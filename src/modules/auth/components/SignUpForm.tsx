@@ -42,7 +42,12 @@ export function SignUpForm() {
       })
       router.push('/dashboard')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create account')
+      let errorMessage = err instanceof Error ? err.message : 'Failed to create account'
+      // Clean up error messages that might contain JSON objects
+      if (errorMessage.includes('{') && errorMessage.includes('}')) {
+        errorMessage = errorMessage.split(':')[0].trim()
+      }
+      setError(errorMessage)
     } finally {
       setIsLoading(false)
     }

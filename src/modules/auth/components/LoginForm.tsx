@@ -32,7 +32,12 @@ export function LoginForm() {
       await login(data)
       router.push('/dashboard')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to sign in')
+      let errorMessage = err instanceof Error ? err.message : 'Failed to sign in'
+      // Clean up error messages that might contain JSON objects
+      if (errorMessage.includes('{') && errorMessage.includes('}')) {
+        errorMessage = errorMessage.split(':')[0].trim()
+      }
+      setError(errorMessage)
     } finally {
       setIsLoading(false)
     }

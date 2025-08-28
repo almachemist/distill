@@ -43,32 +43,33 @@ export class AuthService {
       throw new Error('Failed to create user')
     }
 
+    // After signup, we need to sign in to get a valid session
+    const { data: signInData, error: signInError } = await this.supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+
+    if (signInError) {
+      await this.supabase.auth.admin?.deleteUser(authData.user.id)
+      throw new Error(`Failed to establish session: ${signInError.message}`)
+    }
+
     try {
-      const { data: orgData, error: orgError } = await this.supabase
-        .from('organizations')
-        .insert({ name: organizationName })
-        .select()
-        .single()
+      // Use the RPC function to complete signup with proper permissions
+      const { data, error } = await this.supabase.rpc('complete_signup', {
+        user_id: authData.user.id,
+        org_name: organizationName,
+        display_name: displayName,
+      })
 
-      if (orgError) {
-        throw new Error(`Failed to create organization: ${orgError.message}`)
+      if (error) {
+        throw new Error(`Failed to complete signup: ${error.message}`)
       }
 
-      const { error: profileError } = await this.supabase
-        .from('profiles')
-        .insert({
-          id: authData.user.id,
-          display_name: displayName,
-          organization_id: orgData.id,
-          role: 'admin',
-        })
-
-      if (profileError) {
-        throw new Error(`Failed to create profile: ${profileError.message}`)
-      }
-
-      return authData
+      return signInData
     } catch (error) {
+      // If anything fails, clean up the user
+      await this.supabase.auth.signOut()
       await this.supabase.auth.admin?.deleteUser(authData.user.id)
       throw error
     }
@@ -83,25 +84,35 @@ export class AuthService {
   }
 
   async getCurrentUser() {
-    const { data: { user }, error } = await this.supabase.auth.getUser()
+    try {
+      const { data: { user }, error } = await this.supabase.auth.getUser()
+      
+      if (error) {
+        // Silently handle auth errors - they're expected when not logged in
+        return null
+      }
 
-    if (error) {
-      console.error('Error getting current user:', error)
+      return user
+    } catch {
+      // Silently handle any unexpected errors
       return null
     }
-
-    return user
   }
 
   async getSession(): Promise<Session | null> {
-    const { data: { session }, error } = await this.supabase.auth.getSession()
+    try {
+      const { data: { session }, error } = await this.supabase.auth.getSession()
 
-    if (error) {
-      console.error('Error getting session:', error)
+      if (error) {
+        // Silently handle session errors
+        return null
+      }
+
+      return session
+    } catch {
+      // Silently handle any unexpected errors
       return null
     }
-
-    return session
   }
 
   async getUserProfile(userId: string): Promise<User | null> {
@@ -112,7 +123,7 @@ export class AuthService {
       .single()
 
     if (error) {
-      console.error('Error getting user profile:', error)
+      // Silently handle profile errors
       return null
     }
 

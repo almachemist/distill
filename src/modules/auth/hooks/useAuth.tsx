@@ -42,8 +42,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       setUser(profile)
       setSession(currentSession)
-    } catch (error) {
-      console.error('Error loading user:', error)
+    } catch {
+      // Silently handle errors - user is simply not logged in
       setUser(null)
       setSession(null)
     }
