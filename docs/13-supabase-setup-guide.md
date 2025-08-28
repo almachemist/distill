@@ -17,7 +17,7 @@ Complete guide for setting up Supabase for the Distillery Management System with
 ### 2. Install Supabase CLI
 ```bash
 # Install Supabase CLI
-npm install -g supabase
+pnpm install -g supabase
 
 # Or use npx (no installation required)
 npx supabase --version
@@ -533,7 +533,7 @@ npx supabase db push
 npx supabase db seed
 
 # Run tests
-npm test
+pnpm test
 ```
 
 ### Seed Data

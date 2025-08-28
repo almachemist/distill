@@ -97,10 +97,10 @@ npx create-next-app@latest distil-app --typescript --tailwind --app
 cd distil-app
 
 # Install core dependencies
-npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
-npm install @tanstack/react-query zustand react-hook-form zod
-npm install @radix-ui/themes class-variance-authority
-npm install next-pwa workbox-webpack-plugin
+pnpm install @supabase/supabase-js @supabase/auth-helpers-nextjs
+pnpm install @tanstack/react-query zustand react-hook-form zod
+pnpm install @radix-ui/themes class-variance-authority
+pnpm install next-pwa workbox-webpack-plugin
 
 # Set up Supabase
 npx supabase init
