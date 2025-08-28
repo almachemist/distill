@@ -37,7 +37,7 @@ export class BarrelService {
     const { data: barrel, error } = await this.supabase
       .from('tracking')
       .insert({
-        barrel_id: data.barrelNumber, // Using barrel_id as primary key
+        barrel_number: data.barrelNumber, // Human-readable barrel number
         organization_id: profile.organization_id,
         spirit: data.spiritType,
         prev_spirit: data.prevSpirit,
@@ -97,7 +97,7 @@ export class BarrelService {
     const { data, error } = await this.supabase
       .from('tracking')
       .select('*')
-      .eq('barrel_id', id) // Using barrel_id as primary key
+      .eq('id', id) // Using UUID id as primary key
       .single()
 
     if (error) {
@@ -126,7 +126,7 @@ export class BarrelService {
     const { data: barrel, error } = await this.supabase
       .from('tracking')
       .update(updateData)
-      .eq('barrel_id', id) // Using barrel_id as primary key
+      .eq('id', id) // Using UUID id as primary key
       .select()
       .single()
 
@@ -141,7 +141,7 @@ export class BarrelService {
     const { error } = await this.supabase
       .from('tracking')
       .delete()
-      .eq('barrel_id', id) // Using barrel_id as primary key
+      .eq('id', id) // Using UUID id as primary key
 
     if (error) {
       throw new Error(error.message)
@@ -305,8 +305,8 @@ export class BarrelService {
 
   private mapToBarrel(data: any): Barrel {
     return {
-      id: data.barrel_id, // barrel_id is the primary key
-      barrelNumber: data.barrel_id,
+      id: data.id, // UUID primary key
+      barrelNumber: data.barrel_number, // Human-readable barrel number
       spiritType: data.spirit || '',
       prevSpirit: data.prev_spirit,
       barrelType: data.barrel || '',

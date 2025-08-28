@@ -9,9 +9,18 @@ export default function NewBarrelPage() {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  
+  // Generate a default barrel number based on date and random suffix
+  const generateBarrelNumber = () => {
+    const date = new Date()
+    const year = date.getFullYear().toString().slice(-2)
+    const month = (date.getMonth() + 1).toString().padStart(2, '0')
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0')
+    return `B${year}${month}-${random}`
+  }
 
   const [formData, setFormData] = useState<CreateBarrelData>({
-    barrelNumber: '',
+    barrelNumber: generateBarrelNumber(),
     spiritType: '',
     barrelType: '',
     barrelSize: '200L',
@@ -73,16 +82,29 @@ export default function NewBarrelPage() {
             <label htmlFor="barrelNumber" className="block text-sm font-medium text-gray-700">
               Barrel Number *
             </label>
-            <input
-              type="text"
-              id="barrelNumber"
-              name="barrelNumber"
-              required
-              value={formData.barrelNumber}
-              onChange={handleChange}
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="e.g., B001"
-            />
+            <div className="mt-1 flex rounded-md shadow-sm">
+              <input
+                type="text"
+                id="barrelNumber"
+                name="barrelNumber"
+                required
+                value={formData.barrelNumber}
+                onChange={handleChange}
+                className="flex-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="e.g., B001"
+              />
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, barrelNumber: generateBarrelNumber() }))}
+                className="ml-2 px-3 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                title="Generate new number"
+              >
+                ↻
+              </button>
+            </div>
+            <p className="mt-1 text-xs text-gray-500">
+              Auto-generated or enter your own tracking number
+            </p>
           </div>
 
           <div>
