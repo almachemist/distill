@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Distil - Distillery Management System
 
-## Getting Started
+A modern distillery management system for tracking barrel aging, fermentation, and distillation processes.
 
-First, run the development server:
+## Quick Start
 
+### Prerequisites
+- Node.js 20+
+- pnpm
+- Docker Desktop
+
+### Setup
+
+1. **Clone and install:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/mysticaldiscofrog/distil.git
+cd distil
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Start Supabase (local database):**
+```bash
+pnpm supabase start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Apply database migrations:**
+```bash
+pnpm supabase db reset
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. **Create environment file:**
+```bash
+cp .env.local.example .env.local
+```
 
-## Learn More
+5. **Start development server:**
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Visit http://localhost:3000
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Key Commands
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+pnpm dev              # Start development server
+pnpm build            # Build for production
+pnpm test             # Run tests
+pnpm supabase start   # Start local Supabase
+pnpm supabase stop    # Stop local Supabase
+pnpm supabase studio  # Open database GUI
+pnpm supabase db reset # Reset database (deletes all data!)
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `/src/app` - Next.js pages and routing
+- `/src/modules` - Feature modules (auth, barrels, etc.)
+- `/supabase/migrations` - Database schema
+- `/tests` - Test files
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Features
+
+- 🔐 **Authentication** - Secure login with organization support
+- 🛢️ **Barrel Tracking** - Monitor aging spirits with volume/ABV tracking
+- 📊 **Analytics** - Dashboard with key metrics
+- 🏭 **Multi-tenant** - Support multiple distilleries
+- 📱 **Responsive** - Works on desktop and mobile
+
+## Tech Stack
+
+- Next.js 15
+- TypeScript
+- Supabase (PostgreSQL + Auth)
+- Tailwind CSS
+- React Testing Library
+
+## Documentation
+
+See [PROJECT_PLAN.md](./PROJECT_PLAN.md) for detailed documentation and development roadmap.
+
+## License
+
+Proprietary - All rights reserved
