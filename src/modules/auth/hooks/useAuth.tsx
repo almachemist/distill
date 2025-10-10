@@ -52,11 +52,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const initAuth = async () => {
       setIsLoading(true)
+      
+      // In development mode, provide a mock user for easy testing
+      if (process.env.NODE_ENV === 'development') {
+                 const mockUser: User = {
+           id: '00000000-0000-0000-0000-000000000001',
+           email: 'dev@example.com',
+           name: 'Development User',
+           organization_id: '00000000-0000-0000-0000-000000000001',
+           role: 'admin',
+           created_at: new Date().toISOString(),
+           updated_at: new Date().toISOString()
+         }
+        setUser(mockUser)
+        setSession(null) // No real session in dev mode
+        setIsLoading(false)
+        return
+      }
+      
       await loadUser()
       setIsLoading(false)
     }
 
     initAuth()
+
+    // Skip auth state change listener in development
+    if (process.env.NODE_ENV === 'development') {
+      return () => {}
+    }
 
     const unsubscribe = authService.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session?.user) {
@@ -73,6 +96,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [authService, loadUser])
 
   const login = useCallback(async (credentials: LoginCredentials) => {
+    // In development mode, skip actual login and just use mock user
+    if (process.env.NODE_ENV === 'development') {
+      const mockUser: User = {
+        id: '00000000-0000-0000-0000-000000000001',
+        email: credentials.email,
+        name: 'Development User',
+        organization_id: '00000000-0000-0000-0000-000000000001',
+        role: 'admin',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }
+      setUser(mockUser)
+      setSession(null)
+      return
+    }
+    
     const { user: authUser } = await authService.login(credentials)
     if (authUser) {
       await loadUser(authUser.id)
@@ -80,6 +119,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [authService, loadUser])
 
   const signUp = useCallback(async (data: SignUpData) => {
+    // In development mode, skip actual signup and just use mock user
+    if (process.env.NODE_ENV === 'development') {
+      const mockUser: User = {
+        id: '00000000-0000-0000-0000-000000000001',
+        email: data.email,
+        name: data.displayName,
+        organization_id: '00000000-0000-0000-0000-000000000001',
+        role: 'admin',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      }
+      setUser(mockUser)
+      setSession(null)
+      return
+    }
+    
     const { user: authUser } = await authService.signUp(data)
     if (authUser) {
       await loadUser(authUser.id)

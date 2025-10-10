@@ -20,7 +20,7 @@ export default function BarrelsPage() {
     const service = new BarrelService()
     
     try {
-      const filterOptions = filter === 'all' ? undefined : { status: filter as any }
+      const filterOptions = filter === 'all' ? undefined : { status: filter as Barrel['status'] }
       const [barrelsData, statsData] = await Promise.all([
         service.getBarrels(filterOptions),
         service.getBarrelStats()

@@ -66,6 +66,74 @@ export type Database = {
           },
         ]
       }
+      calendar_events: {
+        Row: {
+          all_day: boolean | null
+          color: string | null
+          created_at: string | null
+          ends_at: string
+          id: string
+          linked_collection: string | null
+          linked_id: string | null
+          notes: string | null
+          organization_id: string
+          resource: string | null
+          sku: string | null
+          starts_at: string
+          status: string
+          timezone: string | null
+          title: string
+          type: string
+          updated_at: string | null
+        }
+        Insert: {
+          all_day?: boolean | null
+          color?: string | null
+          created_at?: string | null
+          ends_at: string
+          id?: string
+          linked_collection?: string | null
+          linked_id?: string | null
+          notes?: string | null
+          organization_id: string
+          resource?: string | null
+          sku?: string | null
+          starts_at: string
+          status: string
+          timezone?: string | null
+          title: string
+          type: string
+          updated_at?: string | null
+        }
+        Update: {
+          all_day?: boolean | null
+          color?: string | null
+          created_at?: string | null
+          ends_at?: string
+          id?: string
+          linked_collection?: string | null
+          linked_id?: string | null
+          notes?: string | null
+          organization_id?: string
+          resource?: string | null
+          sku?: string | null
+          starts_at?: string
+          status?: string
+          timezone?: string | null
+          title?: string
+          type?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "calendar_events_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       barrel_size: {
         Row: {
           active: boolean | null
@@ -399,6 +467,114 @@ export type Database = {
           },
         ]
       }
+      inventory_txns: {
+        Row: {
+          created_at: string | null
+          created_by: string | null
+          dt: string | null
+          id: string
+          item_id: string
+          lot_id: string | null
+          note: string | null
+          organization_id: string
+          quantity: number
+          txn_type: string
+          uom: string
+        }
+        Insert: {
+          created_at?: string | null
+          created_by?: string | null
+          dt?: string | null
+          id?: string
+          item_id: string
+          lot_id?: string | null
+          note?: string | null
+          organization_id: string
+          quantity: number
+          txn_type: string
+          uom: string
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string | null
+          dt?: string | null
+          id?: string
+          item_id?: string
+          lot_id?: string | null
+          note?: string | null
+          organization_id?: string
+          quantity?: number
+          txn_type?: string
+          uom?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "inventory_txns_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_txns_lot_id_fkey"
+            columns: ["lot_id"]
+            isOneToOne: false
+            referencedRelation: "lots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "inventory_txns_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      items: {
+        Row: {
+          abv_pct: number | null
+          category: string | null
+          created_at: string | null
+          default_uom: string
+          id: string
+          is_alcohol: boolean | null
+          name: string
+          organization_id: string
+          updated_at: string | null
+        }
+        Insert: {
+          abv_pct?: number | null
+          category?: string | null
+          created_at?: string | null
+          default_uom?: string
+          id?: string
+          is_alcohol?: boolean | null
+          name: string
+          organization_id: string
+          updated_at?: string | null
+        }
+        Update: {
+          abv_pct?: number | null
+          category?: string | null
+          created_at?: string | null
+          default_uom?: string
+          id?: string
+          is_alcohol?: boolean | null
+          name?: string
+          organization_id?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       location: {
         Row: {
           active: boolean | null
@@ -427,6 +603,60 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "location_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      lots: {
+        Row: {
+          code: string
+          created_at: string | null
+          id: string
+          invoice_url: string | null
+          item_id: string
+          note: string | null
+          organization_id: string
+          qty: number
+          received_date: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          code?: string
+          created_at?: string | null
+          id?: string
+          invoice_url?: string | null
+          item_id: string
+          note?: string | null
+          organization_id: string
+          qty?: number
+          received_date?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          id?: string
+          invoice_url?: string | null
+          item_id?: string
+          note?: string | null
+          organization_id?: string
+          qty?: number
+          received_date?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lots_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "lots_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -490,6 +720,57 @@ export type Database = {
           },
         ]
       }
+      production_orders: {
+        Row: {
+          batch_target_l: number
+          created_at: string | null
+          created_by: string | null
+          id: string
+          organization_id: string
+          product_name: string
+          recipe_id: string
+          status: string
+          updated_at: string | null
+        }
+        Insert: {
+          batch_target_l: number
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          organization_id: string
+          product_name: string
+          recipe_id: string
+          status?: string
+          updated_at?: string | null
+        }
+        Update: {
+          batch_target_l?: number
+          created_at?: string | null
+          created_by?: string | null
+          id?: string
+          organization_id?: string
+          product_name?: string
+          recipe_id?: string
+          status?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "production_orders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "production_orders_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string | null
@@ -521,6 +802,105 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "profiles_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipe_ingredients: {
+        Row: {
+          created_at: string | null
+          id: string
+          item_id: string
+          notes: string | null
+          organization_id: string
+          qty_per_batch: number
+          recipe_id: string
+          step: string
+          uom: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          item_id: string
+          notes?: string | null
+          organization_id: string
+          qty_per_batch: number
+          recipe_id: string
+          step: string
+          uom: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          item_id?: string
+          notes?: string | null
+          organization_id?: string
+          qty_per_batch?: number
+          recipe_id?: string
+          step?: string
+          uom?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_ingredients_item_id_fkey"
+            columns: ["item_id"]
+            isOneToOne: false
+            referencedRelation: "items"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recipe_ingredients_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recipe_ingredients_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipes: {
+        Row: {
+          baseline_final_l: number | null
+          created_at: string | null
+          id: string
+          name: string
+          notes: string | null
+          organization_id: string
+          target_abv: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          baseline_final_l?: number | null
+          created_at?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          organization_id: string
+          target_abv?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          baseline_final_l?: number | null
+          created_at?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          organization_id?: string
+          target_abv?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipes_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -600,12 +980,13 @@ export type Database = {
           abv: string | null
           angelsshare: string | null
           barrel: string | null
-          barrel_id: string
+          barrel_number: string
           batch: string | null
           created_at: string | null
           created_by: string | null
           date_filled: string | null
           date_mature: string | null
+          id: string
           last_inspection: string | null
           location: string | null
           notes_comments: string | null
@@ -621,12 +1002,13 @@ export type Database = {
           abv?: string | null
           angelsshare?: string | null
           barrel?: string | null
-          barrel_id: string
+          barrel_number: string
           batch?: string | null
           created_at?: string | null
           created_by?: string | null
           date_filled?: string | null
           date_mature?: string | null
+          id?: string
           last_inspection?: string | null
           location?: string | null
           notes_comments?: string | null
@@ -642,12 +1024,13 @@ export type Database = {
           abv?: string | null
           angelsshare?: string | null
           barrel?: string | null
-          barrel_id?: string
+          barrel_number?: string
           batch?: string | null
           created_at?: string | null
           created_by?: string | null
           date_filled?: string | null
           date_mature?: string | null
+          id?: string
           last_inspection?: string | null
           location?: string | null
           notes_comments?: string | null
@@ -674,6 +1057,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      complete_signup: {
+        Args: { display_name: string; org_name: string; user_id: string }
+        Returns: Json
+      }
       gtrgm_compress: {
         Args: { "": unknown }
         Returns: unknown

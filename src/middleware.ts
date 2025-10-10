@@ -41,7 +41,8 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // Redirect to login if accessing protected route without auth
-  if (!user && !isPublicRoute) {
+  // Skip auth in development mode for easier testing
+  if (!user && !isPublicRoute && process.env.NODE_ENV !== 'development') {
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
     return NextResponse.redirect(url)

@@ -14,7 +14,7 @@ export default function BarrelDetailPage() {
   const [barrel, setBarrel] = useState<Barrel | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const [isEditing, setIsEditing] = useState(false)
+  // const [isEditing, setIsEditing] = useState(false) // Removed unused state
 
   useEffect(() => {
     loadBarrel()
@@ -200,7 +200,7 @@ export default function BarrelDetailPage() {
           </div>
           
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Angel's Share</h3>
+            <h3 className="text-sm font-medium text-gray-500">Angel&apos;s Share</h3>
             <p className="mt-1 text-lg">
               {angelsShare.loss} L ({angelsShare.percentage}%)
             </p>

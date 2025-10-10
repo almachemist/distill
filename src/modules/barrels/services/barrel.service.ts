@@ -18,27 +18,34 @@ export class BarrelService {
   }
 
   async createBarrel(data: CreateBarrelData): Promise<Barrel> {
-    // Get the user's organization ID
-    const { data: { user } } = await this.supabase.auth.getUser()
-    if (!user) {
-      throw new Error('User not authenticated')
-    }
+    // In development mode, use mock organization ID
+    let organizationId = '00000000-0000-0000-0000-000000000001'
+    
+    if (process.env.NODE_ENV !== 'development') {
+      // Get the user's organization ID
+      const { data: { user } } = await this.supabase.auth.getUser()
+      if (!user) {
+        throw new Error('User not authenticated')
+      }
 
-    const { data: profile } = await this.supabase
-      .from('profiles')
-      .select('organization_id')
-      .eq('id', user.id)
-      .single()
+      const { data: profile } = await this.supabase
+        .from('profiles')
+        .select('organization_id')
+        .eq('id', user.id)
+        .single()
 
-    if (!profile?.organization_id) {
-      throw new Error('User has no organization')
+      if (!profile?.organization_id) {
+        throw new Error('User has no organization')
+      }
+      
+      organizationId = profile.organization_id
     }
 
     const { data: barrel, error } = await this.supabase
       .from('tracking')
       .insert({
         barrel_number: data.barrelNumber, // Human-readable barrel number
-        organization_id: profile.organization_id,
+        organization_id: organizationId,
         spirit: data.spiritType,
         prev_spirit: data.prevSpirit,
         barrel: data.barrelType,
@@ -48,7 +55,7 @@ export class BarrelService {
         abv: data.abv.toString(),
         notes_comments: data.notes,
         status: 'Aging',
-        created_by: user.id,
+        created_by: organizationId, // Use organization ID as fallback
       })
       .select()
       .single()
@@ -61,7 +68,30 @@ export class BarrelService {
   }
 
   async getBarrels(filter?: BarrelFilter): Promise<Barrel[]> {
-    let query = this.supabase.from('tracking').select('*')
+    // In development mode, use mock organization ID
+    let organizationId = '00000000-0000-0000-0000-000000000001'
+    
+    if (process.env.NODE_ENV !== 'development') {
+      // Get the user's organization ID
+      const { data: { user } } = await this.supabase.auth.getUser()
+      if (!user) {
+        throw new Error('User not authenticated')
+      }
+
+      const { data: profile } = await this.supabase
+        .from('profiles')
+        .select('organization_id')
+        .eq('id', user.id)
+        .single()
+
+      if (!profile?.organization_id) {
+        throw new Error('User has no organization')
+      }
+      
+      organizationId = profile.organization_id
+    }
+
+    let query = this.supabase.from('tracking').select('*').eq('organization_id', organizationId)
 
     if (filter) {
       if (filter.status) {
@@ -149,9 +179,33 @@ export class BarrelService {
   }
 
   async getBarrelStats(): Promise<BarrelStats> {
+    // In development mode, use mock organization ID
+    let organizationId = '00000000-0000-0000-0000-000000000001'
+    
+    if (process.env.NODE_ENV !== 'development') {
+      // Get the user's organization ID
+      const { data: { user } } = await this.supabase.auth.getUser()
+      if (!user) {
+        throw new Error('User not authenticated')
+      }
+
+      const { data: profile } = await this.supabase
+        .from('profiles')
+        .select('organization_id')
+        .eq('id', user.id)
+        .single()
+
+      if (!profile?.organization_id) {
+        throw new Error('User has no organization')
+      }
+      
+      organizationId = profile.organization_id
+    }
+
     const { data: barrels, error } = await this.supabase
       .from('tracking')
       .select('*')
+      .eq('organization_id', organizationId)
 
     if (error) {
       throw new Error(error.message)

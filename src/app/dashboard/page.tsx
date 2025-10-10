@@ -9,7 +9,7 @@ export default function DashboardPage() {
     <div className="px-4 py-6 sm:px-0">
       <div className="border-4 border-dashed border-gray-200 rounded-lg p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          Welcome back, {user?.displayName || 'User'}!
+          Welcome back, {user?.name || 'User'}!
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">

@@ -7,7 +7,9 @@ import { useAuth } from '../hooks/useAuth'
 import type { LoginCredentials } from '@/modules/shared/types/auth.types'
 import Link from 'next/link'
 
-interface LoginFormData extends LoginCredentials {}
+interface LoginFormData extends LoginCredentials {
+  // Extends LoginCredentials with no additional fields
+}
 
 export function LoginForm() {
   const router = useRouter()
@@ -218,7 +220,7 @@ export function LoginForm() {
         </button>
         
         <p className="text-center text-sm text-gray-600">
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Link href="/auth/signup" className="text-blue-600 hover:text-blue-800">
             Sign Up
           </Link>

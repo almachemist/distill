@@ -1,6 +1,7 @@
 export interface User {
   id: string
   email: string
+  name?: string
   displayName?: string
   role: 'admin' | 'manager' | 'operator' | 'viewer'
   organizationId: string

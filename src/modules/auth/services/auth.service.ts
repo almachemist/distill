@@ -130,6 +130,7 @@ export class AuthService {
     return {
       id: data.id,
       email: data.email,
+      name: data.display_name,
       displayName: data.display_name,
       role: data.role,
       organizationId: data.organization_id,
