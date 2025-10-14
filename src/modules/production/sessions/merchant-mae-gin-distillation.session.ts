@@ -6,29 +6,63 @@ export const merchantMaeGinDistillation: DistillationSession = {
   id: "SPIRIT-GIN-MM-002",
   spiritRun: "SPIRIT-GIN-MM-002",
   sku: "Merchant Mae Gin",
-  date: "2025-03-13",
+  date: "2025-10-14",
   still: "Carrie",
   boilerOn: "06:30",
   ethanolBatch: "ena-133809",
   chargeVolumeL: 1000,
-  chargeABV: 55,
-  lalIn: 550, // 1000 L x 0.55
+  chargeABV: 47.9,
+  lalIn: 479.0, // 1000 L x 0.479
   powerA: 35,
   steepingHours: 14,
   elementsKW: 32,
   distillationHours: 10,
 
+  charge: {
+    components: [
+      {
+        source: "Manildra NC96",
+        volume_L: 400,
+        abv_percent: 96.0,
+        lal: 384.0,
+        type: "ethanol"
+      },
+      {
+        source: "Left vodka",
+        volume_L: 500,
+        abv_percent: 19.0,
+        lal: 95.0,
+        type: "dilution"
+      },
+      {
+        source: "Water",
+        volume_L: 100,
+        abv_percent: 0.0,
+        lal: 0.0,
+        type: "water"
+      }
+    ],
+    total: {
+      volume_L: 1000,
+      abv_percent: 47.9,
+      lal: 479.0
+    }
+  },
+
   botanicals: [
-    { name: "Juniper", weightG: 6400, notes: "Crushed / steeped" },
-    { name: "Coriander", weightG: 1800, notes: "Steeped" },
-    { name: "Angelica", weightG: 180 },
-    { name: "Orris Root", weightG: 50 },
-    { name: "Orange Peel", weightG: 380, notes: "Fresh navel rind" },
-    { name: "Lemon Peel", weightG: 380, notes: "Fresh lemon rind" },
-    { name: "Liquorice Root", weightG: 100 },
-    { name: "Cardamon", weightG: 150 },
-    { name: "Chamomile", weightG: 50 },
+    { name: "Juniper", weightG: 6400, notes: "Crushed / steeped", ratio_percent: 67.4, status: "ok" },
+    { name: "Coriander", weightG: 1800, notes: "Steeped", ratio_percent: 19.0, status: "ok" },
+    { name: "Angelica", weightG: 180, ratio_percent: 1.9, status: "ok" },
+    { name: "Orris Root", weightG: 50, ratio_percent: 0.5, status: "ok" },
+    { name: "Orange", weightG: 380, notes: "8 fresh naval orange rind", ratio_percent: 4.0, status: "ok" },
+    { name: "Lemon", weightG: 380, notes: "12 fresh lemon rind", ratio_percent: 4.0, status: "ok" },
+    { name: "Liquorice", weightG: 100, notes: "Liquorice root", ratio_percent: 1.1, status: "pending" },
+    { name: "Cardamon", weightG: 150, ratio_percent: 1.6, status: "ok" },
+    { name: "Chamomile", weightG: 50, ratio_percent: 0.5, status: "ok" },
   ],
+
+  totalBotanicals_g: 9490,
+  totalBotanicals_percent: 100.0,
 
   outputs: [
     { 
@@ -84,7 +118,7 @@ export const merchantMaeGinDistillation: DistillationSession = {
     },
   ],
 
-  notes: "Merchant Mae Gin distillation - Carrie still. 14h steeping, 10h distillation. Excellent yield and quality."
+  notes: "Gin batch using fresh citrus rinds and chamomile. Balanced botanical profile with dominant juniper and coriander."
 }
 
 // Additional example sessions for other gins
@@ -207,4 +241,6 @@ export const signatureDryGinDistillation: DistillationSession = {
 
   notes: "Signature Dry Gin distillation - Carrie still. 16h steeping, 9h distillation."
 }
+
+
 

@@ -1,8 +1,27 @@
 // distillation-session.types.ts
+export interface ChargeComponent {
+  source: string
+  volume_L: number
+  abv_percent: number
+  lal: number
+  type: "ethanol" | "dilution" | "water"
+}
+
+export interface ChargeDetails {
+  components: ChargeComponent[]
+  total: {
+    volume_L: number
+    abv_percent: number
+    lal: number
+  }
+}
+
 export interface BotanicalUsage {
   name: string
   weightG: number
   notes?: string
+  ratio_percent?: number
+  status?: "ok" | "pending" | "issue"
 }
 
 export interface OutputPhase {
@@ -51,10 +70,13 @@ export interface DistillationSession {
   elementsKW: number
   distillationHours?: number
   botanicals: BotanicalUsage[]
+  totalBotanicals_g?: number
+  totalBotanicals_percent?: number
   outputs: OutputPhase[]
   dilutions?: DilutionStep[]
   notes?: string
   costs?: DistillationCost
+  charge?: ChargeDetails
 }
 
 export interface DistillationMetrics {
@@ -75,4 +97,6 @@ export interface StillConfiguration {
   elementsKW: number
   waterFlowCapacity_Lph: number
 }
+
+
 

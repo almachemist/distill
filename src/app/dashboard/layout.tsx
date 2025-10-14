@@ -61,6 +61,24 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           Production
         </Link>
                 <Link
+                  href="/dashboard/production/batch-overview"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Batch Overview
+                </Link>
+                <Link
+                  href="/dashboard/production/interactive-distillation"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Interactive Panel
+                </Link>
+                <Link
+                  href="/dashboard/production/daily-details"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Daily Details
+                </Link>
+                <Link
                   href="/dashboard/production/start-batch"
                   className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >

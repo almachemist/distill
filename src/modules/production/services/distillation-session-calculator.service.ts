@@ -65,8 +65,8 @@ export class DistillationSessionCalculator {
       'coriander': 12.85,
       'angelica': 58.17,
       'orris root': 52.32,
-      'orange peel': 3.99,
-      'lemon peel': 6.99,
+      'orange': 3.99,
+      'lemon': 6.99,
       'liquorice': 28.08,
       'cardamon': 64.14,
       'chamomile': 32.20,
@@ -79,6 +79,54 @@ export class DistillationSessionCalculator {
       const kgUsed = botanical.weightG / 1000
       return total + (kgUsed * pricePerKg)
     }, 0)
+  }
+
+  /**
+   * Calculate total botanical weight and percentages
+   */
+  static calculateBotanicalTotals(botanicals: BotanicalUsage[]): { totalG: number, percentages: BotanicalUsage[] } {
+    const totalG = botanicals.reduce((sum, botanical) => sum + botanical.weightG, 0)
+    
+    const percentages = botanicals.map(botanical => ({
+      ...botanical,
+      ratio_percent: totalG > 0 ? (botanical.weightG / totalG) * 100 : 0
+    }))
+
+    return { totalG, percentages }
+  }
+
+  /**
+   * Validate charge components and calculate totals
+   */
+  static validateChargeComponents(components: any[]): { isValid: boolean, total: any, errors: string[] } {
+    const errors: string[] = []
+    
+    if (!components || components.length === 0) {
+      errors.push("No charge components provided")
+      return { isValid: false, total: null, errors }
+    }
+
+    const totalVolume = components.reduce((sum, comp) => sum + comp.volume_L, 0)
+    const totalLAL = components.reduce((sum, comp) => sum + comp.lal, 0)
+    const totalABV = totalVolume > 0 ? (totalLAL / totalVolume) * 100 : 0
+
+    // Validate LAL calculations
+    components.forEach((comp, index) => {
+      const expectedLAL = comp.volume_L * (comp.abv_percent / 100)
+      if (Math.abs(comp.lal - expectedLAL) > 0.1) {
+        errors.push(`Component ${index + 1} (${comp.source}): LAL calculation mismatch`)
+      }
+    })
+
+    return {
+      isValid: errors.length === 0,
+      total: {
+        volume_L: totalVolume,
+        abv_percent: totalABV,
+        lal: totalLAL
+      },
+      errors
+    }
   }
 
   /**
@@ -144,12 +192,25 @@ export class DistillationSessionCalculator {
     const lalOut = processedOutputs.reduce((sum, output) => sum + output.lal, 0)
     const lalEfficiency = this.calculateEfficiency(session.lalIn, lalOut)
 
+    // Calculate botanical totals and percentages
+    const botanicalTotals = this.calculateBotanicalTotals(session.botanicals)
+    const processedBotanicals = botanicalTotals.percentages
+
+    // Validate charge components if provided
+    let chargeValidation = { isValid: true, total: null, errors: [] as string[] }
+    if (session.charge?.components) {
+      chargeValidation = this.validateChargeComponents(session.charge.components)
+    }
+
     // Calculate costs
     const costs = this.calculateDistillationCosts({
       ...session,
       outputs: processedOutputs,
       lalOut,
-      lalEfficiency
+      lalEfficiency,
+      botanicals: processedBotanicals,
+      totalBotanicals_g: botanicalTotals.totalG,
+      totalBotanicals_percent: 100.0
     })
 
     return {
@@ -157,8 +218,17 @@ export class DistillationSessionCalculator {
       outputs: processedOutputs,
       lalOut,
       lalEfficiency,
-      costs
+      botanicals: processedBotanicals,
+      totalBotanicals_g: botanicalTotals.totalG,
+      totalBotanicals_percent: 100.0,
+      costs,
+      // Add validation info to notes if there are errors
+      notes: chargeValidation.errors.length > 0 
+        ? `${session.notes || ''}\n\nValidation Errors: ${chargeValidation.errors.join(', ')}`
+        : session.notes
     }
   }
 }
+
+
 

@@ -213,23 +213,87 @@ export default function DistillationSessionManagementPage() {
 
               {/* Botanicals Used */}
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Botanicals Used</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  Botanicals Used
+                  {selectedSession.totalBotanicals_g && (
+                    <span className="text-sm font-normal text-gray-500 ml-2">
+                      (Total: {selectedSession.totalBotanicals_g}g)
+                    </span>
+                  )}
+                </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {selectedSession.botanicals.map((botanical, index) => (
-                    <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                    <div key={index} className={`flex justify-between items-center p-3 rounded-lg ${
+                      botanical.status === 'pending' ? 'bg-yellow-50 border border-yellow-200' :
+                      botanical.status === 'issue' ? 'bg-red-50 border border-red-200' :
+                      'bg-gray-50'
+                    }`}>
                       <div>
-                        <div className="font-medium text-gray-900">{botanical.name}</div>
+                        <div className="font-medium text-gray-900 flex items-center gap-2">
+                          {botanical.name}
+                          {botanical.status === 'pending' && (
+                            <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Pending</span>
+                          )}
+                          {botanical.status === 'issue' && (
+                            <span className="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Issue</span>
+                          )}
+                        </div>
                         {botanical.notes && (
                           <div className="text-sm text-gray-500">{botanical.notes}</div>
                         )}
                       </div>
-                      <div className="text-sm font-medium text-gray-700">
-                        {botanical.weightG}g
+                      <div className="text-right">
+                        <div className="text-sm font-medium text-gray-700">
+                          {botanical.weightG}g
+                        </div>
+                        {botanical.ratio_percent && (
+                          <div className="text-xs text-gray-500">
+                            {botanical.ratio_percent.toFixed(1)}%
+                          </div>
+                        )}
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
+
+              {/* Charge Components */}
+              {selectedSession.charge && (
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Charge Components</h3>
+                  <div className="space-y-3">
+                    {selectedSession.charge.components.map((component, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div>
+                          <div className="font-medium text-gray-900">{component.source}</div>
+                          <div className="text-sm text-gray-500 capitalize">{component.type}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-gray-700">
+                            {component.volume_L}L @ {component.abv_percent}% ABV
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {component.lal.toFixed(1)} LAL
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <div className="border-t pt-3 mt-3">
+                      <div className="flex justify-between items-center font-semibold">
+                        <span className="text-gray-900">Total Charge:</span>
+                        <div className="text-right">
+                          <div className="text-gray-900">
+                            {selectedSession.charge.total.volume_L}L @ {selectedSession.charge.total.abv_percent}% ABV
+                          </div>
+                          <div className="text-sm text-gray-600">
+                            {selectedSession.charge.total.lal.toFixed(1)} LAL
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Dilution Steps */}
               {selectedSession.dilutions && selectedSession.dilutions.length > 0 && (
@@ -257,4 +321,6 @@ export default function DistillationSessionManagementPage() {
     </div>
   )
 }
+
+
 
