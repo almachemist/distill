@@ -1,0 +1,1001 @@
+'use client'
+
+import { useState } from 'react'
+import type { GinVodkaSpiritBatch } from '@/types/production-schemas'
+import type { Recipe, GinVodkaSpiritRecipe } from '@/types/recipe-schemas'
+
+interface DynamicProductionFormProps {
+  batch: GinVodkaSpiritBatch
+  recipe?: Recipe | null
+  onUpdate: (batch: GinVodkaSpiritBatch) => void
+  onSave: () => void
+  isSaving: boolean
+}
+
+export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSaving }: DynamicProductionFormProps) {
+  const [activeSection, setActiveSection] = useState<number>(1)
+
+  const sections = [
+    { id: 1, name: 'Run Details' },
+    { id: 2, name: 'Charge Adjustment' },
+    { id: 3, name: 'Still Setup' },
+    { id: 4, name: 'Collection Phases' },
+    { id: 5, name: 'Dilution' },
+    { id: 6, name: 'Final Product' },
+  ]
+
+  // Helper to get recipe botanicals safely
+  const recipeBotanicals = recipe && 'botanicals' in recipe ? (recipe as GinVodkaSpiritRecipe).botanicals : null
+
+  function updateField(field: string, value: any) {
+    onUpdate({ ...batch, [field]: value })
+  }
+
+  function updateNestedField(section: string, field: string, value: any) {
+    onUpdate({
+      ...batch,
+      [section]: {
+        ...(batch as any)[section],
+        [field]: value,
+      },
+    })
+  }
+
+  return (
+    <div className="flex gap-6">
+      {/* Sidebar Navigation */}
+      <div className="w-64 flex-shrink-0">
+        <nav className="space-y-1 sticky top-6">
+          {sections.map((section) => (
+            <button
+              key={section.id}
+              onClick={() => setActiveSection(section.id)}
+              className={`
+                w-full text-left px-4 py-3 rounded-lg transition-colors
+                ${
+                  activeSection === section.id
+                    ? 'bg-amber-50 text-amber-900 border-l-4 border-amber-600'
+                    : 'text-neutral-700 hover:bg-neutral-50'
+                }
+              `}
+            >
+              <span className="font-medium">{section.name}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Form Content */}
+      <div className="flex-1">
+        <div className="bg-white rounded-lg border border-neutral-200 p-8">
+          {/* Section 1: Run Details */}
+          {activeSection === 1 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900 mb-6">Run Details</h2>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Spirits Run ID
+                  </label>
+                  <input
+                    type="text"
+                    value={batch.spiritRunId || ''}
+                    onChange={(e) => updateField('spiritRunId', e.target.value)}
+                    placeholder="RUN-20250415-001"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    SKU
+                  </label>
+                  <input
+                    type="text"
+                    value={batch.sku || ''}
+                    onChange={(e) => updateField('sku', e.target.value)}
+                    placeholder="GIN-R01"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    value={batch.date || ''}
+                    onChange={(e) => updateField('date', e.target.value)}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Boiler Start Time
+                  </label>
+                  <input
+                    type="time"
+                    value={batch.boilerStartTime || ''}
+                    onChange={(e) => updateField('boilerStartTime', e.target.value)}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Still Used
+                  </label>
+                  <select
+                    value={batch.stillUsed || ''}
+                    onChange={(e) => updateField('stillUsed', e.target.value)}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  >
+                    <option value="">Select still...</option>
+                    <option value="Roberta 1000L">Roberta 1000L</option>
+                    <option value="Carrie 1000L">Carrie 1000L</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Section 2: Charge Adjustment */}
+          {activeSection === 2 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900 mb-6">Charge Adjustment</h2>
+              
+              <div className="mb-6">
+                <p className="text-sm text-neutral-600 mb-4">
+                  List each ingredient in the charge with volume and ABV. LAL is calculated automatically.
+                </p>
+                
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="bg-neutral-50">
+                      <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Type</th>
+                      <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Source</th>
+                      <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Volume (L)</th>
+                      <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">ABV (%)</th>
+                      <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">LAL</th>
+                      <th className="border border-neutral-300 px-4 py-2"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(batch.chargeAdjustment?.components || []).map((component, index) => (
+                      <tr key={index}>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="text"
+                            value={component.type || ''}
+                            onChange={(e) => {
+                              const newComponents = [...(batch.chargeAdjustment?.components || [])]
+                              newComponents[index] = { ...component, type: e.target.value }
+                              updateNestedField('chargeAdjustment', 'components', newComponents)
+                            }}
+                            placeholder="Ethanol"
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="text"
+                            value={component.source || ''}
+                            onChange={(e) => {
+                              const newComponents = [...(batch.chargeAdjustment?.components || [])]
+                              newComponents[index] = { ...component, source: e.target.value }
+                              updateNestedField('chargeAdjustment', 'components', newComponents)
+                            }}
+                            placeholder="Manildra NC96"
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={component.volume_L || ''}
+                            onChange={(e) => {
+                              const newComponents = [...(batch.chargeAdjustment?.components || [])]
+                              newComponents[index] = { ...component, volume_L: parseFloat(e.target.value) || 0 }
+                              updateNestedField('chargeAdjustment', 'components', newComponents)
+                            }}
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={component.abv_percent || ''}
+                            onChange={(e) => {
+                              const newComponents = [...(batch.chargeAdjustment?.components || [])]
+                              newComponents[index] = { ...component, abv_percent: parseFloat(e.target.value) || 0 }
+                              updateNestedField('chargeAdjustment', 'components', newComponents)
+                            }}
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2 text-center font-medium">
+                          {((component.volume_L ?? 0) * (component.abv_percent ?? 0) * 0.01).toFixed(2)}
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <button
+                            onClick={() => {
+                              const newComponents = (batch.chargeAdjustment?.components || []).filter((_, i) => i !== index)
+                              updateNestedField('chargeAdjustment', 'components', newComponents)
+                            }}
+                            className="text-red-600 hover:text-red-800"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+
+                <button
+                  onClick={() => {
+                    const newComponents = [
+                      ...(batch.chargeAdjustment?.components || []),
+                      { type: '', source: '', volume_L: 0, abv_percent: 0 }
+                    ]
+                    updateNestedField('chargeAdjustment', 'components', newComponents)
+                  }}
+                  className="mt-4 px-4 py-2 text-sm text-amber-700 border border-amber-700 rounded-md hover:bg-amber-50"
+                >
+                  Add Component
+                </button>
+              </div>
+
+              <div className="bg-neutral-50 p-4 rounded-lg">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-neutral-600">Total Volume</p>
+                    <p className="text-2xl font-semibold text-neutral-900">
+                      {(batch.chargeAdjustment?.components ?? []).reduce((sum, c) => sum + (c.volume_L ?? 0), 0).toFixed(1)} L
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-neutral-600">Total LAL</p>
+                    <p className="text-2xl font-semibold text-neutral-900">
+                      {(batch.chargeAdjustment?.components ?? []).reduce((sum, c) => {
+                        const vol = c.volume_L ?? 0
+                        const abv = c.abv_percent ?? 0
+                        return sum + (vol * abv * 0.01)
+                      }, 0).toFixed(2)} L
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 3 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900 mb-6">Still Setup</h2>
+
+              <div className="grid grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Elements
+                  </label>
+                  <input
+                    type="text"
+                    value={batch.stillSetup?.elements ?? ''}
+                    onChange={(e) => updateNestedField('stillSetup', 'elements', e.target.value)}
+                    placeholder="Top + Bottom On"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Plates
+                  </label>
+                  <input
+                    type="text"
+                    value={batch.stillSetup?.plates ?? ''}
+                    onChange={(e) => updateNestedField('stillSetup', 'plates', e.target.value)}
+                    placeholder="4"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Steeping
+                  </label>
+                  <input
+                    type="text"
+                    value={batch.stillSetup?.steeping ?? ''}
+                    onChange={(e) => updateNestedField('stillSetup', 'steeping', e.target.value)}
+                    placeholder="Juniper steeped 18 hrs"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Options / Tags
+                  </label>
+                  <input
+                    type="text"
+                    value={batch.stillSetup?.options ?? ''}
+                    onChange={(e) => updateNestedField('stillSetup', 'options', e.target.value)}
+                    placeholder="Botanical Basket, Dephleg"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <h3 className="text-lg font-semibold text-neutral-900 mb-4">Botanicals</h3>
+                <p className="text-sm text-neutral-600 mb-4">
+                  Recipe on the left, actual quantities added on the right.
+                </p>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-sm font-semibold text-neutral-700 mb-3 bg-blue-50 px-3 py-2 rounded">
+                      Recipe: {batch.recipeName ?? 'No recipe selected'}
+                    </h4>
+                    {recipeBotanicals && recipeBotanicals.length > 0 ? (
+                      <div className="border border-neutral-200 rounded-lg overflow-hidden">
+                        <table className="w-full border-collapse text-sm">
+                          <thead>
+                            <tr className="bg-neutral-100">
+                              <th className="border-b border-neutral-300 px-3 py-2 text-left text-xs font-medium text-neutral-600">Botanical</th>
+                              <th className="border-b border-neutral-300 px-3 py-2 text-right text-xs font-medium text-neutral-600">Weight (g)</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {recipeBotanicals.map((botanical, index) => (
+                              <tr key={index} className="hover:bg-neutral-50">
+                                <td className="border-b border-neutral-200 px-3 py-2 text-neutral-700">{botanical.name}</td>
+                                <td className="border-b border-neutral-200 px-3 py-2 text-right text-neutral-900 font-medium">{botanical.weight_g}g</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                          <tfoot>
+                            <tr className="bg-neutral-50 font-semibold">
+                              <td className="px-3 py-2 text-neutral-900">Total</td>
+                              <td className="px-3 py-2 text-right text-neutral-900">
+                                {recipeBotanicals.reduce((sum, b) => sum + (b.weight_g ?? 0), 0)}g
+                              </td>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                    ) : (
+                      <div className="border border-neutral-200 rounded-lg p-6 text-center text-sm text-neutral-500">
+                        No recipe botanicals available
+                      </div>
+                    )}
+                  </div>
+
+                  <div>
+                    <h4 className="text-sm font-semibold text-neutral-700 mb-3 bg-amber-50 px-3 py-2 rounded">
+                      Actual Quantities Added
+                    </h4>
+                    <div className="border border-neutral-200 rounded-lg overflow-hidden">
+                      <table className="w-full border-collapse text-sm">
+                        <thead>
+                          <tr className="bg-neutral-100">
+                            <th className="border-b border-neutral-300 px-3 py-2 text-left text-xs font-medium text-neutral-600">Botanical</th>
+                            <th className="border-b border-neutral-300 px-3 py-2 text-right text-xs font-medium text-neutral-600">Weight (g)</th>
+                            <th className="border-b border-neutral-300 px-3 py-2 w-10"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {(batch.botanicals ?? []).map((botanical, index) => (
+                            <tr key={index}>
+                              <td className="border-b border-neutral-200 px-3 py-2">
+                                <input
+                                  type="text"
+                                  value={botanical.name ?? ''}
+                                  onChange={(e) => {
+                                    const newBotanicals = [...(batch.botanicals ?? [])]
+                                    newBotanicals[index] = { ...botanical, name: e.target.value }
+                                    updateField('botanicals', newBotanicals)
+                                  }}
+                                  placeholder="Botanical name"
+                                  className="w-full px-2 py-1 border border-neutral-200 rounded text-sm"
+                                />
+                              </td>
+                              <td className="border-b border-neutral-200 px-3 py-2">
+                                <input
+                                  type="number"
+                                  step="1"
+                                  value={botanical.weight_g ?? ''}
+                                  onChange={(e) => {
+                                    const newBotanicals = [...(batch.botanicals ?? [])]
+                                    const val = parseFloat(e.target.value)
+                                    newBotanicals[index] = { ...botanical, weight_g: isNaN(val) ? 0 : val }
+                                    updateField('botanicals', newBotanicals)
+                                  }}
+                                  placeholder="0"
+                                  className="w-full px-2 py-1 border border-neutral-200 rounded text-sm text-right"
+                                />
+                              </td>
+                              <td className="border-b border-neutral-200 px-2 py-2">
+                                <button
+                                  onClick={() => {
+                                    const newBotanicals = (batch.botanicals ?? []).filter((_, i) => i !== index)
+                                    updateField('botanicals', newBotanicals)
+                                  }}
+                                  className="text-red-600 hover:text-red-800 text-xs"
+                                >
+                                  ×
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                        <tfoot>
+                          <tr className="bg-neutral-50 font-semibold">
+                            <td className="px-3 py-2 text-neutral-900">Total</td>
+                            <td className="px-3 py-2 text-right text-neutral-900">
+                              {(batch.botanicals ?? []).reduce((sum, b) => sum + (b.weight_g ?? 0), 0).toFixed(0)}g
+                            </td>
+                            <td></td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        const newBotanicals = [
+                          ...(batch.botanicals ?? []),
+                          { name: '', weight_g: 0, ratio_percent: 0, notes: '' }
+                        ]
+                        updateField('botanicals', newBotanicals)
+                      }}
+                      className="mt-3 w-full px-4 py-2 text-sm text-amber-700 border border-amber-700 rounded-md hover:bg-amber-50"
+                    >
+                      Add Botanical
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 4 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900 mb-6">Section 4: Collection Phases</h2>
+
+              <p className="text-sm text-neutral-600 mb-4">
+                Log each distillation phase with volume, ABV, and LAL. LAL is calculated automatically.
+              </p>
+
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-neutral-50">
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Date</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Phase</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Volume (L)</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">ABV (%)</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">LAL</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Receiving Vessel</th>
+                    <th className="border border-neutral-300 px-4 py-2"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(batch.output || []).map((phase, index) => (
+                    <tr key={index}>
+                      <td className="border border-neutral-300 px-4 py-2">
+                        <input
+                          type="date"
+                          value={phase.date || ''}
+                          onChange={(e) => {
+                            const newOutput = [...(batch.output || [])]
+                            newOutput[index] = { ...phase, date: e.target.value }
+                            updateField('output', newOutput)
+                          }}
+                          className="w-full px-2 py-1 border border-neutral-200 rounded"
+                        />
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-2">
+                        <select
+                          value={phase.phase || ''}
+                          onChange={(e) => {
+                            const newOutput = [...(batch.output || [])]
+                            newOutput[index] = { ...phase, phase: e.target.value as any }
+                            updateField('output', newOutput)
+                          }}
+                          className="w-full px-2 py-1 border border-neutral-200 rounded"
+                        >
+                          <option value="">Select...</option>
+                          <option value="Foreshots">Foreshots</option>
+                          <option value="Heads">Heads</option>
+                          <option value="Hearts">Hearts</option>
+                          <option value="Tails">Tails</option>
+                        </select>
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-2">
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={phase.volume_L || ''}
+                          onChange={(e) => {
+                            const newOutput = [...(batch.output || [])]
+                            newOutput[index] = { ...phase, volume_L: parseFloat(e.target.value) || 0 }
+                            updateField('output', newOutput)
+                          }}
+                          className="w-full px-2 py-1 border border-neutral-200 rounded"
+                        />
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-2">
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={phase.abv_percent || ''}
+                          onChange={(e) => {
+                            const newOutput = [...(batch.output || [])]
+                            newOutput[index] = { ...phase, abv_percent: parseFloat(e.target.value) || 0 }
+                            updateField('output', newOutput)
+                          }}
+                          className="w-full px-2 py-1 border border-neutral-200 rounded"
+                        />
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-2 text-center font-medium">
+                        {((phase.volume_L ?? 0) * (phase.abv_percent ?? 0) * 0.01).toFixed(2)}
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-2">
+                        <input
+                          type="text"
+                          value={phase.receivingVessel || ''}
+                          onChange={(e) => {
+                            const newOutput = [...(batch.output || [])]
+                            newOutput[index] = { ...phase, receivingVessel: e.target.value }
+                            updateField('output', newOutput)
+                          }}
+                          placeholder="Vessel name"
+                          className="w-full px-2 py-1 border border-neutral-200 rounded"
+                        />
+                      </td>
+                      <td className="border border-neutral-300 px-4 py-2">
+                        <button
+                          onClick={() => {
+                            const newOutput = (batch.output || []).filter((_, i) => i !== index)
+                            updateField('output', newOutput)
+                          }}
+                          className="text-red-600 hover:text-red-800"
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              <button
+                onClick={() => {
+                  const newOutput = [
+                    ...(batch.output || []),
+                    { phase: 'Hearts', volume_L: 0, abv_percent: 0, output: '', receivingVessel: '' }
+                  ]
+                  updateField('output', newOutput)
+                }}
+                className="mt-4 px-4 py-2 text-sm text-amber-700 border border-amber-700 rounded-md hover:bg-amber-50"
+              >
+                Add Phase
+              </button>
+
+              <div className="bg-neutral-50 p-4 rounded-lg mt-6">
+                <h3 className="text-sm font-semibold text-neutral-700 mb-3">Summary by Phase</h3>
+                <div className="grid grid-cols-4 gap-4">
+                  {['Foreshots', 'Heads', 'Hearts', 'Tails'].map(phaseName => {
+                    const phaseData = (batch.output ?? []).filter(p => p.phase === phaseName)
+                    const totalVolume = phaseData.reduce((sum, p) => sum + (p.volume_L ?? 0), 0)
+                    const totalLAL = phaseData.reduce((sum, p) => sum + ((p.volume_L ?? 0) * (p.abv_percent ?? 0) * 0.01), 0)
+                    const avgABV = totalVolume > 0 ? (totalLAL * 100.0 / totalVolume) : 0
+
+                    return (
+                      <div key={phaseName} className="bg-white p-3 rounded border border-neutral-200">
+                        <p className="text-xs text-neutral-600 mb-1">{phaseName}</p>
+                        <p className="text-lg font-semibold text-neutral-900">
+                          {totalVolume.toFixed(1)} L
+                        </p>
+                        <p className="text-xs text-neutral-600 mt-1">
+                          @ {avgABV.toFixed(1)}% ABV
+                        </p>
+                        <p className="text-xs text-neutral-500">
+                          {totalLAL.toFixed(2)} LAL
+                        </p>
+                      </div>
+                    )
+                  })}
+                </div>
+                <div className="mt-4 pt-4 border-t border-neutral-300">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <p className="text-sm text-neutral-600">Total Volume</p>
+                      <p className="text-xl font-semibold text-neutral-900">
+                        {(batch.output || []).reduce((sum, p) => sum + (p.volume_L || 0), 0).toFixed(1)} L
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-sm text-neutral-600">Total LAL</p>
+                      <p className="text-xl font-semibold text-neutral-900">
+                        {(batch.output ?? []).reduce((sum, p) => sum + ((p.volume_L ?? 0) * (p.abv_percent ?? 0) * 0.01), 0).toFixed(2)} L
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Section 5: Dilution */}
+          {activeSection === 5 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900 mb-6">Dilution (Hearts Cut)</h2>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+                <h3 className="text-sm font-medium text-blue-900 mb-2">Summary</h3>
+                <div className="grid grid-cols-4 gap-4">
+                  <div>
+                    <p className="text-xs text-blue-700">Hearts Volume (L)</p>
+                    <p className="text-lg font-semibold text-blue-900">
+                      {(batch.output ?? []).filter(p => p.phase === 'Hearts').reduce((sum, p) => sum + (p.volume_L ?? 0), 0).toFixed(1)}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-blue-700">Hearts ABV (%)</p>
+                    <p className="text-lg font-semibold text-blue-900">
+                      {(() => {
+                        const hearts = (batch.output ?? []).filter(p => p.phase === 'Hearts')
+                        const totalVol = hearts.reduce((sum, p) => sum + (p.volume_L ?? 0), 0)
+                        const totalLAL = hearts.reduce((sum, p) => sum + ((p.volume_L ?? 0) * (p.abv_percent ?? 0) * 0.01), 0)
+                        return totalVol > 0 ? ((totalLAL * 100.0 / totalVol)).toFixed(1) : '0.0'
+                      })()}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-blue-700">Target Final ABV (%)</p>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={batch.targetFinalABV || ''}
+                      onChange={(e) => updateField('targetFinalABV', parseFloat(e.target.value) || 0)}
+                      placeholder="43.0"
+                      className="w-full px-2 py-1 border border-blue-300 rounded text-lg font-semibold"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-xs text-blue-700">Water Required (L)</p>
+                    <p className="text-lg font-semibold text-blue-900">
+                      {(() => {
+                        const hearts = (batch.output ?? []).filter(p => p.phase === 'Hearts')
+                        const heartsVol = hearts.reduce((sum, p) => sum + (p.volume_L ?? 0), 0)
+                        const heartsLAL = hearts.reduce((sum, p) => sum + ((p.volume_L ?? 0) * (p.abv_percent ?? 0) * 0.01), 0)
+                        const heartsABV = heartsVol > 0 ? (heartsLAL * 100.0 / heartsVol) : 0
+                        const targetABV = batch.targetFinalABV ?? 43
+                        const waterNeeded = heartsVol * ((heartsABV - targetABV) / targetABV)
+                        return waterNeeded > 0 ? waterNeeded.toFixed(1) : '0.0'
+                      })()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="text-lg font-semibold text-neutral-900 mb-4">Water Additions</h3>
+              <p className="text-sm text-neutral-600 mb-4">
+                Track progressive water additions. Remaining water is calculated after each entry.
+              </p>
+
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-neutral-50">
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Date</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Water Added (L)</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Remaining (L)</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Temp (°C)</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">ABV (%)</th>
+                    <th className="border border-neutral-300 px-4 py-2 text-left text-sm font-medium text-neutral-700">Notes</th>
+                    <th className="border border-neutral-300 px-4 py-2"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(batch.dilutions ?? []).map((dilution, index) => {
+                    const hearts = (batch.output ?? []).filter(p => p.phase === 'Hearts')
+                    const heartsVol = hearts.reduce((sum, p) => sum + (p.volume_L ?? 0), 0)
+                    const heartsLAL = hearts.reduce((sum, p) => sum + ((p.volume_L ?? 0) * (p.abv_percent ?? 0) * 0.01), 0)
+                    const heartsABV = heartsVol > 0 ? (heartsLAL * 100.0 / heartsVol) : 0
+                    const targetABV = batch.targetFinalABV ?? 43
+                    const totalWaterNeeded = heartsVol * ((heartsABV - targetABV) / targetABV)
+                    const waterUsed = (batch.dilutions ?? []).slice(0, index).reduce((sum, d) => sum + (d.filteredWater_L ?? 0), 0)
+                    const remaining = totalWaterNeeded - waterUsed - (dilution.filteredWater_L ?? 0)
+
+                    return (
+                      <tr key={index}>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="date"
+                            value={dilution.date || ''}
+                            onChange={(e) => {
+                              const newDilutions = [...(batch.dilutions || [])]
+                              newDilutions[index] = { ...dilution, date: e.target.value }
+                              updateField('dilutions', newDilutions)
+                            }}
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={dilution.filteredWater_L || ''}
+                            onChange={(e) => {
+                              const newDilutions = [...(batch.dilutions || [])]
+                              newDilutions[index] = { ...dilution, filteredWater_L: parseFloat(e.target.value) || 0 }
+                              updateField('dilutions', newDilutions)
+                            }}
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2 text-center font-medium">
+                          {remaining.toFixed(1)}
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={dilution.temperature_C || ''}
+                            onChange={(e) => {
+                              const newDilutions = [...(batch.dilutions || [])]
+                              newDilutions[index] = { ...dilution, temperature_C: parseFloat(e.target.value) || 0 }
+                              updateField('dilutions', newDilutions)
+                            }}
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={dilution.abv_percent || ''}
+                            onChange={(e) => {
+                              const newDilutions = [...(batch.dilutions || [])]
+                              newDilutions[index] = { ...dilution, abv_percent: parseFloat(e.target.value) || 0 }
+                              updateField('dilutions', newDilutions)
+                            }}
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <input
+                            type="text"
+                            value={dilution.notes || ''}
+                            onChange={(e) => {
+                              const newDilutions = [...(batch.dilutions || [])]
+                              newDilutions[index] = { ...dilution, notes: e.target.value }
+                              updateField('dilutions', newDilutions)
+                            }}
+                            placeholder="First dilution stage"
+                            className="w-full px-2 py-1 border border-neutral-200 rounded"
+                          />
+                        </td>
+                        <td className="border border-neutral-300 px-4 py-2">
+                          <button
+                            onClick={() => {
+                              const newDilutions = (batch.dilutions || []).filter((_, i) => i !== index)
+                              updateField('dilutions', newDilutions)
+                            }}
+                            className="text-red-600 hover:text-red-800"
+                          >
+                            Remove
+                          </button>
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+
+              <button
+                onClick={() => {
+                  const newDilutions = [
+                    ...(batch.dilutions || []),
+                    { number: (batch.dilutions || []).length + 1, date: '', newMake_L: 0, filteredWater_L: 0, newVolume_L: 0, abv_percent: 0, notes: '' }
+                  ]
+                  updateField('dilutions', newDilutions)
+                }}
+                className="mt-4 px-4 py-2 text-sm text-amber-700 border border-amber-700 rounded-md hover:bg-amber-50"
+              >
+                Add Dilution Step
+              </button>
+            </div>
+          )}
+
+          {/* Section 6: Final Product & Bottling */}
+          {activeSection === 6 && (
+            <div>
+              <h2 className="text-2xl font-semibold text-neutral-900 mb-6">Final Product & Bottling</h2>
+
+              <div className="grid grid-cols-2 gap-6 mb-6">
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Final Volume (L)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={batch.finalOutput?.totalVolume_L || ''}
+                    onChange={(e) => updateNestedField('finalOutput', 'totalVolume_L', parseFloat(e.target.value) || 0)}
+                    placeholder="Auto-calculated or manual"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Auto: Hearts + Water = {(() => {
+                      const hearts = (batch.output || []).filter(p => p.phase === 'Hearts')
+                      const heartsVol = hearts.reduce((sum, p) => sum + (p.volume_L || 0), 0)
+                      const waterAdded = (batch.dilutions || []).reduce((sum, d) => sum + (d.filteredWater_L || 0), 0)
+                      return (heartsVol + waterAdded).toFixed(1)
+                    })()} L
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Final ABV (%)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={batch.finalOutput?.abv_percent || ''}
+                    onChange={(e) => updateNestedField('finalOutput', 'abv_percent', parseFloat(e.target.value) || 0)}
+                    placeholder="Measured ABV"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Final LAL
+                  </label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    value={batch.finalOutput?.lal || ''}
+                    onChange={(e) => updateNestedField('finalOutput', 'lal', parseFloat(e.target.value) || 0)}
+                    placeholder="Auto-calculated"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Auto: {(() => {
+                      const hearts = (batch.output ?? []).filter(p => p.phase === 'Hearts')
+                      const heartsLAL = hearts.reduce((sum, p) => sum + ((p.volume_L ?? 0) * (p.abv_percent ?? 0) * 0.01), 0)
+                      return heartsLAL.toFixed(2)
+                    })()} L
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Bottling Date
+                  </label>
+                  <input
+                    type="date"
+                    value={batch.bottlingDate || ''}
+                    onChange={(e) => updateField('bottlingDate', e.target.value)}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Bottle Size (ml)
+                  </label>
+                  <select
+                    value={batch.bottleSize_ml || ''}
+                    onChange={(e) => updateField('bottleSize_ml', parseInt(e.target.value) || 0)}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  >
+                    <option value="">Select size...</option>
+                    <option value="200">200 ml</option>
+                    <option value="700">700 ml</option>
+                    <option value="1000">1000 ml</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Total Bottles
+                  </label>
+                  <input
+                    type="number"
+                    value={batch.totalBottles || ''}
+                    onChange={(e) => updateField('totalBottles', parseInt(e.target.value) || 0)}
+                    placeholder="Auto-calculated"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                  <p className="text-xs text-neutral-500 mt-1">
+                    Auto: {(() => {
+                      const vol = batch.finalOutput?.totalVolume_L || 0
+                      const bottleSize = batch.bottleSize_ml || 700
+                      return Math.floor((vol * 1000) / bottleSize)
+                    })()} bottles
+                  </p>
+                </div>
+
+                <div className="col-span-2">
+                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                    Notes
+                  </label>
+                  <textarea
+                    value={batch.finalOutput?.notes || ''}
+                    onChange={(e) => updateNestedField('finalOutput', 'notes', e.target.value)}
+                    placeholder="Batch #5, Rainforest Gin..."
+                    rows={3}
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+              </div>
+
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                <h3 className="text-lg font-semibold text-green-900 mb-4">Batch Summary</h3>
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <p className="text-sm text-green-700">Final Volume</p>
+                    <p className="text-2xl font-semibold text-green-900">
+                      {batch.finalOutput?.totalVolume_L || 0} L
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-green-700">Final ABV</p>
+                    <p className="text-2xl font-semibold text-green-900">
+                      {batch.finalOutput?.abv_percent || 0}%
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-green-700">Total Bottles</p>
+                    <p className="text-2xl font-semibold text-green-900">
+                      {batch.totalBottles || 0}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Save Button */}
+          <div className="mt-8 pt-6 border-t border-neutral-200 flex justify-between">
+            <button
+              onClick={() => setActiveSection(Math.max(1, activeSection - 1))}
+              disabled={activeSection === 1}
+              className="px-4 py-2 text-sm text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+            
+            <button
+              onClick={onSave}
+              disabled={isSaving}
+              className="px-6 py-2 text-sm font-medium text-white bg-amber-700 rounded-md hover:bg-amber-800 disabled:opacity-50"
+            >
+              {isSaving ? 'Saving...' : 'Save Draft'}
+            </button>
+
+            <button
+              onClick={() => setActiveSection(Math.min(6, activeSection + 1))}
+              disabled={activeSection === 6}
+              className="px-4 py-2 text-sm text-neutral-700 border border-neutral-300 rounded-md hover:bg-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
