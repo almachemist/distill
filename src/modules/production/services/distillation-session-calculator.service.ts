@@ -1,21 +1,30 @@
 // distillation-session-calculator.service.ts
-import { DistillationSession, DistillationCost, DistillationMetrics, BotanicalUsage } from '../types/distillation-session.types'
+import { DistillationSession, DistillationCost, DistillationMetrics, BotanicalUsage, OutputPhase, OutputDetail } from '../types/distillation-session.types'
 import { DISTILLATION_CONSTANTS } from '../constants/distillation.constants'
 import { ethanolBatches } from '../types/ethanol-comprehensive.types'
+
+const toNumber = (value: number | null | undefined): number => value ?? 0
+const toNumberOr = (value: number | null | undefined, fallback: number): number => (value ?? fallback)
+
+const isOutputPhase = (output: OutputPhase | OutputDetail): output is OutputPhase => 'volumeL' in output
 
 export class DistillationSessionCalculator {
   /**
    * Calculate Litres of Absolute Alcohol (LAL)
    */
-  static calculateLAL(volumeL: number, abv: number): number {
-    return volumeL * (abv / 100)
+  static calculateLAL(volumeL: number | null | undefined, abv: number | null | undefined): number {
+    const safeVolume = toNumber(volumeL)
+    const safeAbv = toNumber(abv)
+    return safeVolume * (safeAbv / 100)
   }
 
   /**
    * Calculate efficiency percentage (LAL Out ÷ LAL In)
    */
-  static calculateEfficiency(lalIn: number, lalOut: number): number {
-    return lalOut > 0 ? (lalOut / lalIn) * 100 : 0
+  static calculateEfficiency(lalIn: number | null | undefined, lalOut: number | null | undefined): number {
+    const safeIn = toNumber(lalIn)
+    const safeOut = toNumber(lalOut)
+    return safeIn > 0 ? (safeOut / safeIn) * 100 : 0
   }
 
   /**
@@ -45,11 +54,28 @@ export class DistillationSessionCalculator {
   /**
    * Calculate ethanol cost based on batch usage
    */
-  static calculateEthanolCost(ethanolBatchId: string, volumeL: number, abv: number): number {
-    const batch = ethanolBatches.find(b => b.id === ethanolBatchId)
-    if (!batch) throw new Error(`Ethanol batch ${ethanolBatchId} not found`)
+  static calculateEthanolCost(ethanolBatchId: string | undefined, volumeL: number | null | undefined, abv: number | null | undefined): number {
+    const safeVolume = toNumber(volumeL)
+    const safeAbv = toNumber(abv)
 
-    const pureAlcoholNeeded = volumeL * (abv / 100)
+    if (!ethanolBatchId) {
+      // Use default ethanol pricing if no batch ID provided
+      const defaultEthanolPrice = 2.50 // AUD per litre
+      const pureAlcoholNeeded = safeVolume * (safeAbv / 100)
+      const ethanolVolumeNeeded = pureAlcoholNeeded / 0.96 // Assuming 96% ethanol
+      return ethanolVolumeNeeded * defaultEthanolPrice
+    }
+
+    const batch = ethanolBatches.find(b => b.id === ethanolBatchId)
+    if (!batch) {
+      // Fallback to default pricing if batch not found
+      const defaultEthanolPrice = 2.50 // AUD per litre
+      const pureAlcoholNeeded = safeVolume * (safeAbv / 100)
+      const ethanolVolumeNeeded = pureAlcoholNeeded / 0.96 // Assuming 96% ethanol
+      return ethanolVolumeNeeded * defaultEthanolPrice
+    }
+
+    const pureAlcoholNeeded = safeVolume * (safeAbv / 100)
     const ethanolVolumeFromBatch = pureAlcoholNeeded / (batch.alcoholStrength / 100)
     
     return ethanolVolumeFromBatch * batch.costPerLitreAUD
@@ -76,7 +102,7 @@ export class DistillationSessionCalculator {
 
     return botanicals.reduce((total, botanical) => {
       const pricePerKg = botanicalPrices[botanical.name.toLowerCase()] || 0
-      const kgUsed = botanical.weightG / 1000
+      const kgUsed = toNumber(botanical.weightG) / 1000
       return total + (kgUsed * pricePerKg)
     }, 0)
   }
@@ -85,11 +111,11 @@ export class DistillationSessionCalculator {
    * Calculate total botanical weight and percentages
    */
   static calculateBotanicalTotals(botanicals: BotanicalUsage[]): { totalG: number, percentages: BotanicalUsage[] } {
-    const totalG = botanicals.reduce((sum, botanical) => sum + botanical.weightG, 0)
-    
+    const totalG = botanicals.reduce((sum, botanical) => sum + toNumber(botanical.weightG), 0)
+
     const percentages = botanicals.map(botanical => ({
       ...botanical,
-      ratio_percent: totalG > 0 ? (botanical.weightG / totalG) * 100 : 0
+      ratio_percent: totalG > 0 ? (toNumber(botanical.weightG) / totalG) * 100 : 0
     }))
 
     return { totalG, percentages }
@@ -106,14 +132,14 @@ export class DistillationSessionCalculator {
       return { isValid: false, total: null, errors }
     }
 
-    const totalVolume = components.reduce((sum, comp) => sum + comp.volume_L, 0)
-    const totalLAL = components.reduce((sum, comp) => sum + comp.lal, 0)
+    const totalVolume = components.reduce((sum, comp) => sum + toNumber(comp.volume_L), 0)
+    const totalLAL = components.reduce((sum, comp) => sum + toNumber(comp.lal), 0)
     const totalABV = totalVolume > 0 ? (totalLAL / totalVolume) * 100 : 0
 
     // Validate LAL calculations
     components.forEach((comp, index) => {
-      const expectedLAL = comp.volume_L * (comp.abv_percent / 100)
-      if (Math.abs(comp.lal - expectedLAL) > 0.1) {
+      const expectedLAL = toNumber(comp.volume_L) * (toNumber(comp.abv_percent) / 100)
+      if (Math.abs(toNumber(comp.lal) - expectedLAL) > 0.1) {
         errors.push(`Component ${index + 1} (${comp.source}): LAL calculation mismatch`)
       }
     })
@@ -133,13 +159,15 @@ export class DistillationSessionCalculator {
    * Calculate all costs for a distillation session
    */
   static calculateDistillationCosts(session: DistillationSession): DistillationCost {
-    const electricityCost = this.calculateEnergyCost(session.powerA, session.distillationHours || 10)
-    const waterCost = this.calculateWaterCost(DISTILLATION_CONSTANTS.waterFlowNormal_Lph, session.distillationHours || 10)
+    const hours = toNumberOr(session.distillationHours, 10)
+    const electricityCost = this.calculateEnergyCost(toNumberOr(session.powerA, 35), hours)
+    const waterCost = this.calculateWaterCost(DISTILLATION_CONSTANTS.waterFlowNormal_Lph, hours)
     const ethanolCost = this.calculateEthanolCost(session.ethanolBatch, session.chargeVolumeL, session.chargeABV)
-    const botanicalCost = this.calculateBotanicalCost(session.botanicals)
+    const botanicalCost = this.calculateBotanicalCost(session.botanicals || [])
     
     const totalCost = electricityCost + waterCost + ethanolCost + botanicalCost
-    const costPerLAL = session.lalOut ? totalCost / session.lalOut : 0
+    const outputLAL = toNumber(session.lalOut)
+    const costPerLAL = outputLAL > 0 ? totalCost / outputLAL : 0
 
     return {
       electricityAUD: electricityCost,
@@ -155,15 +183,17 @@ export class DistillationSessionCalculator {
    * Calculate comprehensive distillation metrics
    */
   static calculateDistillationMetrics(session: DistillationSession): DistillationMetrics {
-    const inputLAL = session.lalIn
-    const outputLAL = session.lalOut || 0
+    const inputLAL = toNumber(session.chargeLAL ?? session.lalIn)
+    const outputLAL = toNumber(session.lalOut)
     const efficiency = this.calculateEfficiency(inputLAL, outputLAL)
-    
-    const totalVolumeOut = session.outputs.reduce((sum, output) => sum + output.volumeL, 0)
-    const totalLALOut = session.outputs.reduce((sum, output) => sum + output.lal, 0)
+
+    const outputs = (session.outputs ?? []) as (OutputPhase | OutputDetail)[]
+    const outputPhases = outputs.filter(isOutputPhase)
+    const totalVolumeOut = outputPhases.reduce((sum, output) => sum + toNumber(output.volumeL), 0)
+    const totalLALOut = outputPhases.reduce((sum, output) => sum + toNumber(output.lal), 0)
     const averageABV = totalVolumeOut > 0 ? (totalLALOut / totalVolumeOut) * 100 : 0
 
-    const costs = this.calculateDistillationCosts(session)
+    const costs = this.calculateDistillationCosts({ ...session, outputs: outputPhases as OutputPhase[] })
     const costPerLAL = costs.costPerLAL
     const costPerLiter = totalVolumeOut > 0 ? costs.totalAUD / totalVolumeOut : 0
 
@@ -183,17 +213,36 @@ export class DistillationSessionCalculator {
    */
   static processDistillationSession(session: DistillationSession): DistillationSession {
     // Calculate LAL for each output phase
-    const processedOutputs = session.outputs.map(output => ({
-      ...output,
-      lal: this.calculateLAL(output.volumeL, output.abv)
-    }))
+    const originalOutputs = (session.outputs ?? []) as (OutputPhase | OutputDetail)[]
+    const outputsArePhases = originalOutputs.every(isOutputPhase)
+
+    let processedOutputs: OutputPhase[] | OutputDetail[]
+    let processedOutputPhases: OutputPhase[]
+
+    if (outputsArePhases) {
+      processedOutputPhases = (originalOutputs as OutputPhase[]).map(output => {
+        const volumeL = toNumber(output.volumeL)
+        const abv = toNumber(output.abv)
+
+        return {
+          ...output,
+          volumeL,
+          abv,
+          lal: this.calculateLAL(volumeL, abv)
+        }
+      })
+      processedOutputs = processedOutputPhases
+    } else {
+      processedOutputPhases = []
+      processedOutputs = originalOutputs as OutputDetail[]
+    }
 
     // Calculate total LAL out
-    const lalOut = processedOutputs.reduce((sum, output) => sum + output.lal, 0)
-    const lalEfficiency = this.calculateEfficiency(session.lalIn, lalOut)
+    const lalOut = processedOutputPhases.reduce((sum, output) => sum + toNumber(output.lal), 0)
+    const lalEfficiency = this.calculateEfficiency(session.chargeLAL ?? session.lalIn, lalOut)
 
     // Calculate botanical totals and percentages
-    const botanicalTotals = this.calculateBotanicalTotals(session.botanicals)
+    const botanicalTotals = this.calculateBotanicalTotals(session.botanicals || [])
     const processedBotanicals = botanicalTotals.percentages
 
     // Validate charge components if provided
@@ -205,7 +254,7 @@ export class DistillationSessionCalculator {
     // Calculate costs
     const costs = this.calculateDistillationCosts({
       ...session,
-      outputs: processedOutputs,
+      outputs: processedOutputPhases,
       lalOut,
       lalEfficiency,
       botanicals: processedBotanicals,

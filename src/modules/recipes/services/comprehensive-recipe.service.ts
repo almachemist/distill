@@ -1,16 +1,120 @@
 import { createClient } from '@/lib/supabase/client'
-import { 
-  Recipe, 
-  Ingredient, 
-  InventoryItem, 
-  ProductionBatch, 
+import {
+  Recipe,
+  Ingredient,
+  InventoryItem,
+  ProductionBatch,
   StockTransaction,
   GIN_RECIPES,
   MASTER_INVENTORY,
   calculateRecipeCost,
-  getLowStockItems,
-  updateInventoryAfterProduction
+  getLowStockItems
 } from '../types/comprehensive-recipe.types'
+
+type SupabaseRecipeIngredientItemRow = {
+  id?: string
+  name: string
+  default_uom: string | null
+  price_per_kg: number | null
+  category: string | null
+  supplier: string | null
+  notes: string | null
+}
+
+type SupabaseRecipeIngredientRow = {
+  item_id: string
+  qty_per_batch: number
+  step: number | null
+  items: SupabaseRecipeIngredientItemRow
+}
+
+type SupabaseRecipeRow = {
+  id: string
+  name: string
+  description: string | null
+  abv: number
+  batch_volume: number
+  production_time: number | null
+  difficulty: string | null
+  category: string | null
+  created_at: string
+  updated_at: string
+  is_active: boolean
+  notes: string | null
+  recipe_ingredients: SupabaseRecipeIngredientRow[]
+}
+
+type SupabaseItemRow = {
+  id: string
+  name: string
+  category: string | null
+  default_uom: string
+  min_threshold: number | null
+  max_threshold: number | null
+  price_per_unit: number | null
+  supplier: string | null
+  notes: string | null
+  updated_at: string
+}
+
+type SupabaseInventoryTxnRow = {
+  qty: number
+  txn_type: 'RECEIVE' | 'PRODUCE' | 'ADJUST' | 'CONSUME' | 'TRANSFER' | 'DESTROY'
+}
+
+type SupabaseStockTransactionRow = {
+  id: string
+  item_id: string
+  txn_type: 'RECEIVE' | 'PRODUCE' | 'ADJUST' | 'CONSUME' | 'TRANSFER' | 'DESTROY'
+  qty: number
+  uom: string
+  note: string | null
+  batch_id: string | null
+  dt: string
+  user_id: string | null
+  items: { name: string }
+}
+
+const normalizeRecipeDifficulty = (value: string | null): Recipe['difficulty'] => {
+  const normalized = value?.toLowerCase()
+  if (normalized === 'easy' || normalized === 'medium' || normalized === 'hard') {
+    return normalized
+  }
+  return 'medium'
+}
+
+const normalizeRecipeCategory = (value: string | null): Recipe['category'] => {
+  const normalized = value?.toLowerCase()
+  if (normalized === 'traditional' || normalized === 'contemporary' || normalized === 'experimental') {
+    return normalized
+  }
+  return 'traditional'
+}
+
+const mapRecipeIngredient = (ingredient: SupabaseRecipeIngredientRow): Ingredient => {
+  const unit = ingredient.items.default_uom
+  const normalizedUnit: Ingredient['unit'] = unit === 'kg' || unit === 'g' || unit === 'L' || unit === 'ml' ? unit : 'g'
+
+  const category = ingredient.items.category
+  const normalizedCategory: Ingredient['category'] =
+    category === 'botanical' || category === 'spirit' || category === 'water' || category === 'other'
+      ? category
+      : 'other'
+
+  const pricePerKg = ingredient.items.price_per_kg ?? 0
+
+  return {
+    id: ingredient.item_id,
+    name: ingredient.items.name,
+    quantity: ingredient.qty_per_batch,
+    unit: normalizedUnit,
+    pricePerKg,
+    pricePerBatch: (ingredient.qty_per_batch * pricePerKg) / 1000,
+    category: normalizedCategory,
+    supplier: ingredient.items.supplier ?? undefined,
+    notes: ingredient.items.notes ?? undefined
+  }
+}
 
 export class ComprehensiveRecipeService {
   private supabase = createClient()
@@ -33,42 +137,26 @@ export class ComprehensiveRecipeService {
       if (error) throw error
 
       // Transform Supabase data to our Recipe format
-      return data.map(recipe => ({
-        id: recipe.id,
-        name: recipe.name,
-        description: recipe.description,
-        abv: recipe.abv,
-        batchVolume: recipe.batch_volume,
-        ingredients: recipe.recipe_ingredients.map((ri: any) => ({
-          id: ri.item_id,
-          name: ri.items.name,
-          quantity: ri.qty_per_batch,
-          unit: ri.items.default_uom,
-          pricePerKg: ri.items.price_per_kg || 0,
-          pricePerBatch: (ri.qty_per_batch * (ri.items.price_per_kg || 0)) / 1000, // Convert g to kg
-          category: ri.items.category,
-          supplier: ri.items.supplier,
-          notes: ri.items.notes
-        })),
-        totalCost: calculateRecipeCost(recipe.recipe_ingredients.map((ri: any) => ({
-          id: ri.item_id,
-          name: ri.items.name,
-          quantity: ri.qty_per_batch,
-          unit: ri.items.default_uom,
-          pricePerKg: ri.items.price_per_kg || 0,
-          pricePerBatch: (ri.qty_per_batch * (ri.items.price_per_kg || 0)) / 1000,
-          category: ri.items.category,
-          supplier: ri.items.supplier,
-          notes: ri.items.notes
-        }))),
-        productionTime: recipe.production_time || 24,
-        difficulty: recipe.difficulty || 'medium',
-        category: recipe.category || 'traditional',
-        createdAt: new Date(recipe.created_at),
-        updatedAt: new Date(recipe.updated_at),
-        isActive: recipe.is_active,
-        notes: recipe.notes
-      }))
+      return (data as SupabaseRecipeRow[]).map((recipe) => {
+        const ingredients = recipe.recipe_ingredients.map(mapRecipeIngredient)
+
+        return {
+          id: recipe.id,
+          name: recipe.name,
+          description: recipe.description ?? undefined,
+          abv: recipe.abv,
+          batchVolume: recipe.batch_volume,
+          ingredients,
+          totalCost: calculateRecipeCost(ingredients),
+          productionTime: recipe.production_time || 24,
+          difficulty: normalizeRecipeDifficulty(recipe.difficulty),
+          category: normalizeRecipeCategory(recipe.category),
+          createdAt: new Date(recipe.created_at),
+          updatedAt: new Date(recipe.updated_at),
+          isActive: recipe.is_active,
+          notes: recipe.notes ?? undefined
+        }
+      })
     } catch (error) {
       console.error('Error fetching recipes:', error)
       // Return mock data if database fails
@@ -92,41 +180,24 @@ export class ComprehensiveRecipeService {
 
       if (error) throw error
 
+      const recipe = data as SupabaseRecipeRow
+      const ingredients = recipe.recipe_ingredients.map(mapRecipeIngredient)
+
       return {
         id: data.id,
         name: data.name,
-        description: data.description,
+        description: data.description ?? undefined,
         abv: data.abv,
         batchVolume: data.batch_volume,
-        ingredients: data.recipe_ingredients.map((ri: any) => ({
-          id: ri.item_id,
-          name: ri.items.name,
-          quantity: ri.qty_per_batch,
-          unit: ri.items.default_uom,
-          pricePerKg: ri.items.price_per_kg || 0,
-          pricePerBatch: (ri.qty_per_batch * (ri.items.price_per_kg || 0)) / 1000,
-          category: ri.items.category,
-          supplier: ri.items.supplier,
-          notes: ri.items.notes
-        })),
-        totalCost: calculateRecipeCost(data.recipe_ingredients.map((ri: any) => ({
-          id: ri.item_id,
-          name: ri.items.name,
-          quantity: ri.qty_per_batch,
-          unit: ri.items.default_uom,
-          pricePerKg: ri.items.price_per_kg || 0,
-          pricePerBatch: (ri.qty_per_batch * (ri.items.price_per_kg || 0)) / 1000,
-          category: ri.items.category,
-          supplier: ri.items.supplier,
-          notes: ri.items.notes
-        }))),
+        ingredients,
+        totalCost: calculateRecipeCost(ingredients),
         productionTime: data.production_time || 24,
-        difficulty: data.difficulty || 'medium',
-        category: data.category || 'traditional',
+        difficulty: normalizeRecipeDifficulty(data.difficulty),
+        category: normalizeRecipeCategory(data.category),
         createdAt: new Date(data.created_at),
         updatedAt: new Date(data.updated_at),
         isActive: data.is_active,
-        notes: data.notes
+        notes: data.notes ?? undefined
       }
     } catch (error) {
       console.error('Error fetching recipe:', error)
@@ -210,20 +281,34 @@ export class ComprehensiveRecipeService {
 
       // Transform to our format and get current stock
       const itemsWithStock = await Promise.all(
-        data.map(async (item) => {
+        (data as SupabaseItemRow[]).map(async (item) => {
           const stockLevel = await this.getCurrentStock(item.id)
+          const category = item.category ?? 'other'
+          const normalizedCategory: InventoryItem['category'] =
+            category === 'botanical' ||
+            category === 'spirit' ||
+            category === 'water' ||
+            category === 'packaging' ||
+            category === 'other'
+              ? category
+              : 'other'
+
+          const unit = item.default_uom
+          const normalizedUnit: InventoryItem['unit'] =
+            unit === 'g' || unit === 'kg' || unit === 'L' || unit === 'ml' || unit === 'units' ? unit : 'g'
+
           return {
             id: item.id,
             name: item.name,
-            category: item.category,
+            category: normalizedCategory,
             currentStock: stockLevel,
-            unit: item.default_uom,
-            minThreshold: item.min_threshold || 0,
-            maxThreshold: item.max_threshold || 1000,
-            pricePerUnit: item.price_per_unit || 0,
-            supplier: item.supplier,
+            unit: normalizedUnit,
+            minThreshold: item.min_threshold ?? 0,
+            maxThreshold: item.max_threshold ?? 1000,
+            pricePerUnit: item.price_per_unit ?? 0,
+            supplier: item.supplier ?? undefined,
             lastUpdated: new Date(item.updated_at),
-            notes: item.notes
+            notes: item.notes ?? undefined
           }
         })
       )
@@ -246,7 +331,8 @@ export class ComprehensiveRecipeService {
       if (error) throw error
 
       let total = 0
-      data.forEach(txn => {
+      const transactions = (data ?? []) as SupabaseInventoryTxnRow[]
+      for (const txn of transactions) {
         switch (txn.txn_type) {
           case 'RECEIVE':
           case 'PRODUCE':
@@ -259,7 +345,7 @@ export class ComprehensiveRecipeService {
             total -= txn.qty
             break
         }
-      })
+      }
 
       return total
     } catch (error) {
@@ -427,19 +513,27 @@ export class ComprehensiveRecipeService {
 
       if (error) throw error
 
-      return data.map(txn => ({
-        id: txn.id,
-        itemId: txn.item_id,
-        itemName: txn.items.name,
-        type: txn.txn_type.toLowerCase() as 'receive' | 'consume' | 'adjust' | 'transfer',
-        quantity: txn.qty,
-        unit: txn.uom,
-        reason: txn.note,
-        batchId: txn.batch_id,
-        date: new Date(txn.dt),
-        userId: txn.user_id || 'system',
-        notes: txn.note
-      }))
+      return (data as SupabaseStockTransactionRow[]).map((txn) => {
+        const normalizedType = txn.txn_type.toLowerCase()
+        const allowedTypes: Array<'receive' | 'consume' | 'adjust' | 'transfer'> = ['receive', 'consume', 'adjust', 'transfer']
+        const type = allowedTypes.includes(normalizedType as typeof allowedTypes[number])
+          ? (normalizedType as typeof allowedTypes[number])
+          : 'adjust'
+
+        return {
+          id: txn.id,
+          itemId: txn.item_id,
+          itemName: txn.items.name,
+          type,
+          quantity: txn.qty,
+          unit: txn.uom,
+          reason: txn.note ?? '',
+          batchId: txn.batch_id ?? undefined,
+          date: new Date(txn.dt),
+          userId: txn.user_id ?? 'system',
+          notes: txn.note ?? undefined
+        }
+      })
     } catch (error) {
       console.error('Error fetching stock transactions:', error)
       return []

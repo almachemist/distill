@@ -1,0 +1,5297 @@
+[
+  {
+    "id": "447a1f6a-9c1c-442a-8dfd-493f65775be0",
+    "batch_id": "RUM-23-1",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 23-1",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-08-04T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 450,
+        "water_mass_kg": 1500,
+        "initial_brix": 22.3,
+        "initial_ph": 5.8
+      },
+      "dunder": {
+        "added": true,
+        "type": "O (legacy dunder)",
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": 400,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37,
+        "rehydration_time_min": 20
+      },
+      "temperature_curve": {
+        "0h": 25.6,
+        "24h": 31.1,
+        "48h": 30.1,
+        "72h": 28.9,
+        "96h": 25,
+        "120h": 25
+      },
+      "brix_curve": {
+        "0h": 22.3,
+        "24h": 16.1,
+        "48h": 4.6,
+        "72h": 1.7,
+        "96h": 1.4,
+        "120h": 1.4
+      },
+      "ph_curve": {
+        "0h": 5.8,
+        "72h": 4.87,
+        "96h": 3.68,
+        "120h": 4.87
+      },
+      "duration_hours": 120,
+      "final_brix": 1.4,
+      "final_ph": 4.87,
+      "final_abv_percent": null,
+      "notes": "First DRPS clean ferment on A molasses; chiller staged 30 → 25 °C."
+    },
+    "distillation": {
+      "date": "2023-08-08T00:00:00Z",
+      "boiler": {
+        "volume_l": 900,
+        "abv_percent": null,
+        "lal": null
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "ACS heads from previous run",
+          "volume_l": 103,
+          "abv_percent": 30,
+          "lal": 30.9
+        },
+        {
+          "id": 2,
+          "content": "ACS tails",
+          "volume_l": 79,
+          "abv_percent": 60,
+          "lal": 47.4
+        }
+      ],
+      "heat_profile": {
+        "start_time": "08:45:00",
+        "boiler_elements": "6 × 5750 W (shared R2)",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "13:30:00",
+          "abv_percent": 83.5,
+          "notes": "3 + 1/2 L scaled off"
+        },
+        "heads": {
+          "time": "13:30:00",
+          "volume_l": 31,
+          "abv_percent": 83.5,
+          "lal": 25.885,
+          "density": null,
+          "notes": null
+        },
+        "hearts": {
+          "time": "16:40:00",
+          "volume_l": 83,
+          "abv_percent": 76,
+          "lal": 63.08,
+          "density": null,
+          "notes": "Hearts landed with bright molasses character."
+        },
+        "tails_segments": [
+          {
+            "time": "16:40:00",
+            "volume_l": 64.7,
+            "abv_percent": 70,
+            "lal": 45.29,
+            "density": null,
+            "notes": "Early tails held for future retort charges."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 78.3,
+        "total_lal_end": 134.26,
+        "lal_loss": -55.96
+      },
+      "notes": "Flow ~3.5 L/h with alternating retort power."
+    },
+    "aging": {
+      "fill_date": "2023-09-15T00:00:00Z",
+      "cask": {
+        "number": "31",
+        "origin": "Whipper Snapper / ex rum / ex HB porter",
+        "type": "American Oak",
+        "size_l": 204
+      },
+      "fill_abv_percent": 65.5,
+      "volume_filled_l": 204,
+      "lal_filled": 133.62,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "First DRPS clean ferment from A molasses – great off-still nose."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 171.45,
+      "heart_fraction_percent": 80.56
+    },
+    "metadata": {
+      "created_at": "2023-08-04T00:00:00Z",
+      "updated_at": "2023-09-15T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "4/08/2023 Friday RUM-23-1 A MOL 2022 450 1500 100ml anti foam … 8/08/2023 boiler 900 L (ACS heads/tails) … hearts 83 L @ 76% … total LAL 78.3 → 134.26 … cask 31 filled 204 L @ 65.5% on 15/09/2023."
+  },
+  {
+    "id": "c5c3fa7f-962f-4fd8-92ab-070af0798ade",
+    "batch_id": "RUM-23-1",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 23-1 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-08-04T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 450,
+        "water_mass_kg": 1500,
+        "initial_brix": 22.3,
+        "initial_ph": 5.8
+      },
+      "dunder": {
+        "added": true,
+        "type": "O (legacy dunder)",
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": 400,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37,
+        "rehydration_time_min": 20
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Supplemental double-retort draw from same ferment."
+    },
+    "distillation": {
+      "date": "2023-08-09T00:00:00Z",
+      "boiler": {
+        "volume_l": 900,
+        "abv_percent": null,
+        "lal": null
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "ACS tails from 08/08 run",
+          "volume_l": 97,
+          "abv_percent": 30,
+          "lal": 29.1
+        },
+        {
+          "id": 2,
+          "content": "ACS hearts 43 L + tails 43 L (08/08)",
+          "volume_l": 86,
+          "abv_percent": 60,
+          "lal": 51.6
+        }
+      ],
+      "heat_profile": {
+        "start_time": "08:55:00",
+        "boiler_elements": "6 × 5750 W + 1 × 2200 W per retort",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "12:30:00",
+          "abv_percent": 84,
+          "notes": "3 + 1/2 L scaled off"
+        },
+        "heads": {
+          "time": "12:30:00",
+          "volume_l": 35,
+          "abv_percent": 84,
+          "lal": 29.4,
+          "density": null,
+          "notes": null
+        },
+        "hearts": {
+          "time": "15:45:00",
+          "volume_l": 83.1,
+          "abv_percent": 70,
+          "lal": 58.17,
+          "density": null,
+          "notes": "Supplemental hearts captured for blending."
+        },
+        "tails_segments": [
+          {
+            "time": "15:45:00",
+            "volume_l": 12,
+            "abv_percent": 56.6,
+            "lal": 6.792,
+            "density": null,
+            "notes": "Late tails retained for retorts."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 80.7,
+        "total_lal_end": 135.68,
+        "lal_loss": -54.98
+      },
+      "notes": "Diluted to 64.2% with 47 L water into barrel #32 on 18/09/2023."
+    },
+    "aging": {
+      "fill_date": "2023-09-18T00:00:00Z",
+      "cask": {
+        "number": "32",
+        "origin": null,
+        "type": "American Oak",
+        "size_l": null
+      },
+      "fill_abv_percent": 64.2,
+      "volume_filled_l": null,
+      "lal_filled": null,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Diluted down to 64.2% for storage."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 168.18,
+      "heart_fraction_percent": 72.08
+    },
+    "metadata": {
+      "created_at": "2023-08-04T00:00:00Z",
+      "updated_at": "2023-09-18T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "9/08/2023 RUM-23-1 second run – boiler 900 L, ACS recycle, hearts 83.1 L @ 70%, diluted to 64.2% for barrel 32 on 18/09/2023."
+  },
+  {
+    "id": "9f72a2d9-7fe7-4c0c-b907-e9a3015c3d51",
+    "batch_id": "RUM-23-2",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 23-2",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-09-14T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 22.6,
+        "initial_ph": 5.45
+      },
+      "dunder": {
+        "added": true,
+        "type": "150 L infected clean dunder",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": 1000,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 35,
+        "rehydration_time_min": 20
+      },
+      "temperature_curve": {
+        "0h": 26.9,
+        "24h": 33,
+        "48h": 28.3
+      },
+      "brix_curve": {
+        "0h": 22.5,
+        "24h": 12.5,
+        "48h": 3,
+        "72h": 1.9,
+        "96h": 1.9,
+        "120h": 1.7
+      },
+      "ph_curve": {
+        "0h": 5.45,
+        "24h": 4.9,
+        "120h": 4.78
+      },
+      "duration_hours": 120,
+      "final_brix": 1.7,
+      "final_ph": 4.78,
+      "final_abv_percent": null,
+      "notes": "First cane-juice heavy rum destined for cask aging."
+    },
+    "distillation": {
+      "date": "2023-09-13T00:00:00Z",
+      "boiler": {
+        "volume_l": 950,
+        "abv_percent": null,
+        "lal": null
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "ACS tails from previous run",
+          "volume_l": 104,
+          "abv_percent": 30,
+          "lal": 31.2
+        },
+        {
+          "id": 2,
+          "content": "ACS heads and tails mix",
+          "volume_l": 80,
+          "abv_percent": 60,
+          "lal": 48
+        }
+      ],
+      "heat_profile": {
+        "start_time": "09:30:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "12:30:00",
+          "abv_percent": 84.1,
+          "notes": "3 + 1 scaled off for run"
+        },
+        "heads": {
+          "time": "12:30:00",
+          "volume_l": 25,
+          "abv_percent": 84.1,
+          "lal": 21.25,
+          "density": null,
+          "notes": null
+        },
+        "hearts": {
+          "time": "13:30:00",
+          "volume_l": 63.1,
+          "abv_percent": 84.1,
+          "lal": 63.075,
+          "density": null,
+          "notes": "Clean cane hearts with bright aroma."
+        },
+        "tails_segments": [
+          {
+            "time": "15:40:00",
+            "volume_l": 40,
+            "abv_percent": 79.2,
+            "lal": 51.1,
+            "density": null,
+            "notes": "Early tails retained."
+          },
+          {
+            "time": "16:40:00",
+            "volume_l": 70,
+            "abv_percent": 70,
+            "lal": 49,
+            "density": null,
+            "notes": "Late tails reserved for retorts."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 79.2,
+        "total_lal_end": 135.43,
+        "lal_loss": -56.23
+      },
+      "notes": "First cane juice rum from DRPS to be barrel aged."
+    },
+    "aging": {
+      "fill_date": "2023-09-21T00:00:00Z",
+      "cask": {
+        "number": "33",
+        "origin": "Barrel Brokers Ex-Bourbon load 1",
+        "type": "American Oak",
+        "size_l": 199
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 199,
+      "lal_filled": 126.36,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Clean ferment; slight cheesy nose in tails."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 171.02,
+      "heart_fraction_percent": 79.64
+    },
+    "metadata": {
+      "created_at": "2023-09-14T00:00:00Z",
+      "updated_at": "2023-09-21T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "14/09/2023 RUM-23-2 fermentation … 13/09 boiler 950 L with ACS recycle … hearts 63.075 LAL … cask 33 filled 21/09/2023."
+  },
+  {
+    "id": "59ef9a98-c07f-4924-a1bf-a52313cfc515",
+    "batch_id": "RUM-23-2",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 23-2 (Recycle Pull 1)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-09-14T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 22.6,
+        "initial_ph": 5.45
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder (150 L)",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": 1000,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 35,
+        "rehydration_time_min": 20
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Recycle run drawn from the same wash; fermentation identical to primary."
+    },
+    "distillation": {
+      "date": "2023-09-19T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": null,
+        "lal": 185.2
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Retort charge (mixed tails)",
+          "volume_l": 95,
+          "abv_percent": null,
+          "lal": null
+        },
+        {
+          "id": 2,
+          "content": "Retort charge (60% ABV)",
+          "volume_l": 60,
+          "abv_percent": 60,
+          "lal": 34.55
+        }
+      ],
+      "heat_profile": {
+        "start_time": "08:00:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "10:30:00",
+          "abv_percent": 85.3,
+          "notes": "3 + 1 scaled off"
+        },
+        "heads": {
+          "time": "11:30:00",
+          "volume_l": 28,
+          "abv_percent": 84.9,
+          "lal": 23.7,
+          "density": null,
+          "notes": "Approximate volume reported."
+        },
+        "hearts": {
+          "time": "14:38:00",
+          "volume_l": 76,
+          "abv_percent": 84.2,
+          "lal": 63.99,
+          "density": null,
+          "notes": "Collected after slow heat recovery."
+        },
+        "tails_segments": []
+      },
+      "yield": {
+        "total_lal_start": 185.2,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "Slow bubbling dunder with light yeast film; elements ran 5× near end."
+    },
+    "aging": {
+      "fill_date": "2023-09-21T00:00:00Z",
+      "cask": {
+        "number": "33",
+        "origin": "Barrel Brokers Ex-Bourbon load 1",
+        "type": "American Oak",
+        "size_l": 199
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 199,
+      "lal_filled": 126.36,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Recycle pull blended into cask 33 with primary run."
+    },
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 34.55
+    },
+    "metadata": {
+      "created_at": "2023-09-14T00:00:00Z",
+      "updated_at": "2023-09-21T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "19/09/2023 recycle run – boiler 1000 L, retorts 95 L + 60 L @60%, hearts ≈76 L @84.2%, dunder noted with yeast film."
+  },
+  {
+    "id": "0f2efbe3-7ad9-4fa1-9914-db6cbdb86102",
+    "batch_id": "RUM-23-2",
+    "run_type": "supplemental",
+    "run_index": 4,
+    "product": {
+      "name": "Rum 23-2 (Recycle Pull 2)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-09-14T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 22.6,
+        "initial_ph": 5.45
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder (150 L)",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": 1000,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 35,
+        "rehydration_time_min": 20
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Continuation of recycle campaign from the same ferment."
+    },
+    "distillation": {
+      "date": "2023-09-20T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": null,
+        "lal": 195.3
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Recharged retorts",
+          "volume_l": 103.5,
+          "abv_percent": 30,
+          "lal": null
+        },
+        {
+          "id": 2,
+          "content": "Recharged retorts",
+          "volume_l": 100,
+          "abv_percent": 60,
+          "lal": 73
+        }
+      ],
+      "heat_profile": {
+        "start_time": "08:45:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "11:00:00",
+          "abv_percent": 84,
+          "notes": "Scaled off for run"
+        },
+        "heads": {
+          "time": "11:50:00",
+          "volume_l": 30,
+          "abv_percent": 83.4,
+          "lal": 25.02,
+          "density": null,
+          "notes": "Approximate measurement."
+        },
+        "hearts": {
+          "time": "14:35:00",
+          "volume_l": 75,
+          "abv_percent": 83.8,
+          "lal": 62.85,
+          "density": null,
+          "notes": "Collected prior to ABV collapse."
+        },
+        "tails_segments": [
+          {
+            "time": "16:10:00",
+            "volume_l": 100,
+            "abv_percent": 73,
+            "lal": 73,
+            "density": null,
+            "notes": "Late tails – run finished at lower wattage."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 195.3,
+        "total_lal_end": 135.85,
+        "lal_loss": 59.45
+      },
+      "notes": "Similar clean profile; tails slightly cheesy per log."
+    },
+    "aging": {
+      "fill_date": "2023-09-21T00:00:00Z",
+      "cask": {
+        "number": "33",
+        "origin": "Barrel Brokers Ex-Bourbon load 1",
+        "type": "American Oak",
+        "size_l": 199
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 199,
+      "lal_filled": 126.36,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Combined with earlier pulls for cask 33."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 69.56,
+      "heart_fraction_percent": 32.18
+    },
+    "metadata": {
+      "created_at": "2023-09-14T00:00:00Z",
+      "updated_at": "2023-09-21T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "20/09/2023 recycle run – boiler 1000 L, heads ≈30 L @83.4%, hearts 75 L @83.8%, tails 100 L @73%; notes of cheesy tails."
+  },
+  {
+    "id": "a376b5dd-5642-4e06-b5ea-b387a2353225",
+    "batch_id": "RUM-23-3",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 23-3",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-09-22T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1500,
+        "initial_brix": 21.7,
+        "initial_ph": 5.7
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": 450,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "0h": 24,
+        "24h": 24,
+        "48h": 23.8,
+        "72h": 23.4,
+        "96h": 22.6
+      },
+      "brix_curve": {
+        "0h": 21.7,
+        "24h": 19.3,
+        "48h": 9.1,
+        "72h": 3.9,
+        "96h": 2.8
+      },
+      "ph_curve": {
+        "0h": 5.7,
+        "72h": 4.6,
+        "96h": 4.5,
+        "120h": 4.57
+      },
+      "duration_hours": 120,
+      "final_brix": 2.6,
+      "final_ph": 4.57,
+      "final_abv_percent": null,
+      "notes": "Cane syrup ferment; chiller held 24 °C, pH dipped early with citric addition."
+    },
+    "distillation": {
+      "date": "2023-09-27T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 12,
+        "lal": 197.7
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Split tails charge",
+          "volume_l": 120,
+          "abv_percent": 30,
+          "lal": 77.7
+        },
+        {
+          "id": 2,
+          "content": "Split tails charge",
+          "volume_l": 120,
+          "abv_percent": 60,
+          "lal": 72
+        }
+      ],
+      "heat_profile": {
+        "start_time": "08:45:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "10:35:00",
+          "abv_percent": 84.4,
+          "notes": "Breaker cycling on 2-in-32A."
+        },
+        "heads": {
+          "time": "11:05:00",
+          "volume_l": 18,
+          "abv_percent": 83.8,
+          "lal": 15.08,
+          "density": null,
+          "notes": "Approximate volume recorded in log."
+        },
+        "hearts": {
+          "time": "13:15:00",
+          "volume_l": 80.4,
+          "abv_percent": 83,
+          "lal": 66.72,
+          "density": null,
+          "notes": "Hearts captured before rapid ABV drop."
+        },
+        "tails_segments": [
+          {
+            "time": "15:00:00",
+            "volume_l": 73,
+            "abv_percent": 79.2,
+            "lal": 57.82,
+            "density": null,
+            "notes": "Early tails reserved for retorts."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 347.4,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "Two-day distillation campaign; retort elements stayed engaged making run faster but ABV dropped sooner."
+    },
+    "aging": {
+      "fill_date": "2023-09-29T00:00:00Z",
+      "cask": {
+        "number": "34",
+        "origin": "Barrel Brokers Ex-Bourbon load 1",
+        "type": "American Oak",
+        "size_l": 201
+      },
+      "fill_abv_percent": 65.5,
+      "volume_filled_l": 201,
+      "lal_filled": 131.65,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "168.27 L @83.4% diluted with 52.7 L water for cask entry."
+    },
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 19.21
+    },
+    "metadata": {
+      "created_at": "2023-09-22T00:00:00Z",
+      "updated_at": "2023-09-29T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "22/09/2023 RUM-23-3 cane syrup ferment … 27/09 still charge 1000 L @≈12% with split tails, heads ~18 L @83.8%, hearts 80.4 L @83%, early tails 73 L @79.2%; diluted to 65.5% for cask 34 on 29/09/2023."
+  },
+  {
+    "id": "bceb3973-f3a6-4cff-85dc-bbd2722a09cb",
+    "batch_id": "RUM-23-3",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 23-3 (Day 2)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2023-09-22T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1500,
+        "initial_brix": 21.7,
+        "initial_ph": 5.7
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": 450,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Second-day double-retort pull from same ferment."
+    },
+    "distillation": {
+      "date": "2023-09-28T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 12,
+        "lal": 197.7
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Carry-over tails",
+          "volume_l": 120,
+          "abv_percent": 30,
+          "lal": 77.7
+        },
+        {
+          "id": 2,
+          "content": "Carry-over tails",
+          "volume_l": 120,
+          "abv_percent": 60,
+          "lal": 72
+        }
+      ],
+      "heat_profile": {
+        "start_time": "09:00:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "12:05:00",
+          "abv_percent": 83.7,
+          "notes": "2-in-32A breaker stayed on."
+        },
+        "heads": {
+          "time": "12:05:00",
+          "volume_l": 23,
+          "abv_percent": 83.7,
+          "lal": 19.05,
+          "density": null,
+          "notes": "Approximate volume recorded."
+        },
+        "hearts": {
+          "time": "13:15:00",
+          "volume_l": 87.88,
+          "abv_percent": 83.6,
+          "lal": 73.47,
+          "density": null,
+          "notes": "Extended hearts due to warm retorts."
+        },
+        "tails_segments": [
+          {
+            "time": "15:00:00",
+            "volume_l": 60,
+            "abv_percent": 73,
+            "lal": 43.8,
+            "density": null,
+            "notes": "Late tails collected prior to shutdown."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 347.4,
+        "total_lal_end": 92.52,
+        "lal_loss": 254.88
+      },
+      "notes": "Retort elements remained engaged; faster run but earlier tails."
+    },
+    "aging": {
+      "fill_date": "2023-09-29T00:00:00Z",
+      "cask": {
+        "number": "34",
+        "origin": "Barrel Brokers Ex-Bourbon load 1",
+        "type": "American Oak",
+        "size_l": 201
+      },
+      "fill_abv_percent": 65.5,
+      "volume_filled_l": 201,
+      "lal_filled": 131.65,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Combined with Day 1 distillate for cask 34."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 26.63,
+      "heart_fraction_percent": 21.15
+    },
+    "metadata": {
+      "created_at": "2023-09-22T00:00:00Z",
+      "updated_at": "2023-09-29T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "28/09/2023 follow-up run – boiler 1000 L with retort recycle, heads ≈23 L @83.7%, hearts 87.9 L @83.6%, late tails 60 L @73%; combined for cask 34."
+  },
+  {
+    "id": "0b598629-5146-4c77-9c59-345654f323d4",
+    "batch_id": "RUM-24-1",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-1",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-01-12T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 500,
+        "water_mass_kg": 1500,
+        "initial_brix": 22,
+        "initial_ph": 5.3
+      },
+      "dunder": {
+        "added": true,
+        "type": "Infected dunder (2021)",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 25
+      },
+      "temperature_curve": {
+        "24h": 32,
+        "48h": 36,
+        "72h": 36,
+        "96h": 34
+      },
+      "brix_curve": {
+        "0h": 22,
+        "24h": 15.4,
+        "48h": 4.5,
+        "72h": 3.6,
+        "96h": 3.6
+      },
+      "ph_curve": {
+        "0h": 5.3,
+        "24h": 4.74,
+        "72h": 4.29,
+        "96h": 4.29
+      },
+      "duration_hours": 96,
+      "final_brix": 3.6,
+      "final_ph": 4.29,
+      "final_abv_percent": null,
+      "notes": "Chiller held 30→25 °C; steady drop in Brix with infected dunder addition."
+    },
+    "distillation": {
+      "date": "2024-01-17T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9,
+        "lal": 90
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Tails from previous run (diluted)",
+          "volume_l": 65.5,
+          "abv_percent": 30,
+          "lal": 19.65
+        },
+        {
+          "id": 2,
+          "content": "Tails from previous run (diluted)",
+          "volume_l": 66.8,
+          "abv_percent": 60,
+          "lal": 40.08
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:15:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:45:00",
+          "abv_percent": 84.1,
+          "notes": "3 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:15:00",
+          "volume_l": 23,
+          "abv_percent": 84.1,
+          "lal": 19.343,
+          "density": null,
+          "notes": "Reserved for recycle."
+        },
+        "hearts": {
+          "time": "11:40:00",
+          "volume_l": 79.7,
+          "abv_percent": 81.4,
+          "lal": 64.876,
+          "density": null,
+          "notes": "Bright cane esters; clean heart cut."
+        },
+        "tails_segments": [
+          {
+            "time": "12:45:00",
+            "volume_l": 50,
+            "abv_percent": 74,
+            "lal": 37,
+            "density": null,
+            "notes": "Early tails reserved for retort charge."
+          },
+          {
+            "time": "14:30:00",
+            "volume_l": 39,
+            "abv_percent": 46,
+            "lal": 17.94,
+            "density": null,
+            "notes": "Late tails showing heavier funk."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 149.73,
+        "total_lal_end": 139.16,
+        "lal_loss": -10.57
+      },
+      "notes": "First 2024 cane syrup rum run; hearts proof held steady until late tails."
+    },
+    "aging": {
+      "fill_date": "2024-02-28T00:00:00Z",
+      "cask": {
+        "number": "36",
+        "origin": null,
+        "type": "American Oak",
+        "size_l": null
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 161,
+      "lal_filled": 102.235,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "161 L @63.6% laid into cask 36."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 92.95,
+      "heart_fraction_percent": 43.33
+    },
+    "metadata": {
+      "created_at": "2024-01-12T00:00:00Z",
+      "updated_at": "2024-02-28T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "12/01/2024 RUM-24-1 cane syrup ferment (500 kg, 1500 kg water, 100 L infected dunder) with Distillamax CN; 17/01 boiler 1000 L @9% ABV, retorts charged with diluted tails, heads 23 L @84.1%, hearts 79.7 L @81.4%, tails collected in two stages; 161 L @63.6% filled into cask 36 on 28/02/2024."
+  },
+  {
+    "id": "6d0b9b9f-2d21-4c4b-9f99-85b0f86cfb25",
+    "batch_id": "RUM-24-1",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-1 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-01-12T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 500,
+        "water_mass_kg": 1500,
+        "initial_brix": 22,
+        "initial_ph": 5.3
+      },
+      "dunder": {
+        "added": true,
+        "type": "Infected dunder (2021)",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 25
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Second-day retort recycle run from same ferment."
+    },
+    "distillation": {
+      "date": "2024-01-19T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9,
+        "lal": 90
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails from previous run",
+          "volume_l": 59.2,
+          "abv_percent": 30,
+          "lal": 17.76
+        },
+        {
+          "id": 2,
+          "content": "Early tails from previous run",
+          "volume_l": 59.3,
+          "abv_percent": 60,
+          "lal": 35.58
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:25:00",
+          "abv_percent": 83,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "08:50:00",
+          "volume_l": 23,
+          "abv_percent": 84.1,
+          "lal": 19.343,
+          "density": null,
+          "notes": "Recycled to retorts."
+        },
+        "hearts": {
+          "time": "11:00:00",
+          "volume_l": 59.8,
+          "abv_percent": 81.2,
+          "lal": 48.558,
+          "density": null,
+          "notes": "Supplemental hearts used for later blending."
+        },
+        "tails_segments": [
+          {
+            "time": "13:45:00",
+            "volume_l": 50,
+            "abv_percent": 70,
+            "lal": 35,
+            "density": null,
+            "notes": "Early tails reserved for retorts."
+          },
+          {
+            "time": "15:00:00",
+            "volume_l": 45,
+            "abv_percent": 48,
+            "lal": 21.6,
+            "density": null,
+            "notes": "Late tails pulled with reduced wattage."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 162.683,
+        "total_lal_end": 124.25,
+        "lal_loss": -38.433
+      },
+      "notes": "Recycle run focused on pulling remaining congeners; hearts earmarked for later top-ups."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": 76.36,
+      "heart_fraction_percent": 29.85
+    },
+    "metadata": {
+      "created_at": "2024-01-12T00:00:00Z",
+      "updated_at": "2024-01-19T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "19/01/2024 RUM-24-1 supplemental run – boiler 1000 L @9%, retorts charged with recycled tails, heads 23 L @84.1%, hearts 59.8 L @81.2%, tails split into 70% and 48% cuts; hearts later used as 39 L @63.4% top-up for Batch 24-4."
+  },
+  {
+    "id": "c3fe2c6a-eca8-44dd-863b-47a3fa9860b4",
+    "batch_id": "RUM-24-2",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-2",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-01-17T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 250,
+        "water_mass_kg": 1350,
+        "initial_brix": 20.8,
+        "initial_ph": 5.7
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 30.9,
+        "48h": 31.9,
+        "72h": 31.5,
+        "96h": 28.5
+      },
+      "brix_curve": {
+        "0h": 20.8,
+        "24h": 16.5,
+        "48h": 5,
+        "72h": 4.97,
+        "96h": 4.3
+      },
+      "ph_curve": {
+        "0h": 5.7,
+        "24h": 5.25,
+        "48h": 5.07,
+        "72h": 5.05,
+        "96h": 5.07
+      },
+      "duration_hours": 96,
+      "final_brix": 4.3,
+      "final_ph": 5.07,
+      "final_abv_percent": null,
+      "notes": "Half-charge cane syrup ferment held at 28 °C. Minimal nutrient additions beyond antifoam."
+    },
+    "distillation": {
+      "date": "2024-01-25T00:00:00Z",
+      "boiler": {
+        "volume_l": 800,
+        "abv_percent": 8.9,
+        "lal": 71.2
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails from previous run (diluted)",
+          "volume_l": 72,
+          "abv_percent": 30,
+          "lal": 21.6
+        },
+        {
+          "id": 2,
+          "content": "Early tails from previous run (diluted)",
+          "volume_l": 70,
+          "abv_percent": 60,
+          "lal": 42
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:05:00",
+          "abv_percent": 83.7,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "08:40:00",
+          "volume_l": 23,
+          "abv_percent": 83.3,
+          "lal": 19.159,
+          "density": null,
+          "notes": "Recycled to retorts."
+        },
+        "hearts": {
+          "time": "12:35:00",
+          "volume_l": 71.97,
+          "abv_percent": 82.1,
+          "lal": 59.087,
+          "density": null,
+          "notes": "Clean heart cut destined for cask fill."
+        },
+        "tails_segments": [
+          {
+            "time": "14:20:00",
+            "volume_l": 60,
+            "abv_percent": 70,
+            "lal": 42,
+            "density": null,
+            "notes": "Early tails retained for next retort charge."
+          },
+          {
+            "time": "15:20:00",
+            "volume_l": 48,
+            "abv_percent": 46,
+            "lal": 22.08,
+            "density": null,
+            "notes": "Late tails pulled after wattage drop."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 153.89,
+        "total_lal_end": 142.33,
+        "lal_loss": -11.56
+      },
+      "notes": "Primary RUM-24-2 run. Tails held substantial fruit esters for recycle."
+    },
+    "aging": {
+      "fill_date": "2024-02-22T00:00:00Z",
+      "cask": {
+        "number": "35",
+        "origin": null,
+        "type": "American Oak",
+        "size_l": null
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 178,
+      "lal_filled": 113.03,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "178 L @63.6% filled into cask 35."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 92.51,
+      "heart_fraction_percent": 38.4
+    },
+    "metadata": {
+      "created_at": "2024-01-17T00:00:00Z",
+      "updated_at": "2024-02-22T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "17/01/2024 RUM-24-2 cane syrup ferment (250 kg + 1350 kg water) inoculated with Distillamax CN; 25/01 boiler 800 L @8.9%, retorts 72 L @30% and 70 L @60%, heads 23 L @83.3%, hearts 71.97 L @82.1%, tails split into 70% and 46% cuts; 178 L @63.6% filled into cask 35 on 22/02/2024."
+  },
+  {
+    "id": "6b6b6fe9-9a5e-4060-87da-7fb54e8e343d",
+    "batch_id": "RUM-24-2",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-2 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-01-17T00:00:00Z",
+      "substrate": {
+        "material": "C Molasses",
+        "batch": "2021",
+        "mass_kg": 200,
+        "water_mass_kg": null,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": null,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": null,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Supplemental molasses feed to stretch batch; logs did not capture full fermentation telemetry."
+    },
+    "distillation": {
+      "date": "2024-01-27T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 8.9,
+        "lal": 97.9
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails from previous run (diluted)",
+          "volume_l": 73,
+          "abv_percent": 30,
+          "lal": 21.9
+        },
+        {
+          "id": 2,
+          "content": "Early tails from previous run (diluted)",
+          "volume_l": 70,
+          "abv_percent": 60,
+          "lal": 42
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:20:00",
+          "abv_percent": 84.1,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:20:00",
+          "volume_l": 26,
+          "abv_percent": 83.3,
+          "lal": 21.658,
+          "density": null,
+          "notes": "Recycled."
+        },
+        "hearts": {
+          "time": "11:50:00",
+          "volume_l": 64.68,
+          "abv_percent": 81.5,
+          "lal": 52.714,
+          "density": null,
+          "notes": "Supplemental hearts held for blending."
+        },
+        "tails_segments": [
+          {
+            "time": "13:30:00",
+            "volume_l": 60,
+            "abv_percent": 70,
+            "lal": 42,
+            "density": null,
+            "notes": "Early tails reserved."
+          },
+          {
+            "time": "15:15:00",
+            "volume_l": 52,
+            "abv_percent": 48.9,
+            "lal": 25.428,
+            "density": null,
+            "notes": "Late tails collected after wattage reduction."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 180.959,
+        "total_lal_end": 141.8,
+        "lal_loss": -39.159
+      },
+      "notes": "Molasses-heavy recycle run to build retort reserves and supplemental hearts."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": 78.39,
+      "heart_fraction_percent": 29.13
+    },
+    "metadata": {
+      "created_at": "2024-01-17T00:00:00Z",
+      "updated_at": "2024-01-27T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "27/01/2024 RUM-24-2 supplemental run – boiler 1100 L @8.9%, retorts 73 L @30% and 70 L @60%, heads 26 L @83.3%, hearts 64.68 L @81.5%, tails drawn at 70% and 48.9%; output reserved for future blends."
+  },
+  {
+    "id": "5c21d1a9-2d6a-4a47-8a52-0c1196f9c20c",
+    "batch_id": "RUM-24-3",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-3",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-02-21T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1400,
+        "initial_brix": 24.9,
+        "initial_ph": 5.23
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 350 g nutrient mid-ferment (28/02 log)."
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 28.8,
+        "48h": 29.5,
+        "72h": 28.3,
+        "96h": 27.7,
+        "120h": 26.6
+      },
+      "brix_curve": {
+        "0h": 24.9,
+        "24h": 22.7,
+        "48h": 12.4,
+        "72h": 8.2,
+        "96h": 6.3,
+        "120h": 5.5
+      },
+      "ph_curve": {
+        "0h": 5.23,
+        "24h": 4.92,
+        "48h": 4.77,
+        "72h": 4.67,
+        "96h": 4.58,
+        "120h": 4.56
+      },
+      "duration_hours": 120,
+      "final_brix": 4.2,
+      "final_ph": 4.48,
+      "final_abv_percent": null,
+      "notes": "Clean dunder molasses ferment held at 25 °C; nutrient boost added mid-run."
+    },
+    "distillation": {
+      "date": "2024-02-26T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 10,
+        "lal": 110
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (48 L @52% + 23 L H2O)",
+          "volume_l": 71,
+          "abv_percent": 35,
+          "lal": 24.85
+        },
+        {
+          "id": 2,
+          "content": "Early tails (60 L @70% + 10 L H2O)",
+          "volume_l": 70,
+          "abv_percent": 60,
+          "lal": 42
+        }
+      ],
+      "heat_profile": {
+        "start_time": "07:00:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "09:30:00",
+          "abv_percent": 83.6,
+          "notes": "1 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "11:00:00",
+          "volume_l": 20,
+          "abv_percent": 80,
+          "lal": 16,
+          "density": null,
+          "notes": "Recycled to retort charge."
+        },
+        "hearts": {
+          "time": "14:50:00",
+          "volume_l": 83,
+          "abv_percent": 79.9,
+          "lal": 66.317,
+          "density": null,
+          "notes": "Clean molasses heart destined for cask fill."
+        },
+        "tails_segments": [
+          {
+            "time": "16:40:00",
+            "volume_l": 80,
+            "abv_percent": 75.2,
+            "lal": 60.16,
+            "density": null,
+            "notes": "Early tails retained with strong ester load."
+          },
+          {
+            "time": "18:22:00",
+            "volume_l": 72,
+            "abv_percent": 45.1,
+            "lal": 32.472,
+            "density": null,
+            "notes": "Late tails drawn as wattage reduced."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 198.508,
+        "total_lal_end": 174.949,
+        "lal_loss": 23.559
+      },
+      "notes": "Two-day distillation kickoff; retort elements stayed engaged causing earlier tail drop."
+    },
+    "aging": {
+      "fill_date": "2024-03-13T00:00:00Z",
+      "cask": {
+        "number": "38",
+        "origin": null,
+        "type": "American Oak",
+        "size_l": 230
+      },
+      "fill_abv_percent": 63.8,
+      "volume_filled_l": 200.5,
+      "lal_filled": 127.919,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Diluted to 230 L total solution; 200.5 L entered cask 38 at 63.8%."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 88.14,
+      "heart_fraction_percent": 33.41
+    },
+    "metadata": {
+      "created_at": "2024-02-21T00:00:00Z",
+      "updated_at": "2024-03-13T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "21/02/2024 RUM-24-3 molasses ferment (500 kg + 1400 kg water + 100 L clean dunder) with Distillamax RM; 26/02 boiler 1100 L @10% ABV, retorts charged with diluted late/early tails, heads 20 L @80%, hearts 83 L @79.9%, tails pulled at 75.2% and 45.1%; 200.5 L @63.8% filled to cask 38 on 13/03/2024."
+  },
+  {
+    "id": "f47a4dc4-7ac6-465f-97f7-7f67ce3d2a87",
+    "batch_id": "RUM-24-3",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-3 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-02-21T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1400,
+        "initial_brix": 24.9,
+        "initial_ph": 5.23
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 350 g nutrient mid-ferment (28/02 log)."
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Day two pull from same ferment after nutrient addition."
+    },
+    "distillation": {
+      "date": "2024-02-28T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 10,
+        "lal": 100
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (72 L @45% + 35 L H2O)",
+          "volume_l": 107,
+          "abv_percent": 30,
+          "lal": 32.1
+        },
+        {
+          "id": 2,
+          "content": "Early tails (80 L @75% + 20 L H2O)",
+          "volume_l": 100,
+          "abv_percent": 60,
+          "lal": 60
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:00:00",
+          "abv_percent": 88,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "08:40:00",
+          "volume_l": 25,
+          "abv_percent": 83.8,
+          "lal": 20.95,
+          "density": null,
+          "notes": "Returned to retorts."
+        },
+        "hearts": {
+          "time": "11:30:00",
+          "volume_l": 93,
+          "abv_percent": 81.6,
+          "lal": 75.888,
+          "density": null,
+          "notes": "Supplemental hearts blended into cask lot."
+        },
+        "tails_segments": [
+          {
+            "time": "14:20:00",
+            "volume_l": 80,
+            "abv_percent": 77,
+            "lal": 61.6,
+            "density": null,
+            "notes": "Early tails saved for retort program."
+          },
+          {
+            "time": "16:00:00",
+            "volume_l": 81,
+            "abv_percent": 51,
+            "lal": 41.31,
+            "density": null,
+            "notes": "Late tails cut once ABV dropped."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 208.08,
+        "total_lal_end": 199.748,
+        "lal_loss": 8.332
+      },
+      "notes": "Follow-up draw delivered high heart volume; retort tails replenished."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": 96,
+      "heart_fraction_percent": 36.47
+    },
+    "metadata": {
+      "created_at": "2024-02-21T00:00:00Z",
+      "updated_at": "2024-02-28T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "28/02/2024 RUM-24-3 supplemental run – boiler 1000 L @10% ABV, retorts charged with 107 L @30% and 100 L @60%, heads 25 L @83.8%, hearts 93 L @81.6%, tails drawn at 77% and 51%; output blended with primary batch."
+  },
+  {
+    "id": "c86fd328-2b74-473d-8cdd-b3db0ad73f5f",
+    "batch_id": "RUM-24-4",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-4",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-02-22T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1400,
+        "initial_brix": 22.2,
+        "initial_ph": 5.2
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 36.5,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 26.5,
+        "48h": 27,
+        "72h": 26.6,
+        "96h": 25.9,
+        "120h": 26.4
+      },
+      "brix_curve": {
+        "0h": 22.2,
+        "24h": 19.3,
+        "48h": 9.6,
+        "72h": 6.1,
+        "96h": 4.8,
+        "120h": 3.5
+      },
+      "ph_curve": {
+        "0h": 5.2,
+        "24h": 4.9,
+        "48h": 4.75,
+        "72h": 4.69,
+        "96h": 4.68,
+        "120h": 4.62
+      },
+      "duration_hours": 120,
+      "final_brix": 2.8,
+      "final_ph": 4.59,
+      "final_abv_percent": null,
+      "notes": "Clean dunder ferment held at 25 °C; smooth brix decline across 5 days."
+    },
+    "distillation": {
+      "date": "2024-02-29T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 10,
+        "lal": 110
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails from previous run (81 L @51% + 35 L H2O)",
+          "volume_l": 116,
+          "abv_percent": 35,
+          "lal": 40.6
+        },
+        {
+          "id": 2,
+          "content": "Early tails from previous run (80 L @80% + 32 L H2O)",
+          "volume_l": 112,
+          "abv_percent": 60,
+          "lal": 67.2
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:30:00",
+          "abv_percent": 84,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:20:00",
+          "volume_l": 25,
+          "abv_percent": 84,
+          "lal": 21,
+          "density": null,
+          "notes": "Sharp; recycled to retorts."
+        },
+        "hearts": {
+          "time": "12:30:00",
+          "volume_l": 100,
+          "abv_percent": 82.6,
+          "lal": 82.6,
+          "density": null,
+          "notes": "Rich heart cut with layered molasses ester."
+        },
+        "tails_segments": [
+          {
+            "time": "14:40:00",
+            "volume_l": null,
+            "abv_percent": 79.2,
+            "lal": 67.32,
+            "density": null,
+            "notes": "Early tails retained for retort program; log gave ABV/LAL only."
+          },
+          {
+            "time": "16:45:00",
+            "volume_l": null,
+            "abv_percent": 60,
+            "lal": 47.22,
+            "density": null,
+            "notes": "Late tails drawn after wattage drop."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 239.64,
+        "total_lal_end": 218.14,
+        "lal_loss": 21.5
+      },
+      "notes": "Primary RUM-24-4 run; strong fruit ester tails banked for next charge."
+    },
+    "aging": {
+      "fill_date": "2024-03-06T00:00:00Z",
+      "cask": {
+        "number": "37",
+        "origin": null,
+        "type": "American Oak",
+        "size_l": 248
+      },
+      "fill_abv_percent": 63.4,
+      "volume_filled_l": 194,
+      "lal_filled": 122.996,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Rum 24-4 hearts cut proofed to 63.4% and entered cask 37."
+    },
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 34.47
+    },
+    "metadata": {
+      "created_at": "2024-02-22T00:00:00Z",
+      "updated_at": "2024-03-06T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "22/02/2024 RUM-24-4 molasses ferment (500 kg + 1400 kg water + 100 L clean dunder); 29/02 boiler 1100 L @10% with retorts 116 L @35% and 112 L @60%, heads 25 L @84%, hearts 100 L @82.6%, tails logged at 79.2% and 60% ABV; 194 L @63.4% filled to cask 37 on 06/03/2024."
+  },
+  {
+    "id": "d8f89c31-6b79-40bc-89cc-17ded5a11560",
+    "batch_id": "RUM-24-4",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-4 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-02-22T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1400,
+        "initial_brix": 22.2,
+        "initial_ph": 5.2
+      },
+      "dunder": {
+        "added": true,
+        "type": "Clean dunder",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 36.5,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Second-day pull from the same wash."
+    },
+    "distillation": {
+      "date": "2024-03-01T00:00:00Z",
+      "boiler": {
+        "volume_l": 950,
+        "abv_percent": 10,
+        "lal": 95
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (80 L @60% + 40 L H2O)",
+          "volume_l": 118,
+          "abv_percent": 40,
+          "lal": 47.2
+        },
+        {
+          "id": 2,
+          "content": "Early tails (85 L @79% + 32 L H2O)",
+          "volume_l": 117,
+          "abv_percent": 60,
+          "lal": 70.2
+        }
+      ],
+      "heat_profile": {
+        "start_time": "07:30:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "09:50:00",
+          "abv_percent": 81,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "11:10:00",
+          "volume_l": 25,
+          "abv_percent": 80,
+          "lal": 20,
+          "density": null,
+          "notes": "Recycled to retorts."
+        },
+        "hearts": {
+          "time": "14:15:00",
+          "volume_l": 88,
+          "abv_percent": 82.1,
+          "lal": 72.248,
+          "density": null,
+          "notes": "Supplemental hearts reserved for blending."
+        },
+        "tails_segments": [
+          {
+            "time": "15:45:00",
+            "volume_l": 82.5,
+            "abv_percent": 78.9,
+            "lal": 65.093,
+            "density": null,
+            "notes": "Early tails retained."
+          },
+          {
+            "time": "17:10:00",
+            "volume_l": 100.4,
+            "abv_percent": 64.6,
+            "lal": 64.858,
+            "density": null,
+            "notes": "Late tails collected prior to shutdown."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 234.24,
+        "total_lal_end": 222.199,
+        "lal_loss": 12.041
+      },
+      "notes": "Supplemental draw captured additional hearts for future vatting."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 30.84
+    },
+    "metadata": {
+      "created_at": "2024-02-22T00:00:00Z",
+      "updated_at": "2024-03-01T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "01/03/2024 RUM-24-4 supplemental run – boiler 950 L @10%, retorts 118 L @40% and 117 L @60%, heads 25 L @80%, hearts 88 L @82.1%, tails captured at 78.9% and 64.6%; hearts held for future blending."
+  },
+  {
+    "id": "1a84a6d7-c36b-4a10-9fd1-21c77a69d68e",
+    "batch_id": "RUM-24-5",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-5",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-02-28T00:00:00Z",
+      "substrate": {
+        "material": "C Molasses",
+        "batch": "2021",
+        "mass_kg": 400,
+        "water_mass_kg": 1500,
+        "initial_brix": 26.6,
+        "initial_ph": 5.14
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 350 g nutrient during fermentation."
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37.5,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 28.7,
+        "48h": 29.3,
+        "72h": 29.8,
+        "96h": 27.6
+      },
+      "brix_curve": {
+        "0h": 26.6,
+        "24h": 24.2,
+        "48h": 14.9,
+        "72h": 10.8,
+        "96h": 9.6
+      },
+      "ph_curve": {
+        "0h": 5.14,
+        "24h": 5.02,
+        "48h": 4.92,
+        "72h": 4.89,
+        "96h": 4.88
+      },
+      "duration_hours": 96,
+      "final_brix": 9.3,
+      "final_ph": 4.88,
+      "final_abv_percent": null,
+      "notes": "Molasses ferment showed strong ester production; nutrient bump on day two."
+    },
+    "distillation": {
+      "date": "2024-03-05T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9.6,
+        "lal": 96
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (76 L @64.6% + 64 L H2O)",
+          "volume_l": 140,
+          "abv_percent": 35,
+          "lal": 49
+        },
+        {
+          "id": 2,
+          "content": "Early tails (106 L @76.4% + 28 L H2O)",
+          "volume_l": 134,
+          "abv_percent": 60,
+          "lal": 80.4
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:20:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:30:00",
+          "abv_percent": 82.6,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:15:00",
+          "volume_l": 30,
+          "abv_percent": 83.8,
+          "lal": 25.14,
+          "density": null,
+          "notes": "Clean, aromatic heads retained for recycle."
+        },
+        "hearts": {
+          "time": "13:15:00",
+          "volume_l": 97,
+          "abv_percent": 83.3,
+          "lal": 80.801,
+          "density": null,
+          "notes": "Pineapple-forward heart cut."
+        },
+        "tails_segments": [
+          {
+            "time": "15:10:00",
+            "volume_l": 105,
+            "abv_percent": 79.6,
+            "lal": 83.58,
+            "density": null,
+            "notes": "Early tails retained with high ester load."
+          },
+          {
+            "time": "16:40:00",
+            "volume_l": 72,
+            "abv_percent": 57,
+            "lal": 41.04,
+            "density": null,
+            "notes": "Late tails drawn as ABV collapsed."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 245.4,
+        "total_lal_end": 230.561,
+        "lal_loss": 14.839
+      },
+      "notes": "Primary run yielded expressive tropical profile; tails banked for next cycle."
+    },
+    "aging": {
+      "fill_date": "2024-03-19T00:00:00Z",
+      "cask": {
+        "number": "39",
+        "origin": "Heaven Hill Distillery",
+        "type": "American Oak",
+        "size_l": 195
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 195,
+      "lal_filled": 123.825,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Main hearts laid to rest in ex-Heaven Hill barrel."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 93.95,
+      "heart_fraction_percent": 35.05
+    },
+    "metadata": {
+      "created_at": "2024-02-28T00:00:00Z",
+      "updated_at": "2024-03-19T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "28/02/2024 RUM-24-5 molasses ferment (400 kg + 1500 kg water) with Distillamax RM; 05/03 boiler 1000 L @9.6%, heads 30 L @83.8%, hearts 97 L @83.3%, tails in 2 stages; 195 L @63.5% filled into Heaven Hill cask #39 on 19/03/2024."
+  },
+  {
+    "id": "0bd4f4b1-3c1f-4e79-be02-cd6d8d6af58a",
+    "batch_id": "RUM-24-5",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-5 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-02-28T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 100,
+        "water_mass_kg": null,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": null,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 140 g nutrient during fermentation."
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37.5,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Supplemental cane syrup charge to extend batch; telemetry not recorded."
+    },
+    "distillation": {
+      "date": "2024-03-06T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9.6,
+        "lal": 96
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (72 L @57% + 64 L H2O)",
+          "volume_l": 136,
+          "abv_percent": 30,
+          "lal": 40.8
+        },
+        {
+          "id": 2,
+          "content": "Early tails (105 L @79.6% + 34 L H2O)",
+          "volume_l": 139,
+          "abv_percent": 60,
+          "lal": 83.4
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:30:00",
+          "abv_percent": 84.1,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:20:00",
+          "volume_l": 25,
+          "abv_percent": 83.7,
+          "lal": 20.925,
+          "density": null,
+          "notes": "Held for recycle."
+        },
+        "hearts": {
+          "time": "12:25:00",
+          "volume_l": 94.8,
+          "abv_percent": 83.2,
+          "lal": 78.874,
+          "density": null,
+          "notes": "Supplemental hearts for small-format casks."
+        },
+        "tails_segments": [
+          {
+            "time": "14:15:00",
+            "volume_l": 85,
+            "abv_percent": 80.6,
+            "lal": 68.51,
+            "density": null,
+            "notes": "Early tails recycled."
+          },
+          {
+            "time": "15:30:00",
+            "volume_l": 61,
+            "abv_percent": 73,
+            "lal": 44.53,
+            "density": null,
+            "notes": "Late tails collected for future retorts."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 245.4,
+        "total_lal_end": 212.839,
+        "lal_loss": 32.561
+      },
+      "notes": "Supplemental cane syrup run produced ample hearts for top-up vessels."
+    },
+    "aging": {
+      "fill_date": "2024-03-19T00:00:00Z",
+      "cask": {
+        "number": "50#1",
+        "origin": null,
+        "type": "Small format",
+        "size_l": 50
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 50,
+      "lal_filled": 31.75,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Primary supplemental fill into 50 L cask #1; remaining 11 L transferred to 50#2."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 86.79,
+      "heart_fraction_percent": 37.05
+    },
+    "metadata": {
+      "created_at": "2024-02-28T00:00:00Z",
+      "updated_at": "2024-03-19T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "06/03/2024 RUM-24-5 supplemental cane syrup run – boiler 1000 L @9.6%, heads 25 L @83.7%, hearts 94.8 L @83.2%, tails at 80.6% and 73%; 50 L @63.5% filled to small cask 50#1 with 11 L reserved for 50#2 on 19/03/2024."
+  },
+  {
+    "id": "8f9f69ea-4869-46c0-93b7-e91d4caa1fba",
+    "batch_id": "RUM-24-6",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-6",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-03-01T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 24,
+        "initial_ph": 4.92
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses dunder muck + 50 L funky dunder",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 250 g nutrient during fermentation."
+      },
+      "yeast": {
+        "strain": "Reused yeast slurry",
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {
+        "24h": 28.3,
+        "48h": 26.6,
+        "72h": 25.8,
+        "96h": 25.7
+      },
+      "brix_curve": {
+        "0h": 24,
+        "24h": 14.2,
+        "48h": 9.6,
+        "72h": 8.3,
+        "96h": 7.7
+      },
+      "ph_curve": {
+        "0h": 4.92,
+        "24h": 4.28,
+        "48h": 4.09,
+        "72h": 4.01,
+        "96h": 3.96,
+        "120h": 3.93
+      },
+      "duration_hours": 120,
+      "final_brix": 6.7,
+      "final_ph": 3.93,
+      "final_abv_percent": null,
+      "notes": "Heavy muck/dunder ferment with reused yeast; strong funk baseline."
+    },
+    "distillation": {
+      "date": "2024-03-07T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 9.8,
+        "lal": 107.8
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (61 L @73% + 66 L H2O)",
+          "volume_l": 127,
+          "abv_percent": 30,
+          "lal": 38.1
+        },
+        {
+          "id": 2,
+          "content": "Early tails (85 L @80.6% + 30 L H2O)",
+          "volume_l": 115,
+          "abv_percent": 60,
+          "lal": 66
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:15:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:40:00",
+          "abv_percent": 86.3,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:55:00",
+          "volume_l": 25,
+          "abv_percent": 84,
+          "lal": 21,
+          "density": null,
+          "notes": "Filtered heads reserved."
+        },
+        "hearts": {
+          "time": "14:55:00",
+          "volume_l": 79,
+          "abv_percent": 83.8,
+          "lal": 66.202,
+          "density": null,
+          "notes": "Robust funky heart cut."
+        },
+        "tails_segments": [
+          {
+            "time": "16:10:00",
+            "volume_l": 80,
+            "abv_percent": 81.4,
+            "lal": 65.12,
+            "density": null,
+            "notes": "Early tails kept for reuse."
+          },
+          {
+            "time": "16:50:00",
+            "volume_l": 44,
+            "abv_percent": 78.2,
+            "lal": 34.408,
+            "density": null,
+            "notes": "Late tails captured with high congener load."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 232.875,
+        "total_lal_end": 186.73,
+        "lal_loss": 46.145
+      },
+      "notes": "Primary run produced deep funky profile; tails high in congeners for next charge."
+    },
+    "aging": {
+      "fill_date": "2024-03-19T00:00:00Z",
+      "cask": {
+        "number": "40",
+        "origin": "Heaven Hill Distillery",
+        "type": "American Oak",
+        "size_l": 220
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 209,
+      "lal_filled": 132.715,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Primary hearts proofed to 63.5% and laid into cask 40."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 92.93,
+      "heart_fraction_percent": 28.43
+    },
+    "metadata": {
+      "created_at": "2024-03-01T00:00:00Z",
+      "updated_at": "2024-03-19T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "01/03/2024 RUM-24-6 cane syrup ferment with molasses/funky dunder; 07/03 boiler 1100 L @9.8%, hearts 79 L @83.8%, tails at 81.4% and 78.2%; 209 L @63.5% filled to Heaven Hill cask 40 on 19/03/2024."
+  },
+  {
+    "id": "2bd23ee0-8688-4a92-92b2-6d0dc013f767",
+    "batch_id": "RUM-24-6",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-6 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-03-01T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 24,
+        "initial_ph": 4.92
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses/funky dunder mix",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 250 g nutrient during fermentation."
+      },
+      "yeast": {
+        "strain": "Reused yeast slurry",
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Second-day pull of same wash following nutrient addition."
+    },
+    "distillation": {
+      "date": "2024-03-08T00:00:00Z",
+      "boiler": {
+        "volume_l": 1500,
+        "abv_percent": 9.8,
+        "lal": 147
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (44 L @78.2% + 63 L H2O)",
+          "volume_l": 107,
+          "abv_percent": 32,
+          "lal": 34.24
+        },
+        {
+          "id": 2,
+          "content": "Early tails (80 L @81.4% + 28 L H2O)",
+          "volume_l": 108,
+          "abv_percent": 60,
+          "lal": 64.8
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "09:00:00",
+          "abv_percent": 84.3,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:40:00",
+          "volume_l": 20,
+          "abv_percent": 83.9,
+          "lal": 16.78,
+          "density": null,
+          "notes": "Recycled."
+        },
+        "hearts": {
+          "time": "14:40:00",
+          "volume_l": 81,
+          "abv_percent": 83.7,
+          "lal": 67.797,
+          "density": null,
+          "notes": "Supplemental hearts destined for small casks."
+        },
+        "tails_segments": [
+          {
+            "time": "16:00:00",
+            "volume_l": 81,
+            "abv_percent": 81.2,
+            "lal": 65.772,
+            "density": null,
+            "notes": "Early tails collected."
+          },
+          {
+            "time": "17:00:00",
+            "volume_l": 54,
+            "abv_percent": 74.2,
+            "lal": 40.068,
+            "density": null,
+            "notes": "Late tails captured before shutdown."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 267.04,
+        "total_lal_end": 190.417,
+        "lal_loss": 76.623
+      },
+      "notes": "Large-volume supplemental run produced hearts for 50 L cask program."
+    },
+    "aging": {
+      "fill_date": "2024-03-19T00:00:00Z",
+      "cask": {
+        "number": "50#2",
+        "origin": null,
+        "type": "Small format",
+        "size_l": 50
+      },
+      "fill_abv_percent": 63.5,
+      "volume_filled_l": 11,
+      "lal_filled": 6.985,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Remaining hearts from supplemental run filled into 50 L cask #2."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 71.34,
+      "heart_fraction_percent": 25.39
+    },
+    "metadata": {
+      "created_at": "2024-03-01T00:00:00Z",
+      "updated_at": "2024-03-19T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "08/03/2024 RUM-24-6 supplemental run – boiler 1500 L @9.8%, hearts 81 L @83.7%, tails at 81.2% and 74.2%; 11 L @63.5% filled to 50 L cask #2 on 19/03/2024."
+  },
+  {
+    "id": "ab9b2e5d-28a1-4d19-92a1-9ac034039ae5",
+    "batch_id": "RUM-24-7",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-7",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-03-06T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 25.8,
+        "initial_ph": 5.12
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses muck + 50 L funky dunder",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 110,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 250 g nutrient during fermentation."
+      },
+      "yeast": {
+        "strain": "Reused yeast slurry",
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {
+        "24h": 32.3,
+        "48h": 29,
+        "72h": 10.2,
+        "96h": 26.6,
+        "120h": 12
+      },
+      "brix_curve": {
+        "0h": 25.8,
+        "24h": 16.8,
+        "48h": 12.1,
+        "72h": 8.2,
+        "96h": 8.1
+      },
+      "ph_curve": {
+        "0h": 5.12,
+        "24h": 4.63,
+        "48h": 4.45,
+        "72h": 4.83,
+        "96h": 4.23
+      },
+      "duration_hours": 120,
+      "final_brix": 8.1,
+      "final_ph": 4.23,
+      "final_abv_percent": null,
+      "notes": "High-funk ferment using muck/funky dunder mix."
+    },
+    "distillation": {
+      "date": "2024-03-12T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9,
+        "lal": 90
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (54 L @74.2% + 67 L H2O)",
+          "volume_l": 121,
+          "abv_percent": 33,
+          "lal": 39.93
+        },
+        {
+          "id": 2,
+          "content": "Early tails (81 L @81.2% + 28 L H2O)",
+          "volume_l": 119,
+          "abv_percent": 60,
+          "lal": 71.4
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:30:00",
+          "abv_percent": 85.2,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:10:00",
+          "volume_l": 20,
+          "abv_percent": 84.4,
+          "lal": 16.88,
+          "density": null,
+          "notes": "Reserved for recycle."
+        },
+        "hearts": {
+          "time": "13:15:00",
+          "volume_l": 80.9,
+          "abv_percent": 84,
+          "lal": 67.956,
+          "density": null,
+          "notes": "High-funk heart cut."
+        },
+        "tails_segments": [
+          {
+            "time": "14:15:00",
+            "volume_l": 72,
+            "abv_percent": 81.8,
+            "lal": 58.896,
+            "density": null,
+            "notes": "Early tails retained."
+          },
+          {
+            "time": "15:15:00",
+            "volume_l": 57,
+            "abv_percent": 76,
+            "lal": 43.32,
+            "density": null,
+            "notes": "Late tails drawn at lower wattage."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 218.13,
+        "total_lal_end": 187.052,
+        "lal_loss": 31.078
+      },
+      "notes": "Primary RUM-24-7 run; hearts showcased deep tropical funk."
+    },
+    "aging": {
+      "fill_date": "2024-03-20T00:00:00Z",
+      "cask": {
+        "number": "41",
+        "origin": "Buffalo Trace",
+        "type": "American Oak",
+        "size_l": 200
+      },
+      "fill_abv_percent": 64,
+      "volume_filled_l": 200,
+      "lal_filled": 128,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Primary hearts proofed to 64% and filled to Buffalo Trace cask 41."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 85.74,
+      "heart_fraction_percent": 31.15
+    },
+    "metadata": {
+      "created_at": "2024-03-06T00:00:00Z",
+      "updated_at": "2024-03-20T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "06/03/2024 RUM-24-7 ferment (molasses muck + funky dunder); 12/03 boiler 1000 L @9%, hearts 80.9 L @84%, tails at 81.8% and 76%; 200 L @64% filled to Buffalo Trace cask 41 on 20/03/2024."
+  },
+  {
+    "id": "b574e84f-0b22-41d3-b8c0-2f2a05dcf35f",
+    "batch_id": "RUM-24-7",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-7 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-03-06T00:00:00Z",
+      "substrate": {
+        "material": "A Molasses",
+        "batch": "2022",
+        "mass_kg": 500,
+        "water_mass_kg": 1350,
+        "initial_brix": 25.8,
+        "initial_ph": 5.12
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses/funky dunder mix",
+        "volume_l": 150,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 110,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": "Added 250 g nutrient during fermentation."
+      },
+      "yeast": {
+        "strain": "Reused yeast slurry",
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Day two pull from same ferment."
+    },
+    "distillation": {
+      "date": "2024-03-13T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 9,
+        "lal": 99
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (57 L @76% + 75 L H2O)",
+          "volume_l": 132,
+          "abv_percent": 33,
+          "lal": 43.56
+        },
+        {
+          "id": 2,
+          "content": "Early tails (76 L @81.8% + 26 L H2O)",
+          "volume_l": 102,
+          "abv_percent": 60,
+          "lal": 61.2
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:00:00",
+          "abv_percent": 88.1,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "08:45:00",
+          "volume_l": 20,
+          "abv_percent": 84,
+          "lal": 16.8,
+          "density": null,
+          "notes": "Recycled."
+        },
+        "hearts": {
+          "time": "12:00:00",
+          "volume_l": 81,
+          "abv_percent": 83.5,
+          "lal": 67.635,
+          "density": null,
+          "notes": "Supplemental hearts for small cask fill."
+        },
+        "tails_segments": [
+          {
+            "time": "13:15:00",
+            "volume_l": 75,
+            "abv_percent": 80.7,
+            "lal": 60.525,
+            "density": null,
+            "notes": "Early tails retained."
+          },
+          {
+            "time": "14:15:00",
+            "volume_l": 60,
+            "abv_percent": 73,
+            "lal": 43.8,
+            "density": null,
+            "notes": "Late tails captured prior to shutdown."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 220.7,
+        "total_lal_end": 188.76,
+        "lal_loss": 31.94
+      },
+      "notes": "Supplemental hearts destined for 50 L small cask."
+    },
+    "aging": {
+      "fill_date": "2024-03-20T00:00:00Z",
+      "cask": {
+        "number": "50#2",
+        "origin": null,
+        "type": "Small format",
+        "size_l": 50
+      },
+      "fill_abv_percent": 64,
+      "volume_filled_l": 16,
+      "lal_filled": 10.24,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Supplemental fill into 50 L cask #2 alongside RUM-24-6 hearts."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 85.52,
+      "heart_fraction_percent": 30.65
+    },
+    "metadata": {
+      "created_at": "2024-03-06T00:00:00Z",
+      "updated_at": "2024-03-20T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "13/03/2024 RUM-24-7 supplemental run – boiler 1100 L @9%, hearts 81 L @83.5%, tails at 80.7% and 73%; 16 L @64% filled to 50#2 on 20/03/2024."
+  },
+  {
+    "id": "9b4ea9d3-1a09-45f0-99fe-f6125a9aeb3b",
+    "batch_id": "RUM-24-8",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-8",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-03-08T00:00:00Z",
+      "substrate": {
+        "material": "C Molasses",
+        "batch": "2021",
+        "mass_kg": 180,
+        "water_mass_kg": 1100,
+        "initial_brix": 19,
+        "initial_ph": 4.84
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses muck + 50 L funky dunder + 25 L extreme funky worm",
+        "volume_l": 175,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Reused yeast slurry",
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {
+        "24h": 26.7,
+        "48h": 26,
+        "72h": 26.5,
+        "96h": 3.3
+      },
+      "brix_curve": {
+        "0h": 19,
+        "24h": 9.7,
+        "48h": 5,
+        "72h": 3.4,
+        "96h": 3.91
+      },
+      "ph_curve": {
+        "0h": 4.84,
+        "24h": 3.98,
+        "48h": 3.92,
+        "72h": 3.93,
+        "96h": 3.91
+      },
+      "duration_hours": 96,
+      "final_brix": 3.91,
+      "final_ph": 3.91,
+      "final_abv_percent": null,
+      "notes": "High-funk molasses ferment with multiple dunder additions."
+    },
+    "distillation": {
+      "date": "2024-03-15T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 8.5,
+        "lal": 85
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (60 L @73% + 72 L H2O)",
+          "volume_l": 132,
+          "abv_percent": 33,
+          "lal": 43.56
+        },
+        {
+          "id": 2,
+          "content": "Early tails (75 L @80.7% + 25 L H2O)",
+          "volume_l": 100,
+          "abv_percent": 60,
+          "lal": 60
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:30:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:20:00",
+          "abv_percent": 88,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:05:00",
+          "volume_l": 24,
+          "abv_percent": 84,
+          "lal": 20.16,
+          "density": null,
+          "notes": "Kept for recycle."
+        },
+        "hearts": {
+          "time": "11:50:00",
+          "volume_l": 72,
+          "abv_percent": 83.3,
+          "lal": 59.976,
+          "density": null,
+          "notes": "Hearts with pronounced funk."
+        },
+        "tails_segments": [
+          {
+            "time": "13:00:00",
+            "volume_l": 78,
+            "abv_percent": 79.4,
+            "lal": 61.932,
+            "density": null,
+            "notes": "Early tails held for future charges."
+          },
+          {
+            "time": "14:45:00",
+            "volume_l": 69,
+            "abv_percent": 60.8,
+            "lal": 41.952,
+            "density": null,
+            "notes": "Late tails captured after wattage drop."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 205.36,
+        "total_lal_end": 180.66,
+        "lal_loss": 24.7
+      },
+      "notes": "Primary run yielded robust funky hearts; tails reserved for next cycle."
+    },
+    "aging": {
+      "fill_date": "2024-03-20T00:00:00Z",
+      "cask": {
+        "number": "42",
+        "origin": "Buffalo Trace",
+        "type": "American Oak",
+        "size_l": 191
+      },
+      "fill_abv_percent": 63.7,
+      "volume_filled_l": 191,
+      "lal_filled": 121.285,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Primary hearts proofed to 63.7% and filled to Buffalo Trace cask 42."
+    },
+    "metrics": {
+      "lal_efficiency_percent": 88.42,
+      "heart_fraction_percent": 29.21
+    },
+    "metadata": {
+      "created_at": "2024-03-08T00:00:00Z",
+      "updated_at": "2024-03-20T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "08/03/2024 RUM-24-8 molasses ferment with muck/funky/“worm” additions; 15/03 boiler 1000 L @8.5%, hearts 72 L @83.3%, tails at 79.4% and 60.8%; 191 L @63.7% filled to Buffalo Trace cask 42 on 20/03/2024."
+  },
+  {
+    "id": "cbd56c91-8710-4e63-9a5a-3e3952f9b0f4",
+    "batch_id": "RUM-24-8",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-8 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-03-08T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 200,
+        "water_mass_kg": null,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses muck mix",
+        "volume_l": 131,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": null,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Reused yeast slurry",
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Supplemental cane syrup ferment for same batch."
+    },
+    "distillation": {
+      "date": "2024-03-16T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 8.5,
+        "lal": 85
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (69 L @60.8% + 62 L H2O)",
+          "volume_l": 131,
+          "abv_percent": 32,
+          "lal": 41.92
+        },
+        {
+          "id": 2,
+          "content": "Early tails (78 L @79.4% + 25 L H2O)",
+          "volume_l": 103,
+          "abv_percent": 60,
+          "lal": 61.8
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:30:00",
+        "boiler_elements": "5 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:40:00",
+          "abv_percent": 87,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:20:00",
+          "volume_l": 24,
+          "abv_percent": 84,
+          "lal": 20.16,
+          "density": null,
+          "notes": "Returned to retorts."
+        },
+        "hearts": {
+          "time": "12:30:00",
+          "volume_l": 71,
+          "abv_percent": 83.4,
+          "lal": 59.214,
+          "density": null,
+          "notes": "Supplemental hearts destined for blending."
+        },
+        "tails_segments": [
+          {
+            "time": "13:45:00",
+            "volume_l": 77,
+            "abv_percent": 80.7,
+            "lal": 62.139,
+            "density": null,
+            "notes": "Early tails reserved."
+          },
+          {
+            "time": "15:30:00",
+            "volume_l": 58,
+            "abv_percent": 63.4,
+            "lal": 36.772,
+            "density": null,
+            "notes": "Late tails collected at lower wattage."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 205.52,
+        "total_lal_end": 178.285,
+        "lal_loss": 27.235
+      },
+      "notes": "Supplemental run produced hearts for small-format cask finishing."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": 86.77,
+      "heart_fraction_percent": 28.81
+    },
+    "metadata": {
+      "created_at": "2024-03-08T00:00:00Z",
+      "updated_at": "2024-03-16T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "16/03/2024 RUM-24-8 supplemental cane syrup run – boiler 1000 L @8.5%, hearts 71 L @83.4%, tails at 80.7% and 63.4%; output earmarked for blending."
+  },
+  {
+    "id": "f25c814e-49a2-4d3f-9240-52c0c4ecbc12",
+    "batch_id": "RUM-24-9",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "Rum 24-9",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-09-05T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 500,
+        "water_mass_kg": 1500,
+        "initial_brix": 20.5,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": true,
+        "type": "Molasses dunder (no added fruit/sugar)",
+        "volume_l": 132,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37.5,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 25.9,
+        "48h": 11.9,
+        "72h": 26.8
+      },
+      "brix_curve": {
+        "0h": 20.5,
+        "24h": 20.1,
+        "48h": 11.9,
+        "72h": 5,
+        "96h": 4
+      },
+      "ph_curve": {
+        "24h": 5.2,
+        "48h": 4.54,
+        "72h": 4.52,
+        "96h": 4.51
+      },
+      "duration_hours": 96,
+      "final_brix": 4,
+      "final_ph": 4.51,
+      "final_abv_percent": null,
+      "notes": "Chiller malfunction led to manual cooling; fermentation finished with slight yeast film."
+    },
+    "distillation": {
+      "date": "2024-09-11T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9.2,
+        "lal": 92
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Tails (60 L @73% + 72 L H2O)",
+          "volume_l": 132,
+          "abv_percent": 33,
+          "lal": 43.56
+        },
+        {
+          "id": 2,
+          "content": "Tails (109 L @73% + 23 L H2O)",
+          "volume_l": 132,
+          "abv_percent": 60,
+          "lal": 79.2
+        }
+      ],
+      "heat_profile": {
+        "start_time": "07:00:00",
+        "boiler_elements": "2 × 4000 W (new elements)",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "10:00:00",
+          "abv_percent": 86,
+          "notes": "Limited foreshots due to tripping elements."
+        },
+        "heads": {
+          "time": "10:00:00",
+          "volume_l": 2,
+          "abv_percent": 86,
+          "lal": 1.72,
+          "density": null,
+          "notes": "Small head fraction collected."
+        },
+        "hearts": {
+          "time": "14:30:00",
+          "volume_l": 20,
+          "abv_percent": 84.2,
+          "lal": 16.84,
+          "density": null,
+          "notes": "Limited heart cut due to power issues."
+        },
+        "tails_segments": [
+          {
+            "time": "18:40:00",
+            "volume_l": 72,
+            "abv_percent": 83.4,
+            "lal": 60.048,
+            "density": null,
+            "notes": "Run halted; heating resumed next day."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 113.788,
+        "total_lal_end": 137,
+        "lal_loss": -23.212
+      },
+      "notes": "Run interrupted by power trips; heating resumed next day for completion."
+    },
+    "aging": {
+      "fill_date": "2024-09-18T00:00:00Z",
+      "cask": {
+        "number": "WS",
+        "origin": null,
+        "type": "American Oak",
+        "size_l": 185
+      },
+      "fill_abv_percent": 64,
+      "volume_filled_l": 185,
+      "lal_filled": 118.4,
+      "maturation_location": null,
+      "expected_bottling_date": null,
+      "notes": "Limited hearts proofed to 64% and filled into WS cask."
+    },
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 23.06
+    },
+    "metadata": {
+      "created_at": "2024-09-05T00:00:00Z",
+      "updated_at": "2024-09-18T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "05/09/2024 RUM-24-9 ferment experienced chiller issues; 11/09 distillation with new 4000 W elements tripping, resulting in limited heart cut; 185 L @64% filled to WS cask on 18/09/2024."
+  },
+  {
+    "id": "d55be590-a37b-4339-bd0d-7f0185dadb4c",
+    "batch_id": "RUM-24-9",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "Rum 24-9 (Supplemental)",
+      "type": "rum"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-09-05T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 500,
+        "water_mass_kg": 1500,
+        "initial_brix": 20.5,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": true,
+        "type": "Tails/ethanol blend",
+        "volume_l": 120,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 37.5,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Supplemental ferment for recovery run."
+    },
+    "distillation": {
+      "date": "2024-09-14T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": 9.2,
+        "lal": 92
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Tails (22 L @82% + 38 L H2O)",
+          "volume_l": 60,
+          "abv_percent": 30,
+          "lal": 18
+        },
+        {
+          "id": 2,
+          "content": "Tails + ethanol + H2O (28 L @82% + 10 L H2O + 22 L @50%)",
+          "volume_l": 60,
+          "abv_percent": 60,
+          "lal": 36
+        }
+      ],
+      "heat_profile": {
+        "start_time": "07:15:00",
+        "boiler_elements": "13.4 kW",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "09:50:00",
+          "abv_percent": 89.6,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "11:45:00",
+          "volume_l": 26,
+          "abv_percent": 85,
+          "lal": 22.1,
+          "density": null,
+          "notes": "Collected cautiously after power issues."
+        },
+        "hearts": {
+          "time": "14:00:00",
+          "volume_l": 74,
+          "abv_percent": 83.2,
+          "lal": 61.568,
+          "density": null,
+          "notes": "Supplemental hearts to recover lost yield."
+        },
+        "tails_segments": [
+          {
+            "time": "16:20:00",
+            "volume_l": 64,
+            "abv_percent": 65.7,
+            "lal": 42.048,
+            "density": null,
+            "notes": "Early tails captured after wattage drop."
+          },
+          {
+            "time": "18:45:00",
+            "volume_l": 46,
+            "abv_percent": 49.2,
+            "lal": 22.632,
+            "density": null,
+            "notes": "Late tails collected to complete run."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 148.348,
+        "total_lal_end": 186.632,
+        "lal_loss": -38.284
+      },
+      "notes": "Supplemental run restored expected yields following power-tripped primary."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 33.69
+    },
+    "metadata": {
+      "created_at": "2024-09-05T00:00:00Z",
+      "updated_at": "2024-09-14T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "14/09/2024 RUM-24-9 supplemental run – boiler 1000 L @9.2%, heads 26 L @85%, hearts 74 L @83.2%, tails at 65.7% and 49.2%; run restored yields after primary power issues."
+  },
+  {
+    "id": "1fb84e2f-7d3a-4e6e-8d72-826ea4f5e57b",
+    "batch_id": "CS-24-1",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "CS-24-1",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-09-25T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2024",
+        "mass_kg": 2000,
+        "water_mass_kg": 0,
+        "initial_brix": 18.4,
+        "initial_ph": 4.64
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 150,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 32,
+        "48h": 26.8,
+        "72h": 26,
+        "96h": 25.6,
+        "120h": 25.6
+      },
+      "brix_curve": {
+        "0h": 18.4,
+        "24h": 12.2,
+        "48h": 8.6,
+        "72h": 2.4,
+        "96h": 2,
+        "120h": 2
+      },
+      "ph_curve": {
+        "0h": 4.64,
+        "24h": 3.59,
+        "48h": 3.56,
+        "72h": 3.56,
+        "96h": 3.56,
+        "120h": 3.56
+      },
+      "duration_hours": 120,
+      "final_brix": 2,
+      "final_ph": 3.56,
+      "final_abv_percent": null,
+      "notes": "First 2024 cane juice ferment – clean run with steady pH and Brix decay."
+    },
+    "distillation": {
+      "date": "2024-10-01T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 8.7,
+        "lal": 95.7
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails charge (58 L @63.4% + 47 L H₂O)",
+          "volume_l": 105,
+          "abv_percent": 35,
+          "lal": 36.75
+        },
+        {
+          "id": 2,
+          "content": "Early tails charge (77 L @80.7% + 26 L H₂O)",
+          "volume_l": 103,
+          "abv_percent": 60,
+          "lal": 61.8
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:45:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:40:00",
+          "abv_percent": 87,
+          "notes": "3 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:50:00",
+          "volume_l": 25,
+          "abv_percent": 81.9,
+          "lal": 20.475,
+          "density": 0.849,
+          "notes": "Reserved for the next retort recycle."
+        },
+        "hearts": {
+          "time": "12:25:00",
+          "volume_l": 55,
+          "abv_percent": 80.6,
+          "lal": 44.33,
+          "density": 0.854,
+          "notes": "Bright cane heart cut destined for bottling."
+        },
+        "tails_segments": [
+          {
+            "time": "14:20:00",
+            "volume_l": 85,
+            "abv_percent": 72.2,
+            "lal": 61.37,
+            "density": 0.901,
+            "notes": "Early tails retained for future retorts."
+          },
+          {
+            "time": "16:05:00",
+            "volume_l": 53,
+            "abv_percent": 41.9,
+            "lal": 22.207,
+            "density": 0.939,
+            "notes": "Late tails captured once funk emerged."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 148.382,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "First CS-24-1 draw ran smoothly with excellent ester carry-over into tails."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 29.87
+    },
+    "metadata": {
+      "created_at": "2024-09-25T00:00:00Z",
+      "updated_at": "2024-10-01T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "25/09/2024 CS-24-1 cane juice ferment (2000 kg) with Distillamax RM; 01/10 boiler 1100 L @8.7%, heads 25 L @81.9%, hearts 55 L @80.6%, tails collected at 72.2% and 41.9%."
+  },
+  {
+    "id": "b4f36c8f-0eb5-451d-b8dc-7e2c4a58586a",
+    "batch_id": "CS-24-1",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "CS-24-1 (Supplemental)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-09-25T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2024",
+        "mass_kg": 2000,
+        "water_mass_kg": 0,
+        "initial_brix": 18.4,
+        "initial_ph": 4.64
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 150,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Supplemental draw from the same CS-24-1 wash."
+    },
+    "distillation": {
+      "date": "2024-10-03T00:00:00Z",
+      "boiler": {
+        "volume_l": 850,
+        "abv_percent": 8.7,
+        "lal": 73.95
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (62 L @46.5% + 34.1 L H₂O)",
+          "volume_l": 96.1,
+          "abv_percent": 30,
+          "lal": 28.83
+        },
+        {
+          "id": 2,
+          "content": "Early tails (76 L @72.2% + 15 L H₂O)",
+          "volume_l": 91,
+          "abv_percent": 60,
+          "lal": 54.6
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:00:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:20:00",
+          "abv_percent": 83.9,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "08:50:00",
+          "volume_l": 15,
+          "abv_percent": 79.1,
+          "lal": 11.865,
+          "density": 0.857,
+          "notes": "Heads recycled to retorts."
+        },
+        "hearts": {
+          "time": "12:00:00",
+          "volume_l": 76,
+          "abv_percent": 80.3,
+          "lal": 60.952,
+          "density": 0.852,
+          "notes": "Supplemental hearts reserved for proofing."
+        },
+        "tails_segments": [
+          {
+            "time": "14:00:00",
+            "volume_l": 81.45,
+            "abv_percent": 74.5,
+            "lal": 60.68,
+            "density": 0.868,
+            "notes": "Early tails taken under reduced wattage."
+          },
+          {
+            "time": "15:25:00",
+            "volume_l": 34,
+            "abv_percent": 45.4,
+            "lal": 15.436,
+            "density": 0.939,
+            "notes": "Late tails collected prior to shutdown."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 148.933,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "Second CS-24-1 pull captured additional hearts for the bottling blend."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": 40.94
+    },
+    "metadata": {
+      "created_at": "2024-09-25T00:00:00Z",
+      "updated_at": "2024-10-03T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "03/10/2024 CS-24-1 supplemental run – boiler 850 L @8.7%, heads 15 L @79.1%, hearts 76 L @80.3%, tails at 74.5% and 45.4%; run bottled alongside the primary cut."
+  },
+  {
+    "id": "648f7f41-41a2-4f25-a952-2d3e059055cf",
+    "batch_id": "CS-24-2",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "CS-24-2 (Left Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-01-17T00:00:00Z",
+      "substrate": {
+        "material": "Cane Syrup",
+        "batch": "2021",
+        "mass_kg": 250,
+        "water_mass_kg": 1350,
+        "initial_brix": 20.8,
+        "initial_ph": 5.7
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 100,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 30.9,
+        "48h": 31.9,
+        "72h": 31.5,
+        "96h": 28.5
+      },
+      "brix_curve": {
+        "0h": 20.8,
+        "24h": 16.5,
+        "48h": 5,
+        "72h": 4.97,
+        "96h": 4.3
+      },
+      "ph_curve": {
+        "0h": 5.7,
+        "24h": 5.25,
+        "48h": 5.07,
+        "72h": 5.05,
+        "96h": 5.07
+      },
+      "duration_hours": 96,
+      "final_brix": 4.3,
+      "final_ph": 5.07,
+      "final_abv_percent": null,
+      "notes": "Half-charge cane syrup ferment run on the left tank."
+    },
+    "distillation": {
+      "date": "2024-01-25T00:00:00Z",
+      "boiler": {
+        "volume_l": 800,
+        "abv_percent": 8.9,
+        "lal": 71.2
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (48 L @52% + 23 L H₂O)",
+          "volume_l": 71,
+          "abv_percent": 35,
+          "lal": 24.85
+        },
+        {
+          "id": 2,
+          "content": "Early tails (60 L @70% + 10 L H₂O)",
+          "volume_l": 70,
+          "abv_percent": 60,
+          "lal": 42
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:05:00",
+          "abv_percent": 83.7,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "08:40:00",
+          "volume_l": 23,
+          "abv_percent": 83.3,
+          "lal": 19.159,
+          "density": null,
+          "notes": "Returned to retorts for the next cycle."
+        },
+        "hearts": {
+          "time": "12:35:00",
+          "volume_l": 71.97,
+          "abv_percent": 82.1,
+          "lal": 59.087,
+          "density": null,
+          "notes": "Clean cane spirit hearts destined for bottling."
+        },
+        "tails_segments": [
+          {
+            "time": "14:20:00",
+            "volume_l": 60,
+            "abv_percent": 70,
+            "lal": 42,
+            "density": null,
+            "notes": "Early tails saved for retorts."
+          },
+          {
+            "time": "15:20:00",
+            "volume_l": 48,
+            "abv_percent": 46,
+            "lal": 22.08,
+            "density": null,
+            "notes": "Late tails pulled after wattage drop."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 153.89,
+        "total_lal_end": 142.33,
+        "lal_loss": -11.56
+      },
+      "notes": "Primary CS-24-2 run; tails held strong cane aromatics."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": 92.51,
+      "heart_fraction_percent": 38.4
+    },
+    "metadata": {
+      "created_at": "2024-01-17T00:00:00Z",
+      "updated_at": "2024-01-25T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "17/01/2024 CS-24-2 left fermenter – boiler 800 L @8.9%, heads 23 L @83.3%, hearts 71.97 L @82.1%, tails split at 70% and 46%; run proofed for bottling."
+  },
+  {
+    "id": "5d1c4b27-8620-46c2-b2fb-06594e6dd0ce",
+    "batch_id": "CS-24-2",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "CS-24-2 (Right Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-01-17T00:00:00Z",
+      "substrate": {
+        "material": "C Molasses",
+        "batch": "2021",
+        "mass_kg": 200,
+        "water_mass_kg": null,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": null,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax CN",
+        "mass_g": 1000,
+        "rehydration_temp_c": 38,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Molasses supplement to stretch CS-24-2 output."
+    },
+    "distillation": {
+      "date": "2024-01-27T00:00:00Z",
+      "boiler": {
+        "volume_l": 1100,
+        "abv_percent": 8.9,
+        "lal": 97.9
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (48 L @46% + 25 L H₂O)",
+          "volume_l": 73,
+          "abv_percent": 30,
+          "lal": 21.9
+        },
+        {
+          "id": 2,
+          "content": "Early tails (60 L @70% + 10 L H₂O)",
+          "volume_l": 70,
+          "abv_percent": 60,
+          "lal": 42
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:10:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2400 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:20:00",
+          "abv_percent": 84.1,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:20:00",
+          "volume_l": 26,
+          "abv_percent": 83.3,
+          "lal": 21.658,
+          "density": null,
+          "notes": "Recycled to retorts."
+        },
+        "hearts": {
+          "time": "11:50:00",
+          "volume_l": 64.68,
+          "abv_percent": 81.5,
+          "lal": 52.714,
+          "density": null,
+          "notes": "Supplemental hearts allocated to bottle blend."
+        },
+        "tails_segments": [
+          {
+            "time": "13:30:00",
+            "volume_l": 60,
+            "abv_percent": 70,
+            "lal": 42,
+            "density": null,
+            "notes": "Early tails retained."
+          },
+          {
+            "time": "15:15:00",
+            "volume_l": 52,
+            "abv_percent": 48.9,
+            "lal": 25.428,
+            "density": null,
+            "notes": "Late tails collected with lower wattage."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": 180.959,
+        "total_lal_end": 141.8,
+        "lal_loss": -39.159
+      },
+      "notes": "Right fermenter recycle run – built retort reserves and supplemental hearts."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": 78.39,
+      "heart_fraction_percent": 29.13
+    },
+    "metadata": {
+      "created_at": "2024-01-17T00:00:00Z",
+      "updated_at": "2024-01-27T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "27/01/2024 CS-24-2 supplemental molasses run – boiler 1100 L @8.9%, hearts 64.68 L @81.5%, tails at 70% and 48.9%; output retained for blending."
+  },
+  {
+    "id": "19798336-9df4-45eb-8756-6a6c8d8e6c42",
+    "batch_id": "CS-24-3",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "CS-24-3 (Left Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-11-06T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2024",
+        "mass_kg": 1000,
+        "water_mass_kg": 0,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 0,
+        "citric_acid_g": 0,
+        "fermaid_g": 0,
+        "dap_g": 0,
+        "calcium_carbonate_g": 0,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 1000,
+        "rehydration_temp_c": 34.6,
+        "rehydration_time_min": 13
+      },
+      "temperature_curve": {
+        "24h": 27,
+        "48h": 26.6,
+        "72h": 25.6
+      },
+      "brix_curve": {
+        "24h": 10,
+        "48h": 4.1
+      },
+      "ph_curve": {
+        "24h": 3.56,
+        "48h": 3.52
+      },
+      "duration_hours": 120,
+      "final_brix": null,
+      "final_ph": 3.52,
+      "final_abv_percent": null,
+      "notes": "Left fermenter cane juice run; minimal telemetry captured."
+    },
+    "distillation": {
+      "date": "2024-11-12T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": null,
+        "lal": null
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (42 L @54.3% + 34 L H₂O)",
+          "volume_l": 76,
+          "abv_percent": 30,
+          "lal": 22.8
+        },
+        {
+          "id": 2,
+          "content": "Early tails (58 L @73.7% + 14 L H₂O)",
+          "volume_l": 72,
+          "abv_percent": 60,
+          "lal": 43.2
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:00:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:40:00",
+          "abv_percent": 84,
+          "notes": "2 + 1 scaled off for run."
+        },
+        "heads": {
+          "time": "09:50:00",
+          "volume_l": 20,
+          "abv_percent": 83.6,
+          "lal": 16.72,
+          "density": 0.842,
+          "notes": "Heads recycled."
+        },
+        "hearts": {
+          "time": "12:00:00",
+          "volume_l": 65,
+          "abv_percent": 82,
+          "lal": 53.3,
+          "density": 0.846,
+          "notes": "Hearts destined for bottling."
+        },
+        "tails_segments": [
+          {
+            "time": "13:50:00",
+            "volume_l": 68,
+            "abv_percent": 68,
+            "lal": 46.24,
+            "density": 0.88,
+            "notes": "Early tails stored for retorts."
+          },
+          {
+            "time": "15:00:00",
+            "volume_l": 33,
+            "abv_percent": 53,
+            "lal": 17.49,
+            "density": 0.915,
+            "notes": "Late tails collected before shutdown."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": null,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "Left fermenter draw produced 65 L hearts at 82% ABV."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2024-11-06T00:00:00Z",
+      "updated_at": "2024-11-12T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "12/11/2024 CS-24-3 left fermenter – boiler 1000 L, heads 20 L @83.6%, hearts 65 L @82%, tails captured at 68% and 53%; bottled directly."
+  },
+  {
+    "id": "6d5e20e4-26cf-47f9-80cf-a964530cf0df",
+    "batch_id": "CS-24-3",
+    "run_type": "supplemental",
+    "run_index": 2,
+    "product": {
+      "name": "CS-24-3 (Right Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-11-07T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2024",
+        "mass_kg": 1000,
+        "water_mass_kg": 0,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 0,
+        "citric_acid_g": 0,
+        "fermaid_g": 0,
+        "dap_g": 0,
+        "calcium_carbonate_g": 0,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 500,
+        "rehydration_temp_c": 34.6,
+        "rehydration_time_min": 12.5
+      },
+      "temperature_curve": {
+        "24h": 28.6,
+        "48h": 27.5,
+        "72h": 26.5
+      },
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": 120,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Right fermenter cane juice run; data partial."
+    },
+    "distillation": {
+      "date": "2024-11-15T00:00:00Z",
+      "boiler": {
+        "volume_l": 1000,
+        "abv_percent": null,
+        "lal": null
+      },
+      "retorts": [
+        {
+          "id": 1,
+          "content": "Late tails (55 L @50.8% + 23 L H₂O)",
+          "volume_l": 78,
+          "abv_percent": 35,
+          "lal": 27.3
+        },
+        {
+          "id": 2,
+          "content": "Early tails (68 L @68% + 9 L H₂O)",
+          "volume_l": 77,
+          "abv_percent": 60,
+          "lal": 46.2
+        }
+      ],
+      "heat_profile": {
+        "start_time": "06:00:00",
+        "boiler_elements": "6 × 5750 W",
+        "retort1_elements": "2200 W",
+        "retort2_elements": "2200 W"
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "08:50:00",
+          "abv_percent": 86,
+          "notes": "2 + 1 scaled off."
+        },
+        "heads": {
+          "time": "09:50:00",
+          "volume_l": 20,
+          "abv_percent": 84,
+          "lal": 16.8,
+          "density": 0.841,
+          "notes": "Heads recycled."
+        },
+        "hearts": {
+          "time": "12:15:00",
+          "volume_l": 66,
+          "abv_percent": 82,
+          "lal": 54.12,
+          "density": 0.846,
+          "notes": "Hearts combined with left fermenter output."
+        },
+        "tails_segments": [
+          {
+            "time": "15:00:00",
+            "volume_l": 53.6,
+            "abv_percent": 87,
+            "lal": 46.632,
+            "density": 0.915,
+            "notes": "Late tails captured and blended."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": null,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "Right fermenter follow-up – hearts 66 L @82% joined primary batch."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2024-11-07T00:00:00Z",
+      "updated_at": "2024-11-15T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "15/11/2024 CS-24-3 right fermenter – boiler 1000 L, hearts 66 L @82%, tails 53.6 L @87%; output bottled with the left fermenter batch."
+  },
+  {
+    "id": "2f7f6c6f-38cf-42f4-8f13-33d1891d6403",
+    "batch_id": "CS-24-3",
+    "run_type": "supplemental",
+    "run_index": 3,
+    "product": {
+      "name": "CS-24-3 (Combined Bottling)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Roberta",
+    "fermentation": {
+      "start_date": "2024-11-06T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2024",
+        "mass_kg": 2000,
+        "water_mass_kg": 0,
+        "initial_brix": null,
+        "initial_ph": null
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": null,
+        "citric_acid_g": null,
+        "fermaid_g": null,
+        "dap_g": null,
+        "calcium_carbonate_g": null,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": null,
+        "mass_g": null,
+        "rehydration_temp_c": null,
+        "rehydration_time_min": null
+      },
+      "temperature_curve": {},
+      "brix_curve": {},
+      "ph_curve": {},
+      "duration_hours": null,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Combined bottling entry referencing left/right fermenters."
+    },
+    "distillation": null,
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2024-11-20T00:00:00Z",
+      "updated_at": "2024-11-20T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "CS-24-3 combined bottling record – hearts from left/right fermenters blended and bottled same day."
+  },
+  {
+    "id": "e997bdcd-6cf5-4c30-b3ac-4dc60cb9a2f5",
+    "batch_id": "CS-25-1",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "CS-25-1 (Left Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Carrie",
+    "fermentation": {
+      "start_date": "2025-10-10T00:00:00Z",
+      "substrate": {
+        "material": "Cane Acid (left fermenter)",
+        "batch": "2025",
+        "mass_kg": 1000,
+        "water_mass_kg": 0,
+        "initial_brix": 17.2,
+        "initial_ph": 3.7
+      },
+      "dunder": {
+        "added": false,
+        "type": null,
+        "volume_l": null,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 0,
+        "citric_acid_g": 0,
+        "fermaid_g": 0,
+        "dap_g": 0,
+        "calcium_carbonate_g": 0,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 500,
+        "rehydration_temp_c": 25,
+        "rehydration_time_min": 0
+      },
+      "temperature_curve": {
+        "24h": 29.7,
+        "48h": 26.9,
+        "72h": 26.2,
+        "96h": 26.6,
+        "120h": 26.4
+      },
+      "brix_curve": {
+        "24h": 6.6,
+        "48h": 4.8,
+        "72h": 3.2,
+        "96h": 3.5,
+        "120h": 3.2
+      },
+      "ph_curve": {
+        "24h": 3.7,
+        "48h": 3.6,
+        "72h": 3.5,
+        "96h": 3.45
+      },
+      "duration_hours": 120,
+      "final_brix": null,
+      "final_ph": null,
+      "final_abv_percent": null,
+      "notes": "Left fermenter reserved for cane acid production; no distillation this cycle."
+    },
+    "distillation": null,
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2025-10-10T00:00:00Z",
+      "updated_at": "2025-10-10T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "10/10/2025 CS-25-1 left fermenter used for cane acid production – held for future runs, no distillation executed."
+  },
+  {
+    "id": "2d77f9af-ad1b-4be1-aa62-6290bec8ae7a",
+    "batch_id": "CS-25-1",
+    "run_type": "primary",
+    "run_index": 2,
+    "product": {
+      "name": "CS-25-1 (Right Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Carrie",
+    "fermentation": {
+      "start_date": "2025-10-10T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2025",
+        "mass_kg": 1000,
+        "water_mass_kg": 0,
+        "initial_brix": 19.4,
+        "initial_ph": 3.83
+      },
+      "dunder": {
+        "added": true,
+        "type": "100 L cane acid",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 0,
+        "citric_acid_g": 0,
+        "fermaid_g": 0,
+        "dap_g": 0,
+        "calcium_carbonate_g": 0,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 500,
+        "rehydration_temp_c": 36.8,
+        "rehydration_time_min": 15
+      },
+      "temperature_curve": {
+        "24h": 27.1,
+        "48h": 27.4,
+        "72h": 26.3,
+        "96h": 26.5,
+        "120h": 25.5
+      },
+      "brix_curve": {
+        "24h": 14.3,
+        "48h": 9.7,
+        "72h": 6.9,
+        "96h": 3.9,
+        "120h": 1.8
+      },
+      "ph_curve": {
+        "24h": 3.8,
+        "48h": 3.6,
+        "72h": 3.6,
+        "96h": 3.55,
+        "120h": 3.58
+      },
+      "duration_hours": 120,
+      "final_brix": 1.8,
+      "final_ph": 3.58,
+      "final_abv_percent": null,
+      "notes": "Right fermenter destined for distillation on Carrie still."
+    },
+    "distillation": {
+      "date": "2025-10-17T00:00:00Z",
+      "boiler": {
+        "volume_l": 900,
+        "abv_percent": 9.5,
+        "lal": 85.5
+      },
+      "retorts": [],
+      "heat_profile": {
+        "start_time": "06:30:00",
+        "boiler_elements": "13.2 kW (Carrie still)",
+        "retort1_elements": null,
+        "retort2_elements": null
+      },
+      "cuts": {
+        "foreshots": {
+          "time": "11:15:00",
+          "abv_percent": 84.6,
+          "notes": "2 L discarded (Carrie)."
+        },
+        "heads": {
+          "time": "11:15:00",
+          "volume_l": 15,
+          "abv_percent": 84.6,
+          "lal": 12.69,
+          "density": 0.83,
+          "notes": "Heads discarded due to solvent notes."
+        },
+        "hearts": {
+          "time": "12:50:00",
+          "volume_l": 60,
+          "abv_percent": 65.6,
+          "lal": 39.36,
+          "density": 0.895,
+          "notes": "Hearts proofed for 2025 cane spirit release."
+        },
+        "tails_segments": [
+          {
+            "time": "16:15:00",
+            "volume_l": 45,
+            "abv_percent": 50,
+            "lal": 22.5,
+            "density": 0.928,
+            "notes": "Late tails collected for reprocessing."
+          }
+        ]
+      },
+      "yield": {
+        "total_lal_start": null,
+        "total_lal_end": null,
+        "lal_loss": null
+      },
+      "notes": "First Carrie still cane spirit run of 2025; hearts retained for upcoming release."
+    },
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2025-10-10T00:00:00Z",
+      "updated_at": "2025-10-17T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "17/10/2025 CS-25-1 right fermenter run on Carrie – hearts 60 L @65.6%, tails held for next cycle."
+  },
+  {
+    "id": "6274e6c8-c2b1-4f93-b408-80f17feb5bd3",
+    "batch_id": "CS-25-2",
+    "run_type": "primary",
+    "run_index": 1,
+    "product": {
+      "name": "CS-25-2 (Left Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Carrie",
+    "fermentation": {
+      "start_date": "2025-10-31T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2025",
+        "mass_kg": 1000,
+        "water_mass_kg": 0,
+        "initial_brix": 17.9,
+        "initial_ph": 3.91
+      },
+      "dunder": {
+        "added": true,
+        "type": "100 L cane acid reuse",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 0,
+        "citric_acid_g": 0,
+        "fermaid_g": 0,
+        "dap_g": 0,
+        "calcium_carbonate_g": 0,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 500,
+        "rehydration_temp_c": 25,
+        "rehydration_time_min": 0
+      },
+      "temperature_curve": {
+        "24h": 28.3,
+        "48h": 28.3
+      },
+      "brix_curve": {
+        "0h": 17.9,
+        "24h": 12.8,
+        "48h": 12.8
+      },
+      "ph_curve": {
+        "0h": 3.91,
+        "24h": 3.46,
+        "48h": 3.46
+      },
+      "duration_hours": 48,
+      "final_brix": 12.8,
+      "final_ph": 3.46,
+      "final_abv_percent": null,
+      "notes": "Left fermenter cane acid top-up; distillation pending."
+    },
+    "distillation": null,
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2025-10-31T00:00:00Z",
+      "updated_at": "2025-10-31T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "31/10/2025 CS-25-2 left fermenter – cane acid reuse batch staged for future run on Carrie; no distillation yet."
+  },
+  {
+    "id": "f8a89521-7a3f-42c8-9f2d-f2476d16b8b3",
+    "batch_id": "CS-25-2",
+    "run_type": "primary",
+    "run_index": 2,
+    "product": {
+      "name": "CS-25-2 (Right Fermenter)",
+      "type": "cane_spirit"
+    },
+    "still_used": "Carrie",
+    "fermentation": {
+      "start_date": "2025-10-31T00:00:00Z",
+      "substrate": {
+        "material": "Cane Juice",
+        "batch": "2025",
+        "mass_kg": 1000,
+        "water_mass_kg": 0,
+        "initial_brix": 17.4,
+        "initial_ph": 3.83
+      },
+      "dunder": {
+        "added": true,
+        "type": "100 L cane acid reuse",
+        "volume_l": 100,
+        "ph": null
+      },
+      "additives": {
+        "anti_foam_ml": 0,
+        "citric_acid_g": 0,
+        "fermaid_g": 0,
+        "dap_g": 0,
+        "calcium_carbonate_g": 0,
+        "additional_nutrients": null
+      },
+      "yeast": {
+        "strain": "Distillamax RM",
+        "mass_g": 500,
+        "rehydration_temp_c": 25,
+        "rehydration_time_min": 0
+      },
+      "temperature_curve": {
+        "24h": 27.8,
+        "48h": 27.8
+      },
+      "brix_curve": {
+        "0h": 17.4,
+        "24h": 13.5,
+        "48h": 13.5
+      },
+      "ph_curve": {
+        "0h": 3.83,
+        "24h": 3.39,
+        "48h": 3.39
+      },
+      "duration_hours": 48,
+      "final_brix": 13.5,
+      "final_ph": 3.39,
+      "final_abv_percent": null,
+      "notes": "Right fermenter cane acid staging batch; distillation scheduled later."
+    },
+    "distillation": null,
+    "aging": null,
+    "metrics": {
+      "lal_efficiency_percent": null,
+      "heart_fraction_percent": null
+    },
+    "metadata": {
+      "created_at": "2025-10-31T00:00:00Z",
+      "updated_at": "2025-10-31T00:00:00Z",
+      "created_by": "Gabi"
+    },
+    "sensors": {
+      "temperature_probe": null,
+      "ph_meter": null
+    },
+    "raw_log": "31/10/2025 CS-25-2 right fermenter – cane acid base prepared for upcoming Carrie run."
+  }
+]

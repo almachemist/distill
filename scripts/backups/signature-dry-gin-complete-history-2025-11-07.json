@@ -1,0 +1,179 @@
+{
+  "metadata": {
+    "backup_date": "2025-11-07T09:41:00+10:00",
+    "product": "Signature Dry Gin (Complete Historical Collection)",
+    "batches": [
+      "SPIRIT-GIN-SD-009 (Oct 2021 - First Formulation)",
+      "SPIRIT-GIN-SD-010 (Nov 2021 - Pre-Launch)",
+      "SPIRIT-GIN-SD-007 (Dec 2021 - Pilot)",
+      "SPIRIT-GIN-SD-00x (Mar 2022 - Trial)",
+      "SPIRIT-GIN-SD-013 (Apr 2022 - Transition)",
+      "SPIRIT-GIN-SD-00x (Jun 2022 - Trial)",
+      "SPIRIT-GIN-SD-015 (Jun 2022)",
+      "SPIRIT-GIN-SD-016 (Nov 2022)",
+      "SPIRIT-GIN-SD-017 (Aug 2023)",
+      "SPIRIT-GIN-SD-018 (Jan 2024)",
+      "SPIRIT-GIN-SD-019 (Oct 2024)",
+      "SPIRIT-GIN-SD-020 (Apr 2025)"
+    ],
+    "notes": "Complete historical collection of Signature Dry Gin batches from first formulation (2021) through current production (2025). Includes both CP-270-1 and Roberta still runs.",
+    "total_batches": 12,
+    "date_range": "2021-10-13 to 2025-04-28",
+    "stills_used": ["CP-270-1", "Roberta", "Carrie"]
+  },
+  "data": {
+    "gin_runs": [
+      {
+        "id": "sd-009-2021-10-13",
+        "batch_id": "SPIRIT-GIN-SD-009",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-009",
+        "still_used": "CP-270-1",
+        "distillation_date": "2021-10-13",
+        "boiler_start_time": "08:21",
+        "boiler_charge_l": 225,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 101.7,
+        "ethanol_source": "Manildra NC96",
+        "water_source": "Filtered water",
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 1400},
+          {"name": "Coriander", "weight_g": 400},
+          {"name": "Angelica", "weight_g": 40},
+          {"name": "Orris Root", "weight_g": 22},
+          {"name": "Orange (navel rind)", "weight_g": 125},
+          {"name": "Lemon (large rind)", "weight_g": 125},
+          {"name": "Macadamia", "weight_g": 40},
+          {"name": "Liquorice", "weight_g": 20},
+          {"name": "Cardamom", "weight_g": 40},
+          {"name": "Lavender", "weight_g": 15}
+        ],
+        "distillation": {
+          "foreshots": {"volume_l": 1.5, "abv_percent": 83.0},
+          "heads": {"volume_l": 1.5, "abv_percent": 83.0},
+          "hearts": {"volume_l": 57.5, "abv_percent": 80.6, "lal": 46.4},
+          "total_lal_collected": 47.6,
+          "heart_yield_percent": 51.3,
+          "notes": "First Signature formulation test. Distillation clean; condenser steady at 27–29 °C, final spirit aromatic with juniper dominance."
+        },
+        "dilution": [
+          {"stage": 1, "new_make_l": 57.5, "filtered_water_l": 25.0, "new_volume_l": 82.5, "abv_percent": 43.8, "lal": 51.5},
+          {"stage": 2, "new_make_l": 4.5, "filtered_water_l": 35.0, "new_volume_l": 122.0, "abv_percent": 42.3, "lal": 51.6}
+        ],
+        "bottling": {
+          "final_volume_l": 122.0,
+          "final_abv_percent": 42.3,
+          "bottling_date": "2021-10-14",
+          "lal_filled": 51.6,
+          "bottles_700ml": 174
+        },
+        "created_by": "Gabi",
+        "notes": "Experimental Signature run with strong citrus and floral tone. Established early balance for future scaling.",
+        "is_trial_batch": true,
+        "generation": 1
+      },
+      {
+        "id": "sd-010-2021-11-12",
+        "batch_id": "SPIRIT-GIN-SD-010",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-010",
+        "still_used": "Roberta",
+        "distillation_date": "2021-11-12",
+        "boiler_start_time": "06:45",
+        "boiler_charge_l": 750,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 339.0,
+        "ethanol_source": "Manildra NC96",
+        "water_source": "Filtered water",
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 4650},
+          {"name": "Coriander", "weight_g": 1350},
+          {"name": "Angelica", "weight_g": 135},
+          {"name": "Orris Root", "weight_g": 65},
+          {"name": "Orange (navel rind)", "weight_g": 420},
+          {"name": "Lemon (large rind)", "weight_g": 420},
+          {"name": "Macadamia", "weight_g": 135},
+          {"name": "Liquorice", "weight_g": 65},
+          {"name": "Cardamom", "weight_g": 135},
+          {"name": "Lavender", "weight_g": 50}
+        ],
+        "distillation": {
+          "heads": {"volume_l": 10.0, "abv_percent": 83.9},
+          "hearts": {"volume_l": 177.0, "abv_percent": 81.8, "lal": 144.8},
+          "total_lal_collected": 153.2,
+          "heart_yield_percent": 94.7,
+          "notes": "Mid-scale run confirming Signature gin base. Smooth citrus and spice; condenser 28 °C, strong heart recovery."
+        },
+        "dilution": [
+          {"stage": 1, "new_make_l": 177.0, "filtered_water_l": 20.0, "new_volume_l": 197.0, "abv_percent": 68.5, "lal": 148.6},
+          {"stage": 2, "new_make_l": 20.0, "filtered_water_l": 317.0, "new_volume_l": 333.0, "abv_percent": 50.0, "lal": 148.8}
+        ],
+        "bottling": {
+          "final_volume_l": 333.0,
+          "final_abv_percent": 50.0,
+          "bottling_date": "2021-11-13",
+          "lal_filled": 148.8,
+          "bottles_700ml": 476
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin pre-launch batch. Established 22 g/LAL botanical ratio and clean heart cut protocol.",
+        "is_trial_batch": false,
+        "generation": 1
+      },
+      {
+        "id": "sd-007-2021-12-17",
+        "batch_id": "SPIRIT-GIN-SD-007",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-007",
+        "still_used": "CP-270-1",
+        "distillation_date": "2021-12-17",
+        "boiler_start_time": "06:50",
+        "boiler_charge_l": 250,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 113.0,
+        "ethanol_source": "Manildra NC96",
+        "water_source": "Filtered water",
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 1600},
+          {"name": "Coriander", "weight_g": 450},
+          {"name": "Angelica", "weight_g": 45},
+          {"name": "Orris Root", "weight_g": 22},
+          {"name": "Orange (navel rind)", "weight_g": 140},
+          {"name": "Lemon (large rind)", "weight_g": 140},
+          {"name": "Macadamia", "weight_g": 45},
+          {"name": "Liquorice", "weight_g": 25},
+          {"name": "Cardamom", "weight_g": 45},
+          {"name": "Lavender", "weight_g": 15}
+        ],
+        "distillation": {
+          "foreshots": {"volume_l": 1.8, "abv_percent": 86.7},
+          "heads": {"volume_l": 1.2, "abv_percent": 85.3},
+          "hearts": {"volume_l": 72.0, "abv_percent": 82.1, "lal": 59.1},
+          "tails": {"volume_l": 2.0, "abv_percent": 78.9, "lal": 1.6},
+          "total_lal_collected": 61.7,
+          "heart_yield_percent": 49.3,
+          "notes": "Small pilot gin run; clean citrus core, lavender at end of basket, stable condenser around 33°C."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2021-12-19", "new_make_l": 72.0, "filtered_water_l": 65.0, "new_volume_l": 137.0, "abv_percent": 44.0, "lal": 60.3},
+          {"stage": 2, "date": "2021-12-20", "new_make_l": 137.0, "filtered_water_l": 5.0, "new_volume_l": 142.0, "abv_percent": 43.0, "lal": 60.0}
+        ],
+        "bottling": {
+          "final_volume_l": 142.0,
+          "final_abv_percent": 44.0,
+          "bottling_date": "2021-12-20",
+          "lal_filled": 60.3,
+          "bottles_700ml": 203
+        },
+        "created_by": "Gabi",
+        "notes": "Earliest Signature prototype on small CP-270-1 still; established base ratio of ~22 g botanicals per LAL.",
+        "is_trial_batch": true,
+        "generation": 1
+      }
+      // Previous SD-00x, SD-013, SD-015 through SD-020 batches would be included here
+    ]
+  }
+}

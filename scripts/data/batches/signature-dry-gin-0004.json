@@ -1,0 +1,81 @@
+{
+  "recipe": "Signature Dry Gin",
+  "runs": [
+    {
+      "run_id": "SPIRIT-GIN-SD-0004",
+      "sku": "Signature Dry Gin",
+      "date": "2021-04-17",
+      "still_used": "CP-270",
+      "boiler_start_time": "06:45",
+      "charge": {
+        "ethanol_source": "Manildra NC96",
+        "ethanol_volume_L": 105,
+        "ethanol_abv_percent": 96.0,
+        "ethanol_LAL": 100.8,
+        "water_volume_L": 120,
+        "other_volume_L": 0,
+        "total_charge_L": 225,
+        "charge_abv_percent": 45.2,
+        "total_LAL": 101.7
+      },
+      "still_setup": {
+        "elements": "5750W; 2×2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, tubes - 1 long, 3 short"
+      },
+      "botanicals": [
+        { "name": "Juniper", "notes": "Crushed / steeped", "weight_g": 1400, "ratio_percent": 62.9 },
+        { "name": "Coriander", "notes": "Steeped", "weight_g": 400, "ratio_percent": 18.0 },
+        { "name": "Angelica", "weight_g": 40, "ratio_percent": 1.8 },
+        { "name": "Cassia", "ratio_percent": 0.0 },
+        { "name": "Orris Root", "weight_g": 20, "ratio_percent": 0.9 },
+        { "name": "Orange", "notes": "1.5 fresh navel orange rind", "weight_g": 125, "ratio_percent": 5.6 },
+        { "name": "Lemon", "notes": "2 fresh lemon rind", "weight_g": 125, "ratio_percent": 5.6 },
+        { "name": "Finger Lime", "ratio_percent": 0.0 },
+        { "name": "Lemon Myrtle", "ratio_percent": 0.0 },
+        { "name": "Lemon Aspen", "ratio_percent": 0.0 },
+        { "name": "Grapefruit", "ratio_percent": 0.0 },
+        { "name": "Local Fruit", "ratio_percent": 0.0 },
+        { "name": "Macadamia", "notes": "Sliced fresh macadamia", "weight_g": 40, "ratio_percent": 1.8 },
+        { "name": "Liquorice", "notes": "Liquorice root", "weight_g": 20, "ratio_percent": 0.9 },
+        { "name": "Cardamon", "weight_g": 40, "ratio_percent": 1.8 },
+        { "name": "Lavender", "notes": "Put in basket last", "weight_g": 15, "ratio_percent": 0.7 },
+        { "name": "Chamomile", "ratio_percent": 0.0 },
+        { "name": "Elderflower", "ratio_percent": 0.0 },
+        { "name": "Pepperberry", "ratio_percent": 0.0 },
+        { "name": "Mint", "ratio_percent": 0.0 },
+        { "name": "Vanilla", "ratio_percent": 0.0 }
+      ],
+      "distillation_log": [
+        { "time": "10:00", "phase": "Foreshots", "volume_L": 2.0, "abv_percent": 85.0, "ambient_temp_C": 30.0, "head_temp_C": 76.4, "condenser_temp_C": 29.9, "LAL": 1.7, "power_notes": "2×2200W @ 400" },
+        { "time": "10:18", "phase": "Heads", "volume_L": 1.5, "abv_percent": 85.2, "ambient_temp_C": 30.3, "head_temp_C": 76.6, "condenser_temp_C": 29.8, "LAL": 1.3, "power_notes": "2×2200W @ 400" },
+        { "time": "10:34", "phase": "Middle Run (Hearts)", "volume_L": 2.0, "abv_percent": 84.2, "ambient_temp_C": 30.3, "head_temp_C": 76.9, "condenser_temp_C": 29.7, "LAL": 1.7, "power_notes": "2×2200W @ 400" },
+        { "time": "11:35", "phase": "Middle Run (Hearts)", "volume_L": 10.0, "abv_percent": 83.0, "ambient_temp_C": 30.3, "head_temp_C": 77.3, "condenser_temp_C": 28.6, "LAL": 8.3, "power_notes": "2×2200W @ 440" },
+        { "time": "12:27", "phase": "Middle Run (Hearts)", "volume_L": 10.0, "abv_percent": 82.7, "ambient_temp_C": 30.1, "head_temp_C": 77.4, "condenser_temp_C": 28.4, "LAL": 8.3, "power_notes": "2×2200W @ 480" },
+        { "time": "13:22", "phase": "Middle Run (Hearts)", "volume_L": 10.0, "abv_percent": 82.3, "ambient_temp_C": 30.4, "head_temp_C": 77.8, "condenser_temp_C": 28.5, "LAL": 8.2, "power_notes": "2×2200W @ 480" },
+        { "time": "14:33", "phase": "Middle Run (Hearts)", "volume_L": 12.0, "abv_percent": 81.7, "ambient_temp_C": 30.4, "head_temp_C": 77.8, "condenser_temp_C": 28.4, "LAL": 9.8, "power_notes": "2×2200W @ 480" },
+        { "time": "15:11", "phase": "Middle Run (Hearts)", "volume_L": 8.0, "abv_percent": 81.2, "ambient_temp_C": 28.7, "head_temp_C": 78.0, "condenser_temp_C": 28.5, "LAL": 6.5, "power_notes": "2×2200W @ 480" },
+        { "time": "15:23", "phase": "Middle Run (Hearts)", "volume_L": 2.0, "abv_percent": 80.9, "ambient_temp_C": 28.8, "head_temp_C": 78.0, "condenser_temp_C": 28.5, "LAL": 1.6, "power_notes": "2×2200W @ 480" },
+        { "time": "15:40", "phase": "Middle Run (Hearts)", "volume_L": 2.0, "abv_percent": 81.0, "ambient_temp_C": 28.8, "head_temp_C": 78.0, "condenser_temp_C": 28.5, "LAL": 1.6, "power_notes": "2×2200W @ 480" },
+        { "time": "15:44", "phase": "Tails", "volume_L": 1.0, "abv_percent": 81.0, "ambient_temp_C": null, "LAL": null, "power_notes": "2×2200W @ 480" },
+        { "time": "16:00", "phase": "Tails", "volume_L": 5.0, "abv_percent": 74.0, "ambient_temp_C": null, "LAL": 3.7, "power_notes": "5750W" }
+      ],
+      "outputs": [
+        { "phase": "Foreshots", "destination": "Discarded (20L Waste)", "volume_L": 2.0, "abv_percent": 85.0, "LAL": 1.7 },
+        { "phase": "Heads", "destination": "Discarded (20L Waste)", "volume_L": 1.5, "abv_percent": 85.2, "LAL": 1.3 },
+        { "phase": "Hearts", "destination": "GIN-SD-0004 (VC-100-01)", "volume_L": 56.0, "abv_percent": 82.2, "LAL": 46.0 },
+        { "phase": "Tails", "destination": "Discarded (20L Waste)", "volume_L": 6.0, "abv_percent": 61.7, "LAL": 3.7 }
+      ],
+      "dilution_steps": [
+        { "step": 1, "date": "2021-04-19", "new_make_L": 56.0, "filtered_water_L": 40.0, "new_volume_L": 96.0, "abv_percent": 48.1, "LAL": 46.2 },
+        { "step": 2, "date": "2021-04-19", "new_make_L": 0.0, "filtered_water_L": 10.0, "new_volume_L": 106.0, "abv_percent": 43.4, "LAL": 46.0 },
+        { "step": 3, "date": "2021-04-21", "new_make_L": 0.0, "filtered_water_L": 1.5, "new_volume_L": 107.5, "abv_percent": 42.0, "LAL": 45.2 }
+      ],
+      "final_output_L": 107.5,
+      "final_bottles_filled": 141,
+      "botanicals_per_LAL_g": 22,
+      "total_LAL": 51.0
+    }
+  ]
+}

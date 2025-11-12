@@ -1,0 +1,758 @@
+[
+  {
+    "spiritRunId": "SPIRIT-GIN-OAKS-0X",
+    "sku": "Oaks Kitchen Gin (Trial Recipe Development)",
+    "date": "2022-01-01",
+    "stillUsed": "CP-270-1",
+    "description": "Trial batch for developing the Oaks Kitchen Gin recipe. Small 250 L charge on CP-270-1 still at 40.3% ABV. Botanical load ~24.7 g/LAL, using Thai-inspired ingredients including holy basil, galangal, lemongrass, kaffir, and pandanas.",
+    "notes": "Trial batch (SPIRIT-GIN-OAKS-0X) for developing the Oaks Kitchen Gin recipe. Small 250 L charge on CP-270-1 still at 40.3% ABV (100.8 LAL). Botanical load ~24.7 g/LAL, using Thai-inspired ingredients including holy basil, galangal, lemongrass, kaffir, and pandanas. Guided the development of the final Dry Season gin profile.",
+    "boilerOn": null,
+    "chargeAdjustment": {
+      "total": {
+        "volume_L": 250,
+        "abv_percent": 40.3,
+        "lal": 100.8
+      },
+      "components": [
+        {
+          "type": "ethanol",
+          "source": "Manildra NC96",
+          "volume_L": 105,
+          "abv_percent": 96.0,
+          "lal": 100.8
+        },
+        {
+          "type": "dilution",
+          "source": "Filtered Water",
+          "volume_L": 145,
+          "abv_percent": 0.0,
+          "lal": 0
+        }
+      ]
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1563,
+        "ratio_percent": 62.7,
+        "notes": "Crushed / steeped"
+      },
+      {
+        "name": "Sawtooth Coriander",
+        "weight_g": 125,
+        "ratio_percent": 5.0,
+        "notes": "Leaves - steeped"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.7,
+        "notes": ""
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 0,
+        "ratio_percent": 0,
+        "notes": ""
+      },
+      {
+        "name": "Orris Root",
+        "weight_g": 0,
+        "ratio_percent": 0,
+        "notes": ""
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Leaves & Flowers 50:50"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 42,
+        "ratio_percent": 1.7,
+        "notes": "Leaves only"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "weight_g": 208,
+        "ratio_percent": 8.4,
+        "notes": ""
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 125,
+        "ratio_percent": 5.0,
+        "notes": ""
+      },
+      {
+        "name": "Thai Marigolds",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": ""
+      },
+      {
+        "name": "Galangal",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": "Smashed"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Bashed"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 0,
+        "ratio_percent": 0,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Coconut",
+        "weight_g": 0,
+        "ratio_percent": 0,
+        "notes": ""
+      },
+      {
+        "name": "Liquorice Root",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Pandanas",
+        "weight_g": 52,
+        "ratio_percent": 2.1,
+        "notes": "Thai Vanilla"
+      }
+    ],
+    "totalBotanicals_g": 2491,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 24.7,
+    "stillSetup": {
+      "elements": "5750 W × 2; 2400 W × 1",
+      "plates": "Zero plates",
+      "steeping": "14 h (Juniper, Coriander)",
+      "options": "Whisky helmet, 1 long + 3 short tubes"
+    },
+    "runData": [
+      {
+        "time": null,
+        "phase": "Foreshots",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "observations": "2 × 2200 W @ 440"
+      },
+      {
+        "time": null,
+        "phase": "Heads",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "observations": ""
+      },
+      {
+        "time": null,
+        "phase": "Hearts",
+        "volume_L": 2.0,
+        "abv_percent": 40.0,
+        "volume_percent": 40.0,
+        "observations": ""
+      }
+    ],
+    "output": [
+      {
+        "phase": "Foreshots",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "output": "Discarded",
+        "receivingVessel": "Waste"
+      },
+      {
+        "phase": "Heads",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "output": "Feints",
+        "receivingVessel": "Feints"
+      },
+      {
+        "phase": "Hearts",
+        "volume_L": 2.0,
+        "abv_percent": 40.0,
+        "volume_percent": 40.0,
+        "output": "Oaks Kitchen Gin",
+        "receivingVessel": "VC-330"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 5.0,
+      "abv_percent": null,
+      "lal": null,
+      "notes": "Trial batch - small scale recipe development"
+    },
+    "dilutions": [],
+    "finalOutput": {
+      "totalVolume_L": 2.0,
+      "abv_percent": 40.0,
+      "lal": null,
+      "notes": "Trial batch output"
+    }
+  },
+  {
+    "spiritRunId": "SPIRIT-GIN-OAKS-02",
+    "sku": "Oaks Kitchen Gin",
+    "date": "2022-04-17",
+    "stillUsed": "Roberta",
+    "description": "First full-scale production of the Oaks Kitchen recipe. 1060 L charge @ 48% ABV. Same Thai botanical matrix as the pilot run, scaled to production volume.",
+    "notes": "First full-scale batch of the Oaks Kitchen Gin distilled on Roberta. 1060 L charge @ 48% ABV (508.8 LAL). Same Thai botanical matrix as the pilot run, scaled to production volume. Hearts yield around 280 L (~303 LAL post-blend). Guided final adjustments for later Dry Season and collaboration gins.",
+    "boilerOn": "07:15",
+    "chargeAdjustment": {
+      "total": {
+        "volume_L": 1060,
+        "abv_percent": 48.0,
+        "lal": 508.8
+      },
+      "components": [
+        {
+          "type": "ethanol",
+          "source": "Manildra NC96",
+          "volume_L": 1060,
+          "abv_percent": 48.0,
+          "lal": 508.8
+        }
+      ]
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1563,
+        "ratio_percent": 62.7,
+        "notes": "Crushed / steeped"
+      },
+      {
+        "name": "Sawtooth Coriander",
+        "weight_g": 125,
+        "ratio_percent": 5.0,
+        "notes": "Leaves - steeped"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.7,
+        "notes": ""
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Leaves & Flowers 50:50"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 42,
+        "ratio_percent": 1.7,
+        "notes": "Leaves only"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "weight_g": 208,
+        "ratio_percent": 8.4,
+        "notes": ""
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 125,
+        "ratio_percent": 5.0,
+        "notes": ""
+      },
+      {
+        "name": "Thai Marigolds",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": ""
+      },
+      {
+        "name": "Galangal",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": "Smashed"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Bashed"
+      },
+      {
+        "name": "Liquorice Root",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Pandanas",
+        "weight_g": 52,
+        "ratio_percent": 2.1,
+        "notes": "Thai Vanilla"
+      }
+    ],
+    "totalBotanicals_g": 2491,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 4.9,
+    "stillSetup": {
+      "elements": "5750 W × 2; 2400 W × 1",
+      "plates": "Zero plates",
+      "steeping": "14 h (Juniper, Coriander)",
+      "options": "Whisky helmet, 1 long + 3 short tubes"
+    },
+    "runData": [],
+    "output": [
+      {
+        "phase": "Foreshots",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 50.0,
+        "output": "Discarded",
+        "receivingVessel": "Waste"
+      },
+      {
+        "phase": "Hearts",
+        "volume_L": 280,
+        "abv_percent": 48.0,
+        "output": "Oaks Kitchen Gin",
+        "receivingVessel": "Production"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 281.5,
+      "abv_percent": 48.0,
+      "lal": 508.8,
+      "notes": "280 L hearts + 80 L from previous batch combined later"
+    },
+    "dilutions": [],
+    "finalOutput": {
+      "totalVolume_L": 360,
+      "abv_percent": 48.0,
+      "lal": 303.0,
+      "notes": "280 L new make + 80 L water"
+    }
+  },
+  {
+    "spiritRunId": "SPIRIT-GIN-OAKS-03",
+    "sku": "Oaks Kitchen Gin",
+    "date": "2022-11-15",
+    "stillUsed": "CP-270",
+    "description": "Intermediate CP-270 run to test condenser configuration and botanical expression prior to 2023 formulation. Thai botanical bill maintained, smaller yield for recipe tuning.",
+    "notes": "Intermediate CP-270 run to test condenser configuration and botanical expression prior to 2023 formulation. 15 Nov 2022, Thai botanical bill maintained, smaller yield for recipe tuning. Hearts later diluted to 42.4% ABV (158.7 L final).",
+    "boilerOn": "07:00",
+    "chargeAdjustment": {
+      "total": {
+        "volume_L": 0,
+        "abv_percent": 48.0,
+        "lal": 0
+      },
+      "components": [
+        {
+          "type": "ethanol",
+          "source": "Manildra NC96",
+          "volume_L": 0,
+          "abv_percent": 48.0,
+          "lal": 0
+        }
+      ]
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1563,
+        "ratio_percent": 62.7,
+        "notes": "Crushed / steeped"
+      },
+      {
+        "name": "Sawtooth Coriander",
+        "weight_g": 125,
+        "ratio_percent": 5.0,
+        "notes": "Leaves - steeped"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.7,
+        "notes": ""
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Leaves & Flowers 50:50"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 42,
+        "ratio_percent": 1.7,
+        "notes": "Leaves only"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "weight_g": 208,
+        "ratio_percent": 8.4,
+        "notes": ""
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 125,
+        "ratio_percent": 5.0,
+        "notes": ""
+      },
+      {
+        "name": "Thai Marigolds",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": ""
+      },
+      {
+        "name": "Galangal",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": "Smashed"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Bashed"
+      },
+      {
+        "name": "Liquorice Root",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Pandanas",
+        "weight_g": 52,
+        "ratio_percent": 2.1,
+        "notes": "Thai Vanilla"
+      }
+    ],
+    "totalBotanicals_g": 2491,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": null,
+    "stillSetup": {
+      "elements": "1 × 2400 W, 1 × 2200 W, 1 × 2400 W @ 920 V",
+      "plates": "Zero plates",
+      "steeping": "14 h (Juniper, Coriander)",
+      "options": "Whisky helmet, 4 open tubes"
+    },
+    "runData": [
+      {
+        "time": "10:40",
+        "phase": "Foreshots",
+        "volume_L": 2.0,
+        "abv_percent": 79.4,
+        "headTemp_C": 79.4,
+        "condenserTemp_C": 28.9,
+        "ambientTemp_C": 32.4,
+        "observations": "2 × 2200 W @ 440"
+      },
+      {
+        "time": "11:30",
+        "phase": "Hearts",
+        "headTemp_C": 79.5,
+        "condenserTemp_C": 29.6,
+        "observations": "Cassia phase"
+      },
+      {
+        "time": "12:30",
+        "phase": "Hearts",
+        "headTemp_C": 79.5,
+        "condenserTemp_C": 29.2,
+        "observations": "Orris Root phase"
+      },
+      {
+        "time": "13:30",
+        "phase": "Hearts",
+        "headTemp_C": 79.7,
+        "condenserTemp_C": 28.9,
+        "observations": "Holy Basil phase"
+      },
+      {
+        "time": "14:30",
+        "phase": "Hearts",
+        "headTemp_C": 79.7,
+        "condenserTemp_C": 28.4,
+        "observations": "Thai Sweet Basil phase"
+      },
+      {
+        "time": "15:30",
+        "phase": "Hearts",
+        "headTemp_C": 80.2,
+        "condenserTemp_C": 28.6,
+        "observations": "Kaffir Fruit Rind phase"
+      },
+      {
+        "time": "16:30",
+        "phase": "Hearts",
+        "headTemp_C": 80.4,
+        "condenserTemp_C": 28.5,
+        "observations": "Kaffir Leaves phase"
+      },
+      {
+        "time": "17:00",
+        "phase": "Hearts",
+        "headTemp_C": 81.2,
+        "condenserTemp_C": 28.9,
+        "observations": "Thai Marigolds phase"
+      }
+    ],
+    "output": [
+      {
+        "phase": "Foreshots",
+        "volume_L": 2.0,
+        "abv_percent": 79.4,
+        "output": "Discarded",
+        "receivingVessel": "Waste"
+      },
+      {
+        "phase": "Hearts",
+        "volume_L": 81.7,
+        "abv_percent": null,
+        "output": "Oaks Kitchen Gin",
+        "receivingVessel": "VC-100"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 83.7,
+      "abv_percent": null,
+      "lal": null,
+      "notes": "Condenser test run"
+    },
+    "dilutions": [
+      {
+        "number": 1,
+        "date": "2022-11-28",
+        "newMake_L": 81.7,
+        "filteredWater_L": 77.0,
+        "newVolume_L": 158.7,
+        "abv_percent": 42.4,
+        "notes": "First dilution to 42.4% ABV"
+      }
+    ],
+    "finalOutput": {
+      "totalVolume_L": 158.7,
+      "abv_percent": 42.4,
+      "lal": null,
+      "notes": "Final diluted output"
+    }
+  },
+  {
+    "spiritRunId": "SPIRIT-GIN-OAKS-0X-TRIAL2",
+    "sku": "Oaks Kitchen Gin (Trial Batch 2)",
+    "date": "2022-02-01",
+    "stillUsed": "CP-270-1",
+    "description": "Second pilot-scale test for the Oaks Kitchen Gin recipe on CP-270-1 still. Maintained 250 L @ 40.3% ABV charge with slightly higher Angelica load.",
+    "notes": "Second pilot-scale test for the Oaks Kitchen Gin recipe on CP-270-1 still. Maintained 250 L @ 40.3% ABV charge (100.8 LAL) with slightly higher Angelica load. Thai botanical matrix unchanged. Botanical concentration ≈ 25 g/LAL, consistent with the target flavor profile for later Roberta production runs.",
+    "boilerOn": null,
+    "chargeAdjustment": {
+      "total": {
+        "volume_L": 250,
+        "abv_percent": 40.3,
+        "lal": 100.8
+      },
+      "components": [
+        {
+          "type": "ethanol",
+          "source": "Manildra NC96",
+          "volume_L": 105,
+          "abv_percent": 96.0,
+          "lal": 100.8
+        },
+        {
+          "type": "dilution",
+          "source": "Filtered Water",
+          "volume_L": 145,
+          "abv_percent": 0.0,
+          "lal": 0
+        }
+      ]
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1563,
+        "ratio_percent": 61.3,
+        "notes": "Crushed / steeped"
+      },
+      {
+        "name": "Sawtooth Coriander",
+        "weight_g": 125,
+        "ratio_percent": 4.9,
+        "notes": "Leaves - steeped"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 100,
+        "ratio_percent": 3.9,
+        "notes": ""
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Leaves & Flowers 50:50"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 42,
+        "ratio_percent": 1.6,
+        "notes": "Leaves only"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "weight_g": 208,
+        "ratio_percent": 8.2,
+        "notes": ""
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 125,
+        "ratio_percent": 4.9,
+        "notes": ""
+      },
+      {
+        "name": "Thai Marigolds",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": ""
+      },
+      {
+        "name": "Galangal",
+        "weight_g": 83,
+        "ratio_percent": 3.3,
+        "notes": "Smashed"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 63,
+        "ratio_percent": 2.5,
+        "notes": "Bashed"
+      },
+      {
+        "name": "Liquorice Root",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "notes": ""
+      },
+      {
+        "name": "Pandanas",
+        "weight_g": 52,
+        "ratio_percent": 2.0,
+        "notes": "Thai Vanilla"
+      }
+    ],
+    "totalBotanicals_g": 2549,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 25.3,
+    "stillSetup": {
+      "elements": "5750 W × 2; 2400 W × 1",
+      "plates": "Zero plates",
+      "steeping": "14 h (Juniper, Coriander)",
+      "options": "Whisky helmet, 1 long + 3 short tubes"
+    },
+    "runData": [
+      {
+        "time": null,
+        "phase": "Foreshots",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "observations": "2 × 2200 W @ 440 V"
+      },
+      {
+        "time": null,
+        "phase": "Heads",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "observations": ""
+      },
+      {
+        "time": null,
+        "phase": "Hearts",
+        "volume_L": 2.0,
+        "abv_percent": 40.0,
+        "volume_percent": 40.0,
+        "observations": ""
+      }
+    ],
+    "output": [
+      {
+        "phase": "Foreshots",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "output": "Discarded",
+        "receivingVessel": "Waste"
+      },
+      {
+        "phase": "Heads",
+        "volume_L": 1.5,
+        "abv_percent": null,
+        "volume_percent": 30.0,
+        "output": "Feints",
+        "receivingVessel": "Feints"
+      },
+      {
+        "phase": "Hearts",
+        "volume_L": 2.0,
+        "abv_percent": 40.0,
+        "volume_percent": 40.0,
+        "output": "Oaks Kitchen Gin",
+        "receivingVessel": "Production"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 5.0,
+      "abv_percent": null,
+      "lal": null,
+      "notes": "Trial batch 2 - fine-tune balance of root vs leaf aromatics"
+    },
+    "dilutions": [],
+    "finalOutput": {
+      "totalVolume_L": 2.0,
+      "abv_percent": 40.0,
+      "lal": null,
+      "notes": "Trial batch 2 output"
+    }
+  }
+]
+

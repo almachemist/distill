@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { DistillationSession } from '@/modules/production/types/distillation-session.types'
 import { DistillationSessionCalculator } from '@/modules/production/services/distillation-session-calculator.service'
-import { merchantMaeGinDistillation, rainforestGinDistillation, signatureDryGinDistillation } from '@/modules/production/sessions/merchant-mae-gin-distillation.session'
+import { merchantMaeGinDistillation } from '@/modules/production/sessions/merchant-mae-gin-distillation.session'
+import { vodka003Distillation } from '@/modules/production/sessions/vodka-003-distillation.session'
+import { rainforestGinRF30 } from '@/modules/production/sessions/rainforest-gin-rf30-distillation.session'
 import InteractiveDistillationPanel from '@/modules/production/components/InteractiveDistillationPanel'
 
 interface InteractiveDistillationData {

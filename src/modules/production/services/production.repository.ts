@@ -1,21 +1,53 @@
 import { createClient } from '@/lib/supabase/client'
-import type { 
-  ProductionOrder, 
-  ProductionOrderInsert, 
+import type {
+  ProductionOrder,
+  ProductionOrderInsert,
   ProductionOrderUpdate,
   ProductionOrderListItem,
   ProductionOrderDetails,
   BatchCalculation,
   BatchIngredient,
   LotAllocation,
-  StockMovement
+  StockMovement,
+  ProductionOrderStatus,
+  InventoryTxn
 } from '../types/production.types'
-import type { Recipe, RecipeIngredientWithItem, LotWithStock } from '@/modules/recipes/types/recipe.types'
+import type { Recipe, RecipeIngredientWithItem, LotWithStock, Item } from '@/modules/recipes/types/recipe.types'
 import { StockRepository } from '@/modules/inventory/services/stock.repository'
+import { createCalendarEvent, updateCalendarEvent, deleteCalendarEvent, findCalendarEventByLink } from '@/modules/calendar/services/calendar.repository'
+import type { CalendarStatus, CalendarEvent } from '@/modules/calendar/types/calendar.types'
 
 export class ProductionRepository {
   private supabase = createClient()
   private stockRepo = new StockRepository()
+
+  private toCalendarStatus(status: string): CalendarStatus {
+    switch (status) {
+      case 'in_process':
+        return 'IN_PROGRESS'
+      case 'complete':
+        return 'DONE'
+      case 'released':
+      case 'planned':
+      default:
+        return 'PLANNED'
+    }
+  }
+
+  private lotCostPerUnit(lot: LotWithStock): number {
+    const cost = (lot as LotWithStock & { cost_per_unit?: number | null }).cost_per_unit
+    return typeof cost === 'number' ? cost : 0
+  }
+
+  private lotExpiryDate(lot: LotWithStock): string | null {
+    const expiry = (lot as LotWithStock & { expiry_date?: string | null }).expiry_date
+    return typeof expiry === 'string' ? expiry : null
+  }
+
+  private lotDisplayCode(lot: LotWithStock): string {
+    const legacyLotNumber = (lot as LotWithStock & { lot_number?: string | null }).lot_number
+    return legacyLotNumber ?? lot.code ?? lot.id
+  }
 
   /**
    * Get all production orders with recipe details
@@ -86,7 +118,10 @@ export class ProductionRepository {
   /**
    * Create a new production order
    */
-  async createProductionOrder(order: ProductionOrderInsert): Promise<ProductionOrder> {
+  async createProductionOrder(
+    order: ProductionOrderInsert,
+    opts?: { startsAt?: string; endsAt?: string; resource?: string; sku?: string; allDay?: boolean; timezone?: 'Australia/Brisbane'; notes?: string }
+  ): Promise<ProductionOrder> {
     // Get organization ID
     let organizationId: string
     if (process.env.NODE_ENV === 'development') {
@@ -117,6 +152,24 @@ export class ProductionRepository {
       throw new Error(`Failed to create production order: ${error.message}`)
     }
 
+    try {
+      const now = new Date()
+      const ends = new Date(now.getTime() + 4 * 60 * 60 * 1000)
+      await createCalendarEvent({
+        title: data.product_name,
+        type: 'DISTILLATION',
+        status: this.toCalendarStatus(data.status),
+        linked: { collection: 'workOrders', id: data.id },
+        startsAt: opts?.startsAt ?? now.toISOString(),
+        endsAt: opts?.endsAt ?? ends.toISOString(),
+        allDay: opts?.allDay ?? false,
+        timezone: opts?.timezone ?? 'Australia/Brisbane',
+        resource: opts?.resource,
+        sku: opts?.sku,
+        notes: opts?.notes,
+      })
+    } catch {}
+
     return data
   }
 
@@ -134,6 +187,19 @@ export class ProductionRepository {
     if (error) {
       throw new Error(`Failed to update production order: ${error.message}`)
     }
+    try {
+      const linked = await findCalendarEventByLink('workOrders', id)
+      if (linked) {
+        const patch: Partial<CalendarEvent> = {}
+        if (order.status !== undefined && order.status !== null) {
+          patch.status = this.toCalendarStatus(String(order.status))
+        }
+        if (order.product_name !== undefined) {
+          patch.title = order.product_name
+        }
+        await updateCalendarEvent(linked.id, patch)
+      }
+    } catch {}
 
     return data
   }
@@ -142,6 +208,12 @@ export class ProductionRepository {
    * Delete a production order
    */
   async deleteProductionOrder(id: string): Promise<void> {
+    try {
+      const linked = await findCalendarEventByLink('workOrders', id)
+      if (linked) {
+        await deleteCalendarEvent(linked.id)
+      }
+    } catch {}
     const { error } = await this.supabase
       .from('production_orders')
       .delete()
@@ -194,9 +266,9 @@ export class ProductionRepository {
       const isInternal = shortage === 0
 
       // Calculate cost if lots have cost data
-      const avgCost = availableLots.reduce((sum, lot, _, arr) => {
-        return sum + (lot.cost_per_unit || 0) / arr.length
-      }, 0)
+      const avgCost = availableLots.length > 0
+        ? availableLots.reduce((sum, lot) => sum + this.lotCostPerUnit(lot), 0) / availableLots.length
+        : 0
       totalCost += requiredQuantity * avgCost
 
       // Auto-select lots (FIFO - oldest first)
@@ -213,7 +285,7 @@ export class ProductionRepository {
         if (allocateQty > 0) {
           selectedLots.push({
             lot_id: lot.id,
-            lot_number: lot.lot_number,
+            lot_number: this.lotDisplayCode(lot),
             allocated_quantity: allocateQty,
             uom: ingredient.uom
           })
@@ -228,9 +300,10 @@ export class ProductionRepository {
 
       // Check for near-expiry lots
       const expiringSoon = availableLots.filter(lot => {
-        if (!lot.expiry_date) return false
+        const expiry = this.lotExpiryDate(lot)
+        if (!expiry) return false
         const daysToExpiry = Math.ceil(
-          (new Date(lot.expiry_date).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
+          (new Date(expiry).getTime() - Date.now()) / (1000 * 60 * 60 * 24)
         )
         return daysToExpiry <= 30 && daysToExpiry > 0
       })
@@ -276,7 +349,7 @@ export class ProductionRepository {
     // Validate all allocations have sufficient stock
     for (const ingredient of batchCalculation.ingredients) {
       for (const allocation of ingredient.selected_lots) {
-        const currentStock = await this.stockRepo.getLotStock(allocation.lot_id)
+        const currentStock = await this.getLotStock(allocation.lot_id)
         if (currentStock < allocation.allocated_quantity) {
           throw new Error(
             `Insufficient stock in lot ${allocation.lot_number} for ${ingredient.item.name}. ` +
@@ -307,7 +380,7 @@ export class ProductionRepository {
     for (const movement of movements) {
       await this.stockRepo.createTransaction({
         item_id: movement.item_id,
-        lot_id: movement.lot_id,
+        lot_id: movement.lot_id ?? undefined,
         txn_type: movement.txn_type,
         quantity: movement.quantity,
         uom: movement.uom,
@@ -353,7 +426,7 @@ export class ProductionRepository {
   /**
    * Complete a production order
    */
-  async completeOrder(orderId: string, notes?: string): Promise<void> {
+  async completeOrder(orderId: string): Promise<void> {
     await this.updateProductionOrder(orderId, {
       status: 'complete'
     })
@@ -411,7 +484,7 @@ export class ProductionRepository {
   async getLotStock(lotId: string): Promise<number> {
     const { data, error } = await this.supabase
       .from('inventory_txns')
-      .select('qty, txn_type')
+      .select('quantity, txn_type')
       .eq('lot_id', lotId)
 
     if (error) {
@@ -419,17 +492,20 @@ export class ProductionRepository {
     }
 
     let total = 0
-    data.forEach(txn => {
-      switch (txn.txn_type) {
+    const transactions = (data ?? []) as Array<Pick<InventoryTxn, 'quantity' | 'txn_type'>>
+    transactions.forEach(({ txn_type, quantity }) => {
+      switch (txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
         case 'ADJUST':
-          total += txn.qty
+          total += quantity
           break
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
-          total -= txn.qty
+          total -= quantity
+          break
+        default:
           break
       }
     })

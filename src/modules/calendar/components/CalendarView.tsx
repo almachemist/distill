@@ -6,7 +6,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { listCalendarEvents } from "../services/calendar.repository";
-import type { CalendarEvent } from "../types/calendar.types";
+import type { CalendarEvent, CalendarEventType, CalendarStatus } from "../types/calendar.types";
 import { CALENDAR_COLORS } from "../types/calendar.types";
 
 interface CalendarViewProps {
@@ -30,7 +30,12 @@ export default function CalendarView({ onEventClick, filters }: CalendarViewProp
   const loadEvents = async () => {
     try {
       setLoading(true);
-      const data = await listCalendarEvents(filters);
+      const data = await listCalendarEvents({
+        type: (filters?.type as CalendarEventType | undefined),
+        status: (filters?.status as CalendarStatus | undefined),
+        resource: filters?.resource,
+        sku: filters?.sku,
+      });
       setEvents(
         data.map((e: CalendarEvent) => ({
           id: e.id,
@@ -44,7 +49,9 @@ export default function CalendarView({ onEventClick, filters }: CalendarViewProp
         }))
       );
     } catch (error) {
-      console.error("Failed to load calendar events:", error);
+      const message = error instanceof Error ? error.message : JSON.stringify(error || {});
+      console.error("Failed to load calendar events:", message, error);
+      setEvents([]);
     } finally {
       setLoading(false);
     }

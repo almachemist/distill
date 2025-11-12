@@ -1,11 +1,14 @@
 import { createClient } from "@/lib/supabase/client";
-import type { CalendarEvent, CalendarEventType, CalendarStatus } from "../types/calendar.types";
+import type { CalendarEvent, CalendarEventType, CalendarStatus, LinkedDocRef } from "../types/calendar.types";
 import { CALENDAR_COLORS } from "../types/calendar.types";
 
 const supabase = createClient();
 
 // Helper function to get current user's organization ID
 const getOrganizationId = async (): Promise<string> => {
+  if (process.env.NODE_ENV === 'development') {
+    return '00000000-0000-0000-0000-000000000001'
+  }
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error("User not authenticated");
   
@@ -114,7 +117,17 @@ export const listCalendarEvents = async (opts?: {
   resource?: string;
   sku?: string;
 }) => {
-  const organizationId = await getOrganizationId();
+  let organizationId: string | null = null;
+  try {
+    organizationId = await getOrganizationId();
+  } catch (err) {
+    // In cases where the user is not signed in or profile/org is missing,
+    // return an empty list so the UI can continue gracefully.
+    const message = err instanceof Error ? err.message : JSON.stringify(err || {});
+    // eslint-disable-next-line no-console
+    console.warn("listCalendarEvents: no organization context, returning []:", message);
+    return [] as CalendarEvent[];
+  }
   
   let query = supabase
     .from("calendar_events")
@@ -200,3 +213,41 @@ export const getCalendarEvent = async (id: string): Promise<CalendarEvent | null
     updatedAt: new Date(data.updated_at!).getTime(),
   } as CalendarEvent;
 };
+
+export const findCalendarEventByLink = async (
+  collection: LinkedDocRef['collection'],
+  id: string
+): Promise<CalendarEvent | null> => {
+  const { data, error } = await supabase
+    .from("calendar_events")
+    .select("*")
+    .eq("linked_collection", collection)
+    .eq("linked_id", id)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') return null; // No rows returned
+    throw error;
+  }
+
+  return {
+    id: data.id,
+    title: data.title,
+    type: data.type as CalendarEventType,
+    status: data.status as CalendarStatus,
+    resource: data.resource,
+    sku: data.sku,
+    linked: data.linked_collection && data.linked_id ? {
+      collection: data.linked_collection as any,
+      id: data.linked_id
+    } : undefined,
+    startsAt: data.starts_at,
+    endsAt: data.ends_at,
+    allDay: data.all_day,
+    timezone: data.timezone as "Australia/Brisbane",
+    notes: data.notes,
+    color: data.color,
+    createdAt: new Date(data.created_at!).getTime(),
+    updatedAt: new Date(data.updated_at!).getTime(),
+  } as CalendarEvent;
+}

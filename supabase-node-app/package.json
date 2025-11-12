@@ -1,0 +1,16 @@
+{
+  "name": "supabase-node-app",
+  "version": "1.0.0",
+  "description": "A Node.js application to interact with Supabase.",
+  "main": "src/index.mjs",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
+    "dotenv": "^10.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

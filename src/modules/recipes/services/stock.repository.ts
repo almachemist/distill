@@ -1,12 +1,12 @@
 import { createClient } from '@/lib/supabase/client'
-import type { 
-  Item, 
-  Lot, 
-  LotWithStock, 
-  InventoryTxnInsert, 
+import type {
+  Item,
+  LotWithStock,
+  InventoryTxnInsert,
   TxnType,
   StockCheckResult,
-  ConsumeRequest 
+  ConsumeRequest,
+  InventoryTxn
 } from '../types/recipe.types'
 
 export class StockRepository {
@@ -120,7 +120,7 @@ export class StockRepository {
         .from('items')
         .select('*')
         .eq('id', req.itemId)
-        .single()
+        .single<Item>()
 
       if (error) {
         throw new Error(`Failed to get item details: ${error.message}`)
@@ -169,7 +169,7 @@ export class StockRepository {
     // Post all transactions atomically
     const { error } = await this.supabase
       .from('inventory_txns')
-      .insert(transactions)
+      .insert<InventoryTxnInsert[]>(transactions)
 
     if (error) {
       throw new Error(`Failed to post consumption transactions: ${error.message}`)

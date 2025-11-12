@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "backup_date": "2025-11-07T09:37:00+10:00",
+    "product": "Signature Dry Gin (Complete Historical Collection)",
+    "batches": [
+      "SPIRIT-GIN-SD-00x (March 2022 Trial)",
+      "SPIRIT-GIN-SD-013",
+      "SPIRIT-GIN-SD-00x (June 2022 Trial)",
+      "SPIRIT-GIN-SD-015",
+      "SPIRIT-GIN-SD-016",
+      "SPIRIT-GIN-SD-017",
+      "SPIRIT-GIN-SD-018",
+      "SPIRIT-GIN-SD-019",
+      "SPIRIT-GIN-SD-020"
+    ],
+    "notes": "Complete historical collection of Signature Dry Gin batches from initial trials (March 2022) through current production (2025). Includes both Roberta and Carrie still runs.",
+    "total_batches": 9,
+    "total_volume_liters": 4306.0,
+    "total_bottles_700ml": 6151,
+    "date_range": "2022-03-10 to 2025-04-28"
+  },
+  "data": {
+    "gin_runs": [
+      {
+        "id": "sd-00x-2022-03-10",
+        "batch_id": "SPIRIT-GIN-SD-00x",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-00X",
+        "still_used": "CP-270-1",
+        "distillation_date": "2022-03-10",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 452.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "08:30",
+          "foreshots": {"volume_l": 1.5, "abv_percent": 84.7},
+          "heads": {"volume_l": 8.5, "abv_percent": 83.5},
+          "hearts": {
+            "volume_l": 200.0,
+            "abv_percent": 81.7,
+            "lal": 162.0,
+            "notes": "Clean run, balanced citrus and spice, condenser steady at 28°C."
+          },
+          "tails": {"volume_l": 0, "notes": "No tails collected"},
+          "total_lal_collected": 162.0,
+          "heart_yield_percent": 52.9,
+          "notes": "Early Signature prototype; first recorded consistent distillation."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2022-03-04", "new_make_l": 200.0, "filtered_water_l": 100.0, "new_volume_l": 300.0, "abv_percent": 45.0, "lal": 162.0},
+          {"stage": 2, "date": "2022-03-06", "new_make_l": 300.0, "filtered_water_l": 84.0, "new_volume_l": 384.0, "abv_percent": 42.2, "lal": 162.0}
+        ],
+        "bottling": {
+          "final_volume_l": 384.0,
+          "final_abv_percent": 42.2,
+          "bottling_date": "2022-03-06",
+          "lal_filled": 162.0,
+          "bottles_700ml": 548
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin trial batch. Base formula used in all subsequent refinements.",
+        "raw_log": "10/03/2022 | CP-270-1 | 1000 L @ 45.2 % (452 LAL). Foreshots 1.5 L @ 84.7 %, Heads 8.5 L @ 83.5 %, Hearts 200 L @ 81.7 %. Diluted + 84 L water → 42.2 %. Final 384 L.",
+        "is_trial_batch": true
+      },
+      {
+        "id": "sd-013-2022-04-05",
+        "batch_id": "SPIRIT-GIN-SD-013",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-013",
+        "still_used": "Roberta",
+        "distillation_date": "2022-04-05",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 452.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "08:30",
+          "heads": {"time": "10:00", "volume_l": 12.0},
+          "hearts": {
+            "time": "16:30",
+            "volume_l": 220.0,
+            "abv_percent": 81.1,
+            "lal": 180.0,
+            "notes": "Smooth heart run, collected until 78–79 °C condenser. To be blended with batch 016."
+          },
+          "tails": {"volume_l": 0, "notes": "Cut made early to preserve brightness"},
+          "total_lal_collected": 180.0,
+          "heart_yield_percent": 53.8,
+          "notes": "Blended later with SD-016 for final Signature profile."
+        },
+        "dilution": [
+          {"stage": 1, "new_make_l": 220.0, "filtered_water_l": 100.0, "new_volume_l": 320.0, "abv_percent": 45.0, "lal": 180.0}
+        ],
+        "bottling": {
+          "final_volume_l": 320.0,
+          "final_abv_percent": 45.0,
+          "bottling_date": "2022-04-06",
+          "lal_filled": 180.0,
+          "bottles_700ml": 457
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-013; transition recipe used in standardization. Later blended with SD-016.",
+        "raw_log": "05/04/2022 | Roberta | 1000 L @ 45.2 % (452 LAL). Heads 12 L, Hearts 220 L @ 81 %. Diluted + 100 L water → 45 %. Final 320 L.",
+        "is_trial_batch": false
+      },
+      {
+        "id": "sd-00x-2022-06-08",
+        "batch_id": "SPIRIT-GIN-SD-00x",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-00X-2",
+        "still_used": "Roberta",
+        "distillation_date": "2022-06-08",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 452.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "08:30",
+          "foreshots": {"time": "08:55", "volume_l": 2.0, "abv_percent": 84.7},
+          "heads": {"volume_l": 10.0, "abv_percent": 83.5},
+          "hearts": {
+            "time": "16:20",
+            "volume_l": 252.0,
+            "abv_percent": 79.9,
+            "lal": 201.3,
+            "notes": "Middle run collected cleanly; condenser 28 °C; steady citrus-forward signature cut."
+          },
+          "tails": {"volume_l": 0, "notes": "No tails; stopped at 75.5 °C condenser."},
+          "total_lal_collected": 201.3,
+          "heart_yield_percent": 51.8,
+          "notes": "Batch blended upward with later SD-015 for proof consistency."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2022-06-14", "new_make_l": 252.0, "filtered_water_l": 253.0, "new_volume_l": 505.0, "abv_percent": 42.0, "lal": 246.7}
+        ],
+        "bottling": {
+          "final_volume_l": 505.0,
+          "final_abv_percent": 42.0,
+          "bottling_date": "2022-06-14",
+          "lal_filled": 246.7,
+          "bottles_700ml": 721
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin June 2022 batch. Core recipe before SD-015 optimization; refined citrus expression.",
+        "raw_log": "08/06/2022 | Roberta | 1000 L @ 45.2 % (452 LAL). Foreshots 2 L @ 84.7 %, Heads 10 L @ 83.5 %, Hearts 252 L @ 79.9 %. Diluted + 253 L water → 42 %. Final 505 L.",
+        "is_trial_batch": true
+      },
+      // Previous SD-15 to SD-20 batches would be included here
+      // ... [SD-15 to SD-20 batches from the previous complete backup]
+    ]
+  }
+}

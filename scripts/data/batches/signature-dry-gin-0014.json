@@ -1,0 +1,121 @@
+{
+  "recipe": "Signature Dry Gin",
+  "runs": [
+    {
+      "run_id": "SPIRIT-GIN-SD-014",
+      "sku": "Signature Dry Gin",
+      "date": "2022-06-08",
+      "boiler_start_time": "08:30",
+      "still_used": "CARRIE",
+      "charge": {
+        "ethanol_source": "Manildra NC96",
+        "ethanol_volume_L": 470,
+        "ethanol_abv_percent": 96.0,
+        "ethanol_LAL": 451.2,
+        "water_volume_L": 530,
+        "other_volume_L": 0,
+        "total_charge_L": 1000,
+        "charge_abv_percent": 45.2,
+        "total_LAL": 452.0
+      },
+      "still_setup": {
+        "elements": "5750W × 4",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Not specified",
+        "options": ""
+      },
+      "botanicals": [
+        { "name": "Juniper", "weight_g": 6400, "ratio_percent": 63.3 },
+        { "name": "Coriander", "weight_g": 1800, "ratio_percent": 17.8 },
+        { "name": "Angelica", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Cassia", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Orris Root", "weight_g": 90, "ratio_percent": 0.9 },
+        { "name": "Orange", "weight_g": 560, "ratio_percent": 5.5 },
+        { "name": "Lemon", "weight_g": 560, "ratio_percent": 5.5 },
+        { "name": "Finger Lime", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Lemon Myrtle", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Lemon Aspen", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Grapefruit", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Local Fruit", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Macadamia", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Coconut", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Liquorise", "weight_g": 100, "ratio_percent": 1.0 },
+        { "name": "Cardamon", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Lavender", "weight_g": 60, "ratio_percent": 0.6 },
+        { "name": "Chamomile", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Elderflower", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Pepperberry", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Mint", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Vanilla", "weight_g": 0, "ratio_percent": 0.0 }
+      ],
+      "distillation_log": [
+        {
+          "time": "08:55",
+          "phase": "Foreshots",
+          "volume_L": 2.0,
+          "abv_percent": 84.7,
+          "LAL": 1.7
+        },
+        {
+          "phase": "Heads",
+          "volume_L": 10.0,
+          "abv_percent": 83.5,
+          "LAL": 8.4
+        },
+        {
+          "time": "16:20",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 252.0,
+          "abv_percent": 79.9,
+          "LAL": 201.3
+        }
+      ],
+      "outputs": [
+        {
+          "phase": "Foreshots",
+          "destination": "Discarded (20 L Waste)",
+          "volume_L": 2.0,
+          "abv_percent": 84.7,
+          "LAL": 1.7
+        },
+        {
+          "phase": "Heads",
+          "destination": "FEINTS-GIN-000x / IBC-0x",
+          "volume_L": 10.0,
+          "abv_percent": 83.5,
+          "LAL": 8.4
+        },
+        {
+          "phase": "Hearts",
+          "destination": "GIN-SD-000 / VC-330-03",
+          "volume_L": 252.0,
+          "abv_percent": 79.9,
+          "LAL": 201.3
+        },
+        {
+          "phase": "Tails",
+          "destination": "FEINTS-GIN-000x / IBC-0x",
+          "volume_L": 0.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        }
+      ],
+      "run_totals": {
+        "total_collected_L": 264.0,
+        "hearts_percent_of_run": 95.5,
+        "total_LAL_out": 209.7,
+        "botanicals_g_per_LAL": 22.4
+      },
+      "dilution_steps": [],
+      "combined_dilution": {
+        "date": "2022-06-14",
+        "new_make_L": 252.0,
+        "filtered_water_L": 253.0,
+        "new_volume_L": 253.0,
+        "abv_percent": null,
+        "LAL": 246.7,
+        "final_output_volume_L": 253.0
+      }
+    }
+  ]
+}

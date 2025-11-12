@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "product": "Signature Dry Gin",
+    "batches_included": ["SD-0001", "SD-0002", "SD-0003", "SD-0004", "SD-0005", "SD-0006", "SD-0007", "SD-0008", "SD-0009", "SD-0010", "SD-0011", "SD-0012", "SD-0013", "SD-0014", "SD-0015", "SD-0016", "SD-0017", "SD-0018", "SD-0019", "SD-0020"],
+    "date_range": {
+      "start": "2021-01-22",
+      "end": "2025-04-28"
+    },
+    "total_batches": 20,
+    "total_hearts_L": 0,
+    "total_bottles": 0,
+    "avg_abv": 0,
+    "generated_at": "2025-11-07T11:20:00+10:00",
+    "notes": [
+      "SD-0007 dated 2021-02-02",
+      "SD-0008 dated 2021-07-05",
+      "SD-0009 dated 2021-10-13",
+      "SD-0010 dated 2021-11-12 - still name corrected to CARRIE",
+      "SD-0011 dated 2021-12-17",
+      "SD-0012 dated 2022-03-10",
+      "SD-0013 dated 2022-04-05 - still name corrected to CARRIE",
+      "SD-0014 dated 2022-06-08 - still name corrected to CARRIE",
+      "SD-0015 dated 2022-06-29 - still name corrected to CARRIE",
+      "SD-0016 dated 2022-11-01 - still name corrected to CARRIE, blended with batch 013",
+      "SD-0017 dated 2023-08-15 - still name corrected to CARRIE, blended with batch 013",
+      "SD-0018 dated 2024-01-31 - still name corrected to CARRIE, blended with batch 013, used old Signature batches in charge",
+      "SD-0019 dated 2024-10-29 - still name corrected to CARRIE, new recipe trial with reduced botanicals and lower charge ABV (42.5%)",
+      "SD-0020 dated 2025-04-28 - still name corrected to CARRIE, location 33A, 1000L charge @ 42.5% ABV"
+    ]
+  },
+  "batches": [
+    "/scripts/data/batches/signature-dry-gin-0001.json",
+    "/scripts/data/batches/signature-dry-gin-0002.json",
+    "/scripts/data/batches/signature-dry-gin-0003.json",
+    "/scripts/data/batches/signature-dry-gin-0004.json",
+    "/scripts/data/batches/signature-dry-gin-0005.json",
+    "/scripts/data/batches/signature-dry-gin-0006.json",
+    "/scripts/data/batches/signature-dry-gin-0007.json",
+    "/scripts/data/batches/signature-dry-gin-0008.json",
+    "/scripts/data/batches/signature-dry-gin-0009.json",
+    "/scripts/data/batches/signature-dry-gin-0010.json",
+    "/scripts/data/batches/signature-dry-gin-0011.json",
+    "/scripts/data/batches/signature-dry-gin-0012.json",
+    "/scripts/data/batches/signature-dry-gin-0013.json",
+    "/scripts/data/batches/signature-dry-gin-0014.json",
+    "/scripts/data/batches/signature-dry-gin-0015.json",
+    "/scripts/data/batches/signature-dry-gin-0016.json",
+    "/scripts/data/batches/signature-dry-gin-0017.json",
+    "/scripts/data/batches/signature-dry-gin-0018.json",
+    "/scripts/data/batches/signature-dry-gin-0019.json",
+    "/scripts/data/batches/signature-dry-gin-0020.json"
+  ]
+}

@@ -5,7 +5,9 @@ import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { DistillationSession } from '@/modules/production/types/distillation-session.types'
 import { DistillationSessionCalculator } from '@/modules/production/services/distillation-session-calculator.service'
-import { merchantMaeGinDistillation, rainforestGinDistillation, signatureDryGinDistillation } from '@/modules/production/sessions/merchant-mae-gin-distillation.session'
+import { merchantMaeGinDistillation } from '@/modules/production/sessions/merchant-mae-gin-distillation.session'
+import { vodka003Distillation } from '@/modules/production/sessions/vodka-003-distillation.session'
+import { rainforestGinRF30 } from '@/modules/production/sessions/rainforest-gin-rf30-distillation.session'
 
 export default function DashboardPage() {
   const { user } = useAuth()
@@ -16,15 +18,12 @@ export default function DashboardPage() {
     try {
       const exampleSessions = [
         merchantMaeGinDistillation,
-        rainforestGinDistillation,
-        signatureDryGinDistillation
+        rainforestGinRF30,
+        vodka003Distillation
       ]
 
-      const processedSessions = exampleSessions.map(session => 
-        DistillationSessionCalculator.processDistillationSession(session)
-      )
-
-      setRecentSessions(processedSessions.slice(0, 3)) // Most recent 3
+      // Sessions are already processed, so we can use them directly
+      setRecentSessions(exampleSessions.slice(0, 3)) // Most recent 3
     } catch (err) {
       console.error('Failed to load sessions:', err)
     } finally {
@@ -42,9 +41,9 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Welcome Header */}
       <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
-        <h1 className="text-3xl font-bold mb-2">
-          Welcome back, {user?.displayName || user?.email || 'User'}! 👋
-        </h1>
+            <h1 className="text-3xl font-bold mb-2">
+              Welcome back, {user?.displayName || user?.email || 'User'}!
+            </h1>
         <p className="text-blue-100">
           Track your distillations and manage your production in real-time
         </p>
@@ -96,31 +95,37 @@ export default function DashboardPage() {
       {/* Quick Actions */}
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link
-            href="/dashboard/production/batch-overview"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
-          >
-            📊 View Batches
-          </Link>
-          <Link
-            href="/dashboard/production/interactive-distillation"
-            className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
-          >
-            ⚗️ Interactive Panel
-          </Link>
-          <Link
-            href="/dashboard/production/daily-details"
-            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
-          >
-            📝 Daily Details
-          </Link>
-          <Link
-            href="/dashboard/inventory"
-            className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
-          >
-            📦 Inventory
-          </Link>
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <Link
+                  href="/dashboard/production/batch-overview"
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
+                >
+                  View Batches
+                </Link>
+                <Link
+                  href="/dashboard/production/fy2025-analytics"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
+                >
+                  Analytics
+                </Link>
+                <Link
+                  href="/dashboard/production/interactive-distillation"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
+                >
+                  Interactive Panel
+                </Link>
+                <Link
+                  href="/dashboard/production/daily-details"
+                  className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
+                >
+                  Daily Details
+                </Link>
+                <Link
+                  href="/dashboard/inventory"
+                  className="bg-yellow-600 hover:bg-yellow-700 text-white px-4 py-3 rounded-lg text-sm font-medium text-center transition-colors"
+                >
+                  Inventory
+                </Link>
         </div>
       </div>
 

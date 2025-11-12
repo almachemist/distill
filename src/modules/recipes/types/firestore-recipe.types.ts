@@ -44,6 +44,27 @@ export interface FirestoreIngredient {
   notes?: string
 }
 
+export type FirestoreProductionFeasibility = {
+  feasible: boolean
+  missingIngredients: Array<{ name: string; required: number; available: number; unit: string }>
+  warnings: string[]
+}
+
+export type FirestoreProductionBatchInput = {
+  recipeId: string
+  recipeName: string
+  batchNumber: string
+  targetVolume: number
+  ingredients: FirestoreIngredient[]
+  notes?: string
+}
+
+export interface FirestoreRecipeOps {
+  checkProductionFeasibility(recipeId: string): Promise<FirestoreProductionFeasibility>
+  createProductionBatch(batch: FirestoreProductionBatchInput): Promise<string>
+  executeProductionBatch(batchId: string): Promise<void>
+}
+
 // Complete inventory matching Gabi's Firestore structure
 export const FIRESTORE_INVENTORY: FirestoreInventoryItem[] = [
   { id: "juniper", name: "Juniper", quantity: 0, unit: "g", lastUpdated: Timestamp.now(), category: 'botanical', pricePerKg: 40.273, minThreshold: 5000, maxThreshold: 100000 },
@@ -205,7 +226,7 @@ export const calculateRecipeCost = (ingredients: FirestoreIngredient[]): number 
 // Helper function for easy recipe production
 export const produceRecipe = async (
   recipeId: string, 
-  firestoreService: any, // FirestoreRecipeService instance
+  firestoreService: FirestoreRecipeOps,
   batchVolume?: number
 ): Promise<{ success: boolean; batchId?: string; message: string }> => {
   try {
@@ -261,10 +282,10 @@ export const produceRecipe = async (
 }
 
 // Quick production functions for each recipe
-export const produceRainforestGin = (firestoreService: any, batchVolume?: number) => 
+export const produceRainforestGin = (firestoreService: FirestoreRecipeOps, batchVolume?: number) =>
   produceRecipe('rainforest-gin', firestoreService, batchVolume)
 
-export const produceSignatureDryGin = (firestoreService: any, batchVolume?: number) => 
+export const produceSignatureDryGin = (firestoreService: FirestoreRecipeOps, batchVolume?: number) =>
   produceRecipe('signature-dry-gin', firestoreService, batchVolume)
 
 // Export for easy Firestore integration

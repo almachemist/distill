@@ -1,0 +1,270 @@
+{
+  "Limited Release": {
+    "Australian Cane Spirit": {
+      "wholesale_ex_gst": 60,
+      "rrp": 89,
+      "volume_ml": 700,
+      "abv": 48,
+      "moq": "Case of 6 (or mixed)",
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Reserve Cask Rum": {
+      "wholesale_ex_gst": 99,
+      "rrp": 169,
+      "volume_ml": 700,
+      "abv": 52.5,
+      "moq": "1 bottle (227 bottled)",
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false,
+        "notes": "Preço atualizado para $99 ex GST"
+      }
+    }
+  },
+  "Back Bar Range": {
+    "Rainforest Gin": {
+      "wholesale_ex_gst": 55,
+      "rrp": 80,
+      "volume_ml": 700,
+      "abv": 42.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Signature Dry Gin": {
+      "wholesale_ex_gst": 55,
+      "rrp": 80,
+      "volume_ml": 700,
+      "abv": 42,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Navy Strength Gin": {
+      "wholesale_ex_gst": 69,
+      "rrp": 99,
+      "volume_ml": 700,
+      "abv": 58.8,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Wet Season Gin": {
+      "wholesale_ex_gst": 69,
+      "rrp": 99,
+      "volume_ml": 700,
+      "abv": 42,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Dry Season Gin": {
+      "wholesale_ex_gst": 69,
+      "rrp": 99,
+      "volume_ml": 700,
+      "abv": 40,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Spiced Rum": {
+      "wholesale_ex_gst": 59,
+      "rrp": 85,
+      "volume_ml": 700,
+      "abv": 40,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Pineapple Rum": {
+      "wholesale_ex_gst": 59,
+      "rrp": 85,
+      "volume_ml": 700,
+      "abv": 40,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    }
+  },
+  "Mini Bar & Gift Range": {
+    "Rainforest Gin 200ml": {
+      "wholesale_ex_gst": 21,
+      "rrp": 31,
+      "volume_ml": 200,
+      "abv": 42.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Signature Dry Gin 200ml": {
+      "wholesale_ex_gst": 21,
+      "rrp": 31,
+      "volume_ml": 200,
+      "abv": 42,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Navy Strength 200ml": {
+      "wholesale_ex_gst": 27,
+      "rrp": 38,
+      "volume_ml": 200,
+      "abv": 58.8,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Gin Gift Pack 3x200ml": {
+      "wholesale_ex_gst": 67,
+      "rrp": 99,
+      "content": [
+        "Rainforest Gin",
+        "Signature Dry Gin",
+        "Navy Strength Gin"
+      ],
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    }
+  },
+  "Merchant Mae 2L Pouches": {
+    "Merchant Mae Gin 2L": {
+      "wholesale_ex_gst": 105,
+      "rrp": null,
+      "volume_ml": 2000,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Merchant Mae Vodka 2L": {
+      "wholesale_ex_gst": 105,
+      "rrp": null,
+      "volume_ml": 2000,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Merchant Mae Rum 2L": {
+      "wholesale_ex_gst": 105,
+      "rrp": null,
+      "volume_ml": 2000,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Merchant Mae White Rum 2L": {
+      "wholesale_ex_gst": 105,
+      "rrp": null,
+      "volume_ml": 2000,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    }
+  },
+  "House Pour Range": {
+    "Gin": {
+      "wholesale_ex_gst": 40,
+      "rrp": 60,
+      "volume_ml": 700,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Vodka": {
+      "wholesale_ex_gst": 40,
+      "rrp": 60,
+      "volume_ml": 700,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "White Rum": {
+      "wholesale_ex_gst": 40,
+      "rrp": 60,
+      "volume_ml": 700,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Rum": {
+      "wholesale_ex_gst": 40,
+      "rrp": 60,
+      "volume_ml": 700,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    }
+  },
+  "Traveler Range": {
+    "Gin": {
+      "wholesale_ex_gst": 23,
+      "rrp": 32,
+      "volume_ml": 355,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Vodka": {
+      "wholesale_ex_gst": 23,
+      "rrp": 32,
+      "volume_ml": 355,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "White Rum": {
+      "wholesale_ex_gst": 23,
+      "rrp": 32,
+      "volume_ml": 355,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    },
+    "Rum": {
+      "wholesale_ex_gst": 23,
+      "rrp": 32,
+      "volume_ml": 355,
+      "abv": 37.5,
+      "metadata": {
+        "updated": "2025-10",
+        "discontinued": false
+      }
+    }
+  }
+}

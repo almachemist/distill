@@ -190,9 +190,9 @@ export default function DistillationCutsModal({
 
   const getCutStatusIcon = (status: string) => {
     switch (status) {
-      case 'completed': return '✅'
-      case 'active': return '🟢'
-      default: return '⏳'
+      case 'completed': return '✓'
+      case 'active': return '●'
+      default: return '○'
     }
   }
 
@@ -451,14 +451,14 @@ export default function DistillationCutsModal({
                       disabled={!!powerData.elementsOnTime}
                       className="px-3 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
                     >
-                      🔌 Turn On
+                      Turn On
                     </button>
                     <button
                       onClick={turnElementsOff}
                       disabled={!powerData.elementsOnTime}
                       className="px-3 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-sm"
                     >
-                      🔌 Turn Off
+                      Turn Off
                     </button>
                   </div>
                   
@@ -504,14 +504,14 @@ export default function DistillationCutsModal({
                         : 'bg-green-600 text-white hover:bg-green-700'
                     }`}
                   >
-                    {isTracking ? '⏸️ Pause Tracking' : '▶️ Start Tracking'}
+                    {isTracking ? 'Pause Tracking' : 'Start Tracking'}
                   </button>
                   
                   <button
                     onClick={() => onSave(cuts, powerData)}
                     className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
                   >
-                    💾 Save All Data
+                    Save All Data
                   </button>
                   
                   <button

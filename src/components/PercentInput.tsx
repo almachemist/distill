@@ -1,0 +1,106 @@
+import React from 'react';
+
+interface PercentInputProps {
+  value: number | null;
+  onChange: (value: number | null) => void;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+}
+
+export function PercentInput({ 
+  value, 
+  onChange, 
+  placeholder = "%", 
+  className = "",
+  disabled = false 
+}: PercentInputProps) {
+  return (
+    <input
+      type="text"
+      inputMode="decimal"
+      value={value ?? ""}
+      onChange={(e) => {
+        const s = e.target.value;
+        if (s.trim() === "") { 
+          onChange(null); 
+          return; 
+        }
+        const n = Number(s.replace("%", ""));
+        onChange(Number.isFinite(n) ? n : null);
+      }}
+      placeholder={placeholder}
+      disabled={disabled}
+      className={`px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${className}`}
+    />
+  );
+}
+
+interface NumberInputProps {
+  value: number | null;
+  onChange: (value: number | null) => void;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+  step?: string;
+}
+
+export function NumberInput({ 
+  value, 
+  onChange, 
+  placeholder = "", 
+  className = "",
+  disabled = false,
+  step = "0.1"
+}: NumberInputProps) {
+  return (
+    <input
+      type="number"
+      step={step}
+      value={value ?? ""}
+      onChange={(e) => {
+        const s = e.target.value;
+        if (s.trim() === "") { 
+          onChange(null); 
+          return; 
+        }
+        const n = Number(s);
+        onChange(Number.isFinite(n) ? n : null);
+      }}
+      placeholder={placeholder}
+      disabled={disabled}
+      className={`px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${className}`}
+    />
+  );
+}
+
+interface TextInputProps {
+  value: string | null;
+  onChange: (value: string | null) => void;
+  placeholder?: string;
+  className?: string;
+  disabled?: boolean;
+}
+
+export function TextInput({ 
+  value, 
+  onChange, 
+  placeholder = "", 
+  className = "",
+  disabled = false
+}: TextInputProps) {
+  return (
+    <input
+      type="text"
+      value={value ?? ""}
+      onChange={(e) => {
+        const s = e.target.value;
+        onChange(s.trim() === "" ? null : s);
+      }}
+      placeholder={placeholder}
+      disabled={disabled}
+      className={`px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent ${className}`}
+    />
+  );
+}
+

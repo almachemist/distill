@@ -1,0 +1,265 @@
+{
+  "recipe": "Signature Dry Gin",
+  "runs": [
+    {
+      "run_id": "SPIRIT-GIN-SD-010",
+      "sku": "Signature Dry Gin",
+      "date": "2021-11-12",
+      "boiler_start_time": "06:45",
+      "still_used": "CARRIE",
+      "charge": {
+        "ethanol_source": "Manildra NC96",
+        "ethanol_volume_L": 350,
+        "ethanol_abv_percent": 96.0,
+        "ethanol_LAL": 336.0,
+        "water_volume_L": 400,
+        "other_volume_L": 0,
+        "total_charge_L": 750,
+        "charge_abv_percent": 45.2,
+        "total_LAL": 339.0
+      },
+      "still_setup": {
+        "elements": "5750W × 3, 1 × 2200",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": ""
+      },
+      "botanicals": [
+        { "name": "Juniper", "notes": "Crushed / steeped", "weight_g": 4650, "ratio_percent": 62.6 },
+        { "name": "Coriander", "notes": "Steeped", "weight_g": 1350, "ratio_percent": 18.2 },
+        { "name": "Angelica", "weight_g": 135, "ratio_percent": 1.8 },
+        { "name": "Cassia", "ratio_percent": 0.0 },
+        { "name": "Orris Root", "weight_g": 65, "ratio_percent": 0.9 },
+        { "name": "Orange", "notes": "3 fresh navel oranges - rind", "weight_g": 420, "ratio_percent": 5.7 },
+        { "name": "Lemon", "notes": "4 large lemons - rind", "weight_g": 420, "ratio_percent": 5.7 },
+        { "name": "Finger Lime", "ratio_percent": 0.0 },
+        { "name": "Lemon Myrtle", "ratio_percent": 0.0 },
+        { "name": "Lemon Aspen", "ratio_percent": 0.0 },
+        { "name": "Grapefruit", "ratio_percent": 0.0 },
+        { "name": "Local Fruit", "ratio_percent": 0.0 },
+        { "name": "Macadamia", "notes": "Sliced fresh macadamia", "weight_g": 135, "ratio_percent": 1.8 },
+        { "name": "Coconut", "ratio_percent": 0.0 },
+        { "name": "Liquorise", "notes": "Liquorise root", "weight_g": 65, "ratio_percent": 0.9 },
+        { "name": "Cardamon", "weight_g": 135, "ratio_percent": 1.8 },
+        { "name": "Lavender", "notes": "Put in basket last", "weight_g": 50, "ratio_percent": 0.7 },
+        { "name": "Chamomile", "ratio_percent": 0.0 },
+        { "name": "Elderflower", "ratio_percent": 0.0 },
+        { "name": "Pepperberry", "ratio_percent": 0.0 },
+        { "name": "Mint", "ratio_percent": 0.0 },
+        { "name": "Vanilla", "ratio_percent": 0.0 }
+      ],
+      "distillation_log": [
+        {
+          "time": null,
+          "phase": "Foreshots",
+          "volume_L": 0.0,
+          "vc_tank_volume_L": 330,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 82.9,
+          "condenser_temp_C": 28.0,
+          "abv_percent": null,
+          "LAL": 0.0,
+          "observations": "2/5750 WT ELEMENTS"
+        },
+        {
+          "time": "08:20",
+          "phase": "Heads",
+          "volume_L": 10.0,
+          "abv_percent": 83.9,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 74.4,
+          "condenser_temp_C": 29.6,
+          "LAL": 8.4,
+          "observations": "FAN BLOWING ON COLUMN"
+        },
+        {
+          "time": "08:40",
+          "phase": "Hearts (column stabilising)",
+          "volume_L": 0.0,
+          "abv_percent": 83.5,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 74.4,
+          "condenser_temp_C": 28.5
+        },
+        {
+          "time": "09:20",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 0.0,
+          "abv_percent": 83.4,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 73.5,
+          "condenser_temp_C": 29.0,
+          "LAL": 9.0
+        },
+        {
+          "time": "09:55",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 0.0,
+          "abv_percent": 83.1,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 74.6,
+          "condenser_temp_C": 28.7
+        },
+        {
+          "time": "11:15",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 0.0,
+          "abv_percent": 82.8,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 74.6,
+          "condenser_temp_C": 28.5
+        },
+        {
+          "time": "11:45",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 0.0,
+          "abv_percent": 82.5,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 72.9,
+          "condenser_temp_C": 28.0
+        },
+        {
+          "time": "12:30",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 0.0,
+          "abv_percent": 82.5,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 72.4,
+          "condenser_temp_C": 28.0
+        },
+        {
+          "time": "13:15",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 0.0,
+          "abv_percent": 82.1,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 73.5,
+          "condenser_temp_C": 28.0
+        },
+        {
+          "time": "13:55",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 177.0,
+          "volume_percent": 94.7,
+          "vc_tank_volume_L": 177.0,
+          "abv_percent": 81.8,
+          "ambient_temp_C": 30.0,
+          "head_temp_C": 73.0,
+          "condenser_temp_C": 28.2,
+          "LAL": 144.8
+        }
+      ],
+      "outputs": [
+        {
+          "phase": "Foreshots",
+          "destination": "Discarded (20L Waste)",
+          "volume_L": 0.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        },
+        {
+          "phase": "Heads",
+          "destination": "FEINTS-GIN-000x / IBC-0x",
+          "volume_L": 10.0,
+          "abv_percent": 83.9,
+          "LAL": 8.4
+        },
+        {
+          "phase": "Hearts",
+          "destination": "GIN-SD-000 / VC-330-0x",
+          "volume_L": 177.0,
+          "abv_percent": 81.8,
+          "LAL": 144.8
+        },
+        {
+          "phase": "Tails",
+          "destination": "FEINTS-GIN-000x / IBC-0x",
+          "volume_L": 0.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        }
+      ],
+      "run_totals": {
+        "total_collected_L": 187.0,
+        "hearts_percent_of_run": 94.7,
+        "total_LAL_out": 153.2,
+        "botanicals_g_per_LAL": 22
+      },
+      "dilution_steps": [
+        {
+          "step": 1,
+          "date_added": null,
+          "new_make_L": 177.0,
+          "filtered_water_L": 0.0,
+          "new_volume_L": 177.0,
+          "notes": "x litres required overall"
+        },
+        {
+          "step": 2,
+          "date_added": null,
+          "new_make_L": null,
+          "filtered_water_L": null,
+          "new_volume_L": 177.0
+        }
+      ],
+      "combined_dilution": {
+        "steps": [
+          {
+            "step": 1,
+            "new_make_L": 177.0,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 197.0,
+            "abv_percent": 7300.0,
+            "LAL": 190.1,
+            "notes": "spreadsheet anomaly; 7300% is not realistic"
+          },
+          {
+            "step": 2,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 217.0,
+            "abv_percent": 68.5,
+            "LAL": 148.6
+          },
+          {
+            "step": 3,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 237.0,
+            "abv_percent": 62.5,
+            "LAL": 148.1
+          },
+          {
+            "step": 4,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 257.0,
+            "abv_percent": 58.9,
+            "LAL": 151.4
+          },
+          {
+            "step": 5,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 277.0,
+            "abv_percent": 53.8,
+            "LAL": 149.0
+          },
+          {
+            "step": 6,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 297.0,
+            "abv_percent": 50.1,
+            "LAL": 148.8
+          },
+          {
+            "step": 7,
+            "filtered_water_L": 20.0,
+            "new_volume_L": 317.0,
+            "abv_percent": 4690.0,
+            "LAL": 14867.3,
+            "notes": "added extra 15L; clearly a data entry error in source sheet"
+          }
+        ],
+        "final_output_volume_L": 317.0,
+        "final_note": "source comment: 'total is 333L'"
+      }
+    }
+  ]
+}

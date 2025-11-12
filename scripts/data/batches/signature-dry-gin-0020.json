@@ -1,0 +1,147 @@
+{
+  "recipe": "Signature Dry Gin",
+  "runs": [
+    {
+      "run_id": "SPIRIT-GIN-SD-0020",
+      "sku": "Signature Dry Gin",
+      "date": "2025-04-28",
+      "boiler_start_time": "06:00",
+      "still_used": "CARRIE",
+      "location": "33A",
+      "charge": {
+        "ethanol_source": "Manildra NC96",
+        "ethanol_volume_L": 500,
+        "ethanol_abv_percent": 42.5,
+        "ethanol_LAL": 212.5,
+        "water_volume_L": 500,
+        "other_source": "Old batches of Signature",
+        "other_volume_L": 0,
+        "other_abv_percent": 0.0,
+        "other_LAL": 0.0,
+        "total_charge_L": 1000,
+        "charge_abv_percent": 42.5,
+        "total_LAL": 425.0
+      },
+      "still_setup": {
+        "elements": null,
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "0",
+        "options": ""
+      },
+      "botanicals": [
+        { "name": "Juniper", "notes": "Steeped", "weight_g": 6400, "ratio_percent": 63.4 },
+        { "name": "Coriander", "notes": "Steeped", "weight_g": 1800, "ratio_percent": 17.8 },
+        { "name": "Angelica", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Orris Root", "weight_g": 90, "ratio_percent": 0.9 },
+        { "name": "Orange", "notes": "9 fresh navel oranges – rind", "weight_g": 560, "ratio_percent": 5.6 },
+        { "name": "Lemon", "notes": "12 large lemons – rind", "weight_g": 560, "ratio_percent": 5.6 },
+        { "name": "Macadamia", "notes": "Sliced fresh macadamia", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Liquorise", "notes": "Liquorise root", "weight_g": 100, "ratio_percent": 1.0 },
+        { "name": "Cardamon", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Lavender", "notes": "Put in basket last", "weight_g": 40, "ratio_percent": 0.4 }
+      ],
+      "distillation_log": [
+        {
+          "time": "09:00",
+          "phase": "Foreshots",
+          "volume_L": 2.0,
+          "abv_percent": 88.0,
+          "ambient_temp_C": null,
+          "LAL": null,
+          "power_notes": "33A"
+        },
+        {
+          "time": "09:20",
+          "phase": "Heads",
+          "volume_L": 10.0,
+          "abv_percent": 84.5,
+          "ambient_temp_C": null,
+          "LAL": null,
+          "power_notes": "30A"
+        },
+        {
+          "time": "17:20",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 310.0,
+          "abv_percent": 81.8,
+          "ambient_temp_C": null,
+          "LAL": null,
+          "power_notes": "30A"
+        },
+        {
+          "time": "03:30",
+          "phase": "Tails",
+          "volume_L": 189.0,
+          "abv_percent": 80.9,
+          "ambient_temp_C": null,
+          "LAL": 152.9,
+          "power_notes": "30A"
+        }
+      ],
+      "outputs": [
+        {
+          "phase": "Foreshots",
+          "destination": "Discarded (20 L Waste)",
+          "volume_L": 2.0,
+          "abv_percent": 88.0,
+          "LAL": 0.0
+        },
+        {
+          "phase": "Heads",
+          "destination": "FEINTS-GIN-002 / IBC-01",
+          "volume_L": 10.0,
+          "abv_percent": 84.5,
+          "LAL": 0.0
+        },
+        {
+          "phase": "Hearts",
+          "destination": "GIN-SD-0020 / VC-330",
+          "volume_L": 310.0,
+          "abv_percent": 81.8,
+          "LAL": null
+        },
+        {
+          "phase": "Tails",
+          "destination": "FEINTS-GIN-002 / IBC-01",
+          "volume_L": 189.0,
+          "abv_percent": 80.9,
+          "LAL": 0.0
+        }
+      ],
+      "run_totals": {
+        "total_collected_L": 511.0,
+        "total_run_percent": 32.7,
+        "botanicals_g_per_LAL": null
+      },
+      "dilution_steps": [
+        {
+          "step": 1,
+          "date_added": "2024-02-18",
+          "new_make_L": 310.0,
+          "filtered_water_L": 262.0,
+          "new_volume_L": 572.0,
+          "abv_percent": 45.0,
+          "LAL": 257.4,
+          "notes": "x litres required overall"
+        },
+        {
+          "step": 2,
+          "date_added": null,
+          "new_make_L": 572.0,
+          "filtered_water_L": 31.0,
+          "new_volume_L": 603.0,
+          "abv_percent": 42.0,
+          "LAL": 253.3
+        }
+      ],
+      "combined_dilution": {
+        "new_make_L": null,
+        "filtered_water_L": null,
+        "new_volume_L": 0.0,
+        "abv_percent": null,
+        "LAL": null,
+        "final_output_volume_L": 0.0
+      }
+    }
+  ]
+}

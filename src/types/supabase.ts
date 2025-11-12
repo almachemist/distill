@@ -7,30 +7,10 @@ export type Json =
   | Json[]
 
 export type Database = {
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
@@ -59,6 +39,41 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "barrel_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      barrel_size: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          id: number
+          liters: number | null
+          organization_id: string | null
+          size: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          id?: number
+          liters?: number | null
+          organization_id?: string | null
+          size: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          id?: number
+          liters?: number | null
+          organization_id?: string | null
+          size?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "barrel_size_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -127,41 +142,6 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "calendar_events_organization_id_fkey"
-            columns: ["organization_id"]
-            isOneToOne: false
-            referencedRelation: "organizations"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      barrel_size: {
-        Row: {
-          active: boolean | null
-          created_at: string | null
-          id: number
-          liters: number | null
-          organization_id: string | null
-          size: string
-        }
-        Insert: {
-          active?: boolean | null
-          created_at?: string | null
-          id?: number
-          liters?: number | null
-          organization_id?: string | null
-          size: string
-        }
-        Update: {
-          active?: boolean | null
-          created_at?: string | null
-          id?: number
-          liters?: number | null
-          organization_id?: string | null
-          size?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "barrel_size_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -269,6 +249,144 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      distillation_runs: {
+        Row: {
+          batch_id: string
+          boiler_on_time: string | null
+          botanicals: Json | null
+          charge_components: Json
+          charge_total_abv_percent: number | null
+          charge_total_lal: number | null
+          charge_total_volume_l: number | null
+          created_at: string | null
+          created_by: string | null
+          date: string
+          deflegmator: string | null
+          dilution_steps: Json | null
+          display_name: string
+          final_output_abv_percent: number | null
+          final_output_lal: number | null
+          final_output_volume_l: number | null
+          foreshots_abv_percent: number | null
+          foreshots_lal: number | null
+          foreshots_volume_l: number | null
+          heads_abv_percent: number | null
+          heads_lal: number | null
+          heads_volume_l: number | null
+          hearts_abv_percent: number | null
+          hearts_lal: number | null
+          hearts_segments: Json | null
+          hearts_volume_l: number | null
+          heating_elements: string | null
+          id: string
+          notes: string | null
+          plates: string | null
+          power_setting: string | null
+          product_id: string | null
+          recipe_id: string | null
+          sku: string
+          steeping_end_time: string | null
+          steeping_start_time: string | null
+          steeping_temp_c: number | null
+          still_used: string
+          tails_abv_percent: number | null
+          tails_lal: number | null
+          tails_segments: Json | null
+          tails_volume_l: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          batch_id: string
+          boiler_on_time?: string | null
+          botanicals?: Json | null
+          charge_components?: Json
+          charge_total_abv_percent?: number | null
+          charge_total_lal?: number | null
+          charge_total_volume_l?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          date: string
+          deflegmator?: string | null
+          dilution_steps?: Json | null
+          display_name: string
+          final_output_abv_percent?: number | null
+          final_output_lal?: number | null
+          final_output_volume_l?: number | null
+          foreshots_abv_percent?: number | null
+          foreshots_lal?: number | null
+          foreshots_volume_l?: number | null
+          heads_abv_percent?: number | null
+          heads_lal?: number | null
+          heads_volume_l?: number | null
+          hearts_abv_percent?: number | null
+          hearts_lal?: number | null
+          hearts_segments?: Json | null
+          hearts_volume_l?: number | null
+          heating_elements?: string | null
+          id?: string
+          notes?: string | null
+          plates?: string | null
+          power_setting?: string | null
+          product_id?: string | null
+          recipe_id?: string | null
+          sku: string
+          steeping_end_time?: string | null
+          steeping_start_time?: string | null
+          steeping_temp_c?: number | null
+          still_used: string
+          tails_abv_percent?: number | null
+          tails_lal?: number | null
+          tails_segments?: Json | null
+          tails_volume_l?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          batch_id?: string
+          boiler_on_time?: string | null
+          botanicals?: Json | null
+          charge_components?: Json
+          charge_total_abv_percent?: number | null
+          charge_total_lal?: number | null
+          charge_total_volume_l?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          date?: string
+          deflegmator?: string | null
+          dilution_steps?: Json | null
+          display_name?: string
+          final_output_abv_percent?: number | null
+          final_output_lal?: number | null
+          final_output_volume_l?: number | null
+          foreshots_abv_percent?: number | null
+          foreshots_lal?: number | null
+          foreshots_volume_l?: number | null
+          heads_abv_percent?: number | null
+          heads_lal?: number | null
+          heads_volume_l?: number | null
+          hearts_abv_percent?: number | null
+          hearts_lal?: number | null
+          hearts_segments?: Json | null
+          hearts_volume_l?: number | null
+          heating_elements?: string | null
+          id?: string
+          notes?: string | null
+          plates?: string | null
+          power_setting?: string | null
+          product_id?: string | null
+          recipe_id?: string | null
+          sku?: string
+          steeping_end_time?: string | null
+          steeping_start_time?: string | null
+          steeping_temp_c?: number | null
+          still_used?: string
+          tails_abv_percent?: number | null
+          tails_lal?: number | null
+          tails_segments?: Json | null
+          tails_volume_l?: number | null
+          updated_at?: string | null
+        }
+        Relationships: []
       }
       fermentation: {
         Row: {
@@ -720,6 +838,65 @@ export type Database = {
           },
         ]
       }
+      product_pricing: {
+        Row: {
+          abv: number | null
+          category: string
+          created_at: string | null
+          id: string
+          metadata: Json | null
+          moq: string | null
+          organization_id: string
+          product_name: string
+          rrp: number | null
+          sku: string
+          updated_at: string | null
+          variation: string
+          volume_ml: number | null
+          wholesale_ex_gst: number | null
+        }
+        Insert: {
+          abv?: number | null
+          category: string
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          moq?: string | null
+          organization_id: string
+          product_name: string
+          rrp?: number | null
+          sku?: string
+          updated_at?: string | null
+          variation?: string
+          volume_ml?: number | null
+          wholesale_ex_gst?: number | null
+        }
+        Update: {
+          abv?: number | null
+          category?: string
+          created_at?: string | null
+          id?: string
+          metadata?: Json | null
+          moq?: string | null
+          organization_id?: string
+          product_name?: string
+          rrp?: number | null
+          sku?: string
+          updated_at?: string | null
+          variation?: string
+          volume_ml?: number | null
+          wholesale_ex_gst?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_pricing_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       production_orders: {
         Row: {
           batch_target_l: number
@@ -871,6 +1048,7 @@ export type Database = {
         Row: {
           baseline_final_l: number | null
           created_at: string | null
+          description: string | null
           id: string
           name: string
           notes: string | null
@@ -881,6 +1059,7 @@ export type Database = {
         Insert: {
           baseline_final_l?: number | null
           created_at?: string | null
+          description?: string | null
           id?: string
           name: string
           notes?: string | null
@@ -891,6 +1070,7 @@ export type Database = {
         Update: {
           baseline_final_l?: number | null
           created_at?: string | null
+          description?: string | null
           id?: string
           name?: string
           notes?: string | null
@@ -901,6 +1081,347 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "recipes_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rum_production_runs: {
+        Row: {
+          additional_nutrients: string | null
+          anti_foam_ml: number | null
+          batch_id: string
+          boiler_abv_percent: number | null
+          boiler_elements: string | null
+          boiler_lal: number | null
+          boiler_volume_l: number | null
+          brix_curve: Json | null
+          calcium_carbonate_g: number | null
+          cask_number: string | null
+          cask_origin: string | null
+          cask_size_l: number | null
+          cask_type: string | null
+          citric_acid_g: number | null
+          created_at: string | null
+          created_by: string | null
+          dap_g: number | null
+          distillation_date: string | null
+          distillation_notes: string | null
+          distillation_start_time: string | null
+          dunder_added: boolean | null
+          dunder_ph: number | null
+          dunder_type: string | null
+          dunder_volume_l: number | null
+          expected_bottling_date: string | null
+          fermaid_g: number | null
+          fermentation_duration_hours: number | null
+          fermentation_notes: string | null
+          fermentation_start_date: string | null
+          fill_abv_percent: number | null
+          fill_date: string | null
+          final_abv_percent: number | null
+          final_brix: number | null
+          final_ph: number | null
+          foreshots_abv_percent: number | null
+          foreshots_notes: string | null
+          foreshots_time: string | null
+          heads_abv_percent: number | null
+          heads_lal: number | null
+          heads_notes: string | null
+          heads_time: string | null
+          heads_volume_l: number | null
+          heart_yield_percent: number | null
+          hearts_abv_percent: number | null
+          hearts_lal: number | null
+          hearts_notes: string | null
+          hearts_time: string | null
+          hearts_volume_l: number | null
+          id: string
+          initial_brix: number | null
+          initial_ph: number | null
+          lal_filled: number | null
+          lal_loss: number | null
+          maturation_location: string | null
+          notes: string | null
+          output_product_name: string | null
+          ph_curve: Json | null
+          product_name: string
+          product_type: string | null
+          retort1_abv_percent: number | null
+          retort1_content: string | null
+          retort1_elements: string | null
+          retort1_lal: number | null
+          retort1_volume_l: number | null
+          retort2_abv_percent: number | null
+          retort2_content: string | null
+          retort2_elements: string | null
+          retort2_lal: number | null
+          retort2_volume_l: number | null
+          still_used: string | null
+          substrate_batch: string | null
+          substrate_mass_kg: number | null
+          substrate_type: string | null
+          tails_segments: Json | null
+          temperature_curve: Json | null
+          total_lal_end: number | null
+          total_lal_start: number | null
+          updated_at: string | null
+          volume_filled_l: number | null
+          water_mass_kg: number | null
+          yeast_mass_g: number | null
+          yeast_rehydration_temp_c: number | null
+          yeast_rehydration_time_min: number | null
+          yeast_type: string | null
+        }
+        Insert: {
+          additional_nutrients?: string | null
+          anti_foam_ml?: number | null
+          batch_id: string
+          boiler_abv_percent?: number | null
+          boiler_elements?: string | null
+          boiler_lal?: number | null
+          boiler_volume_l?: number | null
+          brix_curve?: Json | null
+          calcium_carbonate_g?: number | null
+          cask_number?: string | null
+          cask_origin?: string | null
+          cask_size_l?: number | null
+          cask_type?: string | null
+          citric_acid_g?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          dap_g?: number | null
+          distillation_date?: string | null
+          distillation_notes?: string | null
+          distillation_start_time?: string | null
+          dunder_added?: boolean | null
+          dunder_ph?: number | null
+          dunder_type?: string | null
+          dunder_volume_l?: number | null
+          expected_bottling_date?: string | null
+          fermaid_g?: number | null
+          fermentation_duration_hours?: number | null
+          fermentation_notes?: string | null
+          fermentation_start_date?: string | null
+          fill_abv_percent?: number | null
+          fill_date?: string | null
+          final_abv_percent?: number | null
+          final_brix?: number | null
+          final_ph?: number | null
+          foreshots_abv_percent?: number | null
+          foreshots_notes?: string | null
+          foreshots_time?: string | null
+          heads_abv_percent?: number | null
+          heads_lal?: number | null
+          heads_notes?: string | null
+          heads_time?: string | null
+          heads_volume_l?: number | null
+          heart_yield_percent?: number | null
+          hearts_abv_percent?: number | null
+          hearts_lal?: number | null
+          hearts_notes?: string | null
+          hearts_time?: string | null
+          hearts_volume_l?: number | null
+          id?: string
+          initial_brix?: number | null
+          initial_ph?: number | null
+          lal_filled?: number | null
+          lal_loss?: number | null
+          maturation_location?: string | null
+          notes?: string | null
+          output_product_name?: string | null
+          ph_curve?: Json | null
+          product_name: string
+          product_type?: string | null
+          retort1_abv_percent?: number | null
+          retort1_content?: string | null
+          retort1_elements?: string | null
+          retort1_lal?: number | null
+          retort1_volume_l?: number | null
+          retort2_abv_percent?: number | null
+          retort2_content?: string | null
+          retort2_elements?: string | null
+          retort2_lal?: number | null
+          retort2_volume_l?: number | null
+          still_used?: string | null
+          substrate_batch?: string | null
+          substrate_mass_kg?: number | null
+          substrate_type?: string | null
+          tails_segments?: Json | null
+          temperature_curve?: Json | null
+          total_lal_end?: number | null
+          total_lal_start?: number | null
+          updated_at?: string | null
+          volume_filled_l?: number | null
+          water_mass_kg?: number | null
+          yeast_mass_g?: number | null
+          yeast_rehydration_temp_c?: number | null
+          yeast_rehydration_time_min?: number | null
+          yeast_type?: string | null
+        }
+        Update: {
+          additional_nutrients?: string | null
+          anti_foam_ml?: number | null
+          batch_id?: string
+          boiler_abv_percent?: number | null
+          boiler_elements?: string | null
+          boiler_lal?: number | null
+          boiler_volume_l?: number | null
+          brix_curve?: Json | null
+          calcium_carbonate_g?: number | null
+          cask_number?: string | null
+          cask_origin?: string | null
+          cask_size_l?: number | null
+          cask_type?: string | null
+          citric_acid_g?: number | null
+          created_at?: string | null
+          created_by?: string | null
+          dap_g?: number | null
+          distillation_date?: string | null
+          distillation_notes?: string | null
+          distillation_start_time?: string | null
+          dunder_added?: boolean | null
+          dunder_ph?: number | null
+          dunder_type?: string | null
+          dunder_volume_l?: number | null
+          expected_bottling_date?: string | null
+          fermaid_g?: number | null
+          fermentation_duration_hours?: number | null
+          fermentation_notes?: string | null
+          fermentation_start_date?: string | null
+          fill_abv_percent?: number | null
+          fill_date?: string | null
+          final_abv_percent?: number | null
+          final_brix?: number | null
+          final_ph?: number | null
+          foreshots_abv_percent?: number | null
+          foreshots_notes?: string | null
+          foreshots_time?: string | null
+          heads_abv_percent?: number | null
+          heads_lal?: number | null
+          heads_notes?: string | null
+          heads_time?: string | null
+          heads_volume_l?: number | null
+          heart_yield_percent?: number | null
+          hearts_abv_percent?: number | null
+          hearts_lal?: number | null
+          hearts_notes?: string | null
+          hearts_time?: string | null
+          hearts_volume_l?: number | null
+          id?: string
+          initial_brix?: number | null
+          initial_ph?: number | null
+          lal_filled?: number | null
+          lal_loss?: number | null
+          maturation_location?: string | null
+          notes?: string | null
+          output_product_name?: string | null
+          ph_curve?: Json | null
+          product_name?: string
+          product_type?: string | null
+          retort1_abv_percent?: number | null
+          retort1_content?: string | null
+          retort1_elements?: string | null
+          retort1_lal?: number | null
+          retort1_volume_l?: number | null
+          retort2_abv_percent?: number | null
+          retort2_content?: string | null
+          retort2_elements?: string | null
+          retort2_lal?: number | null
+          retort2_volume_l?: number | null
+          still_used?: string | null
+          substrate_batch?: string | null
+          substrate_mass_kg?: number | null
+          substrate_type?: string | null
+          tails_segments?: Json | null
+          temperature_curve?: Json | null
+          total_lal_end?: number | null
+          total_lal_start?: number | null
+          updated_at?: string | null
+          volume_filled_l?: number | null
+          water_mass_kg?: number | null
+          yeast_mass_g?: number | null
+          yeast_rehydration_temp_c?: number | null
+          yeast_rehydration_time_min?: number | null
+          yeast_type?: string | null
+        }
+        Relationships: []
+      }
+      sales_items: {
+        Row: {
+          category: string
+          created_at: string | null
+          discounts_and_comps: number | null
+          gross_sales: number | null
+          id: string
+          import_batch: string | null
+          item_name: string
+          item_variation: string
+          items_sold: number | null
+          net_sales: number | null
+          organization_id: string
+          period_end: string
+          period_granularity: string
+          period_start: string
+          product_sales: number | null
+          raw_payload: Json | null
+          refunds: number | null
+          sku: string
+          tax: number | null
+          units_sold: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          discounts_and_comps?: number | null
+          gross_sales?: number | null
+          id?: string
+          import_batch?: string | null
+          item_name: string
+          item_variation?: string
+          items_sold?: number | null
+          net_sales?: number | null
+          organization_id: string
+          period_end: string
+          period_granularity: string
+          period_start: string
+          product_sales?: number | null
+          raw_payload?: Json | null
+          refunds?: number | null
+          sku?: string
+          tax?: number | null
+          units_sold?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          discounts_and_comps?: number | null
+          gross_sales?: number | null
+          id?: string
+          import_batch?: string | null
+          item_name?: string
+          item_variation?: string
+          items_sold?: number | null
+          net_sales?: number | null
+          organization_id?: string
+          period_end?: string
+          period_granularity?: string
+          period_start?: string
+          product_sales?: number | null
+          raw_payload?: Json | null
+          refunds?: number | null
+          sku?: string
+          tax?: number | null
+          units_sold?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sales_items_organization_id_fkey"
             columns: ["organization_id"]
             isOneToOne: false
             referencedRelation: "organizations"
@@ -980,7 +1501,7 @@ export type Database = {
           abv: string | null
           angelsshare: string | null
           barrel: string | null
-          barrel_number: string
+          barrel_number: string | null
           batch: string | null
           created_at: string | null
           created_by: string | null
@@ -1002,7 +1523,7 @@ export type Database = {
           abv?: string | null
           angelsshare?: string | null
           barrel?: string | null
-          barrel_number: string
+          barrel_number?: string | null
           batch?: string | null
           created_at?: string | null
           created_by?: string | null
@@ -1024,7 +1545,7 @@ export type Database = {
           abv?: string | null
           angelsshare?: string | null
           barrel?: string | null
-          barrel_number?: string
+          barrel_number?: string | null
           batch?: string | null
           created_at?: string | null
           created_by?: string | null
@@ -1061,38 +1582,8 @@ export type Database = {
         Args: { display_name: string; org_name: string; user_id: string }
         Returns: Json
       }
-      gtrgm_compress: {
-        Args: { "": unknown }
-        Returns: unknown
-      }
-      gtrgm_decompress: {
-        Args: { "": unknown }
-        Returns: unknown
-      }
-      gtrgm_in: {
-        Args: { "": unknown }
-        Returns: unknown
-      }
-      gtrgm_options: {
-        Args: { "": unknown }
-        Returns: undefined
-      }
-      gtrgm_out: {
-        Args: { "": unknown }
-        Returns: unknown
-      }
-      set_limit: {
-        Args: { "": number }
-        Returns: number
-      }
-      show_limit: {
-        Args: Record<PropertyKey, never>
-        Returns: number
-      }
-      show_trgm: {
-        Args: { "": string }
-        Returns: string[]
-      }
+      show_limit: { Args: never; Returns: number }
+      show_trgm: { Args: { "": string }; Returns: string[] }
     }
     Enums: {
       [_ in never]: never
@@ -1221,11 +1712,7 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {},
   },
 } as const
-

@@ -1,0 +1,203 @@
+{
+  "Uncategorized": [
+    {
+      "item_name": "Custom Amount",
+      "item_variation": "No description",
+      "sku": null,
+      "items_sold": 2,
+      "product_sales": 155.29,
+      "refunds": 0.0,
+      "discounts_and_comps": 0.0,
+      "net_sales": 155.29,
+      "tax": 15.71,
+      "gross_sales": 171.0,
+      "units_sold": 2
+    },
+    {
+      "item_name": "First Creek Sparkling",
+      "item_variation": "By the Glass",
+      "sku": "First Creek Sparkling Wine",
+      "items_sold": 1,
+      "product_sales": 10.89,
+      "refunds": -10.89,
+      "discounts_and_comps": 0.0,
+      "net_sales": 0.0,
+      "tax": 0.0,
+      "gross_sales": 0.0,
+      "units_sold": 1
+    },
+    {
+      "item_name": "Guided gin tasting",
+      "item_variation": "Regular",
+      "sku": "X656614",
+      "items_sold": 1,
+      "product_sales": 909.09,
+      "refunds": 0.0,
+      "discounts_and_comps": 0.0,
+      "net_sales": 909.09,
+      "tax": 90.91,
+      "gross_sales": 1000.0,
+      "units_sold": 1
+    },
+    {
+      "item_name": "Mocktail",
+      "item_variation": "Regular",
+      "sku": null,
+      "items_sold": 51,
+      "product_sales": 416.91,
+      "refunds": 0.0,
+      "discounts_and_comps": -2.7,
+      "net_sales": 414.21,
+      "tax": 42.09,
+      "gross_sales": 456.3,
+      "units_sold": 51
+    },
+    {
+      "item_name": "Heineken 0",
+      "item_variation": "Regular",
+      "sku": "J701346",
+      "items_sold": 2,
+      "product_sales": 14.5,
+      "refunds": 0.0,
+      "discounts_and_comps": 0.0,
+      "net_sales": 14.5,
+      "tax": 1.5,
+      "gross_sales": 16.0,
+      "units_sold": 2
+    }
+  ],
+  "Cellar Door": [
+    {
+      "item_name": "Cane Spirit + Ginger Beer",
+      "item_variation": "Regular",
+      "sku": "868353D",
+      "items_sold": 27,
+      "product_sales": 319.03,
+      "refunds": 0.0,
+      "discounts_and_comps": -5.29,
+      "net_sales": 313.74,
+      "tax": 31.97,
+      "gross_sales": 345.71,
+      "units_sold": 27
+    },
+    {
+      "item_name": "Cocktail",
+      "item_variation": "Regular",
+      "sku": "Signature Dry Gin",
+      "items_sold": 377,
+      "product_sales": 5481.78,
+      "refunds": -14.54,
+      "discounts_and_comps": -29.85,
+      "net_sales": 5437.39,
+      "tax": 548.76,
+      "gross_sales": 5986.15,
+      "units_sold": 377
+    },
+    {
+      "item_name": "Gin Tasting Paddle",
+      "item_variation": "Regular",
+      "sku": null,
+      "items_sold": 561,
+      "product_sales": 12735.47,
+      "refunds": 0.0,
+      "discounts_and_comps": -111.49,
+      "net_sales": 12623.98,
+      "tax": 1289.53,
+      "gross_sales": 13913.51,
+      "units_sold": 561
+    },
+    {
+      "item_name": "Gin and Tonic",
+      "item_variation": "Rainforest, Signature",
+      "sku": "E314726",
+      "items_sold": 109,
+      "product_sales": 991.57,
+      "refunds": 0.0,
+      "discounts_and_comps": -31.63,
+      "net_sales": 959.94,
+      "tax": 98.43,
+      "gross_sales": 1058.37,
+      "units_sold": 109
+    },
+    {
+      "item_name": "Hemingways Beer",
+      "item_variation": "Regular",
+      "sku": null,
+      "items_sold": 106,
+      "product_sales": 965.65,
+      "refunds": 0.0,
+      "discounts_and_comps": -41.37,
+      "net_sales": 924.28,
+      "tax": 94.35,
+      "gross_sales": 1018.63,
+      "units_sold": 106
+    }
+  ],
+  "Spirits": [
+    {
+      "item_name": "Rainforest Gin 700ml",
+      "item_variation": "Regular",
+      "sku": "Rainforest Gin 700ml",
+      "items_sold": 1188,
+      "product_sales": 70504.56,
+      "refunds": -219.64,
+      "discounts_and_comps": -8150.29,
+      "net_sales": 62134.63,
+      "tax": 6225.98,
+      "gross_sales": 68360.61,
+      "units_sold": 1188
+    },
+    {
+      "item_name": "Signature Dry Gin 700ml",
+      "item_variation": "Regular",
+      "sku": "Signature Dry Gin 700ml",
+      "items_sold": 448,
+      "product_sales": 26582.45,
+      "refunds": 0.0,
+      "discounts_and_comps": -3508.73,
+      "net_sales": 23073.72,
+      "tax": 2313.23,
+      "gross_sales": 25386.95,
+      "units_sold": 448
+    },
+    {
+      "item_name": "Merchant Mae Gin 700ml",
+      "item_variation": "Regular",
+      "sku": "5795953",
+      "items_sold": 1343,
+      "product_sales": 53871.45,
+      "refunds": 0.0,
+      "discounts_and_comps": -5220.84,
+      "net_sales": 48650.61,
+      "tax": 4865.07,
+      "gross_sales": 53515.68,
+      "units_sold": 1343
+    },
+    {
+      "item_name": "Navy Strength Gin 700ml",
+      "item_variation": "Regular",
+      "sku": "Navy Strength Gin 700ml",
+      "items_sold": 305,
+      "product_sales": 24471.47,
+      "refunds": -99.0,
+      "discounts_and_comps": -3982.86,
+      "net_sales": 20389.61,
+      "tax": 2049.07,
+      "gross_sales": 22438.68,
+      "units_sold": 305
+    },
+    {
+      "item_name": "Wet Season Gin 700ml",
+      "item_variation": "Regular",
+      "sku": "Wet Season Gin 700ml",
+      "items_sold": 251,
+      "product_sales": 21450.98,
+      "refunds": -90.9,
+      "discounts_and_comps": -3225.59,
+      "net_sales": 18134.49,
+      "tax": 1823.92,
+      "gross_sales": 19958.41,
+      "units_sold": 251
+    }
+  ]
+}

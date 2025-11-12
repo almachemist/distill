@@ -18,7 +18,6 @@ import {
   FirestoreIngredient,
   FIRESTORE_INVENTORY,
   FIRESTORE_RECIPES,
-  updateInventoryQuantity,
   consumeIngredientsForProduction,
   getLowStockItems,
   calculateRecipeCost

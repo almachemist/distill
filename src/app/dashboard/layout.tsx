@@ -31,10 +31,22 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Dashboard
                 </Link>
                 <Link
-                  href="/dashboard/barrels"
+                  href="/dashboard/planning"
                   className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Barrels
+                  Planning
+                </Link>
+                <Link
+                  href="/dashboard/production"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Production
+                </Link>
+                <Link
+                  href="/dashboard/batches"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Batches
                 </Link>
                 <Link
                   href="/dashboard/inventory"
@@ -43,52 +55,16 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Inventory
                 </Link>
                 <Link
-                  href="/dashboard/inventory/reports"
+                  href="/dashboard/recipes"
                   className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Reports
-                </Link>
-            <Link
-              href="/dashboard/recipes"
-              className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-            >
-              Recipes
-            </Link>
-        <Link
-          href="/dashboard/production"
-          className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-        >
-          Production
-        </Link>
-                <Link
-                  href="/dashboard/production/batch-overview"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Batch Overview
+                  Recipes
                 </Link>
                 <Link
-                  href="/dashboard/production/interactive-distillation"
+                  href="/dashboard/barrels"
                   className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
-                  Interactive Panel
-                </Link>
-                <Link
-                  href="/dashboard/production/daily-details"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Daily Details
-                </Link>
-                <Link
-                  href="/dashboard/production/start-batch"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Start Batch
-                </Link>
-                <Link
-                  href="/dashboard/production/bottling"
-                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                >
-                  Bottling Run
+                  Barrels
                 </Link>
                 <Link
                   href="/dashboard/calendar"

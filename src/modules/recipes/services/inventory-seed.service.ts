@@ -13,10 +13,12 @@ export class InventorySeedService {
       if (process.env.NODE_ENV === 'development') {
         organizationId = '00000000-0000-0000-0000-000000000001'
       } else {
-        const { data: profile } = await this.supabase
+        const { data: profileData } = await this.supabase
           .from('profiles')
           .select('organization_id')
           .single()
+
+        const profile = profileData as { organization_id: string | null } | null
 
         if (!profile?.organization_id) {
           throw new Error('User organization not found')
@@ -25,10 +27,12 @@ export class InventorySeedService {
       }
 
       // Get items that should exist
-      const { data: items } = await this.supabase
+      const { data: itemsData } = await this.supabase
         .from('items')
         .select('id, name')
         .eq('organization_id', organizationId)
+
+      const items = (itemsData ?? []) as Array<{ id: string; name: string }>
 
       if (!items || items.length === 0) {
         throw new Error('No items found. Please seed items first.')
@@ -150,13 +154,15 @@ export class InventorySeedService {
         }
 
         // Check if lot already exists
-        const { data: existingLot } = await this.supabase
+        const { data: existingLotData } = await this.supabase
           .from('lots')
           .select('id')
           .eq('organization_id', organizationId)
           .eq('item_id', item.id)
-          .eq('lot_number', invData.lotNumber)
+          .eq('code', invData.lotNumber)
           .single()
+
+        const existingLot = existingLotData as { id: string } | null
 
         let lotId: string
 
@@ -164,17 +170,21 @@ export class InventorySeedService {
           lotId = existingLot.id
         } else {
           // Create new lot
+          const lotNoteParts = [invData.supplier, invData.notes]
+            .filter(Boolean)
+            .join(' – ')
+
           const lotData: LotInsert = {
             organization_id: organizationId,
             item_id: item.id,
-            lot_number: invData.lotNumber,
+            code: invData.lotNumber,
             received_date: invData.receivedDate,
-            supplier: invData.supplier,
-            cost_per_unit: invData.costPerUnit,
-            notes: invData.notes
+            note: lotNoteParts || null,
+            qty: invData.initialStock,
+            invoice_url: null
           }
 
-          const { data: newLot, error: lotError } = await this.supabase
+          const { data: newLotData, error: lotError } = await this.supabase
             .from('lots')
             .insert([lotData])
             .select('id')
@@ -185,19 +195,28 @@ export class InventorySeedService {
             continue
           }
 
+          const newLot = newLotData as { id: string } | null
+
+          if (!newLot) {
+            console.error(`Lot insert returned no data for ${invData.itemName}`)
+            continue
+          }
+
           lotId = newLot.id
           lotsCreated++
         }
 
         // Check if RECEIVE transaction already exists
-        const { data: existingTxn } = await this.supabase
+        const { data: existingTxnData } = await this.supabase
           .from('inventory_txns')
           .select('id')
           .eq('lot_id', lotId)
           .eq('txn_type', 'RECEIVE')
-          .eq('reference_type', 'initial_stock')
+          .eq('note', 'Initial stock receipt')
 
-        if (existingTxn && existingTxn.length > 0) {
+        const existingTxn = (existingTxnData ?? []) as Array<{ id: string }>
+
+        if (existingTxn.length > 0) {
           console.log(`RECEIVE transaction already exists for lot ${invData.lotNumber}`)
           continue
         }
@@ -210,8 +229,8 @@ export class InventorySeedService {
           txn_type: 'RECEIVE',
           quantity: invData.initialStock,
           uom: invData.uom,
-          reference_type: 'initial_stock',
-          notes: 'Initial stock receipt'
+          note: 'Initial stock receipt',
+          dt: invData.receivedDate ?? null
         }
 
         const { error: txnError } = await this.supabase

@@ -1,0 +1,1317 @@
+[
+  {
+    "spiritRunId": "SPIRIT-GIN-NS-018",
+    "sku": "Navy Strength Gin",
+    "description": "High-strength gin distilled on Carrie still with citrus and native botanicals. Steeped 14 hours, zero plates, 35A start.",
+    "date": "2025-03-04",
+    "boilerOn": "08:15 AM",
+    "stillUsed": "Carrie",
+    "chargeAdjustment": {
+      "components": [
+        {
+          "id": "e56ae53e-23e1-4643-a82d-3cdb788e968d",
+          "source": "Manildra NC96",
+          "volume_L": 500,
+          "abv_percent": 96,
+          "lal": 480,
+          "type": "ethanol",
+          "expected_percent": null
+        },
+        {
+          "id": "3efa5594-21e8-4ccc-acca-30a494251c32",
+          "source": "Filtered Water",
+          "volume_L": 500,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "dilution",
+          "expected_percent": null
+        },
+        {
+          "id": "e2537c58-5e2f-4990-b0df-186bee762985",
+          "source": "Saltwater",
+          "volume_L": 0,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "other",
+          "expected_percent": null
+        }
+      ],
+      "total": {
+        "volume_L": 1000,
+        "abv_percent": 50.3,
+        "lal": 503
+      }
+    },
+    "stillSetup": {
+      "elements": "35 A on at 8:15 AM",
+      "steeping": "14 hours (Juniper, Coriander)",
+      "plates": "Zero plates",
+      "options": null
+    },
+    "botanicals": [
+      {
+        "id": "ce8dd807-2051-4946-a7b1-ce20e00fe68b",
+        "name": "Juniper",
+        "notes": "Crushed / steeped",
+        "weight_g": 6400,
+        "ratio_percent": 63,
+        "status": null
+      },
+      {
+        "id": "ee3c7541-be8e-4dec-87a6-1fa34f877991",
+        "name": "Coriander",
+        "notes": "Steeped",
+        "weight_g": 1800,
+        "ratio_percent": 17.7,
+        "status": null
+      },
+      {
+        "id": "18491ad1-e8e2-4692-a3ab-dd4fbe2d11a7",
+        "name": "Angelica",
+        "notes": "",
+        "weight_g": 180,
+        "ratio_percent": 1.8,
+        "status": null
+      },
+      {
+        "id": "7caa8bce-6371-4f94-b1df-31f16d375f2f",
+        "name": "Orris Root",
+        "notes": "a",
+        "weight_g": 90,
+        "ratio_percent": 0.9,
+        "status": null
+      },
+      {
+        "id": "f75aeab1-750d-45a2-bdba-4a0287867fcb",
+        "name": "Orange",
+        "notes": "8 fresh naval orange rind",
+        "weight_g": 380,
+        "ratio_percent": 3.7,
+        "status": null
+      },
+      {
+        "id": "f5489b42-a73b-4b10-b5eb-e422fbfefd92",
+        "name": "Lemon",
+        "notes": "12 fresh lemon rind",
+        "weight_g": 380,
+        "ratio_percent": 3.7,
+        "status": null
+      },
+      {
+        "id": "6833782f-b3f9-4920-92a2-0057f0ad8ace",
+        "name": "Finger Lime",
+        "notes": "120 caviar scoops",
+        "weight_g": 380,
+        "ratio_percent": 3.7,
+        "status": null
+      },
+      {
+        "id": "eefe65a7-e704-4dff-a105-9a760445a655",
+        "name": "Macadamia",
+        "notes": "Sliced fresh macadamia",
+        "weight_g": 180,
+        "ratio_percent": 1.8,
+        "status": null
+      },
+      {
+        "id": "194f5052-378a-4499-a57b-944132847048",
+        "name": "Liquorice",
+        "notes": "Liquorice root",
+        "weight_g": 100,
+        "ratio_percent": 1,
+        "status": null
+      },
+      {
+        "id": "e6f3bd2f-10e5-49f8-8cb5-c6866d04e731",
+        "name": "Cardamon",
+        "notes": "a",
+        "weight_g": 180,
+        "ratio_percent": 1.8,
+        "status": null
+      },
+      {
+        "id": "8bb69fdd-1cb4-4c8b-84c4-a42caf9906f4",
+        "name": "Chamomile",
+        "notes": "a",
+        "weight_g": 90,
+        "ratio_percent": 0.9,
+        "status": null
+      }
+    ],
+    "totalBotanicals_g": 10160,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 20.2,
+    "runData": [
+      {
+        "id": "bb7f6152-ce96-49ad-9741-e4a975490a57",
+        "time": "11:15 AM",
+        "phase": "Foreshots",
+        "volume_L": 2,
+        "volume_percent": 0.4,
+        "vcTankVolume_L": null,
+        "abv_percent": 85,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": 35,
+        "lal": 1.7,
+        "observations": "35A",
+        "notes": null
+      },
+      {
+        "id": "75707a02-842c-4e81-bb90-44a1c660e0ab",
+        "time": "11:30 AM",
+        "phase": "Heads",
+        "volume_L": 10,
+        "volume_percent": 2,
+        "vcTankVolume_L": null,
+        "abv_percent": 84.8,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": 35,
+        "lal": 8.5,
+        "observations": "35A",
+        "notes": null
+      },
+      {
+        "id": "a3a64323-a1a6-440e-9869-81f9628f014a",
+        "time": "05:30 PM",
+        "phase": "Middle Run (Hearts) – Part 1",
+        "volume_L": 185,
+        "volume_percent": null,
+        "vcTankVolume_L": null,
+        "abv_percent": 83,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": null,
+        "observations": "Distilling at 30A",
+        "notes": null
+      },
+      {
+        "id": "ca1e809c-b55d-4ca8-83fc-6e97d5c2a30b",
+        "time": "06:30 AM (05/03/25)",
+        "phase": "Middle Run (Hearts) – Part 2",
+        "volume_L": 306,
+        "volume_percent": null,
+        "vcTankVolume_L": null,
+        "abv_percent": 82,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": null,
+        "observations": "Distilling at 30A, stopped at 79.9%",
+        "notes": null
+      },
+      {
+        "id": "e7aab927-005f-421b-874e-7071c5d81b6c",
+        "time": null,
+        "phase": "Tails",
+        "volume_L": 220,
+        "volume_percent": null,
+        "vcTankVolume_L": null,
+        "abv_percent": 81,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": null,
+        "observations": "Kept aside for vodka redistillation",
+        "notes": null
+      }
+    ],
+    "totalRun": {
+      "volume_L": 538,
+      "volume_percent": null,
+      "abv_percent": 82,
+      "lal": 503,
+      "notes": "Total recovered 538 L @ ~82% ABV across two-day run. 220 L tails set aside for vodka."
+    },
+    "output": [
+      {
+        "id": "a2ab1305-a39f-4264-a60f-ca187427a9c8",
+        "phase": "Foreshots",
+        "output": "Discarded",
+        "volume_L": 2,
+        "volume_percent": 0.4,
+        "abv_percent": 85,
+        "lal": 1.7,
+        "receivingVessel": "20L Waste"
+      },
+      {
+        "id": "95e42437-1988-4bb6-bc24-675402c4cf2a",
+        "phase": "Heads",
+        "output": "Feints",
+        "volume_L": 10,
+        "volume_percent": 2,
+        "abv_percent": 84.8,
+        "lal": 8.5,
+        "receivingVessel": "FEINTS-GIN-MIX IBC-01"
+      },
+      {
+        "id": "889fcdf6-9ddf-4dd7-8607-184f64cf33bd",
+        "phase": "Hearts",
+        "output": "Navy Strength Gin",
+        "volume_L": 306,
+        "volume_percent": null,
+        "abv_percent": 82,
+        "lal": null,
+        "receivingVessel": "VC-230"
+      },
+      {
+        "id": "5842637c-8802-4673-9757-4fdb89670666",
+        "phase": "Tails",
+        "output": "FEINTS-GIN-MIX IBC-01",
+        "volume_L": 220,
+        "volume_percent": null,
+        "abv_percent": 81,
+        "lal": null,
+        "receivingVessel": "FEINTS-GIN-MIX IBC-01"
+      }
+    ],
+    "dilutions": [
+      {
+        "id": "4affbadf-92d0-451d-8563-e00bfc8c0999",
+        "number": 1,
+        "date": "2025-03-07",
+        "newMake_L": 306,
+        "filteredWater_L": 119,
+        "ethanolAdded": null,
+        "newVolume_L": 425,
+        "abv_percent": 59.1,
+        "lal": null,
+        "finalAbv_percent": null,
+        "notes": "First dilution to 59.1% ABV."
+      }
+    ],
+    "finalOutput": {
+      "totalVolume_L": 425,
+      "abv_percent": 59.1,
+      "lal": 251.2,
+      "notes": "Final Navy Strength Gin blend at 59.1% ABV."
+    },
+    "notes": "Two-day Navy Strength Gin run with 14-hour steeping. Main hearts collected at 82% ABV, diluted to 59.1% for bottling. 220 L tails kept for vodka re-distillation."
+  },
+  {
+    "spiritRunId": "SPIRIT-GIN-DRY-2024",
+    "sku": "Oaks Kitchen Gin – Dry Season",
+    "description": "Seasonal gin collaboration distilled on Carrie still with Thai botanicals and local citrus. Steeped overnight, single run.",
+    "date": "2024-12-02",
+    "boilerStartTime": "08:00 AM",
+    "boilerOn": "08:00 AM",
+    "stillUsed": "Carrie",
+    "chargeAdjustment": {
+      "components": [
+        {
+          "id": "e587c01c-52ea-4e5d-a1f0-d47c02d0e6bc",
+          "source": "Manildra NC96",
+          "volume_L": 1000,
+          "abv_percent": 50,
+          "lal": 500,
+          "type": "ethanol",
+          "expected_percent": null
+        },
+        {
+          "id": "685d9fb8-5b81-4862-b16f-71741bcd29a4",
+          "source": "Filtered Water",
+          "volume_L": 0,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "dilution",
+          "expected_percent": null
+        },
+        {
+          "id": "6b6e6903-cec5-4ab2-98f3-96927902de1c",
+          "source": "Saltwater",
+          "volume_L": 0,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "other",
+          "expected_percent": null
+        }
+      ],
+      "total": {
+        "volume_L": 1000,
+        "abv_percent": 50,
+        "lal": 500
+      }
+    },
+    "stillSetup": {
+      "elements": "2 heating elements; no preheat day before",
+      "steeping": "None recorded",
+      "plates": "None",
+      "options": "Standard run"
+    },
+    "botanicals": [
+      {
+        "id": "af937e00-bbac-4816-bae5-ec0c221bd799",
+        "name": "Juniper berries",
+        "notes": "",
+        "weight_g": 6250,
+        "ratio_percent": 41.9,
+        "status": "ok"
+      },
+      {
+        "id": "027855fa-f331-4ddc-9207-835d392d78f6",
+        "name": "Coriander seed",
+        "notes": "",
+        "weight_g": 625,
+        "ratio_percent": 4.2,
+        "status": "ok"
+      },
+      {
+        "id": "97d0c425-61d3-4450-9274-195aced7ad00",
+        "name": "Angelica",
+        "notes": "",
+        "weight_g": 167,
+        "ratio_percent": 1.1,
+        "status": "ok"
+      },
+      {
+        "id": "c3d7739a-4999-4fa5-bccc-4f0e9e323ee2",
+        "name": "Cardamon",
+        "notes": "",
+        "weight_g": 83,
+        "ratio_percent": 0.6,
+        "status": "ok"
+      },
+      {
+        "id": "e91e1186-8c0e-4932-83f5-5ef0c129f593",
+        "name": "Lemongrass",
+        "notes": "",
+        "weight_g": 1167,
+        "ratio_percent": 7.8,
+        "status": "ok"
+      },
+      {
+        "id": "57be2aa7-7104-42a1-b525-90cb55bf0955",
+        "name": "Mandarin",
+        "notes": "Whole fruit",
+        "weight_g": 1667,
+        "ratio_percent": 11.2,
+        "status": "ok"
+      },
+      {
+        "id": "28f6b1a7-3566-4c1b-b0ef-711071232517",
+        "name": "Mandarin skin",
+        "notes": "",
+        "weight_g": 1200,
+        "ratio_percent": 8,
+        "status": "ok"
+      },
+      {
+        "id": "5de06336-5e31-4ac6-89cb-0488a89e8386",
+        "name": "Turmeric",
+        "notes": "Fresh",
+        "weight_g": 500,
+        "ratio_percent": 3.3,
+        "status": "ok"
+      },
+      {
+        "id": "740b9c64-a6cb-4a44-9f66-ff7c35aaf51c",
+        "name": "Rosella flower",
+        "notes": "Dried petals",
+        "weight_g": 1667,
+        "ratio_percent": 11.2,
+        "status": "ok"
+      },
+      {
+        "id": "0fe82b31-067c-4843-8ffb-11ee9ace78eb",
+        "name": "Holy basil",
+        "notes": "",
+        "weight_g": 167,
+        "ratio_percent": 1.1,
+        "status": "ok"
+      },
+      {
+        "id": "783867e0-1414-4c69-bb2f-ac28a1cd8006",
+        "name": "Thai basil",
+        "notes": "",
+        "weight_g": 1000,
+        "ratio_percent": 6.7,
+        "status": "ok"
+      },
+      {
+        "id": "0d10e26a-128c-4523-87b9-122e4a2b318b",
+        "name": "Kaffir lime leaf",
+        "notes": "Fresh leaves",
+        "weight_g": 333,
+        "ratio_percent": 2.2,
+        "status": "ok"
+      }
+    ],
+    "totalBotanicals_g": 14933,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 29.9,
+    "runData": [
+      {
+        "time": "10:55 AM",
+        "phase": "Foreshots",
+        "volume_L": 2,
+        "abv_percent": 87,
+        "lal": 1.7,
+        "observations": "Discarded"
+      },
+      {
+        "time": "11:15 AM",
+        "phase": "Heads",
+        "volume_L": 12,
+        "abv_percent": 81.6,
+        "lal": 9.8,
+        "observations": "Feints"
+      },
+      {
+        "time": "04:00 PM",
+        "phase": "Middle Run (Hearts) – Part 1",
+        "volume_L": 199,
+        "abv_percent": 81.4,
+        "lal": 162,
+        "observations": "Main hearts run"
+      },
+      {
+        "phase": "Middle Run (Hearts) – Adjustment",
+        "volume_L": 0,
+        "abv_percent": null,
+        "lal": null,
+        "observations": "Suggested to add 205 L water for next run"
+      },
+      {
+        "time": "07:00 AM (Next Day)",
+        "phase": "Tails",
+        "volume_L": 100,
+        "abv_percent": 78,
+        "lal": null,
+        "observations": "Kept for future distillations"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 313,
+      "abv_percent": 80,
+      "lal": 168,
+      "notes": "Foreshots, heads, hearts and tails combined. Late tails retained."
+    },
+    "output": [
+      {
+        "phase": "Foreshots",
+        "output": "Discarded",
+        "receivingVessel": "20 L Waste",
+        "volume_L": 2,
+        "volume_percent": null,
+        "abv_percent": 87,
+        "lal": 1.7
+      },
+      {
+        "phase": "Heads",
+        "output": "Feints",
+        "receivingVessel": "IBC-0x",
+        "volume_L": 12,
+        "volume_percent": null,
+        "abv_percent": 81.6,
+        "lal": 9.8
+      },
+      {
+        "phase": "Hearts",
+        "output": "Oaks Kitchen Dry Season Gin",
+        "receivingVessel": "VC-400",
+        "volume_L": 199,
+        "volume_percent": null,
+        "abv_percent": 81.4,
+        "lal": 162
+      },
+      {
+        "phase": "Tails",
+        "output": "Feints",
+        "receivingVessel": "IBC-0x",
+        "volume_L": 100,
+        "volume_percent": null,
+        "abv_percent": 78,
+        "lal": 0
+      }
+    ],
+    "dilutions": [
+      {
+        "id": "01722986-2d8a-4f8d-b3c5-0585730bc6f3",
+        "number": 1,
+        "date": "2025-01-05",
+        "newMake_L": 199,
+        "filteredWater_L": 20,
+        "ethanolAdded": null,
+        "newVolume_L": 219,
+        "abv_percent": 41.3,
+        "lal": null,
+        "finalAbv_percent": null,
+        "notes": "First dilution to bottling range"
+      },
+      {
+        "id": "cc25f33c-a193-4e4f-8df7-03fb6da0f919",
+        "number": 2,
+        "date": "2025-01-05",
+        "newMake_L": 219,
+        "filteredWater_L": 5,
+        "ethanolAdded": null,
+        "newVolume_L": 224,
+        "abv_percent": 40,
+        "lal": null,
+        "finalAbv_percent": null,
+        "notes": "Fine adjustment to final strength"
+      }
+    ],
+    "finalOutput": {
+      "totalVolume_L": 224,
+      "abv_percent": 40,
+      "lal": null,
+      "notes": "Final Dry Season Gin blend at 40% ABV."
+    },
+    "notes": "Oaks Kitchen Dry Season Gin distilled on Carrie still using tropical Thai botanicals. Balanced lemongrass, rosella, and citrus notes; tails kept for future runs."
+  },
+  {
+    "spiritRunId": "SPIRIT-GIN-OAKS-005-WS",
+    "sku": "Wet Season",
+    "description": "Wet Season Gin Oaks Kitchen 005",
+    "date": "2024-05-13",
+    "boilerStartTime": "06:10",
+    "boilerOn": "06:10",
+    "stillUsed": "Carrie",
+    "chargeAdjustment": {
+      "components": [
+        {
+          "id": "eb378cb4-bbaa-44af-b2b2-cee90f4e59c2",
+          "source": "Ethanol Manildra NC96",
+          "volume_L": 500,
+          "abv_percent": 50,
+          "lal": 250,
+          "type": "ethanol",
+          "expected_percent": null
+        },
+        {
+          "id": "40039d40-76a5-46b7-9009-99afe2769117",
+          "source": "Filtered Water",
+          "volume_L": 500,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "dilution",
+          "expected_percent": null
+        },
+        {
+          "id": "d0531410-fe13-42cc-9ed2-e178e12a7efb",
+          "source": "Saltwater",
+          "volume_L": 0,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "other",
+          "expected_percent": null
+        }
+      ],
+      "total": {
+        "volume_L": 1000,
+        "abv_percent": 25,
+        "lal": 250
+      }
+    },
+    "stillSetup": {
+      "elements": null,
+      "steeping": null,
+      "plates": null,
+      "options": null
+    },
+    "botanicals": [
+      {
+        "id": "3e574ef0-86a1-4ed8-8c0b-c4f7194d8350",
+        "name": "Juniper Crushed / steeped",
+        "notes": "ok",
+        "weight_g": 6250,
+        "ratio_percent": 62.6,
+        "status": "ok"
+      },
+      {
+        "id": "a1fe1ee6-11da-4512-8516-855032071b64",
+        "name": "Sawtooth Coriander Leaves - Steeped",
+        "notes": "",
+        "weight_g": 625,
+        "ratio_percent": 6.3,
+        "status": null
+      },
+      {
+        "id": "374a638e-8820-4711-a34a-2a87b3cf1987",
+        "name": "Angelica",
+        "notes": "ok",
+        "weight_g": 168,
+        "ratio_percent": 1.7,
+        "status": "ok"
+      },
+      {
+        "id": "621f5a96-2805-4e8f-bfc6-83cf2d66df95",
+        "name": "Holy Basil Leaves & Flowers",
+        "notes": "",
+        "weight_g": 252,
+        "ratio_percent": 2.5,
+        "status": null
+      },
+      {
+        "id": "69d2a843-d78c-4e0d-bc50-98c7bd8c7587",
+        "name": "Thai Sweet Basil Leaves only",
+        "notes": "",
+        "weight_g": 168,
+        "ratio_percent": 1.7,
+        "status": null
+      },
+      {
+        "id": "40f5a85c-484b-44de-824b-a19d561e5477",
+        "name": "Kaffir Fruit Rind",
+        "notes": "",
+        "weight_g": 832,
+        "ratio_percent": 8.3,
+        "status": null
+      },
+      {
+        "id": "7a5e6787-1a43-4710-9eeb-70d6de895325",
+        "name": "Kaffir Leaves",
+        "notes": "",
+        "weight_g": 500,
+        "ratio_percent": 5,
+        "status": null
+      },
+      {
+        "id": "7b46f35d-796a-4ed3-b01a-f78b91838ad3",
+        "name": "Thai Marigolds",
+        "notes": "",
+        "weight_g": 332,
+        "ratio_percent": 3.3,
+        "status": null
+      },
+      {
+        "id": "663b4235-928f-4c0b-b72f-87b07fac5c54",
+        "name": "Galangal Smashed",
+        "notes": "",
+        "weight_g": 332,
+        "ratio_percent": 3.3,
+        "status": null
+      },
+      {
+        "id": "bf1f774c-5f65-458a-bc6f-a47a3ba5992e",
+        "name": "Lemon Grass Bashed",
+        "notes": "",
+        "weight_g": 252,
+        "ratio_percent": 2.5,
+        "status": null
+      },
+      {
+        "id": "7c4d3e4b-b0f7-4b4f-91b9-113cf0da1ab9",
+        "name": "Liquorice Root",
+        "notes": "ok",
+        "weight_g": 84,
+        "ratio_percent": 0.8,
+        "status": "ok"
+      },
+      {
+        "id": "b8bb7a6c-a2ae-4492-a305-dfdf926f54b2",
+        "name": "Cardamom",
+        "notes": "ok",
+        "weight_g": 84,
+        "ratio_percent": 0.8,
+        "status": "ok"
+      },
+      {
+        "id": "a36278f8-720b-4ce6-9e39-bc4de1eabf7e",
+        "name": "Pandanas (Thai Vanilla)",
+        "notes": "",
+        "weight_g": 108,
+        "ratio_percent": 1.1,
+        "status": null
+      }
+    ],
+    "totalBotanicals_g": 9988,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 39.9,
+    "runData": [
+      {
+        "id": "2a25a7e8-7a73-43d2-8312-6c9924d8cef2",
+        "time": "09:20",
+        "phase": "Foreshots",
+        "volume_L": 2.5,
+        "volume_percent": 0,
+        "vcTankVolume_L": null,
+        "abv_percent": 86,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": 2.2,
+        "observations": "35A",
+        "notes": null
+      },
+      {
+        "id": "55bfeb17-edee-4b79-8159-12eff83b8664",
+        "time": "09:40",
+        "phase": "Heads",
+        "volume_L": 10,
+        "volume_percent": 0,
+        "vcTankVolume_L": null,
+        "abv_percent": 82,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": 8.2,
+        "observations": "33A",
+        "notes": null
+      },
+      {
+        "id": "eaf8718e-e43c-40a6-b79f-1a61899ab115",
+        "time": "16:00",
+        "phase": "Middle Run (Hearts) – Part 1",
+        "volume_L": 236,
+        "volume_percent": null,
+        "vcTankVolume_L": null,
+        "abv_percent": 80.9,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": 190.9,
+        "observations": "30A",
+        "notes": null
+      },
+      {
+        "id": "df66e5ab-0d26-4f8e-8bc9-5d0873830971",
+        "time": "07:00",
+        "phase": "Tails",
+        "volume_L": 226,
+        "volume_percent": null,
+        "vcTankVolume_L": null,
+        "abv_percent": 81,
+        "density": null,
+        "ambientTemp_C": null,
+        "headTemp_C": null,
+        "condenserTemp_C": null,
+        "lal": 0,
+        "observations": "Late tails — keep aside for future vodka",
+        "notes": null
+      }
+    ],
+    "totalRun": {
+      "volume_L": 474,
+      "volume_percent": 96,
+      "abv_percent": null,
+      "lal": 0,
+      "notes": "Sheet listed Total Run LAL as 0.0"
+    },
+    "output": [
+      {
+        "id": "93e824d8-73b3-471e-a7f4-c57d2292f688",
+        "phase": "Foreshots",
+        "output": "Discarded",
+        "receivingVessel": "Discarded 20L Waste",
+        "volume_L": 2,
+        "volume_percent": 0.8,
+        "abv_percent": 83,
+        "lal": null
+      },
+      {
+        "id": "37c41214-c093-4685-aba7-fea0c1aeb822",
+        "phase": "Heads",
+        "output": "Feints",
+        "receivingVessel": "FEINTS-GIN-MIX IBC-01",
+        "volume_L": 10,
+        "volume_percent": null,
+        "abv_percent": 83,
+        "lal": null
+      },
+      {
+        "id": "6460faf4-4b64-4fde-8e29-2537dba5c068",
+        "phase": "Hearts",
+        "output": "Wet Season Gin",
+        "receivingVessel": "GIN-NS-0018 VC-400",
+        "volume_L": 236,
+        "volume_percent": null,
+        "abv_percent": 80.9,
+        "lal": null
+      },
+      {
+        "id": "82a3d0bd-125d-4bc1-a7b1-5de3b4de4ef6",
+        "phase": "Tails",
+        "output": "Feints",
+        "receivingVessel": "FEINTS-GIN-MIX IBC-01",
+        "volume_L": 226,
+        "volume_percent": null,
+        "abv_percent": 81,
+        "lal": 0
+      }
+    ],
+    "dilutions": [
+      {
+        "id": "a5db9d73-9e8b-4293-a238-cd7b75ff8c78",
+        "number": 1,
+        "date": "2025-03-17",
+        "newMake_L": 236,
+        "filteredWater_L": 218,
+        "ethanolAdded": null,
+        "newVolume_L": 454,
+        "abv_percent": 42.8,
+        "lal": null,
+        "finalAbv_percent": null,
+        "notes": ""
+      },
+      {
+        "id": "417c3c31-de02-4a98-b270-e157b0f99f27",
+        "number": 2,
+        "date": "2025-03-17",
+        "newMake_L": 454,
+        "filteredWater_L": 2,
+        "ethanolAdded": null,
+        "newVolume_L": 456,
+        "abv_percent": 42,
+        "lal": null,
+        "finalAbv_percent": null,
+        "notes": ""
+      }
+    ],
+    "finalOutput": {
+      "totalVolume_L": 456,
+      "abv_percent": 42,
+      "lal": null,
+      "notes": "Final Wet Season Gin blend at 42% ABV."
+    },
+    "notes": "Wet Season Gin Oaks Kitchen 005 distilled on Carrie still. Late tails kept for future vodka."
+  },
+  {
+    "id": "SPIRIT-GIN-RF-28",
+    "sku": "Rainforest Gin",
+    "description": "Rainforest Gin 028 distilled on Carrie still with 18-hour steep of juniper and coriander.",
+    "date": "2024-10-09",
+    "still": "Carrie",
+    "boilerOn": "07:30",
+    "chargeVolumeL": 1000,
+    "chargeABV": 51,
+    "chargeLAL": 510,
+    "powerA": 33,
+    "elementsKW": 32,
+    "steepingHours": 18,
+    "charge": {
+      "components": [
+        {
+          "source": "Ethanol Manildra NC96",
+          "volume_L": 0,
+          "abv_percent": 47,
+          "lal": null,
+          "type": "ethanol"
+        },
+        {
+          "source": "Filtered Water",
+          "volume_L": 0,
+          "abv_percent": 53,
+          "lal": null,
+          "type": "dilution"
+        },
+        {
+          "source": "Saltwater",
+          "volume_L": 0,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "other"
+        }
+      ],
+      "total": {
+        "volume_L": 1000,
+        "abv_percent": 51,
+        "lal": 510
+      }
+    },
+    "stillSetup": {
+      "elements": null,
+      "steeping": "18 hours (Juniper, Coriander)",
+      "plates": null,
+      "options": null
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weightG": 6360,
+        "notes": "",
+        "ratio_percent": 68.05050288893645
+      },
+      {
+        "name": "Coriander",
+        "weightG": 1410,
+        "notes": "",
+        "ratio_percent": 15.086668093301947
+      },
+      {
+        "name": "Angelica",
+        "weightG": 175,
+        "notes": "",
+        "ratio_percent": 1.87245880590627
+      },
+      {
+        "name": "Cassia",
+        "weightG": 25,
+        "notes": "",
+        "ratio_percent": 0.26749411512946714
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weightG": 141,
+        "notes": "",
+        "ratio_percent": 1.5086668093301947
+      },
+      {
+        "name": "Lemon Aspen",
+        "weightG": 71,
+        "notes": "TAILS",
+        "ratio_percent": 0.7596832869676867
+      },
+      {
+        "name": "Grapefruit",
+        "weightG": 567,
+        "notes": "",
+        "ratio_percent": 6.066766531136316
+      },
+      {
+        "name": "Macadamia",
+        "weightG": 102,
+        "notes": "",
+        "ratio_percent": 1.091375989728226
+      },
+      {
+        "name": "Liquorice",
+        "weightG": 51,
+        "notes": "",
+        "ratio_percent": 0.545687994864113
+      },
+      {
+        "name": "Cardamom",
+        "weightG": 141,
+        "notes": "",
+        "ratio_percent": 1.5086668093301947
+      },
+      {
+        "name": "Pepperberry",
+        "weightG": 102,
+        "notes": "",
+        "ratio_percent": 1.091375989728226
+      },
+      {
+        "name": "Vanilla",
+        "weightG": 25,
+        "notes": "",
+        "ratio_percent": 0.26749411512946714
+      },
+      {
+        "name": "Mango",
+        "weightG": 176,
+        "notes": "",
+        "ratio_percent": 1.8831585705114489
+      }
+    ],
+    "totalBotanicals_g": 9346,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 18.3,
+    "runData": [
+      {
+        "time": "09:15",
+        "phase": "Foreshots",
+        "volume_L": 2,
+        "abv_percent": 86,
+        "lal": null,
+        "observations": "45A to warm up"
+      },
+      {
+        "time": "09:40",
+        "phase": "Heads",
+        "volume_L": 13,
+        "abv_percent": 83.5,
+        "lal": null,
+        "observations": "33A"
+      },
+      {
+        "time": "18:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_L": 346,
+        "abv_percent": 82.3,
+        "lal": 21,
+        "observations": "amps 33A"
+      },
+      {
+        "phase": "Tails",
+        "volume_L": 169.7,
+        "abv_percent": 75.5,
+        "lal": null,
+        "observations": "To be used for something else"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 530.7,
+      "abv_percent": null,
+      "lal": 21,
+      "notes": "Total run LAL recorded as 21.0."
+    },
+    "outputs": [
+      {
+        "name": "Foreshots",
+        "volumeL": 2,
+        "abv": 86,
+        "lal": 1.72,
+        "vessel": "Discarded Bucket",
+        "observations": "Discarded"
+      },
+      {
+        "name": "Heads",
+        "volumeL": 13,
+        "abv": 83.5,
+        "lal": 10.855,
+        "vessel": "FEINTS-GIN-01 IBC-02",
+        "observations": "Feints"
+      },
+      {
+        "name": "Hearts",
+        "volumeL": 346,
+        "abv": 82.3,
+        "lal": 284.758,
+        "vessel": "GIN-RF-0028 VC-400",
+        "observations": "Rainforest Gin"
+      },
+      {
+        "name": "Tails",
+        "volumeL": 169.7,
+        "abv": 75.5,
+        "lal": 128.12349999999998,
+        "vessel": "FEINTS-GIN-01 IBC-02",
+        "observations": "Feints"
+      }
+    ],
+    "dilutions": [],
+    "finalOutput": {
+      "totalVolume_L": 346,
+      "lal": 21,
+      "finalAbv_percent": 82.3,
+      "notes": "Hearts captured for Rainforest Gin 028."
+    },
+    "notes": "Rainforest Gin 028 distilled on Carrie still with staged cuts and 18-hour botanical steep.",
+    "lalOut": 425.45649999999995,
+    "lalEfficiency": 83.42284313725489,
+    "costs": {
+      "electricityAUD": 66.1183008552,
+      "waterAUD": 19.332,
+      "ethanolAUD": 1328.125,
+      "botanicalAUD": 323.53328999999997,
+      "totalAUD": 1737.1085908552,
+      "costPerLAL": 4.082928785563742
+    }
+  },
+  {
+    "id": "SPIRIT-GIN-SD-0019",
+    "sku": "Signature Dry Gin New Recipe Trial",
+    "description": "Signature Dry Gin Trial 019",
+    "date": "2024-10-29",
+    "still": "Carrie",
+    "boilerOn": "06:00",
+    "chargeVolumeL": 700,
+    "chargeABV": 42.5,
+    "chargeLAL": 297.5,
+    "powerA": 35,
+    "elementsKW": 32,
+    "steepingHours": 18,
+    "charge": {
+      "components": [
+        {
+          "source": "Ethanol Manildra NC96",
+          "volume_L": 700,
+          "abv_percent": 42.5,
+          "lal": 297.5,
+          "type": "ethanol"
+        },
+        {
+          "source": "Filtered Water",
+          "volume_L": 0,
+          "abv_percent": 0,
+          "lal": 0,
+          "type": "dilution"
+        },
+        {
+          "source": "Old batches of signature",
+          "volume_L": null,
+          "abv_percent": null,
+          "lal": 0,
+          "type": "other"
+        }
+      ],
+      "total": {
+        "volume_L": 700,
+        "abv_percent": 42.5,
+        "lal": 297.5
+      }
+    },
+    "stillSetup": {
+      "elements": "6 × 5750W",
+      "steeping": "18 hours (Juniper, Coriander)",
+      "plates": null,
+      "options": "3 × 5750W + 1 × 2200W; 2 × 5750W + 1 × 2200W"
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weightG": 4480,
+        "notes": "",
+        "ratio_percent": 63.42913776015857
+      },
+      {
+        "name": "Coriander",
+        "weightG": 1260,
+        "notes": "",
+        "ratio_percent": 17.839444995044598
+      },
+      {
+        "name": "Angelica",
+        "weightG": 126,
+        "notes": "#VALUE! na planilha",
+        "ratio_percent": 1.7839444995044598
+      },
+      {
+        "name": "Orris Root",
+        "weightG": 63,
+        "notes": "",
+        "ratio_percent": 0.8919722497522299
+      },
+      {
+        "name": "Orange peel",
+        "weightG": 392,
+        "notes": "",
+        "ratio_percent": 5.550049554013875
+      },
+      {
+        "name": "Lemon peel",
+        "weightG": 392,
+        "notes": "ADD 116 L H2O",
+        "ratio_percent": 5.550049554013875
+      },
+      {
+        "name": "Macadamia",
+        "weightG": 126,
+        "notes": "",
+        "ratio_percent": 1.7839444995044598
+      },
+      {
+        "name": "Liquorice",
+        "weightG": 70,
+        "notes": "",
+        "ratio_percent": 0.9910802775024776
+      },
+      {
+        "name": "Cardamon",
+        "weightG": 126,
+        "notes": "",
+        "ratio_percent": 1.7839444995044598
+      },
+      {
+        "name": "Lavender",
+        "weightG": 28,
+        "notes": "Put in basket last",
+        "ratio_percent": 0.39643211100099107
+      }
+    ],
+    "totalBotanicals_g": 7063,
+    "totalBotanicals_percent": 100,
+    "botanicalsPerLAL": 23.7,
+    "runData": [
+      {
+        "time": "08:40",
+        "phase": "Foreshots",
+        "volume_L": 1.4,
+        "abv_percent": 88,
+        "lal": 0,
+        "observations": "6 × 5750 W"
+      },
+      {
+        "time": "08:50",
+        "phase": "Heads",
+        "volume_L": 7,
+        "abv_percent": 84.5,
+        "lal": null,
+        "observations": "3 × 5750 W + 1 × 2200W"
+      },
+      {
+        "time": "12:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_L": 128,
+        "abv_percent": 81.1,
+        "lal": null,
+        "observations": "2 × 5750W + 1 × 2200W"
+      }
+    ],
+    "totalRun": {
+      "volume_L": 251.4,
+      "volume_percent": null,
+      "abv_percent": null,
+      "lal": null,
+      "notes": "Total Run (Heads/Hearts) mostra #REF!"
+    },
+    "outputs": [
+      {
+        "name": "Foreshots",
+        "volumeL": 1.4,
+        "abv": 0,
+        "lal": 0,
+        "vessel": "Discarded 20L Waste",
+        "observations": "Discarded"
+      },
+      {
+        "name": "Heads",
+        "volumeL": 7,
+        "abv": 0,
+        "lal": 0,
+        "vessel": "FEINTS-GIN-000x IBC-01",
+        "observations": "Feints"
+      },
+      {
+        "name": "Hearts",
+        "volumeL": 128,
+        "abv": 81.1,
+        "lal": 103.80799999999999,
+        "vessel": "GIN-SD-019 IBC-ENA-7",
+        "observations": "Signature Dry Gin"
+      },
+      {
+        "name": "Tails",
+        "volumeL": 0,
+        "abv": 0,
+        "lal": 0,
+        "vessel": "FEINTS-GIN-000x IBC-0x",
+        "observations": "No tails"
+      }
+    ],
+    "dilutions": [
+      {
+        "stepNo": 1,
+        "date": null,
+        "newMakeL": 128,
+        "waterL": 115,
+        "finalVolumeL": 243,
+        "finalABV": 42.8,
+        "notes": "x litres required overall 685"
+      },
+      {
+        "stepNo": 2,
+        "date": null,
+        "newMakeL": 243,
+        "waterL": 1,
+        "finalVolumeL": 244,
+        "finalABV": 42.3,
+        "notes": ""
+      }
+    ],
+    "notes": "Signature Dry Gin Trial 019. Sheet final observation: 0",
+    "lalOut": 103.80799999999999,
+    "lalEfficiency": 34.893445378151256,
+    "costs": {
+      "electricityAUD": 70.125470604,
+      "waterAUD": 19.332,
+      "ethanolAUD": 774.7395833333335,
+      "botanicalAUD": 232.99486,
+      "totalAUD": 1097.1919139373335,
+      "costPerLAL": 10.569435052571416
+    }
+  }
+]

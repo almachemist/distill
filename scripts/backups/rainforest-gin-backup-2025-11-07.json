@@ -1,0 +1,121 @@
+{
+  "metadata": {
+    "backup_date": "2025-11-07T09:32:00+10:00",
+    "product": "Rainforest Gin",
+    "batches": ["SPIRIT-GIN-RF-28", "SPIRIT-GIN-RF-29"],
+    "notes": "Initial backup of Rainforest Gin data before import to Supabase"
+  },
+  "data": {
+    "gin_runs": [
+      {
+        "id": "rf-28-2024-10-09",
+        "batch_id": "SPIRIT-GIN-RF-28",
+        "product_name": "Rainforest Gin",
+        "product_type": "gin",
+        "sku": "RAIN-28",
+        "still_used": "Roberta",
+        "distillation_date": "2024-10-09",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 51.0,
+        "boiler_lal": 510.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6360},
+          {"name": "Coriander", "weight_g": 1410},
+          {"name": "Angelica", "weight_g": 175},
+          {"name": "Cassia", "weight_g": 25},
+          {"name": "Orris Root", "weight_g": 0},
+          {"name": "Orange", "weight_g": 50},
+          {"name": "Lemon", "weight_g": 3},
+          {"name": "Finger Lime", "weight_g": 0},
+          {"name": "Lemon Myrtle", "weight_g": 141},
+          {"name": "Lemon Aspen", "weight_g": 71},
+          {"name": "Grapefruit", "weight_g": 567},
+          {"name": "Macadamia", "weight_g": 102},
+          {"name": "Liquorice", "weight_g": 51},
+          {"name": "Cardamom", "weight_g": 141},
+          {"name": "Pepperberry", "weight_g": 102},
+          {"name": "Vanilla", "weight_g": 25},
+          {"name": "Mango", "weight_g": 176}
+        ],
+        "distillation": {
+          "start_time": "07:30",
+          "foreshots": {"time": "09:15", "volume_l": 2.0, "abv_percent": 86.0},
+          "heads": {"time": "09:40", "volume_l": 13.0, "abv_percent": 83.5},
+          "hearts": {"time": "18:45", "volume_l": 346.0, "abv_percent": 82.3, "lal": 118.9},
+          "tails": {"volume_l": 169.7, "abv_percent": 75.5},
+          "total_lal_collected": 530.7,
+          "heart_yield_percent": 41.7,
+          "duration_hours": 18,
+          "notes": "Run completed over 18 hours using Roberta still with 2 new plates. Foreshots discarded, heads and tails collected to Feints IBC."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2024-10-11", "start_volume_l": 346.0, "filtered_water_l": 274.0, "new_volume_l": 620.0},
+          {"stage": 2, "date": "2024-10-12", "start_volume_l": 670.0, "filtered_water_l": 50.0, "new_volume_l": 720.0},
+          {"stage": 3, "start_volume_l": 723.0, "filtered_water_l": 3.0, "new_volume_l": 726.0}
+        ],
+        "bottling": {
+          "final_volume_l": 726.0,
+          "final_abv_percent": 42.5,
+          "bottling_date": "2024-10-15",
+          "lal_filled": 324.0,
+          "bottles_700ml": 1037
+        },
+        "created_by": "Gabi",
+        "notes": "Rainforest Gin RF-28. First distillation after winter downtime; new still plates used. Diluted to 42.5% with total 324L water.",
+        "raw_log": "RF-28 | 09/10/2024 | Roberta 1000L 51% (510 LAL). Botanicals total 9346g (18.3 g/LAL). Foreshots 2L @86%, Heads 13L @83.5%, Hearts 346L @82.3%, Tails 169.7L @75.5%. Diluted to 42.5% with 324L water added across 3 stages. Final 726L batch."
+      },
+      {
+        "id": "rf-29-2025-01-20",
+        "batch_id": "SPIRIT-GIN-RF-29",
+        "product_name": "Rainforest Gin",
+        "product_type": "gin",
+        "sku": "RAIN-29",
+        "still_used": "Roberta",
+        "distillation_date": "2025-01-20",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 51.0,
+        "boiler_lal": 510.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6360},
+          {"name": "Coriander", "weight_g": 1410},
+          {"name": "Angelica", "weight_g": 175},
+          {"name": "Cassia", "weight_g": 25},
+          {"name": "Lemon Myrtle", "weight_g": 141},
+          {"name": "Lemon Aspen", "weight_g": 71},
+          {"name": "Grapefruit", "weight_g": 567},
+          {"name": "Macadamia", "weight_g": 102},
+          {"name": "Liquorice", "weight_g": 51},
+          {"name": "Cardamom", "weight_g": 141},
+          {"name": "Pepperberry", "weight_g": 102},
+          {"name": "Vanilla", "weight_g": 25},
+          {"name": "Mango", "weight_g": 176}
+        ],
+        "distillation": {
+          "start_time": "07:05",
+          "foreshots": {"time": "09:30", "volume_l": 2.0, "abv_percent": 86.0},
+          "heads": {"time": "09:45", "volume_l": 12.0, "abv_percent": 83.0},
+          "hearts": {"time": "17:00", "volume_l": 280.0, "abv_percent": 82.0, "lal": 96.2},
+          "tails": {"volume_l": 169.7, "abv_percent": 75.5},
+          "total_lal_collected": 449.7,
+          "heart_yield_percent": 41.7,
+          "duration_hours": 18,
+          "notes": "Roberta still, 18-hour run. Clear heads and tails separation. Hearts collected at 82%. Tails saved for Feints IBC."
+        },
+        "dilution": [
+          {"stage": 1, "start_volume_l": 280.0, "filtered_water_l": 248.0, "new_volume_l": 528.0, "abv_percent": 45.0},
+          {"stage": 2, "start_volume_l": 528.0, "filtered_water_l": 18.0, "new_volume_l": 546.0, "abv_percent": 42.0}
+        ],
+        "bottling": {
+          "final_volume_l": 546.0,
+          "final_abv_percent": 42.0,
+          "bottling_date": "2025-01-22",
+          "lal_filled": 229.3,
+          "bottles_700ml": 780
+        },
+        "created_by": "Gabi",
+        "notes": "Rainforest Gin RF-29, first 2025 run. Excellent citrus balance. Diluted to 42% ABV in two stages with 266L total water.",
+        "raw_log": "RF-29 | 20/01/2025 | Roberta 1000L 51% (510 LAL). Botanicals total 9346g (18.3 g/LAL). Foreshots 2L @86%, Heads 12L @83%, Hearts 280L @82%, Tails 169.7L @75.5%. Diluted to 42% with 266L water added. Final 546L batch."
+      }
+    ]
+  }
+}

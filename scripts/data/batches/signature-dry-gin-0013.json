@@ -1,0 +1,127 @@
+{
+  "recipe": "Signature Dry Gin",
+  "runs": [
+    {
+      "run_id": "SPIRIT-GIN-SD-013",
+      "sku": "Signature Dry Gin",
+      "date": "2022-04-05",
+      "boiler_start_time": "08:30",
+      "still_used": "CARRIE",
+      "charge": {
+        "ethanol_source": "Manildra NC96",
+        "ethanol_volume_L": 470,
+        "ethanol_abv_percent": 96.0,
+        "ethanol_LAL": 451.2,
+        "water_volume_L": 530,
+        "other_volume_L": 0,
+        "total_charge_L": 1000,
+        "charge_abv_percent": 45.2,
+        "total_LAL": 452.0
+      },
+      "still_setup": {
+        "elements": "5750W × 4",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Not specified",
+        "options": ""
+      },
+      "botanicals": [
+        { "name": "Juniper", "notes": "Crushed / steeped", "weight_g": 6400, "ratio_percent": 63.3 },
+        { "name": "Coriander", "notes": "Steeped", "weight_g": 1800, "ratio_percent": 17.8 },
+        { "name": "Angelica", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Cassia", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Orris Root", "weight_g": 90, "ratio_percent": 0.9 },
+        { "name": "Orange", "notes": "9 fresh navel oranges – rind", "weight_g": 560, "ratio_percent": 5.5 },
+        { "name": "Lemon", "notes": "12 large lemons – rind", "weight_g": 560, "ratio_percent": 5.5 },
+        { "name": "Finger Lime", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Lemon Myrtle", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Lemon Aspen", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Grapefruit", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Local Fruit", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Macadamia", "notes": "Sliced fresh macadamia", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Coconut", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Liquorise", "notes": "Liquorise root", "weight_g": 100, "ratio_percent": 1.0 },
+        { "name": "Cardamon", "weight_g": 180, "ratio_percent": 1.8 },
+        { "name": "Lavender", "notes": "Put in basket last", "weight_g": 60, "ratio_percent": 0.6 },
+        { "name": "Chamomile", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Elderflower", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Pepperberry", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Mint", "weight_g": 0, "ratio_percent": 0.0 },
+        { "name": "Vanilla", "weight_g": 0, "ratio_percent": 0.0 }
+      ],
+      "distillation_log": [
+        {
+          "phase": "Foreshots",
+          "volume_L": 0.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        },
+        {
+          "time": "10:00",
+          "phase": "Heads",
+          "volume_L": 12.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        },
+        {
+          "time": "16:30",
+          "phase": "Middle Run (Hearts)",
+          "volume_L": 220.0,
+          "abv_percent": null,
+          "LAL": null,
+          "observations": "TBW"
+        }
+      ],
+      "outputs": [
+        {
+          "phase": "Foreshots",
+          "destination": "Discarded (20L Waste)",
+          "volume_L": 0.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        },
+        {
+          "phase": "Heads",
+          "destination": "FEINTS-GIN-000x / IBC-0x",
+          "volume_L": 12.0,
+          "abv_percent": 0.0,
+          "LAL": 0.0
+        },
+        {
+          "phase": "Hearts",
+          "destination": "GIN-SD-013 / VC-317",
+          "volume_L": 220.0,
+          "abv_percent": null,
+          "LAL": null,
+          "notes": "Moved to IBC ENA-7 to be blended with batch 016"
+        },
+        {
+          "phase": "Tails",
+          "destination": "FEINTS-GIN-000x / IBC-0x",
+          "volume_L": 0.0,
+          "abv_percent": null,
+          "LAL": 0.0
+        }
+      ],
+      "run_totals": {
+        "total_collected_L": 232.0,
+        "hearts_percent_of_run": 94.8,
+        "total_LAL_out": null,
+        "botanicals_g_per_LAL": 22.4
+      },
+      "dilution_steps": [
+        {
+          "step": 1,
+          "date_added": null,
+          "new_make_L": 220.0,
+          "filtered_water_L": 100.0,
+          "new_volume_L": 320.0,
+          "notes": "x litres required overall"
+        }
+      ],
+      "combined_dilution": {
+        "steps": [],
+        "final_output_volume_L": 320.0
+      }
+    }
+  ]
+}

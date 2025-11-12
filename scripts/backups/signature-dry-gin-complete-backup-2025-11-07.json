@@ -1,0 +1,345 @@
+{
+  "metadata": {
+    "backup_date": "2025-11-07T09:35:00+10:00",
+    "product": "Signature Dry Gin (Complete Collection)",
+    "batches": [
+      "SPIRIT-GIN-SD-0015",
+      "SPIRIT-GIN-SD-0016",
+      "SPIRIT-GIN-SD-0017",
+      "SPIRIT-GIN-SD-0018",
+      "SPIRIT-GIN-SD-0019",
+      "SPIRIT-GIN-SD-0020"
+    ],
+    "notes": "Complete collection of Signature Dry Gin batches (SD-15 to SD-20) from 2022 to 2025"
+  },
+  "data": {
+    "gin_runs": [
+      {
+        "id": "sd-15-2022-06-29",
+        "batch_id": "SPIRIT-GIN-SD-0015",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-15",
+        "still_used": "Roberta",
+        "distillation_date": "2022-06-29",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 45.2,
+        "boiler_lal": 452.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "08:30",
+          "foreshots": {"time": "08:35", "volume_l": 2.0, "abv_percent": 84.7},
+          "heads": {"time": "08:45", "volume_l": 10.0, "abv_percent": 83.5},
+          "hearts": {
+            "time": "16:00",
+            "volume_l": 274.3,
+            "abv_percent": 81.7,
+            "lal": 223.8,
+            "notes": "Middle run collected steadily until 74.9°C condenser temperature; clean citrus balance."
+          },
+          "tails": {"volume_l": 0, "notes": "No tails kept; hearts cut complete."},
+          "total_lal_collected": 232.2,
+          "heart_yield_percent": 52.4,
+          "notes": "Classic Signature Dry profile. Full notes recorded manually in gin log."
+        },
+        "dilution": [
+          {"stage": 1, "new_make_l": 274.0, "filtered_water_l": 274.0, "new_volume_l": 548.0, "abv_percent": 42.0, "lal": 269.2}
+        ],
+        "bottling": {
+          "final_volume_l": 548.0,
+          "final_abv_percent": 42.0,
+          "bottling_date": "2022-06-30",
+          "lal_filled": 269.2,
+          "bottles_700ml": 783
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-15. Smooth and aromatic; juniper-forward with citrus and macadamia depth.",
+        "raw_log": "29/06/2022 | Roberta | 1000 L @ 45.2 % (452 LAL). Foreshots 2 L @ 84.7 %, Heads 10 L @ 83.5 %, Hearts 274.3 L @ 81.7 %. Diluted 1:1 with water → 42 %. Final 548 L."
+      },
+      {
+        "id": "sd-16-2022-11-01",
+        "batch_id": "SPIRIT-GIN-SD-0016",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-16",
+        "still_used": "Roberta",
+        "distillation_date": "2022-11-01",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 50.0,
+        "boiler_lal": 500.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "06:20",
+          "foreshots": {"time": "08:45", "volume_l": 2.0, "abv_percent": 82.1},
+          "heads": {"time": "08:55", "volume_l": 10.0, "abv_percent": 82.1},
+          "hearts": {
+            "time": "09:25–15:25",
+            "volume_l": 266.0,
+            "abv_percent": 81.1,
+            "lal": 220.1,
+            "notes": "Collected until 79.6 °C condenser. Robust citrus-spice aroma; balanced mid-cut."
+          },
+          "tails": {"volume_l": 0, "notes": "No tails retained."},
+          "total_lal_collected": 228.3,
+          "heart_yield_percent": 52.5,
+          "notes": "Run blended later with batch 013 for standardization."
+        },
+        "dilution": [
+          {"stage": 1, "new_make_l": 266.0, "filtered_water_l": 274.0, "new_volume_l": 540.0, "abv_percent": 42.0, "lal": 265.4}
+        ],
+        "bottling": {
+          "final_volume_l": 540.0,
+          "final_abv_percent": 42.0,
+          "bottling_date": "2022-11-02",
+          "lal_filled": 265.4,
+          "bottles_700ml": 771
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-16. Clean, crisp profile. Steeped 18 h. Balanced juniper and citrus.",
+        "raw_log": "01/11/2022 | Roberta | 1000 L @ 50 % (500 LAL). Foreshots 2 L @ 82 %, Heads 10 L @ 82 %, Hearts 266 L @ 81 %. Diluted + 274 L water → 42 %. Final 540 L."
+      },
+      {
+        "id": "sd-17-2023-08-15",
+        "batch_id": "SPIRIT-GIN-SD-0017",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-17",
+        "still_used": "Carrie",
+        "distillation_date": "2023-08-15",
+        "boiler_charge_l": 950,
+        "boiler_abv_percent": 58.0,
+        "boiler_lal": 551.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "07:00",
+          "foreshots": {"time": "08:40", "volume_l": 2.0, "abv_percent": 85.3},
+          "heads": {"time": "08:55", "volume_l": 10.0, "abv_percent": 83.5},
+          "hearts": {
+            "time": "10:10–15:45",
+            "volume_l": 282.4,
+            "abv_percent": 81.1,
+            "lal": 416.0,
+            "notes": "Collected progressively across six hours; condenser stable 26 °C. Strong citrus profile."
+          },
+          "tails": {"volume_l": 0, "notes": "No tails kept. Hearts cut ended at 80 °C ABV 77 %."},
+          "total_lal_collected": 416.0,
+          "heart_yield_percent": 50.0,
+          "notes": "Run blended with batch 013. Smooth and aromatic signature expression."
+        },
+        "dilution": [
+          {"stage": 1, "new_make_l": 282.0, "filtered_water_l": 274.0, "new_volume_l": 556.0, "abv_percent": 42.0, "lal": 461.4}
+        ],
+        "bottling": {
+          "final_volume_l": 556.0,
+          "final_abv_percent": 42.0,
+          "bottling_date": "2023-08-16",
+          "lal_filled": 461.4,
+          "bottles_700ml": 794
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-17. Steeped 18 h; balanced juniper, macadamia and citrus. Clean bright run.",
+        "raw_log": "15/08/2023 | Carrie | 950 L @ 58 % (551 LAL). Foreshots 2 L @ 85 %, Heads 10 L @ 83.5 %, Hearts 282 L @ 81 %. Diluted + 274 L water → 42 %. Final 556 L."
+      },
+      {
+        "id": "sd-18-2024-01-31",
+        "batch_id": "SPIRIT-GIN-SD-0018",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-18",
+        "still_used": "Carrie",
+        "distillation_date": "2024-01-31",
+        "boiler_charge_l": 1200,
+        "boiler_abv_percent": 48.0,
+        "boiler_lal": 576.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Cassia", "weight_g": 0},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Finger Lime", "weight_g": 0},
+          {"name": "Lemon Myrtle", "weight_g": 0},
+          {"name": "Lemon Aspen", "weight_g": 0},
+          {"name": "Grapefruit", "weight_g": 0},
+          {"name": "Local Fruit", "weight_g": 0},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 60}
+        ],
+        "distillation": {
+          "start_time": "06:00",
+          "foreshots": {"time": "08:20", "volume_l": 2.0, "abv_percent": 84.0},
+          "heads": {"time": "08:45", "volume_l": 10.0, "abv_percent": 83.1},
+          "hearts": {
+            "time": "09:15–15:20",
+            "volume_l": 940.9,
+            "abv_percent": 81.1,
+            "lal": 610.4,
+            "notes": "Collected sequentially from 82% to 77% ABV; strong citrus and spice balance."
+          },
+          "tails": {"volume_l": 0, "notes": "No tails kept; hearts cut stopped at 77.7% ABV."},
+          "total_lal_collected": 610.4,
+          "heart_yield_percent": 50.0,
+          "notes": "Blended with batch 013 post-run."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2024-02-18", "new_make_l": 258.0, "filtered_water_l": 236.0, "new_volume_l": 494.0, "abv_percent": 42.3, "lal": 209.0}
+        ],
+        "bottling": {
+          "final_volume_l": 494.0,
+          "final_abv_percent": 42.3,
+          "bottling_date": "2024-02-18",
+          "lal_filled": 209.0,
+          "bottles_700ml": 705
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-18. Excellent run, used 5x 5750W elements. Smooth citrus-forward hearts with subtle lavender finish.",
+        "raw_log": "31/01/2024 | Carrie | 1200L @ 48% (576 LAL). Foreshots 2L @84%, Heads 10L @83.1%, Hearts 940.9L @81.1%. Dilution: 258L new make + 236L water → 42.3%. Final 494L."
+      },
+      {
+        "id": "sd-19-2024-10-29",
+        "batch_id": "SPIRIT-GIN-SD-0019",
+        "product_name": "Signature Dry Gin – New Recipe Trial",
+        "product_type": "gin",
+        "sku": "SIG-19",
+        "still_used": "Carrie",
+        "distillation_date": "2024-10-29",
+        "boiler_charge_l": 700,
+        "boiler_abv_percent": 42.5,
+        "boiler_lal": 297.5,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 4480},
+          {"name": "Coriander", "weight_g": 1260},
+          {"name": "Angelica", "weight_g": 126},
+          {"name": "Orris Root", "weight_g": 63},
+          {"name": "Orange (navel rind)", "weight_g": 392},
+          {"name": "Lemon (large rind)", "weight_g": 392},
+          {"name": "Macadamia", "weight_g": 126},
+          {"name": "Liquorice", "weight_g": 70},
+          {"name": "Cardamom", "weight_g": 126},
+          {"name": "Lavender", "weight_g": 28}
+        ],
+        "distillation": {
+          "start_time": "06:00",
+          "foreshots": {"time": "08:40", "volume_l": 1.4, "abv_percent": 88.0},
+          "heads": {"time": "08:50", "volume_l": 7.0, "abv_percent": 84.5},
+          "hearts": {
+            "time": "12:15",
+            "volume_l": 128.0,
+            "abv_percent": 81.1,
+            "lal": 104.0,
+            "notes": "Middle run with balanced citrus and spice. Clear heads separation."
+          },
+          "tails": {"volume_l": 0, "notes": "Hearts cut at 77% ABV; tails not collected."},
+          "total_lal_collected": 104.0,
+          "heart_yield_percent": 53.6,
+          "notes": "Clean and bright distillation. Final 42.3% bottling achieved after 116L water addition."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2024-11-03", "new_make_l": 128.0, "filtered_water_l": 115.0, "new_volume_l": 243.0, "abv_percent": 42.8, "lal": 104.0},
+          {"stage": 2, "date": "2024-11-04", "new_make_l": 243.0, "filtered_water_l": 1.0, "new_volume_l": 244.0, "abv_percent": 42.3, "lal": 103.2}
+        ],
+        "bottling": {
+          "final_volume_l": 244.0,
+          "final_abv_percent": 42.3,
+          "bottling_date": "2024-11-04",
+          "lal_filled": 103.2,
+          "bottles_700ml": 348
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-19 trial batch. Adjusted citrus ratio. Smooth, macadamia body; 42.3% ABV bottling strength.",
+        "raw_log": "29/10/2024 | Carrie | 700L @42.5% (297.5 LAL). Foreshots 1.4L, Heads 7L @84.5%, Hearts 128L @81.1%. Dilution: 115L + 1L water. Final 244L @42.3%."
+      },
+      {
+        "id": "sd-20-2025-04-28",
+        "batch_id": "SPIRIT-GIN-SD-0020",
+        "product_name": "Signature Dry Gin",
+        "product_type": "gin",
+        "sku": "SIG-20",
+        "still_used": "Carrie",
+        "distillation_date": "2025-04-28",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 42.5,
+        "boiler_lal": 425.0,
+        "botanicals": [
+          {"name": "Juniper", "weight_g": 6400},
+          {"name": "Coriander", "weight_g": 1800},
+          {"name": "Angelica", "weight_g": 180},
+          {"name": "Orris Root", "weight_g": 90},
+          {"name": "Orange (navel rind)", "weight_g": 560},
+          {"name": "Lemon (large rind)", "weight_g": 560},
+          {"name": "Macadamia", "weight_g": 180},
+          {"name": "Liquorice", "weight_g": 100},
+          {"name": "Cardamom", "weight_g": 180},
+          {"name": "Lavender", "weight_g": 40}
+        ],
+        "distillation": {
+          "start_time": "06:00",
+          "foreshots": {"time": "09:00", "volume_l": 2.0, "abv_percent": 88.0},
+          "heads": {"time": "09:20", "volume_l": 10.0, "abv_percent": 84.5},
+          "hearts": {
+            "time": "17:20",
+            "volume_l": 310.0,
+            "abv_percent": 81.8,
+            "lal": 257.4,
+            "notes": "Collected with perfect balance, distilled until 69% ABV."
+          },
+          "tails": {"volume_l": 189.0, "abv_percent": 80.9},
+          "total_lal_collected": 257.4,
+          "heart_yield_percent": 32.7,
+          "notes": "Distillation steady at 30A; condenser temp stable 30°C."
+        },
+        "dilution": [
+          {"stage": 1, "date": "2025-04-18", "new_make_l": 310.0, "filtered_water_l": 262.0, "new_volume_l": 572.0, "abv_percent": 45.0, "lal": 257.4},
+          {"stage": 2, "date": "2025-04-19", "new_make_l": 572.0, "filtered_water_l": 31.0, "new_volume_l": 603.0, "abv_percent": 42.0, "lal": 253.3}
+        ],
+        "bottling": {
+          "final_volume_l": 603.0,
+          "final_abv_percent": 42.0,
+          "bottling_date": "2025-04-19",
+          "lal_filled": 253.3,
+          "bottles_700ml": 861
+        },
+        "created_by": "Gabi",
+        "notes": "Signature Dry Gin SD-20. Smooth 18-hour steeping; elegant citrus and floral profile; 42% final ABV.",
+        "raw_log": "28/04/2025 | Carrie | 1000L @42.5% (425 LAL). Foreshots 2L @88%, Heads 10L @84.5%, Hearts 310L @81.8%. Dilution: +262L +31L water → 42%. Final 603L @42%."
+      }
+    ]
+  }
+}

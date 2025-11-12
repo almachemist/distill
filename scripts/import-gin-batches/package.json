@@ -1,0 +1,19 @@
+{
+  "name": "import-gin-batches",
+  "version": "1.0.0",
+  "description": "Script to import gin batch data into Supabase",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.80.0",
+    "dotenv": "^16.6.1",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

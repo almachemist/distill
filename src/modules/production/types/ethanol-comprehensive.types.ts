@@ -211,7 +211,6 @@ export class EthanolCostCalculator {
    * Calculate cost per liter of bottled gin including all factors
    */
   static calculateBottledGinCosts(
-    batchId: string = "ena-133809",
     additionalCosts: {
       distillationEnergy: number
       distillationWater: number
@@ -318,7 +317,7 @@ export class EthanolCostCalculator {
       profitPerBottle: number
     }
   } {
-    const production = this.calculateBottledGinCosts("ena-133809", additionalCosts)
+    const production = this.calculateBottledGinCosts(additionalCosts)
     
     const grossProfitPerLiter = sellingPricePerLiter - production.finalProduct.costPerLiter
     const grossProfitTotal = grossProfitPerLiter * production.finalProduct.volumeL

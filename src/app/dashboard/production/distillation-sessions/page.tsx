@@ -3,7 +3,9 @@
 import { useState, useEffect } from 'react'
 import { DistillationSession, DistillationMetrics } from '@/modules/production/types/distillation-session.types'
 import { DistillationSessionCalculator } from '@/modules/production/services/distillation-session-calculator.service'
-import { merchantMaeGinDistillation, rainforestGinDistillation, signatureDryGinDistillation } from '@/modules/production/sessions/merchant-mae-gin-distillation.session'
+import { merchantMaeGinDistillation } from '@/modules/production/sessions/merchant-mae-gin-distillation.session'
+import { vodka003Distillation } from '@/modules/production/sessions/vodka-003-distillation.session'
+import { rainforestGinRF30 } from '@/modules/production/sessions/rainforest-gin-rf30-distillation.session'
 
 export default function DistillationSessionManagementPage() {
   const [loading, setLoading] = useState(true)

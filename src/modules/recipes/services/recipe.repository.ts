@@ -20,73 +20,39 @@ export class RecipeRepository {
    */
   async fetchRecipes(): Promise<Recipe[]> {
     try {
-      // In development mode, use mock organization ID
-      let organizationId = '00000000-0000-0000-0000-000000000001'
-      
-      if (process.env.NODE_ENV !== 'development') {
-        // Get the user's organization ID in production
+      // Development: force dev organization to match seeded data; Production: use user's organization
+      let organizationId: string
+      if (process.env.NODE_ENV === 'development') {
+        organizationId = '00000000-0000-0000-0000-000000000001'
+      } else {
         const { data: { user } } = await this.supabase.auth.getUser()
         if (!user) {
           throw new Error('User not authenticated')
         }
-
         const { data: profile } = await this.supabase
           .from('profiles')
           .select('organization_id')
           .eq('id', user.id)
           .single()
-
         if (!profile?.organization_id) {
           throw new Error('User has no organization')
         }
-        
         organizationId = profile.organization_id
       }
-      
-      console.log('Attempting to fetch recipes with organizationId:', organizationId)
-      
-      // First test if we can connect to the database at all
-      try {
-        const testQuery = await this.supabase
-          .from('recipes')
-          .select('count', { count: 'exact', head: true })
-        console.log('Database connection test result:', testQuery)
-      } catch (testError) {
-        console.error('Database connection test failed:', testError)
-      }
-      
+
       const { data, error } = await this.supabase
         .from('recipes')
         .select('*')
         .eq('organization_id', organizationId)
         .order('name')
 
-      console.log('Query result - data:', data, 'error:', error)
-
       if (error) {
-        console.error('Database error in fetchRecipes:', error)
-        console.error('Error details:', JSON.stringify(error, null, 2))
-        
-        // In development mode, return empty array instead of throwing if it's a connection issue
-        if (process.env.NODE_ENV === 'development' && (!error.message || error.message === '')) {
-          console.warn('Database seems unavailable in development, returning empty array')
-          return []
-        }
-        
         throw new Error(`Failed to fetch recipes: ${error.message || 'Unknown database error'}`)
       }
 
-      console.log('Successfully loaded recipes:', data)
       return data || []
     } catch (err) {
-      console.error('Error in fetchRecipes:', err)
-      
-      // In development mode, provide a fallback
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('Falling back to empty recipes array in development mode')
-        return []
-      }
-      
+      // Surface errors so UI can display them, even in development
       throw err
     }
   }
@@ -95,14 +61,19 @@ export class RecipeRepository {
    * Get a single recipe with all its ingredients
    */
   async fetchRecipeWithIngredients(recipeId: string): Promise<RecipeWithIngredients | null> {
-    // Get organization ID
+    // Development: force dev organization; Production: use user's organization
     let organizationId: string
     if (process.env.NODE_ENV === 'development') {
       organizationId = '00000000-0000-0000-0000-000000000001'
     } else {
+      const { data: { user } } = await this.supabase.auth.getUser()
+      if (!user) {
+        throw new Error('User not authenticated')
+      }
       const { data: profile } = await this.supabase
         .from('profiles')
         .select('organization_id')
+        .eq('id', user.id)
         .single()
       if (!profile?.organization_id) {
         throw new Error('User organization not found')
@@ -141,6 +112,7 @@ export class RecipeRepository {
         items!inner (
           id,
           name,
+          category,
           default_uom,
           is_alcohol,
           abv_pct
