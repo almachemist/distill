@@ -1,0 +1,148 @@
+{
+  "analysis_date": "2025-11-13",
+  "source": "Devil's Thumb Distillery Excisable Product Summary (1 July 2024 to 30 June 2025)",
+  "methodology": "Sum of Wholesale + Cellar Door stock movements on same dates, averaged across multiple bottling runs",
+  
+  "bottling_capacity": {
+    "Signature_700": {
+      "bottles_per_batch": 880,
+      "calculation": "Average of: (700+180=880 on 6 Oct 2025), (200+80=280 on 1 Jun 2025), (310 on 20 Nov 2024)",
+      "batches_analyzed": 3,
+      "distillation_dates": ["2025-04-28", "2024-10-29"],
+      "confidence": "HIGH"
+    },
+    "Signature_200": {
+      "bottles_per_batch": 223,
+      "calculation": "Average of: (100+123=223 on 1 Jun 2025), (170 on 20 Nov 2024)",
+      "batches_analyzed": 2,
+      "confidence": "MEDIUM"
+    },
+    "Rainforest_700": {
+      "bottles_per_batch": 658,
+      "calculation": "Average of: (508+150=658 on 11 Feb 2025), (200+185=385 on 1 Jun 2025)",
+      "batches_analyzed": 2,
+      "distillation_dates": ["2025-07-29", "2025-01-20", "2024-10-09"],
+      "confidence": "HIGH"
+    },
+    "Rainforest_200": {
+      "bottles_per_batch": 316,
+      "calculation": "216+100=316 on 28 Jan 2025",
+      "batches_analyzed": 1,
+      "confidence": "MEDIUM"
+    },
+    "Wet_Season_700": {
+      "bottles_per_batch": 650,
+      "calculation": "Average of: (500+150=650 on 27 Jun 2025), (100+160=260 on 1 Jun 2025)",
+      "batches_analyzed": 2,
+      "distillation_dates": ["2025-05-13"],
+      "confidence": "HIGH"
+    },
+    "Dry_Season_700": {
+      "bottles_per_batch": 576,
+      "calculation": "Average of: (476+100=576 on 14 May 2025), (10+10=20 on 31 Jan 2025), (19 on 5 Dec 2024), (20 on 25 Nov 2024)",
+      "batches_analyzed": 4,
+      "distillation_dates": ["2024-12-02"],
+      "confidence": "HIGH"
+    },
+    "Navy_700": {
+      "bottles_per_batch": 595,
+      "calculation": "Average of: (495+100=595 on 7 Apr 2025), (167+100=267 on 1 Jun 2025)",
+      "batches_analyzed": 2,
+      "distillation_dates": ["2025-03-04"],
+      "confidence": "HIGH"
+    },
+    "Navy_200": {
+      "bottles_per_batch": 100,
+      "calculation": "50+50=100 on 1 Jun 2025",
+      "batches_analyzed": 1,
+      "confidence": "LOW"
+    },
+    "Merchant_Mae_Gin": {
+      "bottles_per_batch": 797,
+      "calculation": "Average of: (899+100=999 on 17 Apr 2025), (408 on 1 Jun 2025), (695 on 12 Nov 2024), (86+400=486 on 16 Aug 2024)",
+      "batches_analyzed": 4,
+      "distillation_dates": ["2025-03-13", "2024-12-01"],
+      "confidence": "HIGH"
+    },
+    "Pineapple_700": {
+      "bottles_per_batch": 252,
+      "calculation": "Average of: (200+52=252 on 29 Jul 2025), (144+54=198 on 18 Feb 2025), (100+50=150 on 1 Jun 2025), (133 on 5 Sep 2024)",
+      "batches_analyzed": 4,
+      "batch_volumes": ["96L on 28 Aug 2024", "151L on 22 Nov 2024", "148L on 7 Jan 2025", "305L on 24 Jun 2025"],
+      "confidence": "HIGH"
+    },
+    "Pineapple_200": {
+      "bottles_per_batch": 0,
+      "calculation": "No data available",
+      "batches_analyzed": 0,
+      "confidence": "NONE - ESTIMATE NEEDED"
+    },
+    "Spiced_700": {
+      "bottles_per_batch": 255,
+      "calculation": "Average of: (200+55=255 on 15 Jul 2025), (100+67=167 on 20 Jan 2025), (10 on 1 Jun 2025), (94 on 16 Sep 2024), (24 on 13 Sep 2024)",
+      "batches_analyzed": 5,
+      "batch_volumes": ["75L on 28 Aug 2024", "117L on 7 Jan 2025", "205L on 24 Jun 2025"],
+      "confidence": "HIGH"
+    },
+    "Spiced_200": {
+      "bottles_per_batch": 0,
+      "calculation": "No data available",
+      "batches_analyzed": 0,
+      "confidence": "NONE - ESTIMATE NEEDED"
+    },
+    "Merchant_Mae_White_Rum": {
+      "bottles_per_batch": 585,
+      "calculation": "Average of: (585 on 10 Jul 2025), (500+148=648 on 4 Mar 2025), (129+30=159 on 1 Jun 2025), (188 on 3 Dec 2024), (100+35=135 on 16 Aug 2024), (141 on 9 Aug 2024)",
+      "batches_analyzed": 6,
+      "distillation_dates": ["2024-08-01", "2025-03-29", "2025-07-01"],
+      "confidence": "HIGH"
+    },
+    "Merchant_Mae_Dark_Rum": {
+      "bottles_per_batch": 336,
+      "calculation": "Average of: (168+168=336 on 1 Jun 2025)",
+      "batches_analyzed": 1,
+      "distillation_dates": ["2024-08-01", "2025-04-02"],
+      "confidence": "MEDIUM"
+    },
+    "Cane_Spirit_700": {
+      "bottles_per_batch": 290,
+      "calculation": "Average of: (37+20=57 on 15 Oct 2024), (194 on 15 Nov 2024), (91+91=182 on 6 Jan 2025), (200+90=290 on 18 Feb 2025)",
+      "batches_analyzed": 4,
+      "distillation_dates": ["2024-10-01", "2024-10-02", "2024-11-12", "2024-11-15"],
+      "confidence": "HIGH"
+    },
+    "Cane_Spirit_200": {
+      "bottles_per_batch": 64,
+      "calculation": "Average of: (30+34=64 on 18 Feb 2025), (60+15=75 on 19 Sep 2024), (75 on 30 Jun 2024), (120+100=220 on 10 Jan 2024)",
+      "batches_analyzed": 4,
+      "confidence": "MEDIUM"
+    },
+    "Reserve_Rum_700": {
+      "bottles_per_batch": 226,
+      "calculation": "Average of: (12+180=192 on 6 Jan 2025), (92+100=192 on 6 Jan 2025), (226 on 15 Nov 2024), (226 on 8 Nov 2024)",
+      "batches_analyzed": 4,
+      "confidence": "HIGH"
+    },
+    "Reserve_Whisky_700": {
+      "bottles_per_batch": 95,
+      "calculation": "10+85=95 on 6 Jan 2025",
+      "batches_analyzed": 1,
+      "confidence": "LOW"
+    },
+    "Coffee_Liqueur_700": {
+      "bottles_per_batch": 0,
+      "calculation": "No data in provided document",
+      "batches_analyzed": 0,
+      "confidence": "NONE - ESTIMATE NEEDED"
+    }
+  },
+  
+  "notes": [
+    "All calculations sum Wholesale + Cellar Door stock movements on the same date",
+    "Averages calculated across multiple bottling runs where available",
+    "Products with only 1 batch analyzed have MEDIUM or LOW confidence",
+    "200ml variants for Pineapple, Spiced, and Coffee Liqueur need estimates",
+    "Merchant Mae products show high variability - may depend on batch size"
+  ]
+}
+

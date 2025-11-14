@@ -1,0 +1,305 @@
+{
+  "generated_at": "2025-11-13T02:18:21.241Z",
+  "summary": {
+    "total_products": 15,
+    "high_priority": 6,
+    "medium_priority": 0,
+    "low_priority": 0,
+    "sufficient_stock": 9,
+    "total_production_needed": 4156
+  },
+  "products": [
+    {
+      "product_name": "Rainforest 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 1627,
+      "total_sales_2025": 85342.90999999996,
+      "avg_monthly_sales": 147.9,
+      "sales_trend": "stable",
+      "current_stock": 347,
+      "stock_after_dec_sales": 118,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 0.8,
+      "recommended_production_2026": 1657,
+      "priority": "HIGH",
+      "notes": [
+        "⚠️ Low stock - urgent production needed",
+        "📈 High demand product",
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Merchant Mae White Rum Bottle",
+      "brand": "Merchant Mae",
+      "total_units_sold_2025": 1088,
+      "total_sales_2025": 39276.53999999999,
+      "avg_monthly_sales": 98.9,
+      "sales_trend": "stable",
+      "current_stock": 218,
+      "stock_after_dec_sales": 65,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 0.7,
+      "recommended_production_2026": 1122,
+      "priority": "HIGH",
+      "notes": [
+        "⚠️ Low stock - urgent production needed",
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Merchant Mae Dark Rum Bottle",
+      "brand": "Merchant Mae",
+      "total_units_sold_2025": 387,
+      "total_sales_2025": 13982.91,
+      "avg_monthly_sales": 35.2,
+      "sales_trend": "stable",
+      "current_stock": 112,
+      "stock_after_dec_sales": 58,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 1.6,
+      "recommended_production_2026": 364,
+      "priority": "HIGH",
+      "notes": [
+        "⚠️ Low stock - urgent production needed",
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Rainforest 200ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 533,
+      "total_sales_2025": 10575.880000000003,
+      "avg_monthly_sales": 48.5,
+      "sales_trend": "stable",
+      "current_stock": 130,
+      "stock_after_dec_sales": 55,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 1.1,
+      "recommended_production_2026": 526,
+      "priority": "HIGH",
+      "notes": [
+        "⚠️ Low stock - urgent production needed",
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Navy 200ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 68,
+      "total_sales_2025": 1652.4,
+      "avg_monthly_sales": 6.2,
+      "sales_trend": "stable",
+      "current_stock": 16,
+      "stock_after_dec_sales": 6,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 1,
+      "recommended_production_2026": 68,
+      "priority": "HIGH",
+      "notes": [
+        "⚠️ Low stock - urgent production needed",
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Cane Spirit 200ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 72,
+      "total_sales_2025": 1524.6599999999999,
+      "avg_monthly_sales": 6.5,
+      "sales_trend": "stable",
+      "current_stock": 18,
+      "stock_after_dec_sales": 8,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 1.2,
+      "recommended_production_2026": 71,
+      "priority": "HIGH",
+      "notes": [
+        "⚠️ Low stock - urgent production needed",
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Signature 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 580,
+      "total_sales_2025": 29823.789999999994,
+      "avg_monthly_sales": 52.7,
+      "sales_trend": "stable",
+      "current_stock": 587,
+      "stock_after_dec_sales": 505,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 9.6,
+      "recommended_production_2026": 128,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Navy 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 398,
+      "total_sales_2025": 26893.049999999992,
+      "avg_monthly_sales": 36.2,
+      "sales_trend": "stable",
+      "current_stock": 518,
+      "stock_after_dec_sales": 462,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 12.8,
+      "recommended_production_2026": 0,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Wet Season 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 298,
+      "total_sales_2025": 21585.67,
+      "avg_monthly_sales": 27.1,
+      "sales_trend": "stable",
+      "current_stock": 617,
+      "stock_after_dec_sales": 575,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 21.2,
+      "recommended_production_2026": 0,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Pineapple Rum 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 332,
+      "total_sales_2025": 18351.840000000004,
+      "avg_monthly_sales": 30.2,
+      "sales_trend": "stable",
+      "current_stock": 485,
+      "stock_after_dec_sales": 438,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 14.5,
+      "recommended_production_2026": 0,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Cane Spirit 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 264,
+      "total_sales_2025": 14778.189999999995,
+      "avg_monthly_sales": 24,
+      "sales_trend": "stable",
+      "current_stock": 230,
+      "stock_after_dec_sales": 193,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 8,
+      "recommended_production_2026": 95,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Spiced Rum 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 260,
+      "total_sales_2025": 14720.970000000008,
+      "avg_monthly_sales": 23.6,
+      "sales_trend": "stable",
+      "current_stock": 212,
+      "stock_after_dec_sales": 175,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 7.4,
+      "recommended_production_2026": 109,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Dry Season 700ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 106,
+      "total_sales_2025": 7353.84,
+      "avg_monthly_sales": 9.6,
+      "sales_trend": "stable",
+      "current_stock": 508,
+      "stock_after_dec_sales": 493,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 51.2,
+      "recommended_production_2026": 0,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Signature 200ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 108,
+      "total_sales_2025": 2076.8,
+      "avg_monthly_sales": 9.8,
+      "sales_trend": "stable",
+      "current_stock": 117,
+      "stock_after_dec_sales": 102,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 10.4,
+      "recommended_production_2026": 16,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    },
+    {
+      "product_name": "Pineapple Rum 200ml",
+      "brand": "Devils Thumb",
+      "total_units_sold_2025": 3,
+      "total_sales_2025": 76.9,
+      "avg_monthly_sales": 0.3,
+      "sales_trend": "stable",
+      "current_stock": 131,
+      "stock_after_dec_sales": 131,
+      "total_batches_produced": 0,
+      "total_bottles_produced": 0,
+      "avg_batch_size": 0,
+      "months_of_stock_remaining": 480.3,
+      "recommended_production_2026": 0,
+      "priority": "SUFFICIENT",
+      "notes": [
+        "🆕 No production history found"
+      ]
+    }
+  ]
+}

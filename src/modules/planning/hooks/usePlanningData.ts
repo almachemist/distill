@@ -1,7 +1,7 @@
 import pricingData from '@/../data/pricing_catalogue_2025.json'
-import salesData from '@/../data/sales_summary_2025.json'
+import salesAnalytics from '@/../data/sales_analytics_2025.json'
 import type { PricingCatalogueJson, PricingProductRecord } from '../types/pricing.types'
-import type { SalesCategoryMap, SalesItemSummary } from '../types/sales.types'
+import type { SalesItemSummary } from '../types/sales.types'
 
 export interface PlanningDataset {
   pricing: PricingProductRecord[]
@@ -12,7 +12,25 @@ export interface PlanningDataset {
 }
 
 const catalogue = pricingData as PricingCatalogueJson
-const salesMap = salesData as SalesCategoryMap
+
+interface SalesAnalytics {
+  summary: {
+    totalNetSales: number
+    totalUnits: number
+    totalSalesCount: number
+  }
+  byProduct: Array<{
+    item: string
+    totalUnits: number
+    totalNetSales: number
+    totalSalesCount: number
+    avgPrice: number
+  }>
+  byChannel: any[]
+  byCustomer: any[]
+  byMonth: any[]
+  crossAnalysis: any
+}
 
 const flattenPricing = (): PricingProductRecord[] => {
   const records: PricingProductRecord[] = []
@@ -37,23 +55,24 @@ const flattenPricing = (): PricingProductRecord[] => {
 
 const flattenSales = (): SalesItemSummary[] => {
   const items: SalesItemSummary[] = []
-  for (const [category, entries] of Object.entries(salesMap)) {
-    for (const entry of entries) {
-      items.push({
-        category,
-        item_name: entry.item_name,
-        item_variation: entry.item_variation ?? null,
-        sku: entry.sku ?? null,
-        items_sold: entry.items_sold ?? null,
-        product_sales: entry.product_sales ?? null,
-        refunds: entry.refunds ?? null,
-        discounts_and_comps: entry.discounts_and_comps ?? null,
-        net_sales: entry.net_sales ?? null,
-        tax: entry.tax ?? null,
-        gross_sales: entry.gross_sales ?? null,
-        units_sold: entry.units_sold ?? null
-      })
-    }
+  const analytics = salesAnalytics as SalesAnalytics
+
+  // Convert sales analytics data to the expected format
+  for (const product of analytics.byProduct) {
+    items.push({
+      category: 'Products', // Default category since analytics doesn't have categories
+      item_name: product.item,
+      item_variation: null,
+      sku: null,
+      items_sold: product.totalUnits,
+      product_sales: product.totalNetSales,
+      refunds: 0,
+      discounts_and_comps: 0,
+      net_sales: product.totalNetSales,
+      tax: 0,
+      gross_sales: product.totalNetSales,
+      units_sold: product.totalUnits
+    })
   }
   return items
 }

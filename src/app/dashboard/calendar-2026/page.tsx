@@ -2,9 +2,9 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { useState, useEffect } from 'react'
-import { EventModal } from '@/components/calendar/EventModal'
-import type { CalendarEvent, CalendarEventInput } from '@/types/calendar-event.types'
+import calendarData from '@/../data/production_calendar_2026_v4.json'
+import decemberData from '@/../data/production_calendar_december_2025.json'
+import { useState } from 'react'
 
 interface ProductionRun {
   product: string
@@ -37,144 +37,10 @@ interface CalendarData {
   calendar: WeekPlan[]
 }
 
-export default function CalendarPage() {
-  const [data, setData] = useState<CalendarData | null>(null)
-  const [decData, setDecData] = useState<CalendarData | null>(null)
+export default function Calendar2026Page() {
+  const data = calendarData as CalendarData
+  const decData = decemberData as CalendarData
   const [selectedQuarter, setSelectedQuarter] = useState<number | 'dec' | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null)
-  const [modalMode, setModalMode] = useState<'create' | 'edit'>('create')
-  const [events, setEvents] = useState<CalendarEvent[]>([])
-
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = async () => {
-    try {
-      setIsLoading(true)
-      const [res2026, resDec, resEvents] = await Promise.all([
-        fetch('/api/calendar-data/2026'),
-        fetch('/api/calendar-data/december'),
-        fetch('/api/calendar-events')
-      ])
-
-      if (res2026.ok) setData(await res2026.json())
-      if (resDec.ok) setDecData(await resDec.json())
-      if (resEvents.ok) {
-        const json = await resEvents.json()
-        setEvents(Array.isArray(json.events) ? json.events : [])
-      }
-    } catch (error) {
-      console.error('Failed to load calendar:', error)
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const handleCardClick = (week: WeekPlan) => {
-    const run = week.production_runs?.[0]
-
-    const year = new Date(week.week_start).getFullYear()
-    const isDecember2025 = year === 2025
-
-    // Create event object with CURRENT data from the week (which should be updated after save)
-    const event: CalendarEvent = {
-      id: `${isDecember2025 ? 'static-dec' : 'static'}-${week.week_number}`,
-      type: 'production',
-      productName: run?.product || getModeLabel(week.mode),
-      productType: week.mode as any,
-      batch: run ? `${run.batch_number}/${run.total_batches}` : undefined,
-      weekStart: `${isDecember2025 ? 2025 : 2026}-W${week.week_number.toString().padStart(2, '0')}`,
-      tank: run?.receiving_tank !== 'None' ? run?.receiving_tank : undefined,
-      notes: week.notes.join(', '),
-      color: '#000000',
-    }
-
-    console.log('🎯 Opening card for week', week.week_number, 'with data:', {
-      product: run?.product,
-      tank: run?.receiving_tank,
-      batch: run ? `${run.batch_number}/${run.total_batches}` : undefined
-    })
-
-    setSelectedEvent(event)
-    setModalMode('edit')
-    setIsModalOpen(true)
-  }
-
-  const handleSave = async (input: CalendarEventInput) => {
-    // CREATE new dynamic event
-    if (modalMode === 'create') {
-      try {
-        console.log('➕ Creating event with input:', input)
-        const res = await fetch('/api/calendar-events', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(input),
-        })
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}))
-          console.error('❌ Create failed:', err)
-          throw new Error('Failed to create')
-        }
-        const json = await res.json()
-        console.log('✅ Created:', json)
-        await reloadEvents()
-        setIsModalOpen(false)
-        return
-      } catch (error) {
-        console.error('💥 Create failed:', error)
-        alert('Failed to create. Please try again.')
-        return
-      }
-    }
-
-    // EDIT existing event
-    if (!selectedEvent) return
-    console.log('💾 Saving event:', selectedEvent.id, 'with input:', input)
-
-    try {
-      if (selectedEvent.id.startsWith('static-')) {
-        // Update static calendar (JSON weeks)
-        const response = await fetch('/api/calendar-events/static-update', {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ id: selectedEvent.id, ...input })
-        })
-        console.log('📡 Static update status:', response.status)
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}))
-          console.error('❌ Static API error:', errorData)
-          throw new Error('Failed to save')
-        }
-        await loadData() // refresh weeks
-      } else {
-        // Update dynamic (custom) event
-        const response = await fetch(`/api/calendar-events/${selectedEvent.id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(input)
-        })
-        console.log('📡 Dynamic update status:', response.status)
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}))
-          console.error('❌ Dynamic API error:', errorData)
-          throw new Error('Failed to save')
-        }
-        await reloadEvents()
-      }
-
-      console.log('✅ Save successful. Closing modal.')
-      setIsModalOpen(false)
-    } catch (error) {
-      console.error('💥 Save failed:', error)
-      alert('Failed to save. Please try again.')
-    }
-  }
-
-  if (isLoading) return <div className="p-8">Loading...</div>
-  if (!data || !decData) return <div className="p-8">Error loading calendar</div>
 
   // Group weeks by quarter
   const quarters = [
@@ -236,7 +102,7 @@ export default function CalendarPage() {
     const date = new Date(dateStr)
     return date.toLocaleDateString('en-AU', { month: 'short', day: 'numeric' })
   }
-
+  
   // Render clean production week card
   const renderProductionWeek = (week: WeekPlan) => {
     if (week.production_runs.length === 0) return null
@@ -244,7 +110,7 @@ export default function CalendarPage() {
     const run = week.production_runs[0]
 
     return (
-      <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+      <div key={week.week_number} className="group relative">
         {/* Week header - minimal */}
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-500">
@@ -256,7 +122,7 @@ export default function CalendarPage() {
         </div>
 
         {/* Main card - clean and focused */}
-        <div className={`border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md ${getModeColor(week.mode)}`}>
+        <div className={`border rounded-lg p-4 transition-all hover:shadow-md ${getModeColor(week.mode)}`}>
           {/* Product name - prominent */}
           <div className="font-semibold text-base mb-1">
             {run.product}
@@ -293,7 +159,7 @@ export default function CalendarPage() {
   // Render bottling week card
   const renderBottlingWeek = (week: WeekPlan) => {
     return (
-      <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+      <div key={week.week_number} className="group relative">
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-500">
             W{week.week_number.toString().padStart(2, '0')}
@@ -303,7 +169,7 @@ export default function CalendarPage() {
           </div>
         </div>
 
-        <div className="border border-stone-300 rounded-lg p-4 h-40 overflow-hidden bg-stone-100/50">
+        <div className="border border-stone-300 rounded-lg p-4 bg-stone-100/50">
           <div className="font-medium text-stone-700 text-sm mb-2">
             Bottling Week
           </div>
@@ -335,7 +201,7 @@ export default function CalendarPage() {
     // Special handling for Reserve Rum weeks
     if (week.mode === 'RESERVE_RUM_BLEND' || week.mode === 'RESERVE_RUM_BOTTLE') {
       return (
-        <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+        <div key={week.week_number} className="group relative">
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs font-medium text-stone-500">
               W{week.week_number.toString().padStart(2, '0')}
@@ -345,7 +211,7 @@ export default function CalendarPage() {
             </div>
           </div>
 
-          <div className={`border rounded-lg p-4 h-40 overflow-hidden ${getModeColor(week.mode)}`}>
+          <div className={`border rounded-lg p-4 ${getModeColor(week.mode)}`}>
             <div className="font-medium text-sm mb-1">
               {getModeLabel(week.mode)}
             </div>
@@ -360,7 +226,7 @@ export default function CalendarPage() {
     // Week 1 - Administrative reset
     if (week.week_number === 1) {
       return (
-        <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+        <div key={week.week_number} className="group relative">
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs font-medium text-stone-500">
               W{week.week_number.toString().padStart(2, '0')}
@@ -370,7 +236,7 @@ export default function CalendarPage() {
             </div>
           </div>
 
-          <div className="border border-stone-300 rounded-lg p-4 h-40 overflow-hidden bg-white">
+          <div className="border border-stone-300 rounded-lg p-4 bg-white">
             <div className="font-medium text-sm text-stone-700 mb-1">
               New Year Reset
             </div>
@@ -384,14 +250,14 @@ export default function CalendarPage() {
 
     // Regular admin/bottling weeks
     return (
-      <div key={week.week_number} className="group relative opacity-40 hover:opacity-100 transition-opacity cursor-pointer" onClick={() => handleCardClick(week)}>
+      <div key={week.week_number} className="group relative opacity-40 hover:opacity-100 transition-opacity">
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-400">
             W{week.week_number.toString().padStart(2, '0')}
           </div>
         </div>
 
-        <div className="border border-stone-200 rounded-lg p-3 h-40 overflow-hidden bg-stone-50/30">
+        <div className="border border-stone-200 rounded-lg p-3 bg-stone-50/30">
           {week.bottling && week.bottling_tasks && week.bottling_tasks.length > 0 ? (
             <>
               <div className="text-xs font-medium text-stone-600 mb-1">
@@ -405,112 +271,6 @@ export default function CalendarPage() {
             <div className="text-xs text-stone-500">
               Non-production
             </div>
-          )}
-        </div>
-      </div>
-    )
-  }
-
-  // Open modal in CREATE mode
-  const handleOpenCreate = () => {
-    setSelectedEvent(null)
-    setModalMode('create')
-    setIsModalOpen(true)
-  }
-
-  // Open modal to edit a dynamic (custom) event
-  const handleDynamicCardClick = (ev: CalendarEvent) => {
-    setSelectedEvent(ev)
-    setModalMode('edit')
-    setIsModalOpen(true)
-  }
-
-  // Reload only dynamic events
-  const reloadEvents = async () => {
-    try {
-      const res = await fetch('/api/calendar-events')
-      if (res.ok) {
-        const json = await res.json()
-        setEvents(Array.isArray(json.events) ? json.events : [])
-      }
-    } catch (e) {
-      console.error('Failed to reload events', e)
-    }
-  }
-
-  // Extract numeric week from weekStart (supports "2026-W15" or plain "15")
-  const getWeekNo = (weekStart?: string): number | null => {
-    if (!weekStart) return null
-    const m = weekStart.match(/^(\d{4})-W(\d{2})$/)
-    if (m) return parseInt(m[2], 10)
-    const n = parseInt(weekStart, 10)
-    return Number.isNaN(n) ? null : n
-  }
-  // Delete a dynamic (custom) event
-  const handleDelete = async (id: string) => {
-    if (!id || id.startsWith('static-')) return
-    try {
-      const res = await fetch(`/api/calendar-events/${id}`, { method: 'DELETE' })
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        console.error('❌ Delete failed:', err)
-        throw new Error('Delete failed')
-      }
-      await reloadEvents()
-      setIsModalOpen(false)
-    } catch (e) {
-      console.error('💥 Delete error:', e)
-      alert('Failed to delete. Please try again.')
-    }
-  }
-
-  // Clear static card contents (keep layout/color)
-  const handleClear = async (id: string) => {
-    if (!id.startsWith('static-')) return
-    try {
-      const res = await fetch('/api/calendar-events/static-update', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, clear: true })
-      })
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        console.error('❌ Clear failed:', err)
-        throw new Error('Clear failed')
-      }
-      await loadData()
-      setIsModalOpen(false)
-    } catch (e) {
-      console.error('💥 Clear error:', e)
-      alert('Failed to clear card. Please try again.')
-    }
-  }
-
-
-  // Render a dynamic/custom event card in the same visual language
-  const renderDynamicEventCard = (ev: CalendarEvent) => {
-    const weekNo = getWeekNo(ev.weekStart)
-    if (!weekNo) return null
-
-    const modeForColor = (ev.productType as string) || (ev.type === 'bottling' ? 'BOTTLING' : ev.type === 'admin' ? 'ADMIN' : 'GIN')
-
-    return (
-      <div key={ev.id} className="group relative cursor-pointer" onClick={() => handleDynamicCardClick(ev)}>
-        <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-medium text-stone-500">W{weekNo.toString().padStart(2, '0')}</div>
-        </div>
-        <div className={`border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md ${getModeColor(modeForColor)}`}>
-          <div className="font-semibold text-base mb-1">{ev.productName || (ev.type[0].toUpperCase()+ev.type.slice(1))}</div>
-          {ev.batch && (
-            <div className="text-sm opacity-75 mb-3">Batch {ev.batch}</div>
-          )}
-          {ev.tank && (
-            <div className="flex items-center gap-2 text-xs mb-3">
-              <div className="px-2 py-1 bg-white/50 rounded border border-current/20 font-mono">{ev.tank}</div>
-            </div>
-          )}
-          {ev.notes && (
-            <div className="mt-3 pt-3 border-t border-current/10 text-xs opacity-75">{ev.notes}</div>
           )}
         </div>
       </div>
@@ -680,28 +440,13 @@ export default function CalendarPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {quarter.weeks.map(week => {
-                  const nodes: (JSX.Element | null)[] = []
-
                   if (week.production_runs.length > 0) {
-                    nodes.push(renderProductionWeek(week))
+                    return renderProductionWeek(week)
                   } else if (week.bottling) {
-                    nodes.push(renderBottlingWeek(week))
+                    return renderBottlingWeek(week)
                   } else {
-                    nodes.push(renderAdminWeek(week))
+                    return renderAdminWeek(week)
                   }
-
-                  // Also render any dynamic events assigned to this week number
-                  const weekNo = week.week_number
-                  const dyn = events.filter(e => {
-                    const wn = getWeekNo(e.weekStart)
-                    if (wn !== weekNo) return false
-                    const isDecQuarter = quarter.q === 'dec'
-                    const ws = e.weekStart || ''
-                    return isDecQuarter ? ws.startsWith('2025-') : (ws.startsWith('2026-') || !ws.includes('-'))
-                  })
-                  dyn.forEach(ev => nodes.push(renderDynamicEventCard(ev)))
-
-                  return <>{nodes}</>
                 })}
               </div>
             </CardContent>
@@ -714,27 +459,8 @@ export default function CalendarPage() {
         <div className="font-medium mb-1">Planning Methodology</div>
         <div className="text-stone-400">Demand-based with 2025 sales data + 10% growth</div>
       </div>
-
-      {/* Add Event (floating) */}
-      <button
-        onClick={handleOpenCreate}
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-stone-900 text-white text-2xl leading-none flex items-center justify-center shadow-lg hover:bg-stone-800"
-        aria-label="Add event"
-        title="Add event"
-      >
-        +
-      </button>
-
-      {/* Modal */}
-      <EventModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSave={handleSave}
-        onDelete={handleDelete}
-        onClear={handleClear}
-        event={selectedEvent}
-        mode={modalMode}
-      />
     </div>
   )
 }
+
+

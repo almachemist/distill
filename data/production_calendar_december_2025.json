@@ -1,0 +1,96 @@
+{
+  "calendar": [
+    {
+      "week_number": 49,
+      "week_start": "2025-12-01",
+      "week_end": "2025-12-07",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "BOTTLING",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Coffee Liqueur"
+      ],
+      "notes": [
+        "Coffee Liqueur - Bottling Run",
+        "Priority bottling for holiday season",
+        "Full week dedicated to bottling"
+      ],
+      "tank_allocations": []
+    },
+    {
+      "week_number": 50,
+      "week_start": "2025-12-08",
+      "week_end": "2025-12-14",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Navy Strength Gin",
+          "batch_number": 1,
+          "total_batches": 1,
+          "production_type": "GIN",
+          "receiving_tank": "SMALL BATCH",
+          "notes": "20L batch in Simini still - Direct bottling to 200ml bottles only"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Navy Strength Gin - Small Batch 1/1, 20L batch in Simini still (not main still), For 200ml bottles only, Direct collection and bottling - no tank storage"
+      ],
+      "tank_allocations": []
+    },
+    {
+      "week_number": 51,
+      "week_start": "2025-12-15",
+      "week_end": "2025-12-21",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "RUM",
+      "production_runs": [
+        {
+          "product": "Merchant Mae White Rum",
+          "batch_number": 1,
+          "total_batches": 3,
+          "production_type": "RUM",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae White Rum - Batch 1/3",
+        "First batch of 2026 production cycle",
+        "Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Navy Strength Gin (2w)",
+        "T-330-A: Merchant Mae White Rum (1w)"
+      ]
+    },
+    {
+      "week_number": 52,
+      "week_start": "2025-12-22",
+      "week_end": "2025-12-28",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "BOTTLING",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Spiced Rum (remaining stock from tank)"
+      ],
+      "notes": [
+        "Spiced Rum - Bottling Run",
+        "Small amount left in tank from previous batch",
+        "Holiday period - light operations"
+      ],
+      "tank_allocations": [
+        "T-400: Navy Strength Gin (3w)",
+        "T-330-A: Merchant Mae White Rum (2w)"
+      ]
+    }
+  ],
+  "generated_at": "2025-11-14T05:05:40.503Z"
+}

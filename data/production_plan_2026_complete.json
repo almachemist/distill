@@ -1,0 +1,622 @@
+{
+  "generated_at": "2025-11-13T02:52:40.617Z",
+  "assumptions": {
+    "growth_rate": 0.1,
+    "safety_buffer_months": 6,
+    "batch_production_days": 3
+  },
+  "summary": {
+    "total_products": 15,
+    "products_needing_production": 10,
+    "total_batches_2026": 16,
+    "total_units_2026": 6324,
+    "total_sales_2025": 288016.35,
+    "projected_sales_2026": 316817.985,
+    "by_priority": {
+      "critical": 2,
+      "high": 4,
+      "medium": 0,
+      "low": 0,
+      "sufficient": 9
+    },
+    "by_production_type": {
+      "gin": 8,
+      "rum": 5,
+      "vodka": 0,
+      "cane_spirit": 3,
+      "liqueur": 0
+    }
+  },
+  "quarterly_schedule": [
+    {
+      "quarter": "Q1 2026",
+      "months": [
+        "January",
+        "February",
+        "March"
+      ],
+      "total_batches": 12,
+      "total_units": 4676,
+      "products": [
+        {
+          "product": "Rainforest 700ml",
+          "batches": 3,
+          "units": 1974,
+          "priority": "CRITICAL"
+        },
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "batches": 2,
+          "units": 1170,
+          "priority": "CRITICAL"
+        },
+        {
+          "product": "Merchant Mae Dark Rum Bottle",
+          "batches": 2,
+          "units": 672,
+          "priority": "HIGH"
+        },
+        {
+          "product": "Rainforest 200ml",
+          "batches": 2,
+          "units": 632,
+          "priority": "HIGH"
+        },
+        {
+          "product": "Navy 200ml",
+          "batches": 1,
+          "units": 100,
+          "priority": "HIGH"
+        },
+        {
+          "product": "Cane Spirit 200ml",
+          "batches": 2,
+          "units": 128,
+          "priority": "HIGH"
+        }
+      ],
+      "equipment_usage": {
+        "gin_still_days": 18,
+        "rum_still_days": 18,
+        "fermentation_tanks": 6
+      }
+    },
+    {
+      "quarter": "Q2 2026",
+      "months": [
+        "April",
+        "May",
+        "June"
+      ],
+      "total_batches": 0,
+      "total_units": 0,
+      "products": [],
+      "equipment_usage": {
+        "gin_still_days": 0,
+        "rum_still_days": 0,
+        "fermentation_tanks": 0
+      }
+    },
+    {
+      "quarter": "Q3 2026",
+      "months": [
+        "July",
+        "August",
+        "September"
+      ],
+      "total_batches": 0,
+      "total_units": 0,
+      "products": [],
+      "equipment_usage": {
+        "gin_still_days": 0,
+        "rum_still_days": 0,
+        "fermentation_tanks": 0
+      }
+    },
+    {
+      "quarter": "Q4 2026",
+      "months": [
+        "October",
+        "November",
+        "December"
+      ],
+      "total_batches": 0,
+      "total_units": 0,
+      "products": [],
+      "equipment_usage": {
+        "gin_still_days": 0,
+        "rum_still_days": 0,
+        "fermentation_tanks": 0
+      }
+    }
+  ],
+  "product_plans": [
+    {
+      "product_name": "Rainforest 700ml",
+      "sku_code": "Rainforest_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 1627,
+      "sales_2025_value": 85342.90999999996,
+      "avg_monthly_sales": 147.9,
+      "sales_2026_projected": 1790,
+      "current_stock_nov_13": 347,
+      "stock_after_dec_sales": 118,
+      "production_needed_units": 1672,
+      "bottles_per_batch": 658,
+      "batches_needed": 2.5410334346504557,
+      "batches_needed_rounded": 3,
+      "total_production_units": 1974,
+      "months_of_stock_current": 0.8,
+      "months_of_stock_after_production": 14.144692359702502,
+      "safety_buffer_months": 6,
+      "priority": "CRITICAL",
+      "recommended_quarter": "Q1",
+      "recommended_month": "January 2026",
+      "notes": [
+        "⚠️ URGENT - Stock critically low",
+        "📈 High-demand product",
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Merchant Mae White Rum Bottle",
+      "sku_code": "Merchant_Mae_White_Rum",
+      "brand": "Merchant Mae",
+      "sales_2025_actual": 1088,
+      "sales_2025_value": 39276.53999999999,
+      "avg_monthly_sales": 98.9,
+      "sales_2026_projected": 1197,
+      "current_stock_nov_13": 218,
+      "stock_after_dec_sales": 65,
+      "production_needed_units": 1132,
+      "bottles_per_batch": 585,
+      "batches_needed": 1.935042735042735,
+      "batches_needed_rounded": 2,
+      "total_production_units": 1170,
+      "months_of_stock_current": 0.7,
+      "months_of_stock_after_production": 12.487360970677452,
+      "safety_buffer_months": 6,
+      "priority": "CRITICAL",
+      "recommended_quarter": "Q1",
+      "recommended_month": "January 2026",
+      "notes": [
+        "⚠️ URGENT - Stock critically low",
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "RUM",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Molasses/Sugar",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Merchant Mae Dark Rum Bottle",
+      "sku_code": "Merchant_Mae_Dark_Rum",
+      "brand": "Merchant Mae",
+      "sales_2025_actual": 387,
+      "sales_2025_value": 13982.91,
+      "avg_monthly_sales": 35.2,
+      "sales_2026_projected": 426,
+      "current_stock_nov_13": 112,
+      "stock_after_dec_sales": 58,
+      "production_needed_units": 368,
+      "bottles_per_batch": 336,
+      "batches_needed": 1.0952380952380953,
+      "batches_needed_rounded": 2,
+      "total_production_units": 672,
+      "months_of_stock_current": 1.6,
+      "months_of_stock_after_production": 20.738636363636363,
+      "safety_buffer_months": 6,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1",
+      "recommended_month": "January 2026",
+      "notes": [
+        "⚠️ URGENT - Stock critically low",
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "RUM",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Molasses/Sugar",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Rainforest 200ml",
+      "sku_code": "Rainforest_200",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 533,
+      "sales_2025_value": 10575.880000000003,
+      "avg_monthly_sales": 48.5,
+      "sales_2026_projected": 586,
+      "current_stock_nov_13": 130,
+      "stock_after_dec_sales": 55,
+      "production_needed_units": 531,
+      "bottles_per_batch": 316,
+      "batches_needed": 1.6803797468354431,
+      "batches_needed_rounded": 2,
+      "total_production_units": 632,
+      "months_of_stock_current": 1.1,
+      "months_of_stock_after_production": 14.164948453608247,
+      "safety_buffer_months": 6,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1",
+      "recommended_month": "January 2026",
+      "notes": [
+        "⚠️ URGENT - Stock critically low",
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Navy 200ml",
+      "sku_code": "Navy_200",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 68,
+      "sales_2025_value": 1652.4,
+      "avg_monthly_sales": 6.2,
+      "sales_2026_projected": 75,
+      "current_stock_nov_13": 16,
+      "stock_after_dec_sales": 6,
+      "production_needed_units": 69,
+      "bottles_per_batch": 100,
+      "batches_needed": 0.69,
+      "batches_needed_rounded": 1,
+      "total_production_units": 100,
+      "months_of_stock_current": 1,
+      "months_of_stock_after_production": 17.096774193548388,
+      "safety_buffer_months": 6,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1",
+      "recommended_month": "January 2026",
+      "notes": [
+        "⚠️ URGENT - Stock critically low",
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Cane Spirit 200ml",
+      "sku_code": "Cane_Spirit_200",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 72,
+      "sales_2025_value": 1524.6599999999999,
+      "avg_monthly_sales": 6.5,
+      "sales_2026_projected": 79,
+      "current_stock_nov_13": 18,
+      "stock_after_dec_sales": 8,
+      "production_needed_units": 71,
+      "bottles_per_batch": 64,
+      "batches_needed": 1.109375,
+      "batches_needed_rounded": 2,
+      "total_production_units": 128,
+      "months_of_stock_current": 1.2,
+      "months_of_stock_after_production": 20.923076923076923,
+      "safety_buffer_months": 6,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1",
+      "recommended_month": "January 2026",
+      "notes": [
+        "⚠️ URGENT - Stock critically low",
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "CANE_SPIRIT",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Sugar Cane",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Signature 700ml",
+      "sku_code": "Signature_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 580,
+      "sales_2025_value": 29823.789999999994,
+      "avg_monthly_sales": 52.7,
+      "sales_2026_projected": 638,
+      "current_stock_nov_13": 587,
+      "stock_after_dec_sales": 505,
+      "production_needed_units": 133,
+      "bottles_per_batch": 880,
+      "batches_needed": 0.15113636363636362,
+      "batches_needed_rounded": 1,
+      "total_production_units": 880,
+      "months_of_stock_current": 9.6,
+      "months_of_stock_after_production": 26.280834914611003,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Navy 700ml",
+      "sku_code": "Navy_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 398,
+      "sales_2025_value": 26893.049999999992,
+      "avg_monthly_sales": 36.2,
+      "sales_2026_projected": 438,
+      "current_stock_nov_13": 518,
+      "stock_after_dec_sales": 462,
+      "production_needed_units": 0,
+      "bottles_per_batch": 595,
+      "batches_needed": 0,
+      "batches_needed_rounded": 0,
+      "total_production_units": 0,
+      "months_of_stock_current": 12.8,
+      "months_of_stock_after_production": 12.762430939226519,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Wet Season 700ml",
+      "sku_code": "Wet_Season_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 298,
+      "sales_2025_value": 21585.67,
+      "avg_monthly_sales": 27.1,
+      "sales_2026_projected": 328,
+      "current_stock_nov_13": 617,
+      "stock_after_dec_sales": 575,
+      "production_needed_units": 0,
+      "bottles_per_batch": 650,
+      "batches_needed": 0,
+      "batches_needed_rounded": 0,
+      "total_production_units": 0,
+      "months_of_stock_current": 21.2,
+      "months_of_stock_after_production": 21.21771217712177,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Pineapple Rum 700ml",
+      "sku_code": "Pineapple_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 332,
+      "sales_2025_value": 18351.840000000004,
+      "avg_monthly_sales": 30.2,
+      "sales_2026_projected": 365,
+      "current_stock_nov_13": 485,
+      "stock_after_dec_sales": 438,
+      "production_needed_units": 0,
+      "bottles_per_batch": 252,
+      "batches_needed": 0,
+      "batches_needed_rounded": 0,
+      "total_production_units": 0,
+      "months_of_stock_current": 14.5,
+      "months_of_stock_after_production": 14.503311258278146,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "RUM",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Molasses/Sugar",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Cane Spirit 700ml",
+      "sku_code": "Cane_Spirit_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 264,
+      "sales_2025_value": 14778.189999999995,
+      "avg_monthly_sales": 24,
+      "sales_2026_projected": 290,
+      "current_stock_nov_13": 230,
+      "stock_after_dec_sales": 193,
+      "production_needed_units": 97,
+      "bottles_per_batch": 290,
+      "batches_needed": 0.33448275862068966,
+      "batches_needed_rounded": 1,
+      "total_production_units": 290,
+      "months_of_stock_current": 8,
+      "months_of_stock_after_production": 20.125,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "CANE_SPIRIT",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Sugar Cane",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Spiced Rum 700ml",
+      "sku_code": "Spiced_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 260,
+      "sales_2025_value": 14720.970000000008,
+      "avg_monthly_sales": 23.6,
+      "sales_2026_projected": 286,
+      "current_stock_nov_13": 212,
+      "stock_after_dec_sales": 175,
+      "production_needed_units": 111,
+      "bottles_per_batch": 255,
+      "batches_needed": 0.43529411764705883,
+      "batches_needed_rounded": 1,
+      "total_production_units": 255,
+      "months_of_stock_current": 7.4,
+      "months_of_stock_after_production": 18.220338983050848,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "RUM",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Molasses/Sugar",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Dry Season 700ml",
+      "sku_code": "Dry_Season_700",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 106,
+      "sales_2025_value": 7353.84,
+      "avg_monthly_sales": 9.6,
+      "sales_2026_projected": 117,
+      "current_stock_nov_13": 508,
+      "stock_after_dec_sales": 493,
+      "production_needed_units": 0,
+      "bottles_per_batch": 576,
+      "batches_needed": 0,
+      "batches_needed_rounded": 0,
+      "total_production_units": 0,
+      "months_of_stock_current": 51.2,
+      "months_of_stock_after_production": 51.35416666666667,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Signature 200ml",
+      "sku_code": "Signature_200",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 108,
+      "sales_2025_value": 2076.8,
+      "avg_monthly_sales": 9.8,
+      "sales_2026_projected": 119,
+      "current_stock_nov_13": 117,
+      "stock_after_dec_sales": 102,
+      "production_needed_units": 17,
+      "bottles_per_batch": 223,
+      "batches_needed": 0.07623318385650224,
+      "batches_needed_rounded": 1,
+      "total_production_units": 223,
+      "months_of_stock_current": 10.4,
+      "months_of_stock_after_production": 33.16326530612245,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "GIN",
+      "equipment_needed": [
+        "Gin Still",
+        "Botanicals",
+        "Neutral Spirit Base",
+        "Bottling Line"
+      ]
+    },
+    {
+      "product_name": "Pineapple Rum 200ml",
+      "sku_code": "Pineapple_200",
+      "brand": "Devils Thumb",
+      "sales_2025_actual": 3,
+      "sales_2025_value": 76.9,
+      "avg_monthly_sales": 0.3,
+      "sales_2026_projected": 3,
+      "current_stock_nov_13": 131,
+      "stock_after_dec_sales": 131,
+      "production_needed_units": 0,
+      "bottles_per_batch": 700,
+      "batches_needed": 0,
+      "batches_needed_rounded": 0,
+      "total_production_units": 0,
+      "months_of_stock_current": 480.3,
+      "months_of_stock_after_production": 436.6666666666667,
+      "safety_buffer_months": 6,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE",
+      "recommended_month": "Not needed in 2026",
+      "notes": [
+        "✅ Production will provide 12+ months coverage"
+      ],
+      "production_type": "RUM",
+      "equipment_needed": [
+        "Rum Still",
+        "Fermentation Tank",
+        "Molasses/Sugar",
+        "Bottling Line"
+      ]
+    }
+  ]
+}

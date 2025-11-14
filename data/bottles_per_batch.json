@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-13",
+    "source": "Devil's Thumb Distillery Excisable Product Summary (July 2024 - June 2025)",
+    "methodology": "Average bottles per batch based on actual stock movements (Wholesale + Cellar Door combined)"
+  },
+  
+  "bottles_per_batch": {
+    "Signature_700": 880,
+    "Signature_200": 223,
+    "Rainforest_700": 658,
+    "Rainforest_200": 316,
+    "Navy_700": 595,
+    "Navy_200": 100,
+    "Wet_Season_700": 650,
+    "Dry_Season_700": 576,
+    "Pineapple_700": 252,
+    "Pineapple_200": 700,
+    "Spiced_700": 255,
+    "Spiced_200": 700,
+    "Cane_Spirit_700": 290,
+    "Cane_Spirit_200": 64,
+    "Merchant_Mae_Gin": 797,
+    "Merchant_Mae_Vodka": 797,
+    "Merchant_Mae_White_Rum": 585,
+    "Merchant_Mae_Dark_Rum": 336,
+    "Reserve_Rum_700": 226,
+    "Reserve_Whisky_700": 95,
+    "Coffee_Liqueur_700": 300
+  },
+  
+  "notes": {
+    "Pineapple_200": "ESTIMATED - No bottling data available, using 700ml ratio",
+    "Spiced_200": "ESTIMATED - No bottling data available, using 700ml ratio",
+    "Merchant_Mae_Vodka": "ESTIMATED - Using Merchant Mae Gin capacity (same base)",
+    "Coffee_Liqueur_700": "ESTIMATED - No bottling data available, conservative estimate",
+    "Navy_200": "LOW CONFIDENCE - Only 1 batch recorded (100 bottles)"
+  },
+  
+  "confidence_levels": {
+    "HIGH": [
+      "Signature_700",
+      "Rainforest_700",
+      "Wet_Season_700",
+      "Dry_Season_700",
+      "Navy_700",
+      "Merchant_Mae_Gin",
+      "Pineapple_700",
+      "Spiced_700",
+      "Merchant_Mae_White_Rum",
+      "Cane_Spirit_700",
+      "Reserve_Rum_700"
+    ],
+    "MEDIUM": [
+      "Signature_200",
+      "Rainforest_200",
+      "Merchant_Mae_Dark_Rum",
+      "Cane_Spirit_200"
+    ],
+    "LOW": [
+      "Navy_200",
+      "Reserve_Whisky_700"
+    ],
+    "ESTIMATED": [
+      "Pineapple_200",
+      "Spiced_200",
+      "Merchant_Mae_Vodka",
+      "Coffee_Liqueur_700"
+    ]
+  }
+}
+

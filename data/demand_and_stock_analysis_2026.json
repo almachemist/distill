@@ -1,0 +1,3855 @@
+{
+  "generated_at": "2025-11-13T06:32:11.526Z",
+  "product_analyses": [
+    {
+      "family": "Rainforest Gin",
+      "priority": "CRITICAL",
+      "buffer_months": 1.5,
+      "current_stock_nov_2025": 477,
+      "demand_analysis": {
+        "family": "Rainforest Gin",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 108
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 90
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 162
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 158
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 184
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 227
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 207
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 189
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 136
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 355
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 43
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 1859,
+        "avg_monthly_2025": 154.91666666666666,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 119
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 99
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 178
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 174
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 202
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 250
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 228
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 208
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 150
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 391
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 47
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 2046
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 477,
+          "production": 0,
+          "demand": 119,
+          "ending_stock": 358,
+          "months_of_stock": 2.099706744868035,
+          "buffer_target": 255.75,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 358,
+          "production": 0,
+          "demand": 99,
+          "ending_stock": 259,
+          "months_of_stock": 1.5190615835777126,
+          "buffer_target": 255.75,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 259,
+          "production": 0,
+          "demand": 178,
+          "ending_stock": 81,
+          "months_of_stock": 0.4750733137829912,
+          "buffer_target": 255.75,
+          "status": "CRITICAL"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 81,
+          "production": 0,
+          "demand": 174,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 202,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 250,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 228,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 208,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 150,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 391,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 47,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 255.75,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Merchant Mae Vodka",
+      "priority": "CRITICAL",
+      "buffer_months": 1.5,
+      "current_stock_nov_2025": 0,
+      "demand_analysis": {
+        "family": "Merchant Mae Vodka",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 372
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 144
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 205
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 276
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 295
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 279
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 255
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 594
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 296
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 576
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 69
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 3361,
+        "avg_monthly_2025": 280.0833333333333,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 409
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 158
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 226
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 304
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 325
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 307
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 281
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 653
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 326
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 634
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 76
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 3699
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 409,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 158,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 226,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 304,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 325,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 307,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 281,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 653,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 326,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 634,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 76,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 462.375,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Signature Gin",
+      "priority": "HIGH",
+      "buffer_months": 1.5,
+      "current_stock_nov_2025": 704,
+      "demand_analysis": {
+        "family": "Signature Gin",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 45
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 47
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 34
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 47
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 44
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 31
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 126
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 68
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 54
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 88
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 3
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 587,
+        "avg_monthly_2025": 48.916666666666664,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 50
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 52
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 37
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 52
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 48
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 34
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 139
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 75
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 59
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 97
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 3
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 646
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 704,
+          "production": 0,
+          "demand": 50,
+          "ending_stock": 654,
+          "months_of_stock": 12.14860681114551,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 654,
+          "production": 0,
+          "demand": 52,
+          "ending_stock": 602,
+          "months_of_stock": 11.18266253869969,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 602,
+          "production": 0,
+          "demand": 37,
+          "ending_stock": 565,
+          "months_of_stock": 10.495356037151703,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 565,
+          "production": 0,
+          "demand": 52,
+          "ending_stock": 513,
+          "months_of_stock": 9.529411764705882,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 513,
+          "production": 0,
+          "demand": 48,
+          "ending_stock": 465,
+          "months_of_stock": 8.637770897832818,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 465,
+          "production": 0,
+          "demand": 34,
+          "ending_stock": 431,
+          "months_of_stock": 8.006191950464396,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 431,
+          "production": 0,
+          "demand": 139,
+          "ending_stock": 292,
+          "months_of_stock": 5.424148606811145,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 292,
+          "production": 0,
+          "demand": 75,
+          "ending_stock": 217,
+          "months_of_stock": 4.030959752321981,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 217,
+          "production": 0,
+          "demand": 59,
+          "ending_stock": 158,
+          "months_of_stock": 2.9349845201238387,
+          "buffer_target": 80.75,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 158,
+          "production": 0,
+          "demand": 97,
+          "ending_stock": 61,
+          "months_of_stock": 1.13312693498452,
+          "buffer_target": 80.75,
+          "status": "LOW"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 61,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 58,
+          "months_of_stock": 1.0773993808049536,
+          "buffer_target": 80.75,
+          "status": "LOW"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 58,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 58,
+          "months_of_stock": 1.0773993808049536,
+          "buffer_target": 80.75,
+          "status": "LOW"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Navy Gin",
+      "priority": "HIGH",
+      "buffer_months": 1.5,
+      "current_stock_nov_2025": 534,
+      "demand_analysis": {
+        "family": "Navy Gin",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 43
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 7
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 48
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 28
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 44
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 21
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 60
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 75
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 9
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 41
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 13
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 389,
+        "avg_monthly_2025": 32.416666666666664,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 47
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 8
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 53
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 31
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 48
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 23
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 66
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 83
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 10
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 45
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 14
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 428
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 534,
+          "production": 0,
+          "demand": 47,
+          "ending_stock": 487,
+          "months_of_stock": 13.654205607476637,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 487,
+          "production": 0,
+          "demand": 8,
+          "ending_stock": 479,
+          "months_of_stock": 13.429906542056075,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 479,
+          "production": 0,
+          "demand": 53,
+          "ending_stock": 426,
+          "months_of_stock": 11.94392523364486,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 426,
+          "production": 0,
+          "demand": 31,
+          "ending_stock": 395,
+          "months_of_stock": 11.074766355140188,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 395,
+          "production": 0,
+          "demand": 48,
+          "ending_stock": 347,
+          "months_of_stock": 9.728971962616823,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 347,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 324,
+          "months_of_stock": 9.08411214953271,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 324,
+          "production": 0,
+          "demand": 66,
+          "ending_stock": 258,
+          "months_of_stock": 7.233644859813085,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 258,
+          "production": 0,
+          "demand": 83,
+          "ending_stock": 175,
+          "months_of_stock": 4.906542056074767,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 175,
+          "production": 0,
+          "demand": 10,
+          "ending_stock": 165,
+          "months_of_stock": 4.626168224299065,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 165,
+          "production": 0,
+          "demand": 45,
+          "ending_stock": 120,
+          "months_of_stock": 3.3644859813084116,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 120,
+          "production": 0,
+          "demand": 14,
+          "ending_stock": 106,
+          "months_of_stock": 2.97196261682243,
+          "buffer_target": 53.5,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 106,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 106,
+          "months_of_stock": 2.97196261682243,
+          "buffer_target": 53.5,
+          "status": "OK"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Australian Cane Spirit",
+      "priority": "HIGH",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 248,
+      "demand_analysis": {
+        "family": "Australian Cane Spirit",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 35
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 6
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 2
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 8
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 32
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 37
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 39
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 65
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 4
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 18
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 3
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 249,
+        "avg_monthly_2025": 20.75,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 39
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 7
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 2
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 9
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 35
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 41
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 43
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 72
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 4
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 20
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 3
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 275
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 248,
+          "production": 0,
+          "demand": 39,
+          "ending_stock": 209,
+          "months_of_stock": 9.12,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 209,
+          "production": 0,
+          "demand": 7,
+          "ending_stock": 202,
+          "months_of_stock": 8.814545454545454,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 202,
+          "production": 0,
+          "demand": 2,
+          "ending_stock": 200,
+          "months_of_stock": 8.727272727272727,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 200,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 191,
+          "months_of_stock": 8.334545454545454,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 191,
+          "production": 0,
+          "demand": 35,
+          "ending_stock": 156,
+          "months_of_stock": 6.807272727272727,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 156,
+          "production": 0,
+          "demand": 41,
+          "ending_stock": 115,
+          "months_of_stock": 5.018181818181818,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 115,
+          "production": 0,
+          "demand": 43,
+          "ending_stock": 72,
+          "months_of_stock": 3.1418181818181816,
+          "buffer_target": 22.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 72,
+          "production": 0,
+          "demand": 72,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 22.916666666666668,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 4,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 22.916666666666668,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 20,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 22.916666666666668,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 22.916666666666668,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 22.916666666666668,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Merchant Mae Gin",
+      "priority": "HIGH",
+      "buffer_months": 1.5,
+      "current_stock_nov_2025": 0,
+      "demand_analysis": {
+        "family": "Merchant Mae Gin",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 109
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 82
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 109
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 145
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 187
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 210
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 158
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 202
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 88
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 169
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 31
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 1490,
+        "avg_monthly_2025": 124.16666666666667,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 120
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 90
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 120
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 160
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 206
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 231
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 174
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 222
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 97
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 186
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 34
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 1640
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 120,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 90,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 120,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 160,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 206,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 231,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 174,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 222,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 97,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 186,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 34,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 205,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Merchant Mae White Rum",
+      "priority": "HIGH",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 0,
+      "demand_analysis": {
+        "family": "Merchant Mae White Rum",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 85
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 34
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 60
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 99
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 102
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 130
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 35
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 212
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 60
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 181
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 24
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 1022,
+        "avg_monthly_2025": 85.16666666666667,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 94
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 37
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 66
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 109
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 112
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 143
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 39
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 233
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 66
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 199
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 26
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 1124
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 94,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 37,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 66,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 109,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 112,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 143,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 39,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 233,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 66,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 199,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 26,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 93.66666666666667,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Merchant Mae Dark Rum",
+      "priority": "HIGH",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 0,
+      "demand_analysis": {
+        "family": "Merchant Mae Dark Rum",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 67
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 32
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 14
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 56
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 47
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 44
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 6
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 68
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 2
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 37
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 373,
+        "avg_monthly_2025": 31.083333333333332,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 74
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 35
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 15
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 62
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 52
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 48
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 7
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 75
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 2
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 41
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 411
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 74,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 35,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 15,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 62,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 52,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 48,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 7,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 75,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 2,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 41,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 34.25,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Wet Season Gin",
+      "priority": "MEDIUM",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 617,
+      "demand_analysis": {
+        "family": "Wet Season Gin",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 30
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 21
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 10
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 24
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 33
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 48
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 36
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 23
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 23
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 14
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 5
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 267,
+        "avg_monthly_2025": 22.25,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 33
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 23
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 11
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 26
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 36
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 53
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 40
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 25
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 25
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 15
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 6
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 293
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 617,
+          "production": 0,
+          "demand": 33,
+          "ending_stock": 584,
+          "months_of_stock": 23.918088737201366,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 584,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 561,
+          "months_of_stock": 22.976109215017065,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 561,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 550,
+          "months_of_stock": 22.525597269624573,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 550,
+          "production": 0,
+          "demand": 26,
+          "ending_stock": 524,
+          "months_of_stock": 21.46075085324232,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 524,
+          "production": 0,
+          "demand": 36,
+          "ending_stock": 488,
+          "months_of_stock": 19.986348122866893,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 488,
+          "production": 0,
+          "demand": 53,
+          "ending_stock": 435,
+          "months_of_stock": 17.81569965870307,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 435,
+          "production": 0,
+          "demand": 40,
+          "ending_stock": 395,
+          "months_of_stock": 16.177474402730375,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 395,
+          "production": 0,
+          "demand": 25,
+          "ending_stock": 370,
+          "months_of_stock": 15.15358361774744,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 370,
+          "production": 0,
+          "demand": 25,
+          "ending_stock": 345,
+          "months_of_stock": 14.129692832764505,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 345,
+          "production": 0,
+          "demand": 15,
+          "ending_stock": 330,
+          "months_of_stock": 13.515358361774743,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 330,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 324,
+          "months_of_stock": 13.26962457337884,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 324,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 324,
+          "months_of_stock": 13.26962457337884,
+          "buffer_target": 24.416666666666668,
+          "status": "OK"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Dry Season Gin",
+      "priority": "MEDIUM",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 508,
+      "demand_analysis": {
+        "family": "Dry Season Gin",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 11
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 3
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 7
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 12
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 26
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 13
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 9
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 8
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 5
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 4
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 98,
+        "avg_monthly_2025": 8.166666666666666,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 12
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 3
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 8
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 13
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 29
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 14
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 10
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 9
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 6
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 4
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 108
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 508,
+          "production": 0,
+          "demand": 12,
+          "ending_stock": 496,
+          "months_of_stock": 55.111111111111114,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 496,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 493,
+          "months_of_stock": 54.77777777777778,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 493,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 493,
+          "months_of_stock": 54.77777777777778,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 493,
+          "production": 0,
+          "demand": 8,
+          "ending_stock": 485,
+          "months_of_stock": 53.888888888888886,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 485,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 472,
+          "months_of_stock": 52.44444444444444,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 472,
+          "production": 0,
+          "demand": 29,
+          "ending_stock": 443,
+          "months_of_stock": 49.22222222222222,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 443,
+          "production": 0,
+          "demand": 14,
+          "ending_stock": 429,
+          "months_of_stock": 47.666666666666664,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 429,
+          "production": 0,
+          "demand": 10,
+          "ending_stock": 419,
+          "months_of_stock": 46.55555555555556,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 419,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 410,
+          "months_of_stock": 45.55555555555556,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 410,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 404,
+          "months_of_stock": 44.888888888888886,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 404,
+          "production": 0,
+          "demand": 4,
+          "ending_stock": 400,
+          "months_of_stock": 44.44444444444444,
+          "buffer_target": 9,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 400,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 400,
+          "months_of_stock": 44.44444444444444,
+          "buffer_target": 9,
+          "status": "OK"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Spiced Rum",
+      "priority": "MEDIUM",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 285,
+      "demand_analysis": {
+        "family": "Spiced Rum",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 13
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 9
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 15
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 29
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 26
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 26
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 25
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 38
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 12
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 21
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 3
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 217,
+        "avg_monthly_2025": 18.083333333333332,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 14
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 10
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 17
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 32
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 29
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 29
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 28
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 42
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 13
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 23
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 3
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 240
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 285,
+          "production": 0,
+          "demand": 14,
+          "ending_stock": 271,
+          "months_of_stock": 13.55,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 271,
+          "production": 0,
+          "demand": 10,
+          "ending_stock": 261,
+          "months_of_stock": 13.05,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 261,
+          "production": 0,
+          "demand": 17,
+          "ending_stock": 244,
+          "months_of_stock": 12.2,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 244,
+          "production": 0,
+          "demand": 32,
+          "ending_stock": 212,
+          "months_of_stock": 10.6,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 212,
+          "production": 0,
+          "demand": 29,
+          "ending_stock": 183,
+          "months_of_stock": 9.15,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 183,
+          "production": 0,
+          "demand": 29,
+          "ending_stock": 154,
+          "months_of_stock": 7.7,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 154,
+          "production": 0,
+          "demand": 28,
+          "ending_stock": 126,
+          "months_of_stock": 6.3,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 126,
+          "production": 0,
+          "demand": 42,
+          "ending_stock": 84,
+          "months_of_stock": 4.2,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 84,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 71,
+          "months_of_stock": 3.55,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 71,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 48,
+          "months_of_stock": 2.4,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 48,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 45,
+          "months_of_stock": 2.25,
+          "buffer_target": 20,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 45,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 45,
+          "months_of_stock": 2.25,
+          "buffer_target": 20,
+          "status": "OK"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Pineapple Rum",
+      "priority": "LOW",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 616,
+      "demand_analysis": {
+        "family": "Pineapple Rum",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 29
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 8
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 28
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 29
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 21
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 17
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 46
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 12
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 12
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 53
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 5
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 260,
+        "avg_monthly_2025": 21.666666666666668,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 32
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 9
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 31
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 32
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 23
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 19
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 51
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 13
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 13
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 58
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 6
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 287
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 616,
+          "production": 0,
+          "demand": 32,
+          "ending_stock": 584,
+          "months_of_stock": 24.418118466898953,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 584,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 575,
+          "months_of_stock": 24.041811846689896,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 575,
+          "production": 0,
+          "demand": 31,
+          "ending_stock": 544,
+          "months_of_stock": 22.745644599303134,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 544,
+          "production": 0,
+          "demand": 32,
+          "ending_stock": 512,
+          "months_of_stock": 21.40766550522648,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 512,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 489,
+          "months_of_stock": 20.445993031358885,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 489,
+          "production": 0,
+          "demand": 19,
+          "ending_stock": 470,
+          "months_of_stock": 19.65156794425087,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 470,
+          "production": 0,
+          "demand": 51,
+          "ending_stock": 419,
+          "months_of_stock": 17.519163763066203,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 419,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 406,
+          "months_of_stock": 16.975609756097562,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 406,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 393,
+          "months_of_stock": 16.43205574912892,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 393,
+          "production": 0,
+          "demand": 58,
+          "ending_stock": 335,
+          "months_of_stock": 14.006968641114982,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 335,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 329,
+          "months_of_stock": 13.75609756097561,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 329,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 329,
+          "months_of_stock": 13.75609756097561,
+          "buffer_target": 23.916666666666668,
+          "status": "OK"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Coffee Liqueur",
+      "priority": "LOW",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 10,
+      "demand_analysis": {
+        "family": "Coffee Liqueur",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 0
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 19
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 34
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 10
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 11
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 74,
+        "avg_monthly_2025": 6.166666666666667,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 0
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 21
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 37
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 11
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 12
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 81
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "buffer_target": 6.75,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 21,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 6.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 37,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 6.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 6.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 12,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 6.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 6.75,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    },
+    {
+      "family": "Reserve Cask Rum",
+      "priority": "LOW",
+      "buffer_months": 1,
+      "current_stock_nov_2025": 0,
+      "demand_analysis": {
+        "family": "Reserve Cask Rum",
+        "monthly_2025": [
+          {
+            "month": 1,
+            "year": 2025,
+            "demand": 5
+          },
+          {
+            "month": 2,
+            "year": 2025,
+            "demand": 7
+          },
+          {
+            "month": 3,
+            "year": 2025,
+            "demand": 3
+          },
+          {
+            "month": 4,
+            "year": 2025,
+            "demand": 8
+          },
+          {
+            "month": 5,
+            "year": 2025,
+            "demand": 10
+          },
+          {
+            "month": 6,
+            "year": 2025,
+            "demand": 10
+          },
+          {
+            "month": 7,
+            "year": 2025,
+            "demand": 10
+          },
+          {
+            "month": 8,
+            "year": 2025,
+            "demand": 14
+          },
+          {
+            "month": 9,
+            "year": 2025,
+            "demand": 16
+          },
+          {
+            "month": 10,
+            "year": 2025,
+            "demand": 52
+          },
+          {
+            "month": 11,
+            "year": 2025,
+            "demand": 4
+          },
+          {
+            "month": 12,
+            "year": 2025,
+            "demand": 0
+          }
+        ],
+        "total_2025": 139,
+        "avg_monthly_2025": 11.583333333333334,
+        "monthly_2026_forecast": [
+          {
+            "month": 1,
+            "year": 2026,
+            "demand": 6
+          },
+          {
+            "month": 2,
+            "year": 2026,
+            "demand": 8
+          },
+          {
+            "month": 3,
+            "year": 2026,
+            "demand": 3
+          },
+          {
+            "month": 4,
+            "year": 2026,
+            "demand": 9
+          },
+          {
+            "month": 5,
+            "year": 2026,
+            "demand": 11
+          },
+          {
+            "month": 6,
+            "year": 2026,
+            "demand": 11
+          },
+          {
+            "month": 7,
+            "year": 2026,
+            "demand": 11
+          },
+          {
+            "month": 8,
+            "year": 2026,
+            "demand": 15
+          },
+          {
+            "month": 9,
+            "year": 2026,
+            "demand": 18
+          },
+          {
+            "month": 10,
+            "year": 2026,
+            "demand": 57
+          },
+          {
+            "month": 11,
+            "year": 2026,
+            "demand": 4
+          },
+          {
+            "month": 12,
+            "year": 2026,
+            "demand": 0
+          }
+        ],
+        "total_2026_forecast": 153
+      },
+      "stock_simulation_2026": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 8,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 15,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 18,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 57,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 4,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 0,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "buffer_target": 12.75,
+          "status": "STOCKOUT"
+        }
+      ],
+      "production_needed": {
+        "total_bottles": 0,
+        "batches_needed": 0,
+        "timing": "TBD"
+      }
+    }
+  ]
+}

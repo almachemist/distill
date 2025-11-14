@@ -1,0 +1,1306 @@
+{
+  "generated_at": "2025-11-14T04:51:02.528Z",
+  "source": "production_plan_2026_v4.json",
+  "methodology": "Demand-based planning with month-by-month stock simulation",
+  "calendar": [
+    {
+      "week_number": 1,
+      "week_start": "2025-12-31",
+      "week_end": "2026-01-06",
+      "month": 1,
+      "month_name": "Jan",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": false,
+      "notes": [
+        "New Year - Administrative reset",
+        "Maintenance, deep cleaning, stocktake, barrel checks",
+        "No distillation this week"
+      ],
+      "tank_allocations": []
+    },
+    {
+      "week_number": 2,
+      "week_start": "2026-01-07",
+      "week_end": "2026-01-13",
+      "month": 1,
+      "month_name": "Jan",
+      "mode": "RESERVE_RUM_BLEND",
+      "production_runs": [],
+      "bottling": false,
+      "notes": [
+        "Reserve Cask Rum - Barrel selection & blending",
+        "Tasting, selecting, blending premium barrels",
+        "Full week dedicated to this process"
+      ],
+      "tank_allocations": []
+    },
+    {
+      "week_number": 3,
+      "week_start": "2026-01-14",
+      "week_end": "2026-01-20",
+      "month": 1,
+      "month_name": "Jan",
+      "mode": "RESERVE_RUM_BOTTLE",
+      "production_runs": [],
+      "bottling": false,
+      "notes": [
+        "Reserve Cask Rum - Manual bottling",
+        "Slow, careful bottling of premium product",
+        "Full week for bottling process"
+      ],
+      "tank_allocations": []
+    },
+    {
+      "week_number": 4,
+      "week_start": "2026-01-21",
+      "week_end": "2026-01-27",
+      "month": 1,
+      "month_name": "Jan",
+      "mode": "VODKA",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 1,
+          "total_batches": 6,
+          "production_type": "VODKA",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan",
+          "receiving_tank": "T-400"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Vodka - Batch 1/6",
+        "Neutral spirit → T-400"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (0w)"
+      ]
+    },
+    {
+      "week_number": 5,
+      "week_start": "2026-01-28",
+      "week_end": "2026-02-03",
+      "month": 2,
+      "month_name": "Feb",
+      "mode": "VODKA",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 2,
+          "total_batches": 6,
+          "production_type": "VODKA",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Vodka - Batch 2/6",
+        "Neutral spirit → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (1w)",
+        "T-330-A: Merchant Mae Vodka (0w)"
+      ]
+    },
+    {
+      "week_number": 6,
+      "week_start": "2026-02-04",
+      "week_end": "2026-02-10",
+      "month": 2,
+      "month_name": "Feb",
+      "mode": "VODKA",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 3,
+          "total_batches": 6,
+          "production_type": "VODKA",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan",
+          "receiving_tank": "T-330-B"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Vodka - Batch 3/6",
+        "Neutral spirit → T-330-B"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (2w)",
+        "T-330-A: Merchant Mae Vodka (1w)",
+        "T-330-B: Merchant Mae Vodka (0w)"
+      ]
+    },
+    {
+      "week_number": 7,
+      "week_start": "2026-02-11",
+      "week_end": "2026-02-17",
+      "month": 2,
+      "month_name": "Feb",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Rainforest Gin",
+          "batch_number": 1,
+          "total_batches": 2,
+          "production_type": "GIN",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb",
+          "receiving_tank": "T-330-C"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Rainforest Gin - Batch 1/2",
+        "Hearts → T-330-C"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (4w)",
+        "T-330-A: Merchant Mae Vodka (3w)",
+        "T-330-B: Merchant Mae Vodka (2w)",
+        "T-330-C: Rainforest Gin (1w)"
+      ]
+    },
+    {
+      "week_number": 8,
+      "week_start": "2026-02-18",
+      "week_end": "2026-02-24",
+      "month": 2,
+      "month_name": "Feb",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Vodka",
+        "Bottle Merchant Mae Vodka",
+        "Bottle Merchant Mae Vodka",
+        "Bottle Rainforest Gin"
+      ],
+      "notes": [
+        "Bottling week - free tanks for next production",
+        "Bottling: Merchant Mae Vodka, Merchant Mae Vodka, Merchant Mae Vodka, Rainforest Gin"
+      ],
+      "tank_allocations": [
+        "T-330-C: Rainforest Gin (2w)"
+      ]
+    },
+    {
+      "week_number": 9,
+      "week_start": "2026-02-25",
+      "week_end": "2026-03-03",
+      "month": 3,
+      "month_name": "Mar",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Rainforest Gin",
+          "batch_number": 2,
+          "total_batches": 2,
+          "production_type": "GIN",
+          "scheduled_month": 3,
+          "scheduled_month_name": "Mar",
+          "receiving_tank": "T-400"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Rainforest Gin - Batch 2/2",
+        "Hearts → T-400"
+      ],
+      "tank_allocations": [
+        "T-400: Rainforest Gin (1w)",
+        "T-330-C: Rainforest Gin (3w)"
+      ]
+    },
+    {
+      "week_number": 10,
+      "week_start": "2026-03-04",
+      "week_end": "2026-03-10",
+      "month": 3,
+      "month_name": "Mar",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Gin",
+          "batch_number": 1,
+          "total_batches": 3,
+          "production_type": "GIN",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Gin - Batch 1/3",
+        "Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Rainforest Gin (2w)",
+        "T-330-A: Merchant Mae Gin (1w)",
+        "T-330-C: Rainforest Gin (4w)"
+      ]
+    },
+    {
+      "week_number": 11,
+      "week_start": "2026-03-11",
+      "week_end": "2026-03-17",
+      "month": 3,
+      "month_name": "Mar",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Gin",
+          "batch_number": 2,
+          "total_batches": 3,
+          "production_type": "GIN",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan",
+          "receiving_tank": "T-330-B"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Gin - Batch 2/3",
+        "Hearts → T-330-B"
+      ],
+      "tank_allocations": [
+        "T-400: Rainforest Gin (3w)",
+        "T-330-A: Merchant Mae Gin (2w)",
+        "T-330-B: Merchant Mae Gin (1w)",
+        "T-330-C: Rainforest Gin (5w)"
+      ]
+    },
+    {
+      "week_number": 12,
+      "week_start": "2026-03-18",
+      "week_end": "2026-03-24",
+      "month": 3,
+      "month_name": "Mar",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Rainforest Gin",
+        "Bottle Merchant Mae Gin",
+        "Bottle Merchant Mae Gin",
+        "Bottle Rainforest Gin"
+      ],
+      "notes": [
+        "Bottling week - free tanks for next production",
+        "Bottling: Rainforest Gin, Merchant Mae Gin, Merchant Mae Gin, Rainforest Gin"
+      ],
+      "tank_allocations": [
+        "T-330-B: Merchant Mae Gin (2w)"
+      ]
+    },
+    {
+      "week_number": 13,
+      "week_start": "2026-03-25",
+      "week_end": "2026-03-31",
+      "month": 4,
+      "month_name": "Apr",
+      "mode": "VODKA",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 6,
+          "total_batches": 6,
+          "production_type": "VODKA",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr",
+          "receiving_tank": "T-400"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Vodka - Batch 6/6",
+        "Hearts → T-400"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (1w)",
+        "T-330-B: Merchant Mae Gin (3w)"
+      ]
+    },
+    {
+      "week_number": 14,
+      "week_start": "2026-04-01",
+      "week_end": "2026-04-07",
+      "month": 4,
+      "month_name": "Apr",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Signature Gin",
+          "batch_number": 1,
+          "total_batches": 1,
+          "production_type": "GIN",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Signature Gin - Batch 1/1",
+        "Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (2w)",
+        "T-330-A: Signature Gin (1w)",
+        "T-330-B: Merchant Mae Gin (4w)"
+      ]
+    },
+    {
+      "week_number": 15,
+      "week_start": "2026-04-08",
+      "week_end": "2026-04-14",
+      "month": 4,
+      "month_name": "Apr",
+      "mode": "RUM",
+      "production_runs": [
+        {
+          "product": "Merchant Mae White Rum",
+          "batch_number": 2,
+          "total_batches": 3,
+          "production_type": "RUM",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr",
+          "receiving_tank": "T-330-C"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae White Rum - Batch 2/3",
+        "Hearts → T-330-C"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (3w)",
+        "T-330-A: Signature Gin (2w)",
+        "T-330-B: Merchant Mae Gin (5w)",
+        "T-330-C: Merchant Mae White Rum (1w)"
+      ]
+    },
+    {
+      "week_number": 16,
+      "week_start": "2026-04-15",
+      "week_end": "2026-04-21",
+      "month": 4,
+      "month_name": "Apr",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Vodka",
+        "Bottle Signature Gin",
+        "Bottle Merchant Mae Gin",
+        "Bottle Merchant Mae White Rum"
+      ],
+      "notes": [
+        "Bottling week - free tanks for next production",
+        "Bottling: Merchant Mae Vodka, Signature Gin, Merchant Mae Gin, Merchant Mae White Rum"
+      ],
+      "tank_allocations": [
+        "T-330-C: Merchant Mae White Rum (2w)"
+      ]
+    },
+    {
+      "week_number": 17,
+      "week_start": "2026-04-22",
+      "week_end": "2026-04-28",
+      "month": 4,
+      "month_name": "Apr",
+      "mode": "RUM",
+      "production_runs": [
+        {
+          "product": "Merchant Mae White Rum",
+          "batch_number": 3,
+          "total_batches": 3,
+          "production_type": "RUM",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr",
+          "receiving_tank": "T-400"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae White Rum - Batch 3/3, Hearts → T-400"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae White Rum (1w)",
+        "T-330-C: Merchant Mae White Rum (3w)"
+      ]
+    },
+    {
+      "week_number": 18,
+      "week_start": "2026-04-29",
+      "week_end": "2026-05-05",
+      "month": 5,
+      "month_name": "May",
+      "mode": "RUM",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Dark Rum",
+          "batch_number": 1,
+          "total_batches": 2,
+          "production_type": "RUM",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Dark Rum - Batch 1/2",
+        "Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae White Rum (2w)",
+        "T-330-A: Merchant Mae Dark Rum (1w)",
+        "T-330-C: Merchant Mae White Rum (4w)"
+      ]
+    },
+    {
+      "week_number": 19,
+      "week_start": "2026-05-06",
+      "week_end": "2026-05-12",
+      "month": 5,
+      "month_name": "May",
+      "mode": "VODKA",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 4,
+          "total_batches": 6,
+          "production_type": "VODKA",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb",
+          "receiving_tank": "T-330-B"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Vodka - Batch 4/6",
+        "Hearts → T-330-B"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae White Rum (3w)",
+        "T-330-A: Merchant Mae Dark Rum (2w)",
+        "T-330-B: Merchant Mae Vodka (1w)",
+        "T-330-C: Merchant Mae White Rum (5w)"
+      ]
+    },
+    {
+      "week_number": 20,
+      "week_start": "2026-05-13",
+      "week_end": "2026-05-19",
+      "month": 5,
+      "month_name": "May",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae White Rum",
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Vodka",
+        "Bottle Merchant Mae White Rum"
+      ],
+      "notes": [
+        "Bottling week - free tanks for next production",
+        "Bottling: Merchant Mae White Rum, Merchant Mae Dark Rum, Merchant Mae Vodka, Merchant Mae White Rum"
+      ],
+      "tank_allocations": [
+        "T-330-B: Merchant Mae Vodka (2w)"
+      ]
+    },
+    {
+      "week_number": 21,
+      "week_start": "2026-05-20",
+      "week_end": "2026-05-26",
+      "month": 5,
+      "month_name": "May",
+      "mode": "VODKA",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 5,
+          "total_batches": 6,
+          "production_type": "VODKA",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb",
+          "receiving_tank": "T-400"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Vodka - Batch 5/6",
+        "Hearts → T-400"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (1w)",
+        "T-330-B: Merchant Mae Vodka (3w)"
+      ]
+    },
+    {
+      "week_number": 22,
+      "week_start": "2026-05-27",
+      "week_end": "2026-06-02",
+      "month": 6,
+      "month_name": "Jun",
+      "mode": "LIQUEUR",
+      "production_runs": [
+        {
+          "product": "Coffee Liqueur",
+          "batch_number": 1,
+          "total_batches": 1,
+          "production_type": "LIQUEUR",
+          "scheduled_month": 6,
+          "scheduled_month_name": "Jun",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Coffee Liqueur - Batch 1/1",
+        "Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (2w)",
+        "T-330-A: Coffee Liqueur (1w)",
+        "T-330-B: Merchant Mae Vodka (4w)"
+      ]
+    },
+    {
+      "week_number": 23,
+      "week_start": "2026-06-03",
+      "week_end": "2026-06-09",
+      "month": 6,
+      "month_name": "Jun",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Gin",
+          "batch_number": 3,
+          "total_batches": 3,
+          "production_type": "GIN",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb",
+          "receiving_tank": "T-330-C"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Gin - Batch 3/3",
+        "Hearts → T-330-C"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Vodka (3w)",
+        "T-330-A: Coffee Liqueur (2w)",
+        "T-330-B: Merchant Mae Vodka (5w)",
+        "T-330-C: Merchant Mae Gin (1w)"
+      ]
+    },
+    {
+      "week_number": 24,
+      "week_start": "2026-06-10",
+      "week_end": "2026-06-16",
+      "month": 6,
+      "month_name": "Jun",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Vodka",
+        "Bottle Coffee Liqueur",
+        "Bottle Merchant Mae Vodka",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Bottling week - free tanks for next production",
+        "Bottling: Merchant Mae Vodka, Coffee Liqueur, Merchant Mae Vodka, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-330-C: Merchant Mae Gin (2w)"
+      ]
+    },
+    {
+      "week_number": 25,
+      "week_start": "2026-06-17",
+      "week_end": "2026-06-23",
+      "month": 6,
+      "month_name": "Jun",
+      "mode": "RUM",
+      "production_runs": [
+        {
+          "product": "Merchant Mae Dark Rum",
+          "batch_number": 2,
+          "total_batches": 2,
+          "production_type": "RUM",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb",
+          "receiving_tank": "T-400"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Merchant Mae Dark Rum - Batch 2/2",
+        "Hearts → T-400"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (1w)",
+        "T-330-C: Merchant Mae Gin (3w)"
+      ]
+    },
+    {
+      "week_number": 26,
+      "week_start": "2026-06-24",
+      "week_end": "2026-06-30",
+      "month": 7,
+      "month_name": "Jul",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (2w)",
+        "T-330-C: Merchant Mae Gin (4w)"
+      ]
+    },
+    {
+      "week_number": 27,
+      "week_start": "2026-07-01",
+      "week_end": "2026-07-07",
+      "month": 7,
+      "month_name": "Jul",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (3w)",
+        "T-330-C: Merchant Mae Gin (5w)"
+      ]
+    },
+    {
+      "week_number": 28,
+      "week_start": "2026-07-08",
+      "week_end": "2026-07-14",
+      "month": 7,
+      "month_name": "Jul",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (4w)",
+        "T-330-C: Merchant Mae Gin (6w)"
+      ]
+    },
+    {
+      "week_number": 29,
+      "week_start": "2026-07-15",
+      "week_end": "2026-07-21",
+      "month": 7,
+      "month_name": "Jul",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (5w)",
+        "T-330-C: Merchant Mae Gin (7w)"
+      ]
+    },
+    {
+      "week_number": 30,
+      "week_start": "2026-07-22",
+      "week_end": "2026-07-28",
+      "month": 7,
+      "month_name": "Jul",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (6w)",
+        "T-330-C: Merchant Mae Gin (8w)"
+      ]
+    },
+    {
+      "week_number": 31,
+      "week_start": "2026-07-29",
+      "week_end": "2026-08-04",
+      "month": 8,
+      "month_name": "Aug",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (7w)",
+        "T-330-C: Merchant Mae Gin (9w)"
+      ]
+    },
+    {
+      "week_number": 32,
+      "week_start": "2026-08-05",
+      "week_end": "2026-08-11",
+      "month": 8,
+      "month_name": "Aug",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (8w)",
+        "T-330-C: Merchant Mae Gin (10w)"
+      ]
+    },
+    {
+      "week_number": 33,
+      "week_start": "2026-08-12",
+      "week_end": "2026-08-18",
+      "month": 8,
+      "month_name": "Aug",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (9w)",
+        "T-330-C: Merchant Mae Gin (11w)"
+      ]
+    },
+    {
+      "week_number": 34,
+      "week_start": "2026-08-19",
+      "week_end": "2026-08-25",
+      "month": 8,
+      "month_name": "Aug",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (10w)",
+        "T-330-C: Merchant Mae Gin (12w)"
+      ]
+    },
+    {
+      "week_number": 35,
+      "week_start": "2026-08-26",
+      "week_end": "2026-09-01",
+      "month": 9,
+      "month_name": "Sep",
+      "mode": "CANE_SPIRIT",
+      "production_runs": [
+        {
+          "product": "Australian Cane Spirit",
+          "batch_number": 1,
+          "total_batches": 1,
+          "production_type": "CANE_SPIRIT",
+          "scheduled_month": 9,
+          "scheduled_month_name": "Sep",
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": false,
+      "notes": [
+        "Australian Cane Spirit - Batch 1/1",
+        "Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (11w)",
+        "T-330-A: Australian Cane Spirit (1w)",
+        "T-330-C: Merchant Mae Gin (13w)"
+      ]
+    },
+    {
+      "week_number": 36,
+      "week_start": "2026-09-02",
+      "week_end": "2026-09-08",
+      "month": 9,
+      "month_name": "Sep",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (12w)",
+        "T-330-A: Australian Cane Spirit (2w)",
+        "T-330-C: Merchant Mae Gin (14w)"
+      ]
+    },
+    {
+      "week_number": 37,
+      "week_start": "2026-09-09",
+      "week_end": "2026-09-15",
+      "month": 9,
+      "month_name": "Sep",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (13w)",
+        "T-330-A: Australian Cane Spirit (3w)",
+        "T-330-C: Merchant Mae Gin (15w)"
+      ]
+    },
+    {
+      "week_number": 38,
+      "week_start": "2026-09-16",
+      "week_end": "2026-09-22",
+      "month": 9,
+      "month_name": "Sep",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (14w)",
+        "T-330-A: Australian Cane Spirit (4w)",
+        "T-330-C: Merchant Mae Gin (16w)"
+      ]
+    },
+    {
+      "week_number": 39,
+      "week_start": "2026-09-23",
+      "week_end": "2026-09-29",
+      "month": 10,
+      "month_name": "Oct",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (15w)",
+        "T-330-A: Australian Cane Spirit (5w)",
+        "T-330-C: Merchant Mae Gin (17w)"
+      ]
+    },
+    {
+      "week_number": 40,
+      "week_start": "2026-09-30",
+      "week_end": "2026-10-06",
+      "month": 10,
+      "month_name": "Oct",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (16w)",
+        "T-330-A: Australian Cane Spirit (6w)",
+        "T-330-C: Merchant Mae Gin (18w)"
+      ]
+    },
+    {
+      "week_number": 41,
+      "week_start": "2026-10-07",
+      "week_end": "2026-10-13",
+      "month": 10,
+      "month_name": "Oct",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (17w)",
+        "T-330-A: Australian Cane Spirit (7w)",
+        "T-330-C: Merchant Mae Gin (19w)"
+      ]
+    },
+    {
+      "week_number": 42,
+      "week_start": "2026-10-14",
+      "week_end": "2026-10-20",
+      "month": 10,
+      "month_name": "Oct",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (18w)",
+        "T-330-A: Australian Cane Spirit (8w)",
+        "T-330-C: Merchant Mae Gin (20w)"
+      ]
+    },
+    {
+      "week_number": 43,
+      "week_start": "2026-10-21",
+      "week_end": "2026-10-27",
+      "month": 10,
+      "month_name": "Oct",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (19w)",
+        "T-330-A: Australian Cane Spirit (9w)",
+        "T-330-C: Merchant Mae Gin (21w)"
+      ]
+    },
+    {
+      "week_number": 44,
+      "week_start": "2026-10-28",
+      "week_end": "2026-11-03",
+      "month": 11,
+      "month_name": "Nov",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (20w)",
+        "T-330-A: Australian Cane Spirit (10w)",
+        "T-330-C: Merchant Mae Gin (22w)"
+      ]
+    },
+    {
+      "week_number": 45,
+      "week_start": "2026-11-04",
+      "week_end": "2026-11-10",
+      "month": 11,
+      "month_name": "Nov",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (21w)",
+        "T-330-A: Australian Cane Spirit (11w)",
+        "T-330-C: Merchant Mae Gin (23w)"
+      ]
+    },
+    {
+      "week_number": 46,
+      "week_start": "2026-11-11",
+      "week_end": "2026-11-17",
+      "month": 11,
+      "month_name": "Nov",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (22w)",
+        "T-330-A: Australian Cane Spirit (12w)",
+        "T-330-C: Merchant Mae Gin (24w)"
+      ]
+    },
+    {
+      "week_number": 47,
+      "week_start": "2026-11-18",
+      "week_end": "2026-11-24",
+      "month": 11,
+      "month_name": "Nov",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (23w)",
+        "T-330-A: Australian Cane Spirit (13w)",
+        "T-330-C: Merchant Mae Gin (25w)"
+      ]
+    },
+    {
+      "week_number": 48,
+      "week_start": "2026-11-25",
+      "week_end": "2026-12-01",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (24w)",
+        "T-330-A: Australian Cane Spirit (14w)",
+        "T-330-C: Merchant Mae Gin (26w)"
+      ]
+    },
+    {
+      "week_number": 49,
+      "week_start": "2026-12-02",
+      "week_end": "2026-12-08",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (25w)",
+        "T-330-A: Australian Cane Spirit (15w)",
+        "T-330-C: Merchant Mae Gin (27w)"
+      ]
+    },
+    {
+      "week_number": 50,
+      "week_start": "2026-12-09",
+      "week_end": "2026-12-15",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "GIN",
+      "production_runs": [
+        {
+          "product": "Navy Strength Gin",
+          "batch_number": 1,
+          "total_batches": 1,
+          "receiving_tank": "va"
+        }
+      ],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Navy Strength Gin - Small Batch 1/1, 20L batch in Simini still (not main still), For 200ml bottles only, Direct collection and bottling - no tank storage"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (26w)",
+        "T-330-A: Australian Cane Spirit (16w)",
+        "T-330-C: Merchant Mae Gin (28w)"
+      ]
+    },
+    {
+      "week_number": 51,
+      "week_start": "2026-12-16",
+      "week_end": "2026-12-22",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "RUM",
+      "production_runs": [
+        {
+          "product": "Merchant Mae White Rum",
+          "batch_number": 1,
+          "total_batches": 3,
+          "receiving_tank": "T-330-A"
+        }
+      ],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Merchant Mae White Rum - Batch 1/3, First batch of 2026 production cycle, Hearts → T-330-A"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (27w)",
+        "T-330-A: Australian Cane Spirit (17w)",
+        "T-330-C: Merchant Mae Gin (29w)"
+      ]
+    },
+    {
+      "week_number": 52,
+      "week_start": "2026-12-23",
+      "week_end": "2026-12-29",
+      "month": 12,
+      "month_name": "Dec",
+      "mode": "ADMIN",
+      "production_runs": [],
+      "bottling": true,
+      "bottling_tasks": [
+        "Bottle Merchant Mae Dark Rum",
+        "Bottle Australian Cane Spirit",
+        "Bottle Merchant Mae Gin"
+      ],
+      "notes": [
+        "Non-distillation week",
+        "Bottling: Merchant Mae Dark Rum, Australian Cane Spirit, Merchant Mae Gin"
+      ],
+      "tank_allocations": [
+        "T-400: Merchant Mae Dark Rum (28w)",
+        "T-330-A: Australian Cane Spirit (18w)",
+        "T-330-C: Merchant Mae Gin (30w)"
+      ]
+    }
+  ]
+}

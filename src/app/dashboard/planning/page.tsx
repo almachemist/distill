@@ -46,32 +46,32 @@ export default function PlanningPage() {
       <header className="space-y-2">
         <h1 className="text-3xl font-semibold text-gray-900">Production Planning</h1>
         <p className="text-gray-600">
-          Dados de vendas 2025 e catálogo de preços carregados do JSON local para auxiliar o planejamento do próximo ano.
+          2025 sales data and pricing catalogue loaded from local JSON to assist next year's planning.
         </p>
       </header>
 
       <section>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-          <SummaryCard title="Net Sales 2025" value={formatCurrency(totalNetSales)} trendLabel="período anual" />
-          <SummaryCard title="Unidades vendidas" value={numberFormatter.format(totalUnitsSold)} trendLabel="itens" />
-          <SummaryCard title="Categorias" value={categoryCount.toString()} trendLabel="com vendas" />
-          <SummaryCard title="Produtos no catálogo" value={totalProducts.toString()} trendLabel="ativos" />
+          <SummaryCard title="Net Sales 2025" value={formatCurrency(totalNetSales)} trendLabel="annual period" />
+          <SummaryCard title="Units Sold" value={numberFormatter.format(totalUnitsSold)} trendLabel="items" />
+          <SummaryCard title="Categories" value={categoryCount.toString()} trendLabel="with sales" />
+          <SummaryCard title="Products in Catalogue" value={totalProducts.toString()} trendLabel="active" />
         </div>
       </section>
 
       <section className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm">
           <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900">Vendas por categoria</h2>
-            <p className="text-sm text-gray-500 mt-1">Ordenado por net sales.</p>
+            <h2 className="text-xl font-semibold text-gray-900">Sales by Category</h2>
+            <p className="text-sm text-gray-500 mt-1">Sorted by net sales.</p>
           </div>
           <div className="p-6 overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead className="text-left text-gray-500">
                 <tr>
-                  <th className="pb-3">Categoria</th>
-                  <th className="pb-3 text-right">Net sales</th>
-                  <th className="pb-3 text-right">Unidades</th>
+                  <th className="pb-3">Category</th>
+                  <th className="pb-3 text-right">Net Sales</th>
+                  <th className="pb-3 text-right">Units</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -89,16 +89,16 @@ export default function PlanningPage() {
 
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm">
           <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900">Top produtos por net sales</h2>
-            <p className="text-sm text-gray-500 mt-1">Top 5 itens vendidos em 2025.</p>
+            <h2 className="text-xl font-semibold text-gray-900">Top Products by Net Sales</h2>
+            <p className="text-sm text-gray-500 mt-1">Top 5 items sold in 2025.</p>
           </div>
           <div className="p-6 overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead className="text-left text-gray-500">
                 <tr>
-                  <th className="pb-3">Produto</th>
-                  <th className="pb-3 text-right">Net sales</th>
-                  <th className="pb-3 text-right">Unidades</th>
+                  <th className="pb-3">Product</th>
+                  <th className="pb-3 text-right">Net Sales</th>
+                  <th className="pb-3 text-right">Units</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -117,15 +117,15 @@ export default function PlanningPage() {
 
       <section className="bg-white border border-gray-200 rounded-xl shadow-sm">
         <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-gray-900">Catálogo de preços</h2>
-          <p className="text-sm text-gray-500 mt-1">Dados importados de pricing_catalogue_2025.json.</p>
+          <h2 className="text-xl font-semibold text-gray-900">Pricing Catalogue</h2>
+          <p className="text-sm text-gray-500 mt-1">Data imported from pricing_catalogue_2025.json.</p>
         </div>
         <div className="p-6 overflow-x-auto">
           <table className="min-w-full text-xs sm:text-sm">
             <thead className="text-left text-gray-500">
               <tr>
-                <th className="pb-3">Categoria</th>
-                <th className="pb-3">Produto</th>
+                <th className="pb-3">Category</th>
+                <th className="pb-3">Product</th>
                 <th className="pb-3">SKU</th>
                 <th className="pb-3 text-right">Wholesale</th>
                 <th className="pb-3 text-right">RRP</th>

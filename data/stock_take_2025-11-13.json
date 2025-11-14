@@ -1,0 +1,110 @@
+{
+  "date": "2025-11-13",
+  "stock_take": {
+    "devils": [
+      {
+        "product": "Rainforest",
+        "sizes": [
+          { "ml": 700, "quantity": 347 },
+          { "ml": 200, "quantity": 130 }
+        ]
+      },
+      {
+        "product": "Signature",
+        "sizes": [
+          { "ml": 700, "quantity": 587 },
+          { "ml": 200, "quantity": 117 }
+        ]
+      },
+      {
+        "product": "Navy",
+        "sizes": [
+          { "ml": 700, "quantity": 518 },
+          { "ml": 200, "quantity": 16 }
+        ]
+      },
+      {
+        "product": "Cane Spirit",
+        "sizes": [
+          { "ml": 700, "quantity": 230 },
+          { "ml": 200, "quantity": 18 }
+        ]
+      },
+      {
+        "product": "Wet Season",
+        "sizes": [
+          { "ml": 700, "quantity": 617 }
+        ]
+      },
+      {
+        "product": "Dry Season",
+        "sizes": [
+          { "ml": 700, "quantity": 508 }
+        ]
+      },
+      {
+        "product": "Pineapple Rum",
+        "sizes": [
+          { "ml": 200, "quantity": 131 },
+          { "ml": 700, "quantity": 485 }
+        ]
+      },
+      {
+        "product": "Spiced Rum",
+        "sizes": [
+          { "ml": 200, "quantity": 73 },
+          { "ml": 700, "quantity": 212 }
+        ]
+      },
+      {
+        "product": "Reserve Cask Rum",
+        "sizes": [
+          { "ml": 700, "quantity": 62 }
+        ]
+      },
+      {
+        "product": "Coffee Liqueur",
+        "sizes": [
+          { "ml": 700, "quantity": 10 }
+        ]
+      },
+      {
+        "product": "Gift packs Gin",
+        "quantity": 16
+      },
+      {
+        "product": "Gift packs Rum",
+        "quantity": 6
+      }
+    ],
+    "merchant_mae": [
+      {
+        "product": "Gin",
+        "types": [
+          { "package": "Bottle", "quantity": 775 },
+          { "package": "Pouches", "quantity": 6 }
+        ]
+      },
+      {
+        "product": "Vodka",
+        "types": [
+          { "package": "Bottle", "quantity": 1083 },
+          { "package": "Pouches", "quantity": 22 }
+        ]
+      },
+      {
+        "product": "White Rum",
+        "types": [
+          { "package": "Bottle", "quantity": 218 }
+        ]
+      },
+      {
+        "product": "Dark Rum",
+        "types": [
+          { "package": "Bottle", "quantity": 112 }
+        ]
+      }
+    ]
+  }
+}
+

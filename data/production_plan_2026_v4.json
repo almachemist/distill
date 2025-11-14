@@ -1,0 +1,2057 @@
+{
+  "generated_at": "2025-11-14T00:21:37.327Z",
+  "production_plans": [
+    {
+      "product": "Rainforest Gin",
+      "priority": "CRITICAL",
+      "current_stock": 477,
+      "total_demand_2026": 2046,
+      "batches_needed": 2,
+      "bottles_per_batch": 974,
+      "production_schedule": [
+        {
+          "product": "Rainforest Gin",
+          "batch_number": 1,
+          "total_batches": 2,
+          "bottles_700ml": 658,
+          "bottles_200ml": 316,
+          "total_bottles": 974,
+          "production_type": "GIN",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb"
+        },
+        {
+          "product": "Rainforest Gin",
+          "batch_number": 2,
+          "total_batches": 2,
+          "bottles_700ml": 658,
+          "bottles_200ml": 316,
+          "total_bottles": 974,
+          "production_type": "GIN",
+          "scheduled_month": 3,
+          "scheduled_month_name": "Mar"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 477,
+          "production": 0,
+          "demand": 119,
+          "ending_stock": 358,
+          "months_of_stock": 2.099706744868035,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 358,
+          "production": 974,
+          "demand": 99,
+          "ending_stock": 1233,
+          "months_of_stock": 7.231671554252199,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 1233,
+          "production": 974,
+          "demand": 178,
+          "ending_stock": 2029,
+          "months_of_stock": 11.900293255131965,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 2029,
+          "production": 0,
+          "demand": 174,
+          "ending_stock": 1855,
+          "months_of_stock": 10.879765395894427,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 1855,
+          "production": 0,
+          "demand": 202,
+          "ending_stock": 1653,
+          "months_of_stock": 9.695014662756599,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 1653,
+          "production": 0,
+          "demand": 250,
+          "ending_stock": 1403,
+          "months_of_stock": 8.228739002932551,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 1403,
+          "production": 0,
+          "demand": 228,
+          "ending_stock": 1175,
+          "months_of_stock": 6.891495601173021,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 1175,
+          "production": 0,
+          "demand": 208,
+          "ending_stock": 967,
+          "months_of_stock": 5.671554252199414,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 967,
+          "production": 0,
+          "demand": 150,
+          "ending_stock": 817,
+          "months_of_stock": 4.7917888563049855,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 817,
+          "production": 0,
+          "demand": 391,
+          "ending_stock": 426,
+          "months_of_stock": 2.498533724340176,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 426,
+          "production": 0,
+          "demand": 47,
+          "ending_stock": 379,
+          "months_of_stock": 2.222873900293255,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 379,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 379,
+          "months_of_stock": 2.222873900293255,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Merchant Mae Vodka",
+      "priority": "CRITICAL",
+      "current_stock": 0,
+      "total_demand_2026": 3699,
+      "batches_needed": 6,
+      "bottles_per_batch": 797,
+      "production_schedule": [
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 1,
+          "total_batches": 6,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "VODKA",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        },
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 2,
+          "total_batches": 6,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "VODKA",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        },
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 3,
+          "total_batches": 6,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "VODKA",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        },
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 4,
+          "total_batches": 6,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "VODKA",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb"
+        },
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 5,
+          "total_batches": 6,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "VODKA",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb"
+        },
+        {
+          "product": "Merchant Mae Vodka",
+          "batch_number": 6,
+          "total_batches": 6,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "VODKA",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 2391,
+          "demand": 409,
+          "ending_stock": 1982,
+          "months_of_stock": 6.4298459042984595,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 1982,
+          "production": 1594,
+          "demand": 158,
+          "ending_stock": 3418,
+          "months_of_stock": 11.088402270884023,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 3418,
+          "production": 0,
+          "demand": 226,
+          "ending_stock": 3192,
+          "months_of_stock": 10.355231143552311,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 3192,
+          "production": 797,
+          "demand": 304,
+          "ending_stock": 3685,
+          "months_of_stock": 11.954582319545823,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 3685,
+          "production": 0,
+          "demand": 325,
+          "ending_stock": 3360,
+          "months_of_stock": 10.900243309002432,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 3360,
+          "production": 0,
+          "demand": 307,
+          "ending_stock": 3053,
+          "months_of_stock": 9.904298459042984,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 3053,
+          "production": 0,
+          "demand": 281,
+          "ending_stock": 2772,
+          "months_of_stock": 8.992700729927007,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 2772,
+          "production": 0,
+          "demand": 653,
+          "ending_stock": 2119,
+          "months_of_stock": 6.874290348742903,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 2119,
+          "production": 0,
+          "demand": 326,
+          "ending_stock": 1793,
+          "months_of_stock": 5.816707218167072,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 1793,
+          "production": 0,
+          "demand": 634,
+          "ending_stock": 1159,
+          "months_of_stock": 3.759935117599351,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 1159,
+          "production": 0,
+          "demand": 76,
+          "ending_stock": 1083,
+          "months_of_stock": 3.51338199513382,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 1083,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 1083,
+          "months_of_stock": 3.51338199513382,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Signature Gin",
+      "priority": "HIGH",
+      "current_stock": 704,
+      "total_demand_2026": 646,
+      "batches_needed": 1,
+      "bottles_per_batch": 1103,
+      "production_schedule": [
+        {
+          "product": "Signature Gin",
+          "batch_number": 1,
+          "total_batches": 1,
+          "bottles_700ml": 880,
+          "bottles_200ml": 223,
+          "total_bottles": 1103,
+          "production_type": "GIN",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 704,
+          "production": 0,
+          "demand": 50,
+          "ending_stock": 654,
+          "months_of_stock": 12.14860681114551,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 654,
+          "production": 0,
+          "demand": 52,
+          "ending_stock": 602,
+          "months_of_stock": 11.18266253869969,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 602,
+          "production": 0,
+          "demand": 37,
+          "ending_stock": 565,
+          "months_of_stock": 10.495356037151703,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 565,
+          "production": 1103,
+          "demand": 52,
+          "ending_stock": 1616,
+          "months_of_stock": 30.018575851393187,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 1616,
+          "production": 0,
+          "demand": 48,
+          "ending_stock": 1568,
+          "months_of_stock": 29.126934984520123,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 1568,
+          "production": 0,
+          "demand": 34,
+          "ending_stock": 1534,
+          "months_of_stock": 28.4953560371517,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 1534,
+          "production": 0,
+          "demand": 139,
+          "ending_stock": 1395,
+          "months_of_stock": 25.91331269349845,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 1395,
+          "production": 0,
+          "demand": 75,
+          "ending_stock": 1320,
+          "months_of_stock": 24.520123839009287,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 1320,
+          "production": 0,
+          "demand": 59,
+          "ending_stock": 1261,
+          "months_of_stock": 23.424148606811144,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 1261,
+          "production": 0,
+          "demand": 97,
+          "ending_stock": 1164,
+          "months_of_stock": 21.622291021671824,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 1164,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 1161,
+          "months_of_stock": 21.56656346749226,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 1161,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 1161,
+          "months_of_stock": 21.56656346749226,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Navy Gin",
+      "priority": "HIGH",
+      "current_stock": 534,
+      "total_demand_2026": 428,
+      "batches_needed": 0,
+      "bottles_per_batch": 695,
+      "production_schedule": [],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 534,
+          "production": 0,
+          "demand": 47,
+          "ending_stock": 487,
+          "months_of_stock": 13.654205607476637,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 487,
+          "production": 0,
+          "demand": 8,
+          "ending_stock": 479,
+          "months_of_stock": 13.429906542056075,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 479,
+          "production": 0,
+          "demand": 53,
+          "ending_stock": 426,
+          "months_of_stock": 11.94392523364486,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 426,
+          "production": 0,
+          "demand": 31,
+          "ending_stock": 395,
+          "months_of_stock": 11.074766355140188,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 395,
+          "production": 0,
+          "demand": 48,
+          "ending_stock": 347,
+          "months_of_stock": 9.728971962616823,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 347,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 324,
+          "months_of_stock": 9.08411214953271,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 324,
+          "production": 0,
+          "demand": 66,
+          "ending_stock": 258,
+          "months_of_stock": 7.233644859813085,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 258,
+          "production": 0,
+          "demand": 83,
+          "ending_stock": 175,
+          "months_of_stock": 4.906542056074767,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 175,
+          "production": 0,
+          "demand": 10,
+          "ending_stock": 165,
+          "months_of_stock": 4.626168224299065,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 165,
+          "production": 0,
+          "demand": 45,
+          "ending_stock": 120,
+          "months_of_stock": 3.3644859813084116,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 120,
+          "production": 0,
+          "demand": 14,
+          "ending_stock": 106,
+          "months_of_stock": 2.97196261682243,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 106,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 106,
+          "months_of_stock": 2.97196261682243,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Australian Cane Spirit",
+      "priority": "HIGH",
+      "current_stock": 248,
+      "total_demand_2026": 275,
+      "batches_needed": 1,
+      "bottles_per_batch": 354,
+      "production_schedule": [
+        {
+          "product": "Australian Cane Spirit",
+          "batch_number": 1,
+          "total_batches": 1,
+          "bottles_700ml": 290,
+          "bottles_200ml": 64,
+          "total_bottles": 354,
+          "production_type": "CANE_SPIRIT",
+          "scheduled_month": 9,
+          "scheduled_month_name": "Sep"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 248,
+          "production": 0,
+          "demand": 39,
+          "ending_stock": 209,
+          "months_of_stock": 9.12,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 209,
+          "production": 0,
+          "demand": 7,
+          "ending_stock": 202,
+          "months_of_stock": 8.814545454545454,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 202,
+          "production": 0,
+          "demand": 2,
+          "ending_stock": 200,
+          "months_of_stock": 8.727272727272727,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 200,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 191,
+          "months_of_stock": 8.334545454545454,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 191,
+          "production": 0,
+          "demand": 35,
+          "ending_stock": 156,
+          "months_of_stock": 6.807272727272727,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 156,
+          "production": 0,
+          "demand": 41,
+          "ending_stock": 115,
+          "months_of_stock": 5.018181818181818,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 115,
+          "production": 0,
+          "demand": 43,
+          "ending_stock": 72,
+          "months_of_stock": 3.1418181818181816,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 72,
+          "production": 0,
+          "demand": 72,
+          "ending_stock": 0,
+          "months_of_stock": 0,
+          "status": "STOCKOUT"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 0,
+          "production": 354,
+          "demand": 4,
+          "ending_stock": 350,
+          "months_of_stock": 15.272727272727272,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 350,
+          "production": 0,
+          "demand": 20,
+          "ending_stock": 330,
+          "months_of_stock": 14.399999999999999,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 330,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 327,
+          "months_of_stock": 14.269090909090908,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 327,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 327,
+          "months_of_stock": 14.269090909090908,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Merchant Mae Gin",
+      "priority": "HIGH",
+      "current_stock": 0,
+      "total_demand_2026": 1640,
+      "batches_needed": 3,
+      "bottles_per_batch": 797,
+      "production_schedule": [
+        {
+          "product": "Merchant Mae Gin",
+          "batch_number": 1,
+          "total_batches": 3,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "GIN",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        },
+        {
+          "product": "Merchant Mae Gin",
+          "batch_number": 2,
+          "total_batches": 3,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "GIN",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        },
+        {
+          "product": "Merchant Mae Gin",
+          "batch_number": 3,
+          "total_batches": 3,
+          "bottles_700ml": 797,
+          "bottles_200ml": 0,
+          "total_bottles": 797,
+          "production_type": "GIN",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 1594,
+          "demand": 120,
+          "ending_stock": 1474,
+          "months_of_stock": 10.785365853658538,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 1474,
+          "production": 797,
+          "demand": 90,
+          "ending_stock": 2181,
+          "months_of_stock": 15.958536585365854,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 2181,
+          "production": 0,
+          "demand": 120,
+          "ending_stock": 2061,
+          "months_of_stock": 15.08048780487805,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 2061,
+          "production": 0,
+          "demand": 160,
+          "ending_stock": 1901,
+          "months_of_stock": 13.909756097560976,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 1901,
+          "production": 0,
+          "demand": 206,
+          "ending_stock": 1695,
+          "months_of_stock": 12.402439024390246,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 1695,
+          "production": 0,
+          "demand": 231,
+          "ending_stock": 1464,
+          "months_of_stock": 10.71219512195122,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 1464,
+          "production": 0,
+          "demand": 174,
+          "ending_stock": 1290,
+          "months_of_stock": 9.439024390243903,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 1290,
+          "production": 0,
+          "demand": 222,
+          "ending_stock": 1068,
+          "months_of_stock": 7.814634146341464,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 1068,
+          "production": 0,
+          "demand": 97,
+          "ending_stock": 971,
+          "months_of_stock": 7.104878048780488,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 971,
+          "production": 0,
+          "demand": 186,
+          "ending_stock": 785,
+          "months_of_stock": 5.7439024390243905,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 785,
+          "production": 0,
+          "demand": 34,
+          "ending_stock": 751,
+          "months_of_stock": 5.495121951219512,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 751,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 751,
+          "months_of_stock": 5.495121951219512,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Merchant Mae White Rum",
+      "priority": "HIGH",
+      "current_stock": 585,
+      "total_demand_2026": 1124,
+      "batches_needed": 2,
+      "bottles_per_batch": 585,
+      "production_schedule": [
+        {
+          "product": "Merchant Mae White Rum",
+          "batch_number": 2,
+          "total_batches": 3,
+          "bottles_700ml": 585,
+          "bottles_200ml": 0,
+          "total_bottles": 585,
+          "production_type": "RUM",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr"
+        },
+        {
+          "product": "Merchant Mae White Rum",
+          "batch_number": 3,
+          "total_batches": 3,
+          "bottles_700ml": 585,
+          "bottles_200ml": 0,
+          "total_bottles": 585,
+          "production_type": "RUM",
+          "scheduled_month": 4,
+          "scheduled_month_name": "Apr"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 585,
+          "production": 0,
+          "demand": 94,
+          "ending_stock": 491,
+          "months_of_stock": 5.241992882562277,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 491,
+          "production": 0,
+          "demand": 37,
+          "ending_stock": 454,
+          "months_of_stock": 4.846975088967971,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 454,
+          "production": 0,
+          "demand": 66,
+          "ending_stock": 388,
+          "months_of_stock": 4.142348754448398,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 388,
+          "production": 1170,
+          "demand": 109,
+          "ending_stock": 1449,
+          "months_of_stock": 15.469750889679714,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 1449,
+          "production": 0,
+          "demand": 112,
+          "ending_stock": 1337,
+          "months_of_stock": 14.274021352313166,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 1337,
+          "production": 0,
+          "demand": 143,
+          "ending_stock": 1194,
+          "months_of_stock": 12.747330960854091,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 1194,
+          "production": 0,
+          "demand": 39,
+          "ending_stock": 1155,
+          "months_of_stock": 12.330960854092526,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 1155,
+          "production": 0,
+          "demand": 233,
+          "ending_stock": 922,
+          "months_of_stock": 9.84341637010676,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 922,
+          "production": 0,
+          "demand": 66,
+          "ending_stock": 856,
+          "months_of_stock": 9.138790035587188,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 856,
+          "production": 0,
+          "demand": 199,
+          "ending_stock": 657,
+          "months_of_stock": 7.014234875444839,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 657,
+          "production": 0,
+          "demand": 26,
+          "ending_stock": 631,
+          "months_of_stock": 6.736654804270462,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 631,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 631,
+          "months_of_stock": 6.736654804270462,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Merchant Mae Dark Rum",
+      "priority": "HIGH",
+      "current_stock": 0,
+      "total_demand_2026": 411,
+      "batches_needed": 2,
+      "bottles_per_batch": 336,
+      "production_schedule": [
+        {
+          "product": "Merchant Mae Dark Rum",
+          "batch_number": 1,
+          "total_batches": 2,
+          "bottles_700ml": 336,
+          "bottles_200ml": 0,
+          "total_bottles": 336,
+          "production_type": "RUM",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        },
+        {
+          "product": "Merchant Mae Dark Rum",
+          "batch_number": 2,
+          "total_batches": 2,
+          "bottles_700ml": 336,
+          "bottles_200ml": 0,
+          "total_bottles": 336,
+          "production_type": "RUM",
+          "scheduled_month": 2,
+          "scheduled_month_name": "Feb"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 336,
+          "demand": 74,
+          "ending_stock": 262,
+          "months_of_stock": 7.649635036496351,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 262,
+          "production": 336,
+          "demand": 35,
+          "ending_stock": 563,
+          "months_of_stock": 16.437956204379564,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 563,
+          "production": 0,
+          "demand": 15,
+          "ending_stock": 548,
+          "months_of_stock": 16,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 548,
+          "production": 0,
+          "demand": 62,
+          "ending_stock": 486,
+          "months_of_stock": 14.18978102189781,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 486,
+          "production": 0,
+          "demand": 52,
+          "ending_stock": 434,
+          "months_of_stock": 12.671532846715328,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 434,
+          "production": 0,
+          "demand": 48,
+          "ending_stock": 386,
+          "months_of_stock": 11.27007299270073,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 386,
+          "production": 0,
+          "demand": 7,
+          "ending_stock": 379,
+          "months_of_stock": 11.065693430656934,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 379,
+          "production": 0,
+          "demand": 75,
+          "ending_stock": 304,
+          "months_of_stock": 8.875912408759124,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 304,
+          "production": 0,
+          "demand": 2,
+          "ending_stock": 302,
+          "months_of_stock": 8.817518248175183,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 302,
+          "production": 0,
+          "demand": 41,
+          "ending_stock": 261,
+          "months_of_stock": 7.62043795620438,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 261,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 261,
+          "months_of_stock": 7.62043795620438,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 261,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 261,
+          "months_of_stock": 7.62043795620438,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Wet Season Gin",
+      "priority": "MEDIUM",
+      "current_stock": 617,
+      "total_demand_2026": 293,
+      "batches_needed": 0,
+      "bottles_per_batch": 650,
+      "production_schedule": [],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 617,
+          "production": 0,
+          "demand": 33,
+          "ending_stock": 584,
+          "months_of_stock": 23.918088737201366,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 584,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 561,
+          "months_of_stock": 22.976109215017065,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 561,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 550,
+          "months_of_stock": 22.525597269624573,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 550,
+          "production": 0,
+          "demand": 26,
+          "ending_stock": 524,
+          "months_of_stock": 21.46075085324232,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 524,
+          "production": 0,
+          "demand": 36,
+          "ending_stock": 488,
+          "months_of_stock": 19.986348122866893,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 488,
+          "production": 0,
+          "demand": 53,
+          "ending_stock": 435,
+          "months_of_stock": 17.81569965870307,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 435,
+          "production": 0,
+          "demand": 40,
+          "ending_stock": 395,
+          "months_of_stock": 16.177474402730375,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 395,
+          "production": 0,
+          "demand": 25,
+          "ending_stock": 370,
+          "months_of_stock": 15.15358361774744,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 370,
+          "production": 0,
+          "demand": 25,
+          "ending_stock": 345,
+          "months_of_stock": 14.129692832764505,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 345,
+          "production": 0,
+          "demand": 15,
+          "ending_stock": 330,
+          "months_of_stock": 13.515358361774743,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 330,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 324,
+          "months_of_stock": 13.26962457337884,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 324,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 324,
+          "months_of_stock": 13.26962457337884,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Dry Season Gin",
+      "priority": "MEDIUM",
+      "current_stock": 508,
+      "total_demand_2026": 108,
+      "batches_needed": 0,
+      "bottles_per_batch": 576,
+      "production_schedule": [],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 508,
+          "production": 0,
+          "demand": 12,
+          "ending_stock": 496,
+          "months_of_stock": 55.111111111111114,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 496,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 493,
+          "months_of_stock": 54.77777777777778,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 493,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 493,
+          "months_of_stock": 54.77777777777778,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 493,
+          "production": 0,
+          "demand": 8,
+          "ending_stock": 485,
+          "months_of_stock": 53.888888888888886,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 485,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 472,
+          "months_of_stock": 52.44444444444444,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 472,
+          "production": 0,
+          "demand": 29,
+          "ending_stock": 443,
+          "months_of_stock": 49.22222222222222,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 443,
+          "production": 0,
+          "demand": 14,
+          "ending_stock": 429,
+          "months_of_stock": 47.666666666666664,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 429,
+          "production": 0,
+          "demand": 10,
+          "ending_stock": 419,
+          "months_of_stock": 46.55555555555556,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 419,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 410,
+          "months_of_stock": 45.55555555555556,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 410,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 404,
+          "months_of_stock": 44.888888888888886,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 404,
+          "production": 0,
+          "demand": 4,
+          "ending_stock": 400,
+          "months_of_stock": 44.44444444444444,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 400,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 400,
+          "months_of_stock": 44.44444444444444,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Spiced Rum",
+      "priority": "MEDIUM",
+      "current_stock": 285,
+      "total_demand_2026": 240,
+      "batches_needed": 0,
+      "bottles_per_batch": 955,
+      "production_schedule": [],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 285,
+          "production": 0,
+          "demand": 14,
+          "ending_stock": 271,
+          "months_of_stock": 13.55,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 271,
+          "production": 0,
+          "demand": 10,
+          "ending_stock": 261,
+          "months_of_stock": 13.05,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 261,
+          "production": 0,
+          "demand": 17,
+          "ending_stock": 244,
+          "months_of_stock": 12.2,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 244,
+          "production": 0,
+          "demand": 32,
+          "ending_stock": 212,
+          "months_of_stock": 10.6,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 212,
+          "production": 0,
+          "demand": 29,
+          "ending_stock": 183,
+          "months_of_stock": 9.15,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 183,
+          "production": 0,
+          "demand": 29,
+          "ending_stock": 154,
+          "months_of_stock": 7.7,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 154,
+          "production": 0,
+          "demand": 28,
+          "ending_stock": 126,
+          "months_of_stock": 6.3,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 126,
+          "production": 0,
+          "demand": 42,
+          "ending_stock": 84,
+          "months_of_stock": 4.2,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 84,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 71,
+          "months_of_stock": 3.55,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 71,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 48,
+          "months_of_stock": 2.4,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 48,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 45,
+          "months_of_stock": 2.25,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 45,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 45,
+          "months_of_stock": 2.25,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Pineapple Rum",
+      "priority": "LOW",
+      "current_stock": 616,
+      "total_demand_2026": 287,
+      "batches_needed": 0,
+      "bottles_per_batch": 952,
+      "production_schedule": [],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 616,
+          "production": 0,
+          "demand": 32,
+          "ending_stock": 584,
+          "months_of_stock": 24.418118466898953,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 584,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 575,
+          "months_of_stock": 24.041811846689896,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 575,
+          "production": 0,
+          "demand": 31,
+          "ending_stock": 544,
+          "months_of_stock": 22.745644599303134,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 544,
+          "production": 0,
+          "demand": 32,
+          "ending_stock": 512,
+          "months_of_stock": 21.40766550522648,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 512,
+          "production": 0,
+          "demand": 23,
+          "ending_stock": 489,
+          "months_of_stock": 20.445993031358885,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 489,
+          "production": 0,
+          "demand": 19,
+          "ending_stock": 470,
+          "months_of_stock": 19.65156794425087,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 470,
+          "production": 0,
+          "demand": 51,
+          "ending_stock": 419,
+          "months_of_stock": 17.519163763066203,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 419,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 406,
+          "months_of_stock": 16.975609756097562,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 406,
+          "production": 0,
+          "demand": 13,
+          "ending_stock": 393,
+          "months_of_stock": 16.43205574912892,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 393,
+          "production": 0,
+          "demand": 58,
+          "ending_stock": 335,
+          "months_of_stock": 14.006968641114982,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 335,
+          "production": 0,
+          "demand": 6,
+          "ending_stock": 329,
+          "months_of_stock": 13.75609756097561,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 329,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 329,
+          "months_of_stock": 13.75609756097561,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Coffee Liqueur",
+      "priority": "LOW",
+      "current_stock": 10,
+      "total_demand_2026": 81,
+      "batches_needed": 1,
+      "bottles_per_batch": 300,
+      "production_schedule": [
+        {
+          "product": "Coffee Liqueur",
+          "batch_number": 1,
+          "total_batches": 1,
+          "bottles_700ml": 300,
+          "bottles_200ml": 0,
+          "total_bottles": 300,
+          "production_type": "LIQUEUR",
+          "scheduled_month": 6,
+          "scheduled_month_name": "Jun"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 10,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 10,
+          "months_of_stock": 1.4814814814814814,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 10,
+          "production": 300,
+          "demand": 0,
+          "ending_stock": 310,
+          "months_of_stock": 45.925925925925924,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 310,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 310,
+          "months_of_stock": 45.925925925925924,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 310,
+          "production": 0,
+          "demand": 21,
+          "ending_stock": 289,
+          "months_of_stock": 42.81481481481482,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 289,
+          "production": 0,
+          "demand": 37,
+          "ending_stock": 252,
+          "months_of_stock": 37.333333333333336,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 252,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 241,
+          "months_of_stock": 35.7037037037037,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 241,
+          "production": 0,
+          "demand": 12,
+          "ending_stock": 229,
+          "months_of_stock": 33.925925925925924,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 229,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 229,
+          "months_of_stock": 33.925925925925924,
+          "status": "OK"
+        }
+      ]
+    },
+    {
+      "product": "Reserve Cask Rum",
+      "priority": "LOW",
+      "current_stock": 0,
+      "total_demand_2026": 153,
+      "batches_needed": 1,
+      "bottles_per_batch": 226,
+      "production_schedule": [
+        {
+          "product": "Reserve Cask Rum",
+          "batch_number": 1,
+          "total_batches": 1,
+          "bottles_700ml": 226,
+          "bottles_200ml": 0,
+          "total_bottles": 226,
+          "production_type": "RUM",
+          "scheduled_month": 1,
+          "scheduled_month_name": "Jan"
+        }
+      ],
+      "stock_projection": [
+        {
+          "month": 1,
+          "month_name": "Jan",
+          "starting_stock": 0,
+          "production": 226,
+          "demand": 6,
+          "ending_stock": 220,
+          "months_of_stock": 17.254901960784313,
+          "status": "OK"
+        },
+        {
+          "month": 2,
+          "month_name": "Feb",
+          "starting_stock": 220,
+          "production": 0,
+          "demand": 8,
+          "ending_stock": 212,
+          "months_of_stock": 16.627450980392158,
+          "status": "OK"
+        },
+        {
+          "month": 3,
+          "month_name": "Mar",
+          "starting_stock": 212,
+          "production": 0,
+          "demand": 3,
+          "ending_stock": 209,
+          "months_of_stock": 16.392156862745097,
+          "status": "OK"
+        },
+        {
+          "month": 4,
+          "month_name": "Apr",
+          "starting_stock": 209,
+          "production": 0,
+          "demand": 9,
+          "ending_stock": 200,
+          "months_of_stock": 15.686274509803921,
+          "status": "OK"
+        },
+        {
+          "month": 5,
+          "month_name": "May",
+          "starting_stock": 200,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 189,
+          "months_of_stock": 14.823529411764707,
+          "status": "OK"
+        },
+        {
+          "month": 6,
+          "month_name": "Jun",
+          "starting_stock": 189,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 178,
+          "months_of_stock": 13.96078431372549,
+          "status": "OK"
+        },
+        {
+          "month": 7,
+          "month_name": "Jul",
+          "starting_stock": 178,
+          "production": 0,
+          "demand": 11,
+          "ending_stock": 167,
+          "months_of_stock": 13.098039215686274,
+          "status": "OK"
+        },
+        {
+          "month": 8,
+          "month_name": "Aug",
+          "starting_stock": 167,
+          "production": 0,
+          "demand": 15,
+          "ending_stock": 152,
+          "months_of_stock": 11.92156862745098,
+          "status": "OK"
+        },
+        {
+          "month": 9,
+          "month_name": "Sep",
+          "starting_stock": 152,
+          "production": 0,
+          "demand": 18,
+          "ending_stock": 134,
+          "months_of_stock": 10.509803921568627,
+          "status": "OK"
+        },
+        {
+          "month": 10,
+          "month_name": "Oct",
+          "starting_stock": 134,
+          "production": 0,
+          "demand": 57,
+          "ending_stock": 77,
+          "months_of_stock": 6.03921568627451,
+          "status": "OK"
+        },
+        {
+          "month": 11,
+          "month_name": "Nov",
+          "starting_stock": 77,
+          "production": 0,
+          "demand": 4,
+          "ending_stock": 73,
+          "months_of_stock": 5.7254901960784315,
+          "status": "OK"
+        },
+        {
+          "month": 12,
+          "month_name": "Dec",
+          "starting_stock": 73,
+          "production": 0,
+          "demand": 0,
+          "ending_stock": 73,
+          "months_of_stock": 5.7254901960784315,
+          "status": "OK"
+        }
+      ]
+    }
+  ]
+}

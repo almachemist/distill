@@ -14,6 +14,10 @@ export function CardTitle({ className = "", ...props }: DivProps) {
   return <div className={`text-lg font-semibold text-onyx ${className}`} {...props} />
 }
 
+export function CardDescription({ className = "", ...props }: DivProps) {
+  return <div className={`text-sm text-muted-foreground ${className}`} {...props} />
+}
+
 export function CardContent({ className = "", ...props }: DivProps) {
   return <div className={`px-4 pb-4 ${className}`} {...props} />
 }

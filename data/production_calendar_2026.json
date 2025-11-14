@@ -1,0 +1,948 @@
+{
+  "generated_at": "2025-11-13T03:13:28.244Z",
+  "configuration": {
+    "GIN_HEART_DAYS_PER_BATCH": 1,
+    "GIN_TAIL_DAYS_PER_BATCH": 2,
+    "RUM_DAYS_PER_BATCH": 2.5,
+    "CANE_SPIRIT_DAYS_PER_BATCH": 2.5,
+    "VODKA_NEUTRAL_DAYS_PER_BATCH": 1,
+    "CLEANING_DAYS_ON_SWITCH": 1,
+    "WEEKS_BETWEEN_BOTTLING": 3,
+    "VODKA_LITRES_PER_NEUTRAL_RUN": 200
+  },
+  "summary": {
+    "total_weeks": 52,
+    "gin_weeks": 8,
+    "rum_cane_weeks": 8,
+    "vodka_weeks": 0,
+    "cleaning_weeks": 0,
+    "bottling_weeks": 36,
+    "total_heart_days": 28,
+    "total_tail_days": 16,
+    "total_cleaning_days": 0
+  },
+  "distillation_needs": [
+    {
+      "product_name": "Rainforest 700ml",
+      "sku_code": "Rainforest_700",
+      "production_type": "GIN",
+      "batches_needed": 3,
+      "heart_days": 3,
+      "tail_days": 6,
+      "rum_cane_days": 0,
+      "priority": "CRITICAL",
+      "recommended_quarter": "Q1"
+    },
+    {
+      "product_name": "Merchant Mae White Rum Bottle",
+      "sku_code": "Merchant_Mae_White_Rum",
+      "production_type": "RUM",
+      "batches_needed": 2,
+      "heart_days": 0,
+      "tail_days": 0,
+      "rum_cane_days": 5,
+      "priority": "CRITICAL",
+      "recommended_quarter": "Q1"
+    },
+    {
+      "product_name": "Merchant Mae Dark Rum Bottle",
+      "sku_code": "Merchant_Mae_Dark_Rum",
+      "production_type": "RUM",
+      "batches_needed": 2,
+      "heart_days": 0,
+      "tail_days": 0,
+      "rum_cane_days": 5,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1"
+    },
+    {
+      "product_name": "Rainforest 200ml",
+      "sku_code": "Rainforest_200",
+      "production_type": "GIN",
+      "batches_needed": 2,
+      "heart_days": 2,
+      "tail_days": 4,
+      "rum_cane_days": 0,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1"
+    },
+    {
+      "product_name": "Navy 200ml",
+      "sku_code": "Navy_200",
+      "production_type": "GIN",
+      "batches_needed": 1,
+      "heart_days": 1,
+      "tail_days": 2,
+      "rum_cane_days": 0,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1"
+    },
+    {
+      "product_name": "Cane Spirit 200ml",
+      "sku_code": "Cane_Spirit_200",
+      "production_type": "CANE_SPIRIT",
+      "batches_needed": 2,
+      "heart_days": 0,
+      "tail_days": 0,
+      "rum_cane_days": 5,
+      "priority": "HIGH",
+      "recommended_quarter": "Q1"
+    },
+    {
+      "product_name": "Signature 700ml",
+      "sku_code": "Signature_700",
+      "production_type": "GIN",
+      "batches_needed": 1,
+      "heart_days": 1,
+      "tail_days": 2,
+      "rum_cane_days": 0,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE"
+    },
+    {
+      "product_name": "Cane Spirit 700ml",
+      "sku_code": "Cane_Spirit_700",
+      "production_type": "CANE_SPIRIT",
+      "batches_needed": 1,
+      "heart_days": 0,
+      "tail_days": 0,
+      "rum_cane_days": 2.5,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE"
+    },
+    {
+      "product_name": "Spiced Rum 700ml",
+      "sku_code": "Spiced_700",
+      "production_type": "RUM",
+      "batches_needed": 1,
+      "heart_days": 0,
+      "tail_days": 0,
+      "rum_cane_days": 2.5,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE"
+    },
+    {
+      "product_name": "Signature 200ml",
+      "sku_code": "Signature_200",
+      "production_type": "GIN",
+      "batches_needed": 1,
+      "heart_days": 1,
+      "tail_days": 2,
+      "rum_cane_days": 0,
+      "priority": "SUFFICIENT",
+      "recommended_quarter": "NONE"
+    }
+  ],
+  "calendar": [
+    {
+      "week_number": 1,
+      "week_start": "2026-01-04",
+      "week_end": "2026-01-10",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [
+        {
+          "product": "Gin Tails (combined batches)",
+          "days": 4
+        }
+      ],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 2,
+      "week_start": "2026-01-11",
+      "week_end": "2026-01-17",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [
+        {
+          "product": "Gin Tails (combined batches)",
+          "days": 4
+        }
+      ],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 3,
+      "week_start": "2026-01-18",
+      "week_end": "2026-01-24",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 4,
+      "week_start": "2026-01-25",
+      "week_end": "2026-01-31",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [
+        {
+          "product": "Gin Tails (combined batches)",
+          "days": 4
+        }
+      ],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 5,
+      "week_start": "2026-02-01",
+      "week_end": "2026-02-07",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [
+        {
+          "product": "Gin Tails (combined batches)",
+          "days": 4
+        }
+      ],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 6,
+      "week_start": "2026-02-08",
+      "week_end": "2026-02-14",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 7,
+      "week_start": "2026-02-15",
+      "week_end": "2026-02-21",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 8,
+      "week_start": "2026-02-22",
+      "week_end": "2026-02-28",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 9,
+      "week_start": "2026-03-01",
+      "week_end": "2026-03-07",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 10,
+      "week_start": "2026-03-08",
+      "week_end": "2026-03-14",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 11,
+      "week_start": "2026-03-15",
+      "week_end": "2026-03-21",
+      "mode": "GIN",
+      "hearts_runs": [
+        {
+          "product": "Rainforest 700ml",
+          "days": 1
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Gin production week"
+      ]
+    },
+    {
+      "week_number": 12,
+      "week_start": "2026-03-22",
+      "week_end": "2026-03-28",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 13,
+      "week_start": "2026-03-29",
+      "week_end": "2026-04-04",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 14,
+      "week_start": "2026-04-05",
+      "week_end": "2026-04-11",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 15,
+      "week_start": "2026-04-12",
+      "week_end": "2026-04-18",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 16,
+      "week_start": "2026-04-19",
+      "week_end": "2026-04-25",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 17,
+      "week_start": "2026-04-26",
+      "week_end": "2026-05-02",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 18,
+      "week_start": "2026-05-03",
+      "week_end": "2026-05-09",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 19,
+      "week_start": "2026-05-10",
+      "week_end": "2026-05-16",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 20,
+      "week_start": "2026-05-17",
+      "week_end": "2026-05-23",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 21,
+      "week_start": "2026-05-24",
+      "week_end": "2026-05-30",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 22,
+      "week_start": "2026-05-31",
+      "week_end": "2026-06-06",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 23,
+      "week_start": "2026-06-07",
+      "week_end": "2026-06-13",
+      "mode": "RUM_CANE",
+      "hearts_runs": [
+        {
+          "product": "Merchant Mae White Rum Bottle",
+          "days": 2.5
+        }
+      ],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Rum/Cane Spirit production week"
+      ]
+    },
+    {
+      "week_number": 24,
+      "week_start": "2026-06-14",
+      "week_end": "2026-06-20",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 25,
+      "week_start": "2026-06-21",
+      "week_end": "2026-06-27",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 26,
+      "week_start": "2026-06-28",
+      "week_end": "2026-07-04",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 27,
+      "week_start": "2026-07-05",
+      "week_end": "2026-07-11",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 28,
+      "week_start": "2026-07-12",
+      "week_end": "2026-07-18",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 29,
+      "week_start": "2026-07-19",
+      "week_end": "2026-07-25",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 30,
+      "week_start": "2026-07-26",
+      "week_end": "2026-08-01",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 31,
+      "week_start": "2026-08-02",
+      "week_end": "2026-08-08",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 32,
+      "week_start": "2026-08-09",
+      "week_end": "2026-08-15",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 33,
+      "week_start": "2026-08-16",
+      "week_end": "2026-08-22",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 34,
+      "week_start": "2026-08-23",
+      "week_end": "2026-08-29",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 35,
+      "week_start": "2026-08-30",
+      "week_end": "2026-09-05",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 36,
+      "week_start": "2026-09-06",
+      "week_end": "2026-09-12",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 37,
+      "week_start": "2026-09-13",
+      "week_end": "2026-09-19",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 38,
+      "week_start": "2026-09-20",
+      "week_end": "2026-09-26",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 39,
+      "week_start": "2026-09-27",
+      "week_end": "2026-10-03",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 40,
+      "week_start": "2026-10-04",
+      "week_end": "2026-10-10",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 41,
+      "week_start": "2026-10-11",
+      "week_end": "2026-10-17",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 42,
+      "week_start": "2026-10-18",
+      "week_end": "2026-10-24",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 43,
+      "week_start": "2026-10-25",
+      "week_end": "2026-10-31",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 44,
+      "week_start": "2026-11-01",
+      "week_end": "2026-11-07",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 45,
+      "week_start": "2026-11-08",
+      "week_end": "2026-11-14",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 46,
+      "week_start": "2026-11-15",
+      "week_end": "2026-11-21",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 47,
+      "week_start": "2026-11-22",
+      "week_end": "2026-11-28",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 48,
+      "week_start": "2026-11-29",
+      "week_end": "2026-12-05",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 49,
+      "week_start": "2026-12-06",
+      "week_end": "2026-12-12",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 50,
+      "week_start": "2026-12-13",
+      "week_end": "2026-12-19",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    },
+    {
+      "week_number": 51,
+      "week_start": "2026-12-20",
+      "week_end": "2026-12-26",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [
+        "All products in tanks"
+      ],
+      "notes": [
+        "Regular bottling and tank turnaround week"
+      ]
+    },
+    {
+      "week_number": 52,
+      "week_start": "2026-12-27",
+      "week_end": "2027-01-02",
+      "mode": "BOTTLING",
+      "hearts_runs": [],
+      "tails_runs": [],
+      "cleaning_days": 0,
+      "bottling_focus": [],
+      "notes": [
+        "Production complete - available for bottling or maintenance"
+      ]
+    }
+  ]
+}

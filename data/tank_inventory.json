@@ -1,0 +1,73 @@
+{
+  "tanks": [
+    {
+      "id": "T-1000",
+      "capacity_l": 1000,
+      "movable_under_still": false,
+      "has_lid": true,
+      "role": "bulk_blending_and_bottling",
+      "notes": "Used for big blends and bottling only. Cannot be placed under the still. Often occupied for weeks or months."
+    },
+    {
+      "id": "T-615",
+      "capacity_l": 615,
+      "movable_under_still": false,
+      "has_lid": true,
+      "role": "bulk_blending_and_bottling",
+      "notes": "Also mainly for blends. Cannot go under the still. Often occupied for long periods (barrel blends, infusions, etc.)."
+    },
+    {
+      "id": "T-400",
+      "capacity_l": 400,
+      "movable_under_still": true,
+      "has_lid": true,
+      "role": "spirit_collection_and_storage",
+      "notes": "Can be placed under the still. Main tank for collecting hearts / clean spirit."
+    },
+    {
+      "id": "T-330-A",
+      "capacity_l": 330,
+      "movable_under_still": true,
+      "has_lid": true,
+      "role": "spirit_collection_and_storage",
+      "notes": "One of three identical 330 L tanks that can be used under the still."
+    },
+    {
+      "id": "T-330-B",
+      "capacity_l": 330,
+      "movable_under_still": true,
+      "has_lid": true,
+      "role": "spirit_collection_and_storage",
+      "notes": "One of three identical 330 L tanks that can be used under the still."
+    },
+    {
+      "id": "T-330-C",
+      "capacity_l": 330,
+      "movable_under_still": true,
+      "has_lid": true,
+      "role": "spirit_collection_and_storage",
+      "notes": "One of three identical 330 L tanks that can be used under the still."
+    },
+    {
+      "id": "T-317",
+      "capacity_l": 317,
+      "movable_under_still": true,
+      "has_lid": false,
+      "role": "emergency_only",
+      "notes": "Broken tank with no lid. Avoid using it. Only for emergencies or very short-term holding (hours)."
+    }
+  ],
+  "total_capacity": {
+    "all_tanks_l": 3322,
+    "movable_tanks_l": 1707,
+    "usable_movable_tanks_l": 1390,
+    "blending_tanks_l": 1615
+  },
+  "notes": [
+    "T-1000 and T-615 are often occupied for months with barrel blends, infusions, etc.",
+    "Only T-400, T-330-A, T-330-B, T-330-C can be placed under the still",
+    "T-317 is emergency use only (no lid)",
+    "Usable movable capacity = T-400 (400L) + 3x T-330 (990L) = 1390L"
+  ]
+}
+
