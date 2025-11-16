@@ -1,0 +1,29 @@
+{
+  "customerGroups": [
+    {
+      "groupName": "Hemingways Brewery",
+      "aliases": [
+        "Hemingways Brewery Cairns Venue",
+        "Hemingways Brewery Trinity",
+        "Hemingways Brewery F&Q Venue",
+        "Hemingways Brewery F&Q PD Manager",
+        "Hemingways Brewery Cairns Providor",
+        "Sails",
+        "Sails Restaurant",
+        "Sails Port Douglas"
+      ],
+      "emails": [
+        "lee@hemingwaysbrewery.com"
+      ],
+      "notes": "All accounts belong to the same Hemingways Brewery corporate customer."
+    },
+    {
+      "groupName": "Matt McMaster",
+      "aliases": [
+        "Matt McMaster"
+      ],
+      "notes": "Duplicate entries merged."
+    }
+  ]
+}
+

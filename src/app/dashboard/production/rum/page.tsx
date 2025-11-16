@@ -84,6 +84,7 @@ export default function RumPage() {
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
   const [batchListCollapsed, setBatchListCollapsed] = useState(false)
   const [statusFilter, setStatusFilter] = useState<'all' | 'ongoing' | 'completed'>('all')
+  const [sortOrder, setSortOrder] = useState<'oldest-first' | 'newest-first'>('oldest-first')
 
   // Set filter from URL on mount
   useEffect(() => {
@@ -142,7 +143,12 @@ export default function RumPage() {
   const sortedRuns = [...filteredBatches].sort((a, b) => {
     const dateA = a.fermentation_start_date ? new Date(a.fermentation_start_date).getTime() : 0
     const dateB = b.fermentation_start_date ? new Date(b.fermentation_start_date).getTime() : 0
-    return dateB - dateA
+
+    if (sortOrder === 'oldest-first') {
+      return dateA - dateB // Oldest first
+    } else {
+      return dateB - dateA // Newest first
+    }
   })
 
   const selectedRun = rumBatches.find((r) => r.batch_id === selectedRunId) || null
@@ -229,6 +235,18 @@ export default function RumPage() {
                 >
                   Completed
                 </button>
+              </div>
+
+              {/* Sort Order Dropdown */}
+              <div className="mb-4">
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value as 'oldest-first' | 'newest-first')}
+                  className="w-full text-sm border border-stone-200 rounded-md px-3 py-2 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                >
+                  <option value="oldest-first">Oldest first (A→Z by date)</option>
+                  <option value="newest-first">Newest first (Z→A by date)</option>
+                </select>
               </div>
 
               {loading && (

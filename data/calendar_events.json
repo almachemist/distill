@@ -22,18 +22,5 @@
     "color": "#A65E2E",
     "createdAt": "2025-11-14T04:00:58.268Z",
     "updatedAt": "2025-11-14T04:00:58.274Z"
-  },
-  {
-    "id": "evt_1763096773162_99atuep9i",
-    "type": "production",
-    "productName": "TESTE",
-    "productType": "VODKA",
-    "batch": "EEE",
-    "weekStart": "2026-W04",
-    "weekEnd": "DD",
-    "tank": "DD",
-    "color": "#777777",
-    "createdAt": "2025-11-14T05:06:13.162Z",
-    "updatedAt": "2025-11-14T05:06:13.162Z"
   }
 ]

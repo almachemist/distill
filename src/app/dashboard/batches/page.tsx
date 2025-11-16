@@ -11,14 +11,14 @@ import { DetailPanel } from "./DetailPanel"
 type GinBatchRecord = GinBatchSummary & Record<string, any>
 
 const GIN_CATEGORIES = [
-  { id: "signature", label: "Signature Dry Gin" },
-  { id: "rainforest", label: "Rainforest Gin" },
-  { id: "navy", label: "Navy Strength" },
-  { id: "merchant", label: "Merchant Mae" },
-  { id: "wet-season", label: "Wet Season" },
   { id: "dry-season", label: "Dry Season" },
+  { id: "ethanol", label: "Ethanol" },
+  { id: "merchant", label: "Merchant Mae" },
+  { id: "navy", label: "Navy Strength" },
+  { id: "rainforest", label: "Rainforest Gin" },
+  { id: "signature", label: "Signature Dry Gin" },
   { id: "vodka", label: "Vodka" },
-  { id: "ethanol", label: "Ethanol" }
+  { id: "wet-season", label: "Wet Season" }
 ]
 
 function formatDate(value: string | null | undefined) {
@@ -194,10 +194,11 @@ export default function BatchesPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [ginBatches, setGinBatches] = useState<GinBatchRecord[]>(() => buildGinBatchFallback())
-  const [activeCategory, setActiveCategory] = useState<string>("signature")
+  const [activeCategory, setActiveCategory] = useState<string>("dry-season")
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [batchListCollapsed, setBatchListCollapsed] = useState(false)
+  const [sortOrder, setSortOrder] = useState<'oldest-first' | 'newest-first'>('oldest-first')
 
   useEffect(() => {
     const controller = new AbortController()
@@ -236,24 +237,18 @@ export default function BatchesPage() {
     return () => controller.abort()
   }, [])
 
-  // Filter batches by category
+  // Filter batches by category and sort by date
   const filteredRuns = ginBatches
     .filter((batch) => resolveGinCategory(batch) === activeCategory)
     .sort((a, b) => {
-      // First, sort by SKU alphabetically
-      const skuA = (a.sku || a.display_name || "").toLowerCase()
-      const skuB = (b.sku || b.display_name || "").toLowerCase()
-      const skuComparison = skuA.localeCompare(skuB)
-      
-      // If SKUs are different, return the alphabetical comparison
-      if (skuComparison !== 0) {
-        return skuComparison
-      }
-      
-      // If SKUs are the same, sort by date (most recent first)
       const dateA = a.date ? new Date(a.date).getTime() : 0
       const dateB = b.date ? new Date(b.date).getTime() : 0
-      return dateB - dateA
+
+      if (sortOrder === 'oldest-first') {
+        return dateA - dateB // Oldest first
+      } else {
+        return dateB - dateA // Newest first
+      }
     })
 
   const selectedRun = ginBatches.find((r) => (r.run_id || r.batch_id) === selectedRunId) || null
@@ -314,6 +309,18 @@ export default function BatchesPage() {
               </svg>
             </button>
           </div>
+          {!batchListCollapsed && (
+            <div className="mb-4">
+              <select
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value as 'oldest-first' | 'newest-first')}
+                className="w-full text-sm border border-stone-200 rounded-md px-3 py-2 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
+              >
+                <option value="oldest-first">Oldest first (A→Z by date)</option>
+                <option value="newest-first">Newest first (Z→A by date)</option>
+              </select>
+            </div>
+          )}
           {!batchListCollapsed && (
             <>
               {loading && (
