@@ -744,15 +744,33 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
       <div className="border-t border-stone-200 pt-6">
         <h3 className="text-lg font-semibold text-stone-900 mb-4">Foreshots</h3>
 
-        <div className="grid grid-cols-1 gap-6">
+        <div className="grid grid-cols-2 gap-6">
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
-              Foreshots Volume (L)
+              Volume (L)
             </label>
             <input
               type="text"
               value={batch.foreshots_volume_l ?? ''}
               onChange={(e) => updateField('foreshots_volume_l', e.target.value)}
+              onBlur={(e) => updateField('foreshots_volume_l', parseToNumber(e.target.value))}
+              placeholder="0.0"
+              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-2">
+              ABV (%)
+            </label>
+            <input
+              type="text"
+              value={batch.foreshots_abv_percent ?? ''}
+              onChange={(e) => updateField('foreshots_abv_percent', e.target.value)}
+              onBlur={(e) => {
+                const validated = validateOnBlur(e.target.value, 99.9, 1)
+                updateField('foreshots_abv_percent', parseToNumber(validated))
+              }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />

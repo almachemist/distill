@@ -13,7 +13,7 @@ interface NewProductionModalProps {
   onCreated: () => void
 }
 
-type ProductCategory = 'gin_vodka' | 'rum_cane'
+type ProductCategory = 'gin_vodka' | 'rum_cane' | 'bottling'
 type Step = 'category' | 'recipe'
 
 export function NewProductionModal({
@@ -64,7 +64,17 @@ export function NewProductionModal({
   }
 
   function handleCategorySelect(category: ProductCategory) {
+    console.log('Category selected:', category)
     setSelectedCategory(category)
+
+    // If bottling, navigate directly to bottling page
+    if (category === 'bottling') {
+      console.log('Navigating to bottling page...')
+      onClose()
+      router.push('/dashboard/production/bottling/new')
+      return
+    }
+
     setStep('recipe')
   }
 
@@ -117,10 +127,10 @@ export function NewProductionModal({
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="grid grid-cols-3 gap-4 mb-6">
                 <button
                   onClick={() => handleCategorySelect('gin_vodka')}
-                  className="p-8 rounded-lg border-2 border-neutral-200 hover:border-amber-600 hover:bg-amber-50 transition-all text-left group"
+                  className="p-6 rounded-lg border-2 border-neutral-200 hover:border-amber-600 hover:bg-amber-50 transition-all text-left group"
                 >
                   <div className="text-lg font-semibold text-neutral-900 mb-2">
                     Gin / Vodka / Spirits
@@ -132,13 +142,25 @@ export function NewProductionModal({
 
                 <button
                   onClick={() => handleCategorySelect('rum_cane')}
-                  className="p-8 rounded-lg border-2 border-neutral-200 hover:border-amber-600 hover:bg-amber-50 transition-all text-left group"
+                  className="p-6 rounded-lg border-2 border-neutral-200 hover:border-amber-600 hover:bg-amber-50 transition-all text-left group"
                 >
                   <div className="text-lg font-semibold text-neutral-900 mb-2">
                     Rum / Cane Spirit
                   </div>
                   <div className="text-sm text-neutral-600">
                     Molasses rum, cane juice spirits, and aged products
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => handleCategorySelect('bottling')}
+                  className="p-6 rounded-lg border-2 border-neutral-200 hover:border-amber-600 hover:bg-amber-50 transition-all text-left group"
+                >
+                  <div className="text-lg font-semibold text-neutral-900 mb-2">
+                    Bottling Run
+                  </div>
+                  <div className="text-sm text-neutral-600">
+                    Blend batches, dilute, and bottle finished products
                   </div>
                 </button>
               </div>

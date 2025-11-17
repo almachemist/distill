@@ -6,6 +6,7 @@ type Group = {
   id: string
   groupName: string
   aliases: string[]
+  emails?: string[]
   totalSpend: number
   totalUnits: number
   firstPurchase: string
@@ -149,6 +150,9 @@ export default function ClientGroups({ groups }: { groups: Group[] }) {
               <div>
                 <h3 className="text-xl font-semibold text-stone-900">{selected.groupName}</h3>
                 <p className="text-sm text-stone-500">{selected.aliases?.length ? `Aliases: ${selected.aliases.join(', ')}` : 'No aliases'}</p>
+                {selected.emails && selected.emails.length > 0 && (
+                  <p className="text-sm text-stone-500 mt-1">Email: {selected.emails.join(', ')}</p>
+                )}
               </div>
               <button onClick={() => setOpenId(null)} className="text-stone-500 hover:text-stone-700">Close</button>
             </div>

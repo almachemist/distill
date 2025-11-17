@@ -45,7 +45,7 @@ export default function CRMDashboardPage() {
       {/* High-Level Metrics */}
       <section>
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-4">
-          <Card title="Total customers" value={number.format(totalCustomers)} subtitle="All accounts" />
+          <Card title="Total customers" value={number.format(totalGroups)} subtitle="All accounts" />
           <Card title="Active (30d)" value={number.format(active30)} subtitle="Recently ordered" />
           <Card title="At risk" value={number.format(atRisk)} subtitle="Needs attention" />
           <Card title="Avg inactivity (days)" value={number.format(avgOrderFrequency)} subtitle="Across customers" />

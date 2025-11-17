@@ -27,18 +27,26 @@ export default function EditRumBatchPage() {
         }
 
         const data = await response.json()
-        
+
         // Map database fields to TypeScript interface
+        // Handle both database format and fallback format
         const mappedBatch: RumCaneSpiritBatch = {
-          id: data.id,
-          productType: data.product_type ?? 'rum',
+          id: data.id || data.batch_id,
+          productType: data.product_type ?? data.productType ?? 'rum',
           status: data.status ?? 'draft',
-          createdAt: data.created_at,
-          updatedAt: data.updated_at,
-          
+          createdAt: data.created_at ?? data.createdAt,
+          updatedAt: data.updated_at ?? data.updatedAt,
+
+          // Stage-based Status
+          fermentation_status: data.fermentation_status ?? 'not_started',
+          distillation_status: data.distillation_status ?? 'not_started',
+          aging_status: data.aging_status ?? 'not_started',
+          bottling_status: data.bottling_status ?? 'not_started',
+          overall_status: data.overall_status ?? 'draft',
+
           // Fermentation
-          batch_name: data.batch_name ?? '',
-          fermentation_date: data.fermentation_date ?? '',
+          batch_name: data.batch_name ?? data.batch_id ?? '',
+          fermentation_date: data.fermentation_date ?? data.fermentation_start_date ?? '',
           fermentation_day: data.fermentation_day,
           substrates: data.substrates ?? [],
           water_volume_l: data.water_volume_l ?? 0,
@@ -93,6 +101,7 @@ export default function EditRumBatchPage() {
           r2_power_input_a: data.r2_power_input_a,
           flow_l_per_h: data.flow_l_per_h,
           foreshots_volume_l: data.foreshots_volume_l,
+          foreshots_abv_percent: data.foreshots_abv_percent,
           heads_cut_time: data.heads_cut_time,
           heads_cut_abv_percent: data.heads_cut_abv_percent,
           heads_cut_volume_l: data.heads_cut_volume_l,
@@ -239,7 +248,7 @@ export default function EditRumBatchPage() {
               Edit Rum Batch: {batch.batch_name || 'Untitled'}
             </h1>
             <p className="text-sm text-stone-600 mt-1">
-              ID: {batch.id} • Status: {batch.status}
+              ID: {batch.id} • Overall Status: <span className="font-medium capitalize">{batch.overall_status?.replace('_', ' ')}</span>
             </p>
           </div>
           <div className="flex gap-3">
@@ -260,8 +269,125 @@ export default function EditRumBatchPage() {
         </div>
       </div>
 
-      {/* Form */}
+      {/* Stage Progress */}
       <div className="max-w-7xl mx-auto p-6">
+        <div className="bg-white rounded-lg border border-stone-200 p-6 mb-6">
+          <h2 className="text-lg font-semibold text-stone-900 mb-4">Production Stages</h2>
+
+          <div className="grid grid-cols-4 gap-4">
+            {/* Fermentation Stage */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <div className={`w-3 h-3 rounded-full ${
+                  batch.fermentation_status === 'completed' ? 'bg-green-500' :
+                  batch.fermentation_status === 'in_progress' ? 'bg-amber-500' :
+                  'bg-stone-300'
+                }`} />
+                <span className="text-sm font-medium text-stone-700">Fermentation</span>
+              </div>
+              <select
+                value={batch.fermentation_status || 'not_started'}
+                onChange={(e) => setBatch({ ...batch, fermentation_status: e.target.value as any })}
+                className="text-xs px-2 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+              >
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
+            {/* Distillation Stage */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <div className={`w-3 h-3 rounded-full ${
+                  batch.distillation_status === 'completed' ? 'bg-green-500' :
+                  batch.distillation_status === 'in_progress' ? 'bg-amber-500' :
+                  'bg-stone-300'
+                }`} />
+                <span className="text-sm font-medium text-stone-700">Distillation</span>
+              </div>
+              <select
+                value={batch.distillation_status || 'not_started'}
+                onChange={(e) => setBatch({ ...batch, distillation_status: e.target.value as any })}
+                className="text-xs px-2 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+              >
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
+            {/* Aging Stage */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <div className={`w-3 h-3 rounded-full ${
+                  batch.aging_status === 'completed' ? 'bg-green-500' :
+                  batch.aging_status === 'in_progress' ? 'bg-amber-500' :
+                  batch.aging_status === 'skipped' ? 'bg-stone-400' :
+                  'bg-stone-300'
+                }`} />
+                <span className="text-sm font-medium text-stone-700">Aging</span>
+              </div>
+              <select
+                value={batch.aging_status || 'not_started'}
+                onChange={(e) => setBatch({ ...batch, aging_status: e.target.value as any })}
+                className="text-xs px-2 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+              >
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="skipped">Skipped</option>
+              </select>
+            </div>
+
+            {/* Bottling Stage */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2 mb-2">
+                <div className={`w-3 h-3 rounded-full ${
+                  batch.bottling_status === 'completed' ? 'bg-green-500' :
+                  batch.bottling_status === 'in_progress' ? 'bg-amber-500' :
+                  batch.bottling_status === 'skipped' ? 'bg-stone-400' :
+                  'bg-stone-300'
+                }`} />
+                <span className="text-sm font-medium text-stone-700">Bottling</span>
+              </div>
+              <select
+                value={batch.bottling_status || 'not_started'}
+                onChange={(e) => setBatch({ ...batch, bottling_status: e.target.value as any })}
+                className="text-xs px-2 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+              >
+                <option value="not_started">Not Started</option>
+                <option value="in_progress">In Progress</option>
+                <option value="completed">Completed</option>
+                <option value="skipped">Skipped</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Overall Status */}
+          <div className="mt-4 pt-4 border-t border-stone-200">
+            <label className="block text-sm font-medium text-stone-700 mb-2">
+              Overall Batch Status
+            </label>
+            <select
+              value={batch.overall_status || 'draft'}
+              onChange={(e) => setBatch({ ...batch, overall_status: e.target.value as any })}
+              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+            >
+              <option value="draft">Draft</option>
+              <option value="fermenting">Fermenting</option>
+              <option value="distilling">Distilling</option>
+              <option value="aging">Aging</option>
+              <option value="ready_to_bottle">Ready to Bottle</option>
+              <option value="bottled">Bottled</option>
+              <option value="archived">Archived</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Form */}
+      <div className="max-w-7xl mx-auto px-6 pb-6">
         <RumProductionForm
           batch={batch}
           onUpdate={setBatch}

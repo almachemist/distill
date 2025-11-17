@@ -5,7 +5,8 @@ import type { CustomerAnalytics } from '@/db/schemas/customerAnalytics'
 import type { CustomerGroupDef, CustomerGroupView, GroupChild } from '@/db/schemas/customerGroup'
 
 function slugify(s: string) {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+  const slug = s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+  return slug || 'unknown'
 }
 
 function getPaths() {
@@ -41,15 +42,27 @@ function isCacheFresh(): boolean {
   }
 }
 
+function normalizeForMatching(s: string): string {
+  // Normalize: lowercase, remove special chars, collapse whitespace
+  return s
+    .toLowerCase()
+    .replace(/['']/g, "'")  // Normalize apostrophes
+    .replace(/[^\w\s]/g, ' ')  // Replace special chars with space
+    .replace(/\s+/g, ' ')  // Collapse multiple spaces
+    .trim()
+}
+
 function inAliases(name: string, aliases: string[]) {
-  const n = name.toLowerCase()
+  const n = normalizeForMatching(name)
   return aliases.some(a => {
-    const al = a.toLowerCase()
-    return n === al || n.includes(al) || al.includes(n)
+    const al = normalizeForMatching(a)
+    // Exact match or customer name contains the full alias (not vice versa)
+    // This prevents "N" from matching "Hemingways" but allows "Sails Cairns" to match "Sails"
+    return n === al || n.includes(al)
   })
 }
 
-function buildFromChildren(def: CustomerGroupDef, children: CustomerAnalytics[]): CustomerGroupView | null {
+function buildFromChildren(def: CustomerGroupDef, children: CustomerAnalytics[], uniqueId?: string): CustomerGroupView | null {
   if (!children.length) return null
   const totalSpend = children.reduce((s, c) => s + c.totalSpend, 0)
   const totalUnits = children.reduce((s, c) => s + c.totalUnits, 0)
@@ -71,8 +84,12 @@ function buildFromChildren(def: CustomerGroupDef, children: CustomerAnalytics[])
     averageDaysBetweenOrders: c.averageDaysBetweenOrders,
     churnRisk: c.churnRisk,
   }))
+
+  // Use uniqueId if provided (for singletons), otherwise slugify groupName
+  const id = uniqueId || slugify(def.groupName)
+
   return {
-    id: slugify(def.groupName),
+    id,
     groupName: def.groupName,
     aliases: def.aliases || [],
     emails: def.emails || [],
@@ -104,7 +121,9 @@ export function generateAndCacheCustomerGroups(): CustomerGroupView[] {
   // Singletons for remaining customers (so list stays complete)
   const remaining = customers.filter(c => !matched.has(c.customerId))
   for (const c of remaining) {
-    const view = buildFromChildren({ groupName: c.customerName, aliases: [c.customerName] }, [c])
+    // Use customerId as unique ID for singletons to avoid duplicates
+    const uniqueId = `customer-${c.customerId.toLowerCase()}`
+    const view = buildFromChildren({ groupName: c.customerName, aliases: [c.customerName] }, [c], uniqueId)
     if (view) groups.push(view)
   }
 

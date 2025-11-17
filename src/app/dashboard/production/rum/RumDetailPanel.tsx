@@ -1,4 +1,7 @@
+"use client"
+
 import React from "react"
+import { useRouter } from "next/navigation"
 
 type RumBatchRecord = any
 
@@ -23,12 +26,42 @@ function formatNumber(value: number | null | undefined, fraction = 1) {
 export const RumDetailPanel: React.FC<{
   run: RumBatchRecord | null
   onClose: () => void
-}> = ({ run, onClose }) => {
+  onDelete?: () => void
+}> = ({ run, onClose, onDelete }) => {
+  const router = useRouter()
+  const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false)
+  const [isDeleting, setIsDeleting] = React.useState(false)
+
   if (!run) return (
     <div className="flex-1 flex items-center justify-center text-stone-400 text-sm">
       Select a rum batch to see details.
     </div>
   )
+
+  const handleDelete = async () => {
+    if (!run.batch_id && !run.id) return
+
+    try {
+      setIsDeleting(true)
+      const batchId = run.batch_id || run.id
+      const response = await fetch(`/api/production/rum/batches/${encodeURIComponent(batchId)}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to delete batch')
+      }
+
+      setShowDeleteConfirm(false)
+      onDelete?.()
+      onClose()
+    } catch (error) {
+      console.error('Error deleting batch:', error)
+      alert('Failed to delete batch. Please try again.')
+    } finally {
+      setIsDeleting(false)
+    }
+  }
 
   // Fermentation data (same as boiler charge)
   const fermentationVolume = run.boiler_volume_l || 0
@@ -77,12 +110,26 @@ export const RumDetailPanel: React.FC<{
           </p>
           <h2 className="text-2xl font-semibold text-stone-900">{run.batch_id}</h2>
         </div>
-        <button
-          onClick={onClose}
-          className="text-xs text-stone-500 hover:text-stone-900 px-3 py-1.5 border border-stone-200 bg-white rounded-md transition"
-        >
-          Close
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => router.push(`/dashboard/production/rum/edit/${encodeURIComponent(run.batch_id)}`)}
+            className="text-xs text-amber-700 hover:text-amber-900 hover:bg-amber-50 px-3 py-1.5 border border-amber-200 bg-white rounded-md transition font-medium"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            className="text-xs text-red-600 hover:text-red-800 hover:bg-red-50 px-3 py-1.5 border border-red-200 bg-white rounded-md transition font-medium"
+          >
+            Delete
+          </button>
+          <button
+            onClick={onClose}
+            className="text-xs text-stone-500 hover:text-stone-900 px-3 py-1.5 border border-stone-200 bg-white rounded-md transition"
+          >
+            Close
+          </button>
+        </div>
       </div>
 
       {/* Process Timeline */}
@@ -533,6 +580,39 @@ export const RumDetailPanel: React.FC<{
           </div>
         )}
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div className="p-6">
+              <h2 className="text-xl font-semibold text-stone-900 mb-2">
+                Delete Batch?
+              </h2>
+              <p className="text-sm text-stone-600 mb-4">
+                Are you sure you want to delete batch <strong>{run.batch_id}</strong>? This action cannot be undone.
+              </p>
+
+              <div className="flex gap-3 justify-end">
+                <button
+                  onClick={() => setShowDeleteConfirm(false)}
+                  disabled={isDeleting}
+                  className="px-4 py-2 text-sm text-stone-700 bg-white border border-stone-300 rounded-md hover:bg-stone-50 disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete}
+                  disabled={isDeleting}
+                  className="px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-700 disabled:opacity-50"
+                >
+                  {isDeleting ? 'Deleting...' : 'Delete Batch'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

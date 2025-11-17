@@ -15,6 +15,10 @@
 
 export type ProductionStatus = 'draft' | 'in_progress' | 'completed' | 'archived';
 
+// Stage-based status types for multi-stage production tracking
+export type StageStatus = 'not_started' | 'in_progress' | 'completed' | 'skipped';
+export type OverallStatus = 'draft' | 'fermenting' | 'distilling' | 'aging' | 'ready_to_bottle' | 'bottled' | 'archived';
+
 export type ProductType = 
   | 'gin' 
   | 'vodka' 
@@ -238,6 +242,13 @@ export interface FermentationReading {
 export interface RumCaneSpiritBatch extends BaseProductionBatch {
   productType: 'rum' | 'cane_spirit';
 
+  // ========== STAGE-BASED STATUS ==========
+  fermentation_status?: StageStatus;
+  distillation_status?: StageStatus;
+  aging_status?: StageStatus;
+  bottling_status?: StageStatus;
+  overall_status?: OverallStatus;
+
   // ========== FERMENTATION ==========
 
   // Basic Info
@@ -332,6 +343,7 @@ export interface RumCaneSpiritBatch extends BaseProductionBatch {
 
   // Foreshots
   foreshots_volume_l?: number;
+  foreshots_abv_percent?: number;
 
   // Heads Cut
   heads_cut_time?: string;

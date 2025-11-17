@@ -153,6 +153,21 @@ export default function RumPage() {
 
   const selectedRun = rumBatches.find((r) => r.batch_id === selectedRunId) || null
 
+  const handleDeleteBatch = async () => {
+    // Refresh the batch list after deletion
+    try {
+      const response = await fetch("/api/production/batches")
+      if (response.ok) {
+        const payload: { gin: any[]; rum: RumBatchRecord[] } = await response.json()
+        const batches = (payload.rum?.length ?? 0) > 0 ? payload.rum : buildRumBatchFallback()
+        setRumBatches(batches)
+        setSelectedRunId(null)
+      }
+    } catch (err) {
+      console.error("Error refreshing batches after delete:", err)
+    }
+  }
+
   return (
     <div className="h-screen flex flex-col bg-stone-100">
       {/* Top Navigation Bar */}
@@ -279,7 +294,11 @@ export default function RumPage() {
           )}
         </div>
 
-        <RumDetailPanel run={selectedRun} onClose={() => setSelectedRunId(null)} />
+        <RumDetailPanel
+          run={selectedRun}
+          onClose={() => setSelectedRunId(null)}
+          onDelete={handleDeleteBatch}
+        />
       </div>
     </div>
   )

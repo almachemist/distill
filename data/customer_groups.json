@@ -3,26 +3,39 @@
     {
       "groupName": "Hemingways Brewery",
       "aliases": [
-        "Hemingways Brewery Cairns Venue",
-        "Hemingways Brewery Trinity",
-        "Hemingways Brewery F&Q Venue",
-        "Hemingways Brewery F&Q PD Manager",
-        "Hemingways Brewery Cairns Providor",
+        "Hemingway's Brewery Cairns Venue",
+        "Hemingway's Brewery Trinity",
+        "Hemingway's Brewery FNQ Venue",
+        "Hemingway's Brewery FNQ PD Manager",
+        "Hemingway's Brewery Cairns Providore",
         "Sails",
         "Sails Restaurant",
-        "Sails Port Douglas"
+        "Sails Port Douglas",
+        "Sails Cairns",
+        "lee@hemingwaysbrewery.com"
       ],
       "emails": [
         "lee@hemingwaysbrewery.com"
       ],
-      "notes": "All accounts belong to the same Hemingways Brewery corporate customer."
+      "notes": "All accounts belong to the same Hemingways Brewery corporate customer, including Sails restaurants."
     },
     {
       "groupName": "Matt McMaster",
       "aliases": [
         "Matt McMaster"
       ],
+      "emails": [],
       "notes": "Duplicate entries merged."
+    },
+    {
+      "groupName": "Aradhna Crabb",
+      "aliases": [
+        "Aradhna Crabb",
+        "Aradhna",
+        "Rads"
+      ],
+      "emails": [],
+      "notes": "Same client with multiple name variations."
     }
   ]
 }
