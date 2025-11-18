@@ -56,6 +56,20 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
     setPreviewColor(color)
   }, [formData.productType, formData.type])
 
+  // Compute ISO week code (YYYY-Www) from a YYYY-MM-DD date
+  function isoWeekFromDate(dateStr: string): string | null {
+    if (!dateStr) return null
+    const [y, m, d] = dateStr.split('-').map(Number)
+    if (!y || !m || !d) return null
+    const date = new Date(Date.UTC(y, m - 1, d))
+    const dayNum = date.getUTCDay() || 7 // Mon=1..Sun=7
+    date.setUTCDate(date.getUTCDate() + 4 - dayNum) // nearest Thursday
+    const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1))
+    const weekNo = Math.ceil((((date.getTime() - yearStart.getTime()) / 86400000) + 1) / 7)
+    const isoYear = date.getUTCFullYear()
+    return `${isoYear}-W${String(weekNo).padStart(2, '0')}`
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -207,6 +221,7 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
           {/* Week Start */}
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
+
               Week Start *
             </label>
             <input
@@ -221,6 +236,25 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
               Format: YYYY-Www (e.g. 2026-W15 for week 15 of 2026)
             </p>
           </div>
+
+          {/* Pick a Date (auto-fills Week Start) */}
+          <div>
+            <label className="block text-sm font-medium text-stone-700 mb-2">
+              Pick a date (auto-fills Week Start)
+            </label>
+            <input
+              type="date"
+              onChange={(e) => {
+                const code = isoWeekFromDate(e.target.value)
+                if (code) setFormData({ ...formData, weekStart: code })
+              }}
+              className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-900"
+            />
+            <p className="text-xs text-stone-500 mt-1">
+              Choose any day in the target week
+            </p>
+          </div>
+
 
           {/* Week End (optional) */}
           <div>
@@ -239,6 +273,7 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
           {/* Tank */}
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
+
               Tank
             </label>
             <input
@@ -284,14 +319,14 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
           {/* Actions */}
           <div className="flex items-center justify-between pt-4 border-t border-stone-200">
             <div className="flex items-center gap-3">
-              {mode === 'edit' && onDelete && event && !event.id.startsWith('static-') && (
+              {mode === 'edit' && onDelete && event && (
                 <button
                   type="button"
                   onClick={handleDelete}
                   disabled={isSubmitting}
                   className="px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
                 >
-                  Delete Event
+                  Delete {event.id.startsWith('static-') ? 'Card' : 'Event'}
                 </button>
               )}
               {mode === 'edit' && onClear && event && event.id.startsWith('static-') && (

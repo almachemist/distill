@@ -55,9 +55,9 @@ export default function CalendarPage() {
     try {
       setIsLoading(true)
       const [res2026, resDec, resEvents] = await Promise.all([
-        fetch('/api/calendar-data/2026'),
-        fetch('/api/calendar-data/december'),
-        fetch('/api/calendar-events')
+        fetch('/api/calendar-data/2026', { cache: 'no-store' }),
+        fetch('/api/calendar-data/december', { cache: 'no-store' }),
+        fetch('/api/calendar-events', { cache: 'no-store' })
       ])
 
       if (res2026.ok) setData(await res2026.json())
@@ -73,21 +73,25 @@ export default function CalendarPage() {
     }
   }
 
-  const handleCardClick = (week: WeekPlan) => {
+  const handleCardClick = (week: WeekPlan, kind?: 'production' | 'bottling' | 'admin') => {
     const run = week.production_runs?.[0]
 
-    const year = new Date(week.week_start).getFullYear()
-    const isDecember2025 = year === 2025
+    // Determine if this week belongs to the December 2025 file
+    const isDecember2025 = week.month_name === 'Dec'
+
+    const resolvedType: 'production' | 'bottling' = kind ? (kind === 'bottling' ? 'bottling' : 'production') : (week.bottling ? 'bottling' : 'production')
 
     // Create event object with CURRENT data from the week (which should be updated after save)
     const event: CalendarEvent = {
       id: `${isDecember2025 ? 'static-dec' : 'static'}-${week.week_number}`,
-      type: 'production',
-      productName: run?.product || getModeLabel(week.mode),
+      type: resolvedType,
+      productName: resolvedType === 'bottling'
+        ? (week.bottling_tasks && week.bottling_tasks.length > 0 ? week.bottling_tasks.join(', ') : 'Bottling Week')
+        : (run?.product || getModeLabel(week.mode)),
       productType: week.mode as any,
-      batch: run ? `${run.batch_number}/${run.total_batches}` : undefined,
+      batch: resolvedType === 'production' && run ? `${run.batch_number}/${run.total_batches}` : undefined,
       weekStart: `${isDecember2025 ? 2025 : 2026}-W${week.week_number.toString().padStart(2, '0')}`,
-      tank: run?.receiving_tank !== 'None' ? run?.receiving_tank : undefined,
+      tank: resolvedType === 'production' && run?.receiving_tank !== 'None' ? run?.receiving_tank : undefined,
       notes: week.notes.join(', '),
       color: '#000000',
     }
@@ -95,7 +99,8 @@ export default function CalendarPage() {
     console.log('🎯 Opening card for week', week.week_number, 'with data:', {
       product: run?.product,
       tank: run?.receiving_tank,
-      batch: run ? `${run.batch_number}/${run.total_batches}` : undefined
+      batch: run ? `${run.batch_number}/${run.total_batches}` : undefined,
+      kind: resolvedType
     })
 
     setSelectedEvent(event)
@@ -244,7 +249,7 @@ export default function CalendarPage() {
     const run = week.production_runs[0]
 
     return (
-      <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+      <div key={`prod-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week, 'production')}>
         {/* Week header - minimal */}
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-500">
@@ -293,7 +298,7 @@ export default function CalendarPage() {
   // Render bottling week card
   const renderBottlingWeek = (week: WeekPlan) => {
     return (
-      <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+      <div key={`bott-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week, 'bottling')}>
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-500">
             W{week.week_number.toString().padStart(2, '0')}
@@ -335,7 +340,7 @@ export default function CalendarPage() {
     // Special handling for Reserve Rum weeks
     if (week.mode === 'RESERVE_RUM_BLEND' || week.mode === 'RESERVE_RUM_BOTTLE') {
       return (
-        <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+        <div key={`admin-reserve-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs font-medium text-stone-500">
               W{week.week_number.toString().padStart(2, '0')}
@@ -360,7 +365,7 @@ export default function CalendarPage() {
     // Week 1 - Administrative reset
     if (week.week_number === 1) {
       return (
-        <div key={week.week_number} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
+        <div key={`admin-week1-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
           <div className="flex items-center justify-between mb-2">
             <div className="text-xs font-medium text-stone-500">
               W{week.week_number.toString().padStart(2, '0')}
@@ -384,7 +389,7 @@ export default function CalendarPage() {
 
     // Regular admin/bottling weeks
     return (
-      <div key={week.week_number} className="group relative opacity-40 hover:opacity-100 transition-opacity cursor-pointer" onClick={() => handleCardClick(week)}>
+      <div key={`admin-${week.week_number}`} className="group relative opacity-40 hover:opacity-100 transition-opacity cursor-pointer" onClick={() => handleCardClick(week)}>
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-400">
             W{week.week_number.toString().padStart(2, '0')}
@@ -428,7 +433,7 @@ export default function CalendarPage() {
   // Reload only dynamic events
   const reloadEvents = async () => {
     try {
-      const res = await fetch('/api/calendar-events')
+      const res = await fetch('/api/calendar-events', { cache: 'no-store' })
       if (res.ok) {
         const json = await res.json()
         setEvents(Array.isArray(json.events) ? json.events : [])
@@ -441,22 +446,40 @@ export default function CalendarPage() {
   // Extract numeric week from weekStart (supports "2026-W15" or plain "15")
   const getWeekNo = (weekStart?: string): number | null => {
     if (!weekStart) return null
-    const m = weekStart.match(/^(\d{4})-W(\d{2})$/)
+    const m = weekStart.match(/^(\d{4})-W(\d{1,2})$/i)
     if (m) return parseInt(m[2], 10)
+    const m2 = weekStart.match(/^W?(\d{1,2})$/i)
+    if (m2) return parseInt(m2[1], 10)
     const n = parseInt(weekStart, 10)
     return Number.isNaN(n) ? null : n
   }
   // Delete a dynamic (custom) event
   const handleDelete = async (id: string) => {
-    if (!id || id.startsWith('static-')) return
+    if (!id) return
     try {
-      const res = await fetch(`/api/calendar-events/${id}`, { method: 'DELETE' })
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        console.error('❌ Delete failed:', err)
-        throw new Error('Delete failed')
+      if (id.startsWith('static-')) {
+        // Delete static card (production or bottling depending on selectedEvent.type)
+        const res = await fetch('/api/calendar-events/static-update', {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id, remove: true, type: selectedEvent?.type })
+        })
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}))
+          console.error('❌ Static delete failed:', err)
+          throw new Error('Delete failed')
+        }
+        await loadData()
+      } else {
+        // Delete dynamic event
+        const res = await fetch(`/api/calendar-events/${id}`, { method: 'DELETE' })
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}))
+          console.error('❌ Delete failed:', err)
+          throw new Error('Delete failed')
+        }
+        await reloadEvents()
       }
-      await reloadEvents()
       setIsModalOpen(false)
     } catch (e) {
       console.error('💥 Delete error:', e)
@@ -682,11 +705,14 @@ export default function CalendarPage() {
                 {quarter.weeks.map(week => {
                   const nodes: (JSX.Element | null)[] = []
 
+                  // Allow both production and bottling to appear in the same week tile
                   if (week.production_runs.length > 0) {
                     nodes.push(renderProductionWeek(week))
-                  } else if (week.bottling) {
+                  }
+                  if (week.bottling) {
                     nodes.push(renderBottlingWeek(week))
-                  } else {
+                  }
+                  if (nodes.length === 0) {
                     nodes.push(renderAdminWeek(week))
                   }
 
@@ -701,7 +727,12 @@ export default function CalendarPage() {
                   })
                   dyn.forEach(ev => nodes.push(renderDynamicEventCard(ev)))
 
-                  return <>{nodes}</>
+                  // Wrap all week content so it stays in a single grid cell
+                  return (
+                    <div key={`wrap-${week.week_number}`} className="space-y-3">
+                      {nodes}
+                    </div>
+                  )
                 })}
               </div>
             </CardContent>

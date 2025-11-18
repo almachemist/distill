@@ -139,9 +139,38 @@ export default function NewBottlingRunPage() {
   }
 
   async function saveBottlingRun() {
-    // TODO: Implement save
-    console.log('Saving...', { selectedBatches, dilutionPhases, bottleEntries, productName })
-    alert('Bottling run saved!')
+    try {
+      if (!productName) throw new Error('Please enter a product name')
+      if (selectedBatches.length === 0) throw new Error('Select at least one batch')
+      if (bottleEntries.length === 0) throw new Error('Add at least one bottle size')
+
+      const payload = {
+        productType: selectedBatches[0]?.batch?.productType || 'gin',
+        productName,
+        mode,
+        selectedBatches,
+        dilutionPhases,
+        bottleEntries,
+        summary,
+      }
+
+      const res = await fetch('/api/production/bottling-runs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}))
+        throw new Error(j.error || `Failed to save (HTTP ${res.status})`)
+      }
+
+      const j = await res.json()
+      alert('Bottling run saved and inventory updated successfully!')
+      window.location.href = '/dashboard/production'
+    } catch (e: any) {
+      alert(e?.message || 'Failed to save bottling run')
+    }
   }
 
   // Calculate mode and summary

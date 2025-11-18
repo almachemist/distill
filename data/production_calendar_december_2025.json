@@ -10,12 +10,10 @@
       "production_runs": [],
       "bottling": true,
       "bottling_tasks": [
-        "Bottle Coffee Liqueur"
+        "Bottle Spiced Rum"
       ],
       "notes": [
-        "Coffee Liqueur - Bottling Run",
-        "Priority bottling for holiday season",
-        "Full week dedicated to bottling"
+        ""
       ],
       "tank_allocations": []
     },
@@ -92,5 +90,5 @@
       ]
     }
   ],
-  "generated_at": "2025-11-14T05:05:40.503Z"
+  "generated_at": "2025-11-17T23:41:28.588Z"
 }

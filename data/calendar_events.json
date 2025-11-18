@@ -1,26 +1,12 @@
 [
   {
-    "id": "evt_1763092279854_80dld6ys8",
+    "id": "evt_1763420299650_8g5i2fy2p",
     "type": "bottling",
-    "productName": "ww",
-    "productType": "CANE_SPIRIT",
-    "weekStart": "3",
-    "weekEnd": "",
-    "tank": "33",
-    "color": "#A65E2E",
-    "createdAt": "2025-11-14T03:51:19.855Z",
-    "updatedAt": "2025-11-14T03:51:19.860Z"
-  },
-  {
-    "id": "evt_1763092858267_bsdbg622v",
-    "type": "production",
-    "productName": "qq",
-    "productType": "CANE_SPIRIT",
-    "batch": "qq",
-    "weekStart": "3",
-    "tank": "33",
-    "color": "#A65E2E",
-    "createdAt": "2025-11-14T04:00:58.268Z",
-    "updatedAt": "2025-11-14T04:00:58.274Z"
+    "productName": "Coffee liqueur",
+    "productType": "LIQUEUR",
+    "weekStart": "2025-W52",
+    "color": "#9A6A4F",
+    "createdAt": "2025-11-17T22:58:19.650Z",
+    "updatedAt": "2025-11-17T23:41:54.517Z"
   }
 ]

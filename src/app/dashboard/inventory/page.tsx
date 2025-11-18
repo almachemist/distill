@@ -1,11 +1,16 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import InventoryManager from '@/modules/inventory/components/InventoryManager'
 
 export default function InventoryPage() {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState<'raw' | 'packaging' | 'product'>('raw')
+  return <InventoryManager />
+
+}
+
+
+
+/*
+
 
   // Mock inventory data
   const inventoryItems = [
@@ -19,7 +24,7 @@ export default function InventoryPage() {
     { id: '7', name: 'Angelica', category: 'raw', type: 'botanical', quantity: 1.2, unit: 'kg', minThreshold: 2, lastUpdated: '2024-01-09' },
     { id: '8', name: 'Lemon Myrtle', category: 'raw', type: 'botanical', quantity: 0.8, unit: 'kg', minThreshold: 1, lastUpdated: '2024-01-08' },
     { id: '9', name: 'Pepperberry', category: 'raw', type: 'botanical', quantity: 0.3, unit: 'kg', minThreshold: 0.5, lastUpdated: '2024-01-07' },
-    
+
     // Packaging Materials
     { id: '10', name: '700ml Bottle (Clear)', category: 'packaging', type: 'bottle', quantity: 1200, unit: 'units', minThreshold: 500, lastUpdated: '2024-01-15' },
     { id: '11', name: '200ml Bottle', category: 'packaging', type: 'bottle', quantity: 800, unit: 'units', minThreshold: 200, lastUpdated: '2024-01-14' },
@@ -29,7 +34,7 @@ export default function InventoryPage() {
     { id: '15', name: 'Label (Back)', category: 'packaging', type: 'label', quantity: 2800, unit: 'units', minThreshold: 2000, lastUpdated: '2024-01-10' },
     { id: '16', name: 'Gift Box (1 Bottle)', category: 'packaging', type: 'box', quantity: 150, unit: 'units', minThreshold: 200, lastUpdated: '2024-01-09' },
     { id: '17', name: 'Carton (6 Bottles)', category: 'packaging', type: 'box', quantity: 80, unit: 'units', minThreshold: 100, lastUpdated: '2024-01-08' },
-    
+
     // Finished Products
     { id: '18', name: 'Signature Dry Gin (Traditional)', category: 'product', type: 'gin', quantity: 142, unit: 'L', minThreshold: 20, lastUpdated: '2024-01-15', notes: 'Batch #SDG-2024-001' },
     { id: '19', name: 'Navy Strength Gin', category: 'product', type: 'gin', quantity: 85, unit: 'L', minThreshold: 15, lastUpdated: '2024-01-14', notes: 'Batch #NSG-2024-002' },
@@ -49,15 +54,15 @@ export default function InventoryPage() {
   const getStatusBadge = (item: any) => {
     const isLow = item.quantity <= item.minThreshold
     const isOut = item.quantity === 0
-    
+
     if (isOut) {
       return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">⚠️ OUT</span>
     }
-    
+
     if (isLow) {
       return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">⚠️ LOW</span>
     }
-    
+
     return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ OK</span>
   }
 
@@ -77,7 +82,7 @@ export default function InventoryPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+      {'/* Header * /'}
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Inventory Management</h1>
@@ -99,7 +104,7 @@ export default function InventoryPage() {
         </div>
       )}
 
-      {/* Low Stock Banner */}
+      {'/* Low Stock Banner * /'}
       {getLowStockItems().length > 0 && (
         <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
           <div className="flex">
@@ -125,7 +130,7 @@ export default function InventoryPage() {
         </div>
       )}
 
-      {/* Category Tabs */}
+      {'/* Category Tabs * /'}
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-8">
           {[
@@ -148,7 +153,7 @@ export default function InventoryPage() {
         </nav>
       </div>
 
-      {/* Inventory Table */}
+      {'/* Inventory Table * /'}
       <div className="bg-white shadow-sm rounded-lg">
         <div className="px-6 py-4 border-b border-gray-200">
           <div className="flex justify-between items-center">
@@ -206,7 +211,7 @@ export default function InventoryPage() {
         )}
       </div>
 
-      {/* Instructions */}
+      {'/* Instructions * /'}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
         <h3 className="text-lg font-semibold text-blue-900 mb-2">Simplified Inventory System</h3>
         <p className="text-blue-700 text-sm mb-4">
@@ -230,3 +235,5 @@ export default function InventoryPage() {
     </div>
   )
 }
+
+*/

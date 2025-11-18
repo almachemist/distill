@@ -8,6 +8,14 @@ export interface GinBatchSummary {
   date: string | null
   still_used: string | null
   updated_at: string | null
+  // Optional enriched fields used by UI when Supabase is unavailable
+  status?: string | null
+  hearts_volume_l?: number | null
+  hearts_abv_percent?: number | null
+  hearts_lal?: number | null
+  charge_total_volume_l?: number | null
+  charge_total_abv_percent?: number | null
+  charge_total_lal?: number | null
 }
 
 export interface RumBatchSummary {
@@ -53,13 +61,37 @@ export function buildGinBatchFallback(): GinBatchSummary[] {
       updated_at: batch.audit?.last_edited_at ?? null
     }))
 
-  const signatureSummaries: GinBatchSummary[] = signatureGinBatchSummaries.map((batch) => ({
-    run_id: batch.batch_id,
-    recipe: batch.recipe,
-    date: batch.date,
-    still_used: batch.still_used,
-    updated_at: null
-  }))
+  const signatureSummaries: GinBatchSummary[] = signatureGinBatchSummaries.map((batch) => {
+    // Compute enriched fields so UI cards show real numbers
+    const heartsABV = batch.hearts_abv_percent ?? null
+    const heartsLAL = batch.hearts_lal ?? null
+    const heartsVolume = batch.hearts_volume_l ?? (
+      heartsLAL != null && heartsABV != null && heartsABV > 0
+        ? Number((heartsLAL / (heartsABV / 100)).toFixed(1))
+        : null
+    )
+
+    const chargeVol = batch.charge_volume_l ?? null
+    const chargeABV = batch.charge_abv_percent ?? null
+    const chargeLAL = chargeVol != null && chargeABV != null
+      ? Number((chargeVol * (chargeABV / 100)).toFixed(1))
+      : null
+
+    return {
+      run_id: batch.batch_id,
+      recipe: batch.recipe,
+      date: batch.date,
+      still_used: batch.still_used,
+      updated_at: null,
+      status: 'completed',
+      hearts_volume_l: heartsVolume,
+      hearts_abv_percent: heartsABV,
+      hearts_lal: heartsLAL ?? (heartsVolume != null && heartsABV != null ? Number((heartsVolume * (heartsABV / 100)).toFixed(1)) : null),
+      charge_total_volume_l: chargeVol,
+      charge_total_abv_percent: chargeABV,
+      charge_total_lal: chargeLAL,
+    }
+  })
 
   const merged = new Map<string, GinBatchSummary>()
 

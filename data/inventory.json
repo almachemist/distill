@@ -1,0 +1,70 @@
+[
+  { "id": "RAIN-700", "sku": "RAIN-700", "name": "Rainforest Gin 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 347, "type": "Alcohol" },
+  { "id": "RAIN-200", "sku": "RAIN-200", "name": "Rainforest Gin 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 130, "type": "Alcohol" },
+  
+  { "id": "SIGN-700", "sku": "SIGN-700", "name": "Signature Dry Gin 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 587, "type": "Alcohol" },
+  { "id": "SIGN-200", "sku": "SIGN-200", "name": "Signature Dry Gin 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 117, "type": "Alcohol" },
+  
+  { "id": "NAVY-700", "sku": "NAVY-700", "name": "Navy Strength Gin 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 518, "type": "Alcohol" },
+  { "id": "NAVY-200", "sku": "NAVY-200", "name": "Navy Strength Gin 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 16, "type": "Alcohol" },
+  
+  { "id": "CANE-700", "sku": "CANE-700", "name": "Cane Spirit 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 230, "type": "Alcohol" },
+  { "id": "CANE-200", "sku": "CANE-200", "name": "Cane Spirit 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 18, "type": "Alcohol" },
+  
+  { "id": "WET-700", "sku": "WET-700", "name": "Wet Season Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 617, "type": "Alcohol" },
+  
+  { "id": "DRY-700", "sku": "DRY-700", "name": "Dry Season Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 508, "type": "Alcohol" },
+  
+  { "id": "PINE-200", "sku": "PINE-200", "name": "Pineapple Rum 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 131, "type": "Alcohol" },
+  { "id": "PINE-700", "sku": "PINE-700", "name": "Pineapple Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 485, "type": "Alcohol" },
+  
+  { "id": "SPICED-200", "sku": "SPICED-200", "name": "Spiced Rum 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 73, "type": "Alcohol" },
+  { "id": "SPICED-700", "sku": "SPICED-700", "name": "Spiced Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 212, "type": "Alcohol" },
+  
+  { "id": "MM-GIN-700", "sku": "MM-GIN-700", "name": "Merchant Mae Gin 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 775, "type": "Alcohol" },
+  { "id": "MM-GIN-POUCH", "sku": "MM-GIN-POUCH", "name": "Merchant Mae Gin Pouches", "category": "Spirits", "unit": "bottle", "currentStock": 6, "type": "Alcohol" },
+  
+  { "id": "MM-VODKA-700", "sku": "MM-VODKA-700", "name": "Merchant Mae Vodka 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 1083, "type": "Alcohol" },
+  { "id": "MM-VODKA-POUCH", "sku": "MM-VODKA-POUCH", "name": "Merchant Mae Vodka Pouches", "category": "Spirits", "unit": "bottle", "currentStock": 22, "type": "Alcohol" },
+  
+  { "id": "MM-WR-700", "sku": "MM-WR-700", "name": "Merchant Mae White Rum 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 218, "type": "Alcohol" },
+  
+  { "id": "MM-DR-700", "sku": "MM-DR-700", "name": "Merchant Mae Dark Rum 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 112, "type": "Alcohol" },
+  
+  { "id": "RESRUM-700", "sku": "RESRUM-700", "name": "Reserve Cask Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 62, "type": "Alcohol" },
+  
+  { "id": "COFFEE-700", "sku": "COFFEE-700", "name": "Coffee Liqueur 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 10, "type": "Alcohol" },
+  
+  { "id": "GIFT-GIN", "sku": "GIFT-GIN", "name": "Gin Gift Packs (3 x 200ml)", "category": "Spirits", "unit": "pack", "currentStock": 16, "type": "Alcohol" },
+  { "id": "GIFT-RUM", "sku": "GIFT-RUM", "name": "Rum Gift Packs (3 x 200ml)", "category": "Spirits", "unit": "pack", "currentStock": 6, "type": "Alcohol" },
+
+  { "id": "PKG-BOTTLE-700", "sku": "PKG-BOTTLE-700", "name": "700ml Glass Bottles", "category": "Packaging", "unit": "unit", "currentStock": 5000 },
+  { "id": "PKG-BOTTLE-200", "sku": "PKG-BOTTLE-200", "name": "200ml Glass Bottles", "category": "Packaging", "unit": "unit", "currentStock": 5000 },
+  { "id": "PKG-CORK-700", "sku": "PKG-CORK-700", "name": "Corks for 700ml", "category": "Packaging", "unit": "unit", "currentStock": 6000 },
+  { "id": "PKG-CAP-200", "sku": "PKG-CAP-200", "name": "Caps for 200ml", "category": "Packaging", "unit": "unit", "currentStock": 6000 },
+  { "id": "PKG-SLEEVE-700", "sku": "PKG-SLEEVE-700", "name": "Tamper Sleeves 700ml", "category": "Packaging", "unit": "unit", "currentStock": 6000 },
+  { "id": "PKG-SLEEVE-200", "sku": "PKG-SLEEVE-200", "name": "Tamper Sleeves 200ml", "category": "Packaging", "unit": "unit", "currentStock": 6000 },
+  { "id": "PKG-CARTON-6P-700", "sku": "PKG-CARTON-6P-700", "name": "6-Pack Cartons (700ml)", "category": "Packaging", "unit": "carton", "currentStock": 1000 },
+
+  { "id": "LBL-RAIN-700", "sku": "LBL-RAIN-700", "name": "Label - Rainforest Gin 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-RAIN-200", "sku": "LBL-RAIN-200", "name": "Label - Rainforest Gin 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
+  { "id": "LBL-SIGN-700", "sku": "LBL-SIGN-700", "name": "Label - Signature Dry Gin 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-SIGN-200", "sku": "LBL-SIGN-200", "name": "Label - Signature Dry Gin 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
+  { "id": "LBL-NAVY-700", "sku": "LBL-NAVY-700", "name": "Label - Navy Strength Gin 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-NAVY-200", "sku": "LBL-NAVY-200", "name": "Label - Navy Strength Gin 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
+  { "id": "LBL-CANE-700", "sku": "LBL-CANE-700", "name": "Label - Cane Spirit 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-CANE-200", "sku": "LBL-CANE-200", "name": "Label - Cane Spirit 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
+  { "id": "LBL-PINE-700", "sku": "LBL-PINE-700", "name": "Label - Pineapple Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-PINE-200", "sku": "LBL-PINE-200", "name": "Label - Pineapple Rum 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
+  { "id": "LBL-SPICED-700", "sku": "LBL-SPICED-700", "name": "Label - Spiced Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-SPICED-200", "sku": "LBL-SPICED-200", "name": "Label - Spiced Rum 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
+  { "id": "LBL-WET-700", "sku": "LBL-WET-700", "name": "Label - Wet Season Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-DR-700", "sku": "LBL-DR-700", "name": "Label - Dry Season Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-RESRUM-700", "sku": "LBL-RESRUM-700", "name": "Label - Reserve Cask Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-COFFEE-700", "sku": "LBL-COFFEE-700", "name": "Label - Coffee Liqueur 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-MMGIN-700", "sku": "LBL-MMGIN-700", "name": "Label - Merchant Mae Gin 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-MMVODKA-700", "sku": "LBL-MMVODKA-700", "name": "Label - Merchant Mae Vodka 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-MMWR-700", "sku": "LBL-MMWR-700", "name": "Label - Merchant Mae White Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-MMDR-700", "sku": "LBL-MMDR-700", "name": "Label - Merchant Mae Dark Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 }
+]
+

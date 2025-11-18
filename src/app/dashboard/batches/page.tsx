@@ -131,11 +131,11 @@ const RunCard: React.FC<{
   run: GinBatchRecord
   onSelect: () => void
 }> = ({ run, onSelect }) => {
-  const heartsVolume = run.hearts_volume_l || 0
-  const heartsABV = run.hearts_abv_percent || 0
-  const heartsLAL = run.hearts_lal || (heartsVolume * heartsABV / 100)
-  const chargeVolume = run.charge_total_volume_l || 0
-  const chargeABV = run.charge_total_abv_percent || 0
+  const heartsABV = run.hearts_abv_percent ?? 0
+  const heartsLAL = run.hearts_lal ?? (run.hearts_volume_l != null && heartsABV > 0 ? run.hearts_volume_l * (heartsABV / 100) : 0)
+  const heartsVolume = run.hearts_volume_l ?? (heartsLAL != null && heartsABV > 0 ? heartsLAL / (heartsABV / 100) : 0)
+  const chargeVolume = run.charge_total_volume_l ?? 0
+  const chargeABV = run.charge_total_abv_percent ?? 0
 
   // Determine status badge
   const status = run.status || 'completed'

@@ -87,14 +87,21 @@ const PhaseTable: React.FC<{ run: GinBatchRecord }> = ({ run }) => {
     })
   }
   
-  if (run.hearts_volume_l) {
-    phases.push({
-      phase: "Hearts",
-      volumeL: run.hearts_volume_l,
-      abv: run.hearts_abv_percent,
-    })
+  {
+    const hv = run.hearts_volume_l ?? (
+      run.hearts_lal != null && run.hearts_abv_percent != null && run.hearts_abv_percent > 0
+        ? Number((run.hearts_lal / (run.hearts_abv_percent / 100)).toFixed(1))
+        : null
+    )
+    if (hv != null && hv > 0) {
+      phases.push({
+        phase: "Hearts",
+        volumeL: hv,
+        abv: run.hearts_abv_percent,
+      })
+    }
   }
-  
+
   if (run.tails_volume_l) {
     phases.push({
       phase: "Tails",
@@ -199,12 +206,12 @@ export const DetailPanel: React.FC<{
     </div>
   )
 
-  const heartsVolume = run.hearts_volume_l || 0
-  const heartsABV = run.hearts_abv_percent || 0
-  const heartsLAL = run.hearts_lal || (heartsVolume * heartsABV / 100)
-  const chargeVolume = run.charge_total_volume_l || 0
-  const chargeABV = run.charge_total_abv_percent || 0
-  const chargeLAL = run.charge_total_lal || 0
+  const heartsABV = run.hearts_abv_percent ?? 0
+  const heartsLAL = run.hearts_lal ?? (run.hearts_volume_l != null && heartsABV > 0 ? run.hearts_volume_l * (heartsABV / 100) : 0)
+  const heartsVolume = run.hearts_volume_l ?? (heartsLAL != null && heartsABV > 0 ? heartsLAL / (heartsABV / 100) : 0)
+  const chargeVolume = run.charge_total_volume_l ?? 0
+  const chargeABV = run.charge_total_abv_percent ?? 0
+  const chargeLAL = run.charge_total_lal ?? 0
 
   // Check if this is a draft/in_progress batch
   const isDraft = run.status === 'draft' || run.status === 'in_progress'
