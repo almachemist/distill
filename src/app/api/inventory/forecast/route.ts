@@ -60,7 +60,7 @@ export async function GET(req: NextRequest) {
     const to = searchParams.get('to') || '2027-03-31'
 
     // 1) Get packaging forecast for the range
-    const origin = req.headers.get('origin') || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'
+    const origin = req.nextUrl.origin
     const url = new URL('/api/forecast/packaging', origin)
     url.searchParams.set('from', from)
     url.searchParams.set('to', to)
