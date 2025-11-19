@@ -135,9 +135,9 @@
         {
           "phase": "Hearts",
           "destination": "GIN-SD-000 / IBC-ENA-7",
-          "volume_L": null,
-          "abv_percent": 81.1,
-          "LAL": 416.0,
+          "volume_L": 282.4,
+          "abv_percent": 80.0,
+          "LAL": 225.9,
           "notes": "Blended with batch 013"
         },
         {
@@ -151,7 +151,7 @@
       "run_totals": {
         "total_collected_L": 928.4,
         "hearts_percent_of_run": null,
-        "total_LAL_out": 416.0,
+        "total_LAL_out": 225.9,
         "botanicals_g_per_LAL": 18.3
       },
       "dilution_steps": [],

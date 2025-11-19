@@ -2,6 +2,8 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import type { InventoryItem, InventoryCategory, Supplier } from '@/types/inventory'
+import Link from 'next/link'
+
 
 const CATEGORIES: (InventoryCategory | 'All')[] = ['All','Spirits','Packaging','Labels','Botanicals','RawMaterials']
 const UNITS = ['bottle','carton','pack','g','kg','L','ml','unit'] as const
@@ -219,6 +221,7 @@ export default function InventoryManager() {
           <p className="text-gray-600 text-sm">Baseline de Novembro 2025 + movimentos (sem negativos)</p>
         </div>
         <div className="flex gap-2">
+          <Link href="/dashboard/inventory-planning" className="px-4 py-2 rounded-md border">Forecast Needs</Link>
           <button className="px-4 py-2 rounded-md border" onClick={() => { setAddingSupplier(true); setSupDraft({}) }}>Add Supplier</button>
           <button className="px-4 py-2 rounded-md bg-gray-900 text-white" onClick={() => { setCreating(true); setDraft({ category: 'Packaging', unit: 'unit', currentStock: 0 }) }}>Add Item</button>
         </div>
@@ -252,7 +255,7 @@ export default function InventoryManager() {
                 <tr key={it.id}>
                   <td className="px-4 py-2 text-sm font-medium text-gray-900">{it.name}</td>
                   <td className="px-4 py-2 text-sm text-gray-600">{it.category}</td>
-                  <td className={`px-4 py-2 text-sm font-semibold ${stockClass(it)}`}>{it.currentStock}</td>
+                  <td className={`px-4 py-2 text-sm font-semibold ${stockClass(it)}`}>{Math.max(0, Number(it.currentStock || 0))}</td>
                   <td className="px-4 py-2 text-sm text-gray-600">{it.unit}</td>
                   <td className="px-4 py-2 text-xs"><span className="inline-flex px-2 py-0.5 rounded bg-gray-100 text-gray-700">{it.type || '—'}</span></td>
                   <td className="px-4 py-2 text-sm text-gray-600">{supName(it.supplierId)}</td>

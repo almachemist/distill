@@ -66,7 +66,7 @@
           "time": "12:15",
           "phase": "Middle Run (Hearts)",
           "volume_L": 128.0,
-          "abv_percent": 81.1,
+          "abv_percent": 81.0,
           "ambient_temp_C": null,
           "head_temp_C": null,
           "condenser_temp_C": null,
@@ -93,8 +93,8 @@
           "phase": "Hearts",
           "destination": "GIN-SD-019 / IBC-ENA-7",
           "volume_L": 128.0,
-          "abv_percent": 81.1,
-          "LAL": null
+          "abv_percent": 81.0,
+          "LAL": 103.7
         },
         {
           "phase": "Tails",

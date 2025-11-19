@@ -17,9 +17,12 @@ export type InventoryItem = {
   minStock?: number
   type?: string
   supplierId?: string
+  // Optional denormalized supplier fields for last purchase/invoice tracking
+  supplierContact?: string
   lastInvoiceNumber?: string
   lastInvoiceDate?: string
   lastPurchaseCost?: number
+  attachmentUrl?: string
   lotNumber?: string
   expiryDate?: string
   notes?: string
