@@ -271,6 +271,12 @@ export default function BatchesPage() {
             >
               Rum
             </button>
+            <button
+              onClick={() => router.push('/dashboard/batches/old-roberta')}
+              className="px-4 py-2 bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 rounded-md text-sm font-medium"
+            >
+              Old Roberta
+            </button>
           </div>
         </div>
       </div>

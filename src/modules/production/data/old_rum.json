@@ -1,0 +1,1701 @@
+{
+  "batch_id": "SPIRIT-RUM-0001",
+  "date": "2021-03-15",
+  "boiler_on": "07:35",
+  "still_used": "CP-270-1",
+
+  "charge": {
+    "low_wines": [
+      {
+        "reference": "LOW-RUM-0001",
+        "volume_l": 192.2,
+        "abv": 33.8,
+        "lal": 65.0
+      }
+    ],
+    "adjustment": {
+      "reference": null,
+      "volume_l": 2.5,
+      "abv": 33.8,
+      "lal": 0.8
+    },
+    "feints_added": [
+      {
+        "reference": "RUM-FEINTS-0001",
+        "volume_l": 20.0,
+        "abv": 47.4,
+        "lal": 9.5
+      }
+    ],
+    "total_charge": {
+      "volume_l": 214.7,
+      "abv": 35.1,
+      "lal": 75.3
+    },
+    "still_setup": {
+      "elements": "5750W + 2200W + 2400W",
+      "plates": "Nil",
+      "options": "Whisky helmet"
+    }
+  },
+
+  "run_log": [
+    {
+      "time": "09:15",
+      "phase": "Foreshots",
+      "volume_l": 1.5,
+      "volume_percent": 0.7,
+      "vc_tank_volume_l": null,
+      "abv": 81.5,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": "1x2400 full power, 1x2200 @150V"
+    },
+    {
+      "time": "09:25",
+      "phase": "Heads",
+      "volume_l": 2.0,
+      "volume_percent": 0.9,
+      "vc_tank_volume_l": null,
+      "abv": 80.4,
+      "ambient_temp_c": 32.5,
+      "head_temp_c": 77.8,
+      "condenser_temp_c": 31.2,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": null
+    },
+    {
+      "time": "09:37",
+      "phase": "Heads",
+      "volume_l": 2.0,
+      "volume_percent": 0.9,
+      "vc_tank_volume_l": null,
+      "abv": 80.2,
+      "ambient_temp_c": 32.1,
+      "head_temp_c": 77.9,
+      "condenser_temp_c": 31.2,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": null
+    },
+    {
+      "time": "09:45",
+      "phase": "Heads",
+      "volume_l": 1.0,
+      "volume_percent": 0.5,
+      "vc_tank_volume_l": null,
+      "abv": 80.2,
+      "ambient_temp_c": 33.0,
+      "head_temp_c": 77.9,
+      "condenser_temp_c": 31.1,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": null
+    },
+    {
+      "time": "10:05",
+      "phase": "Heads",
+      "volume_l": 2.5,
+      "volume_percent": 1.2,
+      "vc_tank_volume_l": null,
+      "abv": 80.0,
+      "ambient_temp_c": 32.4,
+      "head_temp_c": 77.9,
+      "condenser_temp_c": 31.0,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": null
+    },
+    {
+      "time": "10:35",
+      "phase": "Heads",
+      "volume_l": 4.0,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": null,
+      "abv": 80.0,
+      "ambient_temp_c": 32.7,
+      "head_temp_c": 78.0,
+      "condenser_temp_c": 31.8,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": null
+    },
+
+    /* HEARTS — all collected one by one */
+
+    {
+      "time": "11:06",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 4.5,
+      "abv": 79.7,
+      "ambient_temp_c": 32.2,
+      "head_temp_c": 78.1,
+      "condenser_temp_c": 31.5,
+      "defleg_temp_c": null,
+      "lal": 3.6,
+      "observations": null
+    },
+
+    {
+      "time": "11:40",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.0,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": 8.5,
+      "abv": 79.6,
+      "ambient_temp_c": 32.0,
+      "head_temp_c": 78.3,
+      "condenser_temp_c": 31.6,
+      "defleg_temp_c": null,
+      "lal": 3.2,
+      "observations": null
+    },
+
+    {
+      "time": "12:20",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 13.0,
+      "abv": 78.9,
+      "ambient_temp_c": 31.4,
+      "head_temp_c": 78.4,
+      "condenser_temp_c": 31.2,
+      "defleg_temp_c": null,
+      "lal": 3.6,
+      "observations": null
+    },
+
+    {
+      "time": "12:45",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 17.5,
+      "abv": 78.4,
+      "ambient_temp_c": 31.2,
+      "head_temp_c": 78.6,
+      "condenser_temp_c": 30.6,
+      "defleg_temp_c": null,
+      "lal": 3.5,
+      "observations": "up to 165 volts on 2200W element"
+    },
+
+    {
+      "time": "13:15",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 2.3,
+      "vc_tank_volume_l": 22.5,
+      "abv": 77.8,
+      "ambient_temp_c": 31.4,
+      "head_temp_c": 78.9,
+      "condenser_temp_c": 30.6,
+      "defleg_temp_c": null,
+      "lal": 3.9,
+      "observations": null
+    },
+
+    {
+      "time": "13:48",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 27.0,
+      "abv": 77.3,
+      "ambient_temp_c": 31.2,
+      "head_temp_c": 79.0,
+      "condenser_temp_c": 31.5,
+      "defleg_temp_c": null,
+      "lal": 3.5,
+      "observations": null
+    },
+
+    {
+      "time": "14:20",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 2.3,
+      "vc_tank_volume_l": 32.0,
+      "abv": 76.5,
+      "ambient_temp_c": 31.0,
+      "head_temp_c": 79.3,
+      "condenser_temp_c": 30.8,
+      "defleg_temp_c": null,
+      "lal": 3.8,
+      "observations": null
+    },
+
+    {
+      "time": "14:50",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 36.5,
+      "abv": 75.4,
+      "ambient_temp_c": 31.0,
+      "head_temp_c": 79.7,
+      "condenser_temp_c": 31.4,
+      "defleg_temp_c": null,
+      "lal": 3.4,
+      "observations": "up to 200V on 2200W"
+    },
+
+    {
+      "time": "15:20",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 41.0,
+      "abv": 74.5,
+      "ambient_temp_c": 31.0,
+      "head_temp_c": 80.0,
+      "condenser_temp_c": 30.6,
+      "defleg_temp_c": null,
+      "lal": 3.4,
+      "observations": "up to 244V on 2200W"
+    },
+
+    {
+      "time": "15:45",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.0,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": 45.0,
+      "abv": 73.0,
+      "ambient_temp_c": 30.7,
+      "head_temp_c": 80.5,
+      "condenser_temp_c": 30.5,
+      "defleg_temp_c": null,
+      "lal": 2.9,
+      "observations": null
+    },
+
+    {
+      "time": "16:10",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 49.5,
+      "abv": 71.7,
+      "ambient_temp_c": 30.2,
+      "head_temp_c": 81.0,
+      "condenser_temp_c": 31.4,
+      "defleg_temp_c": null,
+      "lal": 3.2,
+      "observations": null
+    },
+
+    {
+      "time": "16:38",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.0,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": 53.5,
+      "abv": 70.4,
+      "ambient_temp_c": 30.3,
+      "head_temp_c": 81.5,
+      "condenser_temp_c": 31.1,
+      "defleg_temp_c": null,
+      "lal": 2.8,
+      "observations": null
+    },
+
+    {
+      "time": "17:05",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.0,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": 57.5,
+      "abv": 68.6,
+      "ambient_temp_c": 30.3,
+      "head_temp_c": 82.1,
+      "condenser_temp_c": 30.9,
+      "defleg_temp_c": null,
+      "lal": 2.7,
+      "observations": null
+    },
+
+    {
+      "time": "17:35",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.5,
+      "volume_percent": 2.1,
+      "vc_tank_volume_l": 62.0,
+      "abv": 66.3,
+      "ambient_temp_c": 30.8,
+      "head_temp_c": 82.7,
+      "condenser_temp_c": 30.6,
+      "defleg_temp_c": null,
+      "lal": 3.0,
+      "observations": null
+    },
+
+    {
+      "time": "18:05",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 4.1,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": 66.1,
+      "abv": 63.4,
+      "ambient_temp_c": 30.6,
+      "head_temp_c": 83.6,
+      "condenser_temp_c": 30.8,
+      "defleg_temp_c": null,
+      "lal": 2.6,
+      "observations": null
+    },
+
+    {
+      "time": "18:30",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 2.6,
+      "volume_percent": 1.2,
+      "vc_tank_volume_l": 68.7,
+      "abv": 60.5,
+      "ambient_temp_c": 30.6,
+      "head_temp_c": 84.4,
+      "condenser_temp_c": 30.6,
+      "defleg_temp_c": null,
+      "lal": 1.6,
+      "observations": null
+    },
+
+    {
+      "time": "18:30",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 2.0,
+      "volume_percent": 0.9,
+      "vc_tank_volume_l": 70.7,
+      "abv": 58.5,
+      "ambient_temp_c": 30.2,
+      "head_temp_c": 84.4,
+      "condenser_temp_c": 30.8,
+      "defleg_temp_c": null,
+      "lal": 1.2,
+      "observations": null
+    },
+
+    {
+      "time": "18:30",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 1.5,
+      "volume_percent": 0.7,
+      "vc_tank_volume_l": 72.2,
+      "abv": 56.7,
+      "ambient_temp_c": 30.2,
+      "head_temp_c": 85.0,
+      "condenser_temp_c": 30.7,
+      "defleg_temp_c": null,
+      "lal": 0.9,
+      "observations": null
+    },
+
+    {
+      "time": "19:05",
+      "phase": "Tails",
+      "volume_l": 1.5,
+      "volume_percent": 0.7,
+      "vc_tank_volume_l": null,
+      "abv": 54.8,
+      "ambient_temp_c": 30.1,
+      "head_temp_c": 85.1,
+      "condenser_temp_c": 30.8,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": null
+    },
+
+    {
+      "time": "20:45",
+      "phase": "Tails",
+      "volume_l": 21.0,
+      "volume_percent": 9.8,
+      "vc_tank_volume_l": null,
+      "abv": 64.3,
+      "ambient_temp_c": 30.0,
+      "head_temp_c": 86.7,
+      "condenser_temp_c": 31.0,
+      "defleg_temp_c": null,
+      "lal": null,
+      "observations": "GEN0002 Heads & Tails collected (PB-001)"
+    }
+  ],
+
+  "outputs": {
+    "foreshots": {
+      "receiving_vessel": "Discarded",
+      "volume_l": 1.5,
+      "volume_percent": 1.4,
+      "abv": null,
+      "lal": 0.0
+    },
+    "heads": {
+      "receiving_vessel": "PB-001",
+      "reference": "GEN-0002",
+      "volume_l": 11.5,
+      "volume_percent": 10.7,
+      "abv": 64.3,
+      "lal": 7.4
+    },
+    "hearts": {
+      "reference": "HIGH-RUM-001",
+      "receiving_vessel": "VC-230-1",
+      "volume_l": 72.2,
+      "volume_percent": 67.0,
+      "abv": 73.0,
+      "lal": 52.7
+    },
+    "tails": {
+      "receiving_vessel": "PB-001",
+      "reference": "GEN-0002",
+      "volume_l": 22.5,
+      "volume_percent": 20.9,
+      "abv": 64.3,
+      "lal": 14.5
+    },
+    "total_run": {
+      "volume_l": 107.7,
+      "volume_percent": 100.0,
+      "lal": 74.5
+    }
+  },
+
+  "dilution": [
+    {
+      "step": 1,
+      "date": "2021-03-16",
+      "new_make_l": 72.2,
+      "filtered_water_l": 5.0,
+      "new_volume_l": 77.2,
+      "abv": 68.3,
+      "lal": 52.7
+    },
+    {
+      "step": 2,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 5.0,
+      "new_volume_l": 82.2,
+      "abv": 64.5,
+      "lal": 53.0
+    },
+    {
+      "step": 3,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 1.3,
+      "new_volume_l": 83.5,
+      "abv": null,
+      "lal": 0.0
+    }
+  ],
+
+  "final_output": {
+    "volume_l": 83.5,
+    "abv": null,
+    "lal": 52.7
+  }
+}
+{
+  "batch_id": "SPIRIT-RUM-002",
+  "date": "2021-08-15",
+  "boiler_on": "11:00",
+  "still_used": "CP-270-1",
+
+  "charge": {
+    "low_wines": [
+      {
+        "reference": "STRIP-RUN-RUM-002-6",
+        "volume_l": 250,
+        "abv": 39.0,
+        "lal": 97.5
+      }
+    ],
+    "adjustment": {
+      "reference": null,
+      "volume_l": 0.0,
+      "abv": 0.0,
+      "lal": 0.0
+    },
+    "feints_added": [],
+    "total_charge": {
+      "volume_l": 250,
+      "abv": 39.0,
+      "lal": 97.5
+    },
+    "still_setup": {
+      "elements": "5750W + 2200W + 2200W",
+      "plates": "Nil",
+      "options": "tee section, helmet, 2 plates",
+      "notes": "Wash was in FV from 13/04/21 (4 months). Put into barrel #6 on 20/08/21."
+    }
+  },
+
+  "run_log": [
+    {
+      "time": "13:05",
+      "phase": "Foreshots",
+      "volume_l": 1.0,
+      "volume_percent": 0.8,
+      "vc_tank_volume_l": null,
+      "abv": 84.4,
+      "ambient_temp_c": 26.0,
+      "head_temp_c": 83.7,
+      "condenser_temp_c": 25.7,
+      "whisky_temp_c": 78.0,
+      "lal": 0.8,
+      "observations": "DISCARDED, 1x2200W + 1x2200W @125V"
+    },
+    {
+      "time": "13:45",
+      "phase": "Heads",
+      "volume_l": 4.5,
+      "volume_percent": 3.4,
+      "vc_tank_volume_l": null,
+      "abv": 83.4,
+      "ambient_temp_c": 25.5,
+      "head_temp_c": 84.3,
+      "condenser_temp_c": 25.6,
+      "whisky_temp_c": 80.0,
+      "lal": 3.8,
+      "observations": "Second element powered up to 150V"
+    },
+    {
+      "time": "14:23",
+      "phase": "Heads",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": null,
+      "abv": 82.1,
+      "ambient_temp_c": 25.6,
+      "head_temp_c": 84.5,
+      "condenser_temp_c": 25.5,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "14:45",
+      "phase": "Heads",
+      "volume_l": 2.5,
+      "volume_percent": 1.9,
+      "vc_tank_volume_l": null,
+      "abv": 82.2,
+      "ambient_temp_c": 25.0,
+      "head_temp_c": 84.4,
+      "condenser_temp_c": 25.6,
+      "whisky_temp_c": 80.0,
+      "lal": 2.1,
+      "observations": null
+    },
+
+    /* HEARTS */
+
+    {
+      "time": "15:20",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 5,
+      "abv": 82.0,
+      "ambient_temp_c": 24.9,
+      "head_temp_c": 84.4,
+      "condenser_temp_c": 25.6,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "16:00",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 10,
+      "abv": 82.0,
+      "ambient_temp_c": 24.9,
+      "head_temp_c": 84.9,
+      "condenser_temp_c": 25.5,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "16:38",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 15,
+      "abv": 81.3,
+      "ambient_temp_c": 24.8,
+      "head_temp_c": 84.6,
+      "condenser_temp_c": 25.5,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "17:05",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 20,
+      "abv": 81.7,
+      "ambient_temp_c": 24.8,
+      "head_temp_c": 85.0,
+      "condenser_temp_c": 25.6,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "17:55",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 25,
+      "abv": 81.2,
+      "ambient_temp_c": 23.0,
+      "head_temp_c": 85.5,
+      "condenser_temp_c": 25.6,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "18:35",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 30,
+      "abv": 80.2,
+      "ambient_temp_c": 23.0,
+      "head_temp_c": 85.6,
+      "condenser_temp_c": 25.5,
+      "whisky_temp_c": 80.0,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "19:05",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 35,
+      "abv": 79.8,
+      "ambient_temp_c": 23.0,
+      "head_temp_c": 85.9,
+      "condenser_temp_c": 25.4,
+      "whisky_temp_c": 80.5,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "19:42",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 3.8,
+      "vc_tank_volume_l": 40,
+      "abv": 79.5,
+      "ambient_temp_c": 23.1,
+      "head_temp_c": 86.0,
+      "condenser_temp_c": 25.5,
+      "whisky_temp_c": 80.5,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "03:55",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 62.0,
+      "volume_percent": 46.8,
+      "vc_tank_volume_l": 102,
+      "abv": 70.0,
+      "ambient_temp_c": 22.0,
+      "head_temp_c": 95.6,
+      "condenser_temp_c": 25.4,
+      "whisky_temp_c": 87.0,
+      "lal": 43.4,
+      "observations": "Cut @ 57 ABV. 1x5750W + 2x2200W"
+    },
+
+    /* TAILS */
+
+    {
+      "time": "06:30",
+      "phase": "Tails",
+      "volume_l": 17.5,
+      "volume_percent": 13.2,
+      "vc_tank_volume_l": null,
+      "abv": 30.0,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 5.3,
+      "observations": null
+    }
+  ],
+
+  "outputs": {
+    "foreshots": {
+      "receiving_vessel": "Discarded",
+      "volume_l": 1.0,
+      "volume_percent": 0.8,
+      "abv": 84.4,
+      "lal": 0.8
+    },
+    "heads": {
+      "reference": "FEINTS-HIGH-RUM-02",
+      "receiving_vessel": "VC-100-01",
+      "volume_l": 12.0,
+      "volume_percent": 9.1,
+      "abv": 82.6,
+      "lal": 9.9
+    },
+    "hearts": {
+      "reference": "HIGH-RUM-0002",
+      "receiving_vessel": "VC-330-2",
+      "volume_l": 102.0,
+      "volume_percent": 77.0,
+      "abv": 74.3,
+      "lal": 75.8
+    },
+    "tails": {
+      "reference": "FEINTS-HIGH-RUM-02",
+      "receiving_vessel": "VC-100-01",
+      "volume_l": 17.5,
+      "volume_percent": 13.2,
+      "abv": 30.0,
+      "lal": 5.3
+    },
+    "total_run": {
+      "volume_l": 132.5,
+      "volume_percent": 100.0,
+      "lal": 91.8
+    }
+  },
+
+  "dilution": [
+    {
+      "step": 1,
+      "date": null,
+      "new_make_l": 102.0,
+      "filtered_water_l": null,
+      "new_volume_l": 102.0,
+      "abv": 75.3,
+      "lal": 75.8
+    },
+    {
+      "step": 2,
+      "date": "2021-08-17",
+      "new_make_l": null,
+      "filtered_water_l": 10.0,
+      "new_volume_l": 112.0,
+      "abv": 69.0,
+      "lal": 77.3
+    },
+    {
+      "step": 3,
+      "date": "2021-08-19",
+      "new_make_l": null,
+      "filtered_water_l": 5.0,
+      "new_volume_l": 117.0,
+      "abv": 66.5,
+      "lal": 77.8
+    },
+    {
+      "step": 4,
+      "date": "2021-08-19",
+      "new_make_l": null,
+      "filtered_water_l": 3.5,
+      "new_volume_l": 120.5,
+      "abv": 64.5,
+      "lal": 77.7
+    },
+    {
+      "step": 5,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 1.5,
+      "new_volume_l": 122.0,
+      "abv": 63.8,
+      "lal": 77.8
+    }
+  ],
+
+  "final_output": {
+    "volume_l": 122.0,
+    "abv": 63.8,
+    "lal": 77.8
+  }
+}
+{
+  "batch_id": "SPIRIT-RUM-0003",
+  "date": "2021-08-31",
+  "boiler_on": null,
+  "still_used": "CP-270-1",
+
+  "charge": {
+    "low_wines": [
+      {
+        "reference": "LOW-RUM-004",
+        "volume_l": 250,
+        "abv": 42.5,
+        "lal": 106.3
+      }
+    ],
+    "adjustment": {
+      "reference": null,
+      "volume_l": 0.0,
+      "abv": 0.0,
+      "lal": 0.0
+    },
+    "feints_added": [
+      {
+        "reference": "FEINTS-000x",
+        "volume_l": 0.0,
+        "abv": 0.0,
+        "lal": 0.0
+      }
+    ],
+    "total_charge": {
+      "volume_l": 250,
+      "abv": 42.5,
+      "lal": 106.3
+    },
+    "still_setup": {
+      "elements": "5750W + 2200W + 2200W",
+      "plates": "Nil",
+      "options": "Short section + Whisky Helmet + Column"
+    }
+  },
+
+  "run_log": [
+    {
+      "time": "08:20",
+      "phase": "Foreshots",
+      "volume_l": 2.0,
+      "volume_percent": 1.7,
+      "vc_tank_volume_l": null,
+      "abv": 82.7,
+      "ambient_temp_c": 27.1,
+      "head_temp_c": 84.1,
+      "condenser_temp_c": 26.5,
+      "whisky_temp_c": 79.0,
+      "lal": 1.7,
+      "observations": "5750W + 2200W + 2400W"
+    },
+    {
+      "time": "09:15",
+      "phase": "Heads",
+      "volume_l": 10.0,
+      "volume_percent": 8.5,
+      "vc_tank_volume_l": null,
+      "abv": 81.4,
+      "ambient_temp_c": 27.4,
+      "head_temp_c": 84.3,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 8.1,
+      "observations": null
+    },
+    {
+      "time": "09:20",
+      "phase": "Heads",
+      "volume_l": 1.0,
+      "volume_percent": 0.8,
+      "vc_tank_volume_l": null,
+      "abv": 81.3,
+      "ambient_temp_c": 27.5,
+      "head_temp_c": 84.3,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 0.8,
+      "observations": null
+    },
+
+    /* HEARTS */
+
+    {
+      "time": "09:45",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 5,
+      "abv": 81.4,
+      "ambient_temp_c": 27.3,
+      "head_temp_c": 84.5,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "10:12",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 10,
+      "abv": 81.4,
+      "ambient_temp_c": 27.4,
+      "head_temp_c": 84.6,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": "10:40",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 15,
+      "abv": 81.4,
+      "ambient_temp_c": 27.5,
+      "head_temp_c": 84.9,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.1,
+      "observations": null
+    },
+    {
+      "time": null,
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 15.0,
+      "volume_percent": 12.7,
+      "vc_tank_volume_l": 30,
+      "abv": 80.6,
+      "ambient_temp_c": 27.8,
+      "head_temp_c": 85.3,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 12.1,
+      "observations": null
+    },
+    {
+      "time": "12:30",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 35,
+      "abv": 80.4,
+      "ambient_temp_c": 27.1,
+      "head_temp_c": 85.5,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "13:00",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 40,
+      "abv": 80.1,
+      "ambient_temp_c": 26.8,
+      "head_temp_c": 85.5,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "13:22",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 45,
+      "abv": 80.0,
+      "ambient_temp_c": 26.6,
+      "head_temp_c": 85.9,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "13:47",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 50,
+      "abv": 79.2,
+      "ambient_temp_c": 26.5,
+      "head_temp_c": 86.0,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": 80.0,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "14:15",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 55,
+      "abv": 79.0,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": null,
+      "lal": 4.0,
+      "observations": null
+    },
+    {
+      "time": "14:45",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 10.0,
+      "volume_percent": 8.5,
+      "vc_tank_volume_l": 65,
+      "abv": 78.5,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": 26.0,
+      "whisky_temp_c": null,
+      "lal": 7.9,
+      "observations": null
+    },
+    {
+      "time": "15:50",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 70,
+      "abv": 77.4,
+      "ambient_temp_c": null,
+      "head_temp_c": 87.0,
+      "condenser_temp_c": null,
+      "whisky_temp_c": 81.0,
+      "lal": 3.9,
+      "observations": null
+    },
+    {
+      "time": "16:20",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 75,
+      "abv": 76.5,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 3.8,
+      "observations": null
+    },
+    {
+      "time": "16:56",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 80,
+      "abv": 75.5,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 3.8,
+      "observations": null
+    },
+    {
+      "time": "17:25",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 85,
+      "abv": 74.4,
+      "ambient_temp_c": null,
+      "head_temp_c": 88.6,
+      "condenser_temp_c": null,
+      "whisky_temp_c": 82.0,
+      "lal": 3.7,
+      "observations": null
+    },
+    {
+      "time": "17:59",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 90,
+      "abv": 73.1,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 3.7,
+      "observations": null
+    },
+    {
+      "time": "18:35",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 95,
+      "abv": 71.3,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 3.6,
+      "observations": null
+    },
+    {
+      "time": "19:10",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 5.0,
+      "volume_percent": 4.2,
+      "vc_tank_volume_l": 100,
+      "abv": 69.0,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 3.5,
+      "observations": null
+    }
+  ],
+
+  "outputs": {
+    "foreshots": {
+      "receiving_vessel": "Discarded",
+      "volume_l": 2.0,
+      "volume_percent": 1.7,
+      "abv": 82.7,
+      "lal": 1.7
+    },
+    "heads": {
+      "receiving_vessel": null,
+      "reference": null,
+      "volume_l": 11.0,
+      "volume_percent": 9.3,
+      "abv": 81.4,
+      "lal": 9.0
+    },
+    "hearts": {
+      "reference": "HIGH-RUM-0004",
+      "receiving_vessel": "VC-330-02",
+      "volume_l": 105.0,
+      "volume_percent": 89.0,
+      "abv": 74.2,
+      "lal": 77.9
+    },
+    "tails": {
+      "receiving_vessel": null,
+      "volume_l": 0.0,
+      "volume_percent": 0.0,
+      "abv": null,
+      "lal": 0.0
+    },
+    "total_run": {
+      "volume_l": 118.0,
+      "volume_percent": 100.0,
+      "lal": 88.6
+    }
+  },
+
+  "dilution": [
+    {
+      "step": 1,
+      "date": null,
+      "new_make_l": 105.0,
+      "filtered_water_l": null,
+      "new_volume_l": 105.0,
+      "abv": 76.8,
+      "lal": 77.9,
+      "notes": "22L required"
+    },
+    {
+      "step": 2,
+      "date": "2021-09-03",
+      "new_make_l": null,
+      "filtered_water_l": 5.0,
+      "new_volume_l": 110.0,
+      "abv": null,
+      "lal": null
+    },
+    {
+      "step": 3,
+      "date": "2021-09-06",
+      "new_make_l": null,
+      "filtered_water_l": 5.0,
+      "new_volume_l": 115.0,
+      "abv": 71.1,
+      "lal": 81.8,
+      "notes": "13L required"
+    },
+    {
+      "step": 4,
+      "date": "2021-09-08",
+      "new_make_l": null,
+      "filtered_water_l": 10.0,
+      "new_volume_l": 125.0,
+      "abv": 65.3,
+      "lal": 81.6
+    },
+    {
+      "step": 5,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 3.5,
+      "new_volume_l": 128.5,
+      "abv": 63.5,
+      "lal": 81.6
+    }
+  ],
+
+  "final_output": {
+    "volume_l": 128.5,
+    "abv": 63.5,
+    "lal": 81.6
+  }
+}
+{
+  "batch_id": "SPIRIT-RUM-005",
+  "date": "2021-12-01",
+  "boiler_on": "04:50",
+  "still_used": "ROBERTA",
+
+  "charge": {
+    "low_wines": [
+      {
+        "reference": "IBC-LOW-WINES",
+        "volume_l": 1073,
+        "abv": 42.0,
+        "lal": 450.7
+      }
+    ],
+    "adjustment": {
+      "reference": null,
+      "volume_l": 0.0,
+      "abv": 0.0,
+      "lal": 0.0
+    },
+    "feints_added": [
+      {
+        "reference": "FEINTS-000x",
+        "volume_l": 0.0,
+        "abv": 0.0,
+        "lal": 0.0
+      }
+    ],
+    "total_charge": {
+      "volume_l": 1073,
+      "abv": 42.0,
+      "lal": 450.7
+    },
+    "still_setup": {
+      "elements": "5750X3, 2200X1",
+      "plates": "Nil",
+      "options": "Run elements 2 x 5750"
+    }
+  },
+
+  "run_log": [
+    {
+      "time": "07:45",
+      "phase": "Foreshots",
+      "volume_l": 2.0,
+      "volume_percent": 0.4,
+      "vc_tank_volume_l": null,
+      "abv": 84.4,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 1.7,
+      "observations": null
+    },
+    {
+      "time": null,
+      "phase": "Heads",
+      "volume_l": 62.0,
+      "volume_percent": 13.7,
+      "vc_tank_volume_l": null,
+      "abv": 80.2,
+      "ambient_temp_c": 30.0,
+      "head_temp_c": 78.6,
+      "condenser_temp_c": 29.6,
+      "whisky_temp_c": null,
+      "lal": 49.7,
+      "observations": null
+    },
+    {
+      "time": "20:30",
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 390.0,
+      "volume_percent": 85.9,
+      "vc_tank_volume_l": 390,
+      "abv": 75.0,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 292.5,
+      "observations": "SHUT DOWN BOILER"
+    }
+  ],
+
+  "outputs": {
+    "foreshots": {
+      "receiving_vessel": "IBC-1000-FEINTS",
+      "volume_l": 2.0,
+      "volume_percent": 0.4,
+      "abv": 84.4,
+      "lal": 1.7
+    },
+    "heads": {
+      "receiving_vessel": null,
+      "volume_l": 62.0,
+      "volume_percent": 13.7,
+      "abv": 80.2,
+      "lal": 49.7
+    },
+    "hearts": {
+      "reference": "HIGH-RUM-000x",
+      "receiving_vessel": "VC-230-1",
+      "volume_l": 390.0,
+      "volume_percent": 85.9,
+      "abv": 75.0,
+      "lal": 292.5
+    },
+    "tails": {
+      "receiving_vessel": null,
+      "volume_l": 0.0,
+      "volume_percent": 0.0,
+      "abv": null,
+      "lal": 0.0
+    },
+    "total_run": {
+      "volume_l": 454.0,
+      "volume_percent": 100.0,
+      "lal": 343.9
+    }
+  },
+
+  "dilution": [
+    {
+      "step": 1,
+      "date": null,
+      "new_make_l": 390.0,
+      "filtered_water_l": null,
+      "new_volume_l": 390.0,
+      "abv": 76.9,
+      "lal": 292.5,
+      "notes": "82 L required"
+    },
+    {
+      "step": 2,
+      "date": "2021-12-13",
+      "new_make_l": null,
+      "filtered_water_l": 40.0,
+      "new_volume_l": 430.0,
+      "abv": null,
+      "lal": null
+    },
+    {
+      "step": 3,
+      "date": "2021-12-14",
+      "new_make_l": null,
+      "filtered_water_l": 20.0,
+      "new_volume_l": 450.0,
+      "abv": 65.0,
+      "lal": 292.5
+    }
+  ],
+
+  "final_output": {
+    "volume_l": 450.0,
+    "abv": 65.0,
+    "lal": 292.5
+  }
+}
+{
+  "batch_id": "SPIRIT-RUM-006",
+  "date": "2022-02-11",
+  "boiler_on": "16:30",
+  "still_used": "CP-270-1",
+
+  "charge": {
+    "low_wines": [
+      {
+        "reference": "10/11/12/13 STRIP RUNS",
+        "volume_l": 950,
+        "abv": 41.0,
+        "lal": 389.5
+      }
+    ],
+    "adjustment": {
+      "reference": null,
+      "volume_l": 0.0,
+      "abv": 0.0,
+      "lal": 0.0
+    },
+    "feints_added": [
+      {
+        "reference": "FEINTS-005",
+        "volume_l": 60,
+        "abv": 80.0,
+        "lal": 48.0
+      }
+    ],
+    "total_charge": {
+      "volume_l": 1010,
+      "abv": 43.3,
+      "lal": 437.5
+    },
+    "still_setup": {
+      "elements": "5750W + 2200W + 2200W",
+      "plates": "Nil",
+      "options": "Short section + Whisky Helmet + Column"
+    }
+  },
+
+  "run_log": [
+    {
+      "time": "09:30",
+      "phase": "Foreshots",
+      "volume_l": 1.0,
+      "volume_percent": 0.2,
+      "vc_tank_volume_l": null,
+      "abv": 90.0,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 0.9,
+      "observations": "5750W + 2200W + 2400W"
+    },
+    {
+      "time": null,
+      "phase": "Heads",
+      "volume_l": 80.0,
+      "volume_percent": 19.6,
+      "vc_tank_volume_l": null,
+      "abv": 82.0,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 65.6,
+      "observations": null
+    },
+    {
+      "time": null,
+      "phase": "Middle Run (Hearts)",
+      "volume_l": 327.7,
+      "volume_percent": 80.2,
+      "vc_tank_volume_l": 328,
+      "abv": 75.1,
+      "ambient_temp_c": null,
+      "head_temp_c": null,
+      "condenser_temp_c": null,
+      "whisky_temp_c": null,
+      "lal": 246.1,
+      "observations": "Will weigh when proof is done"
+    }
+  ],
+
+  "outputs": {
+    "foreshots": {
+      "receiving_vessel": "Discarded",
+      "volume_l": 1.0,
+      "volume_percent": 0.2,
+      "abv": 90.0,
+      "lal": 0.9
+    },
+    "heads": {
+      "receiving_vessel": null,
+      "volume_l": 80.0,
+      "volume_percent": 19.6,
+      "abv": null,
+      "lal": null
+    },
+    "hearts": {
+      "reference": "HIGH-RUM-000x",
+      "receiving_vessel": "VC-400",
+      "volume_l": 327.7,
+      "volume_percent": 80.2,
+      "abv": 75.1,
+      "lal": 246.1
+    },
+    "tails": {
+      "receiving_vessel": null,
+      "volume_l": 0.0,
+      "volume_percent": 0.0,
+      "abv": null,
+      "lal": 0.0
+    },
+    "total_run": {
+      "volume_l": 408.7,
+      "volume_percent": 100.0,
+      "lal": 312.6
+    }
+  },
+
+  "dilution": [
+    {
+      "step": 1,
+      "date": null,
+      "new_make_l": 327.7,
+      "filtered_water_l": null,
+      "new_volume_l": 327.7,
+      "abv": 75.1,
+      "lal": 246.1,
+      "notes": "60 L required"
+    },
+    {
+      "step": 2,
+      "date": "2022-02-23",
+      "new_make_l": null,
+      "filtered_water_l": 20.0,
+      "new_volume_l": 347.7,
+      "abv": null,
+      "lal": null
+    },
+    {
+      "step": 3,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 20.0,
+      "new_volume_l": 367.7,
+      "abv": 66.7,
+      "lal": 245.3
+    },
+    {
+      "step": 4,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 15.0,
+      "new_volume_l": 382.7,
+      "abv": null,
+      "lal": null
+    },
+    {
+      "step": 5,
+      "date": null,
+      "new_make_l": null,
+      "filtered_water_l": 1.0,
+      "new_volume_l": 383.7,
+      "abv": 63.7,
+      "lal": 244.4
+    }
+  ],
+
+  "final_output": {
+    "volume_l": 383.7,
+    "abv": 63.7,
+    "lal": 244.4
+  },
+
+  "barrels": [
+    {
+      "barrel_number": 13,
+      "type": "American Oak ex Whipper Snapper",
+      "date_filled": "2022-02-28",
+      "final_volume_l": 191,
+      "product": "SPIRIT_RUM_6",
+      "weights": {
+        "empty_weight_kg": 120,
+        "fill_weight_kg": 173,
+        "added_weight_kg": 53
+      }
+    },
+    {
+      "barrel_number": 14,
+      "type": "Barrel Brokers ex Moscatel",
+      "date_filled": "2022-02-28",
+      "final_volume_l": 185.5,
+      "product": "SPIRIT_RUM_6",
+      "weights": {
+        "empty_weight_kg": 120,
+        "fill_weight_kg": 167.5,
+        "added_weight_kg": 47.5
+      }
+    }
+  ]
+}
+{
+  "spirit_run_id": "SPIRIT-RUM-007",
+  "date": "2022-09-22",
+  "still": "CP-270-1",
+
+  "charge": {
+    "total_volume_l": 1080,
+    "total_abv_percent": 46.3,
+    "inputs": {
+      "low_wines_volume_l": 876,
+      "feints_volume_l": 204
+    }
+  },
+
+  "outputs": {
+    "heads": {
+      "volume_l": 100.0,
+      "abv_percent": 81.3,
+      "lal": 16.3
+    },
+
+    "hearts": {
+      "vc_330_02": {
+        "volume_l": 264.9,
+        "abv_percent": 79.6,
+        "lal": 210.8
+      },
+      "vc_319": {
+        "volume_l": 138.4,
+        "abv_percent": 73.0,
+        "lal": 101.0
+      },
+      "total_hearts_volume_l": 403.3,
+      "combined_hearts_abv_percent": 77.3,
+      "combined_hearts_lal": 311.8
+    },
+
+    "tails": {
+      "volume_l": 0
+    }
+  },
+
+  "dilution": {
+    "steps": [
+      {
+        "step": 1,
+        "new_volume_l": 403.3
+      },
+      {
+        "step": 2,
+        "water_added_l": 20,
+        "new_volume_l": 423.3
+      },
+      {
+        "step": 3,
+        "water_added_l": 20,
+        "new_volume_l": 443.3,
+        "abv_percent": 66.7,
+        "lal": 295.7
+      },
+      {
+        "step": 4,
+        "water_added_l": 15,
+        "new_volume_l": 458.3
+      },
+      {
+        "step": 5,
+        "water_added_l": 1,
+        "new_volume_l": 459.3,
+        "final_abv_percent": 63.7,
+        "final_lal": 292.6
+      }
+    ],
+    "final_output_volume_l": 459.3
+  }
+}
+

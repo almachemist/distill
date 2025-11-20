@@ -1,0 +1,128 @@
+{
+  "recipes": [
+    {
+      "id": "pineapple_rum",
+      "name": "Pineapple Rum",
+      "added_on": "2025-01-20",
+      "category": "flavored",
+      "base_spirit": {
+        "target_volume_l": 255,
+        "source_volume_l": 186,
+        "source_abv_percent": 75,
+        "scaling_factor": 137.14
+      },
+      "ingredients": [
+        {
+          "name": "Pineapple Flavour",
+          "amount_ml": 30,
+          "scaled_amount_ml": 4114.3,
+          "note": null
+        },
+        {
+          "name": "Glycerin",
+          "amount_ml": 200,
+          "scaled_amount_ml": 27428.6,
+          "note": null
+        }
+      ],
+      "notes": "Tropical pineapple-flavored rum with natural flavoring and glycerin for smoothness"
+    },
+    {
+      "id": "spiced_rum",
+      "name": "Spiced Rum",
+      "added_on": "2025-01-20",
+      "category": "spiced",
+      "base_spirit": {
+        "target_volume_l": 136,
+        "source_volume_l": 127,
+        "source_abv_percent": 75,
+        "scaling_factor": 107.14
+      },
+      "ingredients": [
+        {
+          "name": "Cinnamon",
+          "amount_g": 107.14,
+          "scaled_amount_g": 11478.57,
+          "note": "ok but can reduce"
+        },
+        {
+          "name": "Cardamom",
+          "amount_g": 53.57,
+          "scaled_amount_g": 5739.29,
+          "note": "ok but can reduce"
+        },
+        {
+          "name": "Cloves",
+          "amount_g": 53.57,
+          "scaled_amount_g": 5739.29,
+          "note": "ok but can reduce"
+        },
+        {
+          "name": "Star Anise",
+          "amount_g": 53.57,
+          "scaled_amount_g": 5739.29,
+          "note": "ok but can reduce"
+        },
+        {
+          "name": "Orange Peel",
+          "amount_g": 107.14,
+          "scaled_amount_g": 11478.57,
+          "note": "increase by 10g"
+        },
+        {
+          "name": "Lime Peel",
+          "amount_g": 107.14,
+          "scaled_amount_g": 11478.57,
+          "note": "increase by 10g"
+        },
+        {
+          "name": "Vanilla Essence",
+          "amount_ml": 107.14,
+          "scaled_amount_ml": 11478.57,
+          "note": "ok"
+        },
+        {
+          "name": "Glycerine",
+          "amount_ml": 214.29,
+          "scaled_amount_ml": 22957.14,
+          "note": "ok"
+        }
+      ],
+      "notes": "Traditional spiced rum with cinnamon, cardamom, cloves, star anise, citrus peels, and vanilla"
+    },
+    {
+      "id": "merchant_made_dark_rum",
+      "name": "Merchant Made Dark Rum",
+      "added_on": "2025-01-20",
+      "category": "dark",
+      "base_spirit": {
+        "target_volume_l": 281,
+        "source_volume_l": null,
+        "source_abv_percent": 75,
+        "scaling_factor": null
+      },
+      "ingredients": [
+        {
+          "name": "Caramel Colour",
+          "amount_ml": 175,
+          "scaled_amount_ml": null,
+          "note": null
+        },
+        {
+          "name": "Glycerine",
+          "amount_ml": 150,
+          "scaled_amount_ml": null,
+          "note": null
+        },
+        {
+          "name": "Caramel Flavour Monin",
+          "amount_ml": 300,
+          "scaled_amount_ml": null,
+          "note": null
+        }
+      ],
+      "notes": "Rich dark rum with caramel color and flavor for depth and sweetness"
+    }
+  ]
+}
+
