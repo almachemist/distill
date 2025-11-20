@@ -61,6 +61,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                   Recipes
                 </Link>
                 <Link
+                  href="/dashboard/production/tanks"
+                  className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                >
+                  Tanks
+                </Link>
+                <Link
                   href="/dashboard/barrels"
                   className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                 >
