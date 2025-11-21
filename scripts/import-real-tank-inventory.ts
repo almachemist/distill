@@ -6,12 +6,17 @@
  */
 
 import { createClient } from '@supabase/supabase-js'
+import * as dotenv from 'dotenv'
+
+// Load environment variables from .env.local
+dotenv.config({ path: '.env.local' })
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dscmknufpfhxjcanzdsr.supabase.co'
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 
 if (!supabaseServiceKey) {
   console.error('❌ SUPABASE_SERVICE_ROLE_KEY not found in environment')
+  console.error('Make sure .env.local contains SUPABASE_SERVICE_ROLE_KEY')
   process.exit(1)
 }
 
@@ -151,13 +156,14 @@ async function importTanks() {
         .upsert({
           organization_id: ORGANIZATION_ID,
           tank_id: tank.tank_id,
-          name: tank.name,
-          capacity: tank.capacity_l,
+          tank_name: tank.name,
+          tank_type: 'spirits', // Default tank type
+          capacity_l: tank.capacity_l,
           type: tank.type,
           has_lid: tank.has_lid,
           product: tank.product,
-          volume: tank.volume,
-          abv: tank.abv,
+          current_volume_l: tank.volume,
+          current_abv: tank.abv,
           batch: tank.batch,
           batch_id: tank.batch_id,
           status: tank.status,
