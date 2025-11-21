@@ -10,7 +10,7 @@ interface TankCardProps {
 export function TankCard({ tank, onEdit }: TankCardProps) {
   const statusColor = TANK_STATUS_COLORS[tank.status]
   const statusLabel = TANK_STATUS_LABELS[tank.status]
-  
+
   const colorClasses = {
     gray: 'bg-gray-100 text-gray-800 border-gray-300',
     purple: 'bg-purple-100 text-purple-800 border-purple-300',
@@ -22,8 +22,15 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
   }
 
   const isEmpty = tank.status === 'empty' || tank.status === 'bottled_empty' || tank.status === 'cleaning'
-  const fillPercentage = tank.capacity_l && tank.current_volume_l 
-    ? Math.min((tank.current_volume_l / tank.capacity_l) * 100, 100)
+
+  // Support both field name conventions
+  const capacity = tank.capacity_l || tank.capacity || 0
+  const currentVolume = tank.current_volume_l ?? tank.volume ?? 0
+  const currentAbv = tank.current_abv ?? tank.abv ?? null
+  const tankName = tank.tank_name || tank.name || tank.tank_id
+
+  const fillPercentage = capacity && currentVolume
+    ? Math.min((currentVolume / capacity) * 100, 100)
     : 0
 
   return (
@@ -31,8 +38,13 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h3 className="text-lg font-bold text-gray-900">{tank.tank_name}</h3>
+          <h3 className="text-lg font-bold text-gray-900">{tankName}</h3>
           <p className="text-sm text-gray-600">{tank.tank_id}</p>
+          {tank.has_lid === false && (
+            <span className="inline-block mt-1 px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs rounded">
+              No Lid
+            </span>
+          )}
         </div>
         <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorClasses[statusColor]}`}>
           {statusLabel}
@@ -48,25 +60,32 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
           </div>
         )}
 
-        {!isEmpty && tank.current_abv !== null && tank.current_abv !== undefined && (
+        {!isEmpty && tank.batch && (
           <div>
-            <div className="text-sm font-medium text-gray-700">ABV</div>
-            <div className="text-base font-semibold text-gray-900">{tank.current_abv.toFixed(1)}%</div>
+            <div className="text-sm font-medium text-gray-700">Batch</div>
+            <div className="text-base font-semibold text-gray-900">{tank.batch}</div>
           </div>
         )}
 
-        {!isEmpty && tank.current_volume_l !== null && tank.current_volume_l !== undefined && (
+        {!isEmpty && currentAbv !== null && currentAbv !== undefined && (
+          <div>
+            <div className="text-sm font-medium text-gray-700">ABV</div>
+            <div className="text-base font-semibold text-gray-900">{currentAbv.toFixed(1)}%</div>
+          </div>
+        )}
+
+        {!isEmpty && currentVolume !== null && currentVolume !== undefined && currentVolume > 0 && (
           <div>
             <div className="text-sm font-medium text-gray-700">Volume</div>
             <div className="text-base font-semibold text-gray-900">
-              {tank.current_volume_l.toFixed(0)} L
+              {currentVolume.toFixed(0)} L
               <span className="text-sm text-gray-600 ml-2">
-                / {tank.capacity_l.toFixed(0)} L
+                / {capacity.toFixed(0)} L
               </span>
             </div>
             {/* Fill indicator */}
             <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
-              <div 
+              <div
                 className={`h-2 rounded-full transition-all ${
                   statusColor === 'green' ? 'bg-green-500' :
                   statusColor === 'blue' ? 'bg-blue-500' :
@@ -77,6 +96,36 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
                 }`}
                 style={{ width: `${fillPercentage}%` }}
               />
+            </div>
+          </div>
+        )}
+
+        {/* Infusion details */}
+        {tank.status === 'infusing' && tank.infusion_type && (
+          <div>
+            <div className="text-sm font-medium text-gray-700">Infusion Type</div>
+            <div className="text-base font-semibold text-gray-900 capitalize">{tank.infusion_type}</div>
+          </div>
+        )}
+
+        {tank.extra_materials && Object.keys(tank.extra_materials).length > 0 && (
+          <div>
+            <div className="text-sm font-medium text-gray-700">Materials</div>
+            <div className="text-sm text-gray-900">
+              {Object.entries(tank.extra_materials).map(([key, value]) => (
+                <div key={key}>
+                  {key.replace(/_/g, ' ')}: {value}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {tank.started_on && (
+          <div>
+            <div className="text-sm font-medium text-gray-700">Started</div>
+            <div className="text-sm text-gray-900">
+              {new Date(tank.started_on).toLocaleDateString()}
             </div>
           </div>
         )}
