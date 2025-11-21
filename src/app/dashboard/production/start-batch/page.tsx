@@ -80,7 +80,7 @@ export default function PreparationPage() {
     setOtherComponents(otherComponents.filter((_, i) => i !== index))
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Validation based on product type
     if (productType === 'gin' && !selectedRecipeId) {
       setError('Please select a gin recipe')
@@ -90,55 +90,98 @@ export default function PreparationPage() {
       setError('Please enter a Batch ID')
       return
     }
-
-    // Save to localStorage for now (later we'll save to DB)
-    const components = [
-      {
-        name: 'Ethanol',
-        type: 'ethanol',
-        volume_l: ethanolVolume,
-        abv_percent: ethanolABV,
-        lal: ethanolLAL
-      },
-      {
-        name: 'Water',
-        type: 'water',
-        volume_l: waterVolume,
-        abv_percent: 0,
-        lal: 0
-      },
-      ...otherComponents.map((c: any) => ({
-        name: c.name,
-        type: 'other',
-        volume_l: c.volume,
-        abv_percent: c.abv || 0,
-        lal: (c.volume * (c.abv || 0)) / 100
-      }))
-    ]
-    
-    const preparationData = {
-      productType,
-      recipeId: selectedRecipeId || null,
-      batchId,
-      date,
-      startTime,
-      stillUsed,
-      components,
-      totalVolume,
-      averageABV: avgABV,
-      totalLAL,
-      notes
+    if (!ethanolSelection) {
+      setError('Please select an ethanol batch from inventory')
+      return
     }
-    
-    localStorage.setItem('distillation_preparation', JSON.stringify(preparationData))
-    
-    // Navigate based on product type
-    if (productType === 'gin') {
-      // Gin goes to botanical steeping
-      router.push(`/dashboard/production/botanical-steeping?recipeId=${selectedRecipeId}&batchId=${batchId}`)
-    } else {
-      // Vodka and Ethanol skip botanical steeping, go directly to heating
-      router.push(`/dashboard/production/heating?batchId=${batchId}`)
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      // Save batch with inventory integration
+      const response = await fetch('/api/production/batches-with-inventory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          batch_id: batchId,
+          batch_type: productType === 'ethanol' ? 'vodka' : productType, // Map ethanol to vodka for now
+          product_name: selectedRecipe?.name || productType,
+          date,
+          still_used: stillUsed,
+          notes,
+          ethanol: ethanolSelection,
+          water_quantity_l: waterVolume,
+          botanicals: botanicals.length > 0 ? botanicals : undefined,
+          packaging: packaging.length > 0 ? packaging : undefined,
+          created_by: 'current_user', // TODO: Get from auth
+          organization_id: '00000000-0000-0000-0000-000000000001' // TODO: Get from auth
+        })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to save batch')
+      }
+
+      const result = await response.json()
+      console.log('Batch saved successfully:', result)
+
+      // Also save to localStorage for backward compatibility
+      const components = [
+        {
+          name: ethanolSelection.item_name,
+          type: 'ethanol',
+          volume_l: ethanolSelection.quantity_l,
+          abv_percent: ethanolSelection.abv,
+          lal: ethanolLAL
+        },
+        {
+          name: 'Water',
+          type: 'water',
+          volume_l: waterVolume,
+          abv_percent: 0,
+          lal: 0
+        },
+        ...otherComponents.map((c: any) => ({
+          name: c.name,
+          type: 'other',
+          volume_l: c.volume,
+          abv_percent: c.abv || 0,
+          lal: (c.volume * (c.abv || 0)) / 100
+        }))
+      ]
+
+      const preparationData = {
+        productType,
+        recipeId: selectedRecipeId || null,
+        batchId,
+        date,
+        startTime,
+        stillUsed,
+        components,
+        totalVolume,
+        averageABV: avgABV,
+        totalLAL,
+        totalCost,
+        notes
+      }
+
+      localStorage.setItem('distillation_preparation', JSON.stringify(preparationData))
+
+      // Navigate based on product type
+      if (productType === 'gin') {
+        // Gin goes to botanical steeping
+        router.push(`/dashboard/production/botanical-steeping?recipeId=${selectedRecipeId}&batchId=${batchId}`)
+      } else {
+        // Vodka and Ethanol skip botanical steeping, go directly to heating
+        router.push(`/dashboard/production/heating?batchId=${batchId}`)
+      }
+    } catch (err: any) {
+      console.error('Error saving batch:', err)
+      setError(err.message || 'Failed to save batch. Please try again.')
+    } finally {
+      setLoading(false)
     }
   }
 
