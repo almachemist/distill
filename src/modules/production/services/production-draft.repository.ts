@@ -84,11 +84,17 @@ export async function createDraftBatch(
 
     // Determine which table to use
     if (productType === 'rum' || productType === 'cane_spirit') {
+      // Generate a unique batch_id if not provided
+      const batchId = template.batch_id || `DRAFT-${productType.toUpperCase()}-${Date.now()}`;
+      const productName = template.product_name || (productType === 'rum' ? 'Rum' : 'Cane Spirit');
+
       // Insert into rum_production_runs
       const { data, error } = await supabase
         .from('rum_production_runs')
         .insert({
           ...template,
+          batch_id: batchId,
+          product_name: productName,
           status: 'draft',
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
