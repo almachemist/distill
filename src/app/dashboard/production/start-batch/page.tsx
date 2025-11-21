@@ -3,6 +3,9 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
+import { EthanolBatchSelector, EthanolSelection } from '@/modules/production/components/EthanolBatchSelector'
+import { BotanicalSelector, BotanicalSelection } from '@/modules/production/components/BotanicalSelector'
+import { PackagingSelector, PackagingSelection } from '@/modules/production/components/PackagingSelector'
 
 export default function PreparationPage() {
   const router = useRouter()
@@ -18,23 +21,34 @@ export default function PreparationPage() {
   const [batchId, setBatchId] = useState('')
   const [date, setDate] = useState(new Date().toISOString().split('T')[0])
   const [startTime, setStartTime] = useState('')
-  const [ethanolVolume, setEthanolVolume] = useState(500)
-  const [ethanolABV, setEthanolABV] = useState(96)
+  const [ethanolSelection, setEthanolSelection] = useState<EthanolSelection | null>(null)
   const [waterVolume, setWaterVolume] = useState(500)
   const [stillUsed, setStillUsed] = useState('Carrie')
+  const [botanicals, setBotanicals] = useState<BotanicalSelection[]>([])
+  const [packaging, setPackaging] = useState<PackagingSelection[]>([])
   const [otherComponents, setOtherComponents] = useState<Array<{name: string, volume: number, abv: number}>>([])
   const [notes, setNotes] = useState('')
+  const [showBotanicals, setShowBotanicals] = useState(false)
+  const [showPackaging, setShowPackaging] = useState(false)
 
   // Calculations
   const calculateLAL = (volume: number, abv: number): number => {
     return Math.round((volume * abv / 100) * 10) / 10
   }
 
+  const ethanolVolume = ethanolSelection?.quantity_l || 0
+  const ethanolABV = ethanolSelection?.abv || 0
   const ethanolLAL = calculateLAL(ethanolVolume, ethanolABV)
   const otherLAL = otherComponents.reduce((sum, comp) => sum + calculateLAL(comp.volume, comp.abv), 0)
   const totalVolume = ethanolVolume + waterVolume + otherComponents.reduce((sum, c) => sum + c.volume, 0)
   const totalLAL = ethanolLAL + otherLAL
   const avgABV = totalVolume > 0 ? (totalLAL / totalVolume) * 100 : 0
+
+  // Cost calculations
+  const ethanolCost = ethanolSelection?.total_cost || 0
+  const botanicalCost = botanicals.reduce((sum, b) => sum + b.total_cost, 0)
+  const packagingCost = packaging.reduce((sum, p) => sum + p.total_cost, 0)
+  const totalCost = ethanolCost + botanicalCost + packagingCost
 
   const loadRecipes = useCallback(async () => {
     try {
@@ -250,30 +264,14 @@ export default function PreparationPage() {
             </div>
           </div>
 
-          {/* Ethanol */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
-                Ethanol Added (L)
-              </label>
-              <input
-                type="number"
-                value={ethanolVolume}
-                onChange={(e) => setEthanolVolume(Number(e.target.value))}
-                className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
-                Ethanol ABV (%)
-              </label>
-              <input
-                type="number"
-                value={ethanolABV}
-                onChange={(e) => setEthanolABV(Number(e.target.value))}
-                className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
-              />
-            </div>
+          {/* Ethanol Batch Selector */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Ethanol Selection</h3>
+            <EthanolBatchSelector
+              value={ethanolSelection || undefined}
+              onChange={setEthanolSelection}
+              requiredQuantity={500}
+            />
           </div>
 
           {/* Water */}
@@ -406,10 +404,52 @@ export default function PreparationPage() {
             />
           </div>
 
+          {/* Botanicals Section (for Gin only) */}
+          {productType === 'gin' && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Botanicals (Optional)</h3>
+                <button
+                  type="button"
+                  onClick={() => setShowBotanicals(!showBotanicals)}
+                  className="text-sm text-green-700 hover:text-green-800 font-medium"
+                >
+                  {showBotanicals ? 'Hide' : 'Show'} Botanicals
+                </button>
+              </div>
+              {showBotanicals && (
+                <BotanicalSelector
+                  selections={botanicals}
+                  onChange={setBotanicals}
+                />
+              )}
+            </div>
+          )}
+
+          {/* Packaging Section (Optional) */}
+          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Packaging (Optional)</h3>
+              <button
+                type="button"
+                onClick={() => setShowPackaging(!showPackaging)}
+                className="text-sm text-purple-700 hover:text-purple-800 font-medium"
+              >
+                {showPackaging ? 'Hide' : 'Show'} Packaging
+              </button>
+            </div>
+            {showPackaging && (
+              <PackagingSelector
+                selections={packaging}
+                onChange={setPackaging}
+              />
+            )}
+          </div>
+
           {/* Summary */}
           <div className="bg-gradient-to-br from-beige to-copper-5 rounded-xl p-5 border border-copper-15">
-            <h3 className="text-sm font-semibold text-graphite mb-3">Charge Summary</h3>
-            <div className="grid grid-cols-3 gap-4">
+            <h3 className="text-sm font-semibold text-graphite mb-3">Batch Summary</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div>
                 <div className="text-xs text-graphite/70 mb-1">Total Volume</div>
                 <div className="text-2xl font-bold text-graphite">{totalVolume.toFixed(1)} L</div>
@@ -422,7 +462,36 @@ export default function PreparationPage() {
                 <div className="text-xs text-graphite/70 mb-1">Total LAL</div>
                 <div className="text-2xl font-bold text-graphite">{totalLAL.toFixed(1)}</div>
               </div>
+              <div>
+                <div className="text-xs text-graphite/70 mb-1">Total Cost</div>
+                <div className="text-2xl font-bold text-green-700">${totalCost.toFixed(2)}</div>
+              </div>
             </div>
+
+            {/* Cost Breakdown */}
+            {totalCost > 0 && (
+              <div className="mt-4 pt-4 border-t border-copper-20">
+                <div className="text-xs font-semibold text-graphite/70 mb-2">Cost Breakdown</div>
+                <div className="grid grid-cols-3 gap-3 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-graphite/70">Ethanol:</span>
+                    <span className="text-graphite font-medium">${ethanolCost.toFixed(2)}</span>
+                  </div>
+                  {botanicalCost > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-graphite/70">Botanicals:</span>
+                      <span className="text-graphite font-medium">${botanicalCost.toFixed(2)}</span>
+                    </div>
+                  )}
+                  {packagingCost > 0 && (
+                    <div className="flex justify-between">
+                      <span className="text-graphite/70">Packaging:</span>
+                      <span className="text-graphite font-medium">${packagingCost.toFixed(2)}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Actions */}
