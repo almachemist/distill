@@ -291,30 +291,49 @@ export async function getDraftBatch(id: string, productType?: ProductType): Prom
  */
 export async function updateDraftBatch(
   id: string,
-  updates: Partial<ProductionBatch>
+  updates: Partial<ProductionBatch>,
+  productType?: ProductType
 ): Promise<ProductionBatch | null> {
   try {
+    console.log('updateDraftBatch called with:', { id, productType, hasUpdates: !!updates });
+
     const updatedData = {
       ...updates,
       lastEditedAt: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     };
-    
-    if (isRumCaneSpiritBatch(updates as ProductionBatch)) {
+
+    // Determine which table to use
+    const isRum = productType === 'rum' ||
+                  productType === 'cane_spirit' ||
+                  isRumCaneSpiritBatch(updates as ProductionBatch);
+
+    if (isRum) {
+      // Update rum_production_runs table
       const { data, error } = await supabase
         .from('rum_production_runs')
         .update(updatedData)
         .eq('id', id)
         .select()
         .single();
-      
+
       if (error) {
-        console.error('Error updating rum draft:', error);
+        console.error('Error updating rum draft:', {
+          error,
+          message: error?.message,
+          details: error?.details,
+          hint: error?.hint,
+          code: error?.code,
+          id,
+          productType,
+          updateKeys: Object.keys(updatedData)
+        });
         return null;
       }
-      
+
       return data as RumCaneSpiritBatch;
     } else {
+      // Update production_batches table (gin/vodka/other)
       const { data, error } = await supabase
         .from('production_batches')
         .update({
@@ -324,12 +343,22 @@ export async function updateDraftBatch(
         .eq('id', id)
         .select()
         .single();
-      
+
       if (error) {
-        console.error('Error updating gin/vodka draft:', error);
+        console.error('Error updating gin/vodka draft:', {
+          error,
+          message: error?.message,
+          details: error?.details,
+          hint: error?.hint,
+          code: error?.code,
+          id,
+          productType,
+          updateKeys: Object.keys(updatedData),
+          dataExists: !!data
+        });
         return null;
       }
-      
+
       return {
         ...data.data,
         id: data.id,
@@ -351,7 +380,7 @@ export async function finalizeDraftBatch(
   try {
     return await updateDraftBatch(id, {
       status: 'completed',
-    } as Partial<ProductionBatch>);
+    } as Partial<ProductionBatch>, productType);
   } catch (error) {
     console.error('Error in finalizeDraftBatch:', error);
     return null;

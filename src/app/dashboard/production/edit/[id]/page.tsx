@@ -60,7 +60,9 @@ export default function EditProductionPage() {
 
     setIsSaving(true)
     try {
-      await updateDraftBatch(batch.id!, batch)
+      // Get productType from batch or URL
+      const productType = batch.productType || (searchParams.get('type') as any)
+      await updateDraftBatch(batch.id!, batch, productType)
     } catch (error) {
       console.error('Error saving batch:', error)
     } finally {
