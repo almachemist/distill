@@ -88,22 +88,39 @@ export async function createDraftBatch(
       const batchId = template.batch_id || `DRAFT-${productType.toUpperCase()}-${Date.now()}`;
       const productName = template.product_name || (productType === 'rum' ? 'Rum' : 'Cane Spirit');
 
+      // Prepare the insert data - only include fields that exist in the database
+      const insertData = {
+        batch_id: batchId,
+        product_name: productName,
+        product_type: productType,
+        status: 'draft',
+        overall_status: 'draft',
+        fermentation_status: 'not_started',
+        distillation_status: 'not_started',
+        aging_status: 'not_started',
+        bottling_status: 'not_started',
+        still_used: template.still_used || 'Roberta',
+        notes: template.notes || '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+
       // Insert into rum_production_runs
       const { data, error } = await supabase
         .from('rum_production_runs')
-        .insert({
-          ...template,
-          batch_id: batchId,
-          product_name: productName,
-          status: 'draft',
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        })
+        .insert(insertData)
         .select()
         .single();
 
       if (error) {
-        console.error('Error creating rum draft:', error);
+        console.error('Error creating rum draft:', {
+          error,
+          message: error.message,
+          details: error.details,
+          hint: error.hint,
+          code: error.code,
+          insertData
+        });
         return null;
       }
 
