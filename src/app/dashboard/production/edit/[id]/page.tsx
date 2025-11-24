@@ -62,9 +62,21 @@ export default function EditProductionPage() {
     try {
       // Get productType from batch or URL
       const productType = batch.productType || (searchParams.get('type') as any)
-      await updateDraftBatch(batch.id!, batch, productType)
+      console.log('handleSave - About to save batch:', {
+        id: batch.id,
+        productType,
+        batchKeys: Object.keys(batch),
+        batchSample: JSON.stringify(batch).substring(0, 300)
+      })
+      const result = await updateDraftBatch(batch.id!, batch, productType)
+      console.log('handleSave - Save result:', result ? 'Success' : 'Failed')
+
+      if (!result) {
+        alert('Failed to save batch. Check console for details.')
+      }
     } catch (error) {
       console.error('Error saving batch:', error)
+      alert('Error saving batch: ' + (error as any)?.message)
     } finally {
       setIsSaving(false)
     }

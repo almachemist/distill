@@ -320,13 +320,15 @@ export async function updateDraftBatch(
       if (error) {
         console.error('Error updating rum draft:', {
           error,
+          errorString: JSON.stringify(error),
           message: error?.message,
           details: error?.details,
           hint: error?.hint,
           code: error?.code,
           id,
           productType,
-          updateKeys: Object.keys(updatedData)
+          updateKeys: Object.keys(updatedData),
+          updatedDataSample: JSON.stringify(updatedData).substring(0, 500)
         });
         return null;
       }
@@ -347,6 +349,7 @@ export async function updateDraftBatch(
       if (error) {
         console.error('Error updating gin/vodka draft:', {
           error,
+          errorString: JSON.stringify(error),
           message: error?.message,
           details: error?.details,
           hint: error?.hint,
@@ -354,6 +357,7 @@ export async function updateDraftBatch(
           id,
           productType,
           updateKeys: Object.keys(updatedData),
+          updatedDataSample: JSON.stringify(updatedData).substring(0, 500),
           dataExists: !!data
         });
         return null;
