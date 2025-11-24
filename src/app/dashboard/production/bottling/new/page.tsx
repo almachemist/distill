@@ -30,7 +30,14 @@ export default function NewBottlingRunPage() {
   const [dilutionPhases, setDilutionPhases] = useState<DilutionPhase[]>([])
   const [bottleEntries, setBottleEntries] = useState<BottleEntry[]>([])
   const [productName, setProductName] = useState('')
-  
+  const [manualMode, setManualMode] = useState(false)
+
+  // Manual entry state
+  const [manualProductType, setManualProductType] = useState<ProductType>('gin')
+  const [manualVolume, setManualVolume] = useState<number>(0)
+  const [manualABV, setManualABV] = useState<number>(0)
+  const [manualTankCode, setManualTankCode] = useState<string>('')
+
   // Filters
   const [filterProductType, setFilterProductType] = useState<ProductType | 'all'>('all')
   const [filterSearch, setFilterSearch] = useState('')
@@ -138,10 +145,44 @@ export default function NewBottlingRunPage() {
     setBottleEntries(bottleEntries.filter((_, i) => i !== index))
   }
 
+  function createManualBatch() {
+    if (!manualVolume || !manualABV) {
+      alert('Please enter volume and ABV')
+      return
+    }
+
+    const manualBatch: Batch = {
+      id: `manual-${Date.now()}`,
+      batchCode: manualTankCode || `MANUAL-${Date.now()}`,
+      productName: productName || 'Manual Entry',
+      productType: manualProductType,
+      volumeLitres: manualVolume,
+      abvPercent: manualABV,
+      lal: (manualVolume * manualABV) / 100,
+      tankCode: manualTankCode,
+      status: 'in_tank',
+      notes: 'Manual entry for bottling'
+    }
+
+    const selectedBatch: SelectedBatch = {
+      batch: manualBatch,
+      volumeToUseLitres: manualVolume,
+      lal: manualBatch.lal
+    }
+
+    setSelectedBatches([selectedBatch])
+    setManualMode(false)
+
+    // Auto-set product name if not set
+    if (!productName) {
+      setProductName(manualBatch.productName)
+    }
+  }
+
   async function saveBottlingRun() {
     try {
       if (!productName) throw new Error('Please enter a product name')
-      if (selectedBatches.length === 0) throw new Error('Select at least one batch')
+      if (selectedBatches.length === 0) throw new Error('Select at least one batch or create a manual entry')
       if (bottleEntries.length === 0) throw new Error('Add at least one bottle size')
 
       const payload = {
@@ -273,6 +314,12 @@ export default function NewBottlingRunPage() {
               1. Select Source Batches
             </h2>
             <div className="flex gap-3">
+              <button
+                onClick={() => setManualMode(!manualMode)}
+                className="px-4 py-2 rounded-md bg-amber-700 hover:bg-amber-800 text-white text-sm font-medium transition-colors"
+              >
+                {manualMode ? 'Cancel Manual Entry' : '+ Create from Scratch'}
+              </button>
               {/* Product Type Filter */}
               <select
                 value={filterProductType}
@@ -299,6 +346,108 @@ export default function NewBottlingRunPage() {
               />
             </div>
           </div>
+
+          {/* Manual Entry Form */}
+          {manualMode && (
+            <div className="mb-6 p-6 bg-amber-50 border-2 border-amber-200 rounded-lg">
+              <h3 className="text-md font-semibold text-amber-900 mb-4">
+                Create Bottling Run from Scratch
+              </h3>
+              <p className="text-sm text-amber-700 mb-4">
+                Enter the details of the liquid you want to bottle (e.g., from a tank not tracked as a batch)
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    Product Type
+                  </label>
+                  <select
+                    value={manualProductType}
+                    onChange={(e) => setManualProductType(e.target.value as ProductType)}
+                    className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  >
+                    <option value="gin">Gin</option>
+                    <option value="vodka">Vodka</option>
+                    <option value="rum">Rum</option>
+                    <option value="cane_spirit">Cane Spirit</option>
+                    <option value="spiced_rum">Spiced Rum</option>
+                    <option value="pineapple_rum">Pineapple Rum</option>
+                    <option value="coffee_liqueur">Coffee Liqueur</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    Product Name
+                  </label>
+                  <input
+                    type="text"
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
+                    placeholder="e.g., Devil's Thumb White Rum"
+                    className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    Volume (Litres)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={manualVolume || ''}
+                    onChange={(e) => setManualVolume(parseFloat(e.target.value) || 0)}
+                    placeholder="e.g., 100"
+                    className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    ABV (%)
+                  </label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    value={manualABV || ''}
+                    onChange={(e) => setManualABV(parseFloat(e.target.value) || 0)}
+                    placeholder="e.g., 40"
+                    className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                    Tank Code (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    value={manualTankCode}
+                    onChange={(e) => setManualTankCode(e.target.value)}
+                    placeholder="e.g., T-330-01"
+                    className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
+                  />
+                </div>
+
+                <div className="flex items-end">
+                  <button
+                    onClick={createManualBatch}
+                    className="w-full px-4 py-2 rounded-md bg-amber-700 hover:bg-amber-800 text-white text-sm font-medium transition-colors"
+                  >
+                    Add to Bottling Run
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-4 p-3 bg-white rounded border border-amber-200">
+                <p className="text-xs text-amber-700">
+                  <strong>Calculated LAL:</strong> {((manualVolume * manualABV) / 100).toFixed(2)} L
+                </p>
+              </div>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Available Batches */}
