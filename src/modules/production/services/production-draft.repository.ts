@@ -347,12 +347,17 @@ export async function updateDraftBatch(
         .single();
 
       if (fetchError) {
-        console.error('Error fetching existing batch for update:', {
+        console.error('❌ Error fetching existing batch for update:', {
           error: fetchError,
+          errorMessage: fetchError?.message,
+          errorDetails: fetchError?.details,
+          errorCode: fetchError?.code,
           id
         });
         return null;
       }
+
+      console.log('📋 Existing batch data:', existingData);
 
       const updatePayload: any = {
         data: updatedData,
@@ -362,6 +367,14 @@ export async function updateDraftBatch(
         updated_at: new Date().toISOString(),
       };
 
+      console.log('📤 Update payload:', {
+        id,
+        type: updatePayload.type,
+        still: updatePayload.still,
+        dataKeys: Object.keys(updatedData),
+        dataSample: JSON.stringify(updatedData).substring(0, 300)
+      });
+
       const { data, error } = await supabase
         .from('production_batches')
         .update(updatePayload)
@@ -370,21 +383,30 @@ export async function updateDraftBatch(
         .single();
 
       if (error) {
-        console.error('Error updating gin/vodka draft:', {
-          error,
-          errorString: JSON.stringify(error),
-          message: error?.message,
-          details: error?.details,
-          hint: error?.hint,
-          code: error?.code,
-          id,
-          productType,
-          updateKeys: Object.keys(updatedData),
-          updatePayload: JSON.stringify(updatePayload).substring(0, 500),
-          dataExists: !!data
+        console.error('❌ ERROR updating gin/vodka draft:', {
+          '🔴 ERROR OBJECT': error,
+          '📝 Error Message': error?.message,
+          '📋 Error Details': error?.details,
+          '💡 Error Hint': error?.hint,
+          '🔢 Error Code': error?.code,
+          '🆔 Batch ID': id,
+          '🏷️ Product Type': productType,
+          '🔑 Update Keys': Object.keys(updatedData),
+          '📦 Update Payload': updatePayload,
+          '✅ Data Exists': !!data
         });
+
+        // Also log as plain text for easy copying
+        console.error('ERROR DETAILS (plain text):');
+        console.error('Message:', error?.message);
+        console.error('Details:', error?.details);
+        console.error('Hint:', error?.hint);
+        console.error('Code:', error?.code);
+
         return null;
       }
+
+      console.log('✅ Successfully updated gin/vodka draft');
 
       return {
         ...data.data,
