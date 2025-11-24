@@ -337,18 +337,30 @@ export async function updateDraftBatch(
     } else {
       // Update production_batches table (gin/vodka/other)
       // Note: production_batches table has columns: id, data (JSONB), type, still, created_at, updated_at
+      // Both 'type' and 'still' are NOT NULL columns, so we must provide them
+
+      // First, get the existing record to get current type and still values
+      const { data: existingData, error: fetchError } = await supabase
+        .from('production_batches')
+        .select('type, still')
+        .eq('id', id)
+        .single();
+
+      if (fetchError) {
+        console.error('Error fetching existing batch for update:', {
+          error: fetchError,
+          id
+        });
+        return null;
+      }
+
       const updatePayload: any = {
         data: updatedData,
+        // type and still are NOT NULL, so we must always provide them
+        type: updatedData.productType || existingData.type || 'gin',
+        still: updatedData.stillUsed || existingData.still || '',
         updated_at: new Date().toISOString(),
       };
-
-      // Update type and still if they're in the updates
-      if (updatedData.productType) {
-        updatePayload.type = updatedData.productType;
-      }
-      if (updatedData.stillUsed) {
-        updatePayload.still = updatedData.stillUsed;
-      }
 
       const { data, error } = await supabase
         .from('production_batches')
