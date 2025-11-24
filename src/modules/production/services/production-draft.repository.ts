@@ -295,7 +295,7 @@ export async function updateDraftBatch(
   productType?: ProductType
 ): Promise<ProductionBatch | null> {
   try {
-    console.log('updateDraftBatch called with:', { id, productType, hasUpdates: !!updates });
+    console.log('🔄 updateDraftBatch called with:', { id, productType, hasUpdates: !!updates });
 
     const updatedData = {
       ...updates,
@@ -304,9 +304,30 @@ export async function updateDraftBatch(
     };
 
     // Determine which table to use
-    const isRum = productType === 'rum' ||
-                  productType === 'cane_spirit' ||
-                  isRumCaneSpiritBatch(updates as ProductionBatch);
+    // First, try to determine from productType parameter or type guard
+    let isRum = productType === 'rum' ||
+                productType === 'cane_spirit' ||
+                isRumCaneSpiritBatch(updates as ProductionBatch);
+
+    // If we're not sure, try to detect by checking which table has this ID
+    if (!productType) {
+      console.log('🔍 No productType provided, checking which table contains this batch...');
+
+      // Check rum table first
+      const { data: rumCheck } = await supabase
+        .from('rum_production_runs')
+        .select('id')
+        .eq('id', id)
+        .single();
+
+      if (rumCheck) {
+        console.log('✅ Found batch in rum_production_runs table');
+        isRum = true;
+      } else {
+        console.log('✅ Batch not in rum table, assuming production_batches table');
+        isRum = false;
+      }
+    }
 
     if (isRum) {
       // Update rum_production_runs table
@@ -346,14 +367,20 @@ export async function updateDraftBatch(
         .eq('id', id)
         .single();
 
-      if (fetchError) {
+      if (fetchError || !existingData) {
         console.error('❌ Error fetching existing batch for update:', {
-          error: fetchError,
-          errorMessage: fetchError?.message,
-          errorDetails: fetchError?.details,
-          errorCode: fetchError?.code,
-          id
+          '🔴 ERROR': fetchError,
+          '📝 Error Message': fetchError?.message,
+          '📋 Error Details': fetchError?.details,
+          '💡 Error Hint': fetchError?.hint,
+          '🔢 Error Code': fetchError?.code,
+          '🆔 Batch ID': id,
+          '💭 Possible Cause': 'Batch not found in production_batches table. It might be in rum_production_runs table instead.'
         });
+
+        // Try to be helpful
+        console.log('💡 TIP: If this is a rum/cane spirit batch, make sure productType is set correctly');
+
         return null;
       }
 
