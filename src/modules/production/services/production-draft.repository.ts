@@ -336,12 +336,23 @@ export async function updateDraftBatch(
       return data as RumCaneSpiritBatch;
     } else {
       // Update production_batches table (gin/vodka/other)
+      // Note: production_batches table has columns: id, data (JSONB), type, still, created_at, updated_at
+      const updatePayload: any = {
+        data: updatedData,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Update type and still if they're in the updates
+      if (updatedData.productType) {
+        updatePayload.type = updatedData.productType;
+      }
+      if (updatedData.stillUsed) {
+        updatePayload.still = updatedData.stillUsed;
+      }
+
       const { data, error } = await supabase
         .from('production_batches')
-        .update({
-          data: updatedData,
-          updated_at: new Date().toISOString(),
-        })
+        .update(updatePayload)
         .eq('id', id)
         .select()
         .single();
@@ -357,7 +368,7 @@ export async function updateDraftBatch(
           id,
           productType,
           updateKeys: Object.keys(updatedData),
-          updatedDataSample: JSON.stringify(updatedData).substring(0, 500),
+          updatePayload: JSON.stringify(updatePayload).substring(0, 500),
           dataExists: !!data
         });
         return null;
