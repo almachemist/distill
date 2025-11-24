@@ -191,39 +191,94 @@ export async function getDraftBatches(): Promise<ProductionBatch[]> {
 }
 
 /**
- * Get a specific draft batch by ID
+ * Get a specific draft batch by ID (tries both tables if productType not specified)
  */
-export async function getDraftBatch(id: string, productType: ProductType): Promise<ProductionBatch | null> {
+export async function getDraftBatch(id: string, productType?: ProductType): Promise<ProductionBatch | null> {
   try {
+    console.log('getDraftBatch called with:', { id, productType });
+
+    // If productType is specified, use it
     if (productType === 'rum' || productType === 'cane_spirit') {
       const { data, error } = await supabase
         .from('rum_production_runs')
         .select('*')
         .eq('id', id)
         .single();
-      
+
       if (error || !data) {
-        console.error('Error getting rum draft:', error);
+        console.error('Error getting rum draft:', {
+          error,
+          message: error?.message,
+          details: error?.details,
+          hint: error?.hint,
+          code: error?.code,
+          id,
+          productType
+        });
         return null;
       }
-      
+
       return data as RumCaneSpiritBatch;
-    } else {
+    } else if (productType && productType !== 'rum' && productType !== 'cane_spirit') {
+      // Gin, vodka, liqueur, other
       const { data, error } = await supabase
         .from('production_batches')
         .select('*')
         .eq('id', id)
         .single();
-      
+
       if (error || !data) {
-        console.error('Error getting gin/vodka draft:', error);
+        console.error('Error getting gin/vodka draft:', {
+          error,
+          message: error?.message,
+          details: error?.details,
+          hint: error?.hint,
+          code: error?.code,
+          id,
+          productType,
+          dataExists: !!data
+        });
         return null;
       }
-      
+
       return {
         ...data.data,
         id: data.id,
       } as GinVodkaSpiritBatch;
+    } else {
+      // Product type not specified - try both tables
+      // First try production_batches (gin/vodka)
+      const { data: ginData, error: ginError } = await supabase
+        .from('production_batches')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (!ginError && ginData) {
+        return {
+          ...ginData.data,
+          id: ginData.id,
+        } as GinVodkaSpiritBatch;
+      }
+
+      // Then try rum_production_runs
+      const { data: rumData, error: rumError } = await supabase
+        .from('rum_production_runs')
+        .select('*')
+        .eq('id', id)
+        .single();
+
+      if (!rumError && rumData) {
+        return rumData as RumCaneSpiritBatch;
+      }
+
+      // Not found in either table
+      console.error('Batch not found in any table:', {
+        id,
+        ginError,
+        rumError
+      });
+      return null;
     }
   } catch (error) {
     console.error('Error in getDraftBatch:', error);

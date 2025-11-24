@@ -29,10 +29,9 @@ export default function EditProductionPage() {
   async function loadData() {
     setIsLoading(true)
     try {
-      // Load batch
-      // Note: We need to determine product type from the batch ID or from recipe
-      // For now, we'll try to load from production_batches first
-      const batchData = await getDraftBatch(id, 'gin') // TODO: Fix this
+      // Load batch - getDraftBatch will try both tables if productType not specified
+      const productType = searchParams.get('type') as any
+      const batchData = await getDraftBatch(id, productType)
       if (batchData) {
         setBatch(batchData)
 
