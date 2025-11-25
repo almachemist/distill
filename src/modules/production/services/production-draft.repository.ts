@@ -195,10 +195,20 @@ export async function getDraftBatches(): Promise<ProductionBatch[]> {
  */
 export async function getDraftBatch(id: string, productType?: ProductType): Promise<ProductionBatch | null> {
   try {
-    console.log('getDraftBatch called with:', { id, productType });
+    console.log('🔍 getDraftBatch called with:', { id, productType });
 
-    // If productType is specified, use it
-    if (productType === 'rum' || productType === 'cane_spirit') {
+    // Auto-detect table based on ID format
+    // UUID = rum_production_runs, TEXT = production_batches
+    const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
+    console.log('🔍 ID format detection:', {
+      id,
+      isUUID,
+      willUseTable: isUUID ? 'rum_production_runs' : 'production_batches'
+    });
+
+    if (isUUID) {
+      // UUID = rum_production_runs table
       const { data, error } = await supabase
         .from('rum_production_runs')
         .select('*')
@@ -206,21 +216,21 @@ export async function getDraftBatch(id: string, productType?: ProductType): Prom
         .single();
 
       if (error || !data) {
-        console.error('Error getting rum draft:', {
+        console.error('❌ Error getting rum draft:', {
           error,
           message: error?.message,
           details: error?.details,
           hint: error?.hint,
           code: error?.code,
-          id,
-          productType
+          id
         });
         return null;
       }
 
+      console.log('✅ Found rum batch');
       return data as RumCaneSpiritBatch;
-    } else if (productType && productType !== 'rum' && productType !== 'cane_spirit') {
-      // Gin, vodka, liqueur, other
+    } else {
+      // TEXT id = production_batches table
       const { data, error } = await supabase
         .from('production_batches')
         .select('*')
@@ -228,57 +238,22 @@ export async function getDraftBatch(id: string, productType?: ProductType): Prom
         .single();
 
       if (error || !data) {
-        console.error('Error getting gin/vodka draft:', {
+        console.error('❌ Error getting gin/vodka draft:', {
           error,
           message: error?.message,
           details: error?.details,
           hint: error?.hint,
           code: error?.code,
-          id,
-          productType,
-          dataExists: !!data
+          id
         });
         return null;
       }
 
+      console.log('✅ Found gin/vodka batch');
       return {
         ...data.data,
         id: data.id,
       } as GinVodkaSpiritBatch;
-    } else {
-      // Product type not specified - try both tables
-      // First try production_batches (gin/vodka)
-      const { data: ginData, error: ginError } = await supabase
-        .from('production_batches')
-        .select('*')
-        .eq('id', id)
-        .single();
-
-      if (!ginError && ginData) {
-        return {
-          ...ginData.data,
-          id: ginData.id,
-        } as GinVodkaSpiritBatch;
-      }
-
-      // Then try rum_production_runs
-      const { data: rumData, error: rumError } = await supabase
-        .from('rum_production_runs')
-        .select('*')
-        .eq('id', id)
-        .single();
-
-      if (!rumError && rumData) {
-        return rumData as RumCaneSpiritBatch;
-      }
-
-      // Not found in either table
-      console.error('Batch not found in any table:', {
-        id,
-        ginError,
-        rumError
-      });
-      return null;
     }
   } catch (error) {
     console.error('Error in getDraftBatch:', error);
@@ -343,18 +318,22 @@ export async function updateDraftBatch(
         .single();
 
       if (error) {
-        console.error('Error updating rum draft:', {
-          error,
-          errorString: JSON.stringify(error),
-          message: error?.message,
-          details: error?.details,
-          hint: error?.hint,
-          code: error?.code,
-          id,
-          productType,
-          updateKeys: Object.keys(updatedData),
-          updatedDataSample: JSON.stringify(updatedData).substring(0, 500)
-        });
+        console.error('❌ ERROR updating rum draft:');
+        console.error('Full error object:', error);
+        console.error('Error keys:', Object.keys(error));
+        console.error('Error message:', error?.message);
+        console.error('Error details:', error?.details);
+        console.error('Error hint:', error?.hint);
+        console.error('Error code:', error?.code);
+        console.error('Batch ID:', id);
+        console.error('Update keys:', Object.keys(updatedData));
+        console.error('Update data sample:', JSON.stringify(updatedData).substring(0, 500));
+
+        // Log all error properties
+        for (const key in error) {
+          console.error(`error.${key}:`, (error as any)[key]);
+        }
+
         return null;
       }
 
