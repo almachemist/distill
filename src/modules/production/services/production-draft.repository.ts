@@ -297,12 +297,6 @@ export async function updateDraftBatch(
   try {
     console.log('🔄 updateDraftBatch called with:', { id, productType, hasUpdates: !!updates });
 
-    const updatedData = {
-      ...updates,
-      lastEditedAt: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
-
     // Determine which table to use
     // First, try to determine from productType parameter or type guard
     let isRum = productType === 'rum' ||
@@ -331,6 +325,16 @@ export async function updateDraftBatch(
 
     if (isRum) {
       // Update rum_production_runs table
+      // Note: rum_production_runs doesn't have 'lastEditedAt' column
+      const updatedData = {
+        ...updates,
+        updated_at: new Date().toISOString(),
+      };
+
+      // Remove fields that don't exist in rum_production_runs
+      delete (updatedData as any).lastEditedAt;
+      delete (updatedData as any).id; // Don't update primary key
+
       const { data, error } = await supabase
         .from('rum_production_runs')
         .update(updatedData)
@@ -359,6 +363,16 @@ export async function updateDraftBatch(
       // Update production_batches table (gin/vodka/other)
       // Note: production_batches table has columns: id, data (JSONB), type, still, created_at, updated_at
       // Both 'type' and 'still' are NOT NULL columns, so we must provide them
+
+      // For production_batches, we can include lastEditedAt in the JSONB data
+      const updatedData = {
+        ...updates,
+        lastEditedAt: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      };
+
+      // Remove id to avoid updating primary key
+      delete (updatedData as any).id;
 
       // First, get the existing record to get current type and still values
       const { data: existingData, error: fetchError } = await supabase
