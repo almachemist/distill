@@ -18,20 +18,27 @@ function sumBySize(entries: BottleEntry[], size: number) {
 }
 
 const SPIRIT_SKUS: Record<string, { sku700?: string; sku200?: string; label700?: string; label200?: string }> = {
+  // Devil's Thumb Products
   'Rainforest Gin': { sku700: 'RAIN-700', sku200: 'RAIN-200', label700: 'LBL-RAIN-700', label200: 'LBL-RAIN-200' },
-  'Signature Gin': { sku700: 'SIGN-700', sku200: 'SIGN-200', label700: 'LBL-SIGN-700', label200: 'LBL-SIGN-200' },
+  'Signature Dry Gin': { sku700: 'SIGN-700', sku200: 'SIGN-200', label700: 'LBL-SIGN-700', label200: 'LBL-SIGN-200' },
+  'Signature Gin': { sku700: 'SIGN-700', sku200: 'SIGN-200', label700: 'LBL-SIGN-700', label200: 'LBL-SIGN-200' }, // Alias
   'Navy Strength Gin': { sku700: 'NAVY-700', sku200: 'NAVY-200', label700: 'LBL-NAVY-700', label200: 'LBL-NAVY-200' },
-  'Cane Spirit': { sku700: 'CANE-700', sku200: 'CANE-200', label700: 'LBL-CANE-700', label200: 'LBL-CANE-200' },
+  'Wet Season Gin': { sku700: 'WET-700', sku200: 'WET-200', label700: 'LBL-WET-700', label200: 'LBL-WET-200' },
+  'Dry Season Gin': { sku700: 'DRY-700', sku200: 'DRY-200', label700: 'LBL-DR-700', label200: 'LBL-DR-200' },
+  'Australian Cane Spirit': { sku700: 'CANE-700', sku200: 'CANE-200', label700: 'LBL-CANE-700', label200: 'LBL-CANE-200' },
+  'Cane Spirit': { sku700: 'CANE-700', sku200: 'CANE-200', label700: 'LBL-CANE-700', label200: 'LBL-CANE-200' }, // Alias
   'Pineapple Rum': { sku700: 'PINE-700', sku200: 'PINE-200', label700: 'LBL-PINE-700', label200: 'LBL-PINE-200' },
   'Spiced Rum': { sku700: 'SPICED-700', sku200: 'SPICED-200', label700: 'LBL-SPICED-700', label200: 'LBL-SPICED-200' },
-  'Wet Season Rum': { sku700: 'WET-700', label700: 'LBL-WET-700' },
-  'Dry Season Rum': { sku700: 'DRY-700', label700: 'LBL-DRY-700' },
   'Reserve Cask Rum': { sku700: 'RESRUM-700', label700: 'LBL-RESRUM-700' },
   'Coffee Liqueur': { sku700: 'COFFEE-700', label700: 'LBL-COFFEE-700' },
+
+  // Merchant Mae Products
   'Merchant Mae Gin': { sku700: 'MM-GIN-700', label700: 'LBL-MMGIN-700' },
   'Merchant Mae Vodka': { sku700: 'MM-VODKA-700', label700: 'LBL-MMVODKA-700' },
   'Merchant Mae White Rum': { sku700: 'MM-WR-700', label700: 'LBL-MMWR-700' },
   'Merchant Mae Dark Rum': { sku700: 'MM-DR-700', label700: 'LBL-MMDR-700' },
+  'Merchant Mae Golden Sunrise': { sku700: 'MM-GOLDEN-700', label700: 'LBL-MMGOLDEN-700' },
+  'Merchant Mae Berry Burst': { sku700: 'MM-BERRY-700', label700: 'LBL-MMBERRY-700' },
 }
 
 const PKG = {

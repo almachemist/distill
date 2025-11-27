@@ -12,8 +12,10 @@
   { "id": "CANE-200", "sku": "CANE-200", "name": "Cane Spirit 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 18, "type": "Alcohol" },
   
   { "id": "WET-700", "sku": "WET-700", "name": "Wet Season Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 617, "type": "Alcohol" },
-  
+  { "id": "WET-200", "sku": "WET-200", "name": "Wet Season Rum 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 0, "type": "Alcohol" },
+
   { "id": "DRY-700", "sku": "DRY-700", "name": "Dry Season Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 508, "type": "Alcohol" },
+  { "id": "DRY-200", "sku": "DRY-200", "name": "Dry Season Rum 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 0, "type": "Alcohol" },
   
   { "id": "PINE-200", "sku": "PINE-200", "name": "Pineapple Rum 200ml", "category": "Spirits", "unit": "bottle", "currentStock": 131, "type": "Alcohol" },
   { "id": "PINE-700", "sku": "PINE-700", "name": "Pineapple Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 485, "type": "Alcohol" },
@@ -30,7 +32,11 @@
   { "id": "MM-WR-700", "sku": "MM-WR-700", "name": "Merchant Mae White Rum 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 218, "type": "Alcohol" },
   
   { "id": "MM-DR-700", "sku": "MM-DR-700", "name": "Merchant Mae Dark Rum 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 112, "type": "Alcohol" },
-  
+
+  { "id": "MM-GOLDEN-700", "sku": "MM-GOLDEN-700", "name": "Merchant Mae Golden Sunrise Vodka 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 0, "type": "Alcohol" },
+
+  { "id": "MM-BERRY-700", "sku": "MM-BERRY-700", "name": "Merchant Mae Berry Burst Vodka 700ml Bottle", "category": "Spirits", "unit": "bottle", "currentStock": 0, "type": "Alcohol" },
+
   { "id": "RESRUM-700", "sku": "RESRUM-700", "name": "Reserve Cask Rum 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 62, "type": "Alcohol" },
   
   { "id": "COFFEE-700", "sku": "COFFEE-700", "name": "Coffee Liqueur 700ml", "category": "Spirits", "unit": "bottle", "currentStock": 10, "type": "Alcohol" },
@@ -59,12 +65,16 @@
   { "id": "LBL-SPICED-700", "sku": "LBL-SPICED-700", "name": "Label - Spiced Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
   { "id": "LBL-SPICED-200", "sku": "LBL-SPICED-200", "name": "Label - Spiced Rum 200ml", "category": "Labels", "unit": "unit", "currentStock": 3000 },
   { "id": "LBL-WET-700", "sku": "LBL-WET-700", "name": "Label - Wet Season Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-WET-200", "sku": "LBL-WET-200", "name": "Label - Wet Season Rum 200ml", "category": "Labels", "unit": "unit", "currentStock": 0 },
   { "id": "LBL-DR-700", "sku": "LBL-DR-700", "name": "Label - Dry Season Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-DR-200", "sku": "LBL-DR-200", "name": "Label - Dry Season Rum 200ml", "category": "Labels", "unit": "unit", "currentStock": 0 },
   { "id": "LBL-RESRUM-700", "sku": "LBL-RESRUM-700", "name": "Label - Reserve Cask Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
   { "id": "LBL-COFFEE-700", "sku": "LBL-COFFEE-700", "name": "Label - Coffee Liqueur 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
   { "id": "LBL-MMGIN-700", "sku": "LBL-MMGIN-700", "name": "Label - Merchant Mae Gin 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
   { "id": "LBL-MMVODKA-700", "sku": "LBL-MMVODKA-700", "name": "Label - Merchant Mae Vodka 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
   { "id": "LBL-MMWR-700", "sku": "LBL-MMWR-700", "name": "Label - Merchant Mae White Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
-  { "id": "LBL-MMDR-700", "sku": "LBL-MMDR-700", "name": "Label - Merchant Mae Dark Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 }
+  { "id": "LBL-MMDR-700", "sku": "LBL-MMDR-700", "name": "Label - Merchant Mae Dark Rum 700ml", "category": "Labels", "unit": "unit", "currentStock": 5000 },
+  { "id": "LBL-MMGOLDEN-700", "sku": "LBL-MMGOLDEN-700", "name": "Label - Merchant Mae Golden Sunrise Vodka 700ml", "category": "Labels", "unit": "unit", "currentStock": 0 },
+  { "id": "LBL-MMBERRY-700", "sku": "LBL-MMBERRY-700", "name": "Label - Merchant Mae Berry Burst Vodka 700ml", "category": "Labels", "unit": "unit", "currentStock": 0 }
 ]
 

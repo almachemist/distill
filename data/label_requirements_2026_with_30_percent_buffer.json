@@ -1,0 +1,219 @@
+{
+  "generated_at": "2025-11-25T04:00:00.000Z",
+  "label_inventory_as_of": "2025-11-13",
+  "production_year": 2026,
+  "buffer_percentage": 30,
+  "note": "Includes 30% extra buffer for 2027 early production, printing defects, and bulk pricing discounts",
+  
+  "summary": {
+    "total_2026_production": 13531,
+    "total_labels_needed_with_buffer": 17590,
+    "total_labels_to_order": 12090,
+    "products_requiring_orders": 5
+  },
+  
+  "devils_thumb_products": {
+    "Rainforest_Gin_700ml": {
+      "current_labels": 2300,
+      "production_2026": 1316,
+      "labels_with_30_buffer": 1711,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Rainforest_Gin_200ml": {
+      "current_labels": 600,
+      "production_2026": 632,
+      "labels_with_30_buffer": 822,
+      "shortage_with_buffer": 222,
+      "recommended_order": 500,
+      "status": "ORDER_REQUIRED"
+    },
+    "Signature_Gin_700ml": {
+      "current_labels": 930,
+      "production_2026": 880,
+      "labels_with_30_buffer": 1144,
+      "shortage_with_buffer": 214,
+      "recommended_order": 500,
+      "status": "ORDER_REQUIRED"
+    },
+    "Signature_Gin_200ml": {
+      "current_labels": 1200,
+      "production_2026": 223,
+      "labels_with_30_buffer": 290,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Navy_Gin_700ml": {
+      "current_labels": 1200,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Navy_Gin_200ml": {
+      "current_labels": 1200,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Cane_Spirit_700ml": {
+      "current_labels": 1300,
+      "production_2026": 290,
+      "labels_with_30_buffer": 377,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Cane_Spirit_200ml": {
+      "current_labels": 800,
+      "production_2026": 64,
+      "labels_with_30_buffer": 83,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Wet_Season_700ml": {
+      "current_labels": 1700,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Dry_Season_700ml": {
+      "current_labels": 1700,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Pineapple_Rum_200ml": {
+      "current_labels": 1800,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Pineapple_Rum_700ml": {
+      "current_labels": 430,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Spiced_Rum_200ml": {
+      "current_labels": 1900,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    },
+    "Spiced_Rum_700ml": {
+      "current_labels": 1100,
+      "production_2026": 0,
+      "labels_with_30_buffer": 0,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    }
+  },
+  
+  "merchant_mae_products": {
+    "Gin_700ml": {
+      "current_labels": 800,
+      "production_2026": 2391,
+      "labels_with_30_buffer": 3108,
+      "shortage_with_buffer": 2308,
+      "recommended_order": 2500,
+      "status": "CRITICAL_ORDER_REQUIRED"
+    },
+    "Vodka_700ml": {
+      "current_labels": 150,
+      "production_2026": 4782,
+      "labels_with_30_buffer": 6217,
+      "shortage_with_buffer": 6067,
+      "recommended_order": 6500,
+      "status": "CRITICAL_ORDER_REQUIRED"
+    },
+    "White_Rum_700ml": {
+      "current_labels": 0,
+      "production_2026": 1170,
+      "labels_with_30_buffer": 1521,
+      "shortage_with_buffer": 1521,
+      "recommended_order": 2000,
+      "status": "CRITICAL_ORDER_REQUIRED"
+    },
+    "Dark_Rum_700ml": {
+      "current_labels": 500,
+      "production_2026": 672,
+      "labels_with_30_buffer": 874,
+      "shortage_with_buffer": 374,
+      "recommended_order": 500,
+      "status": "ORDER_REQUIRED"
+    },
+    "Coffee_Liqueur_700ml": {
+      "current_labels": 1800,
+      "production_2026": 300,
+      "labels_with_30_buffer": 390,
+      "shortage_with_buffer": 0,
+      "recommended_order": 0,
+      "status": "SUFFICIENT"
+    }
+  },
+
+  "order_summary": {
+    "critical_orders": [
+      {
+        "product": "MM Vodka 700ml",
+        "order_quantity": 6500,
+        "priority": "CRITICAL",
+        "production_starts": "January 2026"
+      },
+      {
+        "product": "MM Gin 700ml",
+        "order_quantity": 2500,
+        "priority": "CRITICAL",
+        "production_starts": "January 2026"
+      },
+      {
+        "product": "MM White Rum 700ml",
+        "order_quantity": 2000,
+        "priority": "CRITICAL",
+        "production_starts": "April 2026"
+      }
+    ],
+    "high_priority_orders": [
+      {
+        "product": "Signature Gin 700ml",
+        "order_quantity": 500,
+        "priority": "HIGH",
+        "production_starts": "April 2026"
+      },
+      {
+        "product": "MM Dark Rum 700ml",
+        "order_quantity": 500,
+        "priority": "HIGH",
+        "production_starts": "January 2026"
+      },
+      {
+        "product": "Rainforest Gin 200ml",
+        "order_quantity": 500,
+        "priority": "HIGH",
+        "production_starts": "February 2026"
+      }
+    ],
+    "total_labels_to_order": 12500,
+    "total_investment_products": 6,
+    "bulk_pricing_note": "Quantities rounded to 500/1000/2000/2500/5000/6500 for bulk discounts"
+  }
+}
+

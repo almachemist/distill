@@ -1,0 +1,175 @@
+{
+  "generated_at": "2025-11-25T03:30:00.000Z",
+  "label_inventory_as_of": "2025-11-13",
+  "production_year": 2026,
+  "
+_per_bottle": 1,
+  
+  "devils_thumb_products": {
+    "Rainforest_Gin_700ml": {
+      "current_labels": 2300,
+      "bottles_to_produce_2026": 1316,
+      "labels_needed": 1316,
+      "labels_remaining_after_2026": 984,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Rainforest_Gin_200ml": {
+      "current_labels": 600,
+      "bottles_to_produce_2026": 632,
+      "labels_needed": 632,
+      "labels_remaining_after_2026": -32,
+      "order_needed": 32,
+      "status": "ORDER_REQUIRED"
+    },
+    "Signature_Gin_700ml": {
+      "current_labels": 930,
+      "bottles_to_produce_2026": 880,
+      "labels_needed": 880,
+      "labels_remaining_after_2026": 50,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Signature_Gin_200ml": {
+      "current_labels": 1200,
+      "bottles_to_produce_2026": 223,
+      "labels_needed": 223,
+      "labels_remaining_after_2026": 977,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Navy_Gin_700ml": {
+      "current_labels": 1200,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1200,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Navy_Gin_200ml": {
+      "current_labels": 1200,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1200,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Cane_Spirit_700ml": {
+      "current_labels": 1300,
+      "bottles_to_produce_2026": 290,
+      "labels_needed": 290,
+      "labels_remaining_after_2026": 1010,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Cane_Spirit_200ml": {
+      "current_labels": 800,
+      "bottles_to_produce_2026": 64,
+      "labels_needed": 64,
+      "labels_remaining_after_2026": 736,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Wet_Season_700ml": {
+      "current_labels": 1700,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1700,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Dry_Season_700ml": {
+      "current_labels": 1700,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1700,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Pineapple_Rum_200ml": {
+      "current_labels": 1800,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1800,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Pineapple_Rum_700ml": {
+      "current_labels": 430,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 430,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Spiced_Rum_200ml": {
+      "current_labels": 1900,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1900,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Spiced_Rum_700ml": {
+      "current_labels": 1100,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 1100,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    },
+    "Beige_Label_Multiple_Spirits": {
+      "current_labels": 2000,
+      "bottles_to_produce_2026": 0,
+      "labels_needed": 0,
+      "labels_remaining_after_2026": 2000,
+      "order_needed": 0,
+      "status": "SUFFICIENT",
+      "note": "Multi-purpose label"
+    }
+  },
+  
+  "merchant_mae_products": {
+    "Gin_Bottle_700ml": {
+      "current_labels": 800,
+      "bottles_to_produce_2026": 2391,
+      "labels_needed": 2391,
+      "labels_remaining_after_2026": -1591,
+      "order_needed": 1591,
+      "status": "ORDER_REQUIRED"
+    },
+    "Vodka_Bottle_700ml": {
+      "current_labels": 150,
+      "bottles_to_produce_2026": 4782,
+      "labels_needed": 4782,
+      "labels_remaining_after_2026": -4632,
+      "order_needed": 4632,
+      "status": "CRITICAL_ORDER_REQUIRED"
+    },
+    "White_Rum_Bottle_700ml": {
+      "current_labels": 0,
+      "bottles_to_produce_2026": 1170,
+      "labels_needed": 1170,
+      "labels_remaining_after_2026": -1170,
+      "order_needed": 1170,
+      "status": "CRITICAL_ORDER_REQUIRED"
+    },
+    "Dark_Rum_Bottle_700ml": {
+      "current_labels": 500,
+      "bottles_to_produce_2026": 672,
+      "labels_needed": 672,
+      "labels_remaining_after_2026": -172,
+      "order_needed": 172,
+      "status": "ORDER_REQUIRED"
+    },
+    "Coffee_Liqueur_700ml": {
+      "current_labels": 1800,
+      "bottles_to_produce_2026": 300,
+      "labels_needed": 300,
+      "labels_remaining_after_2026": 1500,
+      "order_needed": 0,
+      "status": "SUFFICIENT"
+    }
+  }
+}
+

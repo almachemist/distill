@@ -20,6 +20,29 @@ import DilutionPhaseCard from '@/components/bottling/DilutionPhaseCard'
 import BottlingSummaryCard from '@/components/bottling/BottlingSummaryCard'
 import BottleEntryRow from '@/components/bottling/BottleEntryRow'
 
+// All products from Devil's Thumb and Merchant Mae
+const PRODUCT_LIST = [
+  // Devil's Thumb Products
+  { value: 'Rainforest Gin', label: 'Rainforest Gin', type: 'gin' as ProductType },
+  { value: 'Signature Dry Gin', label: 'Signature Dry Gin', type: 'gin' as ProductType },
+  { value: 'Navy Strength Gin', label: 'Navy Strength Gin', type: 'gin' as ProductType },
+  { value: 'Wet Season Gin', label: 'Wet Season Gin', type: 'gin' as ProductType },
+  { value: 'Dry Season Gin', label: 'Dry Season Gin', type: 'gin' as ProductType },
+  { value: 'Australian Cane Spirit', label: 'Australian Cane Spirit', type: 'cane_spirit' as ProductType },
+  { value: 'Pineapple Rum', label: 'Pineapple Rum', type: 'rum' as ProductType },
+  { value: 'Spiced Rum', label: 'Spiced Rum', type: 'rum' as ProductType },
+  { value: 'Reserve Cask Rum', label: 'Reserve Cask Rum', type: 'rum' as ProductType },
+  { value: 'Coffee Liqueur', label: 'Coffee Liqueur', type: 'liqueur' as ProductType },
+
+  // Merchant Mae Products
+  { value: 'Merchant Mae Gin', label: 'Merchant Mae Gin', type: 'gin' as ProductType },
+  { value: 'Merchant Mae Vodka', label: 'Merchant Mae Vodka', type: 'vodka' as ProductType },
+  { value: 'Merchant Mae Golden Sunrise', label: 'Merchant Mae Golden Sunrise', type: 'vodka' as ProductType },
+  { value: 'Merchant Mae Berry Burst', label: 'Merchant Mae Berry Burst', type: 'vodka' as ProductType },
+  { value: 'Merchant Mae White Rum', label: 'Merchant Mae White Rum', type: 'rum' as ProductType },
+  { value: 'Merchant Mae Dark Rum', label: 'Merchant Mae Dark Rum', type: 'rum' as ProductType },
+]
+
 export default function NewBottlingRunPage() {
   const searchParams = useSearchParams()
   
@@ -358,36 +381,43 @@ export default function NewBottlingRunPage() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
+                <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-amber-900 mb-2">
-                    Product Type
+                    Select Product
                   </label>
                   <select
-                    value={manualProductType}
-                    onChange={(e) => setManualProductType(e.target.value as ProductType)}
+                    value={productName}
+                    onChange={(e) => {
+                      const selectedProduct = PRODUCT_LIST.find(p => p.value === e.target.value)
+                      setProductName(e.target.value)
+                      if (selectedProduct) {
+                        setManualProductType(selectedProduct.type)
+                      }
+                    }}
                     className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
                   >
-                    <option value="gin">Gin</option>
-                    <option value="vodka">Vodka</option>
-                    <option value="rum">Rum</option>
-                    <option value="cane_spirit">Cane Spirit</option>
-                    <option value="spiced_rum">Spiced Rum</option>
-                    <option value="pineapple_rum">Pineapple Rum</option>
-                    <option value="coffee_liqueur">Coffee Liqueur</option>
+                    <option value="">-- Select a product --</option>
+                    <optgroup label="Devil's Thumb Products">
+                      <option value="Rainforest Gin">Rainforest Gin</option>
+                      <option value="Signature Dry Gin">Signature Dry Gin</option>
+                      <option value="Navy Strength Gin">Navy Strength Gin</option>
+                      <option value="Wet Season Gin">Wet Season Gin</option>
+                      <option value="Dry Season Gin">Dry Season Gin</option>
+                      <option value="Australian Cane Spirit">Australian Cane Spirit</option>
+                      <option value="Pineapple Rum">Pineapple Rum</option>
+                      <option value="Spiced Rum">Spiced Rum</option>
+                      <option value="Reserve Cask Rum">Reserve Cask Rum</option>
+                      <option value="Coffee Liqueur">Coffee Liqueur</option>
+                    </optgroup>
+                    <optgroup label="Merchant Mae Products">
+                      <option value="Merchant Mae Gin">Merchant Mae Gin</option>
+                      <option value="Merchant Mae Vodka">Merchant Mae Vodka</option>
+                      <option value="Merchant Mae Golden Sunrise">Merchant Mae Golden Sunrise</option>
+                      <option value="Merchant Mae Berry Burst">Merchant Mae Berry Burst</option>
+                      <option value="Merchant Mae White Rum">Merchant Mae White Rum</option>
+                      <option value="Merchant Mae Dark Rum">Merchant Mae Dark Rum</option>
+                    </optgroup>
                   </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">
-                    Product Name
-                  </label>
-                  <input
-                    type="text"
-                    value={productName}
-                    onChange={(e) => setProductName(e.target.value)}
-                    placeholder="e.g., Devil's Thumb White Rum"
-                    className="w-full px-3 py-2 rounded-md border border-amber-300 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600"
-                  />
                 </div>
 
                 <div>

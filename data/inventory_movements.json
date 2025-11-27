@@ -1,1 +1,100 @@
-[]
+[
+  {
+    "dt": "2025-11-27T04:09:26.640Z",
+    "reference": "bottling:Dry Season Gin",
+    "reason": "bottling",
+    "changes": [
+      {
+        "id": "PKG-BOTTLE-700",
+        "sku": "PKG-BOTTLE-700",
+        "delta": -33,
+        "before": 5000,
+        "after": 4967
+      },
+      {
+        "id": "PKG-CORK-700",
+        "sku": "PKG-CORK-700",
+        "delta": -33,
+        "before": 6000,
+        "after": 5967
+      },
+      {
+        "id": "PKG-SLEEVE-700",
+        "sku": "PKG-SLEEVE-700",
+        "delta": -33,
+        "before": 6000,
+        "after": 5967
+      },
+      {
+        "id": "LBL-DR-700",
+        "sku": "LBL-DR-700",
+        "delta": -33,
+        "before": 5000,
+        "after": 4967
+      },
+      {
+        "id": "PKG-CARTON-6P-700",
+        "sku": "PKG-CARTON-6P-700",
+        "delta": -6,
+        "before": 1000,
+        "after": 994
+      },
+      {
+        "id": "DRY-700",
+        "sku": "DRY-700",
+        "delta": 33,
+        "before": 508,
+        "after": 541
+      }
+    ]
+  },
+  {
+    "dt": "2025-11-27T04:09:26.964Z",
+    "reference": "bottling:Dry Season Gin",
+    "reason": "bottling",
+    "changes": [
+      {
+        "id": "PKG-BOTTLE-700",
+        "sku": "PKG-BOTTLE-700",
+        "delta": -33,
+        "before": 4967,
+        "after": 4934
+      },
+      {
+        "id": "PKG-CORK-700",
+        "sku": "PKG-CORK-700",
+        "delta": -33,
+        "before": 5967,
+        "after": 5934
+      },
+      {
+        "id": "PKG-SLEEVE-700",
+        "sku": "PKG-SLEEVE-700",
+        "delta": -33,
+        "before": 5967,
+        "after": 5934
+      },
+      {
+        "id": "LBL-DR-700",
+        "sku": "LBL-DR-700",
+        "delta": -33,
+        "before": 4967,
+        "after": 4934
+      },
+      {
+        "id": "PKG-CARTON-6P-700",
+        "sku": "PKG-CARTON-6P-700",
+        "delta": -6,
+        "before": 994,
+        "after": 988
+      },
+      {
+        "id": "DRY-700",
+        "sku": "DRY-700",
+        "delta": 33,
+        "before": 541,
+        "after": 574
+      }
+    ]
+  }
+]
