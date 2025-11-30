@@ -1,7 +1,7 @@
-import { createClient } from '@/lib/supabase/server'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { Badge } from '@/components/ui/badge'
+'use client'
+
+import { useEffect, useState } from 'react'
+import { createClient } from '@/lib/supabase/client'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 interface InventoryItem {
@@ -19,58 +19,65 @@ interface CategoryGroup {
   color: string
 }
 
-async function getInventoryData() {
-  const supabase = await createClient()
+export default function StockPage() {
+  const [inventory, setInventory] = useState<InventoryItem[]>([])
+  const [loading, setLoading] = useState(true)
 
-  // Get all items with their current stock levels
-  const { data: items, error: itemsError } = await supabase
-    .from('items')
-    .select('id, name, category, default_uom')
-    .order('name')
+  useEffect(() => {
+    async function loadInventory() {
+      const supabase = createClient()
 
-  if (itemsError) {
-    console.error('Error fetching items:', itemsError)
-    return []
-  }
+      // Get all items with their current stock levels
+      const { data: items, error: itemsError } = await supabase
+        .from('items')
+        .select('id, name, category, default_uom')
+        .order('name')
 
-  // Get stock levels for each item
-  const inventoryData: InventoryItem[] = []
-
-  for (const item of items) {
-    const { data: txns, error: txnsError } = await supabase
-      .from('inventory_txns')
-      .select('quantity, txn_type')
-      .eq('item_id', item.id)
-
-    if (txnsError) {
-      console.error(`Error fetching transactions for ${item.name}:`, txnsError)
-      continue
-    }
-
-    // Calculate current stock
-    let currentStock = 0
-    for (const txn of txns) {
-      if (txn.txn_type === 'RECEIVE' || txn.txn_type === 'PRODUCE' || txn.txn_type === 'ADJUST') {
-        currentStock += Number(txn.quantity)
-      } else if (txn.txn_type === 'CONSUME' || txn.txn_type === 'DESTROY') {
-        currentStock -= Number(txn.quantity)
+      if (itemsError) {
+        console.error('Error fetching items:', itemsError)
+        setLoading(false)
+        return
       }
+
+      // Get stock levels for each item
+      const inventoryData: InventoryItem[] = []
+
+      for (const item of items) {
+        const { data: txns, error: txnsError } = await supabase
+          .from('inventory_txns')
+          .select('quantity, txn_type')
+          .eq('item_id', item.id)
+
+        if (txnsError) {
+          console.error(`Error fetching transactions for ${item.name}:`, txnsError)
+          continue
+        }
+
+        // Calculate current stock
+        let currentStock = 0
+        for (const txn of txns) {
+          if (txn.txn_type === 'RECEIVE' || txn.txn_type === 'PRODUCE' || txn.txn_type === 'ADJUST') {
+            currentStock += Number(txn.quantity)
+          } else if (txn.txn_type === 'CONSUME' || txn.txn_type === 'DESTROY') {
+            currentStock -= Number(txn.quantity)
+          }
+        }
+
+        inventoryData.push({
+          id: item.id,
+          name: item.name,
+          category: item.category || 'Unknown',
+          current_stock: currentStock,
+          uom: item.default_uom
+        })
+      }
+
+      setInventory(inventoryData)
+      setLoading(false)
     }
 
-    inventoryData.push({
-      id: item.id,
-      name: item.name,
-      category: item.category || 'Unknown',
-      current_stock: currentStock,
-      uom: item.default_uom
-    })
-  }
-
-  return inventoryData
-}
-
-export default async function StockPage() {
-  const inventory = await getInventoryData()
+    loadInventory()
+  }, [])
 
   // Categorize items
   const labels = inventory.filter(item => item.name.includes('Label'))
@@ -102,6 +109,22 @@ export default async function StockPage() {
   const totalUnits = inventory.reduce((sum, item) => sum + item.current_stock, 0)
   const lowStockCount = inventory.filter(item => item.current_stock < 100).length
   const criticalStockCount = inventory.filter(item => item.current_stock === 0).length
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-neutral-50 px-6 py-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-3xl font-semibold text-neutral-900 tracking-tight">Inventory</h1>
+            <p className="text-sm text-neutral-500 mt-1">Loading inventory data...</p>
+          </div>
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-900"></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-neutral-50 px-6 py-8">
