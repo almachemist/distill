@@ -104,154 +104,157 @@ export default async function StockPage() {
   const criticalStockCount = inventory.filter(item => item.current_stock === 0).length
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">📊 Inventory Management</h1>
-        <p className="text-muted-foreground">
-          Real-time stock levels and inventory tracking
-        </p>
-      </div>
+    <div className="min-h-screen bg-neutral-50 px-6 py-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-semibold text-neutral-900 tracking-tight">Inventory Management</h1>
+          <p className="text-sm text-neutral-500 mt-1">
+            Real-time stock levels and inventory tracking
+          </p>
+        </div>
 
-      {/* Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Items</CardTitle>
-            <span className="text-2xl">📦</span>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{inventory.length}</div>
-            <p className="text-xs text-muted-foreground">
-              Unique SKUs
-            </p>
-          </CardContent>
-        </Card>
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="p-4 rounded-xl shadow-sm border border-neutral-200 bg-white">
+            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Items</p>
+            <p className="text-2xl font-semibold text-neutral-800 mt-2">{inventory.length}</p>
+            <p className="text-xs text-neutral-400 mt-1">Unique SKUs</p>
+          </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Stock</CardTitle>
-            <span className="text-2xl">🏭</span>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalUnits.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">
-              Units in warehouse
-            </p>
-          </CardContent>
-        </Card>
+          <div className="p-4 rounded-xl shadow-sm border border-neutral-200 bg-white">
+            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Stock</p>
+            <p className="text-2xl font-semibold text-neutral-800 mt-2">{totalUnits.toLocaleString()}</p>
+            <p className="text-xs text-neutral-400 mt-1">Units in warehouse</p>
+          </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Low Stock</CardTitle>
-            <span className="text-2xl">⚠️</span>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-orange-600">{lowStockCount}</div>
-            <p className="text-xs text-muted-foreground">
-              Items below 100 units
-            </p>
-          </CardContent>
-        </Card>
+          <div className="p-4 rounded-xl shadow-sm border border-neutral-200 bg-white">
+            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Low Stock</p>
+            <p className="text-2xl font-semibold text-orange-600 mt-2">{lowStockCount}</p>
+            <p className="text-xs text-neutral-400 mt-1">Below 100 units</p>
+          </div>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Out of Stock</CardTitle>
-            <span className="text-2xl">🚨</span>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">{criticalStockCount}</div>
-            <p className="text-xs text-muted-foreground">
-              Items at 0 stock
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+          <div className="p-4 rounded-xl shadow-sm border border-neutral-200 bg-white">
+            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Out of Stock</p>
+            <p className="text-2xl font-semibold text-red-600 mt-2">{criticalStockCount}</p>
+            <p className="text-xs text-neutral-400 mt-1">Items at 0 stock</p>
+          </div>
+        </div>
 
-      {/* Inventory by Category */}
-      <Tabs defaultValue="labels" className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="labels">
-            🏷️ Labels ({labels.length})
-          </TabsTrigger>
-          <TabsTrigger value="bottles">
-            🍾 Bottles ({bottles.length})
-          </TabsTrigger>
-          <TabsTrigger value="packaging">
-            📦 Packaging ({packaging.length})
-          </TabsTrigger>
-          <TabsTrigger value="materials">
-            🌿 Materials ({rawMaterials.length})
-          </TabsTrigger>
-        </TabsList>
+        {/* Inventory by Category */}
+        <Tabs defaultValue="labels" className="w-full">
+          <TabsList className="bg-neutral-100 p-1 rounded-xl inline-flex gap-1">
+            <TabsTrigger
+              value="labels"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+            >
+              Labels
+            </TabsTrigger>
+            <TabsTrigger
+              value="bottles"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+            >
+              Bottles
+            </TabsTrigger>
+            <TabsTrigger
+              value="packaging"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+            >
+              Packaging
+            </TabsTrigger>
+            <TabsTrigger
+              value="materials"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+            >
+              Materials
+            </TabsTrigger>
+          </TabsList>
 
-        {categories.map((category) => (
-          <TabsContent key={category.name.toLowerCase()} value={category.name.toLowerCase()}>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="text-2xl">{category.icon}</span>
-                  {category.name}
-                </CardTitle>
-                <CardDescription>
-                  {category.items.length} items • {category.items.reduce((sum, item) => sum + item.current_stock, 0).toLocaleString()} total units
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="rounded-md border">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-muted/50">
-                        <TableHead className="w-[50%]">Product Name</TableHead>
-                        <TableHead className="text-center">Category</TableHead>
-                        <TableHead className="text-right">Stock Level</TableHead>
-                        <TableHead className="text-right">Status</TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
+          {categories.map((category) => (
+            <TabsContent key={category.name.toLowerCase()} value={category.name.toLowerCase()} className="mt-6">
+              <div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
+                {/* Category Header */}
+                <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200">
+                  <h3 className="text-lg font-semibold text-neutral-800">{category.name}</h3>
+                  <p className="text-sm text-neutral-500">
+                    {category.items.length} items • {category.items.reduce((sum, item) => sum + item.current_stock, 0).toLocaleString()} total units
+                  </p>
+                </div>
+
+                {/* Table */}
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-neutral-200">
+                    <thead className="bg-neutral-50">
+                      <tr>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                          Product Name
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                          Category
+                        </th>
+                        <th className="px-6 py-3 text-right text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                          Stock Level
+                        </th>
+                        <th className="px-6 py-3 text-right text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                          Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-neutral-100 bg-white">
                       {category.items.length === 0 ? (
-                        <TableRow>
-                          <TableCell colSpan={4} className="text-center text-muted-foreground py-8">
+                        <tr>
+                          <td colSpan={4} className="px-6 py-12 text-center text-sm text-neutral-400">
                             No items in this category
-                          </TableCell>
-                        </TableRow>
+                          </td>
+                        </tr>
                       ) : (
                         category.items
                           .sort((a, b) => b.current_stock - a.current_stock)
                           .map((item) => (
-                            <TableRow key={item.id} className="hover:bg-muted/50">
-                              <TableCell className="font-medium">{item.name}</TableCell>
-                              <TableCell className="text-center">
-                                <Badge variant="outline" className="text-xs">
-                                  {item.category}
-                                </Badge>
-                              </TableCell>
-                              <TableCell className="text-right font-mono">
-                                {item.current_stock.toLocaleString()} {item.uom}
-                              </TableCell>
-                              <TableCell className="text-right">
+                            <tr key={item.id} className="hover:bg-neutral-50 transition-colors duration-150">
+                              <td className="px-6 py-4 text-sm text-neutral-800 font-medium">
+                                {item.name}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-neutral-600">
+                                {item.category}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-right font-medium text-neutral-900">
+                                {item.current_stock.toLocaleString()}
+                              </td>
+                              <td className="px-6 py-4 text-sm text-right">
                                 {item.current_stock === 0 ? (
-                                  <Badge variant="destructive">Out of Stock</Badge>
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-red-100 text-red-700 text-xs font-semibold">
+                                    Out of Stock
+                                  </span>
                                 ) : item.current_stock < 100 ? (
-                                  <Badge variant="default" className="bg-orange-600">Low</Badge>
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-red-50 text-red-600 text-xs font-semibold">
+                                    Low
+                                  </span>
                                 ) : item.current_stock < 500 ? (
-                                  <Badge variant="default" className="bg-amber-600">Medium</Badge>
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-yellow-50 text-yellow-700 text-xs font-semibold">
+                                    Medium
+                                  </span>
                                 ) : item.current_stock < 1000 ? (
-                                  <Badge variant="default" className="bg-blue-600">Good</Badge>
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold">
+                                    Good
+                                  </span>
                                 ) : (
-                                  <Badge variant="default" className="bg-green-600">High</Badge>
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-green-100 text-green-700 text-xs font-semibold">
+                                    High
+                                  </span>
                                 )}
-                              </TableCell>
-                            </TableRow>
+                              </td>
+                            </tr>
                           ))
                       )}
-                    </TableBody>
-                  </Table>
+                    </tbody>
+                  </table>
                 </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        ))}
-      </Tabs>
+              </div>
+            </TabsContent>
+          ))}
+        </Tabs>
+      </div>
     </div>
   )
 }
