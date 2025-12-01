@@ -291,7 +291,7 @@ export default function BatchesPage() {
           onSelect={(id) => {
             setActiveCategory(id)
             const first = ginBatches.find(r => resolveGinCategory(r) === id)
-            setSelectedRunId(first ? (first.run_id || first.batch_id) : null)
+            setSelectedRunId(first ? (first.run_id ?? first.batch_id ?? null) : null)
           }}
         />
       <main className="flex-1 flex">
