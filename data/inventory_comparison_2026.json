@@ -1,0 +1,291 @@
+{
+  "generated_at": "2025-12-01T00:01:57.806Z",
+  "results": [
+    {
+      "sku": "CAP-SCREW-BLACK",
+      "name": "CAP-SCREW-BLACK",
+      "category": "Caps",
+      "needed_2026": 9015,
+      "current_stock": 0,
+      "shortage": 9015,
+      "buffer_30_percent": 2705,
+      "recommended_order": 11720,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "MM-VODKA-700",
+      "name": "MM-VODKA-700",
+      "category": "Bottles",
+      "needed_2026": 4782,
+      "current_stock": 0,
+      "shortage": 4782,
+      "buffer_30_percent": 1435,
+      "recommended_order": 6217,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-MMVODKA-700",
+      "name": "LBL-MMVODKA-700",
+      "category": "Labels",
+      "needed_2026": 4782,
+      "current_stock": 0,
+      "shortage": 4782,
+      "buffer_30_percent": 1435,
+      "recommended_order": 6217,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "CORK-WOOD",
+      "name": "CORK-WOOD",
+      "category": "Corks",
+      "needed_2026": 3931,
+      "current_stock": 0,
+      "shortage": 3931,
+      "buffer_30_percent": 1180,
+      "recommended_order": 5111,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "MM-GIN-700",
+      "name": "MM-GIN-700",
+      "category": "Bottles",
+      "needed_2026": 2391,
+      "current_stock": 0,
+      "shortage": 2391,
+      "buffer_30_percent": 718,
+      "recommended_order": 3109,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-MMGIN-700",
+      "name": "LBL-MMGIN-700",
+      "category": "Labels",
+      "needed_2026": 2391,
+      "current_stock": 0,
+      "shortage": 2391,
+      "buffer_30_percent": 718,
+      "recommended_order": 3109,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "BTL-GIN-700",
+      "name": "BTL-GIN-700",
+      "category": "Bottles",
+      "needed_2026": 2196,
+      "current_stock": 0,
+      "shortage": 2196,
+      "buffer_30_percent": 659,
+      "recommended_order": 2855,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "CARTON-6PACK",
+      "name": "CARTON-6PACK",
+      "category": "Cartons",
+      "needed_2026": 2009,
+      "current_stock": 0,
+      "shortage": 2009,
+      "buffer_30_percent": 603,
+      "recommended_order": 2612,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "MM-RUM-700",
+      "name": "MM-RUM-700",
+      "category": "Bottles",
+      "needed_2026": 1842,
+      "current_stock": 0,
+      "shortage": 1842,
+      "buffer_30_percent": 553,
+      "recommended_order": 2395,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-RF-700",
+      "name": "LBL-RF-700",
+      "category": "Labels",
+      "needed_2026": 1316,
+      "current_stock": 0,
+      "shortage": 1316,
+      "buffer_30_percent": 395,
+      "recommended_order": 1711,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "SLEEVE-RF",
+      "name": "SLEEVE-RF",
+      "category": "Sleeves",
+      "needed_2026": 1316,
+      "current_stock": 0,
+      "shortage": 1316,
+      "buffer_30_percent": 395,
+      "recommended_order": 1711,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-MMWHITE-700",
+      "name": "LBL-MMWHITE-700",
+      "category": "Labels",
+      "needed_2026": 1170,
+      "current_stock": 0,
+      "shortage": 1170,
+      "buffer_30_percent": 351,
+      "recommended_order": 1521,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-SIG-700",
+      "name": "LBL-SIG-700",
+      "category": "Labels",
+      "needed_2026": 880,
+      "current_stock": 0,
+      "shortage": 880,
+      "buffer_30_percent": 264,
+      "recommended_order": 1144,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "SLEEVE-SIG",
+      "name": "SLEEVE-SIG",
+      "category": "Sleeves",
+      "needed_2026": 880,
+      "current_stock": 0,
+      "shortage": 880,
+      "buffer_30_percent": 264,
+      "recommended_order": 1144,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "BTL-GIN-200",
+      "name": "BTL-GIN-200",
+      "category": "Bottles",
+      "needed_2026": 855,
+      "current_stock": 0,
+      "shortage": 855,
+      "buffer_30_percent": 257,
+      "recommended_order": 1112,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-MMDARK-700",
+      "name": "LBL-MMDARK-700",
+      "category": "Labels",
+      "needed_2026": 672,
+      "current_stock": 0,
+      "shortage": 672,
+      "buffer_30_percent": 202,
+      "recommended_order": 874,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-RF-200",
+      "name": "LBL-RF-200",
+      "category": "Labels",
+      "needed_2026": 632,
+      "current_stock": 0,
+      "shortage": 632,
+      "buffer_30_percent": 190,
+      "recommended_order": 822,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "BTL-SPIRIT-700",
+      "name": "BTL-SPIRIT-700",
+      "category": "Bottles",
+      "needed_2026": 590,
+      "current_stock": 0,
+      "shortage": 590,
+      "buffer_30_percent": 177,
+      "recommended_order": 767,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-COFFEE-700",
+      "name": "LBL-COFFEE-700",
+      "category": "Labels",
+      "needed_2026": 300,
+      "current_stock": 0,
+      "shortage": 300,
+      "buffer_30_percent": 90,
+      "recommended_order": 390,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-CANE-700",
+      "name": "LBL-CANE-700",
+      "category": "Labels",
+      "needed_2026": 290,
+      "current_stock": 0,
+      "shortage": 290,
+      "buffer_30_percent": 87,
+      "recommended_order": 377,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "BTL-RUM-700",
+      "name": "BTL-RUM-700",
+      "category": "Bottles",
+      "needed_2026": 226,
+      "current_stock": 0,
+      "shortage": 226,
+      "buffer_30_percent": 68,
+      "recommended_order": 294,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-RESERVE-700",
+      "name": "LBL-RESERVE-700",
+      "category": "Labels",
+      "needed_2026": 226,
+      "current_stock": 0,
+      "shortage": 226,
+      "buffer_30_percent": 68,
+      "recommended_order": 294,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-SIG-200",
+      "name": "LBL-SIG-200",
+      "category": "Labels",
+      "needed_2026": 223,
+      "current_stock": 0,
+      "shortage": 223,
+      "buffer_30_percent": 67,
+      "recommended_order": 290,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "CARTON-12PACK",
+      "name": "CARTON-12PACK",
+      "category": "Cartons",
+      "needed_2026": 79,
+      "current_stock": 0,
+      "shortage": 79,
+      "buffer_30_percent": 24,
+      "recommended_order": 103,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "BTL-SPIRIT-200",
+      "name": "BTL-SPIRIT-200",
+      "category": "Bottles",
+      "needed_2026": 64,
+      "current_stock": 0,
+      "shortage": 64,
+      "buffer_30_percent": 20,
+      "recommended_order": 84,
+      "status": "CRITICAL"
+    },
+    {
+      "sku": "LBL-CANE-200",
+      "name": "LBL-CANE-200",
+      "category": "Labels",
+      "needed_2026": 64,
+      "current_stock": 0,
+      "shortage": 64,
+      "buffer_30_percent": 20,
+      "recommended_order": 84,
+      "status": "CRITICAL"
+    }
+  ]
+}

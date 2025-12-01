@@ -1,0 +1,265 @@
+{
+  "generated_at": "2025-12-01T00:00:02.354Z",
+  "materials": [
+    {
+      "sku": "BTL-GIN-200",
+      "name": "BTL-GIN-200",
+      "category": "Bottles",
+      "quantity_needed": 855,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "BTL-GIN-700",
+      "name": "BTL-GIN-700",
+      "category": "Bottles",
+      "quantity_needed": 2196,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "BTL-RUM-700",
+      "name": "BTL-RUM-700",
+      "category": "Bottles",
+      "quantity_needed": 226,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "BTL-SPIRIT-200",
+      "name": "BTL-SPIRIT-200",
+      "category": "Bottles",
+      "quantity_needed": 64,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "BTL-SPIRIT-700",
+      "name": "BTL-SPIRIT-700",
+      "category": "Bottles",
+      "quantity_needed": 590,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "MM-GIN-700",
+      "name": "MM-GIN-700",
+      "category": "Bottles",
+      "quantity_needed": 2391,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "MM-RUM-700",
+      "name": "MM-RUM-700",
+      "category": "Bottles",
+      "quantity_needed": 1842,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "MM-VODKA-700",
+      "name": "MM-VODKA-700",
+      "category": "Bottles",
+      "quantity_needed": 4782,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "CAP-SCREW-BLACK",
+      "name": "CAP-SCREW-BLACK",
+      "category": "Caps",
+      "quantity_needed": 9015,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "CARTON-12PACK",
+      "name": "CARTON-12PACK",
+      "category": "Cartons",
+      "quantity_needed": 79,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "CARTON-6PACK",
+      "name": "CARTON-6PACK",
+      "category": "Cartons",
+      "quantity_needed": 2009,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "CORK-WOOD",
+      "name": "CORK-WOOD",
+      "category": "Corks",
+      "quantity_needed": 3931,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-CANE-200",
+      "name": "LBL-CANE-200",
+      "category": "Labels",
+      "quantity_needed": 64,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-CANE-700",
+      "name": "LBL-CANE-700",
+      "category": "Labels",
+      "quantity_needed": 290,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-COFFEE-700",
+      "name": "LBL-COFFEE-700",
+      "category": "Labels",
+      "quantity_needed": 300,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-MMDARK-700",
+      "name": "LBL-MMDARK-700",
+      "category": "Labels",
+      "quantity_needed": 672,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-MMGIN-700",
+      "name": "LBL-MMGIN-700",
+      "category": "Labels",
+      "quantity_needed": 2391,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-MMVODKA-700",
+      "name": "LBL-MMVODKA-700",
+      "category": "Labels",
+      "quantity_needed": 4782,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-MMWHITE-700",
+      "name": "LBL-MMWHITE-700",
+      "category": "Labels",
+      "quantity_needed": 1170,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-RESERVE-700",
+      "name": "LBL-RESERVE-700",
+      "category": "Labels",
+      "quantity_needed": 226,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-RF-200",
+      "name": "LBL-RF-200",
+      "category": "Labels",
+      "quantity_needed": 632,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-RF-700",
+      "name": "LBL-RF-700",
+      "category": "Labels",
+      "quantity_needed": 1316,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-SIG-200",
+      "name": "LBL-SIG-200",
+      "category": "Labels",
+      "quantity_needed": 223,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "LBL-SIG-700",
+      "name": "LBL-SIG-700",
+      "category": "Labels",
+      "quantity_needed": 880,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "SLEEVE-RF",
+      "name": "SLEEVE-RF",
+      "category": "Sleeves",
+      "quantity_needed": 1316,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    },
+    {
+      "sku": "SLEEVE-SIG",
+      "name": "SLEEVE-SIG",
+      "category": "Sleeves",
+      "quantity_needed": 880,
+      "current_stock": 0,
+      "to_order": 0,
+      "buffer_30_percent": 0,
+      "recommended_order": 0
+    }
+  ]
+}
