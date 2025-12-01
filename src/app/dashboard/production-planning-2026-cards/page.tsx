@@ -371,6 +371,8 @@ function BatchCard({ batch, batchNumber }: { batch: BatchWithMaterials; batchNum
 }
 
 function MaterialRow({ material }: { material: MaterialNeed }) {
+  const missing = material.stock_after < 0 ? Math.abs(material.stock_after) : 0
+
   return (
     <div className={`flex items-center justify-between p-3 rounded-lg border transition-all duration-150 ${
       material.status === 'CRITICAL' ? 'bg-red-50 border-red-200' :
@@ -382,9 +384,11 @@ function MaterialRow({ material }: { material: MaterialNeed }) {
         <p className="text-sm font-medium text-neutral-900">{material.name}</p>
         <p className="text-xs text-neutral-500 mt-0.5">
           Need: <span className="font-semibold text-neutral-700">{material.needed.toLocaleString()} {material.uom}</span>
+          {' • '}
+          Current: <span className="font-semibold text-neutral-700">{material.current_stock.toLocaleString()} {material.uom}</span>
         </p>
       </div>
-      <div className="text-right">
+      <div className="text-right mr-4">
         <p className={`text-sm font-semibold tabular-nums ${
           material.stock_after <= 0 ? 'text-red-700' :
           material.stock_after < material.needed ? 'text-orange-600' :
@@ -394,6 +398,14 @@ function MaterialRow({ material }: { material: MaterialNeed }) {
         </p>
         <p className="text-xs text-neutral-500 mt-0.5">after batch</p>
       </div>
+      {missing > 0 && (
+        <div className="text-right mr-4">
+          <p className="text-sm font-bold text-red-700 tabular-nums">
+            {missing.toLocaleString()} {material.uom}
+          </p>
+          <p className="text-xs text-red-600 mt-0.5 font-medium">MISSING</p>
+        </div>
+      )}
       <div className="ml-4">
         <StatusBadge status={material.status} />
       </div>

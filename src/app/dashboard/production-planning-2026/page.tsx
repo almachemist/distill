@@ -508,47 +508,54 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                           <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Month</th>
                           <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Consumed</th>
                           <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Stock After</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-red-600 uppercase">Missing</th>
                           <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Status</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-neutral-100">
-                        {timeline.batches.map((batch, idx) => (
-                          <tr
-                            key={idx}
-                            className={`hover:bg-neutral-50 transition-colors duration-150 ${
-                              batch.runs_out ? 'bg-red-50' : ''
-                            }`}
-                          >
-                            <td className="px-4 py-3 text-neutral-600 font-medium">#{batch.batch_index + 1}</td>
-                            <td className="px-4 py-3 text-neutral-900 font-medium">{batch.product}</td>
-                            <td className="px-4 py-3 text-neutral-600">{batch.month}</td>
-                            <td className="px-4 py-3 text-right text-red-600 font-semibold tabular-nums">
-                              -{batch.consumed.toLocaleString()} {timeline.uom}
-                            </td>
-                            <td className={`px-4 py-3 text-right font-semibold tabular-nums ${
-                              batch.stock_after <= 0 ? 'text-red-700' :
-                              batch.stock_after < batch.consumed ? 'text-orange-600' :
-                              'text-green-700'
-                            }`}>
-                              {batch.stock_after.toLocaleString()} {timeline.uom}
-                            </td>
-                            <td className="px-4 py-3 text-right">
-                              {batch.runs_out ? (
-                                <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-700">
-                                  OUT OF STOCK
-                                </span>
-                              ) : batch.stock_after < batch.consumed ? (
-                                <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-700">
-                                  LOW
-                                </span>
-                              ) : (
-                                <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-700">
-                                  OK
-                                </span>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
+                        {timeline.batches.map((batch, idx) => {
+                          const missing = batch.stock_after < 0 ? Math.abs(batch.stock_after) : 0
+                          return (
+                            <tr
+                              key={idx}
+                              className={`hover:bg-neutral-50 transition-colors duration-150 ${
+                                batch.runs_out ? 'bg-red-50' : ''
+                              }`}
+                            >
+                              <td className="px-4 py-3 text-neutral-600 font-medium">#{batch.batch_index + 1}</td>
+                              <td className="px-4 py-3 text-neutral-900 font-medium">{batch.product}</td>
+                              <td className="px-4 py-3 text-neutral-600">{batch.month}</td>
+                              <td className="px-4 py-3 text-right text-red-600 font-semibold tabular-nums">
+                                -{batch.consumed.toLocaleString()} {timeline.uom}
+                              </td>
+                              <td className={`px-4 py-3 text-right font-semibold tabular-nums ${
+                                batch.stock_after <= 0 ? 'text-red-700' :
+                                batch.stock_after < batch.consumed ? 'text-orange-600' :
+                                'text-green-700'
+                              }`}>
+                                {batch.stock_after.toLocaleString()} {timeline.uom}
+                              </td>
+                              <td className="px-4 py-3 text-right font-bold text-red-700 tabular-nums">
+                                {missing > 0 ? `${missing.toLocaleString()} ${timeline.uom}` : '-'}
+                              </td>
+                              <td className="px-4 py-3 text-right">
+                                {batch.runs_out ? (
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-700">
+                                    OUT OF STOCK
+                                  </span>
+                                ) : batch.stock_after < batch.consumed ? (
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-700">
+                                    LOW
+                                  </span>
+                                ) : (
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-700">
+                                    OK
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          )
+                        })}
                       </tbody>
                     </table>
                   </div>
