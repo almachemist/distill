@@ -5,7 +5,7 @@ import { merchantMaeGin003Distillation } from '../sessions/merchant-mae-gin-003-
 import { vodka003Distillation } from '../sessions/vodka-003-distillation.session'
 import { vodka002Distillation } from '../sessions/vodka-002-distillation.session'
 import { rainforestGinRF30 } from '../sessions/rainforest-gin-rf30-distillation.session'
-import { rainforestGinRF29 } from '../sessions/rainforest-gin-rf29-distillation.session'
+import { rainforestGinRF29Distillation } from '../sessions/rainforest-gin-rf29-distillation.session'
 import { rainforestGinRF28 } from '../sessions/spirit-gin-rf28-distillation.session'
 import { spiritLiq001Distillation } from '../sessions/spirit-liq001-distillation.session'
 import { spiritLiq002Distillation } from '../sessions/spirit-liq002-distillation.session'
@@ -34,7 +34,7 @@ export const distillationSessions: DistillationSession[] = [
   merchantMaeGin001Distillation, // SPIRIT-GIN-MM-001
   
   // January 2025
-  rainforestGinRF29, // SPIRIT-GIN-RF-29
+  rainforestGinRF29Distillation, // SPIRIT-GIN-RF-29
   
   // February 2025
   spiritLiq002Distillation, // SPIRIT-LIQ-002

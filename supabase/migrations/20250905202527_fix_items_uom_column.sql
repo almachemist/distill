@@ -18,3 +18,4 @@ ALTER TABLE public.items RENAME COLUMN unit TO default_uom;
 
 
 
+

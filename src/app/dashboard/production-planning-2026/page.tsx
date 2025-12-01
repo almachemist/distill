@@ -94,25 +94,33 @@ export default function ProductionPlanning2026Page() {
 
   useEffect(() => {
     async function loadData() {
-      const supabase = createClient()
+      try {
+        const supabase = createClient()
 
-      // Load production plan
-      const response = await fetch('/production_plan_2026_v4.json')
-      const plan = await response.json()
+        // Load production plan
+        const response = await fetch('/production_plan_2026_v4.json')
+        const plan = await response.json()
 
-      // Load current inventory
-      const { data: items } = await supabase.from('items').select('id, name, category, default_uom')
-      const stockMap = new Map<string, number>()
+        // Load current inventory - OPTIMIZED: Get all items and all transactions in 2 queries
+        const { data: items } = await supabase.from('items').select('id, name, category, default_uom')
+        const { data: allTxns } = await supabase.from('inventory_txns').select('item_id, quantity, txn_type')
 
-      if (items) {
-        for (const item of items) {
-          const { data: txns } = await supabase
-            .from('inventory_txns')
-            .select('quantity, txn_type')
-            .eq('item_id', item.id)
+        const stockMap = new Map<string, number>()
 
-          let stock = 0
-          if (txns) {
+        if (items && allTxns) {
+          // Group transactions by item_id
+          const txnsByItem = new Map<string, typeof allTxns>()
+          for (const txn of allTxns) {
+            if (!txnsByItem.has(txn.item_id)) {
+              txnsByItem.set(txn.item_id, [])
+            }
+            txnsByItem.get(txn.item_id)!.push(txn)
+          }
+
+          // Calculate stock for each item
+          for (const item of items) {
+            const txns = txnsByItem.get(item.id) || []
+            let stock = 0
             for (const txn of txns) {
               if (txn.txn_type === 'RECEIVE' || txn.txn_type === 'PRODUCE' || txn.txn_type === 'ADJUST') {
                 stock += Number(txn.quantity)
@@ -120,32 +128,35 @@ export default function ProductionPlanning2026Page() {
                 stock -= Number(txn.quantity)
               }
             }
+            stockMap.set(item.name, stock)
           }
-          stockMap.set(item.name, stock)
         }
-      }
 
-      setCurrentStock(stockMap)
+        setCurrentStock(stockMap)
 
-      // Process all batches
-      const allBatches: BatchWithMaterials[] = []
+        // Process all batches
+        const allBatches: BatchWithMaterials[] = []
 
-      for (const productPlan of plan.production_plans) {
-        for (const batch of productPlan.production_schedule) {
-          const batchWithMaterials = calculateBatchMaterials(batch, stockMap)
-          allBatches.push(batchWithMaterials)
+        for (const productPlan of plan.production_plans) {
+          for (const batch of productPlan.production_schedule) {
+            const batchWithMaterials = calculateBatchMaterials(batch, stockMap)
+            allBatches.push(batchWithMaterials)
+          }
         }
+
+        // Sort by month
+        allBatches.sort((a, b) => a.scheduled_month - b.scheduled_month)
+
+        // Calculate stock timelines (cumulative consumption)
+        const timelines = calculateStockTimelines(allBatches, stockMap)
+
+        setBatches(allBatches)
+        setStockTimelines(timelines)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error loading production planning data:', error)
+        setLoading(false)
       }
-
-      // Sort by month
-      allBatches.sort((a, b) => a.scheduled_month - b.scheduled_month)
-
-      // Calculate stock timelines (cumulative consumption)
-      const timelines = calculateStockTimelines(allBatches, stockMap)
-
-      setBatches(allBatches)
-      setStockTimelines(timelines)
-      setLoading(false)
     }
 
     loadData()
@@ -200,6 +211,10 @@ export default function ProductionPlanning2026Page() {
     if (batch.bottles_700ml > 0) {
       packaging.push(createMaterialNeed('Bottle 700ml', 'Packaging', batch.bottles_700ml, stockMap, 'units'))
       packaging.push(createMaterialNeed('Cork - Wood', 'Packaging', batch.bottles_700ml, stockMap, 'units'))
+
+      // Carton 6-Pack: Every 6 bottles of 700ml need 1 carton
+      const cartonsNeeded = Math.ceil(batch.bottles_700ml / 6)
+      packaging.push(createMaterialNeed('Carton 6-Pack', 'Packaging', cartonsNeeded, stockMap, 'units'))
     }
 
     if (batch.bottles_200ml > 0) {
@@ -249,59 +264,59 @@ export default function ProductionPlanning2026Page() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 py-8">
+    <div className="min-h-screen bg-[#F4EDE6] py-8">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-neutral-900">2026 Production Planning</h1>
-          <p className="text-sm text-neutral-500 mt-1">Batch-by-batch materials planning with inventory comparison</p>
+          <h1 className="text-3xl font-semibold text-[#1A1A1A]">2026 Production Planning</h1>
+          <p className="text-sm text-[#C07A50] mt-1">Batch-by-batch materials planning with inventory comparison</p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Batches</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">{batches.length}</p>
-            <p className="text-xs text-neutral-400 mt-1">Across all products</p>
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Total Batches</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">{batches.length}</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">Across all products</p>
           </div>
 
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Bottles</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Total Bottles</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">
               {batches.reduce((sum, b) => sum + b.total_bottles, 0).toLocaleString()}
             </p>
-            <p className="text-xs text-neutral-400 mt-1">All sizes combined</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">All sizes combined</p>
           </div>
 
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Gin Batches</p>
-            <p className="text-3xl font-semibold text-green-600 mt-2">
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Gin Batches</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">
               {batches.filter(b => b.production_type === 'GIN').length}
             </p>
-            <p className="text-xs text-neutral-400 mt-1">Botanical tracking</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">Botanical tracking</p>
           </div>
 
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Production Months</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Production Months</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">
               {new Set(batches.map(b => b.scheduled_month_name)).size}
             </p>
-            <p className="text-xs text-neutral-400 mt-1">Jan - Jul 2026</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">Jan - Jul 2026</p>
           </div>
         </div>
 
         {/* Tabs by Month */}
         <Tabs defaultValue="timeline" className="w-full">
-          <TabsList className="bg-neutral-100 p-1 rounded-xl inline-flex gap-1 flex-wrap">
+          <TabsList className="bg-[#EDE3D8] p-1 rounded-xl inline-flex gap-1 flex-wrap border border-[#C07A50]/20">
             <TabsTrigger
               value="timeline"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:border data-[state=active]:border-[#C07A50] data-[state=active]:text-[#1A1A1A] text-[#C07A50] transition-all duration-150"
             >
               Stock Timeline
             </TabsTrigger>
             <TabsTrigger
               value="all"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:border data-[state=active]:border-[#C07A50] data-[state=active]:text-[#1A1A1A] text-[#C07A50] transition-all duration-150"
             >
               All Batches
             </TabsTrigger>
@@ -309,7 +324,7 @@ export default function ProductionPlanning2026Page() {
               <TabsTrigger
                 key={month}
                 value={month}
-                className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+                className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:border data-[state=active]:border-[#C07A50] data-[state=active]:text-[#1A1A1A] text-[#C07A50] transition-all duration-150"
               >
                 {month}
               </TabsTrigger>
@@ -470,11 +485,11 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
         if (items.length === 0) return null
 
         return (
-          <div key={category} className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
+          <div key={category} className="bg-[#F5EEE7] rounded-xl shadow-sm border border-[#C07A50] overflow-hidden">
             {/* Category Header */}
-            <div className="bg-gradient-to-r from-neutral-50 to-white px-6 py-4 border-b border-neutral-200">
-              <h3 className="text-lg font-semibold text-neutral-900">{category}</h3>
-              <p className="text-sm text-neutral-500 mt-1">
+            <div className="bg-white px-6 py-4 border-b border-[#E0DAD2]">
+              <h3 className="text-lg font-semibold text-[#1A1A1A]">{category}</h3>
+              <p className="text-sm text-[#C07A50] mt-1">
                 Stock consumption timeline • {items.length} materials tracked
               </p>
             </div>
@@ -486,14 +501,14 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                   {/* Material Header */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-semibold text-neutral-900">{timeline.material_name}</h4>
-                      <p className="text-xs text-neutral-500 mt-1">
-                        Initial Stock: <span className="font-semibold text-neutral-700">{timeline.initial_stock.toLocaleString()} {timeline.uom}</span>
+                      <h4 className="text-sm font-semibold text-[#1A1A1A]">{timeline.material_name}</h4>
+                      <p className="text-xs text-[#C07A50]/70 mt-1">
+                        Initial Stock: <span className="font-semibold text-[#1A1A1A]">{timeline.initial_stock.toLocaleString()} {timeline.uom}</span>
                       </p>
                     </div>
                     {timeline.batches.some(b => b.runs_out) && (
-                      <span className="inline-flex px-3 py-1 rounded-lg text-xs font-medium bg-red-100 text-red-700">
-                        ⚠️ Runs Out
+                      <span className="inline-flex px-3 py-1 rounded-lg text-xs font-medium bg-[#FDEDEC] text-[#C0392B] border border-[#C0392B]/20">
+                        Runs Out
                       </span>
                     )}
                   </div>
@@ -501,54 +516,48 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                   {/* Timeline Table */}
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead className="bg-neutral-50">
+                      <thead className="bg-white border-b border-[#E0DAD2]">
                         <tr>
-                          <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Batch</th>
-                          <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Product</th>
-                          <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Month</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Consumed</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Stock After</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-red-600 uppercase">Missing</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Status</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-[#C07A50] uppercase">Batch</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-[#C07A50] uppercase">Product</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-[#C07A50] uppercase">Month</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C07A50] uppercase">Consumed</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C07A50] uppercase">Stock After</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C0392B] uppercase">Missing</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C07A50] uppercase">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-neutral-100">
+                      <tbody className="divide-y divide-[#E0DAD2]">
                         {timeline.batches.map((batch, idx) => {
                           const missing = batch.stock_after < 0 ? Math.abs(batch.stock_after) : 0
                           return (
                             <tr
                               key={idx}
-                              className={`hover:bg-neutral-50 transition-colors duration-150 ${
-                                batch.runs_out ? 'bg-red-50' : ''
+                              className={`hover:bg-white/50 transition-colors duration-150 ${
+                                batch.runs_out ? 'bg-[#FDEDEC]' : 'bg-white'
                               }`}
                             >
-                              <td className="px-4 py-3 text-neutral-600 font-medium">#{batch.batch_index + 1}</td>
-                              <td className="px-4 py-3 text-neutral-900 font-medium">{batch.product}</td>
-                              <td className="px-4 py-3 text-neutral-600">{batch.month}</td>
-                              <td className="px-4 py-3 text-right text-red-600 font-semibold tabular-nums">
+                              <td className="px-4 py-3 text-[#C07A50]/70 font-medium">#{batch.batch_index + 1}</td>
+                              <td className="px-4 py-3 text-[#1A1A1A] font-medium">{batch.product}</td>
+                              <td className="px-4 py-3 text-[#C07A50]/70">{batch.month}</td>
+                              <td className="px-4 py-3 text-right text-[#C07A50] font-semibold tabular-nums">
                                 -{batch.consumed.toLocaleString()} {timeline.uom}
                               </td>
                               <td className={`px-4 py-3 text-right font-semibold tabular-nums ${
-                                batch.stock_after <= 0 ? 'text-red-700' :
-                                batch.stock_after < batch.consumed ? 'text-orange-600' :
-                                'text-green-700'
+                                batch.stock_after <= 0 ? 'text-[#C0392B]' : 'text-[#1E7F4A]'
                               }`}>
                                 {batch.stock_after.toLocaleString()} {timeline.uom}
                               </td>
-                              <td className="px-4 py-3 text-right font-bold text-red-700 tabular-nums">
+                              <td className="px-4 py-3 text-right font-bold text-[#C0392B] tabular-nums">
                                 {missing > 0 ? `${missing.toLocaleString()} ${timeline.uom}` : '-'}
                               </td>
                               <td className="px-4 py-3 text-right">
                                 {batch.runs_out ? (
-                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-700">
-                                    OUT OF STOCK
-                                  </span>
-                                ) : batch.stock_after < batch.consumed ? (
-                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-700">
-                                    LOW
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-[#FDEDEC] text-[#C0392B] border border-[#C0392B]/20">
+                                    OUT
                                   </span>
                                 ) : (
-                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-700">
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-[#E9F7EF] text-[#1E7F4A] border border-[#1E7F4A]/20">
                                     OK
                                   </span>
                                 )}
@@ -561,12 +570,12 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                   </div>
 
                   {/* Final Stock Summary */}
-                  <div className="flex items-center justify-between pt-2 border-t border-neutral-200">
-                    <p className="text-xs text-neutral-500">
+                  <div className="flex items-center justify-between pt-2 border-t border-[#E0DAD2]">
+                    <p className="text-xs text-[#C07A50]/70">
                       After {timeline.batches.length} batches
                     </p>
                     <p className={`text-sm font-semibold ${
-                      timeline.batches[timeline.batches.length - 1].stock_after <= 0 ? 'text-red-700' : 'text-neutral-900'
+                      timeline.batches[timeline.batches.length - 1].stock_after <= 0 ? 'text-[#C0392B]' : 'text-[#1A1A1A]'
                     }`}>
                       Final Stock: {timeline.batches[timeline.batches.length - 1].stock_after.toLocaleString()} {timeline.uom}
                     </p>

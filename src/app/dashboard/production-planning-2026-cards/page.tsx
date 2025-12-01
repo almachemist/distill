@@ -78,25 +78,33 @@ export default function ProductionPlanning2026CardsPage() {
 
   useEffect(() => {
     async function loadData() {
-      const supabase = createClient()
+      try {
+        const supabase = createClient()
 
-      // Load production plan
-      const response = await fetch('/production_plan_2026_v4.json')
-      const plan = await response.json()
+        // Load production plan
+        const response = await fetch('/production_plan_2026_v4.json')
+        const plan = await response.json()
 
-      // Load current inventory
-      const { data: items } = await supabase.from('items').select('id, name, category, default_uom')
-      const stockMap = new Map<string, number>()
+        // Load current inventory - OPTIMIZED: Get all items and all transactions in 2 queries
+        const { data: items } = await supabase.from('items').select('id, name, category, default_uom')
+        const { data: allTxns } = await supabase.from('inventory_txns').select('item_id, quantity, txn_type')
 
-      if (items) {
-        for (const item of items) {
-          const { data: txns } = await supabase
-            .from('inventory_txns')
-            .select('quantity, txn_type')
-            .eq('item_id', item.id)
+        const stockMap = new Map<string, number>()
 
-          let stock = 0
-          if (txns) {
+        if (items && allTxns) {
+          // Group transactions by item_id
+          const txnsByItem = new Map<string, typeof allTxns>()
+          for (const txn of allTxns) {
+            if (!txnsByItem.has(txn.item_id)) {
+              txnsByItem.set(txn.item_id, [])
+            }
+            txnsByItem.get(txn.item_id)!.push(txn)
+          }
+
+          // Calculate stock for each item
+          for (const item of items) {
+            const txns = txnsByItem.get(item.id) || []
+            let stock = 0
             for (const txn of txns) {
               if (txn.txn_type === 'RECEIVE' || txn.txn_type === 'PRODUCE' || txn.txn_type === 'ADJUST') {
                 stock += Number(txn.quantity)
@@ -104,29 +112,32 @@ export default function ProductionPlanning2026CardsPage() {
                 stock -= Number(txn.quantity)
               }
             }
+            stockMap.set(item.name, stock)
           }
-          stockMap.set(item.name, stock)
         }
-      }
 
-      setCurrentStock(stockMap)
+        setCurrentStock(stockMap)
 
-      // Process all batches with cumulative stock tracking
-      const allBatches: BatchWithMaterials[] = []
-      const runningStock = new Map<string, number>(stockMap) // Clone initial stock
+        // Process all batches with cumulative stock tracking
+        const allBatches: BatchWithMaterials[] = []
+        const runningStock = new Map<string, number>(stockMap) // Clone initial stock
 
-      for (const productPlan of plan.production_plans) {
-        for (const batch of productPlan.production_schedule) {
-          const batchWithMaterials = calculateBatchMaterials(batch, stockMap, runningStock)
-          allBatches.push(batchWithMaterials)
+        for (const productPlan of plan.production_plans) {
+          for (const batch of productPlan.production_schedule) {
+            const batchWithMaterials = calculateBatchMaterials(batch, stockMap, runningStock)
+            allBatches.push(batchWithMaterials)
+          }
         }
+
+        // Sort by month
+        allBatches.sort((a, b) => a.scheduled_month - b.scheduled_month)
+
+        setBatches(allBatches)
+        setLoading(false)
+      } catch (error) {
+        console.error('Error loading production planning data:', error)
+        setLoading(false)
       }
-
-      // Sort by month
-      allBatches.sort((a, b) => a.scheduled_month - b.scheduled_month)
-
-      setBatches(allBatches)
-      setLoading(false)
     }
 
     loadData()
@@ -145,6 +156,10 @@ export default function ProductionPlanning2026CardsPage() {
     if (batch.bottles_700ml > 0) {
       packaging.push(createMaterialNeed('Bottle 700ml', 'Packaging', batch.bottles_700ml, initialStock, runningStock, 'units'))
       packaging.push(createMaterialNeed('Cork - Wood', 'Packaging', batch.bottles_700ml, initialStock, runningStock, 'units'))
+
+      // Carton 6-Pack: Every 6 bottles of 700ml need 1 carton
+      const cartonsNeeded = Math.ceil(batch.bottles_700ml / 6)
+      packaging.push(createMaterialNeed('Carton 6-Pack', 'Packaging', cartonsNeeded, initialStock, runningStock, 'units'))
     }
 
     if (batch.bottles_200ml > 0) {
@@ -201,53 +216,53 @@ export default function ProductionPlanning2026CardsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 py-8">
+    <div className="min-h-screen bg-[#F4EDE6] py-8">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-neutral-900">2026 Production Planning (Cards View)</h1>
-          <p className="text-sm text-neutral-500 mt-1">Batch cards with materials listed inside • Alternative layout</p>
+          <h1 className="text-3xl font-semibold text-[#1A1A1A]">2026 Production Planning (Cards View)</h1>
+          <p className="text-sm text-[#C07A50] mt-1">Batch cards with materials listed inside • Alternative layout</p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Batches</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">{batches.length}</p>
-            <p className="text-xs text-neutral-400 mt-1">Across all products</p>
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Total Batches</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">{batches.length}</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">Across all products</p>
           </div>
 
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Bottles</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Total Bottles</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">
               {batches.reduce((sum, b) => sum + b.total_bottles, 0).toLocaleString()}
             </p>
-            <p className="text-xs text-neutral-400 mt-1">All sizes combined</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">All sizes combined</p>
           </div>
 
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Gin Batches</p>
-            <p className="text-3xl font-semibold text-green-600 mt-2">
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Gin Batches</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">
               {batches.filter(b => b.production_type === 'GIN').length}
             </p>
-            <p className="text-xs text-neutral-400 mt-1">Botanical tracking</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">Botanical tracking</p>
           </div>
 
-          <div className="rounded-xl shadow-sm border border-neutral-200 bg-white p-6">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Production Months</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">
+          <div className="rounded-xl shadow-sm border border-[#C07A50] bg-white p-6">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide font-medium">Production Months</p>
+            <p className="text-3xl font-semibold text-[#1A1A1A] mt-2">
               {new Set(batches.map(b => b.scheduled_month_name)).size}
             </p>
-            <p className="text-xs text-neutral-400 mt-1">Jan - Jul 2026</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">Jan - Jul 2026</p>
           </div>
         </div>
 
         {/* Tabs by Month */}
         <Tabs defaultValue="all" className="w-full">
-          <TabsList className="bg-neutral-100 p-1 rounded-xl inline-flex gap-1 flex-wrap">
+          <TabsList className="bg-[#EDE3D8] p-1 rounded-xl inline-flex gap-1 flex-wrap border border-[#C07A50]/20">
             <TabsTrigger
               value="all"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:border data-[state=active]:border-[#C07A50] data-[state=active]:text-[#1A1A1A] text-[#C07A50] transition-all duration-150"
             >
               All Batches
             </TabsTrigger>
@@ -255,7 +270,7 @@ export default function ProductionPlanning2026CardsPage() {
               <TabsTrigger
                 key={month}
                 value={month}
-                className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+                className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:border data-[state=active]:border-[#C07A50] data-[state=active]:text-[#1A1A1A] text-[#C07A50] transition-all duration-150"
               >
                 {month}
               </TabsTrigger>
@@ -280,8 +295,8 @@ export default function ProductionPlanning2026CardsPage() {
 function BatchCardsGrid({ batches }: { batches: BatchWithMaterials[] }) {
   if (batches.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow-sm border border-neutral-200 p-12 text-center">
-        <p className="text-sm text-neutral-400">No batches scheduled for this period</p>
+      <div className="bg-white rounded-xl shadow-sm border border-[#C07A50] p-12 text-center">
+        <p className="text-sm text-[#C07A50]/60">No batches scheduled for this period</p>
       </div>
     )
   }
@@ -301,31 +316,27 @@ function BatchCard({ batch, batchNumber }: { batch: BatchWithMaterials; batchNum
   const hasCritical = criticalMaterials.length > 0
 
   return (
-    <div className={`bg-white rounded-xl shadow-sm border-2 transition-all duration-150 hover:shadow-md ${
-      hasCritical ? 'border-red-300' : 'border-neutral-200'
-    }`}>
+    <div className="bg-[#F5EEE7] rounded-xl shadow-sm border border-[#C07A50] transition-all duration-150 hover:shadow-md">
       {/* Card Header */}
-      <div className={`px-6 py-5 border-b ${
-        hasCritical ? 'bg-red-50 border-red-200' : 'bg-gradient-to-r from-neutral-50 to-white border-neutral-200'
-      }`}>
+      <div className="px-6 py-5 border-b border-[#E0DAD2]">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <div className="flex items-center gap-3">
-              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-neutral-900 text-white text-sm font-semibold">
+              <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#1A1A1A] text-white text-sm font-semibold">
                 {batchNumber}
               </span>
               <div>
-                <h3 className="text-lg font-semibold text-neutral-900">{batch.product}</h3>
-                <p className="text-sm text-neutral-500 mt-0.5">
+                <h3 className="text-lg font-semibold text-[#1A1A1A]">{batch.product}</h3>
+                <p className="text-sm text-[#C07A50] mt-0.5">
                   Batch {batch.batch_number} of {batch.total_batches} • {batch.scheduled_month_name} 2026
                 </p>
               </div>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide">Bottles</p>
-            <p className="text-2xl font-semibold text-neutral-900">{batch.total_bottles.toLocaleString()}</p>
-            <p className="text-xs text-neutral-400 mt-1">
+            <p className="text-xs text-[#C07A50] uppercase tracking-wide">Bottles</p>
+            <p className="text-2xl font-semibold text-[#1A1A1A]">{batch.total_bottles.toLocaleString()}</p>
+            <p className="text-xs text-[#C07A50]/60 mt-1">
               {batch.bottles_700ml > 0 && `${batch.bottles_700ml} × 700ml`}
               {batch.bottles_700ml > 0 && batch.bottles_200ml > 0 && ' + '}
               {batch.bottles_200ml > 0 && `${batch.bottles_200ml} × 200ml`}
@@ -334,8 +345,8 @@ function BatchCard({ batch, batchNumber }: { batch: BatchWithMaterials; batchNum
         </div>
 
         {hasCritical && (
-          <div className="mt-4 flex items-center gap-2 px-3 py-2 bg-red-100 border border-red-200 rounded-lg">
-            <span className="text-red-700 text-sm font-medium">⚠️ {criticalMaterials.length} material(s) out of stock</span>
+          <div className="mt-4 flex items-center gap-2 px-3 py-2 bg-[#FDEDEC] border border-[#C0392B]/20 rounded-lg">
+            <span className="text-[#C0392B] text-sm font-medium">{criticalMaterials.length} material(s) missing</span>
           </div>
         )}
       </div>
@@ -345,7 +356,7 @@ function BatchCard({ batch, batchNumber }: { batch: BatchWithMaterials; batchNum
         {/* Packaging Section */}
         {batch.packaging.length > 0 && (
           <div>
-            <h4 className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-3">Packaging</h4>
+            <h4 className="text-xs font-semibold text-[#C07A50] uppercase tracking-wide mb-3">Packaging</h4>
             <div className="space-y-2">
               {batch.packaging.map((material, idx) => (
                 <MaterialRow key={idx} material={material} />
@@ -357,7 +368,7 @@ function BatchCard({ batch, batchNumber }: { batch: BatchWithMaterials; batchNum
         {/* Botanicals Section */}
         {batch.botanicals.length > 0 && (
           <div>
-            <h4 className="text-xs font-semibold text-neutral-500 uppercase tracking-wide mb-3">Botanicals</h4>
+            <h4 className="text-xs font-semibold text-[#C07A50] uppercase tracking-wide mb-3">Botanicals</h4>
             <div className="space-y-2">
               {batch.botanicals.map((material, idx) => (
                 <MaterialRow key={idx} material={material} />
@@ -375,35 +386,31 @@ function MaterialRow({ material }: { material: MaterialNeed }) {
 
   return (
     <div className={`flex items-center justify-between p-3 rounded-lg border transition-all duration-150 ${
-      material.status === 'CRITICAL' ? 'bg-red-50 border-red-200' :
-      material.status === 'LOW' ? 'bg-orange-50 border-orange-200' :
-      material.status === 'ADEQUATE' ? 'bg-yellow-50 border-yellow-200' :
-      'bg-green-50 border-green-200'
+      material.status === 'CRITICAL' ? 'bg-[#FDEDEC] border-[#E0DAD2]' :
+      'bg-white border-[#E0DAD2]'
     }`}>
       <div className="flex-1">
-        <p className="text-sm font-medium text-neutral-900">{material.name}</p>
-        <p className="text-xs text-neutral-500 mt-0.5">
-          Need: <span className="font-semibold text-neutral-700">{material.needed.toLocaleString()} {material.uom}</span>
+        <p className="text-sm font-medium text-[#1A1A1A]">{material.name}</p>
+        <p className="text-xs text-[#C07A50]/70 mt-0.5">
+          Need: <span className="font-semibold text-[#1A1A1A]">{material.needed.toLocaleString()} {material.uom}</span>
           {' • '}
-          Current: <span className="font-semibold text-neutral-700">{material.current_stock.toLocaleString()} {material.uom}</span>
+          Current: <span className="font-semibold text-[#1A1A1A]">{material.current_stock.toLocaleString()} {material.uom}</span>
         </p>
       </div>
       <div className="text-right mr-4">
         <p className={`text-sm font-semibold tabular-nums ${
-          material.stock_after <= 0 ? 'text-red-700' :
-          material.stock_after < material.needed ? 'text-orange-600' :
-          'text-green-700'
+          material.stock_after <= 0 ? 'text-[#C0392B]' : 'text-[#1E7F4A]'
         }`}>
           {material.stock_after.toLocaleString()} {material.uom}
         </p>
-        <p className="text-xs text-neutral-500 mt-0.5">after batch</p>
+        <p className="text-xs text-[#C07A50]/60 mt-0.5">after batch</p>
       </div>
       {missing > 0 && (
         <div className="text-right mr-4">
-          <p className="text-sm font-bold text-red-700 tabular-nums">
+          <p className="text-sm font-bold text-[#C0392B] tabular-nums">
             {missing.toLocaleString()} {material.uom}
           </p>
-          <p className="text-xs text-red-600 mt-0.5 font-medium">MISSING</p>
+          <p className="text-xs text-[#C0392B] mt-0.5 font-medium">MISSING</p>
         </div>
       )}
       <div className="ml-4">
@@ -415,10 +422,10 @@ function MaterialRow({ material }: { material: MaterialNeed }) {
 
 function StatusBadge({ status }: { status: string }) {
   const colors = {
-    CRITICAL: 'bg-red-100 text-red-700 border-red-300',
-    LOW: 'bg-orange-100 text-orange-700 border-orange-300',
-    ADEQUATE: 'bg-yellow-100 text-yellow-700 border-yellow-300',
-    GOOD: 'bg-green-100 text-green-700 border-green-300',
+    CRITICAL: 'bg-[#FDEDEC] text-[#C0392B] border-[#C0392B]/20',
+    LOW: 'bg-[#FDEDEC] text-[#C0392B] border-[#C0392B]/20',
+    ADEQUATE: 'bg-white text-[#C07A50] border-[#C07A50]/30',
+    GOOD: 'bg-[#E9F7EF] text-[#1E7F4A] border-[#1E7F4A]/20',
   }
 
   const labels = {

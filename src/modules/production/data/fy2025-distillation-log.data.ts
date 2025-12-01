@@ -4,7 +4,7 @@ import { merchantMaeGinDistillation } from '../sessions/merchant-mae-gin-distill
 import { merchantMaeGin003Distillation } from '../sessions/merchant-mae-gin-003-distillation.session'
 import { vodka003Distillation } from '../sessions/vodka-003-distillation.session'
 import { rainforestGinRF30 } from '../sessions/rainforest-gin-rf30-distillation.session'
-import { rainforestGinRF29 } from '../sessions/rainforest-gin-rf29-distillation.session'
+import { rainforestGinRF29Distillation } from '../sessions/rainforest-gin-rf29-distillation.session'
 import { spiritLiq001Distillation } from '../sessions/spirit-liq001-distillation.session'
 import { spiritLiq002Distillation } from '../sessions/spirit-liq002-distillation.session'
 import { spiritGinNS018Distillation } from '../sessions/spirit-gin-ns018-distillation.session'
@@ -50,7 +50,7 @@ const allFY2025Sessions: DistillationSession[] = [
   merchantMaeGin003Distillation, // MM-003
   vodka003Distillation,
   rainforestGinRF30,
-  rainforestGinRF29,
+  rainforestGinRF29Distillation,
   spiritLiq001Distillation,
   spiritLiq002Distillation,
   spiritGinNS018Distillation
