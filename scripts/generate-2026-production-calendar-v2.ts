@@ -14,6 +14,7 @@ const CONFIG = {
   TAILS_BATCHES_BEFORE_PROCESSING: 3,
   CANE_SPIRIT_START_WEEK: 32, // No Cane Spirit before August (Week 32)
   PRODUCTION_COMPLETE_BY_WEEK: 30, // Front-load: complete 2026 + early 2027 by end of July
+  BLOCKED_WEEKS: [] as number[], // Weeks where production is blocked (e.g., holidays, maintenance)
 }
 
 type WeekMode = 'GIN' | 'RUM_CANE' | 'VODKA_TAILS' | 'CLEANING' | 'BOTTLING' | 'BLOCKED'
