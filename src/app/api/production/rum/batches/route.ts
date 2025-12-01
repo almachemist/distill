@@ -195,7 +195,7 @@ export async function POST(request: NextRequest) {
 
       // Timestamps
       created_at: batch.createdAt || new Date().toISOString(),
-      updated_at: batch.updatedAt || new Date().toISOString(),
+      updated_at: batch.lastEditedAt || new Date().toISOString(),
     }
 
     const { data, error } = await supabase
