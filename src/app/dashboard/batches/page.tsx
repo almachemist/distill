@@ -346,7 +346,9 @@ export default function BatchesPage() {
                     <RunCard
                       key={run.run_id || run.batch_id}
                       run={run}
-                      onSelect={() => setSelectedRunId(run.run_id || run.batch_id)}
+                      onSelect={() =>
+                        setSelectedRunId(run.run_id ?? run.batch_id ?? null)
+                      }
                     />
                   ))
                 )}
