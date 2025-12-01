@@ -53,8 +53,10 @@ async function executeSQLFile(filePath: string) {
         // Try alternative method: parse and insert via REST API
         console.log(`   Trying alternative method...`);
         
-        // Extract values from SQL
-        const valuesMatch = stmt.match(/VALUES \(\s*'([^']+)',\s*'(.+)',\s*'([^']+)',\s*'([^']+)'\s*\)/s);
+        // Extract values from SQL.
+        // Avoid the /s (dotAll) flag so this stays compatible with TS targets < ES2018.
+        // Use [\s\S]+ instead of . with /s to match across newlines.
+        const valuesMatch = stmt.match(/VALUES \(\s*'([^']+)',\s*'([\s\S]+)',\s*'([^']+)',\s*'([^']+)'\s*\)/);
         
         if (valuesMatch) {
           const [, id, dataJson, type, still] = valuesMatch;
