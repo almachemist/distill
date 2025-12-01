@@ -272,10 +272,12 @@ async function migratePricingCatalogue() {
   const products: any[] = [];
   for (const [category, items] of Object.entries(data)) {
     for (const [productName, details] of Object.entries(items as any)) {
+      // Ensure details is an object before spreading
+      const detailsObj = details && typeof details === 'object' && !Array.isArray(details) ? details : {};
       products.push({
         category,
         product_name: productName,
-        ...details
+        ...detailsObj
       });
     }
   }
