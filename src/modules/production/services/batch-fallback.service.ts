@@ -4,6 +4,7 @@ import { signatureGinBatchSummaries } from "@/modules/production/data/signature-
 
 export interface GinBatchSummary {
   run_id: string
+  batch_id?: string // Alternative ID field used by some batches
   recipe: string | null
   date: string | null
   still_used: string | null
