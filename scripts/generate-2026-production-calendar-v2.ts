@@ -219,7 +219,8 @@ function generate2026Calendar(): WeekPlan[] {
     }
 
     // Check if we need cleaning when switching (but not if we just cleaned)
-    if (lastMode && lastMode !== nextMode && lastMode !== 'BOTTLING' && lastMode !== 'BLOCKED' && lastMode !== 'VODKA_TAILS' && lastMode !== 'CLEANING') {
+    // Note: lastMode can be 'BLOCKED' from a previous week, but we still want to check cleaning
+    if (lastMode && lastMode !== nextMode && lastMode !== 'BOTTLING' && lastMode !== 'VODKA_TAILS' && lastMode !== 'CLEANING' && (lastMode === 'GIN' || lastMode === 'RUM_CANE')) {
       weekPlan.mode = 'CLEANING'
       weekPlan.cleaning_days = CONFIG.CLEANING_DAYS_ON_SWITCH
       weekPlan.notes.push(`Cleaning and water runs - switching from ${lastMode} to ${nextMode}`)
