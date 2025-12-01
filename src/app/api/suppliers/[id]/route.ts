@@ -7,9 +7,9 @@ export const dynamic = 'force-dynamic'
 
 const SUPPLIERS_PATH = 'data/suppliers.json'
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = params.id
+    const { id } = await params
     const suppliers = await readJson<Supplier[]>(SUPPLIERS_PATH, [])
     const idx = suppliers.findIndex(s => s.id === id)
     if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 })

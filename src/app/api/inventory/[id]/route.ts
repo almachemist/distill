@@ -14,9 +14,9 @@ const BASELINE_PROTECTED = new Set<string>([
   'GIFT-GIN','GIFT-RUM'
 ])
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = params.id
+    const { id } = await params
     const items = await readJson<InventoryItem[]>(INVENTORY_PATH, [])
     const idx = items.findIndex(i => i.id === id)
     if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 })
@@ -35,9 +35,9 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = params.id
+    const { id } = await params
     const items = await readJson<InventoryItem[]>(INVENTORY_PATH, [])
     const idx = items.findIndex(i => i.id === id)
     if (idx === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 })

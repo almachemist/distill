@@ -10,11 +10,12 @@ export function generateStaticParams() {
 }
 
 interface RumBatchDetailPageProps {
-  params: { batchId: string }
+  params: Promise<{ batchId: string }>
 }
 
-export default function RumBatchDetailPage({ params }: RumBatchDetailPageProps) {
-  const batch = batches.find((item) => item.batch_id === decodeURIComponent(params.batchId))
+export default async function RumBatchDetailPage({ params }: RumBatchDetailPageProps) {
+  const { batchId } = await params
+  const batch = batches.find((item) => item.batch_id === decodeURIComponent(batchId))
 
   if (!batch) {
     notFound()
