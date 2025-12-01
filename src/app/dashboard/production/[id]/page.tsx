@@ -45,8 +45,8 @@ type ProductionBatch = {
   year?: number
   fermentation: {
     volume_l?: number
-    brix_start?: number | string
-    ph_start?: number | string
+    brix_start?: number | string | null
+    ph_start?: number | string | null
     yeast?: string
     notes?: string
     fermentation_data?: FermentationPoint[]
