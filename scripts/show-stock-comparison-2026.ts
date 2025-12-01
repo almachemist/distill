@@ -45,12 +45,13 @@ for (const productName of criticalProducts) {
   console.log(`${'─'.repeat(90)}`)
   
   for (const projection of productPlan.stock_projection) {
-    const statusIcon = {
+    const statusIcons: Record<string, string> = {
       OK: '✅',
       LOW: '⚠️',
       CRITICAL: '🔴',
       STOCKOUT: '❌',
-    }[projection.status] || '  '
+    }
+    const statusIcon = statusIcons[projection.status as string] || '  '
     
     const prodStr = projection.production > 0 ? `+${projection.production}` : '0'
     
