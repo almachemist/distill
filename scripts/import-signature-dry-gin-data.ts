@@ -19,8 +19,9 @@ const signatureDryGinData = JSON.parse(
   fs.readFileSync(path.join(__dirname, 'backups/signature-dry-gin-complete-backup-2025-11-07.json'), 'utf-8')
 );
 
-// Extract the gin runs from the data structure
-const ginRuns = signatureDryGinData.data.gin_runs;
+// Function to load Signature Dry Gin data
+const loadSignatureDryGinData = () => {
+  return signatureDryGinData.data.gin_runs;
 };
 
 // Function to import a single batch
