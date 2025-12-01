@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useState, useEffect } from 'react'
+import type { ReactElement } from 'react'
 import { EventModal } from '@/components/calendar/EventModal'
 import type { CalendarEvent, CalendarEventInput } from '@/types/calendar-event.types'
 
@@ -703,7 +704,7 @@ export default function CalendarPage() {
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {quarter.weeks.map(week => {
-                  const nodes: (JSX.Element | null)[] = []
+                  const nodes: (ReactElement | null)[] = []
 
                   // Allow both production and bottling to appear in the same week tile
                   if (week.production_runs.length > 0) {
