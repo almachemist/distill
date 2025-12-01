@@ -24,12 +24,28 @@ interface MaterialNeed {
   shortage: number
   status: 'CRITICAL' | 'LOW' | 'ADEQUATE' | 'GOOD'
   uom: string
+  stock_after_batch?: number // Stock remaining after this batch is produced
 }
 
 interface BatchWithMaterials extends Batch {
   materials: MaterialNeed[]
   botanicals: MaterialNeed[]
   packaging: MaterialNeed[]
+}
+
+interface StockTimeline {
+  material_name: string
+  category: string
+  uom: string
+  initial_stock: number
+  batches: {
+    batch_index: number
+    product: string
+    month: string
+    consumed: number
+    stock_after: number
+    runs_out: boolean
+  }[]
 }
 
 // Gin recipes - botanicals per batch
@@ -74,6 +90,7 @@ export default function ProductionPlanning2026Page() {
   const [batches, setBatches] = useState<BatchWithMaterials[]>([])
   const [loading, setLoading] = useState(true)
   const [currentStock, setCurrentStock] = useState<Map<string, number>>(new Map())
+  const [stockTimelines, setStockTimelines] = useState<StockTimeline[]>([])
 
   useEffect(() => {
     async function loadData() {
@@ -123,12 +140,56 @@ export default function ProductionPlanning2026Page() {
       // Sort by month
       allBatches.sort((a, b) => a.scheduled_month - b.scheduled_month)
 
+      // Calculate stock timelines (cumulative consumption)
+      const timelines = calculateStockTimelines(allBatches, stockMap)
+
       setBatches(allBatches)
+      setStockTimelines(timelines)
       setLoading(false)
     }
 
     loadData()
   }, [])
+
+  function calculateStockTimelines(batches: BatchWithMaterials[], stockMap: Map<string, number>): StockTimeline[] {
+    const materialConsumption = new Map<string, StockTimeline>()
+
+    // Process each batch in order
+    batches.forEach((batch, batchIndex) => {
+      const allMaterials = [...batch.packaging, ...batch.botanicals]
+
+      allMaterials.forEach(material => {
+        if (!materialConsumption.has(material.name)) {
+          materialConsumption.set(material.name, {
+            material_name: material.name,
+            category: material.category,
+            uom: material.uom,
+            initial_stock: stockMap.get(material.name) || 0,
+            batches: []
+          })
+        }
+
+        const timeline = materialConsumption.get(material.name)!
+        const previousStock = timeline.batches.length > 0
+          ? timeline.batches[timeline.batches.length - 1].stock_after
+          : timeline.initial_stock
+
+        const stockAfter = previousStock - material.needed
+        const runsOut = stockAfter <= 0
+
+        timeline.batches.push({
+          batch_index: batchIndex,
+          product: batch.product,
+          month: batch.scheduled_month_name,
+          consumed: material.needed,
+          stock_after: stockAfter,
+          runs_out: runsOut
+        })
+      })
+    })
+
+    return Array.from(materialConsumption.values())
+  }
 
   function calculateBatchMaterials(batch: Batch, stockMap: Map<string, number>): BatchWithMaterials {
     const materials: MaterialNeed[] = []
@@ -230,8 +291,14 @@ export default function ProductionPlanning2026Page() {
         </div>
 
         {/* Tabs by Month */}
-        <Tabs defaultValue="all" className="w-full">
+        <Tabs defaultValue="timeline" className="w-full">
           <TabsList className="bg-neutral-100 p-1 rounded-xl inline-flex gap-1 flex-wrap">
+            <TabsTrigger
+              value="timeline"
+              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+            >
+              Stock Timeline
+            </TabsTrigger>
             <TabsTrigger
               value="all"
               className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
@@ -248,6 +315,10 @@ export default function ProductionPlanning2026Page() {
               </TabsTrigger>
             ))}
           </TabsList>
+
+          <TabsContent value="timeline" className="mt-6">
+            <StockTimelineView timelines={stockTimelines} batches={batches} />
+          </TabsContent>
 
           <TabsContent value="all" className="mt-6">
             <BatchList batches={batches} />
@@ -379,6 +450,127 @@ function StatusBadge({ status }: { status: string }) {
     <span className={`inline-flex px-3 py-1 rounded-lg text-xs font-medium ${colors[status as keyof typeof colors]}`}>
       {status}
     </span>
+  )
+}
+
+function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[]; batches: BatchWithMaterials[] }) {
+  // Group by category
+  const byCategory = timelines.reduce((acc, timeline) => {
+    if (!acc[timeline.category]) acc[timeline.category] = []
+    acc[timeline.category].push(timeline)
+    return acc
+  }, {} as Record<string, StockTimeline[]>)
+
+  const categories = ['Packaging', 'Botanicals']
+
+  return (
+    <div className="space-y-8">
+      {categories.map(category => {
+        const items = byCategory[category] || []
+        if (items.length === 0) return null
+
+        return (
+          <div key={category} className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
+            {/* Category Header */}
+            <div className="bg-gradient-to-r from-neutral-50 to-white px-6 py-4 border-b border-neutral-200">
+              <h3 className="text-lg font-semibold text-neutral-900">{category}</h3>
+              <p className="text-sm text-neutral-500 mt-1">
+                Stock consumption timeline • {items.length} materials tracked
+              </p>
+            </div>
+
+            {/* Timeline Tables */}
+            <div className="p-6 space-y-8">
+              {items.map(timeline => (
+                <div key={timeline.material_name} className="space-y-3">
+                  {/* Material Header */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-sm font-semibold text-neutral-900">{timeline.material_name}</h4>
+                      <p className="text-xs text-neutral-500 mt-1">
+                        Initial Stock: <span className="font-semibold text-neutral-700">{timeline.initial_stock.toLocaleString()} {timeline.uom}</span>
+                      </p>
+                    </div>
+                    {timeline.batches.some(b => b.runs_out) && (
+                      <span className="inline-flex px-3 py-1 rounded-lg text-xs font-medium bg-red-100 text-red-700">
+                        ⚠️ Runs Out
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Timeline Table */}
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-sm">
+                      <thead className="bg-neutral-50">
+                        <tr>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Batch</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Product</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-neutral-500 uppercase">Month</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Consumed</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Stock After</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-neutral-500 uppercase">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-neutral-100">
+                        {timeline.batches.map((batch, idx) => (
+                          <tr
+                            key={idx}
+                            className={`hover:bg-neutral-50 transition-colors duration-150 ${
+                              batch.runs_out ? 'bg-red-50' : ''
+                            }`}
+                          >
+                            <td className="px-4 py-3 text-neutral-600 font-medium">#{batch.batch_index + 1}</td>
+                            <td className="px-4 py-3 text-neutral-900 font-medium">{batch.product}</td>
+                            <td className="px-4 py-3 text-neutral-600">{batch.month}</td>
+                            <td className="px-4 py-3 text-right text-red-600 font-semibold tabular-nums">
+                              -{batch.consumed.toLocaleString()} {timeline.uom}
+                            </td>
+                            <td className={`px-4 py-3 text-right font-semibold tabular-nums ${
+                              batch.stock_after <= 0 ? 'text-red-700' :
+                              batch.stock_after < batch.consumed ? 'text-orange-600' :
+                              'text-green-700'
+                            }`}>
+                              {batch.stock_after.toLocaleString()} {timeline.uom}
+                            </td>
+                            <td className="px-4 py-3 text-right">
+                              {batch.runs_out ? (
+                                <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-red-100 text-red-700">
+                                  OUT OF STOCK
+                                </span>
+                              ) : batch.stock_after < batch.consumed ? (
+                                <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-orange-100 text-orange-700">
+                                  LOW
+                                </span>
+                              ) : (
+                                <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-700">
+                                  OK
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* Final Stock Summary */}
+                  <div className="flex items-center justify-between pt-2 border-t border-neutral-200">
+                    <p className="text-xs text-neutral-500">
+                      After {timeline.batches.length} batches
+                    </p>
+                    <p className={`text-sm font-semibold ${
+                      timeline.batches[timeline.batches.length - 1].stock_after <= 0 ? 'text-red-700' : 'text-neutral-900'
+                    }`}>
+                      Final Stock: {timeline.batches[timeline.batches.length - 1].stock_after.toLocaleString()} {timeline.uom}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      })}
+    </div>
   )
 }
 
