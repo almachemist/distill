@@ -39,7 +39,7 @@ export default function EditBarrelPage() {
           currentVolume: data.currentVolume,
           originalVolume: data.originalVolume,
           abv: data.abv,
-          prevSpirit: data.prevSpirit,
+          prevSpirit: data.prevSpirit ?? undefined,
           notes: data.notes,
           status: data.status,
         })
