@@ -80,21 +80,23 @@ export default function StockPage() {
   }, [])
 
   // Categorize items
-  const labels = inventory.filter(item => item.name.includes('Label'))
+  const labels = inventory.filter(item => item.category === 'Labels' || item.name.includes('Label'))
   const bottles = inventory.filter(item =>
+    item.category === 'Bottles' ||
     item.name.includes('Bottle') ||
     (item.name.includes('ml') && !item.name.includes('Label') && !item.name.includes('Cork') && !item.name.includes('Cap'))
   )
   const packaging = inventory.filter(item =>
+    item.category === 'Packaging' ||
     item.name.includes('Cork') ||
     item.name.includes('Cap') ||
     item.name.includes('Sleeve') ||
     item.name.includes('Carton') ||
     item.name.includes('Box')
   )
-  const rawMaterials = inventory.filter(item =>
+  const botanicals = inventory.filter(item =>
+    item.category === 'Botanicals' ||
     item.name.includes('Ethanol') ||
-    item.name.includes('Botanical') ||
     item.name.includes('Sugar') ||
     item.name.includes('Water')
   )
@@ -103,7 +105,7 @@ export default function StockPage() {
     { name: 'Labels', items: labels, icon: '🏷️', color: 'bg-blue-500' },
     { name: 'Bottles', items: bottles, icon: '🍾', color: 'bg-green-500' },
     { name: 'Packaging', items: packaging, icon: '📦', color: 'bg-amber-500' },
-    { name: 'Raw Materials', items: rawMaterials, icon: '🌿', color: 'bg-purple-500' },
+    { name: 'Botanicals', items: botanicals, icon: '🌿', color: 'bg-purple-500' },
   ]
 
   const totalUnits = inventory.reduce((sum, item) => sum + item.current_stock, 0)
@@ -186,10 +188,10 @@ export default function StockPage() {
               Packaging
             </TabsTrigger>
             <TabsTrigger
-              value="materials"
+              value="botanicals"
               className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
             >
-              Materials
+              Botanicals
             </TabsTrigger>
           </TabsList>
 
