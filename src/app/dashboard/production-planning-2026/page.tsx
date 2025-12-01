@@ -80,7 +80,7 @@ export default function ProductionPlanning2026Page() {
       const supabase = createClient()
 
       // Load production plan
-      const response = await fetch('/data/production_plan_2026_v4.json')
+      const response = await fetch('/production_plan_2026_v4.json')
       const plan = await response.json()
 
       // Load current inventory
