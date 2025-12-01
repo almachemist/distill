@@ -220,7 +220,8 @@ export default function BatchesPage() {
         
         // Auto-select first batch if none selected
         if (!selectedRunId && batches.length > 0) {
-          setSelectedRunId(batches[0].run_id || batches[0].batch_id)
+          const firstBatch = batches[0]
+          setSelectedRunId(firstBatch.run_id ?? firstBatch.batch_id ?? null)
         }
       } catch (err) {
         if ((err as Error).name === "AbortError") return
