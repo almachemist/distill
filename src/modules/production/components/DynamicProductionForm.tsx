@@ -173,7 +173,7 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                             value={component.type || ''}
                             onChange={(e) => {
                               const newComponents = [...(batch.chargeAdjustment?.components || [])]
-                              newComponents[index] = { ...component, type: e.target.value }
+                              newComponents[index] = { ...component, type: e.target.value as "ethanol" | "dilution" | "other" }
                               updateNestedField('chargeAdjustment', 'components', newComponents)
                             }}
                             placeholder="Ethanol"
