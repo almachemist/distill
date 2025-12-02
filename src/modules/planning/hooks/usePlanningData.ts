@@ -55,7 +55,7 @@ const flattenPricing = (): PricingProductRecord[] => {
 
 const flattenSales = (): SalesItemSummary[] => {
   const items: SalesItemSummary[] = []
-  const analytics = salesAnalytics as unknown as SalesAnalytics
+  const analytics: any = salesAnalytics
 
   // Convert sales analytics data to the expected format
   for (const product of analytics.byProduct) {
