@@ -177,7 +177,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">Spirit Run ID</label>
               <TextInput
                 value={formData.spiritRunId ?? null}
-                onChange={(value) => setFormData(prev => ({ ...prev, spiritRunId: value ?? null }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, spiritRunId: value || '' }))}
                 placeholder="e.g., SPIRIT-GIN-RF-30"
               />
             </div>
@@ -185,7 +185,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">SKU</label>
               <TextInput
                 value={formData.sku ?? null}
-                onChange={(value) => setFormData(prev => ({ ...prev, sku: value ?? null }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, sku: value || '' }))}
                 placeholder="e.g., Rainforest Gin"
               />
             </div>
@@ -202,7 +202,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
               <TextInput
                 value={formData.stillUsed ?? null}
-                onChange={(value) => setFormData(prev => ({ ...prev, stillUsed: value ?? null }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, stillUsed: value || '' }))}
                 placeholder="e.g., Carrie, Roberta"
               />
             </div>
