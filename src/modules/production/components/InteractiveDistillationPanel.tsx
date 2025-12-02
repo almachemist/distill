@@ -68,7 +68,7 @@ export default function InteractiveDistillationPanel({
     botanicals: session.botanicals.map(b => ({
       name: b.name,
       notes: b.notes || '',
-      weight_g: b.weightG,
+      weight_g: b.weightG ?? 0,
       ratio: b.ratio_percent || 0,
       status: b.status || 'ok'
     })),
