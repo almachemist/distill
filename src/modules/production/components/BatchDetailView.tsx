@@ -831,13 +831,14 @@ export default function BatchDetailView({
                         <div className="grid grid-cols-3 gap-4">
                           <EditableStatRow
                             label="Volume (L)"
-                            value={phaseDetails.data.output.volumeL}
+                            value={('volumeL' in phaseDetails.data.output ? phaseDetails.data.output.volumeL : phaseDetails.data.output.volume_L) as number}
                             editable={isEditing}
                             type="number"
                             min={0}
                             onSave={(v) => {
                               const outputIdx = displaySession.outputs?.findIndex(o => 
-                                o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')
+                                ('name' in o && o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')) ||
+                                ('phase' in o && o.phase?.toLowerCase().includes(activePhase?.slice(0, -1) || ''))
                               ) ?? -1
                               if (outputIdx >= 0) {
                                 applyPatch(`outputs.${outputIdx}.volumeL`, v)
@@ -854,7 +855,8 @@ export default function BatchDetailView({
                             step={0.1}
                             onSave={(v) => {
                               const outputIdx = displaySession.outputs?.findIndex(o => 
-                                o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')
+                                ('name' in o && o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')) ||
+                                ('phase' in o && o.phase?.toLowerCase().includes(activePhase?.slice(0, -1) || ''))
                               ) ?? -1
                               if (outputIdx >= 0) {
                                 applyPatch(`outputs.${outputIdx}.abv`, v)
@@ -877,7 +879,8 @@ export default function BatchDetailView({
                               type="text"
                               onSave={(v) => {
                                 const outputIdx = displaySession.outputs?.findIndex(o => 
-                                  o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')
+                                  ('name' in o && o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')) ||
+                                  ('phase' in o && o.phase?.toLowerCase().includes(activePhase?.slice(0, -1) || ''))
                                 ) ?? -1
                                 if (outputIdx >= 0) {
                                   applyPatch(`outputs.${outputIdx}.vessel`, v)
