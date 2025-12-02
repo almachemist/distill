@@ -114,7 +114,8 @@ export default function BatchOverviewPage() {
     )
     
     // Check if session has output data
-    const hasOutputData = session.output && session.output.length > 0
+    const outputEntries = Array.isArray(session.outputs) ? session.outputs : []
+    const hasOutputData = outputEntries.length > 0
     
     if (hasOutputData) return 'completed'
     if (hasPhaseData) return 'started'
