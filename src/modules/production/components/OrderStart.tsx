@@ -369,7 +369,7 @@ function IngredientLotPicker({
               .map((lot) => (
                 <div key={lot.lot.id} className="flex items-center justify-between bg-white p-2 rounded border">
                   <div className="text-sm">
-                    <span className="font-medium">{lot.lot.lot_number}</span>
+                    <span className="font-medium">{lot.lot.code || (lot.lot as any).lot_number || lot.lot.id}</span>
                     {lot.lot.received_date && (
                       <span className="text-gray-500 ml-2">
                         ({new Date(lot.lot.received_date).toLocaleDateString()})
