@@ -567,7 +567,7 @@ export default function BatchDetailView({
                                   />
                                   <div>
                                     <div className="text-xs text-gray-400 mb-1">LAL</div>
-                                    <div className="font-semibold text-cyan-400">{comp.lal.toFixed(1)}</div>
+                                    <div className="font-semibold text-cyan-400">{comp.lal != null ? (typeof comp.lal === 'number' ? comp.lal.toFixed(1) : comp.lal) : '0.0'}</div>
                                   </div>
                                 </div>
                               </div>
@@ -746,7 +746,7 @@ export default function BatchDetailView({
                               </div>
                               <div>
                                 <div className="text-xs text-gray-400 mb-1">Total LAL</div>
-                                <div className="text-lg font-bold text-cyan-400">{displaySession.totals.hearts.lal.toFixed(1)}</div>
+                                <div className="text-lg font-bold text-cyan-400">{displaySession.totals.hearts.lal != null ? (typeof displaySession.totals.hearts.lal === 'number' ? displaySession.totals.hearts.lal.toFixed(1) : displaySession.totals.hearts.lal) : '0.0'}</div>
                               </div>
                               <div>
                                 <div className="text-xs text-gray-400 mb-1">Parts</div>
@@ -864,7 +864,7 @@ export default function BatchDetailView({
                           {phaseDetails.data.output.lal !== undefined && phaseDetails.data.output.lal > 0 && (
                             <div>
                               <div className="text-xs text-gray-400 mb-1">LAL</div>
-                              <div className="text-lg font-semibold text-green-400">{phaseDetails.data.output.lal.toFixed(1)}</div>
+                              <div className="text-lg font-semibold text-green-400">{phaseDetails.data.output.lal != null ? (typeof phaseDetails.data.output.lal === 'number' ? phaseDetails.data.output.lal.toFixed(1) : phaseDetails.data.output.lal) : '0.0'}</div>
                             </div>
                           )}
                         </div>
