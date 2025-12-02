@@ -870,11 +870,11 @@ export default function BatchDetailView({
                             </div>
                           )}
                         </div>
-                        {phaseDetails.data.output.vessel && (
+                        {('vessel' in phaseDetails.data.output ? phaseDetails.data.output.vessel : ('receivingVessel' in phaseDetails.data.output ? phaseDetails.data.output.receivingVessel : null)) && (
                           <div className="mt-3 pt-3 border-t border-gray-700">
                             <EditableStatRow
                               label="Receiving Vessel"
-                              value={phaseDetails.data.output.vessel}
+                              value={('vessel' in phaseDetails.data.output ? phaseDetails.data.output.vessel : phaseDetails.data.output.receivingVessel) as string}
                               editable={isEditing}
                               type="text"
                               onSave={(v) => {
@@ -889,7 +889,7 @@ export default function BatchDetailView({
                             />
                           </div>
                         )}
-                        {phaseDetails.data.output.observations && (
+                        {('observations' in phaseDetails.data.output && phaseDetails.data.output.observations) && (
                           <div className="mt-3 pt-3 border-t border-gray-700">
                             <EditableStatRow
                               label="Observations"
