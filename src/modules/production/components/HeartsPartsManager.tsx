@@ -321,7 +321,7 @@ export default function HeartsPartsManager({
               {/* Calculated LAL */}
               <div className="bg-blue-50 p-3 rounded-md">
                 <div className="text-sm font-medium text-blue-900">
-                  Calculated LAL: {calculateLAL(editingPart.volumeL, editingPart.abvPercent).toFixed(2)}L
+                  Calculated LAL: {calculateLAL(editingPart.volumeL ?? 0, editingPart.abvPercent ?? 0).toFixed(2)}L
                 </div>
               </div>
 
