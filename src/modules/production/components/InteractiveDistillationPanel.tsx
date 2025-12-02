@@ -145,7 +145,7 @@ export default function InteractiveDistillationPanel({
       notes: '', 
       weight_g: 0, 
       ratio: 0, 
-      status: 'ok' 
+      status: 'ok' as 'ok' | 'pending' | 'issue'
     }]
     setData({ ...data, botanicals: newBotanicals })
     setHasChanges(true)
