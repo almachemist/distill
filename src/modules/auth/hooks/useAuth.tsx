@@ -59,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
            id: '00000000-0000-0000-0000-000000000001',
            email: 'dev@example.com',
            name: 'Development User',
-           organization_id: '00000000-0000-0000-0000-000000000001',
+            organizationId: '00000000-0000-0000-0000-000000000001',
            role: 'admin',
            created_at: new Date().toISOString(),
            updated_at: new Date().toISOString()
@@ -102,7 +102,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: '00000000-0000-0000-0000-000000000001',
         email: credentials.email,
         name: 'Development User',
-        organization_id: '00000000-0000-0000-0000-000000000001',
+            organizationId: '00000000-0000-0000-0000-000000000001',
         role: 'admin',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
@@ -125,7 +125,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         id: '00000000-0000-0000-0000-000000000001',
         email: data.email,
         name: data.displayName,
-        organization_id: '00000000-0000-0000-0000-000000000001',
+            organizationId: '00000000-0000-0000-0000-000000000001',
         role: 'admin',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString()
