@@ -110,36 +110,36 @@ export default function LiveDistillationTracker({
       {
         phase: 'Foreshots',
         data: {
-          volume_L: outputs?.find(o => o.name === 'Foreshots')?.volumeL || 0,
-          abv_percent: outputs?.find(o => o.name === 'Foreshots')?.abv || 0,
+          volume_L: outputs?.find((o: any) => o.name === 'Foreshots')?.volumeL || 0,
+          abv_percent: outputs?.find((o: any) => o.name === 'Foreshots')?.abv || 0,
           density: 0.814,
-          receivingVessel: outputs?.find(o => o.name === 'Foreshots')?.vessel || '',
+          receivingVessel: outputs?.find((o: any) => o.name === 'Foreshots')?.vessel || '',
           destination: 'Discarded',
-          notes: outputs?.find(o => o.name === 'Foreshots')?.observations || ''
+          notes: outputs?.find((o: any) => o.name === 'Foreshots')?.observations || ''
         },
         isCompleted: true
       },
       {
         phase: 'Heads',
         data: {
-          volume_L: outputs?.find(o => o.name === 'Heads')?.volumeL || 0,
-          abv_percent: outputs?.find(o => o.name === 'Heads')?.abv || 0,
+          volume_L: outputs?.find((o: any) => o.name === 'Heads')?.volumeL || 0,
+          abv_percent: outputs?.find((o: any) => o.name === 'Heads')?.abv || 0,
           density: 0.818,
-          receivingVessel: outputs?.find(o => o.name === 'Heads')?.vessel || '',
+          receivingVessel: outputs?.find((o: any) => o.name === 'Heads')?.vessel || '',
           destination: 'Feints',
-          notes: outputs?.find(o => o.name === 'Heads')?.observations || ''
+          notes: outputs?.find((o: any) => o.name === 'Heads')?.observations || ''
         },
         isCompleted: true
       },
       {
         phase: 'Hearts',
         data: {
-          volume_L: outputs?.find(o => o.name === 'Hearts')?.volumeL || 0,
-          abv_percent: outputs?.find(o => o.name === 'Hearts')?.abv || 0,
+          volume_L: outputs?.find((o: any) => o.name === 'Hearts')?.volumeL || 0,
+          abv_percent: outputs?.find((o: any) => o.name === 'Hearts')?.abv || 0,
           density: 0.820,
-          receivingVessel: outputs?.find(o => o.name === 'Hearts')?.vessel || '',
+          receivingVessel: outputs?.find((o: any) => o.name === 'Hearts')?.vessel || '',
           destination: 'VC Tank',
-          notes: outputs?.find(o => o.name === 'Hearts')?.observations || ''
+          notes: outputs?.find((o: any) => o.name === 'Hearts')?.observations || ''
         },
         heartsParts: [], // Initialize empty parts array
         heartsTotals: {
@@ -153,12 +153,12 @@ export default function LiveDistillationTracker({
       {
         phase: 'Tails',
         data: {
-          volume_L: outputs?.find(o => o.name === 'Tails')?.volumeL || 0,
-          abv_percent: outputs?.find(o => o.name === 'Tails')?.abv || 0,
+          volume_L: outputs?.find((o: any) => o.name === 'Tails')?.volumeL || 0,
+          abv_percent: outputs?.find((o: any) => o.name === 'Tails')?.abv || 0,
           density: 0.814,
-          receivingVessel: outputs?.find(o => o.name === 'Tails')?.vessel || '',
+          receivingVessel: outputs?.find((o: any) => o.name === 'Tails')?.vessel || '',
           destination: 'Feints',
-          notes: outputs?.find(o => o.name === 'Tails')?.observations || ''
+          notes: outputs?.find((o: any) => o.name === 'Tails')?.observations || ''
         },
         isCompleted: true
       }
@@ -255,36 +255,36 @@ export default function LiveDistillationTracker({
         {
           phase: 'Foreshots',
           data: {
-            volume_L: outputs?.find(o => o.name === 'Foreshots')?.volumeL || 0,
-            abv_percent: outputs?.find(o => o.name === 'Foreshots')?.abv || 0,
+            volume_L: outputs?.find((o: any) => o.name === 'Foreshots')?.volumeL || 0,
+            abv_percent: outputs?.find((o: any) => o.name === 'Foreshots')?.abv || 0,
             density: 0.814,
-            receivingVessel: outputs?.find(o => o.name === 'Foreshots')?.vessel || '',
+            receivingVessel: outputs?.find((o: any) => o.name === 'Foreshots')?.vessel || '',
             destination: 'Discarded',
-            notes: outputs?.find(o => o.name === 'Foreshots')?.observations || ''
+            notes: outputs?.find((o: any) => o.name === 'Foreshots')?.observations || ''
           },
           isCompleted: false
         },
         {
           phase: 'Heads',
           data: {
-            volume_L: outputs?.find(o => o.name === 'Heads')?.volumeL || 0,
-            abv_percent: outputs?.find(o => o.name === 'Heads')?.abv || 0,
+            volume_L: outputs?.find((o: any) => o.name === 'Heads')?.volumeL || 0,
+            abv_percent: outputs?.find((o: any) => o.name === 'Heads')?.abv || 0,
             density: 0.818,
-            receivingVessel: outputs?.find(o => o.name === 'Heads')?.vessel || '',
+            receivingVessel: outputs?.find((o: any) => o.name === 'Heads')?.vessel || '',
             destination: 'Feints',
-            notes: outputs?.find(o => o.name === 'Heads')?.observations || ''
+            notes: outputs?.find((o: any) => o.name === 'Heads')?.observations || ''
           },
           isCompleted: false
         },
         {
           phase: 'Hearts',
           data: {
-            volume_L: outputs?.find(o => o.name === 'Hearts')?.volumeL || 0,
-            abv_percent: outputs?.find(o => o.name === 'Hearts')?.abv || 0,
+            volume_L: outputs?.find((o: any) => o.name === 'Hearts')?.volumeL || 0,
+            abv_percent: outputs?.find((o: any) => o.name === 'Hearts')?.abv || 0,
             density: 0.820,
-            receivingVessel: outputs?.find(o => o.name === 'Hearts')?.vessel || '',
+            receivingVessel: outputs?.find((o: any) => o.name === 'Hearts')?.vessel || '',
             destination: 'VC Tank',
-            notes: outputs?.find(o => o.name === 'Hearts')?.observations || ''
+            notes: outputs?.find((o: any) => o.name === 'Hearts')?.observations || ''
           },
           heartsParts: [], // Initialize empty parts array for new multi-part system
           heartsTotals: {
@@ -298,12 +298,12 @@ export default function LiveDistillationTracker({
         {
           phase: 'Tails',
           data: {
-            volume_L: outputs?.find(o => o.name === 'Tails')?.volumeL || 0,
-            abv_percent: outputs?.find(o => o.name === 'Tails')?.abv || 0,
+            volume_L: outputs?.find((o: any) => o.name === 'Tails')?.volumeL || 0,
+            abv_percent: outputs?.find((o: any) => o.name === 'Tails')?.abv || 0,
             density: 0.814,
-            receivingVessel: outputs?.find(o => o.name === 'Tails')?.vessel || '',
+            receivingVessel: outputs?.find((o: any) => o.name === 'Tails')?.vessel || '',
             destination: 'Feints',
-            notes: outputs?.find(o => o.name === 'Tails')?.observations || ''
+            notes: outputs?.find((o: any) => o.name === 'Tails')?.observations || ''
           },
           isCompleted: false
         }
