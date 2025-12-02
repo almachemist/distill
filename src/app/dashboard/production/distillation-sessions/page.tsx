@@ -104,19 +104,19 @@ export default function DistillationSessionManagementPage() {
                 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">{metrics.inputLAL.toFixed(1)}</div>
+                    <div className="text-2xl font-bold text-blue-600">{metrics.inputLAL?.toFixed(1) ?? '0.0'}</div>
                     <div className="text-sm text-gray-600">LAL In</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">{metrics.outputLAL.toFixed(1)}</div>
+                    <div className="text-2xl font-bold text-green-600">{metrics.outputLAL?.toFixed(1) ?? '0.0'}</div>
                     <div className="text-sm text-gray-600">LAL Out</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">{metrics.efficiency.toFixed(1)}%</div>
+                    <div className="text-2xl font-bold text-purple-600">{metrics.efficiency?.toFixed(1) ?? '0.0'}%</div>
                     <div className="text-sm text-gray-600">Efficiency</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-orange-600">${metrics.costPerLAL.toFixed(2)}</div>
+                    <div className="text-2xl font-bold text-orange-600">${metrics.costPerLAL?.toFixed(2) ?? '0.00'}</div>
                     <div className="text-sm text-gray-600">Cost/LAL</div>
                   </div>
                 </div>
