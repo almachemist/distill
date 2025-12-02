@@ -168,7 +168,7 @@ export function OrdersList() {
                     {order.batch_target_l}L
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status)}`}>
+                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(order.status as any)}`}>
                       {order.status.replace('_', ' ')}
                     </span>
                   </td>
