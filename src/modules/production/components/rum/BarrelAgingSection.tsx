@@ -112,7 +112,7 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
             <input
               type="text"
               value={batch.fill_abv_percent ?? batch.final_abv_after_dilution_percent ?? ''}
-              onChange={(e) => updateField('fill_abv_percent', formatABV(e.target.value))}
+              onChange={(e) => updateField('fill_abv_percent', parseToNumber(e.target.value))}
               onBlur={(e) => {
                 const validated = validateOnBlur(e.target.value, 95.0, 1)
                 const abv = parseToNumber(validated)
