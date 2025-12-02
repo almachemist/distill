@@ -120,11 +120,6 @@ export default function InventoryManager() {
     }
   }
 
-    } finally {
-      setLoadingMov(false)
-    }
-  }
-
   useEffect(() => { loadAll() }, [category])
 
   function supName(id?: string) {
