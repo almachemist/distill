@@ -32,7 +32,7 @@ export default function EditSessionModal({
         spiritRun: session.spiritRun || '',
         description: session.description || '',
         date: session.date || '',
-        stillUsed: session.stillUsed || '',
+        stillUsed: session.still || (session as any).stillUsed || '',
         notes: session.notes || ''
       })
     }
