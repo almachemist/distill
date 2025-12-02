@@ -847,7 +847,7 @@ export default function BatchDetailView({
                           />
                           <EditableStatRow
                             label="ABV (%)"
-                            value={phaseDetails.data.output.abv}
+                            value={('abv' in phaseDetails.data.output ? phaseDetails.data.output.abv : phaseDetails.data.output.abv_percent) as number}
                             editable={isEditing}
                             type="number"
                             min={0}
