@@ -137,7 +137,7 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
             <input
               type="text"
               value={batch.volume_filled_l ?? batch.final_volume_after_dilution_l ?? ''}
-              onChange={(e) => updateField('volume_filled_l', e.target.value)}
+              onChange={(e) => updateField('volume_filled_l', parseToNumber(e.target.value))}
               onBlur={(e) => {
                 const vol = parseToNumber(e.target.value)
                 updateField('volume_filled_l', vol)
