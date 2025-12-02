@@ -61,8 +61,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
            name: 'Development User',
             organizationId: '00000000-0000-0000-0000-000000000001',
            role: 'admin',
-           created_at: new Date().toISOString(),
-           updated_at: new Date().toISOString()
+           createdAt: new Date().toISOString(),
+           updatedAt: new Date().toISOString()
          }
         setUser(mockUser)
         setSession(null) // No real session in dev mode
