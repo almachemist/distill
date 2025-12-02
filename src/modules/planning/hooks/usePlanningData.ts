@@ -11,7 +11,7 @@ export interface PlanningDataset {
   totalUnitsSold: number
 }
 
-const catalogue = pricingData as PricingCatalogueJson
+const catalogue = pricingData as unknown as PricingCatalogueJson
 
 interface SalesAnalytics {
   summary: {
