@@ -423,7 +423,7 @@ export default function HeartsPartsManager({
               <div className="text-sm text-green-600">Total Volume</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-800">{totals.avgAbvPercent.toFixed(1)}%</div>
+              <div className="text-2xl font-bold text-green-800">{totals.avgAbvPercent?.toFixed(1) || '0.0'}%</div>
               <div className="text-sm text-green-600">Avg ABV</div>
             </div>
             <div className="text-center">
