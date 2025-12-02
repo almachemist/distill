@@ -289,7 +289,7 @@ function IngredientLotPicker({
 
     setAllocations([...allocations, {
       lot_id: lotId,
-      lot_number: lot.lot.lot_number,
+      lot_number: lot.lot.code || (lot.lot as any).lot_number || lotId,
       allocated_quantity: allocateQty,
       uom: ingredient.uom
     }])
