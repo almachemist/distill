@@ -192,17 +192,17 @@ export default function BatchDetailView({
       case 'heating':
         return !!displaySession.boilerOn
       case 'foreshots':
-        return displaySession.runData?.some(r => r.phase.toLowerCase().includes('foreshot')) || 
-               displaySession.phases?.foreshots && displaySession.phases.foreshots.length > 0
+        return (displaySession.runData?.some(r => r.phase.toLowerCase().includes('foreshot')) ?? false) || 
+               !!(displaySession.phases?.foreshots && displaySession.phases.foreshots.length > 0)
       case 'heads':
-        return displaySession.runData?.some(r => r.phase.toLowerCase().includes('head')) ||
-               displaySession.phases?.heads && displaySession.phases.heads.length > 0
+        return (displaySession.runData?.some(r => r.phase.toLowerCase().includes('head')) ?? false) ||
+               !!(displaySession.phases?.heads && displaySession.phases.heads.length > 0)
       case 'hearts':
-        return displaySession.runData?.some(r => r.phase.toLowerCase().includes('heart')) ||
-               (displaySession.phases?.hearts && displaySession.phases.hearts.length > 0)
+        return (displaySession.runData?.some(r => r.phase.toLowerCase().includes('heart')) ?? false) ||
+               !!(displaySession.phases?.hearts && displaySession.phases.hearts.length > 0)
       case 'tails':
-        return displaySession.runData?.some(r => r.phase.toLowerCase().includes('tail')) ||
-               displaySession.phases?.tails && displaySession.phases.tails.length > 0
+        return (displaySession.runData?.some(r => r.phase.toLowerCase().includes('tail')) ?? false) ||
+               !!(displaySession.phases?.tails && displaySession.phases.tails.length > 0)
       default:
         return false
     }
