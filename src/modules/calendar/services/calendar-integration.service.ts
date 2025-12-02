@@ -16,7 +16,7 @@ export class CalendarIntegrationService {
         date: session.date,
         boilerOn: session.boilerOn,
         sku: session.sku,
-        spiritRun: parseInt(session.spiritRun.split('-').pop() || '1'),
+        spiritRun: parseInt(session.spiritRun?.split('-').pop() || '1'),
         still: session.still,
         lalIn: session.lalIn,
         lalOut: session.lalOut,
