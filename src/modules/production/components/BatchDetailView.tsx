@@ -953,7 +953,7 @@ export default function BatchDetailView({
                             onSave={(v) => applyPatch('finalOutput.abv_percent', v)}
                           />
                         ) : (
-                          <div className="text-2xl font-bold text-green-400">{displaySession.finalOutput.abv_percent}%</div>
+                          <div className="text-2xl font-bold text-green-400">{(displaySession.finalOutput as any).abv_percent || (displaySession.finalOutput as any).abvPercent || '-'}%</div>
                         )}
                       </div>
                       <div>
