@@ -944,7 +944,7 @@ export default function BatchDetailView({
                         {isEditing ? (
                           <EditableStatRow
                             label=""
-                            value={displaySession.finalOutput.abv_percent || ''}
+                            value={displaySession.finalOutput.finalAbv_percent || ''}
                             editable={true}
                             type="number"
                             min={0}
