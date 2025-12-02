@@ -1,5 +1,5 @@
 import { createCalendarEvent } from "../services/calendar.repository";
-import type { CalendarEvent } from "../types/calendar.types";
+import type { CalendarEvent, CalendarEventType } from "../types/calendar.types";
 
 // Import your distillation session type - adjust the import path as needed
 interface DistillationSession {
