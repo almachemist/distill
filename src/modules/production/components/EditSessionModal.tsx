@@ -47,7 +47,7 @@ export default function EditSessionModal({
       spiritRun: formData.spiritRun,
       description: formData.description,
       date: formData.date,
-      stillUsed: formData.stillUsed,
+      still: formData.stillUsed,
       notes: formData.notes
     }
     
