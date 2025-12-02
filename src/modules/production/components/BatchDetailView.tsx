@@ -178,7 +178,7 @@ export default function BatchDetailView({
     )
     
     if (hasOutputData && displaySession.finalOutput) return 'completed'
-    if (hasPhaseData || displaySession.runData?.length > 0) return 'live'
+    if (hasPhaseData || (displaySession.runData?.length ?? 0) > 0) return 'live'
     return 'draft'
   }, [displaySession])
 
