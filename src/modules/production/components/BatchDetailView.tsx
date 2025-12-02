@@ -898,7 +898,8 @@ export default function BatchDetailView({
                               type="text"
                               onSave={(v) => {
                                 const outputIdx = displaySession.outputs?.findIndex(o => 
-                                  o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')
+                                  ('name' in o && o.name.toLowerCase().includes(activePhase?.slice(0, -1) || '')) ||
+                                  ('phase' in o && o.phase?.toLowerCase().includes(activePhase?.slice(0, -1) || ''))
                                 ) ?? -1
                                 if (outputIdx >= 0) {
                                   applyPatch(`outputs.${outputIdx}.observations`, v)
