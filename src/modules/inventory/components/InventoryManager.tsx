@@ -80,6 +80,11 @@ export default function InventoryManager() {
       setMovements(await res.json())
     } catch (e: any) {
       console.error(e)
+    } finally {
+      setLoadingMov(false)
+    }
+  }
+  
   async function submitAdjustment() {
     if (!adjusting) return
     try {
