@@ -621,7 +621,7 @@ export default function BatchDetailView({
                           {displaySession.botanicalsPerLAL && (
                             <div>
                               <div className="text-xs text-gray-400 mb-1">Per LAL</div>
-                              <div className="text-lg font-semibold text-cyan-400">{displaySession.botanicalsPerLAL.toFixed(1)} g/LAL</div>
+                              <div className="text-lg font-semibold text-cyan-400">{displaySession.botanicalsPerLAL?.toFixed(1) || '0.0'} g/LAL</div>
                             </div>
                           )}
                         </div>
@@ -742,7 +742,7 @@ export default function BatchDetailView({
                               </div>
                               <div>
                                 <div className="text-xs text-gray-400 mb-1">Avg ABV</div>
-                                <div className="text-lg font-bold text-white">{displaySession.totals.hearts.avgAbvPercent.toFixed(1)}%</div>
+                                <div className="text-lg font-bold text-white">{displaySession.totals.hearts.avgAbvPercent?.toFixed(1) || '0.0'}%</div>
                               </div>
                               <div>
                                 <div className="text-xs text-gray-400 mb-1">Total LAL</div>
