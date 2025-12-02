@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { LotsPicker } from '@/modules/inventory/components/LotsPicker'
+// import { LotsPicker } from '@/modules/inventory/components/LotsPicker' // TODO: Create LotsPicker component
 import { StockRepository } from '@/modules/inventory/services/stock.repository'
 
 interface LotAllocation {
@@ -440,16 +440,11 @@ export function BottlingRun() {
               
               <div className="space-y-4">
                 {categoryNeeds.map((need) => (
-                  <LotsPicker
-                    key={need.item_id}
-                    itemId={need.item_id}
-                    itemName={`${need.item_name}${need.is_optional ? ' (optional)' : ''}`}
-                    requiredQty={need.required_qty}
-                    defaultUom={need.uom}
-                    onAllocationsChange={(allocations) => 
-                      updatePackagingAllocations(need.item_id, allocations)
-                    }
-                  />
+                  <div key={need.item_id} className="p-4 border rounded bg-gray-50">
+                    <div className="font-medium">{need.item_name}{need.is_optional ? ' (optional)' : ''}</div>
+                    <div className="text-sm text-gray-600">Required: {need.required_qty} {need.uom}</div>
+                    <div className="text-xs text-gray-400 mt-2">TODO: Implement LotsPicker component for lot selection</div>
+                  </div>
                 ))}
               </div>
             </div>
