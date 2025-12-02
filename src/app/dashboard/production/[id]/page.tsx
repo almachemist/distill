@@ -79,7 +79,7 @@ type ProductionBatch = {
 
 const batches: ProductionBatch[] = productionBatches.batches
 
-const formatValue = (value: number | string | undefined, suffix = ''): string => {
+const formatValue = (value: number | string | null | undefined, suffix = ''): string => {
   if (value === null || value === undefined || value === '') {
     return 'N/A'
   }
