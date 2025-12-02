@@ -88,7 +88,8 @@ export function OrderStart() {
         recipe_id: recipe.id,
         product_name: productName,
         batch_target_l: batchCalc.batch_target_l,
-        status: 'planned'
+        status: 'planned',
+        organization_id: '00000000-0000-0000-0000-000000000001' // TODO: Get from auth context
       })
 
       // Execute the batch (consume inventory)
