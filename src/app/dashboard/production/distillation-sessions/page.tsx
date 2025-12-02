@@ -148,28 +148,49 @@ export default function DistillationSessionManagementPage() {
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Cost Breakdown</h3>
                   <div className="space-y-3">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Ethanol Cost:</span>
-                      <span className="font-medium">${selectedSession.costs.ethanolAUD.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Energy Cost:</span>
-                      <span className="font-medium">${selectedSession.costs.electricityAUD.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Water Cost:</span>
-                      <span className="font-medium">${selectedSession.costs.waterAUD.toFixed(2)}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Botanical Cost:</span>
-                      <span className="font-medium">${selectedSession.costs.botanicalAUD.toFixed(2)}</span>
-                    </div>
-                    <div className="border-t pt-3">
-                      <div className="flex justify-between text-lg font-semibold">
-                        <span>Total Cost:</span>
-                        <span>${selectedSession.costs.totalAUD.toFixed(2)}</span>
-                      </div>
-                    </div>
+                    {'ethanolAUD' in selectedSession.costs ? (
+                      <>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Ethanol Cost:</span>
+                          <span className="font-medium">${selectedSession.costs.ethanolAUD.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Energy Cost:</span>
+                          <span className="font-medium">${selectedSession.costs.electricityAUD.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Water Cost:</span>
+                          <span className="font-medium">${selectedSession.costs.waterAUD.toFixed(2)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Botanical Cost:</span>
+                          <span className="font-medium">${selectedSession.costs.botanicalAUD.toFixed(2)}</span>
+                        </div>
+                        <div className="border-t pt-3">
+                          <div className="flex justify-between text-lg font-semibold">
+                            <span>Total Cost:</span>
+                            <span>${selectedSession.costs.totalAUD.toFixed(2)}</span>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Ethanol Cost:</span>
+                          <span className="font-medium">${selectedSession.costs.ethanolCost?.toFixed(2) || '0.00'}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Botanical Cost:</span>
+                          <span className="font-medium">${selectedSession.costs.botanicalCost?.toFixed(2) || '0.00'}</span>
+                        </div>
+                        <div className="border-t pt-3">
+                          <div className="flex justify-between text-lg font-semibold">
+                            <span>Total Cost:</span>
+                            <span>${selectedSession.costs.totalCost?.toFixed(2) || '0.00'}</span>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
@@ -189,22 +210,22 @@ export default function DistillationSessionManagementPage() {
                       </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                      {selectedSession.outputs.map((output, index) => (
+                      {selectedSession.outputs?.map((output, index) => (
                         <tr key={index}>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            {output.name}
+                            {'name' in output ? output.name : ('phase' in output ? output.phase : '-')}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {output.volumeL}
+                            {'volumeL' in output ? output.volumeL : ('volume_L' in output ? output.volume_L : '-')}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {output.abv}
+                            {'abv' in output ? output.abv : ('abv_percent' in output ? output.abv_percent : '-')}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {output.lal.toFixed(2)}
+                            {output.lal != null ? (typeof output.lal === 'number' ? output.lal.toFixed(2) : output.lal) : '-'}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {output.vessel || '-'}
+                            {'vessel' in output ? (output.vessel || '-') : ('receivingVessel' in output ? (output.receivingVessel || '-') : '-')}
                           </td>
                         </tr>
                       ))}
@@ -275,7 +296,7 @@ export default function DistillationSessionManagementPage() {
                             {component.volume_L}L @ {component.abv_percent}% ABV
                           </div>
                           <div className="text-xs text-gray-500">
-                            {component.lal.toFixed(1)} LAL
+                            {component.lal != null ? (typeof component.lal === 'number' ? component.lal.toFixed(1) : component.lal) : '0.0'} LAL
                           </div>
                         </div>
                       </div>
@@ -288,7 +309,7 @@ export default function DistillationSessionManagementPage() {
                             {selectedSession.charge.total.volume_L}L @ {selectedSession.charge.total.abv_percent}% ABV
                           </div>
                           <div className="text-sm text-gray-600">
-                            {selectedSession.charge.total.lal.toFixed(1)} LAL
+                            {selectedSession.charge.total.lal != null ? (typeof selectedSession.charge.total.lal === 'number' ? selectedSession.charge.total.lal.toFixed(1) : selectedSession.charge.total.lal) : '0.0'} LAL
                           </div>
                         </div>
                       </div>
@@ -302,17 +323,25 @@ export default function DistillationSessionManagementPage() {
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Dilution Steps</h3>
                   <div className="space-y-3">
-                    {selectedSession.dilutions.map((step, index) => (
-                      <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                        <div className="font-medium text-gray-900">Step {step.stepNo}</div>
-                        <div className="text-sm text-gray-600 mt-1">
-                          {step.newMakeL}L new make + {step.waterL}L water = {step.finalVolumeL}L @ {step.finalABV}% ABV
+                    {selectedSession.dilutions.map((step, index) => {
+                      const stepNo = 'stepNo' in step ? step.stepNo : ('number' in step ? step.number : index + 1)
+                      const newMake = 'newMakeL' in step ? step.newMakeL : ('newMake_L' in step ? step.newMake_L : 0)
+                      const water = 'waterL' in step ? step.waterL : ('filteredWater_L' in step ? step.filteredWater_L : 0)
+                      const finalVol = 'finalVolumeL' in step ? step.finalVolumeL : ('newVolume_L' in step ? step.newVolume_L : 0)
+                      const finalABV = 'finalABV' in step ? step.finalABV : ('abv_percent' in step ? step.abv_percent : 0)
+                      
+                      return (
+                        <div key={index} className="p-3 bg-gray-50 rounded-lg">
+                          <div className="font-medium text-gray-900">Step {stepNo}</div>
+                          <div className="text-sm text-gray-600 mt-1">
+                            {newMake}L new make + {water}L water = {finalVol}L @ {finalABV}% ABV
+                          </div>
+                          {step.notes && (
+                            <div className="text-sm text-gray-500 mt-1">{step.notes}</div>
+                          )}
                         </div>
-                        {step.notes && (
-                          <div className="text-sm text-gray-500 mt-1">{step.notes}</div>
-                        )}
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 </div>
               )}
