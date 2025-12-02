@@ -60,7 +60,7 @@ export default function InteractiveDistillationPanel({
     date: session.date,
     stillUsed: session.still,
     boilerOn: session.boilerOn,
-    charge: session.charge?.components || [
+    charge: (session.charge?.components as any) || [
       { source: "Manildra NC96", volume_L: 400, abv: 96.0, lal: 384.0 },
       { source: "Left Vodka", volume_L: 500, abv: 19.0, lal: 95.0 },
       { source: "Water", volume_L: 100, abv: 0.0, lal: 0.0 }
