@@ -20,8 +20,8 @@ export default function DistillationSessionManagementPage() {
       // Load example sessions and process them with calculations
       const exampleSessions = [
         merchantMaeGinDistillation,
-        rainforestGinDistillation,
-        signatureDryGinDistillation
+        rainforestGinRF30,
+        vodka003Distillation
       ]
 
       const processedSessions = exampleSessions.map(session => 
