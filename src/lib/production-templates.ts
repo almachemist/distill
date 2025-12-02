@@ -103,8 +103,7 @@ export function createRumCaneSpiritTemplate(
     lastEditedAt: now,
     
     // Basic Info
-    batch_id: '',
-    product_name: productType === 'rum' ? 'Rum' : 'Cane Spirit',
+    batch_name: '',
     still_used: '',
     notes: '',
     
