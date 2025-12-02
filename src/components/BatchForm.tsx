@@ -176,7 +176,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Spirit Run ID</label>
               <TextInput
-                value={formData.spiritRunId}
+                value={formData.spiritRunId ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, spiritRunId: value ?? null }))}
                 placeholder="e.g., SPIRIT-GIN-RF-30"
               />
@@ -184,7 +184,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">SKU</label>
               <TextInput
-                value={formData.sku}
+                value={formData.sku ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, sku: value ?? null }))}
                 placeholder="e.g., Rainforest Gin"
               />
@@ -201,7 +201,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
               <TextInput
-                value={formData.stillUsed}
+                value={formData.stillUsed ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, stillUsed: value ?? null }))}
                 placeholder="e.g., Carrie, Roberta"
               />
@@ -209,7 +209,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Boiler On</label>
               <TextInput
-                value={formData.boilerOn}
+                value={formData.boilerOn ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, boilerOn: value ?? null }))}
                 placeholder="e.g., 35A, 07:05"
               />
@@ -217,7 +217,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
               <TextInput
-                value={formData.description}
+                value={formData.description ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, description: value ?? null }))}
                 placeholder="Batch description"
               />
