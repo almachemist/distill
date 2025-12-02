@@ -76,9 +76,9 @@ export default function DistillationCutsPage() {
     const avgABV = totalVolume > 0 ? (totalLAL / totalVolume) * 100 : 0
     
     return {
-      volume: totalVolume.toFixed(2),
-      lal: totalLAL.toFixed(2),
-      abv: avgABV.toFixed(1)
+      volume: parseFloat(totalVolume.toFixed(2)),
+      lal: parseFloat(totalLAL.toFixed(2)),
+      abv: parseFloat(avgABV.toFixed(1))
     }
   }
 
