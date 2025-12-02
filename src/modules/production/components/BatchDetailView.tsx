@@ -261,7 +261,8 @@ export default function BatchDetailView({
           r.phase.toLowerCase().includes(phaseId.slice(0, -1))
         ) || []
         const output = displaySession.outputs?.find(o => 
-          o.name.toLowerCase().includes(phaseId.slice(0, -1))
+          ('name' in o && o.name.toLowerCase().includes(phaseId.slice(0, -1))) ||
+          ('phase' in o && o.phase?.toLowerCase().includes(phaseId.slice(0, -1)))
         )
         return {
           title: `${phaseName} Collection`,
