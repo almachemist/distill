@@ -996,7 +996,7 @@ export default function BatchDetailView({
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <EditableStatRow
                               label="New Make (L)"
-                              value={(dilution as any).newMakeL ?? dilution.newMakeL ?? ''}
+                              value={(dilution as any).newMakeL ?? (dilution as any).newMake_L ?? ''}
                               editable={isEditing}
                               type="number"
                               min={0}
@@ -1007,7 +1007,7 @@ export default function BatchDetailView({
                             />
                             <EditableStatRow
                               label="Water Added (L)"
-                              value={(dilution as any).filteredWater_L || dilution.waterL || 0}
+                              value={(dilution as any).filteredWater_L || (dilution as any).waterL || 0}
                               editable={isEditing}
                               type="number"
                               min={0}
@@ -1018,7 +1018,7 @@ export default function BatchDetailView({
                             />
                             <EditableStatRow
                               label="Final Volume (L)"
-                              value={(dilution as any).newVolume_L || dilution.finalVolumeL || ''}
+                              value={(dilution as any).newVolume_L || (dilution as any).finalVolumeL || ''}
                               editable={isEditing}
                               type="number"
                               min={0}
@@ -1029,7 +1029,7 @@ export default function BatchDetailView({
                             />
                             <EditableStatRow
                               label="Final ABV (%)"
-                              value={(dilution as any).finalAbv_percent || dilution.finalABV || ''}
+                              value={(dilution as any).finalAbv_percent || (dilution as any).finalABV || ''}
                               editable={isEditing}
                               type="number"
                               min={0}
@@ -1041,11 +1041,11 @@ export default function BatchDetailView({
                               }}
                             />
                           </div>
-                          {(dilution.notes || (dilution as any).notes) && (
+                          {((dilution as any).notes) && (
                             <div className="mt-3 pt-3 border-t border-gray-700">
                               <EditableStatRow
                                 label="Notes"
-                                value={(dilution as any).notes || dilution.notes || ''}
+                                value={(dilution as any).notes || ''}
                                 editable={isEditing}
                                 type="text"
                                 onSave={(v) => applyPatch(`dilutions.${idx}.notes`, v)}
