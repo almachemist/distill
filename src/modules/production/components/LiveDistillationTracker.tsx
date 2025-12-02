@@ -60,7 +60,7 @@ export default function LiveDistillationTracker({
   }
 
   const chargeData = extractChargeData(session)
-  const outputs = outputs as any
+  const outputs = session.outputs as any
 
   const [currentRun, setCurrentRun] = useState<DistillationRun>({
     runId: session.id,
