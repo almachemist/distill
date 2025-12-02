@@ -55,14 +55,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       
       // In development mode, provide a mock user for easy testing
       if (process.env.NODE_ENV === 'development') {
-                 const mockUser: User = {
+                const mockUser: User = {
            id: '00000000-0000-0000-0000-000000000001',
-           email: 'dev@example.com',
-           name: 'Development User',
+          email: 'dev@example.com',
+          name: 'Development User',
             organizationId: '00000000-0000-0000-0000-000000000001',
-           role: 'admin',
-           createdAt: new Date().toISOString(),
-           updatedAt: new Date().toISOString()
+           role: 'admin'
          }
         setUser(mockUser)
         setSession(null) // No real session in dev mode
@@ -103,9 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: credentials.email,
         name: 'Development User',
             organizationId: '00000000-0000-0000-0000-000000000001',
-        role: 'admin',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        role: 'admin'
       }
       setUser(mockUser)
       setSession(null)
@@ -126,9 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         email: data.email,
         name: data.displayName,
             organizationId: '00000000-0000-0000-0000-000000000001',
-        role: 'admin',
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString()
+        role: 'admin'
       }
       setUser(mockUser)
       setSession(null)
