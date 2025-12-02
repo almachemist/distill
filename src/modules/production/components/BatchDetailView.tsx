@@ -738,7 +738,7 @@ export default function BatchDetailView({
                             <div className="grid grid-cols-4 gap-4">
                               <div>
                                 <div className="text-xs text-gray-400 mb-1">Total Volume</div>
-                                <div className="text-lg font-bold text-white">{displaySession.totals.hearts.volumeL.toFixed(1)} L</div>
+                                <div className="text-lg font-bold text-white">{displaySession.totals.hearts.volumeL != null ? (typeof displaySession.totals.hearts.volumeL === 'number' ? displaySession.totals.hearts.volumeL.toFixed(1) : displaySession.totals.hearts.volumeL) : '0.0'} L</div>
                               </div>
                               <div>
                                 <div className="text-xs text-gray-400 mb-1">Avg ABV</div>
