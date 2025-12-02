@@ -427,7 +427,7 @@ export default function HeartsPartsManager({
               <div className="text-sm text-green-600">Avg ABV</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-green-800">{totals.lal.toFixed(2)}L</div>
+              <div className="text-2xl font-bold text-green-800">{totals.lal?.toFixed(2) || '0.00'}L</div>
               <div className="text-sm text-green-600">Total LAL</div>
             </div>
             <div className="text-center">
