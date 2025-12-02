@@ -59,7 +59,7 @@ export default function NewRumBatchPage() {
       late_tails_volume_l: undefined,
       late_tails_total_abv_percent: undefined,
       late_tails_lal: undefined,
-    } as RumCaneSpiritBatch)
+    } as unknown as RumCaneSpiritBatch)
   }, [])
 
   const handleSave = async () => {
