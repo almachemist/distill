@@ -18,9 +18,9 @@ export class CalendarIntegrationService {
         sku: session.sku,
         spiritRun: parseInt(session.spiritRun?.split('-').pop() || '1'),
         still: session.still,
-        lalIn: session.lalIn,
-        lalOut: session.lalOut,
-        lalEfficiency: session.lalEfficiency,
+        lalIn: session.lalIn ?? 0,
+        lalOut: session.lalOut ?? undefined,
+        lalEfficiency: session.lalEfficiency ?? undefined,
       });
       console.log(`Calendar event created for distillation session ${session.id}`);
     } catch (error) {
