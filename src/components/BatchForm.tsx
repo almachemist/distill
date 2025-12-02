@@ -63,12 +63,12 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
       
       if (field.includes('volume_L')) {
         volume = value;
-        abv = index !== undefined ? formData.runData?.[index]?.abv_percent : 
-              formData.chargeAdjustment?.total?.abv_percent;
+        abv = (index !== undefined ? formData.runData?.[index]?.abv_percent : 
+              formData.chargeAdjustment?.total?.abv_percent) ?? null;
       } else {
         abv = value;
-        volume = index !== undefined ? formData.runData?.[index]?.volume_L :
-                formData.chargeAdjustment?.total?.volume_L;
+        volume = (index !== undefined ? formData.runData?.[index]?.volume_L :
+                formData.chargeAdjustment?.total?.volume_L) ?? null;
       }
       
       const lal = calcLAL(volume, abv);
@@ -177,7 +177,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">Spirit Run ID</label>
               <TextInput
                 value={formData.spiritRunId}
-                onChange={(value) => setFormData(prev => ({ ...prev, spiritRunId: value || '' }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, spiritRunId: value ?? null }))}
                 placeholder="e.g., SPIRIT-GIN-RF-30"
               />
             </div>
@@ -185,7 +185,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">SKU</label>
               <TextInput
                 value={formData.sku}
-                onChange={(value) => setFormData(prev => ({ ...prev, sku: value || '' }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, sku: value ?? null }))}
                 placeholder="e.g., Rainforest Gin"
               />
             </div>
@@ -202,7 +202,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
               <TextInput
                 value={formData.stillUsed}
-                onChange={(value) => setFormData(prev => ({ ...prev, stillUsed: value || '' }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, stillUsed: value ?? null }))}
                 placeholder="e.g., Carrie, Roberta"
               />
             </div>
@@ -210,7 +210,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">Boiler On</label>
               <TextInput
                 value={formData.boilerOn}
-                onChange={(value) => setFormData(prev => ({ ...prev, boilerOn: value }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, boilerOn: value ?? null }))}
                 placeholder="e.g., 35A, 07:05"
               />
             </div>
@@ -218,7 +218,7 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
               <TextInput
                 value={formData.description}
-                onChange={(value) => setFormData(prev => ({ ...prev, description: value }))}
+                onChange={(value) => setFormData(prev => ({ ...prev, description: value ?? null }))}
                 placeholder="Batch description"
               />
             </div>
