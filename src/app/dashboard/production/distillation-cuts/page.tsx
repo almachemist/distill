@@ -199,7 +199,7 @@ export default function DistillationCutsPage() {
         sku: batchId,
         displayName: `${batchId} (${productLabel})`,
         productId: productType,
-        recipeId: productType === 'gin' ? recipeId : null,
+        recipeId: productType === 'gin' ? recipeId : undefined,
         date: preparationData.date || new Date().toISOString().split('T')[0],
         stillUsed: preparationData.stillUsed || heatingData.stillUsed || 'Unknown',
         
