@@ -117,7 +117,7 @@ export function SimpleStockView() {
                   </div>
                   <div className="text-right">
                     <div className={`font-medium ${getStockStatusColor(item.total_on_hand)}`}>
-                      {item.total_on_hand.toFixed(2)} {item.default_uom}
+                      {item.total_on_hand.toFixed(2)} {item.uom}
                     </div>
                     <div className="text-xs text-gray-500">On hand</div>
                   </div>
