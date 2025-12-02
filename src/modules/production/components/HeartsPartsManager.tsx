@@ -74,7 +74,7 @@ export default function HeartsPartsManager({
 
   // Delete a part
   function deletePart(id: string) {
-    setParts(prev => prev.filter(p => p.id !== id))
+    setParts(safeParts.filter(p => p.id !== id))
   }
 
   // Duplicate a part
@@ -87,7 +87,7 @@ export default function HeartsPartsManager({
       endTime: '',
       notes: ''
     }
-    setParts(prev => [...prev, newPart])
+    setParts([...safeParts, newPart])
   }
 
   // Add new part
