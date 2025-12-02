@@ -3,7 +3,7 @@ import rumDataset from "../rum_production_data.json"
 import type { RumBatch } from "../components/types"
 import { RumDetail } from "../components/RumDetail"
 
-const batches = rumDataset as RumBatch[]
+const batches = rumDataset as any as RumBatch[]
 
 export function generateStaticParams() {
   return batches.map((batch) => ({ batchId: batch.batch_id }))

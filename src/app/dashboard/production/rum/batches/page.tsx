@@ -12,6 +12,9 @@ type RumBatchLegacy = any
 export default function RumBatchesPage() {
   const [expandedBatch, setExpandedBatch] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<TabType>('fermentation')
+  
+  // Cast to any to bypass type checking for legacy flat structure
+  const batches = rumBatchesDataset as any[]
 
   const toggleBatch = (batchId: string) => {
     setExpandedBatch(expandedBatch === batchId ? null : batchId)
@@ -55,7 +58,7 @@ export default function RumBatchesPage() {
 
         {/* Batch Cards */}
         <div className="space-y-4">
-          {rumBatchesDataset.map((batch) => (
+          {batches.map((batch: RumBatchLegacy) => (
             <div key={batch.batch_id} className="bg-white rounded-xl border border-copper-15 shadow-sm overflow-hidden">
               {/* Collapsed Header */}
               <button
@@ -256,7 +259,7 @@ function FermentationTab({ batch }: { batch: RumBatchLegacy }) {
               {Object.entries(batch.temperature_curve || {}).map(([time, value]) => (
                 <div key={time} className="flex justify-between">
                   <span className="text-graphite/60">{time}</span>
-                  <span className="font-medium text-graphite">{value}</span>
+                  <span className="font-medium text-graphite">{String(value)}</span>
                 </div>
               ))}
             </div>
@@ -269,7 +272,7 @@ function FermentationTab({ batch }: { batch: RumBatchLegacy }) {
               {Object.entries(batch.brix_curve || {}).map(([time, value]) => (
                 <div key={time} className="flex justify-between">
                   <span className="text-graphite/60">{time}</span>
-                  <span className="font-medium text-graphite">{value}</span>
+                  <span className="font-medium text-graphite">{String(value)}</span>
                 </div>
               ))}
             </div>
@@ -282,7 +285,7 @@ function FermentationTab({ batch }: { batch: RumBatchLegacy }) {
               {Object.entries(batch.ph_curve || {}).map(([time, value]) => (
                 <div key={time} className="flex justify-between">
                   <span className="text-graphite/60">{time}</span>
-                  <span className="font-medium text-graphite">{value}</span>
+                  <span className="font-medium text-graphite">{String(value)}</span>
                 </div>
               ))}
             </div>

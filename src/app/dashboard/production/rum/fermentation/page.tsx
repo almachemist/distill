@@ -29,7 +29,7 @@ export default function RumFermentationPage() {
   // Additives
   const [antiFoamML, setAntiFoamML] = useState(100)
   const [citricAcidG, setCitricAcidG] = useState<number | null>(null)
-  const [fermaidG, setFermaidG] = useState(1000)
+  const [fermaidG, setFermaidG] = useState<number | null>(1000)
   const [dapG, setDapG] = useState<number | null>(null)
   const [calciumCarbonateG, setCalciumCarbonateG] = useState<number | null>(null)
   const [additionalNutrients, setAdditionalNutrients] = useState('')

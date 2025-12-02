@@ -35,7 +35,7 @@ export default function EditRumBatchPage() {
           productType: data.product_type ?? data.productType ?? 'rum',
           status: data.status ?? 'draft',
           createdAt: data.created_at ?? data.createdAt,
-          updatedAt: data.updated_at ?? data.updatedAt,
+          lastEditedAt: data.updated_at ?? data.lastEditedAt ?? new Date().toISOString(),
 
           // Stage-based Status
           fermentation_status: data.fermentation_status ?? 'not_started',
@@ -172,7 +172,7 @@ export default function EditRumBatchPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...batch,
-          updatedAt: new Date().toISOString()
+          lastEditedAt: new Date().toISOString()
         })
       })
 
@@ -201,7 +201,7 @@ export default function EditRumBatchPage() {
         body: JSON.stringify({
           ...batch,
           status: newStatus,
-          updatedAt: new Date().toISOString()
+          lastEditedAt: new Date().toISOString()
         })
       })
 

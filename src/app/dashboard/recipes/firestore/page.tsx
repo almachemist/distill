@@ -282,7 +282,7 @@ export default function FirestoreRecipesPage() {
       
       // Simulate inventory deduction
       const updatedInventory = inventory.map(item => {
-        const ingredient = recipe.ingredients.find(ing => 
+        const ingredient = recipe.ingredients.find((ing: any) => 
           ing.name.toLowerCase() === item.name.toLowerCase()
         )
         

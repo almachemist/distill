@@ -17,7 +17,7 @@ export default function NewRumBatchPage() {
       productType: 'rum',
       status: 'draft',
       createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      lastEditedAt: new Date().toISOString(),
 
       // Fermentation - Required fields (use undefined for numeric fields to show empty)
       batch_name: '',
