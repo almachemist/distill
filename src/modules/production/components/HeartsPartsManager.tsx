@@ -59,7 +59,7 @@ export default function HeartsPartsManager({
     if (!part.id) part.id = crypto.randomUUID()
     part.lal = calculateLAL(part.volumeL ?? 0, part.abvPercent ?? 0)
     
-    setParts(prev => {
+    setParts((prev: HeartPart[]) => {
       const idx = prev.findIndex(p => p.id === part.id)
       const next = [...prev]
       if (idx >= 0) {
