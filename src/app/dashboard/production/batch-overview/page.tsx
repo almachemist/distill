@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { DistillationSession } from '@/modules/production/types/distillation-session.types'
+import { DistillationSession, DistillationCost } from '@/modules/production/types/distillation-session.types'
 import { DistillationSessionCalculator } from '@/modules/production/services/distillation-session-calculator.service'
 import { distillationSessions } from '@/modules/production/data/distillation-sessions.data'
 import { useAuth } from '@/modules/auth/hooks/useAuth'
@@ -93,6 +93,45 @@ export default function BatchOverviewPage() {
     { value: '12', label: 'December' }
   ]
 
+  type ModernCostBreakdown = {
+    ethanolCost: number
+    botanicalCost: number
+    laborCost: number
+    utilityCost: number
+    totalCost: number
+    costPerLAL: number
+    costPerLiter: number
+  }
+
+  const isLegacyCost = (costs: DistillationSession['costs']): costs is DistillationCost =>
+    !!costs && 'totalAUD' in costs
+
+  const isModernCost = (costs: DistillationSession['costs']): costs is ModernCostBreakdown =>
+    !!costs && 'totalCost' in (costs as ModernCostBreakdown)
+
+  const getTotalCostValue = (costs?: DistillationSession['costs']) => {
+    if (!costs) return 0
+    if (isLegacyCost(costs)) return costs.totalAUD || 0
+    if (isModernCost(costs)) return costs.totalCost || 0
+    return 0
+  }
+
+  const getCostPerLALValue = (session: DistillationSession) => {
+    const costs = session.costs
+    if (!costs) return null
+    if (isLegacyCost(costs)) {
+      if (costs.costPerLAL != null) return costs.costPerLAL
+      if (session.lalOut) return (costs.totalAUD || 0) / session.lalOut
+      return null
+    }
+    if (isModernCost(costs)) {
+      if (costs.costPerLAL != null) return costs.costPerLAL
+      if (session.lalOut) return (costs.totalCost || 0) / session.lalOut
+      return null
+    }
+    return null
+  }
+
   const getEfficiencyColor = (efficiency: number) => {
     if (efficiency >= 80) return 'text-green-600 bg-green-100'
     if (efficiency >= 60) return 'text-yellow-600 bg-yellow-100'
@@ -167,7 +206,9 @@ export default function BatchOverviewPage() {
               </div>
               <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6">
                 <div className="text-3xl font-bold">
-                  ${filteredSessions.reduce((sum, s) => sum + (s.costs?.totalAUD || 0), 0).toFixed(0)}
+                  {`$${filteredSessions
+                    .reduce((sum, session) => sum + getTotalCostValue(session.costs), 0)
+                    .toFixed(0)}`}
                 </div>
                 <div className="text-blue-100">Total Cost</div>
               </div>
@@ -320,7 +361,7 @@ export default function BatchOverviewPage() {
                               {session.costs && (
                                 <div className="flex justify-between items-center">
                                   <span className="text-sm text-gray-600">Cost:</span>
-                                  <span className="font-medium">${session.costs.totalAUD.toFixed(0)}</span>
+                                  <span className="font-medium">${getTotalCostValue(session.costs).toFixed(0)}</span>
                                 </div>
                               )}
                             </div>
@@ -477,7 +518,7 @@ export default function BatchOverviewPage() {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            ${session.costs?.totalAUD.toFixed(0) || '0'}
+                            ${getTotalCostValue(session.costs).toFixed(0)}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div className="flex gap-2">
@@ -906,8 +947,10 @@ export default function BatchOverviewPage() {
                   <div className="text-center p-4 bg-gray-50 rounded-lg">
                     <label className="block text-xs font-medium text-gray-600 mb-1">Cost/LAL</label>
                     <p className="text-xl font-bold text-gray-900">
-                      ${selectedSession.costs?.costPerLAL?.toFixed(2) || selectedSession.costs?.totalAUD ? 
-                        (selectedSession.costs.totalAUD / (selectedSession.lalOut || 1)).toFixed(2) : '-'}
+                      {(() => {
+                        const value = getCostPerLALValue(selectedSession)
+                        return value != null ? `$${value.toFixed(2)}` : '-'
+                      })()}
                     </p>
                   </div>
                 </div>
@@ -918,52 +961,54 @@ export default function BatchOverviewPage() {
                 <div className="bg-white border border-gray-200 rounded-xl p-6">
                   <h3 className="text-xl font-semibold text-gray-900 mb-4">Cost Breakdown</h3>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                    {(selectedSession.costs as any).electricityAUD !== undefined ? (
+                    {isLegacyCost(selectedSession.costs) ? (
                       <>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Electricity</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).electricityAUD.toFixed(2)}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.electricityAUD.toFixed(2)}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Water</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).waterAUD.toFixed(2)}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.waterAUD.toFixed(2)}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Ethanol</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).ethanolAUD.toFixed(2)}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.ethanolAUD.toFixed(2)}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Botanicals</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).botanicalAUD.toFixed(2)}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.botanicalAUD.toFixed(2)}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Total</label>
-                          <p className="text-lg font-bold text-blue-700">${(selectedSession.costs as any).totalAUD.toFixed(2)}</p>
+                          <p className="text-lg font-bold text-blue-700">${selectedSession.costs.totalAUD.toFixed(2)}</p>
                         </div>
                       </>
-                    ) : (
+                    ) : isModernCost(selectedSession.costs) ? (
                       <>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Ethanol</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).ethanolCost?.toFixed(2) || '0.00'}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.ethanolCost?.toFixed(2) || '0.00'}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Botanicals</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).botanicalCost?.toFixed(2) || '0.00'}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.botanicalCost?.toFixed(2) || '0.00'}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Labor</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).laborCost?.toFixed(2) || '0.00'}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.laborCost?.toFixed(2) || '0.00'}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Utilities</label>
-                          <p className="text-lg font-semibold text-gray-900">${(selectedSession.costs as any).utilityCost?.toFixed(2) || '0.00'}</p>
+                          <p className="text-lg font-semibold text-gray-900">${selectedSession.costs.utilityCost?.toFixed(2) || '0.00'}</p>
                         </div>
                         <div>
                           <label className="block text-xs font-medium text-gray-600 mb-1">Total</label>
-                          <p className="text-lg font-bold text-blue-700">${(selectedSession.costs as any).totalCost?.toFixed(2) || '0.00'}</p>
+                          <p className="text-lg font-bold text-blue-700">${selectedSession.costs.totalCost?.toFixed(2) || '0.00'}</p>
                         </div>
                       </>
+                    ) : (
+                      <></>
                     )}
                   </div>
                 </div>
