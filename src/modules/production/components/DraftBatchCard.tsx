@@ -36,7 +36,7 @@ export function DraftBatchCard({ batch, onUpdate }: DraftBatchCardProps) {
     if (isGinVodkaSpiritBatch(batch)) {
       return (batch as GinVodkaSpiritBatch).spiritRunId || batch.id || 'Unknown'
     } else if (isRumCaneSpiritBatch(batch)) {
-      return (batch as RumCaneSpiritBatch).batch_id || batch.id || 'Unknown'
+      return (batch as RumCaneSpiritBatch).batch_name || batch.id || 'Unknown'
     }
     return batch.id || 'Unknown'
   }
