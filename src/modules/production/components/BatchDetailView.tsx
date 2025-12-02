@@ -987,7 +987,7 @@ export default function BatchDetailView({
                         <div key={idx} className="bg-gray-700/30 rounded-lg p-4 border border-gray-600/50">
                           <div className="flex items-center justify-between mb-3">
                             <span className="font-semibold text-white">
-                              Step {(dilution as any).stepNo || dilution.stepNo || idx + 1}
+                              Step {(dilution as any).stepNo || (dilution as any).number || idx + 1}
                             </span>
                             {(dilution as any).date && (
                               <span className="text-sm text-gray-400">{(dilution as any).date}</span>
