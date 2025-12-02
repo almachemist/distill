@@ -96,7 +96,7 @@ export function createRumCaneSpiritTemplate(
   const now = new Date().toISOString();
   const today = new Date().toISOString().split('T')[0];
   
-  return {
+  return ({
     status: 'draft',
     productType,
     createdAt: now,
@@ -240,7 +240,7 @@ export function createRumCaneSpiritTemplate(
     lal_filled: 0,
     maturation_location: '',
     expected_bottling_date: '',
-  };
+  }) as unknown as Partial<RumCaneSpiritBatch>;
 }
 
 // ============================================================================
