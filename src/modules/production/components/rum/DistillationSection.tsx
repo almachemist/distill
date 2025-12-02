@@ -243,7 +243,8 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
               value={batch.boiler_abv_percent ?? ''}
               onChange={(e) => {
                 // Format and limit to 3 digits max (e.g., 855 → 85.5)
-                updateField('boiler_abv_percent', formatABV(e.target.value))
+                const formatted = formatABV(e.target.value)
+                updateField('boiler_abv_percent', formatted ? parseFloat(formatted) : undefined)
               }}
               onBlur={(e) => {
                 const validated = validateOnBlur(e.target.value, 95.0, 1)
