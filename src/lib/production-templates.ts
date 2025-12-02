@@ -108,7 +108,7 @@ export function createRumCaneSpiritTemplate(
     notes: '',
     
     // Fermentation
-    fermentation_start_date: today,
+    fermentation_date: today,
     substrate_type: '',
     substrate_batch: '',
     substrate_mass_kg: 0,
