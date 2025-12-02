@@ -863,7 +863,7 @@ export default function BatchDetailView({
                               }
                             }}
                           />
-                          {phaseDetails.data.output.lal !== undefined && phaseDetails.data.output.lal > 0 && (
+                          {phaseDetails.data.output.lal != null && phaseDetails.data.output.lal > 0 && (
                             <div>
                               <div className="text-xs text-gray-400 mb-1">LAL</div>
                               <div className="text-lg font-semibold text-green-400">{phaseDetails.data.output.lal != null ? (typeof phaseDetails.data.output.lal === 'number' ? phaseDetails.data.output.lal.toFixed(1) : phaseDetails.data.output.lal) : '0.0'}</div>
