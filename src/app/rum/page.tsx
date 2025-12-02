@@ -5,7 +5,7 @@ import rumDataset from "./rum_production_data.json"
 import { BatchCard } from "./components/BatchCard"
 import type { RumBatch } from "./components/types"
 
-const batches = rumDataset as RumBatch[]
+const batches = rumDataset as any as RumBatch[]
 
 export default function RumDashboardPage() {
   const [yearFilter, setYearFilter] = useState<string>("all")
