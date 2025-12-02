@@ -874,7 +874,7 @@ export default function BatchDetailView({
                           <div className="mt-3 pt-3 border-t border-gray-700">
                             <EditableStatRow
                               label="Receiving Vessel"
-                              value={('vessel' in phaseDetails.data.output ? phaseDetails.data.output.vessel : phaseDetails.data.output.receivingVessel) as string}
+                              value={('vessel' in phaseDetails.data.output ? phaseDetails.data.output.vessel : ('receivingVessel' in phaseDetails.data.output ? phaseDetails.data.output.receivingVessel : '')) as string}
                               editable={isEditing}
                               type="text"
                               onSave={(v) => {
