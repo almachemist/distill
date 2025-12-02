@@ -532,7 +532,7 @@ export default function BatchDetailView({
                           </div>
                           <div className="bg-gray-700/50 rounded-lg p-4 border border-gray-600">
                             <div className="text-xs text-gray-400 mb-1">LAL</div>
-                            <div className="text-2xl font-bold text-green-400">{displaySession.charge.total.lal.toFixed(1)} L</div>
+                            <div className="text-2xl font-bold text-green-400">{displaySession.charge.total.lal != null ? (typeof displaySession.charge.total.lal === 'number' ? displaySession.charge.total.lal.toFixed(1) : displaySession.charge.total.lal) : '0.0'} L</div>
                           </div>
                         </div>
                         <div>
