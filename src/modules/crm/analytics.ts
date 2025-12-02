@@ -76,7 +76,7 @@ export function generateAndCacheCustomerAnalytics(): CustomerAnalytics[] {
       totalSpend: 0,
       totalUnits: 0,
       orderCount: 0,
-      dates: [],
+      dates: [] as number[],
       bySku: new Map(),
       byMonth: new Map(),
     }
