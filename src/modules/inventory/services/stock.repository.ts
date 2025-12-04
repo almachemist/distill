@@ -64,7 +64,7 @@ export class StockRepository {
     }
 
     let total = 0
-    data.forEach(txn => {
+    (data ?? []).forEach((txn: any) => {
       switch (txn.txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
@@ -97,7 +97,7 @@ export class StockRepository {
     }
 
     let total = 0
-    data.forEach(txn => {
+    (data ?? []).forEach((txn: any) => {
       switch (txn.txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':

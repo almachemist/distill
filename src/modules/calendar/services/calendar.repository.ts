@@ -158,7 +158,7 @@ export const listCalendarEvents = async (opts?: {
   const { data, error } = await query;
   if (error) throw error;
   
-  return data.map(d => ({
+  return (data ?? []).map((d: any) => ({
     id: d.id,
     title: d.title,
     type: d.type as CalendarEventType,
