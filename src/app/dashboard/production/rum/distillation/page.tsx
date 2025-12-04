@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function RumDistillationPage() {
+function RumDistillationContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const batchId = searchParams.get('batchId') || ''
@@ -715,3 +715,10 @@ export default function RumDistillationPage() {
   )
 }
 
+export default function RumDistillationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+      <RumDistillationContent />
+    </Suspense>
+  )
+}

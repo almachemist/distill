@@ -130,7 +130,7 @@ export class RecipeRepository {
       ...recipe,
       ingredients: (ingredients || []).map(ing => ({
         ...ing,
-        item: ing.items as Item
+        item: (Array.isArray(ing.items) ? ing.items[0] : ing.items) as Item
       }))
     }
   }
@@ -154,7 +154,7 @@ export class RecipeRepository {
 
     return data.map(ing => ({
       ...ing,
-      item: ing.items as Item
+      item: (Array.isArray(ing.items) ? ing.items[0] : ing.items) as Item
     }))
   }
 

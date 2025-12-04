@@ -162,7 +162,15 @@ export const generateFY2025DistillationSummary = (): FY2025DistillationSummary =
     .slice(0, 5)
 
   return {
-    overview: log.summary,
+    overview: {
+      totalRuns: log.totalRuns,
+      totalLALCharged: log.summary.totalLALCharged,
+      totalLALRecovered: log.summary.totalLALRecovered,
+      overallEfficiency: log.summary.overallEfficiency,
+      totalVolumeIn: log.summary.totalVolumeIn,
+      totalVolumeOut: log.summary.totalVolumeOut,
+      averageEfficiency: log.summary.averageEfficiency
+    },
     byProduct: {
       gin: ginSummary,
       vodka: vodkaSummary,
@@ -197,4 +205,3 @@ export const formatVolume = (num: number, decimals: number = 1): string => {
 
 // Export default summary
 export default fy2025DistillationSummary
-

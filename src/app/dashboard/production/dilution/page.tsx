@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function DilutionPage() {
+function DilutionContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const batchId = searchParams.get('batchId') || ''
@@ -506,3 +506,10 @@ export default function DilutionPage() {
   )
 }
 
+export default function DilutionPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+      <DilutionContent />
+    </Suspense>
+  )
+}

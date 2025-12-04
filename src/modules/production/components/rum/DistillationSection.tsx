@@ -286,17 +286,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.heads_added_volume_l ?? ''}
-              onChange={(e) => updateField('heads_added_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('heads_added_volume_l', vol)
-                if (vol !== undefined && batch.heads_added_abv_percent !== undefined) {
-                  updateField('heads_added_lal', calculateLAL(vol, batch.heads_added_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.heads_added_volume_l ?? ''}
+            onChange={(e) => updateField('heads_added_volume_l', parseNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('heads_added_volume_l', vol)
+              if (vol !== undefined && batch.heads_added_abv_percent !== undefined) {
+                updateField('heads_added_lal', calculateLAL(vol, batch.heads_added_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -306,18 +306,21 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.heads_added_abv_percent ?? ''}
-              onChange={(e) => updateField('heads_added_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('heads_added_abv_percent', abv)
-                if (abv !== undefined && batch.heads_added_volume_l !== undefined) {
-                  updateField('heads_added_lal', calculateLAL(batch.heads_added_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.heads_added_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('heads_added_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('heads_added_abv_percent', abv)
+              if (abv !== undefined && batch.heads_added_volume_l !== undefined) {
+                updateField('heads_added_lal', calculateLAL(batch.heads_added_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -363,17 +366,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R1 Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.retort1_volume_l ?? ''}
-              onChange={(e) => updateField('retort1_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('retort1_volume_l', vol)
-                if (vol !== undefined && batch.retort1_abv_percent !== undefined) {
-                  updateField('retort1_lal', calculateLAL(vol, batch.retort1_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.retort1_volume_l ?? ''}
+            onChange={(e) => updateField('retort1_volume_l', parseNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('retort1_volume_l', vol)
+              if (vol !== undefined && batch.retort1_abv_percent !== undefined) {
+                updateField('retort1_lal', calculateLAL(vol, batch.retort1_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -383,18 +386,21 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R1 ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.retort1_abv_percent ?? ''}
-              onChange={(e) => updateField('retort1_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('retort1_abv_percent', abv)
-                if (abv !== undefined && batch.retort1_volume_l !== undefined) {
-                  updateField('retort1_lal', calculateLAL(batch.retort1_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.retort1_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('retort1_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('retort1_abv_percent', abv)
+              if (abv !== undefined && batch.retort1_volume_l !== undefined) {
+                updateField('retort1_lal', calculateLAL(batch.retort1_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -437,17 +443,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R2 Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.retort2_volume_l ?? ''}
-              onChange={(e) => updateField('retort2_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('retort2_volume_l', vol)
-                if (vol !== undefined && batch.retort2_abv_percent !== undefined) {
-                  updateField('retort2_lal', calculateLAL(vol, batch.retort2_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.retort2_volume_l ?? ''}
+            onChange={(e) => updateField('retort2_volume_l', parseNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('retort2_volume_l', vol)
+              if (vol !== undefined && batch.retort2_abv_percent !== undefined) {
+                updateField('retort2_lal', calculateLAL(vol, batch.retort2_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -457,18 +463,21 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R2 ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.retort2_abv_percent ?? ''}
-              onChange={(e) => updateField('retort2_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('retort2_abv_percent', abv)
-                if (abv !== undefined && batch.retort2_volume_l !== undefined) {
-                  updateField('retort2_lal', calculateLAL(batch.retort2_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.retort2_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('retort2_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('retort2_abv_percent', abv)
+              if (abv !== undefined && batch.retort2_volume_l !== undefined) {
+                updateField('retort2_lal', calculateLAL(batch.retort2_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -498,14 +507,14 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Power Input Boiler (A)
             </label>
-            <input
-              type="text"
-              value={batch.power_input_boiler_a ?? ''}
-              onChange={(e) => updateField('power_input_boiler_a', e.target.value)}
-              onBlur={(e) => updateField('power_input_boiler_a', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.power_input_boiler_a ?? ''}
+            onChange={(e) => updateField('power_input_boiler_a', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('power_input_boiler_a', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
@@ -524,14 +533,14 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Power Input R1 (A)
             </label>
-            <input
-              type="text"
-              value={batch.power_input_r1_a ?? ''}
-              onChange={(e) => updateField('power_input_r1_a', e.target.value)}
-              onBlur={(e) => updateField('power_input_r1_a', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.power_input_r1_a ?? ''}
+            onChange={(e) => updateField('power_input_r1_a', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('power_input_r1_a', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
@@ -550,14 +559,14 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Power Input R2 (A)
             </label>
-            <input
-              type="text"
-              value={batch.power_input_r2_a ?? ''}
-              onChange={(e) => updateField('power_input_r2_a', e.target.value)}
-              onBlur={(e) => updateField('power_input_r2_a', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.power_input_r2_a ?? ''}
+            onChange={(e) => updateField('power_input_r2_a', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('power_input_r2_a', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
@@ -583,14 +592,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit Pot Temperature (°C)
             </label>
-            <input
-              type="text"
-              value={batch.first_spirit_pot_temperature_c ?? ''}
-              onChange={(e) => updateField('first_spirit_pot_temperature_c', e.target.value)}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 99.9, 1)
-                updateField('first_spirit_pot_temperature_c', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.first_spirit_pot_temperature_c ?? ''}
+            onChange={(e) => {
+              const formatted = formatTemperature(e.target.value)
+              updateField('first_spirit_pot_temperature_c', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 99.9, 1)
+              updateField('first_spirit_pot_temperature_c', parseToNumber(validated))
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -600,14 +612,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R1 Temperature (°C)
             </label>
-            <input
-              type="text"
-              value={batch.r1_temperature_c ?? ''}
-              onChange={(e) => updateField('r1_temperature_c', formatTemperature(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 99.9, 1)
-                updateField('r1_temperature_c', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.r1_temperature_c ?? ''}
+            onChange={(e) => {
+              const formatted = formatTemperature(e.target.value)
+              updateField('r1_temperature_c', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 99.9, 1)
+              updateField('r1_temperature_c', parseToNumber(validated))
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -617,14 +632,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R2 Temperature (°C)
             </label>
-            <input
-              type="text"
-              value={batch.r2_temperature_c ?? ''}
-              onChange={(e) => updateField('r2_temperature_c', formatTemperature(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 99.9, 1)
-                updateField('r2_temperature_c', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.r2_temperature_c ?? ''}
+            onChange={(e) => {
+              const formatted = formatTemperature(e.target.value)
+              updateField('r2_temperature_c', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 99.9, 1)
+              updateField('r2_temperature_c', parseToNumber(validated))
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -646,14 +664,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.first_spirit_abv_percent ?? ''}
-              onChange={(e) => updateField('first_spirit_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                updateField('first_spirit_abv_percent', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.first_spirit_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('first_spirit_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              updateField('first_spirit_abv_percent', parseToNumber(validated))
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -663,14 +684,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit Density
             </label>
-            <input
-              type="text"
-              value={batch.first_spirit_density ?? ''}
-              onChange={(e) => updateField('first_spirit_density', formatDensity(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 2, 3)
-                updateField('first_spirit_density', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.first_spirit_density ?? ''}
+            onChange={(e) => {
+              const formatted = formatDensity(e.target.value)
+              updateField('first_spirit_density', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 2, 3)
+              updateField('first_spirit_density', parseToNumber(validated))
+            }}
               placeholder="0.000"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -687,56 +711,56 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Power Input Pot (A)
             </label>
-            <input
-              type="text"
-              value={batch.power_input_pot_a ?? ''}
-              onChange={(e) => updateField('power_input_pot_a', e.target.value)}
-              onBlur={(e) => updateField('power_input_pot_a', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.power_input_pot_a ?? ''}
+            onChange={(e) => updateField('power_input_pot_a', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('power_input_pot_a', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R1 Power Input (A)
             </label>
-            <input
-              type="text"
-              value={batch.r1_power_input_a ?? ''}
-              onChange={(e) => updateField('r1_power_input_a', e.target.value)}
-              onBlur={(e) => updateField('r1_power_input_a', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.r1_power_input_a ?? ''}
+            onChange={(e) => updateField('r1_power_input_a', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('r1_power_input_a', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
               R2 Power Input (A)
             </label>
-            <input
-              type="text"
-              value={batch.r2_power_input_a ?? ''}
-              onChange={(e) => updateField('r2_power_input_a', e.target.value)}
-              onBlur={(e) => updateField('r2_power_input_a', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.r2_power_input_a ?? ''}
+            onChange={(e) => updateField('r2_power_input_a', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('r2_power_input_a', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Flow (L/h)
             </label>
-            <input
-              type="text"
-              value={batch.flow_l_per_h ?? ''}
-              onChange={(e) => updateField('flow_l_per_h', e.target.value)}
-              onBlur={(e) => updateField('flow_l_per_h', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.flow_l_per_h ?? ''}
+            onChange={(e) => updateField('flow_l_per_h', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('flow_l_per_h', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
         </div>
       </div>
@@ -750,28 +774,31 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.foreshots_volume_l ?? ''}
-              onChange={(e) => updateField('foreshots_volume_l', e.target.value)}
-              onBlur={(e) => updateField('foreshots_volume_l', parseToNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.foreshots_volume_l ?? ''}
+            onChange={(e) => updateField('foreshots_volume_l', parseToNumber(e.target.value))}
+            onBlur={(e) => updateField('foreshots_volume_l', parseToNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
               ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.foreshots_abv_percent ?? ''}
-              onChange={(e) => updateField('foreshots_abv_percent', e.target.value)}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 99.9, 1)
-                updateField('foreshots_abv_percent', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.foreshots_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('foreshots_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 99.9, 1)
+              updateField('foreshots_abv_percent', parseToNumber(validated))
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -800,18 +827,21 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Heads ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.heads_cut_abv_percent ?? ''}
-              onChange={(e) => updateField('heads_cut_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('heads_cut_abv_percent', abv)
-                if (abv !== undefined && batch.heads_cut_volume_l !== undefined) {
-                  updateField('heads_cut_lal', calculateLAL(batch.heads_cut_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.heads_cut_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('heads_cut_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('heads_cut_abv_percent', abv)
+              if (abv !== undefined && batch.heads_cut_volume_l !== undefined) {
+                updateField('heads_cut_lal', calculateLAL(batch.heads_cut_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -821,17 +851,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Heads Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.heads_cut_volume_l ?? ''}
-              onChange={(e) => updateField('heads_cut_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('heads_cut_volume_l', vol)
-                if (vol !== undefined && batch.heads_cut_abv_percent !== undefined) {
-                  updateField('heads_cut_lal', calculateLAL(vol, batch.heads_cut_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.heads_cut_volume_l ?? ''}
+            onChange={(e) => updateField('heads_cut_volume_l', parseToNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('heads_cut_volume_l', vol)
+              if (vol !== undefined && batch.heads_cut_abv_percent !== undefined) {
+                updateField('heads_cut_lal', calculateLAL(vol, batch.heads_cut_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -854,14 +884,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Heads Density
             </label>
-            <input
-              type="text"
-              value={batch.heads_cut_density ?? ''}
-              onChange={(e) => updateField('heads_cut_density', formatDensity(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 2, 3)
-                updateField('heads_cut_density', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.heads_cut_density ?? ''}
+            onChange={(e) => {
+              const formatted = formatDensity(e.target.value)
+              updateField('heads_cut_density', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 2, 3)
+              updateField('heads_cut_density', parseToNumber(validated))
+            }}
               placeholder="0.000"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -890,14 +923,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Cut ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.hearts_cut_abv_percent ?? ''}
-              onChange={(e) => updateField('hearts_cut_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                updateField('hearts_cut_abv_percent', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.hearts_cut_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('hearts_cut_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              updateField('hearts_cut_abv_percent', parseToNumber(validated))
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -907,17 +943,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.hearts_volume_l ?? ''}
-              onChange={(e) => updateField('hearts_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('hearts_volume_l', vol)
-                if (vol !== undefined && batch.hearts_abv_percent !== undefined) {
-                  updateField('hearts_lal', calculateLAL(vol, batch.hearts_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.hearts_volume_l ?? ''}
+            onChange={(e) => updateField('hearts_volume_l', parseToNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('hearts_volume_l', vol)
+              if (vol !== undefined && batch.hearts_abv_percent !== undefined) {
+                updateField('hearts_lal', calculateLAL(vol, batch.hearts_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -927,18 +963,22 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Hearts ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.hearts_abv_percent ?? ''}
-              onChange={(e) => updateField('hearts_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('hearts_abv_percent', abv)
-                if (abv !== undefined && batch.hearts_volume_l !== undefined) {
-                  updateField('hearts_lal', calculateLAL(batch.hearts_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.hearts_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              const abv = formatted ? parseFloat(formatted) : undefined
+              updateField('hearts_abv_percent', abv)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('hearts_abv_percent', abv)
+              if (abv !== undefined && batch.hearts_volume_l !== undefined) {
+                updateField('hearts_lal', calculateLAL(batch.hearts_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -963,14 +1003,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Cut Density
             </label>
-            <input
-              type="text"
-              value={batch.hearts_cut_density ?? ''}
-              onChange={(e) => updateField('hearts_cut_density', formatDensity(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 2, 3)
-                updateField('hearts_cut_density', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.hearts_cut_density ?? ''}
+            onChange={(e) => {
+              const formatted = formatDensity(e.target.value)
+              updateField('hearts_cut_density', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 2, 3)
+              updateField('hearts_cut_density', parseToNumber(validated))
+            }}
               placeholder="0.000"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -980,14 +1023,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Density
             </label>
-            <input
-              type="text"
-              value={batch.hearts_density ?? ''}
-              onChange={(e) => updateField('hearts_density', formatDensity(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 2, 3)
-                updateField('hearts_density', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.hearts_density ?? ''}
+            onChange={(e) => {
+              const formatted = formatDensity(e.target.value)
+              updateField('hearts_density', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 2, 3)
+              updateField('hearts_density', parseToNumber(validated))
+            }}
               placeholder="0.000"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1001,7 +1047,7 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           <input
             type="text"
             value={batch.power_input_changed_to ?? ''}
-            onChange={(e) => updateField('power_input_changed_to', e.target.value)}
+            onChange={(e) => updateField('power_input_changed_to', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_changed_to', parseNumber(e.target.value))}
             placeholder="0.0"
             className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -1033,14 +1079,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               ETails Cut ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.early_tails_cut_abv_percent ?? ''}
-              onChange={(e) => updateField('early_tails_cut_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                updateField('early_tails_cut_abv_percent', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.early_tails_cut_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('early_tails_cut_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              updateField('early_tails_cut_abv_percent', parseToNumber(validated))
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1050,18 +1099,22 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               ETails Total ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.early_tails_total_abv_percent ?? ''}
-              onChange={(e) => updateField('early_tails_total_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('early_tails_total_abv_percent', abv)
-                if (abv !== undefined && batch.early_tails_volume_l !== undefined) {
-                  updateField('early_tails_lal', calculateLAL(batch.early_tails_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.early_tails_total_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              const abv = formatted ? parseFloat(formatted) : undefined
+              updateField('early_tails_total_abv_percent', abv)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('early_tails_total_abv_percent', abv)
+              if (abv !== undefined && batch.early_tails_volume_l !== undefined) {
+                updateField('early_tails_lal', calculateLAL(batch.early_tails_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1071,17 +1124,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               ETails Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.early_tails_volume_l ?? ''}
-              onChange={(e) => updateField('early_tails_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('early_tails_volume_l', vol)
-                if (vol !== undefined && batch.early_tails_total_abv_percent !== undefined) {
-                  updateField('early_tails_lal', calculateLAL(vol, batch.early_tails_total_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.early_tails_volume_l ?? ''}
+            onChange={(e) => updateField('early_tails_volume_l', parseToNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('early_tails_volume_l', vol)
+              if (vol !== undefined && batch.early_tails_total_abv_percent !== undefined) {
+                updateField('early_tails_lal', calculateLAL(vol, batch.early_tails_total_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1106,14 +1159,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               ETails Density
             </label>
-            <input
-              type="text"
-              value={batch.early_tails_density ?? ''}
-              onChange={(e) => updateField('early_tails_density', formatDensity(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 2, 3)
-                updateField('early_tails_density', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.early_tails_density ?? ''}
+            onChange={(e) => {
+              const formatted = formatDensity(e.target.value)
+              updateField('early_tails_density', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 2, 3)
+              updateField('early_tails_density', parseToNumber(validated))
+            }}
               placeholder="0.000"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1123,14 +1179,14 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Power Input Changed To (A)
             </label>
-            <input
-              type="text"
-              value={batch.power_input_changed_to_2 ?? ''}
-              onChange={(e) => updateField('power_input_changed_to_2', e.target.value)}
-              onBlur={(e) => updateField('power_input_changed_to_2', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.power_input_changed_to_2 ?? ''}
+            onChange={(e) => updateField('power_input_changed_to_2', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('power_input_changed_to_2', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
             <p className="text-xs text-stone-500 mt-1">
               Power adjustment during early tails
             </p>
@@ -1159,14 +1215,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               LTails Cut ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.late_tails_cut_abv_percent ?? ''}
-              onChange={(e) => updateField('late_tails_cut_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                updateField('late_tails_cut_abv_percent', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.late_tails_cut_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('late_tails_cut_abv_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              updateField('late_tails_cut_abv_percent', parseToNumber(validated))
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1176,18 +1235,22 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               LTails Total ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.late_tails_total_abv_percent ?? ''}
-              onChange={(e) => updateField('late_tails_total_abv_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                const abv = parseToNumber(validated)
-                updateField('late_tails_total_abv_percent', abv)
-                if (abv !== undefined && batch.late_tails_volume_l !== undefined) {
-                  updateField('late_tails_lal', calculateLAL(batch.late_tails_volume_l, abv))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.late_tails_total_abv_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              const abv = formatted ? parseFloat(formatted) : undefined
+              updateField('late_tails_total_abv_percent', abv)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              const abv = parseToNumber(validated)
+              updateField('late_tails_total_abv_percent', abv)
+              if (abv !== undefined && batch.late_tails_volume_l !== undefined) {
+                updateField('late_tails_lal', calculateLAL(batch.late_tails_volume_l, abv))
+              }
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1197,17 +1260,17 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               LTails Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.late_tails_volume_l ?? ''}
-              onChange={(e) => updateField('late_tails_volume_l', e.target.value)}
-              onBlur={(e) => {
-                const vol = parseToNumber(e.target.value)
-                updateField('late_tails_volume_l', vol)
-                if (vol !== undefined && batch.late_tails_total_abv_percent !== undefined) {
-                  updateField('late_tails_lal', calculateLAL(vol, batch.late_tails_total_abv_percent))
-                }
-              }}
+          <input
+            type="text"
+            value={batch.late_tails_volume_l ?? ''}
+            onChange={(e) => updateField('late_tails_volume_l', parseToNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseToNumber(e.target.value)
+              updateField('late_tails_volume_l', vol)
+              if (vol !== undefined && batch.late_tails_total_abv_percent !== undefined) {
+                updateField('late_tails_lal', calculateLAL(vol, batch.late_tails_total_abv_percent))
+              }
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1234,7 +1297,10 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           <input
             type="text"
             value={batch.late_tails_density ?? ''}
-            onChange={(e) => updateField('late_tails_density', formatDensity(e.target.value))}
+            onChange={(e) => {
+              const formatted = formatDensity(e.target.value)
+              updateField('late_tails_density', formatted ? parseFloat(formatted) : undefined)
+            }}
             onBlur={(e) => {
               const validated = validateOnBlur(e.target.value, 2, 3)
               updateField('late_tails_density', parseToNumber(validated))
@@ -1289,7 +1355,10 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
               <input
                 type="text"
                 value={batch.final_abv_after_dilution_percent ?? ''}
-                onChange={(e) => updateField('final_abv_after_dilution_percent', formatABV(e.target.value))}
+                onChange={(e) => {
+                  const formatted = formatABV(e.target.value)
+                  updateField('final_abv_after_dilution_percent', formatted ? parseFloat(formatted) : undefined)
+                }}
                 onBlur={(e) => {
                   const validated = validateOnBlur(e.target.value, 95.0, 1)
                   updateField('final_abv_after_dilution_percent', parseToNumber(validated))
@@ -1341,28 +1410,31 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Water Added for Dilution (L)
             </label>
-            <input
-              type="text"
-              value={batch.water_added_for_dilution_l ?? ''}
-              onChange={(e) => updateField('water_added_for_dilution_l', e.target.value)}
-              onBlur={(e) => updateField('water_added_for_dilution_l', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.water_added_for_dilution_l ?? ''}
+            onChange={(e) => updateField('water_added_for_dilution_l', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('water_added_for_dilution_l', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
 
           <div>
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Final ABV (%)
             </label>
-            <input
-              type="text"
-              value={batch.final_abv_after_dilution_percent ?? ''}
-              onChange={(e) => updateField('final_abv_after_dilution_percent', formatABV(e.target.value))}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 95.0, 1)
-                updateField('final_abv_after_dilution_percent', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.final_abv_after_dilution_percent ?? ''}
+            onChange={(e) => {
+              const formatted = formatABV(e.target.value)
+              updateField('final_abv_after_dilution_percent', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 95.0, 1)
+              updateField('final_abv_after_dilution_percent', parseToNumber(validated))
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -1372,14 +1444,14 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Final Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.final_volume_after_dilution_l ?? ''}
-              onChange={(e) => updateField('final_volume_after_dilution_l', e.target.value)}
-              onBlur={(e) => updateField('final_volume_after_dilution_l', parseNumber(e.target.value))}
-              placeholder="0.0"
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
-            />
+          <input
+            type="text"
+            value={batch.final_volume_after_dilution_l ?? ''}
+            onChange={(e) => updateField('final_volume_after_dilution_l', parseNumber(e.target.value))}
+            onBlur={(e) => updateField('final_volume_after_dilution_l', parseNumber(e.target.value))}
+            placeholder="0.0"
+            className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+          />
           </div>
         </div>
 
@@ -1498,4 +1570,3 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
     </div>
   )
 }
-

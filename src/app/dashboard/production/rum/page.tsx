@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { buildRumBatchFallback, type RumBatchSummary } from "@/modules/production/services/batch-fallback.service"
 import { RumDetailPanel } from "./RumDetailPanel"
@@ -75,7 +75,7 @@ const RumCard: React.FC<{
   )
 }
 
-export default function RumPage() {
+function RumPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [loading, setLoading] = useState(false)
@@ -304,3 +304,10 @@ export default function RumPage() {
   )
 }
 
+export default function RumPage() {
+  return (
+    <Suspense fallback={<div className="h-screen flex flex-col bg-stone-100" />}> 
+      <RumPageContent />
+    </Suspense>
+  )
+}

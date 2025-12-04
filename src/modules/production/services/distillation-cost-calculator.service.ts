@@ -203,7 +203,7 @@ export class DistillationCostCalculator {
     const costPerLiterGin = totalCost / outputVolumeL
     const outputLAA = outputVolumeL * (outputABV / 100)
     const costPerLAAGin = outputLAA > 0 ? totalCost / outputLAA : 0
-    const yield = (outputVolumeL / inputVolumeL) * 100
+    const yieldPercent = (outputVolumeL / inputVolumeL) * 100
     
     return {
       ethanol,
@@ -212,7 +212,7 @@ export class DistillationCostCalculator {
         totalCost,
         costPerLiterGin,
         costPerLAAGin,
-        yield,
+        yield: yieldPercent,
         ethanolCostPerLiter: ethanol.cost / outputVolumeL,
         operationalCostPerLiter: operational.costBreakdown.total / outputVolumeL
       }
@@ -247,7 +247,7 @@ export class DistillationCostCalculator {
     const costPerLiterVodka = totalCost / outputVolumeL
     const outputLAA = outputVolumeL * (outputABV / 100)
     const costPerLAAVodka = outputLAA > 0 ? totalCost / outputLAA : 0
-    const yield = (outputVolumeL / inputVolumeL) * 100
+    const yieldPercent = (outputVolumeL / inputVolumeL) * 100
     
     return {
       ethanol,
@@ -256,7 +256,7 @@ export class DistillationCostCalculator {
         totalCost,
         costPerLiterVodka,
         costPerLAAVodka,
-        yield,
+        yield: yieldPercent,
         ethanolCostPerLiter: ethanol.cost / outputVolumeL,
         operationalCostPerLiter: operational.costBreakdown.total / outputVolumeL
       }

@@ -76,43 +76,84 @@ const spiritGinDry2024BulletproofData: Batch = {
 
   runData: [
     {
+      id: generateUUID(),
       time: "10:55 AM",
       phase: "Foreshots",
       volume_L: 2.0,
+      volume_percent: null,
+      vcTankVolume_L: null,
       abv_percent: 87.0,
+      density: null,
+      ambientTemp_C: null,
+      headTemp_C: null,
+      condenserTemp_C: null,
       lal: 1.7,
-      observations: "Discarded"
+      observations: "Discarded",
+      notes: null
     },
     {
+      id: generateUUID(),
       time: "11:15 AM",
       phase: "Heads",
       volume_L: 12.0,
+      volume_percent: null,
+      vcTankVolume_L: null,
       abv_percent: 81.6,
+      density: null,
+      ambientTemp_C: null,
+      headTemp_C: null,
+      condenserTemp_C: null,
       lal: 9.8,
-      observations: "Feints"
+      observations: "Feints",
+      notes: null
     },
     {
+      id: generateUUID(),
       time: "04:00 PM",
       phase: "Middle Run (Hearts) – Part 1",
       volume_L: 199.0,
+      volume_percent: null,
+      vcTankVolume_L: null,
       abv_percent: 81.4,
+      density: null,
+      ambientTemp_C: null,
+      headTemp_C: null,
+      condenserTemp_C: null,
       lal: 162.0,
-      observations: "Main hearts run"
+      observations: "Main hearts run",
+      notes: null
     },
     {
+      id: generateUUID(),
+      time: null,
       phase: "Middle Run (Hearts) – Adjustment",
       volume_L: 0.0,
+      volume_percent: null,
+      vcTankVolume_L: null,
       abv_percent: null,
+      density: null,
+      ambientTemp_C: null,
+      headTemp_C: null,
+      condenserTemp_C: null,
       lal: null,
-      observations: "Suggested to add 205 L water for next run"
+      observations: "Suggested to add 205 L water for next run",
+      notes: null
     },
     {
+      id: generateUUID(),
       time: "07:00 AM (Next Day)",
       phase: "Tails",
       volume_L: 100.0,
+      volume_percent: null,
+      vcTankVolume_L: null,
       abv_percent: 78.0,
+      density: null,
+      ambientTemp_C: null,
+      headTemp_C: null,
+      condenserTemp_C: null,
       lal: null,
-      observations: "Kept for future distillations"
+      observations: "Kept for future distillations",
+      notes: null
     }
   ],
 
@@ -199,13 +240,99 @@ const spiritGinDry2024BulletproofData: Batch = {
   },
 
   notes: "Oaks Kitchen Dry Season Gin distilled on Carrie still using tropical Thai botanicals. Balanced lemongrass, rosella, and citrus notes; tails kept for future runs."
-} satisfies DistillationSession
+}
 
 // Export the enhanced session with calculated metrics
-export const spiritGinDry2024Distillation = VodkaDistillationCalculator.enhanceSession(spiritGinDry2024BulletproofData)
+// Deprecated: previously used bulletproof data directly for enhancement
+// export const spiritGinDry2024Distillation = VodkaDistillationCalculator.enhanceSession(spiritGinDry2024BulletproofData)
 
 // Export the bulletproof schema data
+// Convert bulletproof data to legacy format for compatibility
+const baseSpiritGinDry2024Distillation: DistillationSession = {
+  id: spiritGinDry2024BulletproofData.spiritRunId,
+  spiritRun: spiritGinDry2024BulletproofData.spiritRunId,
+  sku: spiritGinDry2024BulletproofData.sku,
+  description: spiritGinDry2024BulletproofData.description ?? undefined,
+  date: spiritGinDry2024BulletproofData.date,
+  still: spiritGinDry2024BulletproofData.stillUsed,
+  boilerOn: spiritGinDry2024BulletproofData.boilerOn ?? '',
+  chargeLAL: spiritGinDry2024BulletproofData.chargeAdjustment.total.lal ?? 0,
+  chargeVolumeL: spiritGinDry2024BulletproofData.chargeAdjustment.total.volume_L ?? 0,
+  chargeABV: spiritGinDry2024BulletproofData.chargeAdjustment.total.abv_percent ?? 0,
+  powerA: 35,
+  elementsKW: 32,
+  runData: spiritGinDry2024BulletproofData.runData.map(d => ({
+    time: d.time,
+    phase: d.phase,
+    volume_L: d.volume_L,
+    abv_percent: d.abv_percent,
+    lal: d.lal,
+    observations: d.observations ?? undefined
+  })),
+  totalRun: {
+    volume_L: spiritGinDry2024BulletproofData.totalRun.volume_L ?? null,
+    abv_percent: spiritGinDry2024BulletproofData.totalRun.abv_percent ?? null,
+    lal: spiritGinDry2024BulletproofData.totalRun.lal ?? null,
+    notes: spiritGinDry2024BulletproofData.totalRun.notes ?? ''
+  },
+  outputs: spiritGinDry2024BulletproofData.output.map(o => ({
+    name: o.phase as 'Foreshots' | 'Heads' | 'Hearts' | 'Tails',
+    volumeL: o.volume_L ?? 0,
+    abv: o.abv_percent ?? 0,
+    lal: o.lal ?? 0,
+    vessel: o.receivingVessel ?? undefined,
+    observations: undefined
+  })),
+  finalOutput: {
+    totalVolume_L: spiritGinDry2024BulletproofData.finalOutput.totalVolume_L ?? null,
+    finalAbv_percent: spiritGinDry2024BulletproofData.finalOutput.abv_percent ?? null,
+    lal: spiritGinDry2024BulletproofData.finalOutput.lal ?? null,
+    notes: spiritGinDry2024BulletproofData.finalOutput.notes ?? ''
+  },
+  botanicals: spiritGinDry2024BulletproofData.botanicals.map(b => ({
+    name: b.name,
+    weightG: b.weight_g ?? null,
+    notes: b.notes ?? undefined,
+    ratio_percent: b.ratio_percent ?? undefined,
+    status: (b.status ?? undefined) as any
+  })),
+  steepingHours: null,
+  distillationHours: null,
+  totals: undefined,
+  phases: undefined,
+  efficiency: null,
+  recovery: null,
+  spiritYield: null,
+  lalIn: spiritGinDry2024BulletproofData.chargeAdjustment.total.lal ?? null,
+  lalOut: null,
+  lalEfficiency: null,
+  costs: undefined,
+  stillSetup: {
+    elements: spiritGinDry2024BulletproofData.stillSetup.elements ?? null,
+    steeping: spiritGinDry2024BulletproofData.stillSetup.steeping ?? null,
+    plates: spiritGinDry2024BulletproofData.stillSetup.plates ?? null,
+    options: spiritGinDry2024BulletproofData.stillSetup.options ?? null,
+  },
+  charge: {
+    components: spiritGinDry2024BulletproofData.chargeAdjustment.components.map(c => ({
+      source: c.source,
+      volume_L: c.volume_L ?? null,
+      abv_percent: c.abv_percent ?? null,
+      lal: c.lal ?? null,
+      type: (c.type as any) ?? 'other'
+    })),
+    total: {
+      volume_L: spiritGinDry2024BulletproofData.chargeAdjustment.total.volume_L ?? null,
+      abv_percent: spiritGinDry2024BulletproofData.chargeAdjustment.total.abv_percent ?? null,
+      lal: spiritGinDry2024BulletproofData.chargeAdjustment.total.lal ?? null
+    }
+  },
+  notes: spiritGinDry2024BulletproofData.notes ?? undefined
+}
+
+// Export the enhanced session with calculated metrics
+export const spiritGinDry2024Distillation = VodkaDistillationCalculator.enhanceSession(baseSpiritGinDry2024Distillation)
+
 export { spiritGinDry2024BulletproofData }
 
 export default spiritGinDry2024Distillation
-

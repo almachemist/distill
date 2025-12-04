@@ -14,6 +14,7 @@ import {
   ProductionStatus,
   isGinVodkaSpiritBatch,
   isRumCaneSpiritBatch,
+  StillSetup,
 } from '@/types/production-schemas';
 import { createProductionTemplate } from '@/lib/production-templates';
 import type { Recipe, GinVodkaSpiritRecipe, isGinVodkaSpiritRecipe } from '@/types/recipe-schemas';
@@ -53,23 +54,23 @@ export async function createDraftBatch(
       if (ginRecipe.recommendedStill) {
         ginTemplate.stillUsed = ginRecipe.recommendedStill;
       }
+      const getCurrentStillSetup = (): StillSetup => ({
+        elements: ginTemplate.stillSetup?.elements ?? '',
+        plates: ginTemplate.stillSetup?.plates ?? '',
+        steeping: ginTemplate.stillSetup?.steeping ?? '',
+        options: ginTemplate.stillSetup?.options
+      })
       if (ginRecipe.elements) {
-        ginTemplate.stillSetup = {
-          ...ginTemplate.stillSetup,
-          elements: ginRecipe.elements,
-        };
+        const current = getCurrentStillSetup();
+        ginTemplate.stillSetup = { ...current, elements: ginRecipe.elements };
       }
       if (ginRecipe.plates) {
-        ginTemplate.stillSetup = {
-          ...ginTemplate.stillSetup,
-          plates: ginRecipe.plates,
-        };
+        const current = getCurrentStillSetup();
+        ginTemplate.stillSetup = { ...current, plates: ginRecipe.plates };
       }
       if (ginRecipe.steepingHours) {
-        ginTemplate.stillSetup = {
-          ...ginTemplate.stillSetup,
-          steeping: `Juniper steeped ${ginRecipe.steepingHours} hrs`,
-        };
+        const current = getCurrentStillSetup();
+        ginTemplate.stillSetup = { ...current, steeping: `Juniper steeped ${ginRecipe.steepingHours} hrs` };
       }
 
       // Pre-fill target ABV
@@ -84,9 +85,10 @@ export async function createDraftBatch(
 
     // Determine which table to use
     if (productType === 'rum' || productType === 'cane_spirit') {
+      const rumTemplate = template as Partial<RumCaneSpiritBatch>
       // Generate a unique batch_id if not provided
-      const batchId = template.batch_id || `DRAFT-${productType.toUpperCase()}-${Date.now()}`;
-      const productName = template.product_name || (productType === 'rum' ? 'Rum' : 'Cane Spirit');
+      const batchId = rumTemplate.batch_name || `DRAFT-${productType.toUpperCase()}-${Date.now()}`;
+      const productName = rumTemplate.product_name || (productType === 'rum' ? 'Rum' : 'Cane Spirit');
 
       // Prepare the insert data - only include fields that exist in the database
       const insertData = {
@@ -99,8 +101,8 @@ export async function createDraftBatch(
         distillation_status: 'not_started',
         aging_status: 'not_started',
         bottling_status: 'not_started',
-        still_used: template.still_used || 'Roberta',
-        notes: template.notes || '',
+        still_used: rumTemplate.still_used || 'Roberta',
+        notes: rumTemplate.notes || '',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
@@ -126,15 +128,16 @@ export async function createDraftBatch(
 
       return data as RumCaneSpiritBatch;
     } else {
+      const ginTemplate = template as Partial<GinVodkaSpiritBatch>
       // Insert into production_batches
       const { data, error } = await supabase
         .from('production_batches')
         .insert({
-          id: template.spiritRunId || `DRAFT-${Date.now()}`,
+          id: ginTemplate.spiritRunId || `DRAFT-${Date.now()}`,
           type: productType,
-          still: (template as Partial<GinVodkaSpiritBatch>).stillUsed || '',
+          still: ginTemplate.stillUsed || '',
           data: {
-            ...template,
+            ...ginTemplate,
             status: 'draft',
           },
           created_at: new Date().toISOString(),
@@ -383,7 +386,7 @@ export async function updateDraftBatch(
         data: updatedData,
         // type and still are NOT NULL, so we must always provide them
         type: updatedData.productType || existingData.type || 'gin',
-        still: updatedData.stillUsed || existingData.still || '',
+        still: (updatedData as Partial<GinVodkaSpiritBatch>).stillUsed || existingData.still || '',
         updated_at: new Date().toISOString(),
       };
 
@@ -515,8 +518,8 @@ export function validateBatchForFinalization(batch: ProductionBatch): {
 
     if (!batch.output || batch.output.length === 0) errors.push('At least one output fraction is required');
   } else if (isRumCaneSpiritBatch(batch)) {
-    if (!batch.batch_id) errors.push('Batch ID is required');
-    if (!batch.fermentation_start_date) errors.push('Fermentation start date is required');
+    if (!batch.batch_name) errors.push('Batch name is required');
+    if (!batch.fermentation_date) errors.push('Fermentation date is required');
     if (!batch.distillation_date) errors.push('Distillation date is required');
     if (!batch.boiler_volume_l) errors.push('Boiler volume is required');
     if (!batch.hearts_volume_l) errors.push('Hearts volume is required');
@@ -527,4 +530,3 @@ export function validateBatchForFinalization(batch: ProductionBatch): {
     errors,
   };
 }
-

@@ -38,9 +38,10 @@ export interface OutputPhase {
 }
 
 export interface RunDataPoint {
-  time?: string
+  time?: NullableString
   phase: string
   volume_L: NullableNumber
+  volume_percent?: NullableNumber
   abv_percent: NullableNumber
   density?: NullableNumber
   condenserTemp_C?: NullableNumber
@@ -227,6 +228,4 @@ export interface StillConfiguration {
   elementsKW: number
   waterFlowCapacity_Lph: number
 }
-
-
 

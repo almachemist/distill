@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { DistillationRunRepository } from '@/modules/production/services/distillation-run.repository'
 
@@ -15,7 +15,7 @@ type Cut = {
   notes?: string
 }
 
-export default function DistillationCutsPage() {
+function DistillationCutsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const recipeId = searchParams.get('recipeId')
@@ -522,3 +522,10 @@ export default function DistillationCutsPage() {
   )
 }
 
+export default function DistillationCutsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+      <DistillationCutsContent />
+    </Suspense>
+  )
+}

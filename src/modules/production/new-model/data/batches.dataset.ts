@@ -769,29 +769,17 @@ export const batchesDataset: BatchesDataset = {
             lal: 273.6,
             notes: "Collected over 2 days. Suggested add 397 L H₂O"
           },
-          tails: [
-            {
-              date: "2025-03-17",
-              receiving_vessel: "FEINTS-GIN-MIX IBC-01",
-              volume_l: 135.0,
-              abv_percent: 89.0,
-              density: null,
-              notes: "Day 1 collection"
-            },
-            {
-              date: "2025-03-18",
-              receiving_vessel: "FEINTS-GIN-MIX IBC-01",
-              volume_l: 149.0,
-              abv_percent: 88.2,
-              notes: "Started to smell funky and ABV was dropping super fast"
-            },
-            {
-              date: "2025-03-18",
-              receiving_vessel: "FEINTS-GIN-MIX IBC-01",
-              volume_l: 14.0,
-              abv_percent: null,
-              notes: "Final collection"
-            }
+          tails: {
+            receiving_vessel: "FEINTS-GIN-MIX IBC-01",
+            volume_l: 298.0,
+            abv_percent: null,
+            lal: 0.0,
+            notes: "Collected over 2 days; see tails_segments"
+          },
+          tails_segments: [
+            { date: "2025-03-17", volume_l: 135.0, abv_percent: 89.0, notes: "Day 1 collection" },
+            { date: "2025-03-18", volume_l: 149.0, abv_percent: 88.2, notes: "Started to smell funky and ABV dropping fast" },
+            { date: "2025-03-18", volume_l: 14.0, abv_percent: null, notes: "Final collection" }
           ]
         },
 
@@ -799,14 +787,22 @@ export const batchesDataset: BatchesDataset = {
           { phase: "Foreshots", receiving_vessel: "Discarded 20L Waste", volume_l: 2.0, abv_percent: 89.0 },
           { phase: "Heads", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 12.0, abv_percent: 86.7 },
           { phase: "Hearts", receiving_vessel: "GIN-NS-0017 VC-230", volume_l: 332.0, abv_percent: 82.4, lal: 273.6 },
-          { phase: "Tails (Day 1)", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 135.0, abv_percent: 89.0, date: "2025-03-17" },
-          { phase: "Tails (Day 2)", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 149.0, abv_percent: 88.2, date: "2025-03-18", notes: "Funky smell, fast ABV drop" },
-          { phase: "Tails (Day 2 final)", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 14.0, date: "2025-03-18" }
+          { phase: "Tails (Day 1)", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 135.0, abv_percent: 89.0 },
+          { phase: "Tails (Day 2)", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 149.0, abv_percent: 88.2 },
+          { phase: "Tails (Day 2 final)", receiving_vessel: "FEINTS-GIN-MIX IBC-01", volume_l: 14.0 }
         ],
 
         dilution: {
           instructions_note: "Suggested add 397 L H₂O",
-          steps: []
+          steps: [],
+          combined: {
+            final_output_run: {
+              new_make_l: null,
+              total_volume_l: null,
+              lal: null
+            },
+            notes: "Pending dilution calculations"
+          }
         },
 
         audit: {
@@ -1186,7 +1182,6 @@ export const batchesDataset: BatchesDataset = {
             notes: "Blend for vodkas"
           },
           tails: {
-            receiving_vessel: null,
             volume_l: 0.0,
             abv_percent: 0.0,
             lal: 0.0,
@@ -1202,7 +1197,7 @@ export const batchesDataset: BatchesDataset = {
           { phase: "Foreshots", receiving_vessel: "20L Waste", volume_l: 2.0, abv_percent: 89.2, lal: 1.8 },
           { phase: "Heads", receiving_vessel: "20L Waste", volume_l: 11.0, abv_percent: 88.0, lal: 9.7 },
           { phase: "Hearts", receiving_vessel: "VC-600", volume_l: 513.0, abv_percent: 84.5, lal: 433.5 },
-          { phase: "Tails", receiving_vessel: null, volume_l: 0.0, abv_percent: 0.0, lal: 0.0 }
+          { phase: "Tails", volume_l: 0.0, abv_percent: 0.0, lal: 0.0 }
         ],
 
         dilution: {
@@ -1648,14 +1643,17 @@ export const batchesDataset: BatchesDataset = {
               target_abv_percent: 37.5
             }
           ]
+          ,
+          combined: {
+            final_output_run: {
+              new_make_l: null,
+              total_volume_l: 522.0,
+              lal: null
+            }
+          }
         },
 
-        final_output: {
-          charge_total_l: 764.0,
-          dilution_water_added_l: 280.0,
-          final_volume_l: 522.0,
-          target_abv_percent: 37.5
-        },
+        
 
         still_setup: {
           steeping_duration_hours: 14,

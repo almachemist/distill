@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
 import type { RecipeWithIngredients } from '@/modules/recipes/types/recipe.types'
@@ -12,7 +12,7 @@ interface Botanical {
   notes?: string
 }
 
-export default function BotanicalSteepingPage() {
+function BotanicalSteepingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const recipeId = searchParams.get('recipeId')
@@ -345,3 +345,10 @@ export default function BotanicalSteepingPage() {
   )
 }
 
+export default function BotanicalSteepingPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+      <BotanicalSteepingContent />
+    </Suspense>
+  )
+}

@@ -8,6 +8,7 @@
 import { DISTILLATION_CONSTANTS } from '../constants/distillation.constants'
 import { DistillationProcess } from '../types/distillation.types'
 import { calculateStepCost } from '../constants/distillation.constants'
+import { ginDistillation, ginDistillationCosts } from './gin-distillation.process'
 
 export const vodkaDistillation: DistillationProcess = {
   id: "vodka-carrie-still",

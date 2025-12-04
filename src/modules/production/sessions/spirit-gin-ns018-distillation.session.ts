@@ -9,6 +9,7 @@ const spiritGinNS018BulletproofData: Batch = {
   sku: "Navy Strength Gin",
   description: "High-strength gin distilled on Carrie still with citrus and native botanicals. Steeped 14 hours, zero plates, 35A start.",
   date: "2025-03-04",
+  boilerStartTime: "08:15 AM",
   boilerOn: "08:15 AM",
   stillUsed: "Carrie",
 

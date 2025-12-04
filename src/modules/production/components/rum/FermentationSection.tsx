@@ -302,7 +302,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           <input
             type="text"
             value={batch.dunder_ph ?? ''}
-            onChange={(e) => updateField('dunder_ph', e.target.value)}
+            onChange={(e) => {
+              const formatted = formatPH(e.target.value)
+              updateField('dunder_ph', formatted ? parseFloat(formatted) : undefined)
+            }}
             onBlur={(e) => {
               const validated = validateOnBlur(e.target.value, 14, 2)
               updateField('dunder_ph', parseToNumber(validated))
@@ -322,10 +325,13 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           <input
             type="text"
             value={batch.initial_brix ?? ''}
-            onChange={(e) => updateField('initial_brix', e.target.value)}
+            onChange={(e) => {
+              const formatted = formatDecimal(e.target.value)
+              updateField('initial_brix', formatted ? parseFloat(formatted) : 0)
+            }}
             onBlur={(e) => {
               const validated = validateOnBlur(e.target.value, 40)
-              updateField('initial_brix', parseToNumber(validated))
+              updateField('initial_brix', (parseToNumber(validated) ?? 0))
             }}
             placeholder="0.0"
             className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -339,10 +345,13 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           <input
             type="text"
             value={batch.initial_ph ?? ''}
-            onChange={(e) => updateField('initial_ph', e.target.value)}
+            onChange={(e) => {
+              const formatted = formatPH(e.target.value)
+              updateField('initial_ph', formatted ? parseFloat(formatted) : 0)
+            }}
             onBlur={(e) => {
               const validated = validateOnBlur(e.target.value, 14, 2)
-              updateField('initial_ph', parseToNumber(validated))
+              updateField('initial_ph', (parseToNumber(validated) ?? 0))
             }}
             placeholder="0.00"
             className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -356,7 +365,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           <input
             type="text"
             value={batch.initial_temperature_c ?? ''}
-            onChange={(e) => updateField('initial_temperature_c', e.target.value)}
+            onChange={(e) => {
+              const formatted = formatDecimal(e.target.value)
+              updateField('initial_temperature_c', formatted ? parseFloat(formatted) : undefined)
+            }}
             onBlur={(e) => {
               const validated = validateOnBlur(e.target.value, 99.9, 1)
               updateField('initial_temperature_c', parseToNumber(validated))
@@ -417,14 +429,17 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Yeast Rehydration Temperature (°C)
             </label>
-            <input
-              type="text"
-              value={batch.yeast_rehydration_temperature_c ?? ''}
-              onChange={(e) => updateField('yeast_rehydration_temperature_c', e.target.value)}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 99.9, 1)
-                updateField('yeast_rehydration_temperature_c', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.yeast_rehydration_temperature_c ?? ''}
+            onChange={(e) => {
+              const formatted = formatDecimal(e.target.value)
+              updateField('yeast_rehydration_temperature_c', formatted ? parseFloat(formatted) : undefined)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 99.9, 1)
+              updateField('yeast_rehydration_temperature_c', parseToNumber(validated))
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -509,7 +524,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
                     <input
                       type="text"
                       value={reading.temperature_c ?? ''}
-                      onChange={(e) => updateReading(index, 'temperature_c', e.target.value)}
+                      onChange={(e) => {
+                        const formatted = formatDecimal(e.target.value)
+                        updateReading(index, 'temperature_c', formatted ? parseFloat(formatted) : undefined)
+                      }}
                       onBlur={(e) => {
                         const validated = validateOnBlur(e.target.value, 99.9, 1)
                         updateReading(index, 'temperature_c', parseToNumber(validated))
@@ -522,7 +540,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
                     <input
                       type="text"
                       value={reading.brix ?? ''}
-                      onChange={(e) => updateReading(index, 'brix', e.target.value)}
+                      onChange={(e) => {
+                        const formatted = formatDecimal(e.target.value)
+                        updateReading(index, 'brix', formatted ? parseFloat(formatted) : undefined)
+                      }}
                       onBlur={(e) => {
                         const validated = validateOnBlur(e.target.value, 40)
                         updateReading(index, 'brix', parseToNumber(validated))
@@ -535,7 +556,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
                     <input
                       type="text"
                       value={reading.ph ?? ''}
-                      onChange={(e) => updateReading(index, 'ph', e.target.value)}
+                      onChange={(e) => {
+                        const formatted = formatPH(e.target.value)
+                        updateReading(index, 'ph', formatted ? parseFloat(formatted) : undefined)
+                      }}
                       onBlur={(e) => {
                         const validated = validateOnBlur(e.target.value, 14, 2)
                         updateReading(index, 'ph', parseToNumber(validated))
@@ -566,14 +590,17 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Final Brix
             </label>
-            <input
-              type="text"
-              value={batch.final_brix ?? ''}
-              onChange={(e) => updateField('final_brix', e.target.value)}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 40)
-                updateField('final_brix', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.final_brix ?? ''}
+            onChange={(e) => {
+              const formatted = formatDecimal(e.target.value)
+              updateField('final_brix', formatted ? parseFloat(formatted) : 0)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 40)
+              updateField('final_brix', (parseToNumber(validated) ?? 0))
+            }}
               placeholder="0.0"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -583,14 +610,17 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Final pH
             </label>
-            <input
-              type="text"
-              value={batch.final_ph ?? ''}
-              onChange={(e) => updateField('final_ph', e.target.value)}
-              onBlur={(e) => {
-                const validated = validateOnBlur(e.target.value, 14, 2)
-                updateField('final_ph', parseToNumber(validated))
-              }}
+          <input
+            type="text"
+            value={batch.final_ph ?? ''}
+            onChange={(e) => {
+              const formatted = formatPH(e.target.value)
+              updateField('final_ph', formatted ? parseFloat(formatted) : 0)
+            }}
+            onBlur={(e) => {
+              const validated = validateOnBlur(e.target.value, 14, 2)
+              updateField('final_ph', (parseToNumber(validated) ?? 0))
+            }}
               placeholder="0.00"
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
             />
@@ -601,4 +631,3 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
     </div>
   )
 }
-

@@ -1,8 +1,9 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 
-export default function BottlingSummaryPage() {
+function BottlingSummaryContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   
@@ -83,6 +84,13 @@ export default function BottlingSummaryPage() {
   )
 }
 
+export default function BottlingSummaryPage() {
+  return (
+    <Suspense fallback={<div className="space-y-6" />}> 
+      <BottlingSummaryContent />
+    </Suspense>
+  )
+}
 
 
 

@@ -121,6 +121,16 @@ export interface StockValidation {
   shortage: number
 }
 
+// Stock check result with full item details
+export interface StockCheckResult {
+  item_id: string
+  item: Item
+  required_quantity: number
+  available_quantity: number
+  is_sufficient: boolean
+  shortage: number
+}
+
 // Search and filter types
 export interface RecipeFilter {
   name?: string
@@ -164,6 +174,17 @@ export interface BatchCalculation {
   warnings: string[]
 }
 
+// Consumption posting payload types
+export interface ConsumeTxn {
+  item_id: string
+  lot_id: string
+  quantity: number
+  uom: string
+}
 
+export interface ConsumeRequest {
+  production_order_id: string
+  transactions: ConsumeTxn[]
+}
 
 

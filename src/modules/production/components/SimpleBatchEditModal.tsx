@@ -1,6 +1,6 @@
 'use client'
 
-import { DistillationSession } from '../types/distillation-session.types'
+import { DistillationSession, OutputDetail, OutputPhase } from '../types/distillation-session.types'
 import { useState, useEffect } from 'react'
 
 interface SimpleBatchEditModalProps {
@@ -39,9 +39,11 @@ export default function SimpleBatchEditModal({
     setEditedSession(prev => ({
       ...prev,
       charge: {
-        ...prev.charge,
+        components: prev.charge?.components ?? [],
         total: {
-          ...prev.charge?.total,
+          volume_L: prev.charge?.total?.volume_L ?? null,
+          abv_percent: prev.charge?.total?.abv_percent ?? null,
+          lal: prev.charge?.total?.lal ?? null,
           [field]: value,
         },
       },
@@ -70,12 +72,24 @@ export default function SimpleBatchEditModal({
   }
 
   const handleOutputChange = (index: number, field: string, value: any) => {
-    setEditedSession(prev => ({
-      ...prev,
-      outputs: prev.outputs?.map((out, i) =>
-        i === index ? { ...out, [field]: value } : out
-      ) || [],
-    }))
+    setEditedSession(prev => {
+      const outputs = prev.outputs ?? []
+      const isPhase = (o: any): o is OutputPhase => 'name' in o && ('volumeL' in o || 'abv' in o)
+      if (outputs.length === 0) {
+        return { ...prev, outputs }
+      }
+      if (outputs.every(isPhase)) {
+        const next: OutputPhase[] = (outputs as OutputPhase[]).map((out, i) =>
+          i === index ? { ...out, [field]: value } as OutputPhase : out
+        )
+        return { ...prev, outputs: next }
+      } else {
+        const next: OutputDetail[] = (outputs as OutputDetail[]).map((out, i) =>
+          i === index ? { ...out, [field]: value } as OutputDetail : out
+        )
+        return { ...prev, outputs: next }
+      }
+    })
   }
 
   return (
@@ -311,51 +325,55 @@ export default function SimpleBatchEditModal({
             <div className="bg-purple-50 rounded-xl p-4">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Outputs</h3>
               <div className="space-y-3">
-                {editedSession.outputs.map((out, idx) => (
-                  <div key={idx} className="bg-white rounded-lg p-3 border border-gray-200">
-                    <div className="font-medium text-gray-900 mb-2">{out.name || out.phase}</div>
-                    <div className="grid grid-cols-4 gap-3">
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
-                        <input
-                          type="number"
-                          step="0.1"
-                          value={out.volumeL || ''}
-                          onChange={(e) => handleOutputChange(idx, 'volumeL', parseFloat(e.target.value) || 0)}
-                          className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
-                        <input
-                          type="number"
-                          step="0.1"
-                          value={out.abv || ''}
-                          onChange={(e) => handleOutputChange(idx, 'abv', parseFloat(e.target.value) || 0)}
-                          className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">Vessel</label>
-                        <input
-                          type="text"
-                          value={out.vessel || ''}
-                          onChange={(e) => handleOutputChange(idx, 'vessel', e.target.value)}
-                          className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-xs font-medium text-gray-600 mb-1">Observations</label>
-                        <input
-                          type="text"
-                          value={out.observations || ''}
-                          onChange={(e) => handleOutputChange(idx, 'observations', e.target.value)}
-                          className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
-                        />
+                {editedSession.outputs.map((out, idx) => {
+                  const isPhase = (out as any).name !== undefined
+                  const title = isPhase ? (out as OutputPhase).name : (out as OutputDetail).phase
+                  return (
+                    <div key={idx} className="bg-white rounded-lg p-3 border border-gray-200">
+                      <div className="font-medium text-gray-900 mb-2">{title}</div>
+                      <div className="grid grid-cols-4 gap-3">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={isPhase ? ((out as OutputPhase).volumeL || '') : ((out as OutputDetail).volume_L || '')}
+                            onChange={(e) => handleOutputChange(idx, isPhase ? 'volumeL' : 'volume_L', parseFloat(e.target.value) || 0)}
+                            className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
+                          <input
+                            type="number"
+                            step="0.1"
+                            value={isPhase ? ((out as OutputPhase).abv || '') : ((out as OutputDetail).abv_percent || '')}
+                            onChange={(e) => handleOutputChange(idx, isPhase ? 'abv' : 'abv_percent', parseFloat(e.target.value) || 0)}
+                            className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-1">Vessel</label>
+                          <input
+                            type="text"
+                            value={isPhase ? (((out as OutputPhase).vessel || '')) : (((out as OutputDetail).receivingVessel || ''))}
+                            onChange={(e) => handleOutputChange(idx, isPhase ? 'vessel' : 'receivingVessel', e.target.value)}
+                            className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-1">Observations</label>
+                          <input
+                            type="text"
+                            value={isPhase ? (((out as OutputPhase).observations || '')) : ''}
+                            onChange={(e) => handleOutputChange(idx, 'observations', e.target.value)}
+                            className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
           )}
@@ -392,7 +410,3 @@ export default function SimpleBatchEditModal({
     </div>
   )
 }
-
-
-
-

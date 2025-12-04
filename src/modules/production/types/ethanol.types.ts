@@ -164,13 +164,13 @@ export class EthanolCostCalculator {
     const costPerLiterOutput = outputVolumeL > 0 ? ethanolCalc.cost / outputVolumeL : 0
     const outputLAA = outputVolumeL * (outputABV / 100)
     const costPerLAAOutput = outputLAA > 0 ? ethanolCalc.cost / outputLAA : 0
-    const yield = inputVolumeL > 0 ? (outputVolumeL / inputVolumeL) * 100 : 0
+    const yieldPercent = inputVolumeL > 0 ? (outputVolumeL / inputVolumeL) * 100 : 0
     
     return {
       ethanolCost: ethanolCalc.cost,
       costPerLiterOutput,
       costPerLAAOutput,
-      yield
+      yield: yieldPercent
     }
   }
   

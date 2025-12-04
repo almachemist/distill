@@ -1,8 +1,4 @@
 import { fy2025DistillationLog, getStillPerformanceComparison } from './fy2025-distillation-log.data'
-import { spiritLiq001BulletproofData } from '../sessions/spirit-liq001-distillation.session'
-import { spiritLiq002BulletproofData } from '../sessions/spirit-liq002-distillation.session'
-import { spiritGinNS018BulletproofData } from '../sessions/spirit-gin-ns018-distillation.session'
-import { spiritGinDry2024BulletproofData } from '../sessions/spirit-gin-dry2024-distillation.session'
 import { type Batch } from '@/types/schema'
 
 // Enhanced FY2025 Master Distillation Summary with Analytics
@@ -269,7 +265,7 @@ function generateEnhancedMonthlyBreakdown(monthlyData: any): { [month: string]: 
       lalRecovered: data.lalRecovered,
       efficiency: data.efficiency,
       volumeProcessed: data.runs.reduce((sum: number, run: any) => sum + calculateTotalVolume(run), 0),
-      products: [...new Set(data.runs.map((run: any) => getProductType(run)))]
+      products: Array.from(new Set<string>(data.runs.map((run: any) => getProductType(run))))
     }
   })
   

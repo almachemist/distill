@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { LotsPicker } from '@/modules/inventory/components/LotsPicker'
 import { StockRepository } from '@/modules/inventory/services/stock.repository'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
 import type { RecipeWithIngredients } from '@/modules/recipes/types/recipe.types'
@@ -22,6 +21,90 @@ interface IngredientAllocation {
   uom: string
   allocations: LotAllocation[]
   is_complete: boolean
+}
+
+interface LotsPickerProps {
+  itemId: string
+  itemName: string
+  requiredQty: number
+  defaultUom: string
+  onAllocationsChange: (allocations: LotAllocation[]) => void
+}
+
+function LotsPicker({ itemId, itemName, requiredQty, defaultUom, onAllocationsChange }: LotsPickerProps) {
+  const [lots, setLots] = useState<Awaited<ReturnType<StockRepository['getLotsForItem']>>>([])
+  const [allocs, setAllocs] = useState<Record<string, number>>({})
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const repo = new StockRepository()
+    setLoading(true)
+    repo.getLotsForItem(itemId)
+      .then(setLots)
+      .catch(e => setError(e instanceof Error ? e.message : 'Failed to load lots'))
+      .finally(() => setLoading(false))
+  }, [itemId])
+
+  useEffect(() => {
+    const allocations: LotAllocation[] = Object.entries(allocs)
+      .filter(([, qty]) => qty > 0)
+      .map(([lotId, qty]) => {
+        const lot = lots.find(l => l.lot_id === lotId)!
+        return { lot_id: lotId, lot_code: lot?.lot_code || '', qty, uom: defaultUom }
+      })
+    onAllocationsChange(allocations)
+  }, [allocs, lots, defaultUom, onAllocationsChange])
+
+  const totalAllocated = Object.values(allocs).reduce((sum, q) => sum + q, 0)
+  const remaining = Math.max(0, requiredQty - totalAllocated)
+
+  return (
+    <div className="border rounded-lg p-4">
+      <div className="flex justify-between items-center mb-3">
+        <div className="font-medium text-gray-900">{itemName}</div>
+        <div className="text-sm text-gray-700">Required: {requiredQty} {defaultUom} • Remaining: {remaining.toFixed(2)} {defaultUom}</div>
+      </div>
+      {error && <div className="text-red-700 text-sm mb-2">{error}</div>}
+      {loading ? (
+        <div className="text-sm text-gray-500">Loading…</div>
+      ) : (
+        <div className="space-y-2">
+          {lots.length === 0 && (
+            <div className="text-sm text-gray-500">No lots with stock</div>
+          )}
+          {lots.map(lot => (
+            <div key={lot.lot_id} className="grid grid-cols-5 gap-2 items-center">
+              <div className="text-sm text-gray-900">{lot.lot_code}</div>
+              <div className="text-sm text-gray-700">On hand: {lot.on_hand.toFixed(2)} {defaultUom}</div>
+              <input
+                type="number"
+                step="0.1"
+                min="0"
+                max={lot.on_hand}
+                value={allocs[lot.lot_id] ?? ''}
+                onChange={(e) => {
+                  const v = parseFloat(e.target.value)
+                  setAllocs(a => ({ ...a, [lot.lot_id]: isNaN(v) ? 0 : Math.min(v, lot.on_hand) }))
+                }}
+                className="w-full px-2 py-1 text-sm border border-gray-300 rounded"
+              />
+              <button
+                type="button"
+                onClick={() => setAllocs(a => ({ ...a, [lot.lot_id]: Math.min(remaining, lot.on_hand) }))}
+                className="px-2 py-1 text-sm border rounded"
+              >Max</button>
+              <button
+                type="button"
+                onClick={() => setAllocs(a => { const { [lot.lot_id]: _, ...rest } = a; return rest })}
+                className="px-2 py-1 text-sm border rounded"
+              >Clear</button>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
 
 export function StartGinBatch() {

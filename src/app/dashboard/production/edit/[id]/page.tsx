@@ -1,6 +1,6 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { useParams, useSearchParams, useRouter } from 'next/navigation'
 import { getDraftBatch, updateDraftBatch } from '@/modules/production/services/production-draft.repository'
 import { getRecipeById } from '@/modules/production/services/recipe.repository'
@@ -9,7 +9,7 @@ import type { ProductionBatch, GinVodkaSpiritBatch } from '@/types/production-sc
 import { isGinVodkaSpiritBatch } from '@/types/production-schemas'
 import type { Recipe } from '@/types/recipe-schemas'
 
-export default function EditProductionPage() {
+function EditProductionContent() {
   const params = useParams()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -178,3 +178,10 @@ export default function EditProductionPage() {
   )
 }
 
+export default function EditProductionPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-neutral-50" />}> 
+      <EditProductionContent />
+    </Suspense>
+  )
+}

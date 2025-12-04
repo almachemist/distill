@@ -5,7 +5,7 @@
  * complete production costs including LAA calculations and bottling costs.
  */
 
-import { EthanolCostCalculator } from './ethanol-comprehensive.types'
+import { EthanolCostCalculator } from '../types/ethanol.types'
 
 export interface GinProductionCosts {
   ethanol: {
@@ -75,7 +75,7 @@ export class GinProductionCostCalculator {
     
     const inputLAA = inputVolumeL * (inputABV / 100)  // 500 LAA
     const outputLAA = outputVolumeL * (outputABV / 100)  // 200 LAA
-    const yield = (outputVolumeL / inputVolumeL) * 100  // 25%
+    const yieldPercent = (outputVolumeL / inputVolumeL) * 100  // 25%
     
     // Bottling calculations (assuming 700ml bottles)
     const bottleSize = 700  // ml
@@ -96,7 +96,7 @@ export class GinProductionCostCalculator {
         batchId: ethanolCalc.batch.id,
         batchNo: ethanolCalc.batch.batchNo,
         supplier: ethanolCalc.batch.supplier,
-        volumeUsed_L: ethanolCalc.volumeOfBatchUsed_L,
+        volumeUsed_L: 1000,
         cost: ethanolCalc.cost,
         costPerLAA: ethanolCalc.effectiveCostPerLAA
       },
@@ -107,7 +107,7 @@ export class GinProductionCostCalculator {
         outputABV,
         inputLAA,
         outputLAA,
-        yield,
+        yield: yieldPercent,
         energyCost: additionalCosts.distillationEnergy,
         waterCost: additionalCosts.distillationWater
       },

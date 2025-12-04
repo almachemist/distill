@@ -1,4 +1,4 @@
-import { DistillationSession } from '../types/distillation-session.types'
+import { DistillationSession, OutputDetail, OutputPhase } from '../types/distillation-session.types'
 import { merchantMaeGin001Distillation } from '../sessions/merchant-mae-gin-001-distillation.session'
 import { merchantMaeGinDistillation } from '../sessions/merchant-mae-gin-distillation.session'
 import { merchantMaeGin003Distillation } from '../sessions/merchant-mae-gin-003-distillation.session'
@@ -109,7 +109,15 @@ const calculateSummary = (sessions: DistillationSession[]) => {
   const totalVolumeIn = sessions.reduce((sum, session) => sum + (session.chargeVolumeL || 0), 0)
   const totalVolumeOut = sessions.reduce((sum, session) => {
     const outputs = session.outputs || []
-    return sum + outputs.reduce((outputSum, output) => outputSum + (output.volumeL || 0), 0)
+    if (outputs.length === 0) return sum
+    const isPhase = (outputs[0] as any).name !== undefined
+    if (isPhase) {
+      const out = outputs as OutputPhase[]
+      return sum + out.reduce((acc, o) => acc + (o.volumeL || 0), 0)
+    } else {
+      const out = outputs as OutputDetail[]
+      return sum + out.reduce((acc, o) => acc + (o.volume_L || 0), 0)
+    }
   }, 0)
   
   const overallEfficiency = totalLALCharged > 0 ? (totalLALRecovered / totalLALCharged) * 100 : 0
@@ -156,7 +164,7 @@ const generateMonthlyBreakdown = (sessions: DistillationSession[]) => {
 
 // Generate the complete FY2025 distillation log
 export const fy2025DistillationLog: FY2025DistillationLog = {
-  financialYear: '2025',
+  financialYear: '2024-2025',
   totalRuns: allFY2025Sessions.length,
   runsByProduct: categorizeByProduct(allFY2025Sessions),
   runsByStill: categorizeByStill(allFY2025Sessions),

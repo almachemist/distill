@@ -1,8 +1,9 @@
 'use client'
 
+import { Suspense } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
 
-export default function BatchSummaryPage() {
+function BatchSummaryContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   
@@ -78,6 +79,13 @@ export default function BatchSummaryPage() {
   )
 }
 
+export default function BatchSummaryPage() {
+  return (
+    <Suspense fallback={<div className="space-y-6" />}> 
+      <BatchSummaryContent />
+    </Suspense>
+  )
+}
 
 
 

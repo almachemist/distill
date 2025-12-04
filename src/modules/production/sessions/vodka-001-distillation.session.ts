@@ -1,4 +1,4 @@
-import { DistillationSession, RunDataPoint, StillSetup, TotalRun, OutputDetail, DilutionDetail, FinalOutput } from '../types/distillation-session.types'
+import { DistillationSession, RunDataPoint, StillSetup, TotalRun, OutputDetail, OutputPhase, DilutionDetail, FinalOutput } from '../types/distillation-session.types'
 import { VodkaDistillationCalculator } from '../services/vodka-distillation-calculator.service'
 
 const baseVodka001Distillation: DistillationSession = {
@@ -128,7 +128,7 @@ const baseVodka001Distillation: DistillationSession = {
       vessel: 'Not collected',
       observations: 'Not collected'
     }
-  ] as OutputDetail[],
+  ] as OutputPhase[],
 
   // Dilution history
   dilutions: [
@@ -173,5 +173,4 @@ const baseVodka001Distillation: DistillationSession = {
   notes: 'Vodka triple distilled batch 001. Hearts collected in parts over multiple days.'
 }
 
-export const vodka001Distillation = VodkaDistillationCalculator.processDistillationSession(baseVodka001Distillation)
-
+export const vodka001Distillation = VodkaDistillationCalculator.enhanceSession(baseVodka001Distillation)

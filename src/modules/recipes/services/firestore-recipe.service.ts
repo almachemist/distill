@@ -34,7 +34,7 @@ export class FirestoreRecipeService {
       const inventoryRef = collection(db, this.inventoryCollection)
       const snapshot = await getDocs(inventoryRef)
       
-      return snapshot.docs.map(doc => ({
+      return snapshot.docs.map((doc: any) => ({
         id: doc.id,
         ...doc.data()
       } as FirestoreInventoryItem))
@@ -114,7 +114,7 @@ export class FirestoreRecipeService {
       const q = query(recipesRef, where('isActive', '==', true), orderBy('name'))
       const snapshot = await getDocs(q)
       
-      return snapshot.docs.map(doc => ({
+      return snapshot.docs.map((doc: any) => ({
         id: doc.id,
         ...doc.data()
       } as FirestoreRecipe))

@@ -8,7 +8,6 @@ interface TankCardProps {
 }
 
 export function TankCard({ tank, onEdit }: TankCardProps) {
-  const statusColor = TANK_STATUS_COLORS[tank.status]
   const statusLabel = TANK_STATUS_LABELS[tank.status]
 
   const colorClasses = {
@@ -20,6 +19,8 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
     green: 'bg-green-100 text-green-800 border-green-300',
     red: 'bg-red-100 text-red-800 border-red-300'
   }
+
+  const statusColorKey = TANK_STATUS_COLORS[tank.status]
 
   const isEmpty = tank.status === 'empty' || tank.status === 'bottled_empty' || tank.status === 'cleaning'
 
@@ -34,7 +35,7 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
     : 0
 
   return (
-    <div className={`rounded-xl border-2 ${colorClasses[statusColor]} p-6 shadow-sm hover:shadow-md transition`}>
+    <div className={`rounded-xl border-2 ${colorClasses[statusColorKey as keyof typeof colorClasses]} p-6 shadow-sm hover:shadow-md transition`}>
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div>
@@ -46,7 +47,7 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
             </span>
           )}
         </div>
-        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorClasses[statusColor]}`}>
+        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorClasses[statusColorKey as keyof typeof colorClasses]}`}>
           {statusLabel}
         </span>
       </div>
@@ -87,11 +88,11 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
             <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
               <div
                 className={`h-2 rounded-full transition-all ${
-                  statusColor === 'green' ? 'bg-green-500' :
-                  statusColor === 'blue' ? 'bg-blue-500' :
-                  statusColor === 'yellow' ? 'bg-yellow-500' :
-                  statusColor === 'orange' ? 'bg-orange-500' :
-                  statusColor === 'purple' ? 'bg-purple-500' :
+                  statusColorKey === 'green' ? 'bg-green-500' :
+                  statusColorKey === 'blue' ? 'bg-blue-500' :
+                  statusColorKey === 'yellow' ? 'bg-yellow-500' :
+                  statusColorKey === 'orange' ? 'bg-orange-500' :
+                  statusColorKey === 'purple' ? 'bg-purple-500' :
                   'bg-gray-400'
                 }`}
                 style={{ width: `${fillPercentage}%` }}
@@ -160,4 +161,3 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
     </div>
   )
 }
-

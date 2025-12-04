@@ -167,14 +167,13 @@ export const merchantMaeGin003Distillation: DistillationSession = {
 
   finalOutput: {
     totalVolume_L: 729.0,
-    abv_percent: 37.5,
+    finalAbv_percent: 37.5,
     lal: 397.0,
     notes: "Final Merchant Mae Gin blend at 37.5% ABV. LAL check: total_lal_in 384; estimated_perfect_out_percent 84.0; estimated_out_lal 397.534"
   },
 
   notes: "Merchant Mae Gin 003 - Production batch with whisky helmet configuration (1 long + 3 short tubes). Balanced botanical profile with dominant juniper and coriander."
 }
-
 
 
 

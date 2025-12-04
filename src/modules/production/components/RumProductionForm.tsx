@@ -34,7 +34,7 @@ export function RumProductionForm({ batch, onUpdate, onSave, isSaving }: RumProd
     onUpdate({
       ...batch,
       [field]: value,
-      updatedAt: new Date().toISOString()
+      lastEditedAt: new Date().toISOString()
     })
   }
 
@@ -86,7 +86,7 @@ export function RumProductionForm({ batch, onUpdate, onSave, isSaving }: RumProd
       {/* Footer Actions */}
       <div className="border-t border-stone-200 px-6 py-4 bg-stone-50 flex justify-between items-center">
         <div className="text-sm text-stone-600">
-          {mounted ? `Last updated: ${new Date(batch.updatedAt).toLocaleString('en-AU')}` : 'Last updated: ...'}
+          {mounted ? `Last updated: ${new Date(batch.lastEditedAt).toLocaleString('en-AU')}` : 'Last updated: ...'}
         </div>
         <div className="flex gap-3">
           <button
@@ -119,4 +119,3 @@ export function RumProductionForm({ batch, onUpdate, onSave, isSaving }: RumProd
     </div>
   )
 }
-

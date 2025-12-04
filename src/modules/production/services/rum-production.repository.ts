@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
-import type { RumProductionRun, RumProductionRunDB } from '../types/rum-production.types'
+import type { RumProductionRunDB } from '../types/rum-production.types'
 
 export class RumProductionRepository {
   private supabase = createClient()
@@ -215,7 +215,6 @@ export class RumProductionRepository {
     return data || []
   }
 }
-
 
 
 

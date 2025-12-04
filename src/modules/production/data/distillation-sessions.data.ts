@@ -1,4 +1,4 @@
-import { DistillationSession } from '../types/distillation-session.types'
+import { DistillationSession, OutputDetail, OutputPhase } from '../types/distillation-session.types'
 import { merchantMaeGin001Distillation } from '../sessions/merchant-mae-gin-001-distillation.session'
 import { merchantMaeGinDistillation } from '../sessions/merchant-mae-gin-distillation.session'
 import { merchantMaeGin003Distillation } from '../sessions/merchant-mae-gin-003-distillation.session'
@@ -75,10 +75,18 @@ export const getSessionsBySku = (sku: string): DistillationSession[] => {
 // Summary statistics
 export const getSessionSummary = () => {
   const totalSessions = distillationSessions.length
-  const totalVolumeIn = distillationSessions.reduce((sum, session) => sum + session.chargeVolumeL, 0)
+  const totalVolumeIn = distillationSessions.reduce((sum, session) => sum + (session.chargeVolumeL ?? 0), 0)
   const totalVolumeOut = distillationSessions.reduce((sum, session) => {
     const outputs = session.outputs || []
-    return sum + outputs.reduce((outputSum, output) => outputSum + output.volume_L, 0)
+    if (outputs.length === 0) return sum
+    const isPhase = (outputs[0] as any).name !== undefined
+    if (isPhase) {
+      const out = outputs as OutputPhase[]
+      return sum + out.reduce((acc, o) => acc + (o.volumeL ?? 0), 0)
+    } else {
+      const out = outputs as OutputDetail[]
+      return sum + out.reduce((acc, o) => acc + (o.volume_L ?? 0), 0)
+    }
   }, 0)
   
   const totalLALIn = distillationSessions.reduce((sum, session) => sum + (session.chargeLAL || 0), 0)

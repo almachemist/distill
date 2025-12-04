@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { 
@@ -43,7 +43,7 @@ const PRODUCT_LIST = [
   { value: 'Merchant Mae Dark Rum', label: 'Merchant Mae Dark Rum', type: 'rum' as ProductType },
 ]
 
-export default function NewBottlingRunPage() {
+function NewBottlingRunContent() {
   const searchParams = useSearchParams()
   
   // State
@@ -697,3 +697,10 @@ export default function NewBottlingRunPage() {
   )
 }
 
+export default function NewBottlingRunPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#F5F5F5]" />}> 
+      <NewBottlingRunContent />
+    </Suspense>
+  )
+}

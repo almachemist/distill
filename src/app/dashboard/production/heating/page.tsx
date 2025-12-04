@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function HeatingPage() {
+function HeatingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const recipeId = searchParams.get('recipeId')
@@ -234,3 +234,10 @@ export default function HeatingPage() {
   )
 }
 
+export default function HeatingPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+      <HeatingContent />
+    </Suspense>
+  )
+}

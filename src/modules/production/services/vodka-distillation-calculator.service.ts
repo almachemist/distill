@@ -1,35 +1,35 @@
-import { DistillationSession } from '../types/distillation-session.types'
+import { DistillationSession, OutputPhase, OutputDetail } from '../types/distillation-session.types'
 
 export class VodkaDistillationCalculator {
   static calculateMetrics(session: DistillationSession) {
-    // Calculate input LAL
-    const inputLAL = session.chargeLAL || (session.chargeVolumeL * session.chargeABV / 100)
-    
-    // Calculate output LAL from hearts
-    const heartsOutputs = session.outputs?.filter(output => 
-      output.name === 'Hearts' && output.lal
-    ) || []
-    
-    const outputLAL = heartsOutputs.reduce((sum, output) => sum + (output.lal || 0), 0)
-    
-    // Calculate efficiency (LAL recovery)
-    const efficiency = inputLAL > 0 ? (outputLAL / inputLAL) * 100 : 0
-    
-    // Calculate recovery (volume recovery)
-    const totalOutputVolume = session.outputs?.reduce((sum, output) => sum + output.volumeL, 0) || 0
-    const recovery = session.chargeVolumeL > 0 ? (totalOutputVolume / session.chargeVolumeL) * 100 : 0
-    
-    // Calculate spirit yield (hearts as % of total output)
-    const heartsVolume = heartsOutputs.reduce((sum, output) => sum + output.volumeL, 0)
+    const chargeVol = session.chargeVolumeL ?? 0
+    const chargeAbv = session.chargeABV ?? 0
+    const inputLAL = session.chargeLAL ?? (chargeVol * chargeAbv / 100)
+
+    const outputs = (session.outputs ?? []) as Array<OutputPhase | OutputDetail>
+    const heartsOutputs = outputs.filter(o => {
+      const phaseName = 'name' in o ? o.name : ('phase' in o ? o.phase : undefined)
+      return phaseName === 'Hearts'
+    })
+
+    const outputLAL = heartsOutputs.reduce((sum, o) => sum + ((o as any).lal ?? 0), 0)
+
+    const getVolume = (o: OutputPhase | OutputDetail): number => {
+      return 'volumeL' in o ? (o.volumeL ?? 0) : (o.volume_L ?? 0)
+    }
+
+    const totalOutputVolume = outputs.reduce((sum, o) => sum + getVolume(o), 0)
+    const recovery = chargeVol > 0 ? (totalOutputVolume / chargeVol) * 100 : 0
+
+    const heartsVolume = heartsOutputs.reduce((sum, o) => sum + getVolume(o), 0)
     const spiritYield = totalOutputVolume > 0 ? (heartsVolume / totalOutputVolume) * 100 : 0
-    
-    // Calculate total run LAL
-    const totalRunLAL = session.runData?.reduce((sum, run) => sum + (run.lal || 0), 0) || 0
-    
+
+    const totalRunLAL = (session.runData ?? []).reduce((sum, run) => sum + (run.lal ?? 0), 0)
+
     return {
       inputLAL,
       outputLAL,
-      efficiency,
+      efficiency: inputLAL > 0 ? (outputLAL / inputLAL) * 100 : 0,
       recovery,
       spiritYield,
       totalRunLAL,
@@ -39,26 +39,25 @@ export class VodkaDistillationCalculator {
   }
   
   static calculateCosts(session: DistillationSession) {
-    // Basic cost calculations (can be enhanced with actual pricing)
-    const ethanolCostPerLiter = 2.50 // AUD per liter
-    const powerCostPerKWh = 0.25 // AUD per kWh
-    const laborCostPerHour = 35.00 // AUD per hour
-    
-    const ethanolCost = session.chargeVolumeL * ethanolCostPerLiter
-    const powerCost = (session.elementsKW * 8) * powerCostPerKWh // Assuming 8 hours
-    const laborCost = 8 * laborCostPerHour // Assuming 8 hours labor
-    
+    const ethanolCostPerLiter = 2.50
+    const powerCostPerKWh = 0.25
+    const laborCostPerHour = 35.00
+
+    const ethanolCost = (session.chargeVolumeL ?? 0) * ethanolCostPerLiter
+    const powerCost = ((session.elementsKW ?? 0) * 8) * powerCostPerKWh
+    const laborCost = 8 * laborCostPerHour
+
     const totalCost = ethanolCost + powerCost + laborCost
-    
+
     const metrics = this.calculateMetrics(session)
     const costPerLAL = metrics.outputLAL > 0 ? totalCost / metrics.outputLAL : 0
     const costPerLiter = metrics.totalOutputVolume > 0 ? totalCost / metrics.totalOutputVolume : 0
-    
+
     return {
       ethanolAUD: ethanolCost,
-      botanicalAUD: 0, // No botanicals for vodka
+      botanicalAUD: 0,
       electricityAUD: powerCost,
-      waterAUD: 0, // Assuming no water cost for vodka
+      waterAUD: 0,
       totalAUD: totalCost,
       costPerLAL,
       costPerLiter
@@ -77,11 +76,10 @@ export class VodkaDistillationCalculator {
       lalOut: metrics.outputLAL,
       lalEfficiency: metrics.efficiency,
       costs: costs,
-      // Update totalRun LAL if not set
       totalRun: session.totalRun ? {
         ...session.totalRun,
-        lal: session.totalRun.lal || metrics.totalRunLAL
-      } : undefined
+        lal: session.totalRun.lal ?? metrics.totalRunLAL
+      } : session.totalRun
     }
   }
 }
