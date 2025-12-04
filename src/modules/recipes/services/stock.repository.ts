@@ -45,17 +45,20 @@ export class StockRepository {
     }
 
     let total = 0
-    data.forEach(txn => {
-      switch (txn.txn_type) {
+    const transactions = (data ?? []) as Array<Pick<InventoryTxn, 'quantity' | 'txn_type'>>
+    transactions.forEach(({ txn_type, quantity }) => {
+      switch (txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
-          total += txn.quantity
+          total += quantity
           break
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
         case 'ADJUST':
-          total -= txn.quantity
+          total -= quantity
+          break
+        default:
           break
       }
     })
@@ -77,17 +80,20 @@ export class StockRepository {
     }
 
     let total = 0
-    data.forEach(txn => {
-      switch (txn.txn_type) {
+    const transactions = (data ?? []) as Array<Pick<InventoryTxn, 'quantity' | 'txn_type'>>
+    transactions.forEach(({ txn_type, quantity }) => {
+      switch (txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
-          total += txn.quantity
+          total += quantity
           break
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
         case 'ADJUST':
-          total -= txn.quantity
+          total -= quantity
+          break
+        default:
           break
       }
     })
@@ -139,7 +145,7 @@ export class StockRepository {
         .from('items')
         .select('*')
         .eq('id', req.itemId)
-        .single<Item>()
+        .single()
 
       if (error) {
         throw new Error(`Failed to get item details: ${error.message}`)
@@ -147,7 +153,7 @@ export class StockRepository {
 
       results.push({
         item_id: req.itemId,
-        item,
+        item: item as Item,
         required_quantity: req.quantity,
         available_quantity: available,
         is_sufficient: shortage === 0,
@@ -190,7 +196,7 @@ export class StockRepository {
     // Post all transactions atomically
     const { error } = await this.supabase
       .from('inventory_txns')
-      .insert<InventoryTxnInsert[]>(transactions)
+      .insert(transactions)
 
     if (error) {
       throw new Error(`Failed to post consumption transactions: ${error.message}`)
@@ -268,5 +274,3 @@ export class StockRepository {
     return data
   }
 }
-
-

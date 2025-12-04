@@ -31,7 +31,7 @@ export async function getActiveRecipes(): Promise<Recipe[]> {
       return []
     }
     
-    return data.map(row => ({
+    return (data ?? []).map((row: any) => ({
       id: row.id,
       recipeName: row.recipe_name,
       productType: row.product_type as ProductType,
@@ -68,7 +68,7 @@ export async function getRecipesByType(productType: ProductType): Promise<Recipe
 
     console.log(`Found ${data?.length || 0} recipes for type ${productType}:`, data)
 
-    return data.map(row => ({
+    return (data ?? []).map((row: any) => ({
       id: row.id,
       recipeName: row.recipe_name,
       productType: row.product_type as ProductType,
@@ -249,4 +249,3 @@ export async function archiveRecipe(id: string): Promise<boolean> {
     return false
   }
 }
-

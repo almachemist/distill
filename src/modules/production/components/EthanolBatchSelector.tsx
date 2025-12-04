@@ -57,7 +57,7 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
 
       // For each item, get available lots with quantities
       const batchesWithStock = await Promise.all(
-        (items || []).map(async (item) => {
+        (items || []).map(async (item: any) => {
           const { data: lots, error: lotsError } = await supabase
             .from('lots')
             .select('id, code, qty, cost_per_unit, supplier_id, note, expiry_date')
@@ -84,9 +84,9 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
             if (supplier) supplierName = supplier.name
           }
 
-          const totalQty = lots?.reduce((sum, lot) => sum + (parseFloat(lot.qty as any) || 0), 0) || 0
-          const avgCost = lots && lots.length > 0 
-            ? lots.reduce((sum, lot) => sum + (parseFloat(lot.cost_per_unit as any) || 0), 0) / lots.length 
+          const totalQty = (lots ?? []).reduce((sum: number, lot: any) => sum + (parseFloat(lot.qty as any) || 0), 0)
+          const avgCost = (lots ?? []).length > 0 
+            ? (lots ?? []).reduce((sum: number, lot: any) => sum + (parseFloat(lot.cost_per_unit as any) || 0), 0) / (lots ?? []).length 
             : 0
 
           return {
@@ -102,7 +102,8 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
         })
       )
 
-      setEthanolBatches(batchesWithStock.filter(b => b !== null && b.available_quantity > 0) as EthanolBatch[])
+      setEthanolBatches((batchesWithStock || [])
+        .filter((b: any) => b && b.available_quantity > 0) as EthanolBatch[])
     } catch (error) {
       console.error('Error loading ethanol batches:', error)
     } finally {
@@ -259,4 +260,3 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
     </div>
   )
 }
-

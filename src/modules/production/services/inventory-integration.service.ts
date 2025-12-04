@@ -238,7 +238,7 @@ export class InventoryIntegrationService {
         .eq('batch_id', batch_id)
         .eq('batch_type', batch_type)
 
-      const ethanol_cost = materials?.reduce((sum, m) => sum + (m.total_cost || 0), 0) || 0
+      const ethanol_cost = (materials ?? []).reduce((sum: number, m: any) => sum + (m?.total_cost || 0), 0)
 
       // Get botanical cost
       const { data: botanicals } = await this.supabase
@@ -247,7 +247,7 @@ export class InventoryIntegrationService {
         .eq('batch_id', batch_id)
         .eq('batch_type', batch_type)
 
-      const botanical_cost = botanicals?.reduce((sum, b) => sum + (b.total_cost || 0), 0) || 0
+      const botanical_cost = (botanicals ?? []).reduce((sum: number, b: any) => sum + (b?.total_cost || 0), 0)
 
       // Get packaging cost
       const { data: packaging } = await this.supabase
@@ -256,7 +256,7 @@ export class InventoryIntegrationService {
         .eq('batch_id', batch_id)
         .eq('batch_type', batch_type)
 
-      const packaging_cost = packaging?.reduce((sum, p) => sum + (p.total_cost || 0), 0) || 0
+      const packaging_cost = (packaging ?? []).reduce((sum: number, p: any) => sum + (p?.total_cost || 0), 0)
 
       const total_cost = ethanol_cost + botanical_cost + packaging_cost
 

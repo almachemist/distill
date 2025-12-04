@@ -176,7 +176,7 @@ export async function getDraftBatches(): Promise<ProductionBatch[]> {
       .eq('data->>status', 'draft');
     
     if (!ginVodkaError && ginVodkaData) {
-      batches.push(...ginVodkaData.map(batch => ({
+      batches.push(...ginVodkaData.map((batch: any) => ({
         ...batch.data,
         id: batch.id,
       })));

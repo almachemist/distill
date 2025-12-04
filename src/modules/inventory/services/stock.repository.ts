@@ -63,21 +63,20 @@ export class StockRepository {
       throw new Error(`Failed to get on-hand quantity: ${error.message}`)
     }
 
-    let total = 0
-    (data ?? []).forEach((txn: any) => {
+    const total = (data ?? []).reduce((acc: number, txn: any) => {
       switch (txn.txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
         case 'ADJUST':
-          total += txn.qty
-          break
+          return acc + Number(txn.qty ?? 0)
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
-          total -= txn.qty
-          break
+          return acc - Number(txn.qty ?? 0)
+        default:
+          return acc
       }
-    })
+    }, 0)
 
     return total
   }
@@ -96,21 +95,20 @@ export class StockRepository {
       throw new Error(`Failed to get lot on-hand quantity: ${error.message}`)
     }
 
-    let total = 0
-    (data ?? []).forEach((txn: any) => {
+    const total = (data ?? []).reduce((acc: number, txn: any) => {
       switch (txn.txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
         case 'ADJUST':
-          total += txn.qty
-          break
+          return acc + Number(txn.qty ?? 0)
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
-          total -= txn.qty
-          break
+          return acc - Number(txn.qty ?? 0)
+        default:
+          return acc
       }
-    })
+    }, 0)
 
     return total
   }

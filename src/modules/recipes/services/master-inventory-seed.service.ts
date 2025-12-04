@@ -46,16 +46,17 @@ export class MasterInventorySeedService {
         const { data: profile, error: profileError } = await this.supabase
           .from('profiles')
           .select('organization_id')
-          .single< SupabaseProfileRow >()
+          .single()
 
         if (profileError) {
           throw profileError
         }
 
-        if (!profile?.organization_id) {
+        const typedProfile = profile as SupabaseProfileRow | null
+        if (!typedProfile?.organization_id) {
           throw new Error('User organization not found')
         }
-        organizationId = profile.organization_id
+        organizationId = typedProfile.organization_id as string
       }
 
       let created = 0

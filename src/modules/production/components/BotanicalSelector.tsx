@@ -52,7 +52,7 @@ export function BotanicalSelector({ selections, onChange }: BotanicalSelectorPro
 
       // For each item, get available lots with quantities
       const botanicalsWithStock = await Promise.all(
-        (items || []).map(async (item) => {
+        (items || []).map(async (item: any) => {
           const { data: lots, error: lotsError } = await supabase
             .from('lots')
             .select('id, code, qty, cost_per_unit, supplier_id, expiry_date')
@@ -79,9 +79,9 @@ export function BotanicalSelector({ selections, onChange }: BotanicalSelectorPro
             if (supplier) supplierName = supplier.name
           }
 
-          const totalQty = lots?.reduce((sum, lot) => sum + (parseFloat(lot.qty as any) || 0), 0) || 0
-          const avgCost = lots && lots.length > 0 
-            ? lots.reduce((sum, lot) => sum + (parseFloat(lot.cost_per_unit as any) || 0), 0) / lots.length 
+          const totalQty = (lots ?? []).reduce((sum: number, lot: any) => sum + (parseFloat(lot.qty as any) || 0), 0)
+          const avgCost = (lots ?? []).length > 0 
+            ? (lots ?? []).reduce((sum: number, lot: any) => sum + (parseFloat(lot.cost_per_unit as any) || 0), 0) / (lots ?? []).length 
             : 0
 
           return {
@@ -96,7 +96,8 @@ export function BotanicalSelector({ selections, onChange }: BotanicalSelectorPro
         })
       )
 
-      setBotanicals(botanicalsWithStock.filter(b => b !== null && b.available_quantity_g > 0) as BotanicalItem[])
+      setBotanicals((botanicalsWithStock || [])
+        .filter((b: any) => b && b.available_quantity_g > 0) as BotanicalItem[])
     } catch (error) {
       console.error('Error loading botanicals:', error)
     } finally {
@@ -288,4 +289,3 @@ export function BotanicalSelector({ selections, onChange }: BotanicalSelectorPro
     </div>
   )
 }
-
