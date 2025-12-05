@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import type { CalendarEvent, CalendarEventInput } from '@/types/calendar-event.types'
 import { assignEventColor } from '@/utils/calendar-colors'
+export const runtime = 'nodejs'
 
 const EVENTS_FILE = join(process.cwd(), 'data', 'calendar_events.json')
 
@@ -132,4 +133,3 @@ export async function DELETE(
     )
   }
 }
-

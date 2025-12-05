@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from 'next/server'
 import { readFile } from 'fs/promises'
 import path from 'path'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+export const runtime = 'nodejs'
 
 function stripAndWrapObjectsToArray(text: string): any[] {
   const noBlock = text.replace(/\/\*[\s\S]*?\*\//g, '')
@@ -82,4 +83,3 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ batc
   res.headers.set('x-raw-source', rawSource)
   return res
 }
-

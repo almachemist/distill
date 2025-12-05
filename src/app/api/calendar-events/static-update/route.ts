@@ -8,6 +8,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
+export const runtime = 'nodejs'
 
 const CALENDAR_2026_FILE = join(process.cwd(), 'data', 'production_calendar_2026_v4.json')
 const CALENDAR_DEC_FILE = join(process.cwd(), 'data', 'production_calendar_december_2025.json')
@@ -351,4 +352,3 @@ export async function PATCH(request: NextRequest) {
     )
   }
 }
-

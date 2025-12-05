@@ -19,7 +19,10 @@ import {
 import { createProductionTemplate } from '@/lib/production-templates';
 import type { Recipe, GinVodkaSpiritRecipe, isGinVodkaSpiritRecipe } from '@/types/recipe-schemas';
 
-const supabase = createClient();
+async function getSupabase() {
+  const mod = await import('@/lib/supabase/client');
+  return mod.createClient();
+}
 
 // ============================================================================
 // DRAFT MANAGEMENT
@@ -108,7 +111,8 @@ export async function createDraftBatch(
       };
 
       // Insert into rum_production_runs
-      const { data, error } = await supabase
+      const sb = await getSupabase();
+      const { data, error } = await sb
         .from('rum_production_runs')
         .insert(insertData)
         .select()
@@ -130,7 +134,8 @@ export async function createDraftBatch(
     } else {
       const ginTemplate = template as Partial<GinVodkaSpiritBatch>
       // Insert into production_batches
-      const { data, error } = await supabase
+      const sb = await getSupabase();
+      const { data, error } = await sb
         .from('production_batches')
         .insert({
           id: ginTemplate.spiritRunId || `DRAFT-${Date.now()}`,
@@ -170,7 +175,8 @@ export async function getDraftBatches(): Promise<ProductionBatch[]> {
     const batches: ProductionBatch[] = [];
     
     // Get gin/vodka drafts from production_batches
-    const { data: ginVodkaData, error: ginVodkaError } = await supabase
+    const sb = await getSupabase();
+    const { data: ginVodkaData, error: ginVodkaError } = await sb
       .from('production_batches')
       .select('*')
       .eq('data->>status', 'draft');
@@ -212,7 +218,8 @@ export async function getDraftBatch(id: string, productType?: ProductType): Prom
 
     if (isUUID) {
       // UUID = rum_production_runs table
-      const { data, error } = await supabase
+      const sb = await getSupabase();
+      const { data, error } = await sb
         .from('rum_production_runs')
         .select('*')
         .eq('id', id)
@@ -234,7 +241,8 @@ export async function getDraftBatch(id: string, productType?: ProductType): Prom
       return data as RumCaneSpiritBatch;
     } else {
       // TEXT id = production_batches table
-      const { data, error } = await supabase
+      const sb = await getSupabase();
+      const { data, error } = await sb
         .from('production_batches')
         .select('*')
         .eq('id', id)
@@ -286,7 +294,8 @@ export async function updateDraftBatch(
       console.log('🔍 No productType provided, checking which table contains this batch...');
 
       // Check rum table first
-      const { data: rumCheck } = await supabase
+      const sbDetect = await getSupabase();
+      const { data: rumCheck } = await sbDetect
         .from('rum_production_runs')
         .select('id')
         .eq('id', id)
@@ -313,7 +322,8 @@ export async function updateDraftBatch(
       delete (updatedData as any).lastEditedAt;
       delete (updatedData as any).id; // Don't update primary key
 
-      const { data, error } = await supabase
+      const sbRumUpd = await getSupabase();
+      const { data, error } = await sbRumUpd
         .from('rum_production_runs')
         .update(updatedData)
         .eq('id', id)
@@ -357,7 +367,8 @@ export async function updateDraftBatch(
       delete (updatedData as any).id;
 
       // First, get the existing record to get current type and still values
-      const { data: existingData, error: fetchError } = await supabase
+      const sbFetch = await getSupabase();
+      const { data: existingData, error: fetchError } = await sbFetch
         .from('production_batches')
         .select('type, still')
         .eq('id', id)
@@ -398,7 +409,8 @@ export async function updateDraftBatch(
         dataSample: JSON.stringify(updatedData).substring(0, 300)
       });
 
-      const { data, error } = await supabase
+      const sbUpd = await getSupabase();
+      const { data, error } = await sbUpd
         .from('production_batches')
         .update(updatePayload)
         .eq('id', id)
@@ -465,7 +477,8 @@ export async function finalizeDraftBatch(
 export async function deleteDraftBatch(id: string, productType: ProductType): Promise<boolean> {
   try {
     if (productType === 'rum' || productType === 'cane_spirit') {
-      const { error } = await supabase
+      const sbDel = await getSupabase();
+      const { error } = await sbDel
         .from('rum_production_runs')
         .delete()
         .eq('id', id);
@@ -475,7 +488,8 @@ export async function deleteDraftBatch(id: string, productType: ProductType): Pr
         return false;
       }
     } else {
-      const { error } = await supabase
+      const sbDel = await getSupabase();
+      const { error } = await sbDel
         .from('production_batches')
         .delete()
         .eq('id', id);

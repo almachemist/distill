@@ -5,6 +5,7 @@ import { writeJson, readJson } from '@/lib/jsonStore'
 import type { OldRobertaBatch, OldRobertaFile } from '@/modules/production/types/old-roberta.types'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+export const runtime = 'nodejs'
 
 const STORE_PATH = 'data/old_roberta_distillations.json'
 const REPO_CS_PATH = 'src/modules/production/data/old_cane_spirit.json'
@@ -130,4 +131,3 @@ export async function POST() {
     return NextResponse.json({ error: err?.message || 'Failed to import old cane spirit' }, { status: 400 })
   }
 }
-

@@ -1,5 +1,6 @@
 import React from 'react'
 import { headers } from 'next/headers'
+export const dynamic = 'force-dynamic'
 
 async function getData(baseUrl: string, from = '2025-12-01', to = '2026-03-31') {
   const url = new URL('/api/forecast/packaging', baseUrl)
@@ -73,4 +74,3 @@ export default async function ForecastPage() {
     </div>
   )
 }
-

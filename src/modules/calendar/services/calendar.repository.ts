@@ -2,17 +2,21 @@ import { createClient } from "@/lib/supabase/client";
 import type { CalendarEvent, CalendarEventType, CalendarStatus, LinkedDocRef } from "../types/calendar.types";
 import { CALENDAR_COLORS } from "../types/calendar.types";
 
-const supabase = createClient();
+async function getSupabase() {
+  const mod = await import("@/lib/supabase/client");
+  return mod.createClient();
+}
 
 // Helper function to get current user's organization ID
 const getOrganizationId = async (): Promise<string> => {
   if (process.env.NODE_ENV === 'development') {
     return '00000000-0000-0000-0000-000000000001'
   }
-  const { data: { user } } = await supabase.auth.getUser();
+  const sb = await getSupabase();
+  const { data: { user } } = await sb.auth.getUser();
   if (!user) throw new Error("User not authenticated");
   
-  const { data: profile } = await supabase
+  const { data: profile } = await sb
     .from("profiles")
     .select("organization_id")
     .eq("id", user.id)
@@ -42,7 +46,8 @@ export const createCalendarEvent = async (e: Omit<CalendarEvent,"id"|"createdAt"
     organization_id: organizationId,
   };
   
-  const { data, error } = await supabase
+  const sb = await getSupabase();
+  const { data, error } = await sb
     .from("calendar_events")
     .insert(payload)
     .select()
@@ -92,7 +97,8 @@ export const updateCalendarEvent = async (id: string, patch: Partial<CalendarEve
   if (patch.notes !== undefined) updateData.notes = patch.notes;
   if (patch.color !== undefined) updateData.color = patch.color;
   
-  const { error } = await supabase
+  const sb = await getSupabase();
+  const { error } = await sb
     .from("calendar_events")
     .update(updateData)
     .eq("id", id);
@@ -101,7 +107,8 @@ export const updateCalendarEvent = async (id: string, patch: Partial<CalendarEve
 };
 
 export const deleteCalendarEvent = async (id: string) => {
-  const { error } = await supabase
+  const sb = await getSupabase();
+  const { error } = await sb
     .from("calendar_events")
     .delete()
     .eq("id", id);
@@ -129,7 +136,8 @@ export const listCalendarEvents = async (opts?: {
     return [] as CalendarEvent[];
   }
   
-  let query = supabase
+  const sb = await getSupabase();
+  let query = sb
     .from("calendar_events")
     .select("*")
     .eq("organization_id", organizationId)
@@ -181,7 +189,8 @@ export const listCalendarEvents = async (opts?: {
 };
 
 export const getCalendarEvent = async (id: string): Promise<CalendarEvent | null> => {
-  const { data, error } = await supabase
+  const sb = await getSupabase();
+  const { data, error } = await sb
     .from("calendar_events")
     .select("*")
     .eq("id", id)
@@ -218,7 +227,8 @@ export const findCalendarEventByLink = async (
   collection: LinkedDocRef['collection'],
   id: string
 ): Promise<CalendarEvent | null> => {
-  const { data, error } = await supabase
+  const sb = await getSupabase();
+  const { data, error } = await sb
     .from("calendar_events")
     .select("*")
     .eq("linked_collection", collection)

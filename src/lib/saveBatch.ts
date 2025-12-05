@@ -1,11 +1,10 @@
 import { BatchSchema, type Batch } from "@/types/schema";
 import { deepMerge, sanitizeData } from "@/lib/deepMerge";
-import { createClient } from '@supabase/supabase-js';
 
-// Initialize Supabase client (you may need to adjust this based on your setup)
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'your-supabase-url';
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'your-supabase-key';
-const supabase = createClient(supabaseUrl, supabaseKey);
+async function getSupabase(): Promise<any> {
+  const mod = await import('@/lib/supabase/client');
+  return mod.createClient();
+}
 
 export async function upsertBatch(batchId: string, incoming: any): Promise<Batch> {
   try {
@@ -13,6 +12,7 @@ export async function upsertBatch(batchId: string, incoming: any): Promise<Batch
     const parsed = BatchSchema.parse(incoming) as Batch;
 
     // 2) pull existing (so we don't lose any detail)
+    const supabase = await getSupabase();
     const { data: existingData, error: fetchError } = await supabase
       .from('distillation_runs')
       .select('*')
@@ -77,6 +77,7 @@ export async function upsertBatchLocal(batchId: string, incoming: any): Promise<
 // Function to get a batch by ID
 export async function getBatch(batchId: string): Promise<Batch | null> {
   try {
+    const supabase = await getSupabase();
     const { data, error } = await supabase
       .from('distillation_runs')
       .select('*')
@@ -100,6 +101,7 @@ export async function getBatch(batchId: string): Promise<Batch | null> {
 // Function to get all batches
 export async function getAllBatches(): Promise<Batch[]> {
   try {
+    const supabase = await getSupabase();
     const { data, error } = await supabase
       .from('distillation_runs')
       .select('*')
@@ -115,4 +117,3 @@ export async function getAllBatches(): Promise<Batch[]> {
     throw error;
   }
 }
-

@@ -3,6 +3,7 @@ import { writeJson, readJson } from '@/lib/jsonStore'
 import type { OldRobertaBatch, OldRobertaFile } from '@/modules/production/types/old-roberta.types'
 import { createClient } from '@/lib/supabase/server'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+export const runtime = 'nodejs'
 
 const STORE_PATH = 'data/old_roberta_distillations.json'
 
@@ -126,4 +127,3 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: err?.message || 'Failed to import' }, { status: 400 })
   }
 }
-

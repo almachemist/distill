@@ -9,7 +9,10 @@ import { createClient } from '@/lib/supabase/client'
 import type { Recipe, GinVodkaSpiritRecipe, RumCaneSpiritRecipe } from '@/types/recipe-schemas'
 import type { ProductType } from '@/types/production-schemas'
 
-const supabase = createClient()
+async function getSupabase() {
+  const mod = await import('@/lib/supabase/client')
+  return mod.createClient()
+}
 
 // ============================================================================
 // RECIPE QUERIES
@@ -20,7 +23,8 @@ const supabase = createClient()
  */
 export async function getActiveRecipes(): Promise<Recipe[]> {
   try {
-    const { data, error } = await supabase
+    const sb = await getSupabase()
+    const { data, error } = await sb
       .from('production_recipes')
       .select('*')
       .eq('is_active', true)
@@ -54,7 +58,8 @@ export async function getActiveRecipes(): Promise<Recipe[]> {
 export async function getRecipesByType(productType: ProductType): Promise<Recipe[]> {
   try {
     console.log('Fetching recipes for type:', productType)
-    const { data, error } = await supabase
+    const sb = await getSupabase()
+    const { data, error } = await sb
       .from('production_recipes')
       .select('*')
       .eq('product_type', productType)
@@ -111,7 +116,8 @@ export async function getRumCaneSpiritRecipes(): Promise<RumCaneSpiritRecipe[]> 
  */
 export async function getRecipeById(id: string): Promise<Recipe | null> {
   try {
-    const { data, error } = await supabase
+    const sb = await getSupabase()
+    const { data, error } = await sb
       .from('production_recipes')
       .select('*')
       .eq('id', id)
@@ -146,7 +152,8 @@ export async function createRecipe(recipe: Partial<Recipe>): Promise<Recipe | nu
   try {
     const { id, recipeName, productType, description, notes, createdAt, updatedAt, isActive, ...recipeData } = recipe
     
-    const { data, error } = await supabase
+    const sb = await getSupabase()
+    const { data, error } = await sb
       .from('production_recipes')
       .insert({
         recipe_name: recipeName,
@@ -199,7 +206,8 @@ export async function updateRecipe(id: string, updates: Partial<Recipe>): Promis
     if (isActive !== undefined) updateData.is_active = isActive
     if (Object.keys(recipeData).length > 0) updateData.data = recipeData
     
-    const { data, error } = await supabase
+    const sb = await getSupabase()
+    const { data, error } = await sb
       .from('production_recipes')
       .update(updateData)
       .eq('id', id)
@@ -233,7 +241,8 @@ export async function updateRecipe(id: string, updates: Partial<Recipe>): Promis
  */
 export async function archiveRecipe(id: string): Promise<boolean> {
   try {
-    const { error } = await supabase
+    const sb = await getSupabase()
+    const { error } = await sb
       .from('production_recipes')
       .update({ is_active: false, updated_at: new Date().toISOString() })
       .eq('id', id)

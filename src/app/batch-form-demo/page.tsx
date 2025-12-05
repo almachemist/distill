@@ -1,4 +1,5 @@
 'use client'
+export const dynamic = 'force-dynamic'
 
 import React, { useState } from 'react';
 import { BatchForm } from '@/components/BatchForm';
@@ -140,4 +141,3 @@ export default function BatchFormDemo() {
     </div>
   );
 }
-

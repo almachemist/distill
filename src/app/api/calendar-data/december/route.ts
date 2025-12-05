@@ -8,6 +8,7 @@
 import { NextResponse } from 'next/server'
 import { readFileSync } from 'fs'
 import { join } from 'path'
+export const runtime = 'nodejs'
 
 const CALENDAR_FILE = join(process.cwd(), 'data', 'production_calendar_december_2025.json')
 
@@ -30,4 +31,3 @@ export async function GET() {
     )
   }
 }
-
