@@ -138,7 +138,11 @@ export class AuthService {
   }
 
   onAuthStateChange(callback: (event: string, session: Session | null) => void) {
-    const { data } = this.supabase.auth.onAuthStateChange(callback)
+    const auth: any = (this.supabase as any).auth
+    if (!auth || typeof auth.onAuthStateChange !== 'function') {
+      return () => {}
+    }
+    const { data } = auth.onAuthStateChange(callback)
     return () => data.subscription.unsubscribe()
   }
 
