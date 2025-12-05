@@ -32,8 +32,20 @@ export function createClient(): any {
     }
     cached = {
       auth: {
-        getUser: async () => ({ data: { user: null }, error: null })
+        getUser: async () => ({ data: { user: null }, error: null }),
+        getSession: async () => ({ data: { session: null }, error: null }),
+        signInWithPassword: async () => ({ data: { user: null, session: null }, error: new Error('Supabase is not configured') }),
+        signUp: async () => ({ data: { user: null, session: null }, error: new Error('Supabase is not configured') }),
+        signOut: async () => ({ error: null }),
+        refreshSession: async () => ({ data: { session: null }, error: null }),
+        resetPasswordForEmail: async () => ({ error: new Error('Supabase is not configured') }),
+        updateUser: async () => ({ data: null, error: new Error('Supabase is not configured') }),
+        onAuthStateChange: (cb: any) => ({ data: { subscription: { unsubscribe() {} } } }),
+        admin: {
+          deleteUser: async () => ({ data: null, error: null }),
+        },
       },
+      rpc() { return makeQuery() },
       from() { return makeQuery() },
       channel() {
         const ch: any = {
