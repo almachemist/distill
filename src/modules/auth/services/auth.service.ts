@@ -24,6 +24,22 @@ export class AuthService {
     return data
   }
 
+  async loginWithOtp(email: string) {
+    const origin = typeof window !== 'undefined' 
+      ? window.location.origin 
+      : (process.env.NEXT_PUBLIC_SITE_URL || 'https://distil-app.com')
+    const { data, error } = await this.supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: origin,
+      },
+    })
+    if (error) {
+      throw new Error(error.message)
+    }
+    return data
+  }
+
   async signUp(signUpData: SignUpData) {
     const { email, password, displayName, organizationName } = signUpData
 

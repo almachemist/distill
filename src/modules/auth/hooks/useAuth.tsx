@@ -117,7 +117,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [authService, loadUser])
 
   const loginWithOtp = useCallback(async (email: string) => {
-    await authService.loginWithOtp(email)
+    await (authService as any).loginWithOtp(email)
   }, [authService])
 
   const signUp = useCallback(async (data: SignUpData) => {
