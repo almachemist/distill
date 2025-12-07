@@ -16,7 +16,9 @@ export class AuthService {
     })
 
     if (error) {
-      throw new Error(error.message)
+      const status = (error as any)?.status || 'ERR'
+      const message = error.message || 'Login failed'
+      throw new Error(`[${status}] ${message}`)
     }
 
     return data

@@ -35,6 +35,9 @@ export function LoginForm() {
       router.push('/dashboard')
     } catch (err) {
       let errorMessage = err instanceof Error ? err.message : 'Failed to sign in'
+      if (errorMessage.startsWith('[400]')) {
+        errorMessage = 'Invalid email or password, or email is not confirmed.'
+      }
       // Clean up error messages that might contain JSON objects
       if (errorMessage.includes('{') && errorMessage.includes('}')) {
         errorMessage = errorMessage.split(':')[0].trim()

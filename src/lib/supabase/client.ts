@@ -40,6 +40,7 @@ export function createClient(): any {
         refreshSession: async () => ({ data: { session: null }, error: null }),
         resetPasswordForEmail: async () => ({ error: new Error('Supabase is not configured') }),
         updateUser: async () => ({ data: null, error: new Error('Supabase is not configured') }),
+        resend: async () => ({ data: null, error: null }),
         onAuthStateChange: (cb: any) => ({ data: { subscription: { unsubscribe() {} } } }),
         admin: {
           deleteUser: async () => ({ data: null, error: null }),
