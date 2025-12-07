@@ -166,6 +166,17 @@ export class AuthService {
     }
   }
 
+  async resendConfirmationEmail(email: string) {
+    const { error } = await (this.supabase as any).auth.resend({
+      type: 'signup',
+      email,
+    })
+
+    if (error) {
+      throw new Error(error.message)
+    }
+  }
+
   async updatePassword(newPassword: string) {
     const { error } = await this.supabase.auth.updateUser({
       password: newPassword,

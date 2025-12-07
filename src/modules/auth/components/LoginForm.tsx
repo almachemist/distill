@@ -13,7 +13,7 @@ interface LoginFormData extends LoginCredentials {
 
 export function LoginForm() {
   const router = useRouter()
-  const { login, resetPassword } = useAuth()
+  const { login, resetPassword, resendConfirmationEmail } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [showForgotPassword, setShowForgotPassword] = useState(false)
@@ -61,6 +61,24 @@ export function LoginForm() {
       setResetEmailSent(true)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to send reset email')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleResendConfirmation = async () => {
+    const email = getValues('email')
+    if (!email) {
+      setError('Please enter your email address to resend confirmation')
+      return
+    }
+    setIsLoading(true)
+    setError(null)
+    try {
+      await resendConfirmationEmail(email)
+      setError('Confirmation email sent. Please check your inbox.')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to resend confirmation email')
     } finally {
       setIsLoading(false)
     }
@@ -217,6 +235,13 @@ export function LoginForm() {
           className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
         >
           Forgot Password?
+        </button>
+        <button
+          type="button"
+          onClick={handleResendConfirmation}
+          className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
+        >
+          Resend Confirmation Email
         </button>
         
         <p className="text-center text-sm text-gray-600">

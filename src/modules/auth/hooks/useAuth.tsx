@@ -15,6 +15,7 @@ interface AuthContextValue {
   logout: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
   refreshSession: () => Promise<void>
+  resendConfirmationEmail: (email: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined)
@@ -145,6 +146,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     await authService.resetPassword(email)
   }, [authService])
 
+  const resendConfirmationEmail = useCallback(async (email: string) => {
+    await authService.resendConfirmationEmail(email)
+  }, [authService])
+
   const refreshSession = useCallback(async () => {
     const { session: newSession } = await authService.refreshSession()
     setSession(newSession)
@@ -160,6 +165,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     logout,
     resetPassword,
     refreshSession,
+    resendConfirmationEmail,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
