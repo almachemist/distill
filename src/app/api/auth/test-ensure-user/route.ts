@@ -4,7 +4,7 @@ export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
   const { email: rawEmail, password: rawPassword } = await req.json().catch(() => ({}))
-  const allowed = (process.env.ALLOW_TEST_LOGIN_EMAIL || 'g@g.com').toLowerCase()
+  const allowed = (process.env.ALLOW_TEST_LOGIN_EMAIL || 'distiller@devilsthumbdistillery.com').toLowerCase()
   const email = (rawEmail || allowed).toLowerCase()
   const password = rawPassword || process.env.TEST_LOGIN_PASSWORD || '12345678'
 
@@ -41,4 +41,3 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({ status: 'ok', email })
 }
-
