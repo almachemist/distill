@@ -11,6 +11,7 @@ interface AuthContextValue {
   isLoading: boolean
   isAuthenticated: boolean
   login: (credentials: LoginCredentials) => Promise<void>
+  loginWithOtp: (email: string) => Promise<void>
   signUp: (data: SignUpData) => Promise<void>
   logout: () => Promise<void>
   resetPassword: (email: string) => Promise<void>
@@ -115,6 +116,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [authService, loadUser])
 
+  const loginWithOtp = useCallback(async (email: string) => {
+    await authService.loginWithOtp(email)
+  }, [authService])
+
   const signUp = useCallback(async (data: SignUpData) => {
     // In development mode, skip actual signup and just use mock user
     if (process.env.NODE_ENV === 'development') {
@@ -161,6 +166,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     isLoading,
     isAuthenticated: !!user,
     login,
+    loginWithOtp,
     signUp,
     logout,
     resetPassword,
