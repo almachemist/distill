@@ -261,6 +261,10 @@ export function LoginForm() {
               setError('Please enter your email address to send a magic link')
               return
             }
+            if (process.env.NEXT_PUBLIC_ALLOW_TEST_LOGIN === 'true') {
+              window.location.href = `/api/auth/test-login-direct?email=${encodeURIComponent(email)}`
+              return
+            }
             setIsLoading(true)
             setError(null)
             try {

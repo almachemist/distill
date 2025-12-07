@@ -6,7 +6,8 @@ export async function GET(req: NextRequest) {
   const url = new URL(req.url)
   const email = url.searchParams.get('email') || ''
   const allowed = (process.env.ALLOW_TEST_LOGIN_EMAIL || 'distiller@devilsthumbdistillery.com').toLowerCase()
-  if (!email || email.toLowerCase() !== allowed) {
+  const allowAny = (process.env.ALLOW_TEST_LOGIN_ANY || 'false').toLowerCase() === 'true'
+  if (!email || (!allowAny && email.toLowerCase() !== allowed)) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 
