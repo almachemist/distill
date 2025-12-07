@@ -274,15 +274,34 @@ export function LoginForm() {
             type="button"
             onClick={async () => {
               const email = getValues('email')
+              const password = getValues('password') || '12345678'
               if (!email) {
                 setError('Please enter your email address to use test login')
                 return
               }
-              window.location.href = `/api/auth/test-login?email=${encodeURIComponent(email)}`
+              setIsLoading(true)
+              setError(null)
+              try {
+                const resp = await fetch('/api/auth/test-ensure-user', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email, password }),
+                })
+                if (!resp.ok) {
+                  const j = await resp.json().catch(() => ({}))
+                  throw new Error(j.error || 'Failed to ensure test user')
+                }
+                await login({ email, password })
+                router.push('/dashboard')
+              } catch (err) {
+                setError(err instanceof Error ? err.message : 'Failed to test login')
+              } finally {
+                setIsLoading(false)
+              }
             }}
             className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
           >
-            Use Test Login (Magic Link)
+            Use Test Login (Bypass Confirmation)
           </button>
         )}
         
