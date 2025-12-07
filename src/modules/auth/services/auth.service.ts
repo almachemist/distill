@@ -157,8 +157,11 @@ export class AuthService {
   }
 
   async resetPassword(email: string) {
+    const origin = typeof window !== 'undefined' 
+      ? window.location.origin 
+      : (process.env.NEXT_PUBLIC_SITE_URL || 'https://distil-app.com')
     const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/reset-password`,
+      redirectTo: `${origin}/auth/reset-password`,
     })
 
     if (error) {
