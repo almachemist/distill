@@ -4,10 +4,15 @@ export const runtime = 'nodejs'
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url)
-  const email = url.searchParams.get('email') || ''
-  const allowed = (process.env.ALLOW_TEST_LOGIN_EMAIL || 'distiller@devilsthumbdistillery.com').toLowerCase()
+  const email = (url.searchParams.get('email') || '').toLowerCase()
   const allowAny = (process.env.ALLOW_TEST_LOGIN_ANY || 'false').toLowerCase() === 'true'
-  if (!email || (!allowAny && email.toLowerCase() !== allowed)) {
+  const envList = (process.env.ALLOW_TEST_LOGIN_EMAILS || process.env.ALLOW_TEST_LOGIN_EMAIL || '')
+    .split(',')
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+  const defaults = ['g@g.com', 'distillery@devilsthumbdistillery.com', 'distiller@devilsthumbdistillery.com']
+  const allowedSet = new Set(envList.length ? envList : defaults)
+  if (!email || (!allowAny && !allowedSet.has(email))) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 

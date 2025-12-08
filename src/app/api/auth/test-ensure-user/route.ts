@@ -4,12 +4,17 @@ export const runtime = 'nodejs'
 
 export async function POST(req: NextRequest) {
   const { email: rawEmail, password: rawPassword } = await req.json().catch(() => ({}))
-  const allowed = (process.env.ALLOW_TEST_LOGIN_EMAIL || 'distiller@devilsthumbdistillery.com').toLowerCase()
   const allowAny = (process.env.ALLOW_TEST_LOGIN_ANY || 'false').toLowerCase() === 'true'
-  const email = (rawEmail || allowed).toLowerCase()
+  const envList = (process.env.ALLOW_TEST_LOGIN_EMAILS || process.env.ALLOW_TEST_LOGIN_EMAIL || '')
+    .split(',')
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+  const defaults = ['g@g.com', 'distillery@devilsthumbdistillery.com', 'distiller@devilsthumbdistillery.com']
+  const allowedSet = new Set(envList.length ? envList : defaults)
+  const email = (rawEmail || envList[0] || defaults[0]).toLowerCase()
   const password = rawPassword || process.env.TEST_LOGIN_PASSWORD || '12345678'
 
-  if (!allowAny && email !== allowed) {
+  if (!allowAny && !allowedSet.has(email)) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 

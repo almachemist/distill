@@ -10,9 +10,14 @@ function isValidUrl(u: string | null | undefined): u is string {
 export async function GET(req: NextRequest) {
   const urlParam = new URL(req.url)
   const email = (urlParam.searchParams.get('email') || '').toLowerCase()
-  const allowed = (process.env.ALLOW_TEST_LOGIN_EMAIL || 'distiller@devilsthumbdistillery.com').toLowerCase()
   const allowAny = (process.env.ALLOW_TEST_LOGIN_ANY || 'false').toLowerCase() === 'true'
-  if (!email || (!allowAny && email !== allowed)) {
+  const envList = (process.env.ALLOW_TEST_LOGIN_EMAILS || process.env.ALLOW_TEST_LOGIN_EMAIL || '')
+    .split(',')
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+  const defaults = ['g@g.com', 'distillery@devilsthumbdistillery.com', 'distiller@devilsthumbdistillery.com']
+  const allowedSet = new Set(envList.length ? envList : defaults)
+  if (!email || (!allowAny && !allowedSet.has(email))) {
     return NextResponse.json({ error: 'forbidden' }, { status: 403 })
   }
 
@@ -29,9 +34,10 @@ export async function GET(req: NextRequest) {
     email,
     options: { redirectTo: site },
   })
-  const otp = (data as any)?.properties?.email_otp_token
-  if (error || !otp) {
-    return NextResponse.json({ error: error?.message || 'otp_error' }, { status: 400 })
+  const props = (data as any)?.properties || {}
+  const tokenHash = props.hashed_token || props.token_hash
+  if (error || !tokenHash) {
+    return NextResponse.json({ error: error?.message || 'token_hash_error' }, { status: 400 })
   }
 
   const serverSupabase = createServerClient(supabaseUrl, supabaseAnonKey, {
@@ -42,7 +48,7 @@ export async function GET(req: NextRequest) {
   })
   const { data: sessionData, error: verifyError } = await serverSupabase.auth.verifyOtp({
     email,
-    token: otp,
+    token_hash: tokenHash,
     type: 'email',
   })
   if (verifyError) {
