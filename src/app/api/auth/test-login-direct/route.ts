@@ -34,21 +34,12 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: error?.message || 'otp_error' }, { status: 400 })
   }
 
-  let response = NextResponse.redirect(new URL('/dashboard', site))
   const serverSupabase = createServerClient(supabaseUrl, supabaseAnonKey, {
     cookies: {
-      getAll() {
-        // Route handler does not need reads here
-        return [] as any
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }: any) => {
-          try { response.cookies.set(name, value, options) } catch {}
-        })
-      },
+      getAll() { return [] as any },
+      setAll() {},
     }
   })
-
   const { data: sessionData, error: verifyError } = await serverSupabase.auth.verifyOtp({
     email,
     token: otp,
@@ -60,7 +51,8 @@ export async function GET(req: NextRequest) {
   if (!sessionData?.session) {
     return NextResponse.json({ error: 'session_missing' }, { status: 400 })
   }
-
-  return response
+  const redirectUrl = new URL('/auth/test/callback', site)
+  redirectUrl.searchParams.set('access_token', sessionData.session.access_token)
+  redirectUrl.searchParams.set('refresh_token', sessionData.session.refresh_token)
+  return NextResponse.redirect(redirectUrl)
 }
-
