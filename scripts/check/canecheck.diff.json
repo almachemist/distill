@@ -1,0 +1,53 @@
+[
+  {
+    "batch_id": "CS-25-2-L",
+    "status": "missing_in_json",
+    "supabase": {
+      "still_used": "Roberta",
+      "retort1_content": "Late tails",
+      "retort1_volume_l": 68,
+      "retort1_abv_percent": 30,
+      "retort1_lal": 20.4,
+      "retort2_content": "Early tails",
+      "retort2_volume_l": 66,
+      "retort2_abv_percent": 60,
+      "retort2_lal": 39.6,
+      "hearts_volume_l": 45,
+      "hearts_abv_percent": 79.5,
+      "hearts_lal": 35.78
+    }
+  },
+  {
+    "batch_id": "CS-24-1",
+    "status": "missing_in_json",
+    "supabase": {
+      "still_used": "Roberta",
+      "retort1_volume_l": 0,
+      "retort2_volume_l": 0,
+      "heads_volume_l": 0,
+      "hearts_volume_l": 0
+    }
+  },
+  {
+    "batch_id": "CS-24-2",
+    "status": "missing_in_json",
+    "supabase": {
+      "still_used": "Roberta",
+      "retort1_volume_l": 0,
+      "retort2_volume_l": 0,
+      "heads_volume_l": 0,
+      "hearts_volume_l": 0
+    }
+  },
+  {
+    "batch_id": "CS-24-3",
+    "status": "missing_in_json",
+    "supabase": {
+      "still_used": "Roberta",
+      "retort1_volume_l": 0,
+      "retort2_volume_l": 0,
+      "heads_volume_l": 0,
+      "hearts_volume_l": 0
+    }
+  }
+]

@@ -1,0 +1,79 @@
+[
+  {
+    "batch_id": "RUM-23-1",
+    "differences": {
+      "heads_volume_l": { "json": 10, "supabase": 31 },
+      "heads_abv_percent": { "json": 83, "supabase": 83.5 },
+      "heads_lal": { "json": 63.08, "supabase": 25.89 },
+      "hearts_volume_l": { "json": 64.7, "supabase": 83 },
+      "hearts_abv_percent": { "json": 83, "supabase": 76 },
+      "hearts_lal": { "json": 45.29, "supabase": 63.08 }
+    }
+  },
+  {
+    "batch_id": "RUM-24-2",
+    "differences": {
+      "cask_number": { "json": 35, "supabase": "35" }
+    }
+  },
+  {
+    "batch_id": "RUM-24-3",
+    "differences": {
+      "cask_number": { "json": 38, "supabase": "38" }
+    }
+  },
+  {
+    "batch_id": "RUM-24-4",
+    "differences": {
+      "initial_brix": { "json": 0, "supabase": 22.2 },
+      "initial_ph": { "json": 0, "supabase": 5.2 },
+      "yeast_type": { "json": null, "supabase": "Distillamax RM" },
+      "yeast_mass_g": { "json": 0, "supabase": 1000 },
+      "retort1_content": { "json": null, "supabase": "Late tails 116 L (81 L @ 51% + 35 L H2O)" },
+      "retort1_volume_l": { "json": 0, "supabase": 116 },
+      "retort1_abv_percent": { "json": 0, "supabase": 35 },
+      "retort1_lal": { "json": 0, "supabase": 40.6 },
+      "retort2_content": { "json": null, "supabase": "Early tails 112 L (80 L @ 80% + 32 L H2O)" },
+      "retort2_volume_l": { "json": 0, "supabase": 112 },
+      "retort2_abv_percent": { "json": 0, "supabase": 60 },
+      "retort2_lal": { "json": 0, "supabase": 67.2 },
+      "heads_volume_l": { "json": 0, "supabase": 25 },
+      "heads_abv_percent": { "json": 0, "supabase": 84 },
+      "heads_lal": { "json": 0, "supabase": 21 },
+      "hearts_volume_l": { "json": 0, "supabase": 100 },
+      "hearts_abv_percent": { "json": 0, "supabase": 82.6 },
+      "hearts_lal": { "json": 0, "supabase": 82.6 },
+      "total_lal_start": { "json": 0, "supabase": 239.64 },
+      "total_lal_end": { "json": 0, "supabase": 218.14 },
+      "lal_loss": { "json": 0, "supabase": 21.5 },
+      "cask_number": { "json": 37, "supabase": "37" },
+      "fill_abv_percent": { "json": 0, "supabase": 63.4 },
+      "volume_filled_l": { "json": 0, "supabase": 194 },
+      "lal_filled": { "json": 0, "supabase": 123 }
+    }
+  },
+  {
+    "batch_id": "RUM-24-5",
+    "differences": {
+      "cask_number": { "json": 39, "supabase": "39" }
+    }
+  },
+  {
+    "batch_id": "RUM-24-6",
+    "differences": {
+      "cask_number": { "json": 40, "supabase": "40" }
+    }
+  },
+  {
+    "batch_id": "RUM-24-7",
+    "differences": {
+      "cask_number": { "json": 41, "supabase": "41" }
+    }
+  },
+  {
+    "batch_id": "RUM-24-8",
+    "differences": {
+      "cask_number": { "json": 42, "supabase": "42" }
+    }
+  }
+]
