@@ -1,6 +1,6 @@
 'use client'
 
-import { DistillationSession, OutputDetail, OutputPhase } from '../types/distillation-session.types'
+import { DistillationSession, OutputDetail, OutputPhase, RunDataPoint, ChargeComponent } from '../types/distillation-session.types'
 import { useState, useEffect } from 'react'
 
 interface SimpleBatchEditModalProps {
@@ -31,11 +31,13 @@ export default function SimpleBatchEditModal({
     onClose()
   }
 
-  const handleChange = (field: string, value: any) => {
+  const handleChange = <K extends keyof DistillationSession>(field: K, value: DistillationSession[K]) => {
     setEditedSession(prev => ({ ...prev, [field]: value }))
   }
 
-  const handleChargeChange = (field: string, value: any) => {
+  type ChargeTotalKey = 'volume_L' | 'abv_percent' | 'lal'
+  type ChargeTotalValue = number | null
+  const handleChargeChange = (field: ChargeTotalKey, value: ChargeTotalValue) => {
     setEditedSession(prev => ({
       ...prev,
       charge: {
@@ -50,7 +52,7 @@ export default function SimpleBatchEditModal({
     }))
   }
 
-  const handleChargeComponentChange = (index: number, field: string, value: any) => {
+  const handleChargeComponentChange = <K extends keyof ChargeComponent>(index: number, field: K, value: ChargeComponent[K]) => {
     setEditedSession(prev => ({
       ...prev,
       charge: {
@@ -62,7 +64,7 @@ export default function SimpleBatchEditModal({
     }))
   }
 
-  const handleRunDataChange = (index: number, field: string, value: any) => {
+  const handleRunDataChange = <K extends keyof RunDataPoint>(index: number, field: K, value: RunDataPoint[K]) => {
     setEditedSession(prev => ({
       ...prev,
       runData: prev.runData?.map((run, i) =>
@@ -71,10 +73,14 @@ export default function SimpleBatchEditModal({
     }))
   }
 
-  const handleOutputChange = (index: number, field: string, value: any) => {
+  const handleOutputChange = (index: number, field: string, value: unknown) => {
     setEditedSession(prev => {
       const outputs = prev.outputs ?? []
-      const isPhase = (o: any): o is OutputPhase => 'name' in o && ('volumeL' in o || 'abv' in o)
+      const isPhase = (o: unknown): o is OutputPhase => {
+        if (typeof o !== 'object' || o === null) return false
+        const obj = o as Record<string, unknown>
+        return 'name' in obj && ('volumeL' in obj || 'abv' in obj)
+      }
       if (outputs.length === 0) {
         return { ...prev, outputs }
       }
@@ -326,7 +332,7 @@ export default function SimpleBatchEditModal({
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Outputs</h3>
               <div className="space-y-3">
                 {editedSession.outputs.map((out, idx) => {
-                  const isPhase = (out as any).name !== undefined
+                  const isPhase = (out as OutputPhase | OutputDetail) && (out as OutputPhase).name !== undefined
                   const title = isPhase ? (out as OutputPhase).name : (out as OutputDetail).phase
                   return (
                     <div key={idx} className="bg-white rounded-lg p-3 border border-gray-200">

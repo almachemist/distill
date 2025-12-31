@@ -1,6 +1,5 @@
 // merchant-mae-gin-003-distillation.session.ts
 import { DistillationSession } from '../types/distillation-session.types'
-import { DISTILLATION_CONSTANTS } from '../constants/distillation.constants'
 
 export const merchantMaeGin003Distillation: DistillationSession = {
   id: "SPIRIT-GIN-MM-003",
@@ -174,6 +173,5 @@ export const merchantMaeGin003Distillation: DistillationSession = {
 
   notes: "Merchant Mae Gin 003 - Production batch with whisky helmet configuration (1 long + 3 short tubes). Balanced botanical profile with dominant juniper and coriander."
 }
-
 
 

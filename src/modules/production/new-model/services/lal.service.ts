@@ -38,7 +38,7 @@ export function sumSegmentsLal(segments: Array<{ volume_l?: number | null; abv_p
   let total = 0
   const flags: LalFlag[] = []
   for (const seg of segments) {
-    const r = calcLal(seg.volume_l ?? null, seg.abv_percent ?? null, seg.lal ?? null, (seg as any).density ?? null)
+    const r = calcLal(seg.volume_l ?? null, seg.abv_percent ?? null, seg.lal ?? null, seg.density ?? null)
     if (r.value == null) flags.push(...r.flags)
     else total += r.value
   }
@@ -56,7 +56,7 @@ export function computeHeartsLal(cuts: Cuts): LalResult {
     return sumSegmentsLal(segs as HeartsSegment[])
   }
   // Else compute from hearts volume/abv
-  return calcLal(hearts?.volume_l ?? null, hearts?.abv_percent ?? null, hearts?.lal ?? null, (hearts as any)?.density ?? null)
+  return calcLal(hearts?.volume_l ?? null, hearts?.abv_percent ?? null, hearts?.lal ?? null, hearts?.density ?? null)
 }
 
 export function computeTailsLal(cuts: Cuts): LalResult {
@@ -67,17 +67,17 @@ export function computeTailsLal(cuts: Cuts): LalResult {
     return sumSegmentsLal(segs as TailsSegment[])
   }
   // Else rely on single tails phase
-  return calcLal(tails?.volume_l ?? null, tails?.abv_percent ?? null, tails?.lal ?? null, (tails as any)?.density ?? null)
+  return calcLal(tails?.volume_l ?? null, tails?.abv_percent ?? null, tails?.lal ?? null, tails?.density ?? null)
 }
 
 export function computeHeadsLal(cuts: Cuts): LalResult {
   const heads = cuts.heads
-  return calcLal(heads?.volume_l ?? null, heads?.abv_percent ?? null, heads?.lal ?? null, (heads as any)?.density ?? null)
+  return calcLal(heads?.volume_l ?? null, heads?.abv_percent ?? null, heads?.lal ?? null, heads?.density ?? null)
 }
 
 export function computeForeshotsLal(cuts: Cuts): LalResult {
   const fs = cuts.foreshots
-  return calcLal(fs?.volume_l ?? null, fs?.abv_percent ?? null, fs?.lal ?? null, (fs as any)?.density ?? null)
+  return calcLal(fs?.volume_l ?? null, fs?.abv_percent ?? null, fs?.lal ?? null, fs?.density ?? null)
 }
 
 export interface BatchKpi {
@@ -156,12 +156,12 @@ export type CutKey = "foreshots" | "heads" | "hearts" | "tails"
 export function applyLalOnCutUpdate(batch: BatchNew, cutKey: CutKey, updates: Partial<CutPhase>): BatchNew {
   // Pure function: returns a new batch object with LAL applied according to rules
   const next: BatchNew = JSON.parse(JSON.stringify(batch)) as BatchNew
-  const target = (next.cuts as any)[cutKey] as CutPhase
+  const target = next.cuts[cutKey] as CutPhase
   const merged: CutPhase = { ...target, ...updates }
-  ;(next.cuts as any)[cutKey] = merged
+  next.cuts[cutKey] = merged
 
   // Recompute this cut's LAL if needed (preserve existing if present)
-  const r = calcLal(merged.volume_l ?? null, merged.abv_percent ?? null, merged.lal ?? null, (merged as any)?.density ?? null)
+  const r = calcLal(merged.volume_l ?? null, merged.abv_percent ?? null, merged.lal ?? null, merged?.density ?? null)
   if (merged.lal == null) {
     merged.lal = r.value
   }

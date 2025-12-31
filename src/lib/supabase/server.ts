@@ -1,23 +1,25 @@
 import { createServerClient } from '@supabase/ssr'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { cookies } from 'next/headers'
 
 function isValidUrl(u: string | null | undefined): u is string {
   return typeof u === 'string' && (u.startsWith('http://') || u.startsWith('https://'))
 }
 
-export async function createClient(): Promise<any> {
+export async function createClient(): Promise<SupabaseClient> {
   const cookieStore = await cookies()
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!isValidUrl(url) || typeof key !== 'string') {
-    return {
+    const stub = {
       auth: {
         getUser: async () => ({ data: { user: null }, error: null })
       },
       from() {
         throw new Error('Supabase is not configured')
       }
-    } as any
+    }
+    return stub as unknown as SupabaseClient
   }
   return createServerClient(
     url,

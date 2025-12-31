@@ -70,6 +70,7 @@ export interface BottlingRun {
   bottleEntries: BottleEntry[]
   summary: BottlingSummary
   createdAt?: string
+  isTest?: boolean
   notes?: string
 }
 
@@ -152,45 +153,67 @@ export function calculateBottlingSummary(
 }
 
 // Helper: Convert API batch data to unified Batch type
-export function normalizeBatch(apiBatch: any): Batch | null {
+export function normalizeBatch(apiBatch: unknown): Batch | null {
   try {
-    // Determine product type
+    const b = apiBatch as Record<string, unknown>
     let productType: ProductType = 'gin'
-    if (apiBatch.product_type) {
-      productType = apiBatch.product_type as ProductType
-    } else if (apiBatch.productType) {
-      productType = apiBatch.productType as ProductType
+    if (typeof b.product_type === 'string') {
+      productType = b.product_type as ProductType
+    } else if (typeof b.productType === 'string') {
+      productType = b.productType as ProductType
     }
 
-    // Get batch code
-    const batchCode = apiBatch.batch_id || apiBatch.batchCode || apiBatch.run_id || apiBatch.id || 'UNKNOWN'
+    const batchCode =
+      (b.batch_id as string) ||
+      (b.batchCode as string) ||
+      (b.run_id as string) ||
+      (b.id as string) ||
+      'UNKNOWN'
 
-    // Get product name
-    const productName = apiBatch.product_name || apiBatch.productName || apiBatch.recipe || apiBatch.display_name || apiBatch.sku || batchCode
+    const productName =
+      (b.product_name as string) ||
+      (b.productName as string) ||
+      (b.recipe as string) ||
+      (b.display_name as string) ||
+      (b.sku as string) ||
+      batchCode
 
-    // Get volume (try multiple field names)
-    const volumeLitres = apiBatch.volume_L || apiBatch.volumeLitres || apiBatch.volume_filled_l || apiBatch.hearts_volume_l || 0
+    const volumeLitres =
+      (b.volume_L as number) ||
+      (b.volumeLitres as number) ||
+      (b.volume_filled_l as number) ||
+      (b.hearts_volume_l as number) ||
+      0
 
-    // Get ABV (try multiple field names)
-    const abvPercent = apiBatch.abv_percent || apiBatch.abvPercent || apiBatch.fill_abv_percent || apiBatch.hearts_abv_percent || 0
+    const abvPercent =
+      (b.abv_percent as number) ||
+      (b.abvPercent as number) ||
+      (b.fill_abv_percent as number) ||
+      (b.hearts_abv_percent as number) ||
+      0
 
-    // Calculate LAL
     const lal = calculateLAL(volumeLitres, abvPercent)
 
-    // Get tank/cask
-    const tankCode = apiBatch.tank || apiBatch.tankCode || apiBatch.cask_number || undefined
+    const tankCode =
+      (b.tank as string) ||
+      (b.tankCode as string) ||
+      (b.cask_number as string) ||
+      undefined
 
-    // Get status
     let status: BatchStatus = 'in_tank'
-    if (apiBatch.status) {
-      status = apiBatch.status as BatchStatus
+    if (typeof b.status === 'string') {
+      status = b.status as BatchStatus
     }
 
-    // Get distilled date
-    const distilledAt = apiBatch.distilled_date || apiBatch.distilledAt || apiBatch.date || apiBatch.distillation_date || undefined
+    const distilledAt =
+      (b.distilled_date as string) ||
+      (b.distilledAt as string) ||
+      (b.date as string) ||
+      (b.distillation_date as string) ||
+      undefined
 
     return {
-      id: apiBatch.id || batchCode,
+      id: (b.id as string) || batchCode,
       batchCode,
       productName,
       productType,
@@ -200,7 +223,7 @@ export function normalizeBatch(apiBatch: any): Batch | null {
       tankCode,
       status,
       distilledAt,
-      notes: apiBatch.notes
+      notes: (b.notes as string | undefined)
     }
   } catch (error) {
     console.error('Error normalizing batch:', error, apiBatch)
@@ -216,4 +239,3 @@ export function getAvailableBatches(batches: Batch[]): Batch[] {
     (b.status === 'in_tank' || b.status === 'in_barrel' || b.status === 'completed')
   )
 }
-

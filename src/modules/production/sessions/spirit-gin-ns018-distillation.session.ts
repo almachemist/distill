@@ -1,7 +1,6 @@
 import type { DistillationSession } from '../types/distillation-session.types'
 import { VodkaDistillationCalculator } from '../services/vodka-distillation-calculator.service'
-import { BatchSchema, type Batch, generateUUID } from '@/types/schema'
-import { migrateDistillationSession } from '@/lib/migrateSessions'
+import { type Batch, generateUUID } from '@/types/schema'
 
 // Complete SPIRIT-GIN-NS-018 data in bulletproof schema format
 const spiritGinNS018BulletproofData: Batch = {

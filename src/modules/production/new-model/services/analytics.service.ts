@@ -88,8 +88,7 @@ export function aggregate(dataset: BatchesDataset, year: number, still: string, 
     return groups.get(key) as GroupAggregate
   }
 
-  // Count mismatches to the special key '*all*' and also to each group's bad_still_count when present
-  const mismatchSet = new Set<string>(mismatched.map(m => m.batch_id))
+ 
 
   for (const b of filtered) {
     const { key, label } = groupKeyLabel(b)

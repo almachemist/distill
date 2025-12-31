@@ -144,27 +144,7 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
     return value
   }
 
-  // Auto-update LAL when volume or ABV changes (update all 3 fields at once)
-  const updateWithLAL = (
-    volumeField: keyof RumCaneSpiritBatch,
-    abvField: keyof RumCaneSpiritBatch,
-    lalField: keyof RumCaneSpiritBatch,
-    volume: number | undefined,
-    abv: number | undefined
-  ) => {
-    const lal = (volume && abv) ? calculateLAL(volume, abv) : undefined
-
-    // Update all 3 fields at once to avoid multiple re-renders
-    const updates = {
-      [volumeField]: volume,
-      [abvField]: abv,
-      [lalField]: lal
-    }
-
-    Object.entries(updates).forEach(([key, value]) => {
-      updateField(key as keyof RumCaneSpiritBatch, value as any)
-    })
-  }
+ 
 
   return (
     <div className="space-y-8">
@@ -214,18 +194,15 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             <label className="block text-sm font-medium text-stone-700 mb-2">
               Boiler Volume (L)
             </label>
-            <input
-              type="text"
-              value={batch.boiler_volume_l ?? ''}
-              onChange={(e) => {
-                // @ts-ignore - Allow string during typing, convert to number on blur
-                updateField('boiler_volume_l', e.target.value)
-              }}
-              onBlur={(e) => {
-                const vol = parseNumber(e.target.value)
-                updateField('boiler_volume_l', vol)
-                // Auto-calculate LAL if both volume and ABV exist
-                if (vol !== undefined && batch.boiler_abv_percent !== undefined) {
+          <input
+            type="text"
+            value={batch.boiler_volume_l ?? ''}
+            onChange={(e) => updateField('boiler_volume_l', parseNumber(e.target.value))}
+            onBlur={(e) => {
+              const vol = parseNumber(e.target.value)
+              updateField('boiler_volume_l', vol)
+              // Auto-calculate LAL if both volume and ABV exist
+              if (vol !== undefined && batch.boiler_abv_percent !== undefined) {
                   updateField('boiler_lal', calculateLAL(vol, batch.boiler_abv_percent))
                 }
               }}

@@ -712,6 +712,53 @@
         "ph_start": 3.83,
         "notes": "100 L of cane acid from batch CS-25-2"
       }
+    },
+    {
+      "batch_id": "RUM-25-001",
+      "product_group": "RUM-25",
+      "date": "2025-11-28",
+      "feedstock": "Cane Syrup",
+      "year": 2023,
+      "fermentation": {
+        "date_start": "2025-11-28",
+        "volume_l": null,
+        "brix_start": 17.9,
+        "ph_start": 4.91,
+        "yeast": "Distillamax RM 1kg",
+        "notes": "Substrate 500 kg cane syrup + 1400 kg water; cane acid 100 L (CS-25-2); Fermaid 500g; DAP 500g; rehydration 37.8°C 15 min; starting temp 25°C; tank Left fermenter; substrate batch 2023"
+      },
+      "distillations": [
+        {
+          "date": "2025-11-29",
+          "charge_l": 1100,
+          "abv_in": 8.5,
+          "lal_in": 93.5,
+          "tails_added": "R1: Mixed tails 83 L @ 33% (27.39 LAL); R2: Mixed tails 82 L @ 58.5% (47.97 LAL)",
+          "segments": [
+            { "time": "11:00", "abv": 78.0 },
+            { "time": "12:00", "abv": 83.6 },
+            { "time": "16:30", "abv": 80.2 },
+            { "time": "13:40+", "abv": 76.0 },
+            { "time": "15:30+", "abv": 53.0 }
+          ],
+          "lal_out_total": 134.284
+        },
+        {
+          "date": "2025-11-29",
+          "charge_l": 900,
+          "abv_in": 8.5,
+          "lal_in": 76.5,
+          "tails_added": "R1: Late tails 61 L @ 30% (18.3 LAL); R2: Early tails 63.5 L @ 60% (38.1 LAL)",
+          "segments": [
+            { "time": "10:30", "abv": 80.0 },
+            { "time": "11:25", "abv": 83.6 },
+            { "time": "14:15", "abv": 79.9 },
+            { "time": "15:00", "abv": 75.1 },
+            { "time": "17:20", "abv": 53.0 }
+          ],
+          "lal_out_total": 119.128
+        }
+      ]
     }
   ]
 }

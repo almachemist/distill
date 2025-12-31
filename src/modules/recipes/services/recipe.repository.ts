@@ -12,6 +12,8 @@ import type {
   RecipeCsvRow
 } from '../types/recipe.types'
 
+type RecipeIngredientJoined = RecipeIngredient & { items: Item | Item[] }
+
 export class RecipeRepository {
   private supabase = createClient()
 
@@ -128,10 +130,13 @@ export class RecipeRepository {
 
     return {
       ...recipe,
-      ingredients: (ingredients || []).map((ing: any) => ({
-        ...ing,
-        item: (Array.isArray(ing.items) ? ing.items[0] : ing.items) as Item
-      }))
+      ingredients: (ingredients || []).map((ing) => {
+        const j = ing as RecipeIngredientJoined
+        return {
+          ...j,
+          item: (Array.isArray(j.items) ? j.items[0] : j.items) as Item
+        }
+      })
     }
   }
 
@@ -152,10 +157,13 @@ export class RecipeRepository {
       throw new Error(`Failed to fetch recipe ingredients: ${error.message}`)
     }
 
-    return (data ?? []).map((ing: any) => ({
-      ...ing,
-      item: (Array.isArray(ing.items) ? ing.items[0] : ing.items) as Item
-    }))
+    return (data ?? []).map((ing) => {
+      const j = ing as RecipeIngredientJoined
+      return {
+        ...j,
+        item: (Array.isArray(j.items) ? j.items[0] : j.items) as Item
+      }
+    })
   }
 
   /**

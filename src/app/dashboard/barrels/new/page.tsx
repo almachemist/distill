@@ -1,14 +1,20 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { BarrelService } from '@/modules/barrels/services/barrel.service'
 import type { CreateBarrelData } from '@/modules/barrels/types/barrel.types'
+import { createClient } from '@/lib/supabase/client'
+import type { Tank } from '@/modules/production/types/tank.types'
 
-export default function NewBarrelPage() {
+function NewBarrelContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const supabase = createClient()
+  const USE_STATIC = ['1','true','yes'].includes((process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase())
+  const [sourceTank, setSourceTank] = useState<Tank | null>(null)
   
   // Generate a default barrel number based on date and random suffix
   const generateBarrelNumber = () => {
@@ -34,14 +40,126 @@ export default function NewBarrelPage() {
     notes: '',
   })
 
+  useEffect(() => {
+    const product = searchParams.get('product') || ''
+    const abv = parseFloat(searchParams.get('abv') || '') || 0
+    const volume = parseFloat(searchParams.get('volume') || '') || 0
+    const location = searchParams.get('location') || ''
+    const tankId = searchParams.get('tankId') || ''
+    if (product || abv || volume || location || tankId) {
+      setFormData(prev => ({
+        ...prev,
+        spiritType: product || prev.spiritType,
+        abv: abv || prev.abv,
+        currentVolume: volume || prev.currentVolume,
+        originalVolume: volume || prev.originalVolume,
+        location: location || prev.location,
+        notes: tankId ? `From tank ${tankId}` : prev.notes
+      }))
+    }
+    if (tankId && !USE_STATIC) {
+      ;(async () => {
+        const { data } = await supabase
+          .from('tanks')
+          .select('*')
+          .eq('tank_id', tankId)
+          .single()
+        if (data) setSourceTank(data as Tank)
+      })()
+    }
+  }, [searchParams])
+
+  useEffect(() => {
+    const map: Record<string, string> = {
+      'Ex-Bourbon': '200L',
+      'Virgin Oak': '200L',
+      'Ex-Sherry': '250L',
+      'Ex-Port': '225L',
+      'Stainless Steel': '200L'
+    }
+    const target = map[formData.barrelType]
+    if (target) {
+      setFormData(prev => ({
+        ...prev,
+        barrelSize: target,
+        currentVolume: Math.min(prev.currentVolume || 0, parseFloat(target))
+      }))
+    }
+  }, [formData.barrelType])
+
+  const capacityL = parseFloat(formData.barrelSize) || 0
+  const availableTank = ((sourceTank?.current_volume_l ?? sourceTank?.volume ?? 0) as number) || 0
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError(null)
 
     try {
+      if (sourceTank) {
+        const available = Number(sourceTank.current_volume_l ?? sourceTank.volume ?? 0)
+        const transferVol = Number(formData.currentVolume || 0)
+        if (transferVol > available) {
+          setError(`Transfer exceeds tank volume. Available: ${available}L, Requested: ${transferVol}L`)
+          setIsLoading(false)
+          return
+        }
+      }
+      const sizeStr = formData.barrelSize || ''
+      const capacityMatch = sizeStr.match(/(\d+)\s*L/i)
+      const capacityL = capacityMatch ? parseFloat(capacityMatch[1]) : undefined
+      if (capacityL && formData.currentVolume > capacityL) {
+        setError(`Barrel capacity exceeded. Capacity: ${capacityL}L, Requested: ${formData.currentVolume}L`)
+        setIsLoading(false)
+        return
+      }
       const service = new BarrelService()
-      await service.createBarrel(formData)
+      const barrel = await service.createBarrel(formData)
+
+      const tankId = searchParams.get('tankId') || ''
+      if (tankId && !USE_STATIC) {
+        const { data: tank, error: tankErr } = await supabase
+          .from('tanks')
+          .select('*')
+          .eq('tank_id', tankId)
+          .single()
+        if (!tankErr && tank) {
+          const prevVol = Number(tank.current_volume_l ?? tank.volume ?? 0)
+          const transferVol = Number(formData.currentVolume || 0)
+          const remaining = Math.max(prevVol - transferVol, 0)
+          const newStatus = remaining <= 0 ? 'empty' : 'holding'
+          const updates = {
+            current_volume_l: remaining,
+            status: newStatus,
+            last_updated_by: 'Barreling'
+          }
+          const { error: updErr } = await supabase
+            .from('tanks')
+            .update(updates)
+            .eq('id', tank.id)
+          if (!updErr) {
+            await supabase
+              .from('tank_history')
+              .insert({
+                organization_id: tank.organization_id,
+                tank_id: tank.id,
+                action: 'Transferred to barrel',
+                user_name: 'Barreling',
+                previous_values: {
+                  tank_name: tank.tank_name,
+                  capacity_l: tank.capacity_l,
+                  product: tank.product,
+                  current_abv: tank.current_abv,
+                  current_volume_l: tank.current_volume_l,
+                  status: tank.status,
+                  notes: tank.notes
+                },
+                new_values: updates,
+                notes: `Barrel ${barrel?.barrelNumber || ''}`
+              })
+          }
+        }
+      }
       router.push('/dashboard/barrels')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create barrel')
@@ -76,6 +194,16 @@ export default function NewBarrelPage() {
       )}
 
       <form onSubmit={handleSubmit} className="space-y-6 bg-white shadow-sm rounded-lg p-6">
+        {sourceTank && (
+          <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+            <div className="text-sm text-amber-700">
+              Source tank {sourceTank.tank_id} has {(sourceTank.current_volume_l ?? sourceTank.volume ?? 0) || 0} L at {(sourceTank.current_abv ?? sourceTank.abv ?? 0) || 0}% ABV.
+            </div>
+            <div className="text-xs text-amber-800 mt-1">
+              After transfer of {formData.currentVolume} L, remaining will be {Math.max(((sourceTank.current_volume_l ?? sourceTank.volume ?? 0) || 0) - (formData.currentVolume || 0), 0)} L.
+            </div>
+          </div>
+        )}
         {/* Barrel Identification */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -215,6 +343,19 @@ export default function NewBarrelPage() {
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               placeholder="190"
             />
+            <div className="mt-2 flex items-center gap-3">
+              <span className="text-xs text-gray-600">Capacity: {capacityL} L</span>
+              {sourceTank && (
+                <span className="text-xs text-gray-600">Available in tank: {availableTank} L</span>
+              )}
+              <button
+                type="button"
+                onClick={() => setFormData(prev => ({ ...prev, currentVolume: Math.min(capacityL || 0, availableTank || 0), originalVolume: Math.min(capacityL || 0, availableTank || 0) }))}
+                className="px-2 py-1 border border-gray-300 rounded-md text-xs font-medium text-gray-700 bg-white hover:bg-gray-50"
+              >
+                Fill to Capacity
+              </button>
+            </div>
           </div>
 
           <div>
@@ -322,5 +463,13 @@ export default function NewBarrelPage() {
         </div>
       </form>
     </div>
+  )
+}
+
+export default function NewBarrelPage() {
+  return (
+    <Suspense fallback={<div className="p-6 text-gray-600">Loading...</div>}>
+      <NewBarrelContent />
+    </Suspense>
   )
 }

@@ -1,84 +1,127 @@
 'use client'
 
 import { Suspense } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useEffect, useMemo, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-function BottlingSummaryContent() {
-  const searchParams = useSearchParams()
+type Summary = {
+  spiritType: string
+  volume: number
+  bottleSize: number
+  quantity: number
+}
+
+function SummaryInner() {
   const router = useRouter()
-  
-  const tank = searchParams.get('tank')
-  const size = searchParams.get('size')
-  const units = searchParams.get('units')
-  const transactions = searchParams.get('transactions')
+  const params = useSearchParams()
+  const [data, setData] = useState<Summary>({ spiritType: '', volume: 0, bottleSize: 700, quantity: 0 })
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const spiritType = params.get('spiritType') || ''
+    const volume = Number(params.get('volume') || 0)
+    const bottleSize = Number(params.get('bottleSize') || 700)
+    const quantityParam = Number(params.get('quantity') || 0)
+    const calcQty = quantityParam || Math.floor((volume * 1000) / bottleSize)
+    setData({ spiritType, volume, bottleSize, quantity: calcQty })
+  }, [params])
+
+  const estimates = useMemo(() => {
+    const bottles = data.quantity
+    const closures = bottles
+    const labels = bottles * 2
+    const cartons6 = data.bottleSize === 700 ? Math.ceil(bottles / 6) : 0
+    const producedName = `${data.spiritType} ${data.bottleSize}ml`
+    return { bottles, closures, labels, cartons6, producedName }
+  }, [data])
+
+  async function confirmSave() {
+    try {
+      setSaving(true)
+      setError(null)
+      const payload = {
+        productType: 'rum',
+        productName: data.spiritType,
+        mode: 'standard',
+        selectedBatches: [],
+        dilutionPhases: [],
+        bottleEntries: [{ size_ml: data.bottleSize, quantity: data.quantity }],
+        summary: { volume_l: data.volume, bottle_size_ml: data.bottleSize, bottles: data.quantity },
+        notes: 'Bottling summary confirm'
+      }
+      const res = await fetch('/api/production/bottling-runs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      if (!res.ok) {
+        const j = await res.json().catch(() => ({}))
+        throw new Error(j.error || 'Failed to save bottling run')
+      }
+      const j = await res.json()
+      const finishedName = estimates.producedName
+      router.push(`/dashboard/inventory?category=Spirits&search=${encodeURIComponent(finishedName)}`)
+    } catch (e: any) {
+      setError(e?.message || 'Failed to save')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  function editAgain() {
+    const qs = new URLSearchParams({
+      spiritType: data.spiritType,
+      volume: String(data.volume),
+      bottleSize: String(data.bottleSize),
+      quantity: String(data.quantity)
+    })
+    router.push(`/dashboard/production/bottling?${qs.toString()}`)
+  }
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-start">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Bottling Run Started Successfully</h1>
-          <p className="text-gray-600 mt-1">
-            Your bottling run has been started and packaging consumed
-          </p>
+          <h1 className="text-3xl font-bold text-gray-900">Bottling Summary</h1>
+          <p className="text-gray-600 text-sm">Review, edit or confirm before saving</p>
+        </div>
+        <div className="flex gap-2">
+          <button onClick={editAgain} className="px-4 py-2 rounded-md border">Edit</button>
+          <button onClick={() => router.back()} className="px-4 py-2 rounded-md border">Cancel</button>
+          <button onClick={confirmSave} disabled={saving} className="px-4 py-2 rounded-md bg-green-600 text-white">{saving ? 'Saving…' : 'Confirm Save'}</button>
         </div>
       </div>
 
-      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-        <div className="flex items-center mb-4">
-          <div className="flex-shrink-0">
-            <div className="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center">
-              <span className="text-white text-sm font-bold">✓</span>
-            </div>
-          </div>
-          <div className="ml-3">
-            <h3 className="text-lg font-medium text-green-800">
-              Bottling Run Started
-            </h3>
-            <p className="text-green-700">
-              All packaging materials have been consumed from inventory
-            </p>
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-md p-4">
+          <p className="text-red-800">{error}</p>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Configuration</h2>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between"><span className="text-gray-600">Spirit</span><span className="font-medium">{data.spiritType || '—'}</span></div>
+            <div className="flex justify-between"><span className="text-gray-600">Volume</span><span className="font-medium">{data.volume} L</span></div>
+            <div className="flex justify-between"><span className="text-gray-600">Bottle Size</span><span className="font-medium">{data.bottleSize} ml</span></div>
+            <div className="flex justify-between"><span className="text-gray-600">Bottles</span><span className="font-medium">{data.quantity}</span></div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-          <div>
-            <div className="text-green-700 font-medium">Source Tank</div>
-            <div className="text-green-900">{tank || 'Unknown'}</div>
-          </div>
-          <div>
-            <div className="text-green-700 font-medium">Unit Size</div>
-            <div className="text-green-900">{size}ml</div>
-          </div>
-          <div>
-            <div className="text-green-700 font-medium">Units</div>
-            <div className="text-green-900">{units} bottles</div>
-          </div>
-          <div>
-            <div className="text-green-700 font-medium">Transactions</div>
-            <div className="text-green-900">{transactions} CONSUME records</div>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Consumption & Output</h2>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between"><span className="text-gray-600">Bottles</span><span className="font-medium">{estimates.bottles}</span></div>
+            <div className="flex justify-between"><span className="text-gray-600">Closures</span><span className="font-medium">{estimates.closures}</span></div>
+            <div className="flex justify-between"><span className="text-gray-600">Labels</span><span className="font-medium">{estimates.labels}</span></div>
+            <div className="flex justify-between"><span className="text-gray-600">Cartons (6)</span><span className="font-medium">{estimates.cartons6}</span></div>
+            <div className="border-t pt-3 flex justify-between"><span className="text-gray-600">Finished Good</span><span className="font-medium">{estimates.producedName}</span></div>
           </div>
         </div>
       </div>
 
-      <div className="flex space-x-3">
-        <button
-          onClick={() => router.push('/dashboard/production/bottling')}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
-        >
-          Start Another Run
-        </button>
-        <button
-          onClick={() => router.push('/dashboard/inventory')}
-          className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700"
-        >
-          Check Inventory
-        </button>
-        <button
-          onClick={() => router.push('/dashboard/production')}
-          className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
-        >
-          Back to Production
-        </button>
+      <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+        <h3 className="text-lg font-semibold text-blue-900 mb-2">Next</h3>
+        <p className="text-blue-700 text-sm mb-3">After confirming, you will be redirected to Inventory filtered to the finished product.</p>
+        <button onClick={() => router.push(`/dashboard/inventory?category=Spirits&search=${encodeURIComponent(estimates.producedName)}`)} className="px-4 py-2 rounded-md bg-blue-600 text-white">Preview Inventory</button>
       </div>
     </div>
   )
@@ -86,24 +129,8 @@ function BottlingSummaryContent() {
 
 export default function BottlingSummaryPage() {
   return (
-    <Suspense fallback={<div className="space-y-6" />}> 
-      <BottlingSummaryContent />
+    <Suspense fallback={<div className="py-12 text-center text-gray-500">Loading…</div>}>
+      <SummaryInner />
     </Suspense>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

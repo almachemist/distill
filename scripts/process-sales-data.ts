@@ -10,8 +10,11 @@
  * - Cross-analysis (product x month, channel x product, etc.)
  */
 
+import 'dotenv/config'
 import fs from 'fs'
 import path from 'path'
+import { createServiceRoleClient } from '../src/lib/supabase/serviceRole'
+import type { SalesCategoryMap } from '../src/modules/planning/types/sales.types'
 
 interface RawSalesRow {
   Date: string
@@ -146,6 +149,94 @@ function processSalesData(rawData: RawSalesRow[]): ProcessedSale[] {
   })
 }
 
+function buildMapFromAnalytics(analytics: any): SalesCategoryMap {
+  const map: SalesCategoryMap = {}
+  const products = Array.isArray(analytics?.byProduct) ? analytics.byProduct : []
+  for (const p of products) {
+    const category = typeof p?.category === 'string' ? p.category : 'Unknown'
+    const item = typeof p?.item === 'string' ? p.item : ''
+    const sku = typeof p?.sku === 'string' ? p.sku : null
+    const items_sold = typeof p?.salesCount === 'number' ? p.salesCount : null
+    const units_sold = typeof p?.totalUnits === 'number' ? p.totalUnits : null
+    const discounts_and_comps = typeof p?.totalDiscounts === 'number' ? p.totalDiscounts : null
+    const net_sales = typeof p?.totalNetSales === 'number' ? p.totalNetSales : null
+    const gross_sales = typeof p?.totalGrossSales === 'number' ? p.totalGrossSales : null
+    const entry = {
+      item_name: item,
+      item_variation: null,
+      sku,
+      items_sold,
+      product_sales: null,
+      refunds: null,
+      discounts_and_comps,
+      net_sales,
+      tax: null,
+      gross_sales,
+      units_sold
+    }
+    if (!map[category]) map[category] = []
+    map[category].push(entry)
+  }
+  return map
+}
+
+async function importAnalytics(): Promise<{ upserted: number }> {
+  const analyticsPath = path.join(process.cwd(), 'data', 'sales_analytics_2025.json')
+  if (!fs.existsSync(analyticsPath)) {
+    return { upserted: 0 }
+  }
+  const content = fs.readFileSync(analyticsPath, 'utf-8')
+  const analytics = JSON.parse(content)
+  const map = buildMapFromAnalytics(analytics)
+  const organization_id = '00000000-0000-0000-0000-000000000001'
+  const range = analytics?.summary?.dateRange || {}
+  const period_start = typeof range?.start === 'string' ? range.start : '2025-01-01'
+  const period_end = typeof range?.end === 'string' ? range.end : '2025-12-31'
+  const granularity = 'annual'
+  const import_batch = 'square-analytics-2025'
+  const records: any[] = []
+  for (const [category, items] of Object.entries(map)) {
+    for (const item of items as any[]) {
+      records.push({
+        organization_id,
+        category,
+        item_name: item.item_name,
+        item_variation: item.item_variation ?? '',
+        sku: item.sku ?? '',
+        period_start,
+        period_end,
+        period_granularity: granularity,
+        items_sold: item.items_sold ?? null,
+        units_sold: item.units_sold ?? null,
+        product_sales: item.product_sales ?? null,
+        refunds: item.refunds ?? null,
+        discounts_and_comps: item.discounts_and_comps ?? null,
+        net_sales: item.net_sales ?? null,
+        tax: item.tax ?? null,
+        gross_sales: item.gross_sales ?? null,
+        import_batch,
+        raw_payload: item
+      })
+    }
+  }
+  const DRY_RUN = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true'
+  if (DRY_RUN) {
+    console.log(`DRY_RUN on, would upsert ${records.length} records`)
+    return { upserted: 0 }
+  }
+  const supa = createServiceRoleClient()
+  const { error } = await supa
+    .from('sales_items')
+    .upsert(records, {
+      ignoreDuplicates: false,
+      onConflict: 'organization_id,period_start,period_end,category,item_name,item_variation,sku'
+    })
+  if (error) {
+    throw new Error(error.message)
+  }
+  return { upserted: records.length }
+}
+
 // Main execution
 async function main() {
   console.log('🚀 Starting sales data processing...\n')
@@ -168,7 +259,8 @@ async function main() {
   console.log(`💾 Saved processed data to: ${outputPath}\n`)
 
   console.log('✅ Processing complete!')
+  const result = await importAnalytics()
+  console.log(`⬆️ Imported ${result.upserted} Square analytics records`)
 }
 
 main().catch(console.error)
-

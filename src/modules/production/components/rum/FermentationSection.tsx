@@ -80,7 +80,7 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
   }
 
   // Helper to update substrate entries
-  const updateSubstrate = (index: number, field: keyof SubstrateEntry, value: any) => {
+  const updateSubstrate = <K extends keyof SubstrateEntry>(index: number, field: K, value: SubstrateEntry[K]) => {
     const newSubstrates = [...(batch.substrates ?? [])]
     newSubstrates[index] = { ...newSubstrates[index], [field]: value }
     updateField('substrates', newSubstrates)
@@ -98,7 +98,7 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
   }
 
   // Helper to update fermentation readings
-  const updateReading = (index: number, field: keyof FermentationReading, value: any) => {
+  const updateReading = <K extends keyof FermentationReading>(index: number, field: K, value: FermentationReading[K]) => {
     const newReadings = [...(batch.fermentation_readings ?? [])]
     newReadings[index] = { ...newReadings[index], [field]: value }
     updateField('fermentation_readings', newReadings)
@@ -237,7 +237,7 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
 
         {(batch.substrates ?? []).length === 0 && (
           <div className="border border-dashed border-stone-300 rounded-lg p-6 text-center text-sm text-stone-500">
-            No substrates added yet. Click "+ Add Substrate" to add one.
+            No substrates added yet. Click &quot;+ Add Substrate&quot; to add one.
           </div>
         )}
 
@@ -576,7 +576,7 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
 
         {(batch.fermentation_readings ?? []).length === 0 && (
           <div className="border border-dashed border-stone-300 rounded-lg p-6 text-center text-sm text-stone-500">
-            No readings yet. Click "Initialize Readings" to add monitoring points.
+            No readings yet. Click &quot;Initialize Readings&quot; to add monitoring points.
           </div>
         )}
       </div>

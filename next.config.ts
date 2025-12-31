@@ -16,6 +16,11 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: false,
   },
   outputFileTracingRoot: __dirname,
+  outputFileTracingIncludes: {
+    '/api/**': ['data/**'],
+    '/app/**': ['data/**'],
+    '/**': ['data/**'],
+  },
 };
 
 export default nextConfig;

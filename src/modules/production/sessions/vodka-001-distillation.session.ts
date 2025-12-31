@@ -1,4 +1,4 @@
-import { DistillationSession, RunDataPoint, StillSetup, TotalRun, OutputDetail, OutputPhase, DilutionDetail, FinalOutput } from '../types/distillation-session.types'
+import { DistillationSession, RunDataPoint, StillSetup, TotalRun, OutputPhase, DilutionDetail, FinalOutput } from '../types/distillation-session.types'
 import { VodkaDistillationCalculator } from '../services/vodka-distillation-calculator.service'
 
 const baseVodka001Distillation: DistillationSession = {

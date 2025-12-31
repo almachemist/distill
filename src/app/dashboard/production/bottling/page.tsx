@@ -1,6 +1,7 @@
-'use client'
+"use client"
+export const dynamic = 'force-dynamic'
 
-import { useState, useEffect, useCallback } from 'react'
+import { Suspense, useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { StockRepository } from '@/modules/inventory/services/stock.repository'
 import type { StockLevel } from '@/modules/inventory/services/stock.repository'
@@ -18,6 +19,23 @@ export default function BottlingPage() {
   })
 
   const stockRepo = new StockRepository()
+
+  useEffect(() => {
+    try {
+      const sp = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams()
+      const preSpirit = sp.get('spiritType') || ''
+      const preVolume = Number(sp.get('volume') || 0)
+      const preBottleSize = Number(sp.get('bottleSize') || 750)
+      setBottlingRun(prev => ({
+        ...prev,
+        spiritType: preSpirit || prev.spiritType,
+        volume: preVolume || prev.volume,
+        bottleSize: preBottleSize || prev.bottleSize,
+      }))
+    } catch {
+      // ignore
+    }
+  }, [])
 
   const loadStockLevels = useCallback(async () => {
     try {
@@ -100,6 +118,11 @@ export default function BottlingPage() {
   }
 
   return (
+    <Suspense fallback={
+      <div className="flex justify-center items-center min-h-64">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      </div>
+    }>
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
@@ -245,5 +268,6 @@ export default function BottlingPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   )
 }

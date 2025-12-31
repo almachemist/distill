@@ -131,7 +131,7 @@ export const listCalendarEvents = async (opts?: {
     // In cases where the user is not signed in or profile/org is missing,
     // return an empty list so the UI can continue gracefully.
     const message = err instanceof Error ? err.message : JSON.stringify(err || {});
-    // eslint-disable-next-line no-console
+     
     console.warn("listCalendarEvents: no organization context, returning []:", message);
     return [] as CalendarEvent[];
   }

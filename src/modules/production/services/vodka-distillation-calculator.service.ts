@@ -12,7 +12,10 @@ export class VodkaDistillationCalculator {
       return phaseName === 'Hearts'
     })
 
-    const outputLAL = heartsOutputs.reduce((sum, o) => sum + ((o as any).lal ?? 0), 0)
+    const getLal = (o: OutputPhase | OutputDetail): number => {
+      return typeof o.lal === 'number' ? o.lal : 0
+    }
+    const outputLAL = heartsOutputs.reduce((sum, o) => sum + getLal(o), 0)
 
     const getVolume = (o: OutputPhase | OutputDetail): number => {
       return 'volumeL' in o ? (o.volumeL ?? 0) : (o.volume_L ?? 0)

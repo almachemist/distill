@@ -294,7 +294,7 @@ const baseSpiritGinDry2024Distillation: DistillationSession = {
     weightG: b.weight_g ?? null,
     notes: b.notes ?? undefined,
     ratio_percent: b.ratio_percent ?? undefined,
-    status: (b.status ?? undefined) as any
+    status: b.status === 'ok' || b.status === 'pending' || b.status === 'issue' ? b.status : undefined
   })),
   steepingHours: null,
   distillationHours: null,
@@ -319,7 +319,7 @@ const baseSpiritGinDry2024Distillation: DistillationSession = {
       volume_L: c.volume_L ?? null,
       abv_percent: c.abv_percent ?? null,
       lal: c.lal ?? null,
-      type: (c.type as any) ?? 'other'
+      type: c.type === 'ethanol' || c.type === 'dilution' || c.type === 'water' || c.type === 'other' ? c.type : 'other'
     })),
     total: {
       volume_L: spiritGinDry2024BulletproofData.chargeAdjustment.total.volume_L ?? null,

@@ -14,6 +14,7 @@ export default function InventoryManager() {
   const [suppliers, setSuppliers] = useState<Supplier[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [search, setSearch] = useState<string>('')
 
   const [edit, setEdit] = useState<InventoryItem | null>(null)
   const [creating, setCreating] = useState<boolean>(false)
@@ -26,15 +27,17 @@ export default function InventoryManager() {
   const [movements, setMovements] = useState<any[]>([])
   const [loadingMov, setLoadingMov] = useState(false)
   const [adjusting, setAdjusting] = useState<InventoryItem | null>(null)
-  const [adjDraft, setAdjDraft] = useState<{ delta?: number; reason?: string; note?: string }>({})
+  const [adjDraft, setAdjDraft] = useState<{ delta?: number; counted?: number; reason?: string; note?: string }>({})
   const [submittingAdj, setSubmittingAdj] = useState(false)
   const [adjMsg, setAdjMsg] = useState<string | null>(null)
 
 
   const filtered = useMemo(() => {
-    if (category === 'All') return items
-    return items.filter(i => i.category === category)
-  }, [items, category])
+    const base = category === 'All' ? items : items.filter(i => i.category === category)
+    if (!search) return base
+    const s = search.toLowerCase()
+    return base.filter(i => (i.name?.toLowerCase().includes(s) || i.sku?.toLowerCase().includes(s)))
+  }, [items, category, search])
 
   async function loadAll() {
     try {
@@ -90,7 +93,8 @@ export default function InventoryManager() {
     try {
       setSubmittingAdj(true)
       setAdjMsg(null)
-      const delta = Number(adjDraft.delta)
+      const useCounted = adjDraft.counted !== undefined && adjDraft.counted !== null && !Number.isNaN(Number(adjDraft.counted))
+      const delta = useCounted ? (Number(adjDraft.counted) - Number(adjusting.currentStock)) : Number(adjDraft.delta)
       if (!Number.isFinite(delta) || delta === 0) {
         setAdjMsg('Please enter a non-zero number')
         setSubmittingAdj(false)
@@ -100,8 +104,8 @@ export default function InventoryManager() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          reference: `manual-adjust:${adjusting.sku || adjusting.id}`,
-          reason: adjDraft.reason || 'adjustment',
+          reference: `${(adjDraft.reason || 'adjustment') === 'stocktake' ? 'stocktake' : 'manual-adjust'}:${adjusting.sku || adjusting.id}`,
+          reason: adjDraft.reason || (useCounted ? 'stocktake' : 'adjustment'),
           changes: [{ sku: adjusting.sku || adjusting.id, delta, note: adjDraft.note }]
         })
       })
@@ -121,6 +125,16 @@ export default function InventoryManager() {
   }
 
   useEffect(() => { loadAll() }, [category])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const sp = new URLSearchParams(window.location.search)
+      const cat = sp.get('category') as (InventoryCategory | 'All') | null
+      const s = sp.get('search') || sp.get('sku')
+      if (cat && (['All','Spirits','Packaging','Labels','Botanicals','RawMaterials'] as const).includes(cat as any)) setCategory(cat)
+      if (s) setSearch(s)
+    }
+  }, [])
 
   function supName(id?: string) {
     if (!id) return '—'
@@ -231,6 +245,10 @@ export default function InventoryManager() {
         {CATEGORIES.map(c => (
           <button key={c} onClick={() => setCategory(c)} className={`px-3 py-1.5 rounded-md border ${category === c ? 'bg-gray-900 text-white' : 'bg-white text-gray-800'}`}>{c}</button>
         ))}
+        <div className="ml-auto flex items-center gap-2">
+          <input placeholder="Filter by name or SKU" value={search} onChange={e => setSearch(e.target.value)} className="px-3 py-1.5 rounded-md border" />
+          {search && <button className="px-3 py-1.5 rounded-md border" onClick={() => setSearch('')}>Clear</button>}
+        </div>
       </div>
 
       {error && <div className="bg-red-50 border border-red-200 text-red-800 p-3 rounded">{error}</div>}
@@ -323,17 +341,21 @@ export default function InventoryManager() {
               <label>Adjust by (delta)
                 <input type="number" className="mt-1 w-full border rounded p-2" onChange={e => setAdjDraft(d => ({ ...d, delta: e.target.value === '' ? undefined : Number(e.target.value) }))} placeholder="+100 or -50" />
               </label>
+              <label>Counted quantity
+                <input type="number" className="mt-1 w-full border rounded p-2" onChange={e => setAdjDraft(d => ({ ...d, counted: e.target.value === '' ? undefined : Number(e.target.value) }))} placeholder="Set absolute" />
+              </label>
               <label>Reason
                 <select className="mt-1 w-full border rounded p-2" defaultValue="adjustment" onChange={e => setAdjDraft(d => ({ ...d, reason: e.target.value }))}>
                   <option value="receive">receive</option>
                   <option value="consume">consume</option>
                   <option value="adjustment">adjustment</option>
+                  <option value="stocktake">stocktake</option>
                 </select>
               </label>
               <label>Note
                 <textarea className="mt-1 w-full border rounded p-2" rows={3} onChange={e => setAdjDraft(d => ({ ...d, note: e.target.value }))} />
               </label>
-              <div className="text-gray-600">New quantity: <span className={`${(Number(adjusting.currentStock) + Number(adjDraft.delta || 0)) < 0 ? 'text-red-600' : 'text-gray-900'} font-semibold`}>{Number(adjusting.currentStock) + Number(adjDraft.delta || 0)}</span> {adjusting.unit}</div>
+              <div className="text-gray-600">New quantity: <span className={`${(Number(adjDraft.counted ?? (Number(adjusting.currentStock) + Number(adjDraft.delta || 0))) < 0) ? 'text-red-600' : 'text-gray-900'} font-semibold`}>{Number(adjDraft.counted ?? (Number(adjusting.currentStock) + Number(adjDraft.delta || 0)))}</span> {adjusting.unit}</div>
             </div>
             <div className="flex justify-end gap-2 pt-2">
               <button className="px-4 py-2 rounded border" onClick={() => setAdjusting(null)}>Cancel</button>
@@ -433,4 +455,3 @@ export default function InventoryManager() {
     </div>
   )
 }
-

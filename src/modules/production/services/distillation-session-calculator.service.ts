@@ -1,5 +1,5 @@
 // distillation-session-calculator.service.ts
-import { DistillationSession, DistillationCost, DistillationMetrics, BotanicalUsage, OutputPhase, OutputDetail } from '../types/distillation-session.types'
+import { DistillationSession, DistillationCost, DistillationMetrics, BotanicalUsage, OutputPhase, OutputDetail, ChargeComponent } from '../types/distillation-session.types'
 import { DISTILLATION_CONSTANTS } from '../constants/distillation.constants'
 import { ethanolBatches } from '../types/ethanol-comprehensive.types'
 
@@ -124,7 +124,7 @@ export class DistillationSessionCalculator {
   /**
    * Validate charge components and calculate totals
    */
-  static validateChargeComponents(components: any[]): { isValid: boolean, total: any, errors: string[] } {
+  static validateChargeComponents(components: ChargeComponent[]): { isValid: boolean, total: { volume_L: number, abv_percent: number, lal: number } | null, errors: string[] } {
     const errors: string[] = []
     
     if (!components || components.length === 0) {
@@ -246,7 +246,7 @@ export class DistillationSessionCalculator {
     const processedBotanicals = botanicalTotals.percentages
 
     // Validate charge components if provided
-    let chargeValidation = { isValid: true, total: null, errors: [] as string[] }
+    let chargeValidation: { isValid: boolean, total: { volume_L: number, abv_percent: number, lal: number } | null, errors: string[] } = { isValid: true, total: null, errors: [] }
     if (session.charge?.components) {
       chargeValidation = this.validateChargeComponents(session.charge.components)
     }
@@ -278,6 +278,4 @@ export class DistillationSessionCalculator {
     }
   }
 }
-
-
 

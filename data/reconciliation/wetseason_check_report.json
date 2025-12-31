@@ -1,0 +1,20 @@
+{
+  "summary": {
+    "rows": 3,
+    "mismatches": 0
+  },
+  "items": [
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-0X",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-02",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-03",
+      "diffs": []
+    }
+  ]
+}

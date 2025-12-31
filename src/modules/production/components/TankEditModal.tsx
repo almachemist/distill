@@ -47,7 +47,7 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
 
     setIsSaving(true)
     try {
-      const updates: any = {
+      const updates: TankUpdateInput & { tank_id?: string; tank_name?: string; capacity_l?: number } = {
         product: product.trim() || null,
         current_abv: abv ? parseFloat(abv) : null,
         current_volume_l: volume ? parseFloat(volume) : null,
@@ -278,4 +278,3 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
     </div>
   )
 }
-

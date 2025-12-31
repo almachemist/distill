@@ -1,0 +1,1245 @@
+[
+  {
+    "run_id": "SPIRIT-GIN-OAKS-DRY-01",
+    "sku": "Oaks Kitchen Dry Season Gin",
+    "date": "2022-12-12",
+    "boiler_on_time": "09:00",
+    "still_used": "CP-270-1",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 125,
+          "abv_percent": 96,
+          "lal": 120
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 125,
+          "abv_percent": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 250,
+        "abv_percent": 48,
+        "lal": 120
+      },
+      "still_setup": {
+        "elements": "5750 ×1, 2200 ×1, 2400 ×1",
+        "steeping": "None (no pre-soak)",
+        "plates": "Zero plates",
+        "options": "Standard gin setup"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1650,
+        "ratio_percent": 59.3,
+        "notes": "Crushed / steeped",
+        "time": "07:12",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "volume_percent": 2,
+        "observations": "2 × 2200 W @ 440 V"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 330,
+        "ratio_percent": 11.9,
+        "notes": "Seed"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Cassia",
+        "time": "10:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.6
+      },
+      {
+        "name": "Orris Root",
+        "time": "11:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 5,
+        "abv_percent": 82.4,
+        "lal": 4.1
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 63,
+        "ratio_percent": 2.3,
+        "notes": "Leaves & flowers 50:50",
+        "time": "11:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 10,
+        "abv_percent": 82.3,
+        "lal": 4.1
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 42,
+        "ratio_percent": 1.5,
+        "notes": "Leaves only",
+        "time": "11:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 15,
+        "abv_percent": 82.5,
+        "lal": 4.1
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "weight_g": 208,
+        "ratio_percent": 7.5,
+        "time": "12:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 20,
+        "abv_percent": 82.3,
+        "lal": 4.1
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 125,
+        "ratio_percent": 4.5,
+        "time": "12:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 25,
+        "abv_percent": 82,
+        "lal": 4.1
+      },
+      {
+        "name": "Thai Marigolds",
+        "weight_g": 83,
+        "ratio_percent": 3,
+        "time": "12:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 30,
+        "abv_percent": 81.8,
+        "lal": 4.1
+      },
+      {
+        "name": "Galangal",
+        "weight_g": 83,
+        "ratio_percent": 3,
+        "notes": "Smashed",
+        "time": "13:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 35,
+        "abv_percent": 81.8,
+        "lal": 4.1
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 63,
+        "ratio_percent": 2.3,
+        "notes": "Bashed",
+        "time": "13:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 40,
+        "abv_percent": 81.6,
+        "lal": 4.1
+      },
+      {
+        "name": "Macadamia",
+        "notes": "Sliced fresh macadamia",
+        "time": "13:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 45,
+        "abv_percent": 81.3,
+        "lal": 4.1
+      },
+      {
+        "name": "Coconut",
+        "time": "14:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 50,
+        "abv_percent": 81,
+        "lal": 4.1
+      },
+      {
+        "name": "Liquorice Root",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "time": "14:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "volume_percent": 13.6,
+        "vc_tank_volume_l": 60,
+        "abv_percent": 80.5,
+        "lal": 8.1
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "time": "15:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 12,
+        "volume_percent": 16.3,
+        "vc_tank_volume_l": 72,
+        "abv_percent": 79.5,
+        "lal": 9.5
+      },
+      {
+        "name": "Pandanas",
+        "weight_g": 52,
+        "ratio_percent": 1.9,
+        "notes": "Thai vanilla"
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2783,
+      "botanicals_per_lal_g": 23.2,
+      "output": {
+        "hearts": {
+          "id": "GIN-OAKS-DRY-01",
+          "vessel": "VC-330",
+          "volume_l": 72,
+          "abv_percent": 81.3,
+          "lal": 58.5
+        },
+        "foreshots": {
+          "volume_l": 1.5,
+          "volume_percent": 2
+        },
+        "tails": {
+          "volume_l": 0
+        },
+        "total_output_l": 73.5
+      }
+    },
+    "final_output": {
+      "new_make_l": 72,
+      "filtered_water_l": 0,
+      "final_volume_l": 72,
+      "abv_percent": 81.3,
+      "lal": 58.5
+    },
+    "notes": "Oaks Kitchen Dry Season collaboration. 250 L charge @ 48 %. Dry tropical gin highlighting Thai botanicals (holy basil, kaffir, lemongrass, galangal, marigold, pandanas). 23 g/LAL botanical load; bright citrus-herbal profile at 81 %."
+  },
+  {
+    "run_id": "SPIRIT-GIN-OAKS-DRY-02",
+    "sku": "Oaks Kitchen Dry Season Gin",
+    "date": "2023-08-01",
+    "boiler_on_time": "06:15",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 600,
+          "abv_percent": 44,
+          "lal": 264
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 600,
+        "abv_percent": 44,
+        "lal": 264
+      },
+      "still_setup": {
+        "elements": "6 × 5750 W run",
+        "steeping": "14 h (Juniper)",
+        "plates": "Zero plates",
+        "options": "Roberta standard configuration"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 3750,
+        "ratio_percent": 62.5,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots",
+        "volume_l": 10,
+        "abv_percent": 81.3,
+        "observations": "2 × 5750 W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 600,
+        "ratio_percent": 10,
+        "notes": "Steeped seed"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 100,
+        "ratio_percent": 1.7
+      },
+      {
+        "name": "Cassia",
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 145,
+        "volume_percent": 93.5,
+        "abv_percent": 81.4,
+        "ambient_temp_c": 30,
+        "head_temp_c": 76.4,
+        "condenser_temp_c": 32.6,
+        "lal": 118
+      },
+      {
+        "name": "Orris Root",
+        "ratio_percent": 0,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 100,
+        "ratio_percent": 1.7,
+        "notes": "Leaves & flowers 50:50",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 600,
+        "ratio_percent": 10,
+        "notes": "Leaves only",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 200,
+        "ratio_percent": 3.3,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Thai Marigolds",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Galangal",
+        "notes": "Smashed",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 700,
+        "ratio_percent": 11.7,
+        "notes": "Bashed",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorice Root",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 50,
+        "ratio_percent": 0.8,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Mandarin Skin",
+        "weight_g": 720,
+        "notes": "Added for citrus depth"
+      },
+      {
+        "name": "Mandarin Fruit",
+        "weight_g": 1000,
+        "notes": "Fresh mandarin pulp contribution"
+      },
+      {
+        "name": "Rosella Flower",
+        "weight_g": 1000,
+        "notes": "Adds color and floral acidity"
+      },
+      {
+        "name": "Turmeric",
+        "weight_g": 300,
+        "notes": "Fresh sliced for earthy spice"
+      },
+      {
+        "name": "Pandanas",
+        "notes": "Thai vanilla note"
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 6000,
+      "botanicals_per_lal_g": 22.7,
+      "output": {
+        "hearts": {
+          "id": "GIN-OAKS-DRY-02",
+          "vessel": "VC-330",
+          "volume_l": 145,
+          "abv_percent": 81.4,
+          "lal": 118
+        },
+        "foreshots": {
+          "volume_l": 10
+        },
+        "tails": {
+          "volume_l": 0
+        },
+        "total_output_l": 155
+      }
+    },
+    "final_output": {
+      "new_make_l": 145,
+      "filtered_water_l": 0,
+      "final_volume_l": 145,
+      "abv_percent": 81.4,
+      "lal": 118
+    },
+    "notes": "Oaks Kitchen Dry Season Gin, full-scale Roberta still production (Aug 2023). Tropical dry-style gin emphasizing Thai botanicals plus mandarin, rosella, and turmeric for seasonal color and complexity. Botanical load ~22.7 g/LAL. Hearts yield 145 L @ 81.4 %."
+  },
+  {
+    "run_id": "SPIRIT-GIN-OAKS-DRY-02",
+    "sku": "Oaks Kitchen Dry Season Gin",
+    "date": "2023-08-01",
+    "boiler_on_time": "06:15",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 600,
+          "abv_percent": 44,
+          "lal": 264
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 600,
+        "abv_percent": 44,
+        "lal": 264
+      },
+      "still_setup": {
+        "elements": "6 × 5750 W run",
+        "steeping": "14 h (Juniper)",
+        "plates": "Zero plates",
+        "options": "Roberta standard configuration"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 3750,
+        "ratio_percent": 62.5,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots",
+        "volume_l": 10,
+        "abv_percent": 81.3,
+        "observations": "2 × 5750 W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 600,
+        "ratio_percent": 10,
+        "notes": "Steeped seed"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 100,
+        "ratio_percent": 1.7
+      },
+      {
+        "name": "Cassia",
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 145,
+        "volume_percent": 93.5,
+        "abv_percent": 81.4,
+        "ambient_temp_c": 30,
+        "head_temp_c": 76.4,
+        "condenser_temp_c": 32.6,
+        "lal": 118
+      },
+      {
+        "name": "Orris Root",
+        "ratio_percent": 0,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 100,
+        "ratio_percent": 1.7,
+        "notes": "Leaves & flowers 50:50",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 600,
+        "ratio_percent": 10,
+        "notes": "Leaves only",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 200,
+        "ratio_percent": 3.3,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Thai Marigolds",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Galangal",
+        "notes": "Smashed",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 700,
+        "ratio_percent": 11.7,
+        "notes": "Bashed",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorice Root",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 50,
+        "ratio_percent": 0.8,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Mandarin Skin",
+        "weight_g": 720,
+        "notes": "Added for citrus depth"
+      },
+      {
+        "name": "Mandarin Fruit",
+        "weight_g": 1000,
+        "notes": "Fresh mandarin pulp contribution"
+      },
+      {
+        "name": "Rosella Flower",
+        "weight_g": 1000,
+        "notes": "Adds color and floral acidity"
+      },
+      {
+        "name": "Turmeric",
+        "weight_g": 300,
+        "notes": "Fresh sliced for earthy spice"
+      },
+      {
+        "name": "Pandanas",
+        "notes": "Thai vanilla note"
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 6000,
+      "botanicals_per_lal_g": 22.7,
+      "output": {
+        "hearts": {
+          "id": "GIN-OAKS-DRY-02",
+          "vessel": "VC-330",
+          "volume_l": 145,
+          "abv_percent": 81.4,
+          "lal": 118
+        },
+        "foreshots": {
+          "volume_l": 10
+        },
+        "tails": {
+          "volume_l": 0
+        },
+        "total_output_l": 155
+      }
+    },
+    "final_output": {
+      "new_make_l": 145,
+      "filtered_water_l": 0,
+      "final_volume_l": 145,
+      "abv_percent": 81.4,
+      "lal": 118
+    },
+    "notes": "Oaks Kitchen Dry Season Gin, full-scale Roberta still production (Aug 2023). Tropical dry-style gin emphasizing Thai botanicals plus mandarin, rosella, and turmeric for seasonal color and complexity. Botanical load ~22.7 g/LAL. Hearts yield 145 L @ 81.4 %."
+  },
+  {
+    "run_id": "SPIRIT-GIN-DRY-2024",
+    "sku": "Oaks Kitchen Gin – Dry Season",
+    "date": "2024-12-02",
+    "boiler_on_time": "08:00",
+    "still_used": "Carrie",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 1000,
+          "abv_percent": 50,
+          "lal": 500
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 50,
+        "lal": 500
+      },
+      "still_setup": {
+        "elements": "2 heating elements active",
+        "steeping": "No steeping – botanicals added on distillation day",
+        "plates": "5",
+        "options": "Carrie still configuration"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6250,
+        "ratio_percent": 41.9,
+        "notes": "Berries",
+        "time": "10:55",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 87,
+        "lal": 1.7
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 625,
+        "ratio_percent": 4.2,
+        "time": "11:15",
+        "phase": "Heads",
+        "volume_l": 12,
+        "abv_percent": 81.6,
+        "lal": 9.8
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 167,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 83,
+        "ratio_percent": 0.6,
+        "time": "16:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 199,
+        "abv_percent": 81.4,
+        "lal": 162
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 1167,
+        "ratio_percent": 7.8
+      },
+      {
+        "name": "Mandarin",
+        "weight_g": 1667,
+        "ratio_percent": 11.2,
+        "notes": "Suggested to add 205 L water during run"
+      },
+      {
+        "name": "Mandarin Skin",
+        "weight_g": 1200,
+        "ratio_percent": 8
+      },
+      {
+        "name": "Turmeric",
+        "weight_g": 500,
+        "ratio_percent": 3.3
+      },
+      {
+        "name": "Rosella Flower",
+        "weight_g": 1667,
+        "ratio_percent": 11.2
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 167,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Thai Basil",
+        "weight_g": 1000,
+        "ratio_percent": 6.7
+      },
+      {
+        "name": "Kaffir Lime Leaf",
+        "weight_g": 333,
+        "ratio_percent": 2.2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 14933,
+      "botanicals_per_lal_g": 29.9,
+      "output": {
+        "hearts": {
+          "id": "GIN-OAKS-DRY-2024",
+          "vessel": "VC-400",
+          "volume_l": 199,
+          "abv_percent": 81.4,
+          "lal": 162
+        },
+        "foreshots": {
+          "volume_l": 2,
+          "abv_percent": 87,
+          "lal": 1.7
+        },
+        "heads": {
+          "volume_l": 12,
+          "abv_percent": 81.6,
+          "lal": 9.8
+        },
+        "tails": {
+          "volume_l": 100,
+          "abv_percent": 78,
+          "notes": "Kept for future redistillation"
+        },
+        "total_output_l": 313
+      }
+    },
+    "dilution": [
+      {
+        "step": 1,
+        "date_added": "2025-01-05",
+        "new_make_l": 199,
+        "filtered_water_l": 20,
+        "new_volume_l": 219,
+        "abv_percent": 41.3
+      },
+      {
+        "step": 2,
+        "new_make_l": 219,
+        "filtered_water_l": 5,
+        "new_volume_l": 224,
+        "abv_percent": 40
+      }
+    ],
+    "final_output": {
+      "final_volume_l": 224,
+      "abv_percent": 40,
+      "total_lal": 162
+    },
+    "notes": "Oaks Kitchen Gin – Dry Season 2024, Carrie still. Distilled with 15 botanical ingredients including Thai basil, rosella, turmeric, and mandarin. 1000 L charge @ 50 % ABV (500 LAL). Hearts yield 199 L @ 81.4 % (162 LAL). Diluted to 40 % ABV for bottling. Strong aromatic intensity (29.9 g/LAL), highlighting tropical citrus and Thai herbs."
+  },
+  {
+    "run_id": "SPIRIT-GIN-OAKS-DRY-01",
+    "sku": "Oaks Kitchen Dry Season Gin",
+    "date": "2022-12-12",
+    "boiler_on_time": "09:00",
+    "still_used": "CP-270-1",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 125,
+          "abv_percent": 96,
+          "lal": 120
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 125,
+          "abv_percent": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 250,
+        "abv_percent": 48,
+        "lal": 120
+      },
+      "still_setup": {
+        "elements": "5750 ×1, 2200 ×1, 2400 ×1",
+        "steeping": "None (no pre-soak)",
+        "plates": "Zero plates",
+        "options": "Standard gin setup"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1650,
+        "ratio_percent": 59.3,
+        "notes": "Crushed / steeped",
+        "time": "07:12",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "volume_percent": 2,
+        "observations": "2 × 2200 W @ 440 V"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 330,
+        "ratio_percent": 11.9,
+        "notes": "Seed"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Cassia",
+        "time": "10:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.6
+      },
+      {
+        "name": "Orris Root",
+        "time": "11:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 5,
+        "abv_percent": 82.4,
+        "lal": 4.1
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 63,
+        "ratio_percent": 2.3,
+        "notes": "Leaves & flowers 50:50",
+        "time": "11:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 10,
+        "abv_percent": 82.3,
+        "lal": 4.1
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 42,
+        "ratio_percent": 1.5,
+        "notes": "Leaves only",
+        "time": "11:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 15,
+        "abv_percent": 82.5,
+        "lal": 4.1
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "weight_g": 208,
+        "ratio_percent": 7.5,
+        "time": "12:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 20,
+        "abv_percent": 82.3,
+        "lal": 4.1
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 125,
+        "ratio_percent": 4.5,
+        "time": "12:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 25,
+        "abv_percent": 82,
+        "lal": 4.1
+      },
+      {
+        "name": "Thai Marigolds",
+        "weight_g": 83,
+        "ratio_percent": 3,
+        "time": "12:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 30,
+        "abv_percent": 81.8,
+        "lal": 4.1
+      },
+      {
+        "name": "Galangal",
+        "weight_g": 83,
+        "ratio_percent": 3,
+        "notes": "Smashed",
+        "time": "13:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 35,
+        "abv_percent": 81.8,
+        "lal": 4.1
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 63,
+        "ratio_percent": 2.3,
+        "notes": "Bashed",
+        "time": "13:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 40,
+        "abv_percent": 81.6,
+        "lal": 4.1
+      },
+      {
+        "name": "Macadamia",
+        "notes": "Sliced fresh macadamia",
+        "time": "13:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 45,
+        "abv_percent": 81.3,
+        "lal": 4.1
+      },
+      {
+        "name": "Coconut",
+        "time": "14:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "volume_percent": 6.8,
+        "vc_tank_volume_l": 50,
+        "abv_percent": 81,
+        "lal": 4.1
+      },
+      {
+        "name": "Liquorice Root",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "time": "14:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "volume_percent": 13.6,
+        "vc_tank_volume_l": 60,
+        "abv_percent": 80.5,
+        "lal": 8.1
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 21,
+        "ratio_percent": 0.8,
+        "time": "15:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 12,
+        "volume_percent": 16.3,
+        "vc_tank_volume_l": 72,
+        "abv_percent": 79.5,
+        "lal": 9.5
+      },
+      {
+        "name": "Pandanas",
+        "weight_g": 52,
+        "ratio_percent": 1.9,
+        "notes": "Thai vanilla"
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2783,
+      "botanicals_per_lal_g": 23.2,
+      "output": {
+        "hearts": {
+          "id": "GIN-OAKS-DRY-01",
+          "vessel": "VC-330",
+          "volume_l": 72,
+          "abv_percent": 81.3,
+          "lal": 58.5
+        },
+        "foreshots": {
+          "volume_l": 1.5,
+          "volume_percent": 2
+        },
+        "tails": {
+          "volume_l": 0
+        },
+        "total_output_l": 73.5
+      }
+    },
+    "final_output": {
+      "new_make_l": 72,
+      "filtered_water_l": 0,
+      "final_volume_l": 72,
+      "abv_percent": 81.3,
+      "lal": 58.5
+    },
+    "notes": "Oaks Kitchen Dry Season collaboration. 250 L charge @ 48 %. Dry tropical gin highlighting Thai botanicals (holy basil, kaffir, lemongrass, galangal, marigold, pandanas). 23 g/LAL botanical load; bright citrus-herbal profile at 81 %."
+  },
+  {
+    "run_id": "SPIRIT-GIN-OAKS-DRY-02",
+    "sku": "Oaks Kitchen Dry Season Gin",
+    "date": "2023-08-01",
+    "boiler_on_time": "06:15",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 600,
+          "abv_percent": 44,
+          "lal": 264
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 600,
+        "abv_percent": 44,
+        "lal": 264
+      },
+      "still_setup": {
+        "elements": "6 × 5750 W run",
+        "steeping": "14 h (Juniper)",
+        "plates": "Zero plates",
+        "options": "Roberta standard configuration"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 3750,
+        "ratio_percent": 62.5,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots",
+        "volume_l": 10,
+        "abv_percent": 81.3,
+        "observations": "2 × 5750 W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 600,
+        "ratio_percent": 10,
+        "notes": "Steeped seed"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 100,
+        "ratio_percent": 1.7
+      },
+      {
+        "name": "Cassia",
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 145,
+        "volume_percent": 93.5,
+        "abv_percent": 81.4,
+        "ambient_temp_c": 30,
+        "head_temp_c": 76.4,
+        "condenser_temp_c": 32.6,
+        "lal": 118
+      },
+      {
+        "name": "Orris Root",
+        "ratio_percent": 0,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Holy Basil",
+        "weight_g": 100,
+        "ratio_percent": 1.7,
+        "notes": "Leaves & flowers 50:50",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Thai Sweet Basil",
+        "weight_g": 600,
+        "ratio_percent": 10,
+        "notes": "Leaves only",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Kaffir Fruit Rind",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Kaffir Leaves",
+        "weight_g": 200,
+        "ratio_percent": 3.3,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Thai Marigolds",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Galangal",
+        "notes": "Smashed",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemongrass",
+        "weight_g": 700,
+        "ratio_percent": 11.7,
+        "notes": "Bashed",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorice Root",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 50,
+        "ratio_percent": 0.8,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Mandarin Skin",
+        "weight_g": 720,
+        "notes": "Added for citrus depth"
+      },
+      {
+        "name": "Mandarin Fruit",
+        "weight_g": 1000,
+        "notes": "Fresh mandarin pulp contribution"
+      },
+      {
+        "name": "Rosella Flower",
+        "weight_g": 1000,
+        "notes": "Adds color and floral acidity"
+      },
+      {
+        "name": "Turmeric",
+        "weight_g": 300,
+        "notes": "Fresh sliced for earthy spice"
+      },
+      {
+        "name": "Pandanas",
+        "notes": "Thai vanilla note"
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 6000,
+      "botanicals_per_lal_g": 22.7,
+      "output": {
+        "hearts": {
+          "id": "GIN-OAKS-DRY-02",
+          "vessel": "VC-330",
+          "volume_l": 145,
+          "abv_percent": 81.4,
+          "lal": 118
+        },
+        "foreshots": {
+          "volume_l": 10
+        },
+        "tails": {
+          "volume_l": 0
+        },
+        "total_output_l": 155
+      }
+    },
+    "final_output": {
+      "new_make_l": 145,
+      "filtered_water_l": 0,
+      "final_volume_l": 145,
+      "abv_percent": 81.4,
+      "lal": 118
+    },
+    "notes": "Oaks Kitchen Dry Season Gin, full-scale Roberta still production (Aug 2023). Tropical dry-style gin emphasizing Thai botanicals plus mandarin, rosella, and turmeric for seasonal color and complexity. Botanical load ~22.7 g/LAL. Hearts yield 145 L @ 81.4 %."
+  }
+]

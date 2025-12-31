@@ -72,7 +72,7 @@ export interface TankContents {
   /** Infusion details (if applicable) */
   infusion?: InfusionDetails
   /** Extra materials (legacy field, use infusion.extra_materials instead) */
-  extra_materials?: Record<string, any>
+  extra_materials?: Record<string, unknown>
   /** Started on date (legacy field, use infusion.started_on instead) */
   started_on?: string
 }
@@ -151,4 +151,3 @@ export interface TankSummary {
   /** Tanks by product type */
   by_product: Record<string, number>
 }
-

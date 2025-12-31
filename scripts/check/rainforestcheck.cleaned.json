@@ -1,0 +1,6917 @@
+[
+  {
+    "run_id": "SPIRIT-GIN-RF-30",
+    "sku": "Rainforest Gin",
+    "date": "2025-07-29",
+    "boiler_start_time": "06:30",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 51,
+        "lal": 510
+      },
+      "still_setup": {
+        "elements": "2 new ones",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": "5.2173E+15"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Lemon Myrtle",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "notes": "ok",
+        "weight_g": 71,
+        "ratio_percent": 0.8
+      },
+      {
+        "name": "Grapefruit",
+        "notes": "ok",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "TAILS",
+        "observations": "Another day distilling the left over, to be used for distilling vodka",
+        "volume_l": 242,
+        "abv_percent": 79.4
+      },
+      {
+        "name": "Macadamia",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Liquorise",
+        "notes": "ok",
+        "weight_g": 51,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Vanilla",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "volume_l": 2,
+        "volume_percent": 0.7,
+        "abv_percent": 0,
+        "lal": 0
+      },
+      {
+        "name": "Mango",
+        "notes": "ok",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "IBC-02",
+        "volume_l": 10,
+        "abv_percent": 0,
+        "lal": 0
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 18.3,
+      "total_output": {
+        "total_run_l": 545,
+        "lal": 21,
+        "hearts": {
+          "id": "GIN-RF-0026",
+          "vessel": "VC-400",
+          "volume_l": 291,
+          "abv_percent": 80.7,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-02",
+          "volume_l": 242,
+          "abv_percent": 79.4,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "date_added": "2025-08-02",
+        "new_make_l": 291,
+        "filtered_water_l": 259,
+        "new_volume_l": 550,
+        "abv_percent": 42,
+        "lal": 231
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 550,
+      "lal": 231,
+      "abv_percent": 42
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-29",
+    "sku": "Rainforest Gin",
+    "date": "2025-01-20",
+    "boiler_start_time": "07:05",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 51,
+        "lal": 510
+      },
+      "still_setup": {
+        "elements": "2 new ones",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": "5.2173E+15"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "notes": "ok",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "09:30",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 86
+      },
+      {
+        "name": "Coriander",
+        "notes": "ok",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:45",
+        "phase": "Heads",
+        "volume_l": 12,
+        "abv_percent": 83
+      },
+      {
+        "name": "Angelica",
+        "notes": "ok",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "17:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 280,
+        "abv_percent": 82,
+        "observations": "Added 266 L H₂O to dilute, then 248 L added later"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lemon Aspen",
+        "notes": "ok",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "TAILS"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "time": "07:00",
+        "observations": "Another day distilling the leftover, to be used for something else",
+        "volume_l": 169.7,
+        "abv_percent": 75.5
+      },
+      {
+        "name": "Macadamia",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Liquorise",
+        "notes": "ok",
+        "weight_g": 51,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Vanilla",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "abv_percent": 83
+      },
+      {
+        "name": "Mango",
+        "notes": "ok",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "IBC-01",
+        "abv_percent": 83
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 18.3,
+      "total_output": {
+        "total_run_l": 449.7,
+        "lal": 21,
+        "hearts": {
+          "id": "GIN-RF-0029",
+          "vessel": "VC-400",
+          "volume_l": 280,
+          "abv_percent": 82,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-01",
+          "vessel": "IBC-01",
+          "volume_l": 169.7,
+          "abv_percent": 75.5,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 280,
+        "filtered_water_l": 248,
+        "new_volume_l": 528,
+        "abv_percent": 45,
+        "lal": 237.6
+      },
+      {
+        "step": 2,
+        "new_make_l": 528,
+        "filtered_water_l": 18,
+        "new_volume_l": 546,
+        "abv_percent": 42,
+        "lal": 229.3
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 546,
+      "lal": 229.3,
+      "abv_percent": 42
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-28",
+    "sku": "Rainforest Gin",
+    "date": "2024-10-09",
+    "boiler_start_time": "07:30",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 51,
+        "lal": 510
+      },
+      "still_setup": {
+        "elements": "2 new ones",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": "5.2173E+15"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "notes": "ok",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "09:15",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 86,
+        "observations": "45A to warm up"
+      },
+      {
+        "name": "Coriander",
+        "notes": "ok",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:40",
+        "phase": "Heads",
+        "volume_l": 13,
+        "abv_percent": 83.5,
+        "observations": "33A"
+      },
+      {
+        "name": "Angelica",
+        "notes": "ok",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "18:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 346,
+        "abv_percent": 82.3,
+        "observations": "to dilute to 42.5% add 324 L H2O; 11/10 added 274 L; 15/10 added 50 L"
+      },
+      {
+        "name": "Orris Root",
+        "weight_g": 0,
+        "ratio_percent": 0
+      },
+      {
+        "name": "Orange",
+        "notes": "ok",
+        "weight_g": 50,
+        "observations": "added on 15/10"
+      },
+      {
+        "name": "Lemon",
+        "weight_g": 3
+      },
+      {
+        "name": "Finger Lime",
+        "weight_g": 0
+      },
+      {
+        "name": "Lemon Myrtle",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lemon Aspen",
+        "notes": "ok",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "TAILS"
+      },
+      {
+        "name": "Grapefruit",
+        "notes": "240",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "observations": "Another day distilling the leftover; to be used for something else",
+        "volume_l": 169.7,
+        "abv_percent": 75.5
+      },
+      {
+        "name": "Local Fruit",
+        "weight_g": 0,
+        "observations": "Distilled until 69%"
+      },
+      {
+        "name": "Macadamia",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Coconut",
+        "weight_g": 0
+      },
+      {
+        "name": "Liquorise",
+        "notes": "ok",
+        "weight_g": 51,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lavender",
+        "weight_g": 0
+      },
+      {
+        "name": "Chamomile",
+        "weight_g": 0
+      },
+      {
+        "name": "Elderflower",
+        "weight_g": 0
+      },
+      {
+        "name": "Pepperberry",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint",
+        "weight_g": 0
+      },
+      {
+        "name": "Vanilla",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "volume_l": 2,
+        "abv_percent": 86
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "IBC-02",
+        "volume_l": 13,
+        "abv_percent": 83.5
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 18.3,
+      "total_output": {
+        "total_run_l": 530.7,
+        "lal": 21,
+        "hearts": {
+          "id": "GIN-RF-0028",
+          "vessel": "VC-400",
+          "volume_l": 346,
+          "abv_percent": 82.3,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-01",
+          "vessel": "IBC-02",
+          "volume_l": 169.7,
+          "abv_percent": 75.5,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "date_added": "2024-10-11",
+        "new_make_l": 346,
+        "filtered_water_l": 274,
+        "new_volume_l": 620,
+        "abv_percent": null,
+        "lal": 0
+      },
+      {
+        "step": 2,
+        "date_added": "2024-10-12",
+        "new_make_l": 670,
+        "filtered_water_l": 50,
+        "new_volume_l": 720,
+        "abv_percent": null,
+        "lal": 0
+      },
+      {
+        "step": 3,
+        "date_added": "2024-10-13",
+        "new_make_l": 723,
+        "filtered_water_l": 3,
+        "new_volume_l": 726,
+        "abv_percent": null,
+        "lal": 0
+      }
+    ],
+    "final_output": {
+      "volume_l": 726,
+      "lal": 0,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-27",
+    "sku": "Rainforest Gin",
+    "date": "2023-08-17",
+    "boiler_start_time": "08:40",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 49.5,
+        "lal": 495
+      },
+      "still_setup": {
+        "elements": "5750W x6 + 1 x 2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "notes": "ok",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "10:25",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 84,
+        "observations": "6 * 5750W"
+      },
+      {
+        "name": "Coriander",
+        "notes": "ok",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "10:35",
+        "phase": "Heads",
+        "volume_l": 10,
+        "abv_percent": 82.5,
+        "observations": "3 * 5750W + 1 * 2200W"
+      },
+      {
+        "name": "Angelica",
+        "notes": "ok",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "12:20",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 81.8,
+        "abv_percent": 82.2,
+        "observations": "2 * 5750W + 1 * 2200W"
+      },
+      {
+        "name": "Orris Root",
+        "time": "14:20",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 142.3,
+        "abv_percent": 81.4,
+        "observations": "2 * 5750W + 1 * 2200W"
+      },
+      {
+        "name": "Orange",
+        "time": "15:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 215,
+        "abv_percent": 80.7,
+        "observations": "2 * 5750W + 1 * 2200W"
+      },
+      {
+        "name": "Lemon",
+        "time": "16:20",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 232,
+        "abv_percent": 80.1
+      },
+      {
+        "name": "Finger Lime",
+        "time": "17:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 249.6,
+        "abv_percent": 79.6
+      },
+      {
+        "name": "Lemon Myrtle",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "notes": "ok",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "Heart in a bucket"
+      },
+      {
+        "name": "Grapefruit",
+        "notes": "240",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Local Fruit",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorise",
+        "notes": "ok",
+        "weight_g": 51,
+        "ratio_percent": 0.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "notes": "ok",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "notes": "ok",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "notes": "ok",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "abv_percent": null
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "Buker",
+        "abv_percent": null
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 18.9,
+      "total_output": {
+        "total_run_l": 291,
+        "lal": 21,
+        "hearts": {
+          "id": "GIN-RF-0026",
+          "vessel": "VC-400",
+          "volume_l": 291,
+          "abv_percent": 80.7,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 0,
+      "lal": 291,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-25",
+    "sku": "Rainforest Gin",
+    "date": "2022-11-25",
+    "boiler_start_time": "07:00",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 950,
+        "abv_percent": 52.4,
+        "lal": 497.8
+      },
+      "still_setup": {
+        "elements": "5750W x4 + 1 x 2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "09:00",
+        "phase": "Foreshots",
+        "volume_l": 1,
+        "abv_percent": 87.2,
+        "ambient_temp_c": 30.5,
+        "head_temp_c": 79,
+        "condenser_temp_c": 32.8,
+        "lal": 0.9,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:05",
+        "phase": "Heads",
+        "volume_l": 11,
+        "abv_percent": 83,
+        "ambient_temp_c": 30.8,
+        "head_temp_c": 79,
+        "condenser_temp_c": 34.2,
+        "lal": 9.1,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "09:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 21.1,
+        "abv_percent": 82.7,
+        "ambient_temp_c": 30.8,
+        "head_temp_c": 79.6,
+        "condenser_temp_c": 33.5,
+        "lal": 17.4,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:05",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 38.9,
+        "abv_percent": 82.7,
+        "ambient_temp_c": 31.4,
+        "head_temp_c": 78.7,
+        "condenser_temp_c": 34,
+        "lal": 32.1,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orange",
+        "phase": "Middle Run (Hearts)",
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Lemon",
+        "time": "16:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 284.6,
+        "abv_percent": 80.4,
+        "ambient_temp_c": 31.5,
+        "condenser_temp_c": 33,
+        "lal": 228.8,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Finger Lime",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "Heart in a bucket",
+        "volume_l": 20,
+        "abv_percent": 78,
+        "lal": 15.6,
+        "observations": "didn’t mixed it yet"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Local Fruit",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "volume_l": 3,
+        "abv_percent": 29.1,
+        "lal": 0.9
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "Buker",
+        "volume_l": 10,
+        "abv_percent": 91.3,
+        "lal": 9.1
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 18.8,
+      "total_output": {
+        "total_run_l": 298.94,
+        "lal": 30.1,
+        "hearts": {
+          "id": "GIN-RF-0021",
+          "vessel": "VC-330/-01",
+          "volume_l": 285.9,
+          "abv_percent": 81.8,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 0,
+      "lal": 291,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-26",
+    "sku": "Rainforest Gin",
+    "date": "2022-11-29",
+    "boiler_start_time": "06:40",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 49.5,
+        "lal": 495
+      },
+      "still_setup": {
+        "elements": "5750W x4 + 1 x 2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "08:50",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 82.3,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:00",
+        "phase": "Heads",
+        "volume_l": 10,
+        "abv_percent": 82.1,
+        "ambient_temp_c": 32,
+        "head_temp_c": 79.5,
+        "condenser_temp_c": 34,
+        "lal": 8.2,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 16.8,
+        "abv_percent": 82.3,
+        "ambient_temp_c": 32.4,
+        "head_temp_c": 78.9,
+        "condenser_temp_c": 34.5,
+        "lal": 13.9,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 56.3,
+        "abv_percent": 82.1,
+        "ambient_temp_c": 32.4,
+        "head_temp_c": 79.9,
+        "condenser_temp_c": 35.6,
+        "lal": 46.2,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orange",
+        "phase": "Middle Run (Hearts)",
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Lemon",
+        "time": "17:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 289,
+        "abv_percent": 78.3,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Finger Lime",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "Heart in a bucket",
+        "volume_l": 20,
+        "abv_percent": 78,
+        "lal": 15.6,
+        "observations": "didn’t mixed it yet"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Local Fruit",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "lal": 1.6
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "Buker",
+        "lal": 8.2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 18.9,
+      "total_output": {
+        "total_run_l": 291,
+        "lal": 29.2,
+        "hearts": {
+          "id": "GIN-RF-0026",
+          "vessel": "VC-400",
+          "volume_l": 291,
+          "abv_percent": 80.7,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 0,
+      "lal": 291,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-24",
+    "sku": "Rainforest Gin",
+    "date": "2022-11-07",
+    "boiler_start_time": "07:00",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 0,
+        "abv_percent": null,
+        "lal": null
+      },
+      "still_setup": {
+        "elements": "5750W x4 + 1 x 2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "09:00",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 83.1,
+        "ambient_temp_c": 32,
+        "head_temp_c": 79,
+        "condenser_temp_c": 32.6,
+        "lal": 1.7,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:20",
+        "phase": "Heads",
+        "volume_l": 10,
+        "abv_percent": 83,
+        "ambient_temp_c": 32,
+        "head_temp_c": 79.3,
+        "condenser_temp_c": 33.3,
+        "lal": 8.3,
+        "observations": "5750W x3 + 1 x 2200W"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "09:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 19.9,
+        "abv_percent": 82.7,
+        "ambient_temp_c": 32,
+        "head_temp_c": 79.6,
+        "condenser_temp_c": 33.6,
+        "lal": 16.5,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:20",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 40,
+        "abv_percent": 82.7,
+        "ambient_temp_c": 32,
+        "head_temp_c": 78.5,
+        "condenser_temp_c": 33.5,
+        "lal": 33.1,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orange",
+        "phase": "Middle Run (Hearts)",
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Lemon",
+        "time": "17:20",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 342.8,
+        "abv_percent": 79,
+        "ambient_temp_c": 32,
+        "head_temp_c": 80.2,
+        "condenser_temp_c": 31.9,
+        "lal": 270.8,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Finger Lime",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "Heart in a bucket",
+        "volume_l": 20,
+        "abv_percent": 78,
+        "lal": 15.6,
+        "observations": "didn’t mixed it yet"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Local Fruit",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "volume_l": 2,
+        "abv_percent": 83.1,
+        "lal": 1.7
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "Buker",
+        "volume_l": 10,
+        "abv_percent": 83,
+        "lal": 8.3
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": null,
+      "total_output": {
+        "total_run_l": 361,
+        "lal": 29.3,
+        "hearts": {
+          "id": "GIN-RF-0024",
+          "vessel": "VC-304",
+          "volume_l": 349,
+          "abv_percent": 81.2,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 0,
+      "lal": 291,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-23",
+    "sku": "Rainforest Gin",
+    "date": "2022-09-27",
+    "boiler_start_time": "06:20",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 0,
+        "abv_percent": null,
+        "lal": null
+      },
+      "still_setup": {
+        "elements": "5750W x4 + 1 x 2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "08:50",
+        "phase": "Foreshots",
+        "volume_l": 2,
+        "abv_percent": 82.3,
+        "ambient_temp_c": 32,
+        "head_temp_c": 80,
+        "condenser_temp_c": 32.8,
+        "lal": 1.6,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:00",
+        "phase": "Heads",
+        "volume_l": 10,
+        "abv_percent": 81.5,
+        "ambient_temp_c": 33.1,
+        "head_temp_c": 80.4,
+        "condenser_temp_c": 33.1,
+        "lal": 8.2,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 21.5,
+        "abv_percent": 81.7,
+        "ambient_temp_c": 34,
+        "head_temp_c": 80,
+        "condenser_temp_c": 35.5,
+        "lal": 17.5,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 46.2,
+        "abv_percent": 81.5,
+        "ambient_temp_c": 35,
+        "head_temp_c": 79.9,
+        "condenser_temp_c": 35.5,
+        "lal": 37.6,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orange",
+        "phase": "Middle Run (Hearts)",
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Lemon",
+        "time": "16:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 275.8,
+        "abv_percent": 78.5,
+        "ambient_temp_c": 33.2,
+        "head_temp_c": 81.5,
+        "condenser_temp_c": 33,
+        "lal": 216.5,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Finger Lime",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "Heart in a bucket",
+        "volume_l": 20,
+        "abv_percent": 78,
+        "lal": 15.6,
+        "observations": "didn’t mixed it yet"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Local Fruit",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "volume_l": 3,
+        "abv_percent": 54.9,
+        "lal": 1.6
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "Buker",
+        "volume_l": 10,
+        "abv_percent": 81.5,
+        "lal": 8.2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": null,
+      "total_output": {
+        "total_run_l": 293.63,
+        "lal": 29.2,
+        "hearts": {
+          "id": "GIN-RF-0021",
+          "vessel": "VC-330-01",
+          "volume_l": 280.6,
+          "abv_percent": 80,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "date_added": "2022-11-08",
+        "new_make_l": 247,
+        "filtered_water_l": null,
+        "new_volume_l": null,
+        "abv_percent": null,
+        "lal": null
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 0,
+      "lal": 291,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-22",
+    "sku": "Rainforest Gin",
+    "date": "2022-09-29",
+    "boiler_start_time": "06:30",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 0,
+          "abv_percent": 47,
+          "lal": 0
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 0,
+        "abv_percent": null,
+        "lal": null
+      },
+      "still_setup": {
+        "elements": "5750W x4 + 1 x 2200W",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "08:40",
+        "phase": "Foreshots",
+        "volume_l": 3,
+        "abv_percent": 83.6,
+        "lal": 2.5,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "08:45",
+        "phase": "Heads",
+        "volume_l": 9,
+        "abv_percent": 81.8,
+        "ambient_temp_c": 26.8,
+        "head_temp_c": 79,
+        "condenser_temp_c": 29.9,
+        "lal": 7.4,
+        "observations": "5750W x4 + 1 x 2200W"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "09:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 22.9,
+        "abv_percent": 82.1,
+        "ambient_temp_c": 28,
+        "head_temp_c": 79.2,
+        "condenser_temp_c": 30.4,
+        "lal": 18.8,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orris Root",
+        "time": "09:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 41.9,
+        "abv_percent": 81.9,
+        "ambient_temp_c": 29,
+        "head_temp_c": 79.4,
+        "condenser_temp_c": 31,
+        "lal": 34.3,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Orange",
+        "phase": "Middle Run (Hearts)",
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Lemon",
+        "time": "15:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 262.9,
+        "abv_percent": 78.9,
+        "ambient_temp_c": 31,
+        "head_temp_c": 80.9,
+        "condenser_temp_c": 30.5,
+        "lal": 207.4,
+        "observations": "5750W x2 + 1 x 2200W"
+      },
+      {
+        "name": "Finger Lime",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8,
+        "phase": "Heart in a bucket",
+        "volume_l": 20,
+        "abv_percent": 78,
+        "lal": 15.6,
+        "observations": "didn’t mixed it yet"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Local Fruit",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Coconut",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Buket",
+        "volume_l": 3,
+        "abv_percent": 83.6,
+        "lal": 2.5
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "Buker",
+        "volume_l": 9,
+        "abv_percent": 81.8,
+        "lal": 7.4
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": null,
+      "total_output": {
+        "total_run_l": 276.79,
+        "lal": 28.4,
+        "hearts": {
+          "id": "GIN-RF-0021",
+          "vessel": "VC-330-01",
+          "volume_l": 264.8,
+          "abv_percent": 81.1,
+          "lal": 21
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 24.1,
+      "lal": 70.1
+    },
+    "final_output": {
+      "volume_l": 0,
+      "lal": 291,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-21",
+    "sku": "Rainforest Gin",
+    "date": "2022-07-01",
+    "boiler_start_time": "06:30",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 1060,
+          "abv_percent": 45,
+          "lal": 477
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1060,
+        "abv_percent": 45,
+        "lal": 477
+      },
+      "still_setup": {
+        "elements": "5750W x4",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "time": "08:55",
+        "phase": "Foreshots",
+        "volume_l": 2
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "09:10",
+        "phase": "Heads",
+        "volume_l": 10
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "time": "16:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 291
+      },
+      {
+        "name": "Orris Root"
+      },
+      {
+        "name": "Orange"
+      },
+      {
+        "name": "Lemon"
+      },
+      {
+        "name": "Finger Lime"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1
+      },
+      {
+        "name": "Local Fruit"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Coconut"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "Discarded",
+        "volume_l": 0
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 0
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 19.6,
+      "total_output": {
+        "total_run_l": 291,
+        "lal": 0,
+        "hearts": {
+          "id": "GIN-RF-0021",
+          "vessel": "VC-317",
+          "volume_l": 291,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "combined_dilution": {
+      "new_make_l": 291,
+      "filtered_water_l": 291,
+      "new_volume_l": 291,
+      "abv_percent": 16.9,
+      "lal": 49.1
+    },
+    "final_output": {
+      "volume_l": 291,
+      "lal": 0,
+      "abv_percent": 16.9
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-020",
+    "sku": "Rainforest Gin",
+    "date": "2022-05-25",
+    "boiler_start_time": "07:35",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 1060,
+          "abv_percent": 45,
+          "lal": 477
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1060,
+        "abv_percent": 45,
+        "lal": 477
+      },
+      "still_setup": {
+        "elements": "5750W x4",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "phase": "Foreshots",
+        "volume_l": 3
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "phase": "Heads",
+        "volume_l": 12
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 316.5,
+        "abv_percent": 76.2,
+        "lal": 241.2
+      },
+      {
+        "name": "Orris Root"
+      },
+      {
+        "name": "Orange"
+      },
+      {
+        "name": "Lemon"
+      },
+      {
+        "name": "Finger Lime"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1
+      },
+      {
+        "name": "Local Fruit"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Coconut"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "20L Waste",
+        "volume_l": 3
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 12
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 19.6,
+      "total_output": {
+        "total_run_l": 346.5,
+        "lal": 241.2,
+        "hearts": {
+          "id": "GIN-RF-000x",
+          "vessel": "VC-330-01",
+          "volume_l": 316.5,
+          "abv_percent": 76.2,
+          "lal": 241.2
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-1000-1",
+          "volume_l": 15,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 316.5,
+        "filtered_water_l": 316.5,
+        "new_volume_l": 316.5,
+        "abv_percent": null,
+        "lal": null
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 316,
+      "filtered_water_l": 260,
+      "new_volume_l": 576,
+      "abv_percent": null,
+      "lal": null
+    },
+    "final_output": {
+      "volume_l": 576,
+      "lal": 241.2,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-0019",
+    "sku": "Rainforest Gin",
+    "date": "2022-04-12",
+    "boiler_start_time": "07:05",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 1060,
+          "abv_percent": 45,
+          "lal": 477
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1060,
+        "abv_percent": 45,
+        "lal": 477
+      },
+      "still_setup": {
+        "elements": "5750W x4",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6360,
+        "ratio_percent": 68.1,
+        "phase": "Foreshots",
+        "volume_l": 2
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1410,
+        "ratio_percent": 15.1,
+        "time": "08:30",
+        "phase": "Heads",
+        "volume_l": 10
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 175,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:31",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.6
+      },
+      {
+        "name": "Orange",
+        "time": "16:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 220,
+        "abv_percent": 76,
+        "lal": null
+      },
+      {
+        "name": "Lemon"
+      },
+      {
+        "name": "Finger Lime"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 71,
+        "ratio_percent": 0.8
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 567,
+        "ratio_percent": 6.1
+      },
+      {
+        "name": "Local Fruit"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Coconut"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 51,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 141,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 102,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 25,
+        "ratio_percent": 0.3,
+        "phase": "Foreshots",
+        "receiving_vessel": "20L Waste",
+        "volume_l": 2
+      },
+      {
+        "name": "Mango",
+        "weight_g": 176,
+        "ratio_percent": 1.9,
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 10
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 9346,
+      "botanicals_per_lal_g": 19.6,
+      "total_output": {
+        "total_run_l": 232,
+        "lal": null,
+        "hearts": {
+          "id": "GIN-RF-000x",
+          "vessel": "VC-400",
+          "volume_l": 220,
+          "abv_percent": 76,
+          "lal": null
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 220,
+        "filtered_water_l": 220,
+        "new_volume_l": 220,
+        "abv_percent": null,
+        "lal": null
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 220,
+      "filtered_water_l": 220,
+      "new_volume_l": 220,
+      "abv_percent": null,
+      "lal": null
+    },
+    "final_output": {
+      "volume_l": 220,
+      "lal": null,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-18",
+    "sku": "Rainforest Gin",
+    "date": "2022-03-26",
+    "boiler_start_time": "06:30",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 470,
+          "abv_percent": 96,
+          "lal": 451.2
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 530,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 1000,
+        "abv_percent": 45.1,
+        "lal": 451.2
+      },
+      "still_setup": {
+        "elements": "5750W x4",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": null,
+        "options": null
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 6000,
+        "ratio_percent": 68.1,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots",
+        "volume_l": 1.5
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1330,
+        "ratio_percent": 15.1,
+        "notes": "Steeped",
+        "phase": "Heads",
+        "volume_l": 1.5
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 165,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 24,
+        "ratio_percent": 0.3,
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 205,
+        "abv_percent": 81.6,
+        "lal": 167.3
+      },
+      {
+        "name": "Orris Root"
+      },
+      {
+        "name": "Orange"
+      },
+      {
+        "name": "Lemon"
+      },
+      {
+        "name": "Finger Lime"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 133,
+        "ratio_percent": 1.5,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 67,
+        "ratio_percent": 0.8,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 535,
+        "ratio_percent": 6.1,
+        "notes": "7.5 grapefruit sliced"
+      },
+      {
+        "name": "Local Fruit"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 96,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Coconut"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 48,
+        "ratio_percent": 0.5,
+        "notes": "Liquorise root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 133,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Lavender",
+        "phase": "Tails"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 96,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Mint"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 24,
+        "ratio_percent": 0.3,
+        "notes": "7.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20L Waste",
+        "volume_l": 1.5
+      },
+      {
+        "name": "Mango",
+        "weight_g": 166,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 1.5
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 8817,
+      "botanicals_per_lal_g": 19.5,
+      "total_output": {
+        "total_run_l": 211,
+        "lal": 167.3,
+        "hearts": {
+          "id": "GIN-RF-000x",
+          "vessel": "VC-615-1",
+          "volume_l": 205,
+          "abv_percent": 81.6,
+          "lal": 167.3
+        },
+        "tails": {
+          "id": "FEINTS-GIN-000x",
+          "vessel": "IBC-0x",
+          "volume_l": 3,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 205,
+        "filtered_water_l": 180,
+        "new_volume_l": 385,
+        "abv_percent": null,
+        "lal": null
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 205,
+      "filtered_water_l": 180,
+      "new_volume_l": 385,
+      "abv_percent": null,
+      "lal": 167.3
+    },
+    "final_output": {
+      "volume_l": 385,
+      "lal": 167.3,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-016",
+    "sku": "Rainforest Gin",
+    "date": "2022-01-12",
+    "boiler_start_time": "07:10",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 350,
+          "abv_percent": 96,
+          "lal": 336
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 400,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 750,
+        "abv_percent": 44.8,
+        "lal": 336
+      },
+      "still_setup": {
+        "elements": "5750W x1 + 2400W x1",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 4500,
+        "ratio_percent": 68,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1000,
+        "ratio_percent": 15.1,
+        "notes": "Steeped",
+        "phase": "Heads",
+        "volume_l": 12,
+        "abv_percent": 83,
+        "lal": 10,
+        "observations": "5750W x2 run elements; 33 L/hour"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 115,
+        "ratio_percent": 1.7
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 18,
+        "ratio_percent": 0.3,
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 170,
+        "abv_percent": 82,
+        "lal": 139.4
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:34",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.7
+      },
+      {
+        "name": "Orange",
+        "time": "11:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.6
+      },
+      {
+        "name": "Lemon",
+        "time": "11:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.4
+      },
+      {
+        "name": "Finger Lime",
+        "time": "12:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.9
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 100,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "13:40",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.4
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 50,
+        "ratio_percent": 0.8,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 400,
+        "ratio_percent": 6,
+        "notes": "5 grapefruit sliced"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 72,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 45,
+        "ratio_percent": 0.7,
+        "notes": "Liquorice root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 100,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 72,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 18,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 0
+      },
+      {
+        "name": "Mango",
+        "weight_g": 125,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 12,
+        "abv_percent": 83,
+        "lal": 10
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 6615,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 182,
+        "lal": 149.4,
+        "hearts": {
+          "id": "GIN-RF-016",
+          "vessel": "VC-330-01",
+          "volume_l": 170,
+          "abv_percent": 82,
+          "lal": 139.4
+        },
+        "tails": {
+          "id": "FEINTS-GIN-016",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "date_added": "2022-01-19",
+        "new_make_l": 170,
+        "filtered_water_l": 20,
+        "new_volume_l": 190,
+        "abv_percent": 80.6,
+        "lal": 152
+      },
+      {
+        "step": 2,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 210
+      },
+      {
+        "step": 3,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 230
+      },
+      {
+        "step": 4,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 250
+      },
+      {
+        "step": 5,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 270
+      },
+      {
+        "step": 6,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 290
+      },
+      {
+        "step": 7,
+        "new_make_l": 33,
+        "filtered_water_l": 20,
+        "new_volume_l": 323
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 170,
+      "filtered_water_l": 153,
+      "new_volume_l": 323,
+      "abv_percent": 49.1,
+      "lal": 153
+    },
+    "final_output": {
+      "volume_l": 323,
+      "lal": 153,
+      "abv_percent": 49.1
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-016",
+    "sku": "Rainforest Gin",
+    "date": "2022-01-12",
+    "boiler_start_time": "07:10",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 350,
+          "abv_percent": 96,
+          "lal": 336
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 400,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 750,
+        "abv_percent": 44.8,
+        "lal": 336
+      },
+      "still_setup": {
+        "elements": "5750W x1 + 2400W x1",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 4500,
+        "ratio_percent": 68,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1000,
+        "ratio_percent": 15.1,
+        "notes": "Steeped",
+        "phase": "Heads",
+        "volume_l": 12,
+        "abv_percent": 83,
+        "lal": 10,
+        "observations": "5750W x2 run elements; 33 L/hour"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 115,
+        "ratio_percent": 1.7
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 18,
+        "ratio_percent": 0.3,
+        "time": "09:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 170,
+        "abv_percent": 82,
+        "lal": 139.4
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:34",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.7
+      },
+      {
+        "name": "Orange",
+        "time": "11:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.6
+      },
+      {
+        "name": "Lemon",
+        "time": "11:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.4
+      },
+      {
+        "name": "Finger Lime",
+        "time": "12:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.9
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 100,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "13:40",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.4
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 50,
+        "ratio_percent": 0.8,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 400,
+        "ratio_percent": 6,
+        "notes": "5 grapefruit sliced"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 72,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 45,
+        "ratio_percent": 0.7,
+        "notes": "Liquorice root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 100,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 72,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 18,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 0
+      },
+      {
+        "name": "Mango",
+        "weight_g": 125,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 12,
+        "abv_percent": 83,
+        "lal": 10
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 6615,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 182,
+        "lal": 149.4,
+        "hearts": {
+          "id": "GIN-RF-016",
+          "vessel": "VC-330-01",
+          "volume_l": 170,
+          "abv_percent": 82,
+          "lal": 139.4
+        },
+        "tails": {
+          "id": "FEINTS-GIN-016",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "date_added": "2022-01-19",
+        "new_make_l": 170,
+        "filtered_water_l": 20,
+        "new_volume_l": 190,
+        "abv_percent": 80.6,
+        "lal": 152
+      },
+      {
+        "step": 2,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 210
+      },
+      {
+        "step": 3,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 230
+      },
+      {
+        "step": 4,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 250
+      },
+      {
+        "step": 5,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 270
+      },
+      {
+        "step": 6,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 290
+      },
+      {
+        "step": 7,
+        "new_make_l": 33,
+        "filtered_water_l": 20,
+        "new_volume_l": 323
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 170,
+      "filtered_water_l": 153,
+      "new_volume_l": 323,
+      "abv_percent": 49.1,
+      "lal": 153
+    },
+    "final_output": {
+      "volume_l": 323,
+      "lal": 153,
+      "abv_percent": 49.1
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-015",
+    "sku": "Rainforest Gin",
+    "date": "2022-01-03",
+    "boiler_start_time": "08:00",
+    "still_used": "CP-270-1",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 115,
+          "abv_percent": 96,
+          "lal": 110.4
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 135,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 250,
+        "abv_percent": 44.2,
+        "lal": 110.4
+      },
+      "still_setup": {
+        "elements": "5750W x1 + 2200W x2",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1500,
+        "ratio_percent": 67.9,
+        "notes": "Crushed / steeped",
+        "time": "09:38",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 85.1,
+        "lal": 1.3
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 330,
+        "ratio_percent": 14.9,
+        "notes": "Steeped",
+        "time": "09:38",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 85.1,
+        "lal": 1.3,
+        "ambient_temp_c": 30.5,
+        "head_temp_c": 83,
+        "condenser_temp_c": 30.6
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.7
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 6,
+        "ratio_percent": 0.3,
+        "time": "10:20",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.3
+      },
+      {
+        "name": "Orris Root",
+        "time": "11:00",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.7
+      },
+      {
+        "name": "Orange",
+        "time": "12:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 64,
+        "abv_percent": 81.3,
+        "lal": 52
+      },
+      {
+        "name": "Lemon",
+        "time": "12:34",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Finger Lime",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 33,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "phase": "Middle Run (Hearts)"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 140,
+        "ratio_percent": 6.3,
+        "notes": "5 grapefruit sliced"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 24,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Liquorice root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 33,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 24,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 9,
+        "ratio_percent": 0.4,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 85.1,
+        "lal": 1.3
+      },
+      {
+        "name": "Mango",
+        "weight_g": 42,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 1.5,
+        "abv_percent": 85.1,
+        "lal": 1.3
+      },
+      {
+        "name": "Additional Botanicals (top tee)",
+        "details": [
+          {
+            "name": "Cardamon",
+            "quantity": "4 pods"
+          },
+          {
+            "name": "Juniper",
+            "notes": "Crushed",
+            "weight_g": 100
+          },
+          {
+            "name": "Vanilla",
+            "percentage": "50%",
+            "weight_g": 4.5
+          },
+          {
+            "name": "Mango",
+            "percentage": "50%",
+            "weight_g": 21
+          }
+        ]
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2209,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 67,
+        "lal": 53.3,
+        "hearts": {
+          "id": "GIN-RF-015",
+          "vessel": "VC-330-01",
+          "volume_l": 64,
+          "abv_percent": 81.3,
+          "lal": 52
+        },
+        "tails": {
+          "id": "FEINTS-GIN-015",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 64,
+        "filtered_water_l": 0,
+        "new_volume_l": 64,
+        "abv_percent": 81.5,
+        "lal": 101.1
+      },
+      {
+        "step": 2,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 84
+      },
+      {
+        "step": 3,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 104,
+        "abv_percent": 50,
+        "lal": 52
+      },
+      {
+        "step": 4,
+        "new_make_l": 10,
+        "filtered_water_l": 5,
+        "new_volume_l": 119,
+        "abv_percent": 46,
+        "lal": 52.4
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 64,
+      "filtered_water_l": 55,
+      "new_volume_l": 119,
+      "abv_percent": 49,
+      "lal": 52.4
+    },
+    "final_output": {
+      "volume_l": 119,
+      "lal": 52.4,
+      "abv_percent": 49
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-014",
+    "sku": "Rainforest Gin",
+    "date": "2021-10-16",
+    "boiler_start_time": "08:00",
+    "still_used": "Roberta",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 350,
+          "abv_percent": 96,
+          "lal": 336
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 400,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 750,
+        "abv_percent": 44.8,
+        "lal": 336
+      },
+      "still_setup": {
+        "elements": "5750W x1 + 2400W x1",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 4500,
+        "ratio_percent": 68,
+        "notes": "Crushed / steeped",
+        "time": "10:30",
+        "phase": "Foreshots",
+        "abv_percent": 82,
+        "head_temp_c": 79.1,
+        "condenser_temp_c": 27.4,
+        "observations": "Boiler turned off temporarily"
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 1000,
+        "ratio_percent": 15.1,
+        "notes": "Steeped",
+        "time": "11:00",
+        "phase": "Heads",
+        "volume_l": 10,
+        "abv_percent": 82,
+        "head_temp_c": 79.3,
+        "condenser_temp_c": 27.5,
+        "observations": "2x5750W elements @ 30 L/hour"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 125,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 18,
+        "ratio_percent": 0.3,
+        "time": "11:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 20,
+        "abv_percent": 81.8,
+        "lal": 16.4
+      },
+      {
+        "name": "Orris Root",
+        "time": "13:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 50,
+        "abv_percent": 81.7,
+        "lal": 40.9
+      },
+      {
+        "name": "Orange",
+        "time": "14:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 100,
+        "abv_percent": 80.8,
+        "lal": 80.8
+      },
+      {
+        "name": "Lemon"
+      },
+      {
+        "name": "Finger Lime"
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 100,
+        "ratio_percent": 1.5,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 50,
+        "ratio_percent": 0.8,
+        "notes": "Put on last"
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 400,
+        "ratio_percent": 6,
+        "notes": "5 grapefruit sliced"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 72,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 36,
+        "ratio_percent": 0.5,
+        "notes": "Liquorice root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 100,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 72,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 18,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20L Waste",
+        "volume_l": 0
+      },
+      {
+        "name": "Mango",
+        "weight_g": 125,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "receiving_vessel": "IBC-FEINTS-01",
+        "volume_l": 10
+      },
+      {
+        "name": "Lavender"
+      },
+      {
+        "name": "Chamomile"
+      },
+      {
+        "name": "Elderflower"
+      },
+      {
+        "name": "Mint"
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 6616,
+      "botanicals_per_lal_g": 19.7,
+      "total_output": {
+        "total_run_l": 180,
+        "lal": 138,
+        "hearts": {
+          "id": "GIN-RF-014",
+          "vessel": "VC-330-01",
+          "volume_l": 170,
+          "abv_percent": 81.2,
+          "lal": 138
+        },
+        "tails": {
+          "id": "Discarded",
+          "vessel": "20L Waste",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 170,
+        "filtered_water_l": 140,
+        "new_volume_l": 310,
+        "abv_percent": 45.7,
+        "lal": 142
+      },
+      {
+        "step": 2,
+        "new_make_l": 10,
+        "filtered_water_l": 10,
+        "new_volume_l": 320,
+        "abv_percent": 43.4
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 170,
+      "filtered_water_l": 150,
+      "new_volume_l": 320,
+      "abv_percent": 45,
+      "lal": 138
+    },
+    "final_output": {
+      "volume_l": 320,
+      "lal": 138,
+      "abv_percent": 45
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-013",
+    "sku": "Rainforest Gin",
+    "date": "2021-09-29",
+    "boiler_start_time": "08:00",
+    "still_used": "CP-270-1",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 115,
+          "abv_percent": 96,
+          "lal": 110.4
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 135,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 250,
+        "abv_percent": 44.2,
+        "lal": 110.4
+      },
+      "still_setup": {
+        "elements": "5750W x1 + 2400W x1",
+        "steeping": "18 hours (Juniper, Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1500,
+        "ratio_percent": 67.9,
+        "notes": "Crushed / steeped",
+        "time": "09:31",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 81,
+        "head_temp_c": 83.7,
+        "condenser_temp_c": 32.8,
+        "lal": 1.2
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 330,
+        "ratio_percent": 14.9,
+        "notes": "Steeped",
+        "time": "09:38",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 80,
+        "head_temp_c": 84.2,
+        "condenser_temp_c": 31.9,
+        "lal": 1.2
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 6,
+        "ratio_percent": 0.3,
+        "time": "10:12",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 6.4,
+        "abv_percent": 80.1,
+        "head_temp_c": 84.4,
+        "condenser_temp_c": 32.6,
+        "lal": 5.1
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:37",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 81,
+        "lal": 4.1
+      },
+      {
+        "name": "Orange",
+        "time": "11:04",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Lemon",
+        "time": "11:29",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Finger Lime",
+        "time": "11:57",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 33,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "12:22",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 17,
+        "ratio_percent": 0.8,
+        "notes": "Put on last",
+        "time": "13:16",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 140,
+        "ratio_percent": 6.3,
+        "notes": "5 grapefruit sliced",
+        "time": "13:43",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:08",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:35",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "15:00",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.5,
+        "lal": 4
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 24,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "15:40",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.3,
+        "lal": 4
+      },
+      {
+        "name": "Coconut",
+        "time": "15:55",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 3.5,
+        "abv_percent": 79.9,
+        "lal": 2.8
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 12,
+        "ratio_percent": 0.5,
+        "notes": "Liquorice root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 33,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 24,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 6,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 81,
+        "lal": 1.2
+      },
+      {
+        "name": "Mango",
+        "weight_g": 42,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "receiving_vessel": "IBC-0x",
+        "volume_l": 1.5,
+        "abv_percent": 80,
+        "lal": 1.2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2209,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 67.9,
+        "lal": 53,
+        "hearts": {
+          "id": "GIN-RF-013",
+          "vessel": "VC-330-01",
+          "volume_l": 64.9,
+          "abv_percent": 79.8,
+          "lal": 51.8
+        },
+        "tails": {
+          "id": "FEINTS-GIN-013",
+          "vessel": "IBC-0x",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 64.9,
+        "filtered_water_l": 20,
+        "new_volume_l": 84.9,
+        "abv_percent": 49,
+        "lal": 52
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 64.9,
+      "filtered_water_l": 20,
+      "new_volume_l": 84.9,
+      "abv_percent": 49,
+      "lal": 52
+    },
+    "final_output": {
+      "volume_l": 84.9,
+      "lal": 52,
+      "abv_percent": 49
+    }
+  },
+  {
+    "gin_runs": [
+      {
+        "id": "rf-28-2024-10-09",
+        "batch_id": "SPIRIT-GIN-RF-28",
+        "product_name": "Rainforest Gin",
+        "product_type": "gin",
+        "sku": "RAIN-28",
+        "still_used": "Roberta",
+        "distillation_date": "2024-10-09",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 51,
+        "boiler_lal": 510,
+        "botanicals": [
+          {
+            "name": "Juniper",
+            "weight_g": 6360
+          },
+          {
+            "name": "Coriander",
+            "weight_g": 1410
+          },
+          {
+            "name": "Angelica",
+            "weight_g": 175
+          },
+          {
+            "name": "Cassia",
+            "weight_g": 25
+          },
+          {
+            "name": "Orris Root",
+            "weight_g": 0
+          },
+          {
+            "name": "Orange",
+            "weight_g": 50
+          },
+          {
+            "name": "Lemon",
+            "weight_g": 3
+          },
+          {
+            "name": "Finger Lime",
+            "weight_g": 0
+          },
+          {
+            "name": "Lemon Myrtle",
+            "weight_g": 141
+          },
+          {
+            "name": "Lemon Aspen",
+            "weight_g": 71
+          },
+          {
+            "name": "Grapefruit",
+            "weight_g": 567
+          },
+          {
+            "name": "Macadamia",
+            "weight_g": 102
+          },
+          {
+            "name": "Liquorice",
+            "weight_g": 51
+          },
+          {
+            "name": "Cardamom",
+            "weight_g": 141
+          },
+          {
+            "name": "Pepperberry",
+            "weight_g": 102
+          },
+          {
+            "name": "Vanilla",
+            "weight_g": 25
+          },
+          {
+            "name": "Mango",
+            "weight_g": 176
+          }
+        ],
+        "distillation": {
+          "start_time": "07:30",
+          "foreshots": {
+            "time": "09:15",
+            "volume_l": 2,
+            "abv_percent": 86
+          },
+          "heads": {
+            "time": "09:40",
+            "volume_l": 13,
+            "abv_percent": 83.5
+          },
+          "hearts": {
+            "time": "18:45",
+            "volume_l": 346,
+            "abv_percent": 82.3,
+            "lal": 118.9
+          },
+          "tails": {
+            "volume_l": 169.7,
+            "abv_percent": 75.5
+          },
+          "total_lal_collected": 530.7,
+          "heart_yield_percent": 41.7,
+          "duration_hours": 18,
+          "notes": "Run completed over 18 hours using Roberta still with 2 new plates. Foreshots discarded, heads and tails collected to Feints IBC."
+        },
+        "dilution": [
+          {
+            "stage": 1,
+            "date": "2024-10-11",
+            "start_volume_l": 346,
+            "filtered_water_l": 274,
+            "new_volume_l": 620
+          },
+          {
+            "stage": 2,
+            "date": "2024-10-12",
+            "start_volume_l": 670,
+            "filtered_water_l": 50,
+            "new_volume_l": 720
+          },
+          {
+            "stage": 3,
+            "start_volume_l": 723,
+            "filtered_water_l": 3,
+            "new_volume_l": 726
+          }
+        ],
+        "bottling": {
+          "final_volume_l": 726,
+          "final_abv_percent": 42.5,
+          "bottling_date": "2024-10-15",
+          "lal_filled": 324,
+          "bottles_700ml": 1037
+        },
+        "created_by": "Gabi",
+        "notes": "Rainforest Gin RF-28. First distillation after winter downtime; new still plates used. Diluted to 42.5% with total 324L water.",
+        "raw_log": "RF-28 | 09/10/2024 | Roberta 1000L 51% (510 LAL). Botanicals total 9346g (18.3 g/LAL). Foreshots 2L @86%, Heads 13L @83.5%, Hearts 346L @82.3%, Tails 169.7L @75.5%. Diluted to 42.5% with 324L water added across 3 stages. Final 726L batch."
+      },
+      {
+        "id": "rf-29-2025-01-20",
+        "batch_id": "SPIRIT-GIN-RF-29",
+        "product_name": "Rainforest Gin",
+        "product_type": "gin",
+        "sku": "RAIN-29",
+        "still_used": "Roberta",
+        "distillation_date": "2025-01-20",
+        "boiler_charge_l": 1000,
+        "boiler_abv_percent": 51,
+        "boiler_lal": 510,
+        "botanicals": [
+          {
+            "name": "Juniper",
+            "weight_g": 6360
+          },
+          {
+            "name": "Coriander",
+            "weight_g": 1410
+          },
+          {
+            "name": "Angelica",
+            "weight_g": 175
+          },
+          {
+            "name": "Cassia",
+            "weight_g": 25
+          },
+          {
+            "name": "Lemon Myrtle",
+            "weight_g": 141
+          },
+          {
+            "name": "Lemon Aspen",
+            "weight_g": 71
+          },
+          {
+            "name": "Grapefruit",
+            "weight_g": 567
+          },
+          {
+            "name": "Macadamia",
+            "weight_g": 102
+          },
+          {
+            "name": "Liquorice",
+            "weight_g": 51
+          },
+          {
+            "name": "Cardamom",
+            "weight_g": 141
+          },
+          {
+            "name": "Pepperberry",
+            "weight_g": 102
+          },
+          {
+            "name": "Vanilla",
+            "weight_g": 25
+          },
+          {
+            "name": "Mango",
+            "weight_g": 176
+          }
+        ],
+        "distillation": {
+          "start_time": "07:05",
+          "foreshots": {
+            "time": "09:30",
+            "volume_l": 2,
+            "abv_percent": 86
+          },
+          "heads": {
+            "time": "09:45",
+            "volume_l": 12,
+            "abv_percent": 83
+          },
+          "hearts": {
+            "time": "17:00",
+            "volume_l": 280,
+            "abv_percent": 82,
+            "lal": 96.2
+          },
+          "tails": {
+            "volume_l": 169.7,
+            "abv_percent": 75.5
+          },
+          "total_lal_collected": 449.7,
+          "heart_yield_percent": 41.7,
+          "duration_hours": 18,
+          "notes": "Roberta still, 18-hour run. Clear heads and tails separation. Hearts collected at 82%. Tails saved for Feints IBC."
+        },
+        "dilution": [
+          {
+            "stage": 1,
+            "start_volume_l": 280,
+            "filtered_water_l": 248,
+            "new_volume_l": 528,
+            "abv_percent": 45
+          },
+          {
+            "stage": 2,
+            "start_volume_l": 528,
+            "filtered_water_l": 18,
+            "new_volume_l": 546,
+            "abv_percent": 42
+          }
+        ],
+        "bottling": {
+          "final_volume_l": 546,
+          "final_abv_percent": 42,
+          "bottling_date": "2025-01-22",
+          "lal_filled": 229.3,
+          "bottles_700ml": 780
+        },
+        "created_by": "Gabi",
+        "notes": "Rainforest Gin RF-29, first 2025 run. Excellent citrus balance. Diluted to 42% ABV in two stages with 266L total water.",
+        "raw_log": "RF-29 | 20/01/2025 | Roberta 1000L 51% (510 LAL). Botanicals total 9346g (18.3 g/LAL). Foreshots 2L @86%, Heads 12L @83%, Hearts 280L @82%, Tails 169.7L @75.5%. Diluted to 42% with 266L water added. Final 546L batch."
+      }
+    ]
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-011",
+    "sku": "Rainforest Gin",
+    "date": "2021-09-30",
+    "boiler_start_time": "07:00",
+    "still_used": "CP-270-1",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 115,
+          "abv_percent": 96,
+          "lal": 110.4
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 135,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 250,
+        "abv_percent": 44.2,
+        "lal": 110.4
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1500,
+        "ratio_percent": 67.9,
+        "notes": "Crushed / steeped",
+        "time": "08:00",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 83
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 330,
+        "ratio_percent": 14.9,
+        "notes": "Steeped",
+        "time": "08:37",
+        "phase": "Heads",
+        "volume_l": 2,
+        "abv_percent": 80
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 42,
+        "ratio_percent": 1.9,
+        "observations": "Half the juniper quantity was ground"
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 6,
+        "ratio_percent": 0.3,
+        "time": "08:52",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83,
+        "head_temp_c": 84.5,
+        "condenser_temp_c": 28.4,
+        "lal": 4.2
+      },
+      {
+        "name": "Orris Root",
+        "time": "09:21",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Orange",
+        "time": "09:59",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Lemon",
+        "time": "10:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Finger Lime",
+        "time": "10:53",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 33,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "11:20",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 17,
+        "ratio_percent": 0.8,
+        "notes": "Put on last",
+        "time": "11:48",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 140,
+        "ratio_percent": 6.3,
+        "notes": "5 grapefruit sliced",
+        "time": "12:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80,
+        "lal": 4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "12:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 79,
+        "lal": 4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 78,
+        "lal": 3.9
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 24,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "14:11",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 77,
+        "lal": 3.9
+      },
+      {
+        "name": "Coconut",
+        "time": "14:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 77,
+        "lal": 3.9
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 12,
+        "ratio_percent": 0.5,
+        "notes": "Liquorice root",
+        "time": "14:46",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2,
+        "abv_percent": 77,
+        "lal": 1.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 33,
+        "ratio_percent": 1.5
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 24,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 6,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5
+      },
+      {
+        "name": "Mango",
+        "weight_g": 42,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2209,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 70.5,
+        "lal": 53.2,
+        "hearts": {
+          "id": "GIN-RF-011",
+          "vessel": "VC-230",
+          "volume_l": 67,
+          "abv_percent": 79.4,
+          "lal": 53.2
+        },
+        "tails": {
+          "id": "Discarded",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 67,
+        "filtered_water_l": 45,
+        "new_volume_l": 112,
+        "abv_percent": 45,
+        "lal": 53
+      }
+    ],
+    "combined_dilution": {
+      "new_make_l": 67,
+      "filtered_water_l": 45,
+      "new_volume_l": 112,
+      "abv_percent": 45,
+      "lal": 53
+    },
+    "final_output": {
+      "volume_l": 112,
+      "lal": 53,
+      "abv_percent": 45
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-010",
+    "sku": "Rainforest Gin",
+    "date": "2021-06-22",
+    "boiler_start_time": "07:30",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "time": "09:30",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 85.3
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "time": "09:38",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.8
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "time": "10:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.5
+      },
+      {
+        "name": "Orange",
+        "time": "10:58",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.4
+      },
+      {
+        "name": "Lemon",
+        "time": "11:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.3
+      },
+      {
+        "name": "Finger Lime",
+        "time": "11:55",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "12:22",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.9
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "12:50",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.6
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "13:18",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:48",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.4
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:16",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.8
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.6
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "15:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.5
+      },
+      {
+        "name": "Coconut",
+        "time": "15:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.3
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 85.3
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.8
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20.1,
+      "total_output": {
+        "total_run_l": 68,
+        "lal": 54.9,
+        "hearts": {
+          "id": "GIN-RF-0010",
+          "vessel": "VC-330-03",
+          "volume_l": 65,
+          "abv_percent": 82.6,
+          "lal": 53.7
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "date_added": "2021-06-24",
+        "new_make_l": 65,
+        "filtered_water_l": 60,
+        "new_volume_l": 125,
+        "abv_percent": 55.8,
+        "lal": 103.2
+      },
+      {
+        "step": 2,
+        "date_added": "2021-06-28",
+        "new_make_l": 30,
+        "filtered_water_l": 90,
+        "new_volume_l": 215,
+        "abv_percent": 48.2,
+        "lal": 103.6
+      },
+      {
+        "step": 3,
+        "new_make_l": 20,
+        "filtered_water_l": 20,
+        "new_volume_l": 235,
+        "abv_percent": 44,
+        "lal": 103.4
+      },
+      {
+        "step": 4,
+        "new_make_l": 5,
+        "filtered_water_l": 5,
+        "new_volume_l": 240,
+        "abv_percent": 43.1,
+        "lal": 103.4
+      },
+      {
+        "step": 5,
+        "new_make_l": 1.5,
+        "filtered_water_l": 1.5,
+        "new_volume_l": 241.5,
+        "abv_percent": 42.7,
+        "lal": 103.1
+      }
+    ],
+    "final_output": {
+      "volume_l": 241.5,
+      "abv_percent": 42.7,
+      "lal": 103.1
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-009",
+    "sku": "Rainforest Gin",
+    "date": "2021-06-21",
+    "boiler_start_time": "07:30",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 84.5
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "time": "09:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.1
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:07",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.8
+      },
+      {
+        "name": "Orange",
+        "time": "10:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.7
+      },
+      {
+        "name": "Lemon",
+        "time": "11:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.4
+      },
+      {
+        "name": "Finger Lime",
+        "time": "11:27",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.3
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "11:52",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.1
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "12:22",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.9
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "12:49",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.6
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:19",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.2
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:45",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.1
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.1
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "14:40",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.4
+      },
+      {
+        "name": "Coconut",
+        "notes": "Included in late hearts"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 84.5
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.6
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 63,
+        "lal": 50.3,
+        "hearts": {
+          "id": "GIN-RF-0009",
+          "vessel": "VC-330-03",
+          "volume_l": 60,
+          "abv_percent": 81.8,
+          "lal": 49.1
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 60,
+        "filtered_water_l": 55,
+        "new_volume_l": 115,
+        "abv_percent": 45,
+        "lal": 49
+      }
+    ],
+    "final_output": {
+      "volume_l": 115,
+      "abv_percent": 45,
+      "lal": 49
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-008",
+    "sku": "Rainforest Gin",
+    "date": "2021-06-08",
+    "boiler_start_time": "07:30",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "time": "08:50",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 82.8
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "time": "08:58",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.2
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "time": "09:04",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.8
+      },
+      {
+        "name": "Orris Root",
+        "time": "09:32",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.3
+      },
+      {
+        "name": "Orange",
+        "time": "10:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.2
+      },
+      {
+        "name": "Lemon",
+        "time": "10:28",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.2
+      },
+      {
+        "name": "Finger Lime",
+        "time": "10:57",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.4
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "11:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.2
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "12:00",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.3
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "12:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82
+      },
+      {
+        "name": "Local Fruit",
+        "time": "12:58",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.9
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:28",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.8
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:58",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.5
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "14:27",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.1
+      },
+      {
+        "name": "Coconut",
+        "time": "14:42",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.6
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5,
+        "time": "14:52",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 80.2
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 73,
+        "lal": 57.3,
+        "hearts": {
+          "id": "GIN-RF-0008",
+          "vessel": "VC-230-01",
+          "volume_l": 70,
+          "abv_percent": 81.9,
+          "lal": 57.3
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 70,
+        "filtered_water_l": 65,
+        "new_volume_l": 135,
+        "abv_percent": 58,
+        "lal": 117.5
+      },
+      {
+        "step": 2,
+        "new_make_l": 35,
+        "filtered_water_l": 35,
+        "new_volume_l": 205,
+        "abv_percent": 49,
+        "lal": 116.4
+      },
+      {
+        "step": 3,
+        "new_make_l": 25,
+        "filtered_water_l": 25,
+        "new_volume_l": 255,
+        "abv_percent": 45,
+        "lal": 118.1
+      },
+      {
+        "step": 4,
+        "new_make_l": 7,
+        "filtered_water_l": 7,
+        "new_volume_l": 269,
+        "abv_percent": 43.7,
+        "lal": 117.8
+      },
+      {
+        "step": 5,
+        "new_make_l": 6.5,
+        "filtered_water_l": 6.5,
+        "new_volume_l": 276,
+        "abv_percent": 43.5,
+        "lal": 117.8
+      }
+    ],
+    "final_output": {
+      "volume_l": 276,
+      "abv_percent": 43.5,
+      "lal": 117.8
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-007",
+    "sku": "Rainforest Gin",
+    "date": "2021-06-04",
+    "boiler_start_time": "06:58",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "time": "08:50",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 86
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "time": "08:58",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.6
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "time": "09:04",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1,
+        "abv_percent": 84.4
+      },
+      {
+        "name": "Orris Root",
+        "time": "09:32",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 84.2
+      },
+      {
+        "name": "Orange",
+        "time": "10:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 84
+      },
+      {
+        "name": "Lemon",
+        "time": "10:28",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.9
+      },
+      {
+        "name": "Finger Lime",
+        "time": "10:57",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 84
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "11:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83.8
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "12:00",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "12:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Local Fruit",
+        "time": "12:58",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:28",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83.3
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:58",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83.1
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "14:27",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 83
+      },
+      {
+        "name": "Coconut",
+        "time": "14:42",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1.5,
+        "abv_percent": 84
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5,
+        "time": "14:52",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2.5,
+        "abv_percent": 82.6
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "time": "15:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 4,
+        "abv_percent": 82.7
+      },
+      {
+        "name": "Lavender",
+        "time": "15:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 3.5,
+        "abv_percent": 82.3
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 86
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.6
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 74,
+        "lal": 60.5,
+        "hearts": {
+          "id": "GIN-RF-0007",
+          "vessel": "VC-230-01",
+          "volume_l": 67.5,
+          "abv_percent": 83.5,
+          "lal": 56.4
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 3.5,
+          "abv_percent": 82.3,
+          "lal": 2.9
+        }
+      }
+    },
+    "dilution": {
+      "reference": "See RF-008 combined dilution",
+      "new_make_l": 67.5,
+      "filtered_water_l": 67.5,
+      "abv_percent": null
+    },
+    "final_output": {
+      "volume_l": 67.5,
+      "abv_percent": null
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-000X",
+    "sku": "Rainforest Gin",
+    "date": "2021-05-13",
+    "boiler_start_time": "08:15",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750 W × 1 + 2400 W × 1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "time": "09:45",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 85.2
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "time": "09:57",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.2
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Basket"
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "Basket",
+        "time": "10:12",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2,
+        "abv_percent": 84
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:52",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.7
+      },
+      {
+        "name": "Orange",
+        "time": "11:31",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Lemon",
+        "time": "12:09",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.3
+      },
+      {
+        "name": "Finger Lime",
+        "time": "12:48",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "13:29",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.6
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "14:13",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.4
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "14:54",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.2
+      },
+      {
+        "name": "Local Fruit",
+        "time": "15:42",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.7
+      },
+      {
+        "name": "Local Fruit",
+        "time": "16:25",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.2
+      },
+      {
+        "name": "Local Fruit",
+        "time": "16:46",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2.5,
+        "abv_percent": 80.2
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "17:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2.5,
+        "abv_percent": 79.7
+      },
+      {
+        "name": "Liquorice",
+        "weight_g": 11,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Pods"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 85.2
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 55,
+        "lal": 44.1,
+        "hearts": {
+          "id": "GIN-RF-000X",
+          "vessel": "VC-230-01",
+          "volume_l": 52,
+          "abv_percent": 82.4,
+          "lal": 42.9
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 0,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": "Combined",
+        "date": "2021-05-17",
+        "new_make_l": 108,
+        "filtered_water_l": 70,
+        "new_volume_l": 178,
+        "abv_percent": 82.5,
+        "lal": 89.1
+      },
+      {
+        "step": 2,
+        "date": "2021-06-01",
+        "filtered_water_l": 25,
+        "new_volume_l": 203,
+        "abv_percent": 45.9,
+        "lal": 93.2
+      },
+      {
+        "step": 3,
+        "date": "2021-06-02",
+        "filtered_water_l": 10,
+        "new_volume_l": 213,
+        "abv_percent": 44.9,
+        "lal": 95.6
+      },
+      {
+        "step": 4,
+        "date": "2021-06-02",
+        "filtered_water_l": 5,
+        "new_volume_l": 218,
+        "abv_percent": 43.9,
+        "lal": 95.7
+      },
+      {
+        "step": 5,
+        "date": "2021-06-02",
+        "filtered_water_l": 8.5,
+        "new_volume_l": 226.5,
+        "abv_percent": 43,
+        "lal": 97.4
+      },
+      {
+        "step": 6,
+        "date": "2021-06-02",
+        "filtered_water_l": 1.5,
+        "new_volume_l": 228,
+        "abv_percent": 42.6,
+        "lal": 97.1
+      }
+    ],
+    "final_output": {
+      "volume_l": 228,
+      "abv_percent": 42.6,
+      "lal": 97.1
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-0005",
+    "sku": "Rainforest Gin",
+    "date": "2021-05-12",
+    "boiler_start_time": "07:30",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "time": "08:58",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 85.5
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "time": "09:10",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.1
+      },
+      {
+        "name": "Angelica Root",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Basket"
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "Basket",
+        "time": "09:27",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2,
+        "abv_percent": 84.1
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:27",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.8
+      },
+      {
+        "name": "Orange",
+        "time": "11:27",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.7
+      },
+      {
+        "name": "Lemon",
+        "time": "12:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.6
+      },
+      {
+        "name": "Finger Lime",
+        "time": "12:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.1
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "13:15",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.8
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "13:50",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.4
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "14:23",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 82.2
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:55",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.9
+      },
+      {
+        "name": "Local Fruit",
+        "time": "15:30",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.7
+      },
+      {
+        "name": "Local Fruit",
+        "time": "16:05",
+        "phase": "Middle Run (Hearts)",
+        "abv_percent": 81.5
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "16:40",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 4,
+        "abv_percent": 80.4
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Pods"
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 85.5
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.1
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 61.5,
+        "lal": 47.5,
+        "hearts": {
+          "id": "GIN-RF-0005",
+          "vessel": "VC-230-01",
+          "volume_l": 56,
+          "abv_percent": 82.6,
+          "lal": 46.2
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 2.5,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [],
+    "final_output": {
+      "volume_l": 61.5,
+      "abv_percent": null,
+      "lal": 47.5
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-0004",
+    "sku": "Rainforest Gin",
+    "date": "2021-04-16",
+    "boiler_start_time": "05:55",
+    "still_used": "CP-230",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2200W ×2",
+        "steeping": "14 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 66.7,
+        "notes": "Crushed / steeped",
+        "time": "07:30",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 85.9
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.8,
+        "notes": "Steeped",
+        "time": "07:42",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.3
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "time": "07:58",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2,
+        "abv_percent": 84
+      },
+      {
+        "name": "Orris Root",
+        "time": "09:01",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "abv_percent": 83.3
+      },
+      {
+        "name": "Orange",
+        "time": "10:04",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "abv_percent": 83
+      },
+      {
+        "name": "Lemon",
+        "time": "10:56",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "abv_percent": 82.3
+      },
+      {
+        "name": "Finger Lime",
+        "time": "11:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "abv_percent": 81.8
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 30,
+        "ratio_percent": 1.5,
+        "notes": "Put on last",
+        "time": "12:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 10,
+        "abv_percent": 81.2
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 15,
+        "ratio_percent": 0.7,
+        "notes": "Put on last",
+        "time": "12:56",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 2.5,
+        "abv_percent": 80.7
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "13:08",
+        "phase": "Tails",
+        "volume_l": 2.5,
+        "abv_percent": 80.2
+      },
+      {
+        "name": "Local Fruit",
+        "time": "13:43",
+        "phase": "Tails",
+        "volume_l": 10,
+        "abv_percent": 79.6
+      },
+      {
+        "name": "Local Fruit",
+        "time": "14:41",
+        "phase": "Tails",
+        "volume_l": 15,
+        "abv_percent": 78.6
+      },
+      {
+        "name": "Local Fruit",
+        "time": "15:41",
+        "phase": "Tails",
+        "volume_l": 18,
+        "abv_percent": 74.8
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "16:45",
+        "phase": "Tails",
+        "volume_l": 2,
+        "abv_percent": 67.5
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 85.9
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 84.3
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2024,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 101,
+        "lal": 80.7,
+        "hearts": {
+          "id": "GIN-RF-0004",
+          "vessel": "VC-230-01",
+          "volume_l": 54.5,
+          "abv_percent": 82.3,
+          "lal": 44.9
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 45,
+          "abv_percent": 76.8,
+          "lal": 34.6
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": "Combined",
+        "date": "2021-04-16",
+        "new_make_l": 107,
+        "new_volume_l": 107,
+        "abv_percent": 82,
+        "lal": 87.7
+      },
+      {
+        "step": 2,
+        "date": "2021-04-17",
+        "new_make_l": 107,
+        "filtered_water_l": 94,
+        "new_volume_l": 201,
+        "abv_percent": 42.5,
+        "lal": 85.4
+      }
+    ],
+    "final_output": {
+      "volume_l": 201,
+      "abv_percent": 42.5,
+      "lal": 85.4,
+      "bottles_est": 270
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-0003",
+    "sku": "Rainforest Gin",
+    "date": "2021-04-15",
+    "boiler_start_time": "06:45",
+    "still_used": "CP-230",
+    "notes": "2nd 5750W element tripped; only one 5750W + one 2400W used.",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 105,
+          "abv_percent": 96,
+          "lal": 100.8
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 120,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 225,
+        "abv_percent": 44.8,
+        "lal": 100.8
+      },
+      "still_setup": {
+        "elements": "5750W ×1 + 2400W ×1 (2nd 5750W tripped)",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 1 long + 3 short tubes"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 1350,
+        "ratio_percent": 67.2,
+        "notes": "Crushed / steeped",
+        "time": "09:15",
+        "phase": "Foreshots",
+        "volume_l": 1.5,
+        "abv_percent": 83.9
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 340,
+        "ratio_percent": 16.9,
+        "notes": "Steeped",
+        "time": "09:25",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.2
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 38,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "time": "10:08",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.5
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:28",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82.2
+      },
+      {
+        "name": "Orange",
+        "time": "10:43",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 82
+      },
+      {
+        "name": "Lemon",
+        "time": "11:01",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 81.8
+      },
+      {
+        "name": "Finger Lime",
+        "time": "11:19",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 81.7
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 20,
+        "ratio_percent": 1,
+        "notes": "Put on last",
+        "time": "11:38",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 81.6
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 10,
+        "ratio_percent": 0.5,
+        "notes": "Put on last",
+        "time": "11:55",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 81.3
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 125,
+        "ratio_percent": 6.2,
+        "notes": "5 grapefruit sliced",
+        "time": "12:15",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 81.2
+      },
+      {
+        "name": "Local Fruit",
+        "time": "12:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80.8
+      },
+      {
+        "name": "Local Fruit",
+        "time": "12:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 80.6
+      },
+      {
+        "name": "Local Fruit",
+        "time": "12:26",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1.5,
+        "abv_percent": 80.4
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia",
+        "time": "13:10",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1,
+        "abv_percent": 81.4
+      },
+      {
+        "name": "Coconut",
+        "time": "13:35",
+        "phase": "Tails",
+        "volume_l": 5,
+        "abv_percent": 80.1
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 11,
+        "ratio_percent": 0.5,
+        "time": "13:50",
+        "phase": "Tails",
+        "volume_l": 5,
+        "abv_percent": 79.8
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "time": "15:00",
+        "phase": "Tails",
+        "volume_l": 20,
+        "abv_percent": 77.6
+      },
+      {
+        "name": "Lavender",
+        "time": "15:20",
+        "phase": "Tails",
+        "volume_l": 12,
+        "abv_percent": 74.8
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 22,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 5.5,
+        "ratio_percent": 0.3,
+        "notes": "2.5 sticks",
+        "phase": "Foreshots",
+        "receiving_vessel": "20 L Waste",
+        "volume_l": 1.5,
+        "abv_percent": 83.9
+      },
+      {
+        "name": "Mango",
+        "weight_g": 38,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Heads",
+        "volume_l": 1.5,
+        "abv_percent": 83.2
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 2009,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 96,
+        "lal": 76.6,
+        "hearts": {
+          "id": "GIN-RF-0003",
+          "vessel": "VC-230-01",
+          "volume_l": 52.5,
+          "abv_percent": 81.6,
+          "lal": 42.9
+        },
+        "tails": {
+          "id": "FEINTS-GIN-0001",
+          "volume_l": 42,
+          "abv_percent": 77.4,
+          "lal": 32.5
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "new_make_l": 52.5,
+        "filtered_water_l": 52.5
+      },
+      {
+        "step": 2,
+        "new_make_l": 85.1,
+        "filtered_water_l": 52.5
+      },
+      {
+        "step": 3,
+        "new_make_l": 100.1,
+        "filtered_water_l": 52.5
+      },
+      {
+        "step": 4,
+        "new_make_l": 108.1,
+        "filtered_water_l": 52.5
+      }
+    ],
+    "final_output": {
+      "volume_l": 52.5,
+      "abv_percent": 81.6,
+      "lal": 42.9
+    }
+  },
+  {
+    "run_id": "SPIRIT-GIN-RF-0001",
+    "sku": "Rainforest Gin",
+    "date": "2021-01-23",
+    "still_used": "CP-100",
+    "charge_adjustment": {
+      "sources": [
+        {
+          "source": "Manildra NC96",
+          "type": "Ethanol",
+          "volume_l": 40,
+          "abv_percent": 96,
+          "lal": 38.4
+        },
+        {
+          "source": "Filtered Water",
+          "type": "Dilution",
+          "volume_l": 45,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        {
+          "source": "Saltwater",
+          "type": "Other",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        }
+      ],
+      "total_charge": {
+        "volume_l": 85,
+        "abv_percent": 45.2,
+        "lal": 38.4
+      },
+      "still_setup": {
+        "elements": "5750W ×2 + 2400W",
+        "steeping": "18 h (Juniper + Coriander)",
+        "plates": "Zero plates",
+        "options": "Whisky helmet, 2 tube sections"
+      }
+    },
+    "botanicals": [
+      {
+        "name": "Juniper",
+        "weight_g": 500,
+        "ratio_percent": 66.5,
+        "notes": "Crushed / steeped",
+        "time": "09:20",
+        "phase": "Heads",
+        "volume_l": 1,
+        "abv_percent": 85.5
+      },
+      {
+        "name": "Coriander",
+        "weight_g": 125,
+        "ratio_percent": 16.6,
+        "notes": "Steeped"
+      },
+      {
+        "name": "Angelica",
+        "weight_g": 14,
+        "ratio_percent": 1.9
+      },
+      {
+        "name": "Cassia",
+        "weight_g": 2,
+        "ratio_percent": 0.3,
+        "time": "09:35",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1,
+        "abv_percent": 84.6
+      },
+      {
+        "name": "Orris Root",
+        "time": "10:50",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 84.6
+      },
+      {
+        "name": "Orange",
+        "time": "12:00",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 84.6
+      },
+      {
+        "name": "Lemon",
+        "time": "13:12",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 84.5
+      },
+      {
+        "name": "Finger Lime",
+        "time": "14:20",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 5,
+        "abv_percent": 83.5
+      },
+      {
+        "name": "Lemon Myrtle",
+        "weight_g": 17,
+        "ratio_percent": 2.3,
+        "notes": "Put on last",
+        "time": "14:30",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1,
+        "abv_percent": 82.8
+      },
+      {
+        "name": "Lemon Aspen",
+        "weight_g": 8,
+        "ratio_percent": 1.1,
+        "notes": "Put on last",
+        "time": "14:45",
+        "phase": "Middle Run (Hearts)",
+        "volume_l": 1.2,
+        "abv_percent": 82.6
+      },
+      {
+        "name": "Grapefruit",
+        "weight_g": 42,
+        "ratio_percent": 5.6,
+        "notes": "2 grapefruit sliced"
+      },
+      {
+        "name": "Local Fruit"
+      },
+      {
+        "name": "Macadamia",
+        "weight_g": 8,
+        "ratio_percent": 1.1,
+        "notes": "Sliced fresh macadamia"
+      },
+      {
+        "name": "Coconut"
+      },
+      {
+        "name": "Liquorise",
+        "weight_g": 4,
+        "ratio_percent": 0.5,
+        "notes": "Liquorice root"
+      },
+      {
+        "name": "Cardamon",
+        "weight_g": 8,
+        "ratio_percent": 1.1,
+        "time": "15:00",
+        "phase": "Tails",
+        "volume_l": 0.8,
+        "abv_percent": 82.5
+      },
+      {
+        "name": "Lavender",
+        "time": "15:30",
+        "phase": "Tails",
+        "volume_l": 5,
+        "abv_percent": 80.1
+      },
+      {
+        "name": "Pepperberry",
+        "weight_g": 8,
+        "ratio_percent": 1.1,
+        "notes": "Black pepper"
+      },
+      {
+        "name": "Vanilla",
+        "weight_g": 2,
+        "ratio_percent": 0.3,
+        "notes": "1 stick",
+        "phase": "Heads",
+        "receiving_vessel": "20L Drum",
+        "volume_l": 1
+      },
+      {
+        "name": "Mango",
+        "weight_g": 14,
+        "ratio_percent": 1.9,
+        "notes": "Dried mango",
+        "phase": "Hearts",
+        "vessel": "VC-100-1",
+        "volume_l": 23.2,
+        "abv_percent": 82.5
+      }
+    ],
+    "totals": {
+      "botanicals_total_g": 752,
+      "botanicals_per_lal_g": 20,
+      "total_output": {
+        "total_run_l": 30,
+        "lal": 19.1,
+        "hearts": {
+          "id": "GIN-RF-0001",
+          "vessel": "VC-100-1",
+          "volume_l": 23.2,
+          "abv_percent": 82.5,
+          "lal": 19.1
+        },
+        "tails": {
+          "id": "Discarded",
+          "volume_l": 5.8,
+          "lal": 0
+        }
+      }
+    },
+    "dilution_steps": [
+      {
+        "step": 1,
+        "date": "2021-01-23",
+        "new_make_l": 23.2,
+        "filtered_water_l": 22.6,
+        "new_volume_l": 45.8,
+        "abv_percent": 42.9,
+        "lal": 19.6
+      }
+    ],
+    "final_output": {
+      "volume_l": 45.8,
+      "abv_percent": 42.9,
+      "lal": 19.6
+    }
+  }
+]

@@ -241,6 +241,21 @@ export const RumDetailPanel: React.FC<{
               </div>
 
               <div>
+                <dt className="text-xs text-stone-500 uppercase">Initial Brix</dt>
+                <dd className="font-medium text-stone-900">{formatNumber(run.initial_brix, 1)}</dd>
+              </div>
+
+              <div>
+                <dt className="text-xs text-stone-500 uppercase">Initial pH</dt>
+                <dd className="font-medium text-stone-900">{formatNumber(run.initial_ph, 2)}</dd>
+              </div>
+
+              <div>
+                <dt className="text-xs text-stone-500 uppercase">Yeast</dt>
+                <dd className="font-medium text-stone-900">{run.yeast_type || "—"}</dd>
+              </div>
+
+              <div>
                 <dt className="text-xs text-stone-500 uppercase">Water Mass</dt>
                 <dd className="font-medium text-stone-900">{formatNumber(run.water_mass_kg, 0)} kg</dd>
               </div>
@@ -616,4 +631,3 @@ export const RumDetailPanel: React.FC<{
     </div>
   )
 }
-

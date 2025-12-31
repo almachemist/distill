@@ -110,7 +110,7 @@ const calculateSummary = (sessions: DistillationSession[]) => {
   const totalVolumeOut = sessions.reduce((sum, session) => {
     const outputs = session.outputs || []
     if (outputs.length === 0) return sum
-    const isPhase = (outputs[0] as any).name !== undefined
+    const isPhase = typeof outputs[0] === 'object' && outputs[0] !== null && 'name' in (outputs[0] as object)
     if (isPhase) {
       const out = outputs as OutputPhase[]
       return sum + out.reduce((acc, o) => acc + (o.volumeL || 0), 0)
@@ -147,7 +147,7 @@ const generateMonthlyBreakdown = (sessions: DistillationSession[]) => {
     monthlyData[month].push(session)
   })
   
-  const monthlyBreakdown: { [month: string]: any } = {}
+  const monthlyBreakdown: { [month: string]: { runs: DistillationSession[]; lalCharged: number; lalRecovered: number; efficiency: number } } = {}
   
   Object.entries(monthlyData).forEach(([month, runs]) => {
     const monthSummary = calculateSummary(runs)

@@ -1,5 +1,4 @@
-const { createClient } = require('@supabase/supabase-js');
-import { supabase } from './supabaseClient.mjs';
+import supabase from './supabaseClient.mjs';
 
 const main = async () => {
   // Example of fetching data from a Supabase table

@@ -1,18 +1,19 @@
 declare module 'firebase/firestore' {
-  export const collection: any
-  export const doc: any
-  export const getDocs: any
-  export const getDoc: any
-  export const setDoc: any
-  export const updateDoc: any
-  export const addDoc: any
-  export const query: any
-  export const where: any
-  export const orderBy: any
-  export const Timestamp: any
-  export type Timestamp = any
+  export function collection(...args: unknown[]): unknown
+  export function doc(...args: unknown[]): unknown
+  export function getDocs(...args: unknown[]): unknown
+  export function getDoc(...args: unknown[]): unknown
+  export function setDoc(...args: unknown[]): unknown
+  export function updateDoc(...args: unknown[]): unknown
+  export function addDoc(...args: unknown[]): unknown
+  export function query(...args: unknown[]): unknown
+  export function where(...args: unknown[]): unknown
+  export function orderBy(...args: unknown[]): unknown
+  export class Timestamp {
+    static now(): Timestamp
+  }
 }
 
 declare module '@/lib/firebase/config' {
-  export const db: any
+  export const db: unknown
 }

@@ -19,13 +19,96 @@ export default function DashboardPage() {
 
   useEffect(() => {
     try {
+      const caneSpiritCS251A: DistillationSession = {
+        id: 'CS-25-1-A',
+        sku: 'Cane Spirit — CS-25-1',
+        description: 'Cane Acid run A — heads + early/late tails separados',
+        date: '2025-10-17',
+        still: 'Carrie',
+        boilerOn: '35A',
+        powerA: 35,
+        elementsKW: 32,
+        chargeVolumeL: 900,
+        chargeABV: 9.5,
+        chargeLAL: 85.5,
+        botanicals: [],
+        outputs: [
+          { name: 'Heads', volumeL: 15.0, abv: 84.6, lal: 12.69, vessel: 'Hearts batch', observations: 'Corte às 12:50' },
+          { name: 'Tails', volumeL: 10.5, abv: 42.5, lal: 4.4625, vessel: 'Early tails', observations: 'Separado' },
+          { name: 'Tails', volumeL: 10.5, abv: 42.5, lal: 4.4625, vessel: 'Late tails', observations: 'Separado' }
+        ]
+      }
+
+      const caneSpiritCS251B: DistillationSession = {
+        id: 'CS-25-1-B',
+        sku: 'Cane Spirit — CS-25-1',
+        description: 'Cane Acid run B — early/late tails separados',
+        date: '2025-10-17',
+        still: 'Carrie',
+        boilerOn: '35A',
+        powerA: 35,
+        elementsKW: 32,
+        chargeVolumeL: 900,
+        chargeABV: 9.5,
+        chargeLAL: 85.5,
+        botanicals: [],
+        outputs: [
+          { name: 'Tails', volumeL: 10.5, abv: 42.5, lal: 4.4625, vessel: 'Early tails', observations: 'Separado' },
+          { name: 'Tails', volumeL: 10.5, abv: 42.5, lal: 4.4625, vessel: 'Late tails', observations: 'Separado' }
+        ]
+      }
+
+      const caneSpiritCS252A: DistillationSession = {
+        id: 'CS-25-2-A',
+        sku: 'Cane Spirit — CS-25-2',
+        description: 'Cane syrup run A — heads, hearts e tails separados',
+        date: '2025-10-31',
+        still: 'Carrie',
+        boilerOn: '33A',
+        powerA: 33,
+        elementsKW: 32,
+        chargeVolumeL: 1100,
+        chargeABV: 7.5,
+        chargeLAL: 67.5,
+        botanicals: [],
+        outputs: [
+          { name: 'Heads', volumeL: 18.0, abv: 84.3, lal: 15.138, vessel: 'Hearts batch', observations: 'Corte às 12:15' },
+          { name: 'Hearts', volumeL: 81.8, abv: 80.6, lal: 67.894, vessel: 'VC-1000', observations: 'Corte às 15:30' },
+          { name: 'Tails', volumeL: 79.0, abv: 43.0, lal: 33.97, vessel: 'Early tails', observations: 'Separado' },
+          { name: 'Tails', volumeL: 71.0, abv: 65.6, lal: 46.576, vessel: 'Late tails', observations: 'Separado' }
+        ]
+      }
+
+      const caneSpiritCS252B: DistillationSession = {
+        id: 'CS-25-2-B',
+        sku: 'Cane Spirit — CS-25-2',
+        description: 'Cane syrup run B — early/late tails separados',
+        date: '2025-11-15',
+        still: 'Carrie',
+        boilerOn: '33A',
+        powerA: 33,
+        elementsKW: 32,
+        chargeVolumeL: 900,
+        chargeABV: 7.5,
+        chargeLAL: 67.5,
+        botanicals: [],
+        outputs: [
+          { name: 'Tails', volumeL: 68.5, abv: 53.0, lal: 28.538, vessel: 'Early tails', observations: 'Corte 15:00' },
+          { name: 'Tails', volumeL: 61.0, abv: 30.0, lal: 18.3, vessel: 'Late tails', observations: 'Corte 11:25' }
+        ]
+      }
+
       const exampleSessions = [
         merchantMaeGinDistillation,
         rainforestGinRF30,
-        vodka003Distillation
+        vodka003Distillation,
+        caneSpiritCS251A,
+        caneSpiritCS251B,
+        caneSpiritCS252A,
+        caneSpiritCS252B
       ]
 
-      setRecentSessions(exampleSessions.slice(0, 3))
+      setRecentSessions(exampleSessions.slice(0, 7))
     } catch (err) {
       console.error('Failed to load sessions:', err)
     } finally {

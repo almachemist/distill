@@ -55,7 +55,7 @@ export class StockRepository {
 
     const { data, error } = await this.supabase
       .from('inventory_txns')
-      .select('qty, txn_type')
+      .select('quantity, txn_type')
       .eq('item_id', itemId)
       .eq('organization_id', organizationId)
 
@@ -67,12 +67,12 @@ export class StockRepository {
       switch (txn.txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
-        case 'ADJUST':
-          return acc + Number(txn.qty ?? 0)
+          return acc + Number(txn.quantity ?? 0)
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
-          return acc - Number(txn.qty ?? 0)
+        case 'ADJUST':
+          return acc - Number(txn.quantity ?? 0)
         default:
           return acc
       }
@@ -87,7 +87,7 @@ export class StockRepository {
   async onHandByLot(itemId: string, lotId: string): Promise<number> {
     const { data, error } = await this.supabase
       .from('inventory_txns')
-      .select('qty, txn_type')
+      .select('quantity, txn_type')
       .eq('item_id', itemId)
       .eq('lot_id', lotId)
 
@@ -99,12 +99,12 @@ export class StockRepository {
       switch (txn.txn_type) {
         case 'RECEIVE':
         case 'PRODUCE':
-        case 'ADJUST':
-          return acc + Number(txn.qty ?? 0)
+          return acc + Number(txn.quantity ?? 0)
         case 'CONSUME':
         case 'TRANSFER':
         case 'DESTROY':
-          return acc - Number(txn.qty ?? 0)
+        case 'ADJUST':
+          return acc - Number(txn.quantity ?? 0)
         default:
           return acc
       }
@@ -325,7 +325,6 @@ export class StockRepository {
         item_id: itemId,
         code: code,
         qty: qty,
-        uom: uom,
         received_date: new Date().toISOString(),
         note: note
       })

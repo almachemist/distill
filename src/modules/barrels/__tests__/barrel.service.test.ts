@@ -118,10 +118,13 @@ describe('BarrelService', () => {
         },
       ]
 
-      mockSupabaseClient.from().select().eq().order.mockResolvedValue({
-        data: mockBarrels,
-        error: null,
-      })
+      const mockChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        order: vi.fn().mockResolvedValue({ data: mockBarrels, error: null }),
+      }
+
+      mockSupabaseClient.from.mockReturnValue(mockChain)
 
       const result = await barrelService.getBarrels(filter)
 
@@ -172,10 +175,13 @@ describe('BarrelService', () => {
         status: 'Aging',
       }
 
-      mockSupabaseClient.from().select().eq().single.mockResolvedValue({
-        data: mockBarrel,
-        error: null,
-      })
+      const mockChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: mockBarrel, error: null }),
+      }
+
+      mockSupabaseClient.from.mockReturnValue(mockChain)
 
       const result = await barrelService.getBarrelById('123')
 

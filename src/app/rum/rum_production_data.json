@@ -249,8 +249,8 @@
       {
         "date": "2023-09-13",
         "boiler_volume_l": 950,
-        "boiler_abv_percent": "-",
-        "boiler_lal": "-",
+        "boiler_abv_percent": 11.5,
+        "boiler_lal": 109.3,
         "heads_addition": {
           "description": "ACS tails from previous run",
           "volume_l": 104,
@@ -430,7 +430,13 @@
           "density": "-",
           "flow_lph": "-"
         },
-        "cut_points": [],
+        "cut_points": [
+          { "phase": "Foreshots", "volume_l": 1.5, "abv_percent": 84.8, "lal": 1.272 },
+          { "phase": "Heads", "volume_l": 26, "abv_percent": 84.2, "lal": 21.892 },
+          { "phase": "Hearts", "volume_l": 82, "abv_percent": 80.5, "lal": 66.01 },
+          { "phase": "Early Tails", "volume_l": 11, "abv_percent": 66.0, "lal": 7.26 },
+          { "phase": "Late Tails", "volume_l": 16, "abv_percent": 45.0, "lal": 7.2 }
+        ],
         "summary": {
           "lal_in": 195.3,
           "lal_out": 135.85,
@@ -595,7 +601,13 @@
           "density": "-",
           "flow_lph": "-"
         },
-        "cut_points": [],
+        "cut_points": [
+          { "phase": "Foreshots", "volume_l": 1.5, "abv_percent": 85.0, "lal": 1.275 },
+          { "phase": "Heads", "volume_l": 28, "abv_percent": 84.5, "lal": 23.66 },
+          { "phase": "Hearts", "volume_l": 85, "abv_percent": 81.5, "lal": 69.275 },
+          { "phase": "Early Tails", "volume_l": 12, "abv_percent": 67.0, "lal": 8.04 },
+          { "phase": "Late Tails", "volume_l": 18, "abv_percent": 46.0, "lal": 8.28 }
+        ],
         "summary": {
           "lal_in": 347.4,
           "lal_out": 92.52,

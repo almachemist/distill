@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { RUM_PRODUCT_RECIPES, type RumProductRecipe } from '../data/rum-product-recipes.dataset'
+import { RUM_PRODUCT_RECIPES } from '../data/rum-product-recipes.dataset'
 
 const formatNumber = (value: number | null | undefined, options?: Intl.NumberFormatOptions) => {
   if (value == null) return '—'
@@ -155,4 +155,3 @@ export function RumProductRecipesBrowser() {
     </div>
   )
 }
-

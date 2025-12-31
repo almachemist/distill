@@ -33,10 +33,10 @@ export class FirestoreRecipeService {
     try {
       const inventoryRef = collection(db, this.inventoryCollection)
       const snapshot = await getDocs(inventoryRef)
-      
-      return snapshot.docs.map((doc: any) => ({
+      const docs = (snapshot as unknown as { docs: Array<{ id: string; data: () => unknown }> }).docs
+      return docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...(doc.data() as Record<string, unknown>)
       } as FirestoreInventoryItem))
     } catch (error) {
       console.error('Error fetching inventory:', error)
@@ -50,10 +50,11 @@ export class FirestoreRecipeService {
       const itemRef = doc(db, this.inventoryCollection, itemId)
       const itemSnap = await getDoc(itemRef)
       
-      if (itemSnap.exists()) {
+      const snap = itemSnap as unknown as { exists: () => boolean; id: string; data: () => unknown }
+      if (snap.exists()) {
         return {
-          id: itemSnap.id,
-          ...itemSnap.data()
+          id: snap.id,
+          ...(snap.data() as Record<string, unknown>)
         } as FirestoreInventoryItem
       }
       
@@ -69,7 +70,7 @@ export class FirestoreRecipeService {
       const itemRef = doc(db, this.inventoryCollection, itemId)
       await updateDoc(itemRef, {
         ...updates,
-        lastUpdated: Timestamp.now()
+        lastUpdated: (Timestamp as unknown as { now: () => unknown }).now()
       })
     } catch (error) {
       console.error('Error updating inventory item:', error)
@@ -82,7 +83,7 @@ export class FirestoreRecipeService {
       const itemRef = doc(db, this.inventoryCollection, itemId)
       await updateDoc(itemRef, {
         quantity: newQuantity,
-        lastUpdated: Timestamp.now()
+        lastUpdated: (Timestamp as unknown as { now: () => unknown }).now()
       })
     } catch (error) {
       console.error('Error updating inventory quantity:', error)
@@ -113,10 +114,10 @@ export class FirestoreRecipeService {
       const recipesRef = collection(db, this.recipesCollection)
       const q = query(recipesRef, where('isActive', '==', true), orderBy('name'))
       const snapshot = await getDocs(q)
-      
-      return snapshot.docs.map((doc: any) => ({
+      const docs = (snapshot as unknown as { docs: Array<{ id: string; data: () => unknown }> }).docs
+      return docs.map((doc) => ({
         id: doc.id,
-        ...doc.data()
+        ...(doc.data() as Record<string, unknown>)
       } as FirestoreRecipe))
     } catch (error) {
       console.error('Error fetching recipes:', error)
@@ -130,10 +131,11 @@ export class FirestoreRecipeService {
       const recipeRef = doc(db, this.recipesCollection, recipeId)
       const recipeSnap = await getDoc(recipeRef)
       
-      if (recipeSnap.exists()) {
+      const snap = recipeSnap as unknown as { exists: () => boolean; id: string; data: () => unknown }
+      if (snap.exists()) {
         return {
-          id: recipeSnap.id,
-          ...recipeSnap.data()
+          id: snap.id,
+          ...(snap.data() as Record<string, unknown>)
         } as FirestoreRecipe
       }
       
@@ -149,11 +151,10 @@ export class FirestoreRecipeService {
       const recipesRef = collection(db, this.recipesCollection)
       const docRef = await addDoc(recipesRef, {
         ...recipe,
-        createdAt: Timestamp.now(),
-        updatedAt: Timestamp.now()
+        createdAt: (Timestamp as unknown as { now: () => unknown }).now(),
+        updatedAt: (Timestamp as unknown as { now: () => unknown }).now()
       })
-      
-      return docRef.id
+      return (docRef as unknown as { id: string }).id
     } catch (error) {
       console.error('Error creating recipe:', error)
       throw error
@@ -165,7 +166,7 @@ export class FirestoreRecipeService {
       const recipeRef = doc(db, this.recipesCollection, recipeId)
       await updateDoc(recipeRef, {
         ...updates,
-        updatedAt: Timestamp.now()
+        updatedAt: (Timestamp as unknown as { now: () => unknown }).now()
       })
     } catch (error) {
       console.error('Error updating recipe:', error)
@@ -204,12 +205,11 @@ export class FirestoreRecipeService {
       const docRef = await addDoc(batchesRef, {
         ...batchData,
         status: 'in_progress',
-        startDate: Timestamp.now(),
+        startDate: (Timestamp as unknown as { now: () => unknown }).now(),
         totalCost: calculateRecipeCost(batchData.ingredients),
-        createdAt: Timestamp.now()
+        createdAt: (Timestamp as unknown as { now: () => unknown }).now()
       })
-      
-      return docRef.id
+      return (docRef as unknown as { id: string }).id
     } catch (error) {
       console.error('Error creating production batch:', error)
       throw error
@@ -222,11 +222,12 @@ export class FirestoreRecipeService {
       const batchRef = doc(db, this.productionCollection, batchId)
       const batchSnap = await getDoc(batchRef)
       
-      if (!batchSnap.exists()) {
+      const snap = batchSnap as unknown as { exists: () => boolean }
+      if (!snap.exists()) {
         throw new Error('Production batch not found')
       }
       
-      const batch = batchSnap.data()
+      const batch = (batchSnap as unknown as { data: () => unknown }).data() as { ingredients: FirestoreIngredient[] }
       
       // Update inventory by consuming ingredients
       const inventory = await this.getAllInventoryItems()
@@ -242,8 +243,8 @@ export class FirestoreRecipeService {
       // Update batch status
       await updateDoc(batchRef, {
         status: 'completed',
-        endDate: Timestamp.now(),
-        updatedAt: Timestamp.now()
+        endDate: (Timestamp as unknown as { now: () => unknown }).now(),
+        updatedAt: (Timestamp as unknown as { now: () => unknown }).now()
       })
       
       console.log(`Production batch ${batchId} completed successfully`)

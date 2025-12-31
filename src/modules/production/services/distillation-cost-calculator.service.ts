@@ -195,7 +195,6 @@ export class DistillationCostCalculator {
     
     // Gin production: 1000L @ 50% ABV → 250L @ 80% ABV (hearts)
     const inputVolumeL = 1000
-    const inputABV = 50
     const outputVolumeL = 250
     const outputABV = 80
     
@@ -239,7 +238,6 @@ export class DistillationCostCalculator {
     
     // Vodka production: 1000L @ 50% ABV → 350L @ 91.5% ABV (combined output)
     const inputVolumeL = 1000
-    const inputABV = 50
     const outputVolumeL = 350
     const outputABV = 91.5
     

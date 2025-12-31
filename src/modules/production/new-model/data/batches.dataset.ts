@@ -1896,7 +1896,7 @@ export const batchesDataset: BatchesDataset = {
           hearts_segments: [
             { time_start: "16:30", volume_l: 289, abv_percent: 84.4, density: null, lal: null, notes: "VC Tank 33A; Back on 07:30AM → 9 to 4PM" },
             { time_start: "07:30 (+1d)", volume_l: 168, abv_percent: 86.0, density: 0.834, lal: 65.4, notes: "VC Tank 26A; Back on 07:30AM → 9 to 3:30PM" },
-            { time_start: null as any, volume_l: 76.0, abv_percent: 86.4, density: null, lal: 0.0, notes: "VC Tank 25A" }
+            { time_start: undefined, volume_l: 76.0, abv_percent: 86.4, density: null, lal: 0.0, notes: "VC Tank 25A" }
           ],
           totals_line_from_sheet: {
             declared_total_run_volume_l: 546.0,

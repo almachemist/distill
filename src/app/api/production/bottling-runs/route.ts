@@ -1,142 +1,113 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { BottlingRun, BottleEntry } from '@/types/bottling'
-import { readJson, writeJson } from '@/lib/jsonStore'
-import type { InventoryItem } from '@/types/inventory'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-
-
-const INVENTORY_PATH = 'data/inventory.json'
-const MOVEMENTS_PATH = 'data/inventory_movements.json'
-
-type Change = { sku: string; delta: number; note?: string }
+type Change = { name: string; category: string; delta: number; uom: string }
 
 function sumBySize(entries: BottleEntry[], size: number) {
   return (entries || []).filter(e => e.size_ml === size).reduce((s, e) => s + (e.quantity || 0), 0)
 }
 
-const SPIRIT_SKUS: Record<string, { sku700?: string; sku200?: string; label700?: string; label200?: string }> = {
-  // Devil's Thumb Products
-  'Rainforest Gin': { sku700: 'RAIN-700', sku200: 'RAIN-200', label700: 'LBL-RAIN-700', label200: 'LBL-RAIN-200' },
-  'Signature Dry Gin': { sku700: 'SIGN-700', sku200: 'SIGN-200', label700: 'LBL-SIGN-700', label200: 'LBL-SIGN-200' },
-  'Signature Gin': { sku700: 'SIGN-700', sku200: 'SIGN-200', label700: 'LBL-SIGN-700', label200: 'LBL-SIGN-200' }, // Alias
-  'Navy Strength Gin': { sku700: 'NAVY-700', sku200: 'NAVY-200', label700: 'LBL-NAVY-700', label200: 'LBL-NAVY-200' },
-  'Wet Season Gin': { sku700: 'WET-700', sku200: 'WET-200', label700: 'LBL-WET-700', label200: 'LBL-WET-200' },
-  'Dry Season Gin': { sku700: 'DRY-700', sku200: 'DRY-200', label700: 'LBL-DR-700', label200: 'LBL-DR-200' },
-  'Australian Cane Spirit': { sku700: 'CANE-700', sku200: 'CANE-200', label700: 'LBL-CANE-700', label200: 'LBL-CANE-200' },
-  'Cane Spirit': { sku700: 'CANE-700', sku200: 'CANE-200', label700: 'LBL-CANE-700', label200: 'LBL-CANE-200' }, // Alias
-  'Pineapple Rum': { sku700: 'PINE-700', sku200: 'PINE-200', label700: 'LBL-PINE-700', label200: 'LBL-PINE-200' },
-  'Spiced Rum': { sku700: 'SPICED-700', sku200: 'SPICED-200', label700: 'LBL-SPICED-700', label200: 'LBL-SPICED-200' },
-  'Reserve Cask Rum': { sku700: 'RESRUM-700', label700: 'LBL-RESRUM-700' },
-  'Coffee Liqueur': { sku700: 'COFFEE-700', label700: 'LBL-COFFEE-700' },
-
-  // Merchant Mae Products
-  'Merchant Mae Gin': { sku700: 'MM-GIN-700', label700: 'LBL-MMGIN-700' },
-  'Merchant Mae Vodka': { sku700: 'MM-VODKA-700', label700: 'LBL-MMVODKA-700' },
-  'Merchant Mae White Rum': { sku700: 'MM-WR-700', label700: 'LBL-MMWR-700' },
-  'Merchant Mae Dark Rum': { sku700: 'MM-DR-700', label700: 'LBL-MMDR-700' },
-  'Merchant Mae Golden Sunrise': { sku700: 'MM-GOLDEN-700', label700: 'LBL-MMGOLDEN-700' },
-  'Merchant Mae Berry Burst': { sku700: 'MM-BERRY-700', label700: 'LBL-MMBERRY-700' },
+const PKG_NAMES = {
+  BOTTLE_700: { name: 'Bottle 700ml', category: 'packaging_bottle' },
+  BOTTLE_200: { name: 'Bottle 200ml', category: 'packaging_bottle' },
+  CORK_700: { name: 'Cork 700ml', category: 'packaging_closure' },
+  CAP_200: { name: 'Cap 200ml', category: 'packaging_closure' },
+  CARTON_6P_700: { name: 'Carton 6-pack 700ml', category: 'packaging_carton' },
+  SLEEVE_700: { name: 'Tamper Sleeve 700ml', category: 'packaging_sleeve' },
+  SLEEVE_200: { name: 'Tamper Sleeve 200ml', category: 'packaging_sleeve' }
 }
 
-const PKG = {
-  BOTTLE_700: 'PKG-BOTTLE-700',
-  BOTTLE_200: 'PKG-BOTTLE-200',
-  CORK_700: 'PKG-CORK-700',
-  CAP_200: 'PKG-CAP-200',
-  SLEEVE_700: 'PKG-SLEEVE-700',
-  SLEEVE_200: 'PKG-SLEEVE-200',
-  CARTON_6P_700: 'PKG-CARTON-6P-700',
+async function getOrganizationId(supabase: any): Promise<string> {
+  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) throw new Error('User not authenticated')
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('organization_id')
+    .eq('id', user.id)
+    .single()
+  if (!profile?.organization_id) throw new Error('User organization not found')
+  return profile.organization_id
 }
 
-function sumMovementsBySku(records: any[]) {
-  const map = new Map<string, number>()
-  for (const r of records) {
-    for (const ch of r.changes || []) {
-      map.set(ch.sku, (map.get(ch.sku) || 0) + Number(ch.delta || 0))
+async function findItemByName(supabase: any, organization_id: string, name: string) {
+  const { data } = await supabase
+    .from('items')
+    .select('id')
+    .eq('organization_id', organization_id)
+    .eq('name', name)
+    .single()
+  return data
+}
+
+async function ensureItemSupabase(supabase: any, organization_id: string, name: string, category: string, default_uom: string, is_alcohol: boolean): Promise<string> {
+  const existing = await findItemByName(supabase, organization_id, name)
+  if (existing?.id) return existing.id
+  const { data, error } = await supabase
+    .from('items')
+    .insert({ organization_id, name, category, default_uom, is_alcohol })
+    .select('id')
+    .single()
+  if (error) throw error
+  return data.id
+}
+
+async function getOnHand(supabase: any, organization_id: string, item_id: string): Promise<number> {
+  const { data, error } = await supabase
+    .from('inventory_txns')
+    .select('quantity, txn_type')
+    .eq('organization_id', organization_id)
+    .eq('item_id', item_id)
+  if (error) throw error
+  return (data || []).reduce((acc: number, t: any) => {
+    switch (t.txn_type) {
+      case 'RECEIVE':
+      case 'PRODUCE':
+        return acc + Number(t.quantity || 0)
+      case 'CONSUME':
+      case 'TRANSFER':
+      case 'DESTROY':
+      case 'ADJUST':
+        return acc - Number(t.quantity || 0)
+      default:
+        return acc
     }
-  }
-  return map
-}
-
-async function applyMovements(reference: string, changes: Change[]) {
-  const items = await readJson<InventoryItem[]>(INVENTORY_PATH, [])
-  const recs = await readJson<any[]>(MOVEMENTS_PATH, [])
-
-  // index by sku
-  const bySku = new Map(items.map((it) => [it.sku, it]))
-
-  // validate existence
-  for (const ch of changes) {
-    if (!bySku.has(ch.sku)) {
-      throw new Error(`Item not found: ${ch.sku}`)
-    }
-  }
-
-  // coalesce by sku
-  const pending = new Map<string, number>()
-  for (const ch of changes) pending.set(ch.sku, (pending.get(ch.sku) || 0) + Number(ch.delta || 0))
-
-  // validate non-negative using baseline + existing movements
-  const sums = sumMovementsBySku(recs)
-  for (const [sku, delta] of pending) {
-    const item = bySku.get(sku)!
-    const baseline = Number(item.currentStock || 0)
-    const before = baseline + (sums.get(sku) || 0)
-    const after = before + delta
-    if (after < 0) throw new Error(`Insufficient stock for ${sku}: need ${-delta}, available ${before}`)
-  }
-
-  // build applied consolidated
-  const applied: any[] = []
-  for (const [sku, delta] of pending) {
-    const item = bySku.get(sku)!
-    const baseline = Number(item.currentStock || 0)
-    const before = baseline + (sums.get(sku) || 0)
-    const after = before + delta
-    applied.push({ id: item.id, sku, delta, before, after })
-  }
-
-  // append record only (do not modify baseline file)
-  recs.push({ dt: new Date().toISOString(), reference, reason: 'bottling', changes: applied })
-  await writeJson(MOVEMENTS_PATH, recs)
-  return applied
+  }, 0)
 }
 
 function buildBottlingChanges(body: BottlingRun): Change[] {
-  const p = SPIRIT_SKUS[body.productName]
-  if (!p) throw new Error(`Unknown product mapping for ${body.productName}`)
   const q700 = sumBySize(body.bottleEntries || [], 700)
   const q200 = sumBySize(body.bottleEntries || [], 200)
   const changes: Change[] = []
-
   if (q700 > 0) {
-    changes.push({ sku: PKG.BOTTLE_700, delta: -q700 })
-    changes.push({ sku: PKG.CORK_700, delta: -q700 })
-    changes.push({ sku: PKG.SLEEVE_700, delta: -q700 })
-    if (p.label700) changes.push({ sku: p.label700, delta: -q700 })
+    changes.push({ name: PKG_NAMES.BOTTLE_700.name, category: PKG_NAMES.BOTTLE_700.category, delta: -q700, uom: 'unit' })
+    changes.push({ name: PKG_NAMES.CORK_700.name, category: PKG_NAMES.CORK_700.category, delta: -q700, uom: 'unit' })
+    changes.push({ name: PKG_NAMES.SLEEVE_700.name, category: PKG_NAMES.SLEEVE_700.category, delta: -q700, uom: 'unit' })
     const cartons = Math.ceil(q700 / 6)
-    changes.push({ sku: PKG.CARTON_6P_700, delta: -cartons })
-    if (!p.sku700) throw new Error(`No 700ml finished-good SKU for ${body.productName}`)
-    changes.push({ sku: p.sku700, delta: +q700 })
+    changes.push({ name: PKG_NAMES.CARTON_6P_700.name, category: PKG_NAMES.CARTON_6P_700.category, delta: -cartons, uom: 'unit' })
+    changes.push({ name: `${body.productName} 700ml`, category: 'finished_good', delta: +q700, uom: 'unit' })
+    changes.push({ name: `Label 700ml - ${body.productName}`, category: 'packaging_label', delta: -q700, uom: 'unit' })
   }
-
   if (q200 > 0) {
-    changes.push({ sku: PKG.BOTTLE_200, delta: -q200 })
-    changes.push({ sku: PKG.CAP_200, delta: -q200 })
-    changes.push({ sku: PKG.SLEEVE_200, delta: -q200 })
-    if (p.label200) changes.push({ sku: p.label200, delta: -q200 })
-    if (!p.sku200) throw new Error(`No 200ml finished-good SKU for ${body.productName}`)
-    changes.push({ sku: p.sku200, delta: +q200 })
+    changes.push({ name: PKG_NAMES.BOTTLE_200.name, category: PKG_NAMES.BOTTLE_200.category, delta: -q200, uom: 'unit' })
+    changes.push({ name: PKG_NAMES.CAP_200.name, category: PKG_NAMES.CAP_200.category, delta: -q200, uom: 'unit' })
+    changes.push({ name: PKG_NAMES.SLEEVE_200.name, category: PKG_NAMES.SLEEVE_200.category, delta: -q200, uom: 'unit' })
+    changes.push({ name: `${body.productName} 200ml`, category: 'finished_good', delta: +q200, uom: 'unit' })
+    changes.push({ name: `Label 200ml - ${body.productName}`, category: 'packaging_label', delta: -q200, uom: 'unit' })
   }
-
   return changes
 }
 
 export async function GET(request: NextRequest) {
   try {
+    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
+    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
+    if (useStatic) {
+      return NextResponse.json({ bottlingRuns: [] })
+    }
     const supabase = await createClient()
     const { data, error } = await supabase
       .from('bottling_runs')
@@ -152,21 +123,19 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createClient()
+    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
+    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
     const body = await request.json() as BottlingRun
 
     if (!body.productType || !body.productName || !body.selectedBatches || body.selectedBatches.length === 0) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // 1) Build and apply inventory movements first (fail-fast on insufficient stock)
-    const changes = buildBottlingChanges(body)
-    await applyMovements(`bottling:${body.productName}`, changes)
-
-    // 2) Insert bottling run record
-    const { data, error } = await supabase
-      .from('bottling_runs')
-      .insert({
+    // Fast path: static/test mode bypasses all database operations
+    if (useStatic || body.isTest) {
+      const changes = buildBottlingChanges(body)
+      const mockRow = {
+        id: `static-${Date.now()}`,
         product_type: body.productType,
         product_name: body.productName,
         mode: body.mode,
@@ -174,15 +143,133 @@ export async function POST(request: NextRequest) {
         dilution_phases: body.dilutionPhases || [],
         bottle_entries: body.bottleEntries || [],
         summary: body.summary,
-        notes: body.notes || null
-      })
-      .select()
-      .single()
-    if (error) throw error
+        notes: body.notes || (body.isTest ? 'TEST RUN' : null),
+        created_at: new Date().toISOString()
+      }
+      return NextResponse.json({ bottlingRun: mockRow, inventoryApplied: [] })
+    }
 
-    return NextResponse.json({ bottlingRun: data, inventoryApplied: changes })
+    const supabase = await createClient()
+    const organization_id = await getOrganizationId(supabase)
+
+    const changes = buildBottlingChanges(body)
+
+    const resolvedItems: { change: Change; item_id: string }[] = []
+    for (const ch of changes) {
+      const item_id = await ensureItemSupabase(supabase, organization_id, ch.name, ch.category, ch.uom, ch.category === 'finished_good')
+      resolvedItems.push({ change: ch, item_id })
+    }
+
+    for (const r of resolvedItems) {
+      if (r.change.delta < 0) {
+        const available = await getOnHand(supabase, organization_id, r.item_id)
+        if (available + r.change.delta < 0) {
+          return NextResponse.json({ error: `Insufficient stock for ${r.change.name}. Required: ${-r.change.delta}, Available: ${available}` }, { status: 400 })
+        }
+      }
+    }
+
+    const txns = resolvedItems.map(r => ({
+      organization_id,
+      item_id: r.item_id,
+      lot_id: null,
+      txn_type: r.change.delta >= 0 ? 'PRODUCE' : 'CONSUME',
+      quantity: Math.abs(r.change.delta),
+      uom: r.change.uom,
+      note: `Bottling ${body.productName}`,
+      dt: new Date().toISOString()
+    }))
+
+    const { error: insertErr } = await supabase
+      .from('inventory_txns')
+      .insert(txns)
+    if (insertErr) throw insertErr
+
+    let bottlingRow: any = null
+    {
+      const { data, error } = await supabase
+        .from('bottling_runs')
+        .insert({
+          product_type: body.productType,
+          product_name: body.productName,
+          mode: body.mode,
+          selected_batches: body.selectedBatches,
+          dilution_phases: body.dilutionPhases || [],
+          bottle_entries: body.bottleEntries || [],
+          summary: body.summary,
+          notes: body.notes || null
+        })
+        .select()
+        .single()
+      if (error) throw error
+      bottlingRow = data
+    }
+
+    {
+      const tankUse: Record<string, number> = {}
+      for (const sb of body.selectedBatches || []) {
+        const tc = sb?.batch?.tankCode
+        if (!tc) continue
+        const use = Number(sb?.volumeToUseLitres || 0)
+        tankUse[tc] = (tankUse[tc] || 0) + use
+      }
+      for (const tankCode of Object.keys(tankUse)) {
+        const { data: tank, error: tankErr } = await supabase
+          .from('tanks')
+          .select('*')
+          .eq('organization_id', organization_id)
+          .eq('tank_id', tankCode)
+          .single()
+        if (tankErr) {
+          console.warn('Tank fetch failed for', tankCode, tankErr?.message)
+          continue
+        }
+        const available = Number(tank.current_volume_l ?? 0)
+        if (available < tankUse[tankCode]) {
+          return NextResponse.json({ error: `Insufficient tank volume for ${tankCode}. Available: ${available}, Required: ${tankUse[tankCode]}` }, { status: 400 })
+        }
+        const remaining = Math.max(available - tankUse[tankCode], 0)
+        const newStatus = remaining <= 0 ? 'bottled_empty' : (tank.status || 'ready_to_bottle')
+        const updates = {
+          current_volume_l: remaining,
+          status: newStatus,
+          last_updated_by: 'Bottling'
+        }
+        const { error: updErr } = await supabase
+          .from('tanks')
+          .update(updates)
+          .eq('organization_id', organization_id)
+          .eq('tank_id', tankCode)
+        if (updErr) {
+          console.warn('Tank update failed for', tankCode, updErr?.message)
+          continue
+        }
+        await supabase
+          .from('tank_history')
+          .insert({
+            organization_id,
+            tank_id: tank.id || tankCode,
+            action: 'Bottling run',
+            user_name: 'Bottling',
+            previous_values: {
+              tank_name: tank.tank_name,
+              capacity_l: tank.capacity_l,
+              product: tank.product,
+              current_abv: tank.current_abv,
+              current_volume_l: tank.current_volume_l,
+              status: tank.status,
+              notes: tank.notes
+            },
+            new_values: updates,
+            notes: `Bottled: ${body.productName}`
+          })
+      }
+    }
+
+    return NextResponse.json({ bottlingRun: bottlingRow, inventoryApplied: changes })
   } catch (error: any) {
     console.error('Error creating bottling run:', error)
     return NextResponse.json({ error: error?.message || 'Failed to create bottling run' }, { status: 400 })
   }
 }
+function ensureItem() {}

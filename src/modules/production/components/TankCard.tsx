@@ -1,13 +1,19 @@
 'use client'
 
+import Link from 'next/link'
 import { Tank, TANK_STATUS_LABELS, TANK_STATUS_COLORS } from '../types/tank.types'
 
 interface TankCardProps {
   tank: Tank
   onEdit: (tank: Tank) => void
+  onTransform?: (tank: Tank) => void
+  onInfuse?: (tank: Tank) => void
+  onAdjust?: (tank: Tank) => void
+  onCombine?: (tank: Tank) => void
+  onViewHistory?: (tank: Tank) => void
 }
 
-export function TankCard({ tank, onEdit }: TankCardProps) {
+export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onCombine, onViewHistory }: TankCardProps) {
   const statusLabel = TANK_STATUS_LABELS[tank.status]
 
   const colorClasses = {
@@ -24,7 +30,6 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
 
   const isEmpty = tank.status === 'empty' || tank.status === 'bottled_empty' || tank.status === 'cleaning'
 
-  // Support both field name conventions
   const capacity = tank.capacity_l || tank.capacity || 0
   const currentVolume = tank.current_volume_l ?? tank.volume ?? 0
   const currentAbv = tank.current_abv ?? tank.abv ?? null
@@ -34,9 +39,19 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
     ? Math.min((currentVolume / capacity) * 100, 100)
     : 0
 
+  const qp = new URLSearchParams({
+    tankId: tank.tank_id || '',
+    product: (tank.product || '') + '',
+    volume: (currentVolume || 0).toString(),
+    abv: (currentAbv || 0).toString(),
+    location: (tank.location || '') + ''
+  }).toString()
+
+  const showBottling = (currentVolume || 0) > 0
+  const showBarrel = (currentVolume || 0) > 0 && !!tank.product
+
   return (
     <div className={`rounded-xl border-2 ${colorClasses[statusColorKey as keyof typeof colorClasses]} p-6 shadow-sm hover:shadow-md transition`}>
-      {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="text-lg font-bold text-gray-900">{tankName}</h3>
@@ -52,7 +67,6 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
         </span>
       </div>
 
-      {/* Content */}
       <div className="space-y-3">
         {!isEmpty && tank.product && (
           <div>
@@ -84,7 +98,6 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
                 / {capacity.toFixed(0)} L
               </span>
             </div>
-            {/* Fill indicator */}
             <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
               <div
                 className={`h-2 rounded-full transition-all ${
@@ -101,7 +114,6 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
           </div>
         )}
 
-        {/* Infusion details */}
         {tank.status === 'infusing' && tank.infusion_type && (
           <div>
             <div className="text-sm font-medium text-gray-700">Infusion Type</div>
@@ -115,7 +127,7 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
             <div className="text-sm text-gray-900">
               {Object.entries(tank.extra_materials).map(([key, value]) => (
                 <div key={key}>
-                  {key.replace(/_/g, ' ')}: {value}
+                  {key.replace(/_/g, ' ')}: {typeof value === 'object' ? JSON.stringify(value) : String(value)}
                 </div>
               ))}
             </div>
@@ -151,7 +163,60 @@ export function TankCard({ tank, onEdit }: TankCardProps) {
         )}
       </div>
 
-      {/* Edit Button */}
+      {(showBarrel || showBottling) && (
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+          {showBarrel && (
+            <Link
+              href={`/dashboard/barrels/new?${qp}`}
+              className="w-full inline-flex items-center justify-center bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition"
+            >
+              Transfer to Barrels
+            </Link>
+          )}
+          {showBottling && (
+            <Link
+              href={`/dashboard/production/bottling/new?${qp}`}
+              className="w-full inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition"
+            >
+              Start Bottling
+            </Link>
+          )}
+        </div>
+      )}
+
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <button
+          onClick={() => onTransform && onTransform(tank)}
+          className="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition"
+        >
+          Transform Product
+        </button>
+        <button
+          onClick={() => onInfuse && onInfuse(tank)}
+          className="w-full inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition"
+        >
+          Add Ingredients / Infusion
+        </button>
+        <button
+          onClick={() => onAdjust && onAdjust(tank)}
+          className="w-full inline-flex items-center justify-center bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition"
+        >
+          Adjust Volume / ABV
+        </button>
+        <button
+          onClick={() => onCombine && onCombine(tank)}
+          className="w-full inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition"
+        >
+          Combine Tanks
+        </button>
+        <button
+          onClick={() => onViewHistory && onViewHistory(tank)}
+          className="w-full inline-flex items-center justify-center bg-gray-700 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition"
+        >
+          View History
+        </button>
+      </div>
+
       <button
         onClick={() => onEdit(tank)}
         className="mt-4 w-full bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-4 rounded-lg transition"

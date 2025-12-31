@@ -5,19 +5,17 @@
  * Handles creation, updating, and finalization of production batches.
  */
 
-import { createClient } from '@/lib/supabase/client';
 import {
   ProductionBatch,
   GinVodkaSpiritBatch,
   RumCaneSpiritBatch,
   ProductType,
-  ProductionStatus,
   isGinVodkaSpiritBatch,
   isRumCaneSpiritBatch,
   StillSetup,
 } from '@/types/production-schemas';
 import { createProductionTemplate } from '@/lib/production-templates';
-import type { Recipe, GinVodkaSpiritRecipe, isGinVodkaSpiritRecipe } from '@/types/recipe-schemas';
+import type { Recipe, GinVodkaSpiritRecipe } from '@/types/recipe-schemas';
 
 async function getSupabase() {
   const mod = await import('@/lib/supabase/client');
@@ -182,7 +180,7 @@ export async function getDraftBatches(): Promise<ProductionBatch[]> {
       .eq('data->>status', 'draft');
     
     if (!ginVodkaError && ginVodkaData) {
-      batches.push(...ginVodkaData.map((batch: any) => ({
+      batches.push(...ginVodkaData.map((batch: { id: string; data: GinVodkaSpiritBatch }) => ({
         ...batch.data,
         id: batch.id,
       })));
@@ -313,19 +311,17 @@ export async function updateDraftBatch(
     if (isRum) {
       // Update rum_production_runs table
       // Note: rum_production_runs doesn't have 'lastEditedAt' column
-      const updatedData = {
+      const sanitizedData: Record<string, unknown> = {
         ...updates,
         updated_at: new Date().toISOString(),
       };
-
-      // Remove fields that don't exist in rum_production_runs
-      delete (updatedData as any).lastEditedAt;
-      delete (updatedData as any).id; // Don't update primary key
+      delete sanitizedData['lastEditedAt'];
+      delete sanitizedData['id'];
 
       const sbRumUpd = await getSupabase();
       const { data, error } = await sbRumUpd
         .from('rum_production_runs')
-        .update(updatedData)
+        .update(sanitizedData)
         .eq('id', id)
         .select()
         .single();
@@ -339,12 +335,12 @@ export async function updateDraftBatch(
         console.error('Error hint:', error?.hint);
         console.error('Error code:', error?.code);
         console.error('Batch ID:', id);
-        console.error('Update keys:', Object.keys(updatedData));
-        console.error('Update data sample:', JSON.stringify(updatedData).substring(0, 500));
+        console.error('Update keys:', Object.keys(sanitizedData));
+        console.error('Update data sample:', JSON.stringify(sanitizedData).substring(0, 500));
 
         // Log all error properties
         for (const key in error) {
-          console.error(`error.${key}:`, (error as any)[key]);
+          console.error(`error.${key}:`, (error as unknown as Record<string, unknown>)[key]);
         }
 
         return null;
@@ -357,14 +353,12 @@ export async function updateDraftBatch(
       // Both 'type' and 'still' are NOT NULL columns, so we must provide them
 
       // For production_batches, we can include lastEditedAt in the JSONB data
-      const updatedData = {
+      const sanitizedUpdatedData: Record<string, unknown> = {
         ...updates,
         lastEditedAt: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };
-
-      // Remove id to avoid updating primary key
-      delete (updatedData as any).id;
+      delete sanitizedUpdatedData['id'];
 
       // First, get the existing record to get current type and still values
       const sbFetch = await getSupabase();
@@ -393,11 +387,11 @@ export async function updateDraftBatch(
 
       console.log('📋 Existing batch data:', existingData);
 
-      const updatePayload: any = {
-        data: updatedData,
+      const updatePayload: Record<string, unknown> = {
+        data: sanitizedUpdatedData,
         // type and still are NOT NULL, so we must always provide them
-        type: updatedData.productType || existingData.type || 'gin',
-        still: (updatedData as Partial<GinVodkaSpiritBatch>).stillUsed || existingData.still || '',
+        type: (sanitizedUpdatedData as { productType?: string }).productType || existingData.type || 'gin',
+        still: (sanitizedUpdatedData as Partial<GinVodkaSpiritBatch>).stillUsed || existingData.still || '',
         updated_at: new Date().toISOString(),
       };
 
@@ -405,8 +399,8 @@ export async function updateDraftBatch(
         id,
         type: updatePayload.type,
         still: updatePayload.still,
-        dataKeys: Object.keys(updatedData),
-        dataSample: JSON.stringify(updatedData).substring(0, 300)
+        dataKeys: Object.keys(sanitizedUpdatedData),
+        dataSample: JSON.stringify(sanitizedUpdatedData).substring(0, 300)
       });
 
       const sbUpd = await getSupabase();
@@ -426,7 +420,7 @@ export async function updateDraftBatch(
           '🔢 Error Code': error?.code,
           '🆔 Batch ID': id,
           '🏷️ Product Type': productType,
-          '🔑 Update Keys': Object.keys(updatedData),
+          '🔑 Update Keys': Object.keys(sanitizedUpdatedData),
           '📦 Update Payload': updatePayload,
           '✅ Data Exists': !!data
         });

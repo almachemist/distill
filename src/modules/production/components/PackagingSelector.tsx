@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { createClient } from '@/lib/supabase/client'
 
 export interface PackagingItem {
   id: string
   name: string
-  packaging_type: 'bottle' | 'closure' | 'label' | 'carton' | 'gift_box' | 'other'
+  packaging_type: 'bottle' | 'closure' | 'label' | 'carton' | 'gift_box' | 'sleeve' | 'other'
   available_quantity: number
   cost_per_unit: number
   supplier: string
@@ -16,7 +16,7 @@ export interface PackagingItem {
 export interface PackagingSelection {
   inventory_item_id: string
   item_name: string
-  packaging_type: 'bottle' | 'closure' | 'label' | 'carton' | 'gift_box' | 'other'
+  packaging_type: 'bottle' | 'closure' | 'label' | 'carton' | 'gift_box' | 'sleeve' | 'other'
   quantity_used: number
   cost_per_unit: number
   total_cost: number
@@ -35,28 +35,26 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
   
   const supabase = createClient()
 
-  useEffect(() => {
-    loadPackagingItems()
-  }, [])
-
-  const loadPackagingItems = async () => {
+  const loadPackagingItems = useCallback(async () => {
     try {
-      // Query items table for packaging items
       const { data: items, error: itemsError } = await supabase
         .from('items')
         .select('id, name, category')
-        .in('category', ['packaging', 'bottle', 'closure', 'label', 'carton'])
+        .in('category', ['packaging_bottle', 'packaging_closure', 'packaging_label', 'packaging_carton', 'packaging_sleeve'])
         .order('name')
 
       if (itemsError) throw itemsError
 
-      // For each item, get available lots with quantities
+      type ItemRow = { id: string; name: string; category: string }
+      type LotRow = { id: string; code: string; qty: number | string; cost_per_unit: number | string; supplier_id: string | null }
+
       const packagingWithStock = await Promise.all(
-        (items || []).map(async (item: any) => {
+        (items || []).map(async (item) => {
+          const it = item as ItemRow
           const { data: lots, error: lotsError } = await supabase
             .from('lots')
             .select('id, code, qty, cost_per_unit, supplier_id')
-            .eq('item_id', item.id)
+            .eq('item_id', it.id)
             .gt('qty', 0)
             .order('received_date', { ascending: false })
 
@@ -65,8 +63,7 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
             return null
           }
 
-          // Get supplier info
-          const lotWithSupplier = lots && lots.length > 0 ? lots[0] : null
+          const lotWithSupplier = lots && lots.length > 0 ? (lots[0] as LotRow) : null
           let supplierName = 'Unknown'
           
           if (lotWithSupplier?.supplier_id) {
@@ -76,43 +73,55 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
               .eq('id', lotWithSupplier.supplier_id)
               .single()
             
-            if (supplier) supplierName = supplier.name
+            if (supplier) supplierName = (supplier as { name: string }).name
           }
 
-          const totalQty = (lots ?? []).reduce((sum: number, lot: any) => sum + (parseFloat(lot.qty as any) || 0), 0)
+          const totalQty = (lots ?? []).reduce((sum: number, lot) => {
+            const l = lot as LotRow
+            const q = typeof l.qty === 'string' ? parseFloat(l.qty) : l.qty
+            return sum + (q || 0)
+          }, 0)
           const avgCost = (lots ?? []).length > 0 
-            ? (lots ?? []).reduce((sum: number, lot: any) => sum + (parseFloat(lot.cost_per_unit as any) || 0), 0) / (lots ?? []).length 
+            ? (lots ?? []).reduce((sum: number, lot) => {
+                const l = lot as LotRow
+                const c = typeof l.cost_per_unit === 'string' ? parseFloat(l.cost_per_unit) : l.cost_per_unit
+                return sum + (c || 0)
+              }, 0) / (lots ?? []).length 
             : 0
 
-          // Determine packaging type from item name or category
           let packagingType: PackagingItem['packaging_type'] = 'other'
-          const nameLower = item.name.toLowerCase()
+          const nameLower = it.name.toLowerCase()
           if (nameLower.includes('bottle')) packagingType = 'bottle'
           else if (nameLower.includes('cap') || nameLower.includes('cork') || nameLower.includes('closure')) packagingType = 'closure'
           else if (nameLower.includes('label')) packagingType = 'label'
           else if (nameLower.includes('carton') || nameLower.includes('box')) packagingType = 'carton'
+          else if (nameLower.includes('sleeve')) packagingType = 'sleeve'
           else if (nameLower.includes('gift')) packagingType = 'gift_box'
 
           return {
-            id: item.id,
-            name: item.name,
+            id: it.id,
+            name: it.name,
             packaging_type: packagingType,
             available_quantity: totalQty,
             cost_per_unit: avgCost,
             supplier: supplierName,
             lot_number: lotWithSupplier?.code || 'N/A'
-          }
+          } as PackagingItem
         })
       )
 
       setPackagingItems((packagingWithStock || [])
-        .filter((p: any) => p && p.available_quantity > 0) as PackagingItem[])
+        .filter((p): p is PackagingItem => !!p && p.available_quantity > 0))
     } catch (error) {
       console.error('Error loading packaging items:', error)
     } finally {
       setLoading(false)
     }
-  }
+  }, [supabase])
+
+  useEffect(() => {
+    loadPackagingItems()
+  }, [loadPackagingItems])
 
   const addPackaging = () => {
     onChange([...selections, {
@@ -131,13 +140,13 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
     onChange(selections.filter((_, i) => i !== index))
   }
 
-  const updatePackaging = (index: number, field: keyof PackagingSelection, value: any) => {
+  const updatePackaging = <K extends keyof PackagingSelection>(index: number, field: K, value: PackagingSelection[K]) => {
     const updated = [...selections]
     updated[index] = { ...updated[index], [field]: value }
     
     // If changing the item, update all related fields
     if (field === 'inventory_item_id') {
-      const item = packagingItems.find(p => p.id === value)
+      const item = packagingItems.find(p => p.id === (value as string))
       if (item) {
         updated[index] = {
           ...updated[index],
@@ -154,7 +163,7 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
 
     // If changing quantity, recalculate cost
     if (field === 'quantity_used') {
-      updated[index].total_cost = value * updated[index].cost_per_unit
+      updated[index].total_cost = (value as number) * updated[index].cost_per_unit
     }
 
     onChange(updated)
@@ -169,6 +178,7 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
     closure: 'Closures',
     label: 'Labels',
     carton: 'Cartons',
+    sleeve: 'Tamper Sleeves',
     gift_box: 'Gift Boxes',
     other: 'Other'
   }
@@ -187,7 +197,7 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
       </div>
 
       {selections.length === 0 && (
-        <p className="text-gray-500 text-sm">No packaging added yet. Click "Add Packaging" to start.</p>
+        <p className="text-gray-500 text-sm">No packaging added yet. Click &quot;Add Packaging&quot; to start.</p>
       )}
 
       {selections.map((selection, index) => {
@@ -204,7 +214,7 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
                 </label>
                 <select
                   value={selection.packaging_type}
-                  onChange={(e) => updatePackaging(index, 'packaging_type', e.target.value)}
+                  onChange={(e) => updatePackaging(index, 'packaging_type', e.target.value as PackagingSelection['packaging_type'])}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                 >
                   {Object.entries(packagingTypeLabels).map(([value, label]) => (

@@ -22,10 +22,12 @@ describe('LoginForm', () => {
       isLoading: false,
       isAuthenticated: false,
       login: mockLogin,
+      loginWithOtp: vi.fn(),
       signUp: vi.fn(),
       logout: vi.fn(),
       resetPassword: mockResetPassword,
       refreshSession: vi.fn(),
+      resendConfirmationEmail: vi.fn(),
     })
 
     vi.mocked(useRouter).mockReturnValue({

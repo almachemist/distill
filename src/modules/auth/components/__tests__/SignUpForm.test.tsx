@@ -21,10 +21,12 @@ describe('SignUpForm', () => {
       isLoading: false,
       isAuthenticated: false,
       login: vi.fn(),
+      loginWithOtp: vi.fn(),
       signUp: mockSignUp,
       logout: vi.fn(),
       resetPassword: vi.fn(),
       refreshSession: vi.fn(),
+      resendConfirmationEmail: vi.fn(),
     })
 
     vi.mocked(useRouter).mockReturnValue({

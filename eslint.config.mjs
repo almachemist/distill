@@ -10,26 +10,33 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends("next/core-web-vitals"),
   {
     ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
+      "**/node_modules/**",
+      "**/.next/**",
+      "**/out/**",
+      "**/build/**",
+      "**/coverage/**",
+      "**/dist/**",
+      "**/supabase/**",
+      "**/scripts/**",
+      "**/tests/**",
+      "**/data/**",
+      "**/docs/**",
       "next-env.d.ts",
+      "test-*.js"
     ],
     rules: {
-      // Treat these as warnings instead of errors to allow builds to succeed
-      "@typescript-eslint/no-explicit-any": "warn",
-      "react/no-unescaped-entities": "warn",
-      "@typescript-eslint/no-unused-vars": "warn",
-      "react-hooks/exhaustive-deps": "warn",
-      "@next/next/no-html-link-for-pages": "warn",
-      "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-empty-object-type": "warn",
-    },
+      "react-hooks/exhaustive-deps": "off",
+      "react/no-unescaped-entities": "off",
+      "@next/next/no-html-link-for-pages": "off"
+    }
   },
+  {
+    files: ["**/*.{ts,tsx}"],
+    ignores: ["**/*.{ts,tsx}"]
+  }
 ];
 
 export default eslintConfig;

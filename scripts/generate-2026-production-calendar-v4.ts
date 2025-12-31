@@ -190,10 +190,10 @@ for (let week = 1; week <= 52; week++) {
 
   // Determine week mode
   let mode: WeekMode = 'ADMIN'
-  let productionRuns: ProductionRun[] = []
+  const productionRuns: ProductionRun[] = []
   let bottling = false
   let bottlingTasks: string[] = []
-  let notes: string[] = []
+  const notes: string[] = []
 
   // OPERATIONAL CONSTRAINTS - Fixed weeks at start of year
 

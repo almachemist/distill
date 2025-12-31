@@ -44,7 +44,7 @@ type ProductionBatch = {
   feedstock: string
   year?: number
   fermentation: {
-    volume_l?: number
+    volume_l?: number | null
     brix_start?: number | string | null
     ph_start?: number | string | null
     yeast?: string

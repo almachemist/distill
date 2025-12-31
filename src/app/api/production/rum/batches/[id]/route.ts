@@ -1,7 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 import { RumCaneSpiritBatch } from '@/types/production-schemas'
 import { buildRumBatchFallback } from '@/modules/production/services/batch-fallback.service'
+
+export const runtime = 'nodejs'
 
 // Helper to check if string is a valid UUID
 function isValidUUID(str: string): boolean {
@@ -15,7 +18,21 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const supabase = await createClient()
+    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
+    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
+    if (useStatic) {
+      const { id } = await params
+      const fallbackBatches = buildRumBatchFallback()
+      const fallbackBatch = fallbackBatches.find((b: any) => b.batch_id === id || b.id === id)
+      if (fallbackBatch) return NextResponse.json(fallbackBatch)
+      return NextResponse.json({ error: 'Batch not found' }, { status: 404 })
+    }
+    let supabase: any
+    try {
+      supabase = createServiceRoleClient()
+    } catch {
+      supabase = await createClient()
+    }
     const { id } = await params
 
     let data = null
@@ -75,7 +92,12 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const supabase = await createClient()
+    let supabase: any
+    try {
+      supabase = createServiceRoleClient()
+    } catch {
+      supabase = await createClient()
+    }
     const { id } = await params
     const batch: RumCaneSpiritBatch = await request.json()
 
@@ -342,7 +364,12 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const supabase = await createClient()
+    let supabase: any
+    try {
+      supabase = createServiceRoleClient()
+    } catch {
+      supabase = await createClient()
+    }
     const { id } = await params
 
     console.log('🗑️ DELETE request for id:', id, 'isValidUUID:', isValidUUID(id))
@@ -389,4 +416,3 @@ export async function DELETE(
     )
   }
 }
-

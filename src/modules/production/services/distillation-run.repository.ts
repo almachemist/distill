@@ -10,13 +10,13 @@ export type DistillationRunInput = {
   stillUsed: string
   
   // Charge
-  chargeComponents: any[]
+  chargeComponents: unknown[]
   chargeTotalVolume?: number
   chargeTotalABV?: number
   chargeTotalLAL?: number
   
   // Botanicals (optional)
-  botanicals?: any[]
+  botanicals?: unknown[]
   steepingStartTime?: string
   steepingEndTime?: string
   steepingTemp?: number
@@ -45,11 +45,11 @@ export type DistillationRunInput = {
   tailsABV?: number
   tailsLAL?: number
   
-  heartsSegments?: any[]
-  tailsSegments?: any[]
+  heartsSegments?: unknown[]
+  tailsSegments?: unknown[]
   
   // Dilution
-  dilutionSteps?: any[]
+  dilutionSteps?: unknown[]
   finalOutputVolume?: number
   finalOutputABV?: number
   finalOutputLAL?: number
@@ -202,7 +202,6 @@ export class DistillationRunRepository {
     console.log(`🗑️ Batch ${batchId} deleted successfully`)
   }
 }
-
 
 
 

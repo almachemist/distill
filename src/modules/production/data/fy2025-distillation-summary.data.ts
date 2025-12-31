@@ -139,7 +139,7 @@ export const generateFY2025DistillationSummary = (): FY2025DistillationSummary =
   }
 
   // Generate monthly breakdown
-  const monthlyBreakdown: { [month: string]: any } = {}
+  const monthlyBreakdown: { [month: string]: { runs: number; lalCharged: number; lalRecovered: number; efficiency: number } } = {}
   Object.entries(log.monthlyBreakdown).forEach(([month, data]) => {
     monthlyBreakdown[month] = {
       runs: data.runs.length,

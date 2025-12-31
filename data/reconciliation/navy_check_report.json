@@ -1,0 +1,76 @@
+{
+  "summary": {
+    "rows": 17,
+    "mismatches": 0
+  },
+  "items": [
+    {
+      "batch_id": "SPIRIT-GIN-NS-0001",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0002",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0003",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0004",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0005",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0006",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0007",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-0008",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-010",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-011",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-013",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-014",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-015",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-016",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-017",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-018",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-NS-019",
+      "diffs": []
+    }
+  ]
+}

@@ -9,7 +9,6 @@ import type {
   BatchIngredient,
   LotAllocation,
   StockMovement,
-  ProductionOrderStatus,
   InventoryTxn
 } from '../types/production.types'
 import type { Recipe, RecipeIngredientWithItem, LotWithStock, Item } from '@/modules/recipes/types/recipe.types'
@@ -69,7 +68,7 @@ export class ProductionRepository {
       throw new Error(`Failed to fetch production orders: ${error.message}`)
     }
 
-    return (data ?? []).map((order: any) => ({
+    return (data ?? []).map((order: ProductionOrder & { recipes: Recipe }) => ({
       ...order,
       recipe: order.recipes as Recipe
     }))
@@ -417,7 +416,7 @@ export class ProductionRepository {
       throw new Error(`Failed to fetch production orders by status: ${error.message}`)
     }
 
-    return (data ?? []).map((order: any) => ({
+    return (data ?? []).map((order: ProductionOrder & { recipes: Recipe }) => ({
       ...order,
       recipe: order.recipes as Recipe
     }))
@@ -561,4 +560,3 @@ export class ProductionRepository {
     }
   }
 }
-

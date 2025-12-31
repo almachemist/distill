@@ -1,0 +1,32 @@
+{
+  "summary": {
+    "rows": 6,
+    "mismatches": 0
+  },
+  "items": [
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-DRY-01",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-DRY-02",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-DRY-02",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-DRY-2024",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-DRY-01",
+      "diffs": []
+    },
+    {
+      "batch_id": "SPIRIT-GIN-OAKS-DRY-02",
+      "diffs": []
+    }
+  ]
+}

@@ -182,5 +182,5 @@ export interface BatchNew {
 export interface BatchesDataset {
   products: Product[]
   batches_by_month: Record<string, BatchNew[]>
-  ui_suggestions?: any
+  ui_suggestions?: unknown
 }

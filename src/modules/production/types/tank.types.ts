@@ -42,7 +42,7 @@ export interface Tank {
 
   // Infusion details
   infusion_type?: string | null
-  extra_materials?: Record<string, any> | null
+  extra_materials?: Record<string, unknown> | null
   started_on?: string | null
   expected_completion?: string | null
 
@@ -61,8 +61,8 @@ export interface TankHistoryEntry {
   tank_id: string
   action: string
   user_name?: string | null
-  previous_values?: Record<string, any> | null
-  new_values?: Record<string, any> | null
+  previous_values?: Record<string, unknown> | null
+  new_values?: Record<string, unknown> | null
   notes?: string | null
   created_at: string
 }
@@ -74,6 +74,10 @@ export interface TankUpdateInput {
   status?: TankStatus
   notes?: string | null
   last_updated_by?: string
+  infusion_type?: string | null
+  extra_materials?: Record<string, unknown> | null
+  started_on?: string | null
+  expected_completion?: string | null
 }
 
 export const TANK_STATUS_LABELS: Record<TankStatus, string> = {
@@ -107,4 +111,3 @@ export const TANK_STATUS_COLORS: Record<TankStatus, string> = {
   maintenance: 'red',
   unavailable: 'gray'
 }
-

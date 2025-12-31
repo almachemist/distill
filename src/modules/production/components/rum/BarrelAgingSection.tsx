@@ -1,7 +1,6 @@
 "use client"
 
 import { RumCaneSpiritBatch } from "@/types/production-schemas"
-import Link from "next/link"
 
 interface BarrelAgingSectionProps {
   batch: RumCaneSpiritBatch
@@ -11,35 +10,7 @@ interface BarrelAgingSectionProps {
 export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionProps) {
 
   // Helper functions for formatting inputs
-  /**
-   * Format ABV: Type digits → ##.# format (e.g., 855 → 85.5)
-   * Max: 95.0% (realistic spirit run limit)
-   * Rule: Last digit becomes decimal, clamp AFTER formatting
-   * Limit: Max 3 digits (prevents infinite input)
-   */
-  const formatABV = (value: string): string => {
-    const digits = value.replace(/\D/g, '')
-    if (digits.length === 0) return ''
-
-    // Limit to max 3 digits (prevents infinite input like 999999...)
-    const limitedDigits = digits.slice(0, 3)
-
-    let formatted = ''
-    if (limitedDigits.length <= 2) {
-      formatted = limitedDigits
-    } else {
-      // Last digit becomes decimal: 855 → 85.5
-      const intPart = limitedDigits.slice(0, -1)
-      const decPart = limitedDigits.slice(-1)
-      formatted = `${intPart}.${decPart}`
-    }
-
-    // Clamp to max AFTER formatting (not before!)
-    const num = parseFloat(formatted)
-    if (!isNaN(num) && num > 95.0) return '95.0'
-
-    return formatted
-  }
+ 
 
   // Parse to number for storage
   const parseToNumber = (value: string): number | undefined => {
@@ -314,4 +285,3 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
     </div>
   )
 }
-

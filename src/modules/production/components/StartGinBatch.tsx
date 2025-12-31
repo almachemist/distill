@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { StockRepository } from '@/modules/inventory/services/stock.repository'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
@@ -96,7 +96,7 @@ function LotsPicker({ itemId, itemName, requiredQty, defaultUom, onAllocationsCh
               >Max</button>
               <button
                 type="button"
-                onClick={() => setAllocs(a => { const { [lot.lot_id]: _, ...rest } = a; return rest })}
+                onClick={() => setAllocs(a => { const rest = { ...a }; delete rest[lot.lot_id]; return rest })}
                 className="px-2 py-1 text-sm border rounded"
               >Clear</button>
             </div>
@@ -121,31 +121,10 @@ export function StartGinBatch() {
   const recipeId = searchParams.get('recipeId')
   const urlBatchTargetL = searchParams.get('batchTargetL')
 
-  const stockRepo = new StockRepository()
-  const recipeRepo = new RecipeRepository()
+  const stockRepo = useMemo(() => new StockRepository(), [])
+  const recipeRepo = useMemo(() => new RecipeRepository(), [])
 
-  useEffect(() => {
-    if (recipeId) {
-      loadRecipe()
-    } else {
-      setError('Recipe ID is required')
-      setLoading(false)
-    }
-  }, [recipeId])
-
-  useEffect(() => {
-    if (urlBatchTargetL) {
-      setBatchTargetL(Number(urlBatchTargetL))
-    }
-  }, [urlBatchTargetL])
-
-  useEffect(() => {
-    if (recipe) {
-      calculateScaledIngredients()
-    }
-  }, [recipe, batchTargetL])
-
-  const loadRecipe = async () => {
+  const loadRecipe = useCallback(async () => {
     try {
       setLoading(true)
       const recipeData = await recipeRepo.fetchRecipeWithIngredients(recipeId!)
@@ -159,13 +138,27 @@ export function StartGinBatch() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [recipeRepo, recipeId])
 
-  const calculateScaledIngredients = () => {
+  useEffect(() => {
+    if (recipeId) {
+      loadRecipe()
+    } else {
+      setError('Recipe ID is required')
+      setLoading(false)
+    }
+  }, [recipeId, loadRecipe])
+
+  useEffect(() => {
+    if (urlBatchTargetL) {
+      setBatchTargetL(Number(urlBatchTargetL))
+    }
+  }, [urlBatchTargetL])
+
+  const calculateScaledIngredients = useCallback(() => {
     if (!recipe) return
 
-    // Determine baseline based on recipe name
-    let recipeBaseL = 100 // Default baseline
+    let recipeBaseL = 100
     if (recipe.name.includes('Rainforest Gin')) {
       recipeBaseL = 546
     } else if (recipe.name.includes('Signature Dry Gin')) {
@@ -183,7 +176,6 @@ export function StartGinBatch() {
     const newScaleFactor = batchTargetL / recipeBaseL
     setScaleFactor(newScaleFactor)
 
-    // Include all ingredients (ethanol, botanicals, and water)
     const relevantIngredients = recipe.ingredients
 
     const allocations: IngredientAllocation[] = relevantIngredients.map(ingredient => ({
@@ -197,7 +189,15 @@ export function StartGinBatch() {
     }))
 
     setIngredientAllocations(allocations)
-  }
+  }, [recipe, batchTargetL])
+
+  useEffect(() => {
+    if (recipe) {
+      calculateScaledIngredients()
+    }
+  }, [recipe, batchTargetL, calculateScaledIngredients])
+
+ 
 
   const updateIngredientAllocations = (ingredientId: string, allocations: LotAllocation[]) => {
     setIngredientAllocations(prev => prev.map(ing => {

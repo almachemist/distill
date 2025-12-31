@@ -1,5 +1,5 @@
 import { fy2025DistillationLog, getStillPerformanceComparison } from './fy2025-distillation-log.data'
-import { type Batch } from '@/types/schema'
+import type { DistillationSession, OutputDetail, OutputPhase } from '../types/distillation-session.types'
 
 // Enhanced FY2025 Master Distillation Summary with Analytics
 export interface FY2025MasterSummary {
@@ -102,22 +102,22 @@ interface QualityMetrics {
 // Generate comprehensive master summary
 export const generateMasterFY2025Summary = (): FY2025MasterSummary => {
   const log = fy2025DistillationLog
-  const stillComparison = getStillPerformanceComparison()
+  
 
   // Calculate product summaries with enhanced metrics
-  const ginSummary = calculateProductSummary(log.runsByProduct.gin, 'gin')
-  const vodkaSummary = calculateProductSummary(log.runsByProduct.vodka, 'vodka')
-  const ethanolSummary = calculateProductSummary(log.runsByProduct.ethanol, 'ethanol')
+  const ginSummary = calculateProductSummary(log.runsByProduct.gin)
+  const vodkaSummary = calculateProductSummary(log.runsByProduct.vodka)
+  const ethanolSummary = calculateProductSummary(log.runsByProduct.ethanol)
 
   // Calculate still summaries with enhanced metrics
-  const carrieSummary = calculateStillSummary(log.runsByStill.carrie, 'carrie')
-  const robertaSummary = calculateStillSummary(log.runsByStill.roberta, 'roberta')
+  const carrieSummary = calculateStillSummary(log.runsByStill.carrie)
+  const robertaSummary = calculateStillSummary(log.runsByStill.roberta)
 
   // Generate monthly breakdown with enhanced data
   const monthlyBreakdown = generateEnhancedMonthlyBreakdown(log.monthlyBreakdown)
 
   // Get top performing runs
-  const allRuns = [...log.runsByProduct.gin, ...log.runsByProduct.vodka, ...log.runsByProduct.ethanol]
+  const allRuns: DistillationSession[] = [...log.runsByProduct.gin, ...log.runsByProduct.vodka, ...log.runsByProduct.ethanol]
   const topPerformingRuns = allRuns
     .map(run => ({
       id: run.id,
@@ -176,7 +176,7 @@ export const generateMasterFY2025Summary = (): FY2025MasterSummary => {
 }
 
 // Helper functions
-function calculateProductSummary(sessions: any[], productType: string): ProductSummary {
+function calculateProductSummary(sessions: DistillationSession[]): ProductSummary {
   const runs = sessions.length
   const lalCharged = sessions.reduce((sum, session) => sum + (session.chargeLAL || 0), 0)
   const lalRecovered = sessions.reduce((sum, session) => sum + calculateLALRecovered(session), 0)
@@ -200,7 +200,7 @@ function calculateProductSummary(sessions: any[], productType: string): ProductS
   }
 }
 
-function calculateStillSummary(sessions: any[], stillName: string): StillSummary {
+function calculateStillSummary(sessions: DistillationSession[]): StillSummary {
   const runs = sessions.length
   const lalCharged = sessions.reduce((sum, session) => sum + (session.chargeLAL || 0), 0)
   const lalRecovered = sessions.reduce((sum, session) => sum + calculateLALRecovered(session), 0)
@@ -222,67 +222,84 @@ function calculateStillSummary(sessions: any[], stillName: string): StillSummary
   }
 }
 
-function calculateLALRecovered(session: any): number {
+function calculateLALRecovered(session: DistillationSession): number {
   const outputs = session.outputs || []
-  return outputs.reduce((sum: number, output: any) => sum + (output.lal || 0), 0)
+  return outputs.reduce((sum: number, output: OutputDetail | OutputPhase) => {
+    const lal = (output as OutputDetail).lal ?? (output as OutputPhase).lal
+    return sum + (lal || 0)
+  }, 0)
 }
 
-function calculateTotalVolume(session: any): number {
+function calculateTotalVolume(session: DistillationSession): number {
   const outputs = session.outputs || []
-  return outputs.reduce((sum: number, output: any) => sum + (output.volumeL || output.volume_L || 0), 0)
+  return outputs.reduce((sum: number, output: OutputDetail | OutputPhase) => {
+    const volDetail = (output as OutputDetail).volume_L
+    const volPhase = (output as OutputPhase).volumeL
+    const vol = volDetail ?? volPhase ?? 0
+    return sum + vol
+  }, 0)
 }
 
-function calculateAverageABV(sessions: any[]): number {
+function calculateAverageABV(sessions: DistillationSession[]): number {
   if (sessions.length === 0) return 0
   const totalABV = sessions.reduce((sum, session) => {
     const outputs = session.outputs || []
-    const sessionABV = outputs.reduce((outputSum: number, output: any) => 
-      outputSum + (output.abv || output.abv_percent || 0), 0)
+    const sessionABV = outputs.reduce((outputSum: number, output: OutputDetail | OutputPhase) => {
+      const abvDetailPct = (output as OutputDetail).abv_percent
+      const abvPhase = (output as OutputPhase).abv
+      return outputSum + (abvDetailPct ?? abvPhase ?? 0)
+    }, 0)
     return sum + sessionABV
   }, 0)
   return totalABV / sessions.length
 }
 
-function calculateAverageRunTime(sessions: any[]): number {
+function calculateAverageRunTime(sessions: DistillationSession[]): number {
   // This would need actual run time data - placeholder for now
   return sessions.length * 8 // Assume 8 hours average per run
 }
 
-function getProductType(session: any): string {
+function getProductType(session: DistillationSession): string {
   if (session.sku.toLowerCase().includes('gin')) return 'gin'
   if (session.sku.toLowerCase().includes('vodka')) return 'vodka'
   if (session.sku.toLowerCase().includes('ethanol')) return 'ethanol'
   return 'other'
 }
 
-function generateEnhancedMonthlyBreakdown(monthlyData: any): { [month: string]: MonthlySummary } {
+function generateEnhancedMonthlyBreakdown(monthlyData: { [month: string]: { runs: DistillationSession[]; lalCharged: number; lalRecovered: number; efficiency: number } }): { [month: string]: MonthlySummary } {
   const enhanced: { [month: string]: MonthlySummary } = {}
   
-  Object.entries(monthlyData).forEach(([month, data]: [string, any]) => {
+  Object.entries(monthlyData).forEach(([month, data]) => {
     enhanced[month] = {
       runs: data.runs.length,
       lalCharged: data.lalCharged,
       lalRecovered: data.lalRecovered,
       efficiency: data.efficiency,
-      volumeProcessed: data.runs.reduce((sum: number, run: any) => sum + calculateTotalVolume(run), 0),
-      products: Array.from(new Set<string>(data.runs.map((run: any) => getProductType(run))))
+      volumeProcessed: data.runs.reduce((sum: number, run: DistillationSession) => sum + calculateTotalVolume(run), 0),
+      products: Array.from(new Set<string>(data.runs.map((run: DistillationSession) => getProductType(run))))
     }
   })
   
   return enhanced
 }
 
-function calculateEfficiencyTrends(monthlyData: any): EfficiencyTrend[] {
-  return Object.entries(monthlyData).map(([month, data]: [string, any]) => ({
+function calculateEfficiencyTrends(monthlyData: { [month: string]: { runs: DistillationSession[]; lalCharged: number; lalRecovered: number; efficiency: number } }): EfficiencyTrend[] {
+  return Object.entries(monthlyData).map(([month, data]) => ({
     month,
     efficiency: data.efficiency,
-    volume: data.runs.reduce((sum: number, run: any) => sum + calculateTotalVolume(run), 0),
+    volume: data.runs.reduce((sum: number, run: DistillationSession) => sum + calculateTotalVolume(run), 0),
     runs: data.runs.length
   }))
 }
 
-function calculateCostAnalysis(sessions: any[]): CostAnalysis {
-  const totalCost = sessions.reduce((sum, session) => sum + (session.costs?.totalCost || 0), 0)
+function calculateCostAnalysis(sessions: DistillationSession[]): CostAnalysis {
+  const totalCost = sessions.reduce((sum, session) => {
+    const c = session.costs
+    if (!c) return sum
+    if ('totalCost' in c) return sum + (c.totalCost || 0)
+    if ('totalAUD' in c) return sum + (c.totalAUD || 0)
+    return sum
+  }, 0)
   const totalLAL = sessions.reduce((sum, session) => sum + calculateLALRecovered(session), 0)
   const totalVolume = sessions.reduce((sum, session) => sum + calculateTotalVolume(session), 0)
   
@@ -290,18 +307,45 @@ function calculateCostAnalysis(sessions: any[]): CostAnalysis {
     totalCost,
     costPerLAL: totalLAL > 0 ? totalCost / totalLAL : 0,
     costPerLiter: totalVolume > 0 ? totalCost / totalVolume : 0,
-    electricityCost: sessions.reduce((sum, session) => sum + (session.costs?.utilityCost || 0), 0),
-    waterCost: sessions.reduce((sum, session) => sum + (session.costs?.waterCost || 0), 0),
-    ethanolCost: sessions.reduce((sum, session) => sum + (session.costs?.ethanolCost || 0), 0),
-    botanicalCost: sessions.reduce((sum, session) => sum + (session.costs?.botanicalCost || 0), 0)
+    electricityCost: sessions.reduce<number>((sum, session) => {
+      const c = session.costs
+      if (!c) return sum
+      if ('utilityCost' in c) return sum + (c.utilityCost || 0)
+      if ('electricityAUD' in c) return sum + (c.electricityAUD || 0)
+      return sum
+    }, 0),
+    waterCost: sessions.reduce<number>((sum, session) => {
+      const c = session.costs
+      if (!c) return sum
+      if ('waterCost' in c) return sum + (((c as { waterCost?: number }).waterCost) || 0)
+      if ('waterAUD' in c) return sum + (c.waterAUD || 0)
+      return sum
+    }, 0),
+    ethanolCost: sessions.reduce<number>((sum, session) => {
+      const c = session.costs
+      if (!c) return sum
+      if ('ethanolCost' in c) return sum + (c.ethanolCost || 0)
+      if ('ethanolAUD' in c) return sum + (c.ethanolAUD || 0)
+      return sum
+    }, 0),
+    botanicalCost: sessions.reduce<number>((sum, session) => {
+      const c = session.costs
+      if (!c) return sum
+      if ('botanicalCost' in c) return sum + (c.botanicalCost || 0)
+      if ('botanicalAUD' in c) return sum + (c.botanicalAUD || 0)
+      return sum
+    }, 0)
   }
 }
 
-function calculateQualityMetrics(sessions: any[]): QualityMetrics {
+function calculateQualityMetrics(sessions: DistillationSession[]): QualityMetrics {
   const totalABV = sessions.reduce((sum, session) => {
     const outputs = session.outputs || []
-    return sum + outputs.reduce((outputSum: number, output: any) => 
-      outputSum + (output.abv || output.abv_percent || 0), 0)
+    return sum + outputs.reduce((outputSum: number, output: OutputDetail | OutputPhase) => {
+      const abvDetailPct = (output as OutputDetail).abv_percent
+      const abvPhase = (output as OutputPhase).abv
+      return outputSum + (abvDetailPct ?? abvPhase ?? 0)
+    }, 0)
   }, 0)
   
   const totalOutputs = sessions.reduce((sum, session) => sum + (session.outputs?.length || 0), 0)
@@ -324,7 +368,7 @@ function calculateQualityMetrics(sessions: any[]): QualityMetrics {
   }
 }
 
-function calculateConsistencyScore(sessions: any[]): number {
+function calculateConsistencyScore(sessions: DistillationSession[]): number {
   // Calculate variance in efficiency across sessions
   const efficiencies = sessions.map(session => session.efficiency || 0)
   const average = efficiencies.reduce((sum, eff) => sum + eff, 0) / efficiencies.length
@@ -335,7 +379,7 @@ function calculateConsistencyScore(sessions: any[]): number {
   return Math.max(0, 100 - (standardDeviation / average) * 100)
 }
 
-function calculateFeintsRecovery(sessions: any[]): number {
+function calculateFeintsRecovery(sessions: DistillationSession[]): number {
   // Calculate percentage of feints/tails that were recovered for ethanol production
   const ethanolSessions = sessions.filter(session => getProductType(session) === 'ethanol')
   const totalFeintsVolume = ethanolSessions.reduce((sum, session) => sum + (session.chargeVolumeL || 0), 0)

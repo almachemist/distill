@@ -53,7 +53,7 @@ async function main() {
       
       // Determine type and still based on batch_id
       let type = 'other';
-      let still = 'Carrie';
+      const still = 'Carrie';
       
       if (batchId.startsWith('RUM-')) {
         type = 'rum';

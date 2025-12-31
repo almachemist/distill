@@ -5,7 +5,6 @@
  * Recipes are reusable templates for creating production batches.
  */
 
-import { createClient } from '@/lib/supabase/client'
 import type { Recipe, GinVodkaSpiritRecipe, RumCaneSpiritRecipe } from '@/types/recipe-schemas'
 import type { ProductType } from '@/types/production-schemas'
 
@@ -35,16 +34,27 @@ export async function getActiveRecipes(): Promise<Recipe[]> {
       return []
     }
     
-    return (data ?? []).map((row: any) => ({
+    type RecipeRow = {
+      id: string
+      recipe_name: string
+      product_type: ProductType
+      description?: string | null
+      notes?: string | null
+      created_at: string
+      updated_at: string
+      is_active: boolean
+      data?: Partial<Recipe>
+    }
+    return (data ?? []).map((row: RecipeRow) => ({
       id: row.id,
       recipeName: row.recipe_name,
-      productType: row.product_type as ProductType,
-      description: row.description,
-      notes: row.notes,
+      productType: row.product_type,
+      description: row.description ?? undefined,
+      notes: row.notes ?? undefined,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       isActive: row.is_active,
-      ...row.data,
+      ...(row.data ?? {}),
     })) as Recipe[]
   } catch (error) {
     console.error('Error in getActiveRecipes:', error)
@@ -73,16 +83,27 @@ export async function getRecipesByType(productType: ProductType): Promise<Recipe
 
     console.log(`Found ${data?.length || 0} recipes for type ${productType}:`, data)
 
-    return (data ?? []).map((row: any) => ({
+    type RecipeRow = {
+      id: string
+      recipe_name: string
+      product_type: ProductType
+      description?: string | null
+      notes?: string | null
+      created_at: string
+      updated_at: string
+      is_active: boolean
+      data?: Partial<Recipe>
+    }
+    return (data ?? []).map((row: RecipeRow) => ({
       id: row.id,
       recipeName: row.recipe_name,
-      productType: row.product_type as ProductType,
-      description: row.description,
-      notes: row.notes,
+      productType: row.product_type,
+      description: row.description ?? undefined,
+      notes: row.notes ?? undefined,
       createdAt: row.created_at,
       updatedAt: row.updated_at,
       isActive: row.is_active,
-      ...row.data,
+      ...(row.data ?? {}),
     })) as Recipe[]
   } catch (error) {
     console.error('Error in getRecipesByType:', error)
@@ -150,7 +171,7 @@ export async function getRecipeById(id: string): Promise<Recipe | null> {
  */
 export async function createRecipe(recipe: Partial<Recipe>): Promise<Recipe | null> {
   try {
-    const { id, recipeName, productType, description, notes, createdAt, updatedAt, isActive, ...recipeData } = recipe
+    const { recipeName, productType, description, notes, isActive, ...recipeData } = recipe
     
     const sb = await getSupabase()
     const { data, error } = await sb
@@ -195,7 +216,7 @@ export async function updateRecipe(id: string, updates: Partial<Recipe>): Promis
   try {
     const { recipeName, productType, description, notes, isActive, ...recipeData } = updates
     
-    const updateData: any = {
+    const updateData: Record<string, unknown> = {
       updated_at: new Date().toISOString(),
     }
     

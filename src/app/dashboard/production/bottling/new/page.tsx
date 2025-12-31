@@ -54,12 +54,14 @@ function NewBottlingRunContent() {
   const [bottleEntries, setBottleEntries] = useState<BottleEntry[]>([])
   const [productName, setProductName] = useState('')
   const [manualMode, setManualMode] = useState(false)
+  const [isTestRun, setIsTestRun] = useState(false)
 
   // Manual entry state
   const [manualProductType, setManualProductType] = useState<ProductType>('gin')
   const [manualVolume, setManualVolume] = useState<number>(0)
   const [manualABV, setManualABV] = useState<number>(0)
   const [manualTankCode, setManualTankCode] = useState<string>('')
+  const [deeplinkApplied, setDeeplinkApplied] = useState(false)
 
   // Filters
   const [filterProductType, setFilterProductType] = useState<ProductType | 'all'>('all')
@@ -81,6 +83,48 @@ function NewBottlingRunContent() {
     }
   }, [searchParams, allBatches])
 
+  useEffect(() => {
+    if (deeplinkApplied) return
+    const tankId = searchParams.get('tankId') || ''
+    const productParam = searchParams.get('product') || ''
+    const volumeParam = parseFloat(searchParams.get('volume') || '') || 0
+    const abvParam = parseFloat(searchParams.get('abv') || '') || 0
+    if (!tankId && !productParam && !volumeParam && !abvParam) return
+    function inferType(name: string): ProductType {
+      const p = PRODUCT_LIST.find(p => p.value === name)
+      if (p) return p.type
+      const n = (name || '').toLowerCase()
+      if (n.includes('rum')) return 'rum'
+      if (n.includes('gin')) return 'gin'
+      if (n.includes('vodka')) return 'vodka'
+      if (n.includes('cane')) return 'cane_spirit'
+      if (n.includes('liqueur')) return 'other_liqueur'
+      return 'gin'
+    }
+    const productType = inferType(productParam)
+    const manualBatch: Batch = {
+      id: `manual-${Date.now()}`,
+      batchCode: tankId || `MANUAL-${Date.now()}`,
+      productName: productParam || 'Manual Entry',
+      productType,
+      volumeLitres: volumeParam,
+      abvPercent: abvParam,
+      lal: (volumeParam * abvParam) / 100,
+      tankCode: tankId || undefined,
+      status: 'in_tank',
+      notes: 'Manual entry from tank'
+    }
+    const selected: SelectedBatch = {
+      batch: manualBatch,
+      volumeToUseLitres: manualBatch.volumeLitres,
+      lal: manualBatch.lal
+    }
+    setSelectedBatches([selected])
+    setProductName(productParam || '')
+    setManualMode(false)
+    setDeeplinkApplied(true)
+  }, [searchParams, deeplinkApplied])
+
   async function loadBatches() {
     try {
       const res = await fetch('/api/production/batches')
@@ -93,9 +137,15 @@ function NewBottlingRunContent() {
       const rumBatches = (data.rum || []).map(normalizeBatch).filter(Boolean) as Batch[]
       
       const allBatchesRaw = [...ginBatches, ...rumBatches]
+      const seen = new Map<string, Batch>()
+      for (const b of allBatchesRaw) {
+        const k = `${b.id}|${b.batchCode}|${b.tankCode || ''}|${b.distilledAt || ''}`
+        if (!seen.has(k)) seen.set(k, b)
+      }
+      const allBatchesDedup = Array.from(seen.values())
       
       // Filter only batches available for bottling
-      const available = getAvailableBatches(allBatchesRaw)
+      const available = getAvailableBatches(allBatchesDedup)
       
       setAllBatches(available)
     } catch (error) {
@@ -128,6 +178,20 @@ function NewBottlingRunContent() {
     setSelectedBatches(selectedBatches.filter((_, i) => i !== index))
   }
 
+  function updateSelectedBatchVolume(index: number, volume: number) {
+    const sb = selectedBatches[index]
+    if (!sb) return
+    const max = sb.batch.volumeLitres
+    const v = Math.max(0, Math.min(volume, max))
+    const updated = [...selectedBatches]
+    updated[index] = {
+      ...sb,
+      volumeToUseLitres: v,
+      lal: (v * sb.batch.abvPercent) / 100
+    }
+    setSelectedBatches(updated)
+  }
+
   function addDilutionPhase() {
     const newPhase: DilutionPhase = {
       id: `phase-${Date.now()}`,
@@ -142,6 +206,37 @@ function NewBottlingRunContent() {
     const updated = [...dilutionPhases]
     updated[index] = phase
     setDilutionPhases(updated)
+  }
+
+  function updateSelectedBatchAbv(index: number, abv: number) {
+    const sb = selectedBatches[index]
+    if (!sb) return
+    const newAbv = Math.max(0, abv || 0)
+    const updatedBatch = { ...sb.batch, abvPercent: newAbv }
+    const v = sb.volumeToUseLitres
+    const updated = [...selectedBatches]
+    updated[index] = {
+      ...sb,
+      batch: updatedBatch,
+      lal: (v * newAbv) / 100
+    }
+    setSelectedBatches(updated)
+  }
+
+  function updateSelectedBatchAvailableVolume(index: number, availableLitres: number) {
+    const sb = selectedBatches[index]
+    if (!sb) return
+    const avail = Math.max(0, availableLitres || 0)
+    const updatedBatch = { ...sb.batch, volumeLitres: avail }
+    const v = Math.max(0, Math.min(sb.volumeToUseLitres, avail))
+    const updated = [...selectedBatches]
+    updated[index] = {
+      ...sb,
+      batch: updatedBatch,
+      volumeToUseLitres: v,
+      lal: (v * updatedBatch.abvPercent) / 100
+    }
+    setSelectedBatches(updated)
   }
 
   function removeDilutionPhase(index: number) {
@@ -166,6 +261,20 @@ function NewBottlingRunContent() {
 
   function removeBottleEntry(index: number) {
     setBottleEntries(bottleEntries.filter((_, i) => i !== index))
+  }
+
+  function balanceBottleEntries() {
+    const final = summary.finalVolume_L || 0
+    const planned = bottleEntries.reduce((s, e) => s + (e.volumeBottled_L || 0), 0)
+    if (final <= 0 || planned <= final) return
+    const ratio = final / planned
+    const updated = bottleEntries.map(e => {
+      const q = Math.floor((e.quantity || 0) * ratio)
+      const volumeBottled_L = (q * e.size_ml) / 1000
+      const lalBottled = (volumeBottled_L * summary.finalABV) / 100
+      return { ...e, quantity: q, volumeBottled_L, lalBottled }
+    })
+    setBottleEntries(updated)
   }
 
   function createManualBatch() {
@@ -193,7 +302,7 @@ function NewBottlingRunContent() {
       lal: manualBatch.lal
     }
 
-    setSelectedBatches([selectedBatch])
+    setSelectedBatches(prev => [...prev, selectedBatch])
     setManualMode(false)
 
     // Auto-set product name if not set
@@ -216,6 +325,8 @@ function NewBottlingRunContent() {
         dilutionPhases,
         bottleEntries,
         summary,
+        isTest: isTestRun,
+        notes: isTestRun ? 'TEST RUN' : undefined,
       }
 
       const res = await fetch('/api/production/bottling-runs', {
@@ -240,6 +351,8 @@ function NewBottlingRunContent() {
   // Calculate mode and summary
   const mode = getBottlingMode(selectedBatches.map(sb => sb.batch))
   const summary = calculateBottlingSummary(selectedBatches, dilutionPhases, bottleEntries)
+  const selectedInputVolume = selectedBatches.reduce((s, sb) => s + (sb.volumeToUseLitres || 0), 0)
+  const plannedBottleVolume = bottleEntries.reduce((s, e) => s + (e.volumeBottled_L || 0), 0)
 
   // Filter available batches
   const filteredBatches = allBatches.filter(batch => {
@@ -317,6 +430,17 @@ function NewBottlingRunContent() {
               <p className="text-sm text-[#777777] mt-1">
                 Select batches from available liquid in tanks
               </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="flex items-center gap-2 text-sm text-[#000000]">
+                <input
+                  type="checkbox"
+                  checked={isTestRun}
+                  onChange={(e) => setIsTestRun(e.target.checked)}
+                  className="h-4 w-4 rounded border-[#E5E5E5]"
+                />
+                Test run (bypass stock checks)
+              </label>
             </div>
             <Link
               href="/dashboard/production"
@@ -486,9 +610,9 @@ function NewBottlingRunContent() {
                 Available Batches ({filteredBatches.length})
               </h3>
               <div className="space-y-3 max-h-[600px] overflow-y-auto pr-2">
-                {filteredBatches.map((batch) => (
+                {filteredBatches.map((batch, idx) => (
                   <BatchCard
-                    key={batch.id}
+                    key={`${batch.id}-${batch.batchCode}-${batch.tankCode || batch.distilledAt || ''}-${idx}`}
                     batch={batch}
                     onAdd={() => addBatchToSelection(batch)}
                     showAddButton
@@ -511,13 +635,114 @@ function NewBottlingRunContent() {
               </h3>
               <div className="space-y-3">
                 {selectedBatches.map((sb, index) => (
-                  <BatchCard
-                    key={sb.batch.id}
-                    batch={sb.batch}
-                    onRemove={() => removeBatchFromSelection(index)}
-                    isSelected
-                    showRemoveButton
-                  />
+                  <div key={`${sb.batch.id}-${sb.batch.tankCode || sb.batch.distilledAt || index}`} className="space-y-2">
+                    <BatchCard
+                      batch={sb.batch}
+                      onRemove={() => removeBatchFromSelection(index)}
+                      isSelected
+                      showRemoveButton
+                    />
+                    <div className="rounded-lg border border-[#E5E5E5] bg-white p-3">
+                      <div className="grid grid-cols-4 gap-4 items-end">
+                        <div>
+                          <label className="block text-xs text-[#777777] mb-1">
+                            Use Volume (L)
+                          </label>
+                          <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            max={sb.batch.volumeLitres}
+                            value={sb.volumeToUseLitres}
+                            onChange={(e) => {
+                              const val = parseFloat(e.target.value)
+                              updateSelectedBatchVolume(index, isNaN(val) ? 0 : val)
+                            }}
+                            className="
+                              w-full px-3 py-2 rounded-md
+                              border border-[#E5E5E5]
+                              text-sm text-[#000000]
+                              focus:outline-none focus:ring-2 focus:ring-[#A65E2E] focus:border-transparent
+                            "
+                            placeholder="0.0"
+                          />
+                          <div className="mt-2 flex gap-2">
+                            <button
+                              onClick={() => updateSelectedBatchVolume(index, sb.batch.volumeLitres * 0.25)}
+                              className="px-2 py-1 rounded-md border border-[#E5E5E5] text-xs text-[#777777] hover:bg-[#E5E5E5]"
+                              type="button"
+                            >
+                              25%
+                            </button>
+                            <button
+                              onClick={() => updateSelectedBatchVolume(index, sb.batch.volumeLitres * 0.5)}
+                              className="px-2 py-1 rounded-md border border-[#E5E5E5] text-xs text-[#777777] hover:bg-[#E5E5E5]"
+                              type="button"
+                            >
+                              50%
+                            </button>
+                            <button
+                              onClick={() => updateSelectedBatchVolume(index, sb.batch.volumeLitres)}
+                              className="px-2 py-1 rounded-md border border-[#E5E5E5] text-xs text-[#777777] hover:bg-[#E5E5E5]"
+                              type="button"
+                            >
+                              100%
+                            </button>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="block text-xs text-[#777777] mb-1">
+                            ABV (%)
+                          </label>
+                          <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            value={sb.batch.abvPercent}
+                            onChange={(e) => {
+                              const val = parseFloat(e.target.value)
+                              updateSelectedBatchAbv(index, isNaN(val) ? 0 : val)
+                            }}
+                            className="
+                              w-full px-3 py-2 rounded-md
+                              border border-[#E5E5E5]
+                              text-sm text-[#000000]
+                              focus:outline-none focus:ring-2 focus:ring-[#A65E2E] focus:border-transparent
+                            "
+                            placeholder="0.0"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs text-[#777777] mb-1">
+                            Available Volume (L)
+                          </label>
+                          <input
+                            type="number"
+                            step="0.1"
+                            min="0"
+                            value={sb.batch.volumeLitres}
+                            onChange={(e) => {
+                              const val = parseFloat(e.target.value)
+                              updateSelectedBatchAvailableVolume(index, isNaN(val) ? 0 : val)
+                            }}
+                            className="
+                              w-full px-3 py-2 rounded-md
+                              border border-[#E5E5E5]
+                              text-sm text-[#000000]
+                              focus:outline-none focus:ring-2 focus:ring-[#A65E2E] focus:border-transparent
+                            "
+                            placeholder="0.0"
+                          />
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xs text-[#777777] mb-1">Selected LAL</p>
+                          <p className="text-sm font-medium text-[#000000]">
+                            {sb.lal.toFixed(2)} L
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
                 {selectedBatches.length === 0 && (
                   <div className="rounded-lg border-2 border-dashed border-[#E5E5E5] p-8 text-center">
@@ -555,6 +780,16 @@ function NewBottlingRunContent() {
             <p className="text-xs text-[#777777] mt-2">
               Mode: <span className="font-medium text-[#A65E2E]">{mode === 'blend' ? 'Blend Mode (Rum/Cane Spirit)' : 'Simple Bottling (Gin/Vodka)'}</span>
             </p>
+            {productName && (
+              <div className="mt-3">
+                <Link
+                  href={`/dashboard/inventory?category=Spirits&search=${encodeURIComponent(productName)}`}
+                  className="inline-flex items-center px-3 py-2 rounded-md border border-[#E5E5E5] text-[#777777] hover:bg-[#E5E5E5] transition-colors text-sm"
+                >
+                  Edit Product Details
+                </Link>
+              </div>
+            )}
           </div>
         )}
 
@@ -627,6 +862,42 @@ function NewBottlingRunContent() {
                   + 1L
                 </button>
               </div>
+            </div>
+            <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                <div>
+                  <p className="text-amber-700">Selected Input</p>
+                  <p className="font-semibold text-amber-900">{selectedInputVolume.toFixed(1)} L</p>
+                </div>
+                <div>
+                  <p className="text-amber-700">Water Added</p>
+                  <p className="font-semibold text-amber-900">{summary.totalWaterAdded_L.toFixed(1)} L</p>
+                </div>
+                <div>
+                  <p className="text-amber-700">Final Volume</p>
+                  <p className="font-semibold text-amber-900">{summary.finalVolume_L.toFixed(1)} L</p>
+                </div>
+                <div>
+                  <p className="text-amber-700">Planned Bottles</p>
+                  <p className="font-semibold text-amber-900">{plannedBottleVolume.toFixed(1)} L</p>
+                </div>
+              </div>
+              {plannedBottleVolume > summary.finalVolume_L && (
+                <p className="mt-2 text-xs text-red-700">
+                  Planned bottled volume exceeds final volume. Reduce quantities.
+                </p>
+              )}
+              {plannedBottleVolume > summary.finalVolume_L && (
+                <div className="mt-3">
+                  <button
+                    type="button"
+                    onClick={balanceBottleEntries}
+                    className="px-3 py-2 rounded-md bg-amber-700 hover:bg-amber-800 text-white text-sm font-medium transition-colors"
+                  >
+                    Balance to Final Volume
+                  </button>
+                </div>
+              )}
             </div>
 
             {bottleEntries.length > 0 ? (

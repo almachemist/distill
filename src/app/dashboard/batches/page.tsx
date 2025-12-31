@@ -2,12 +2,23 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import {
-  buildGinBatchFallback,
-  type GinBatchSummary
-} from "@/modules/production/services/batch-fallback.service"
 import { DetailPanel } from "./DetailPanel"
 
+type GinBatchSummary = {
+  run_id: string
+  batch_id?: string
+  recipe?: string | null
+  date?: string | null
+  still_used?: string | null
+  updated_at?: string | null
+  status?: string | null
+  hearts_volume_l?: number | null
+  hearts_abv_percent?: number | null
+  hearts_lal?: number | null
+  charge_total_volume_l?: number | null
+  charge_total_abv_percent?: number | null
+  charge_total_lal?: number | null
+}
 type GinBatchRecord = GinBatchSummary & Record<string, any>
 
 const GIN_CATEGORIES = [
@@ -69,6 +80,7 @@ function resolveGinCategory(batch: GinBatchRecord): string {
   
   if (value.includes("vodka")) return "vodka"
   if (value.includes("ethanol") || value.includes("liq")) return "ethanol"
+  if (value.includes("cane spirit") || value.includes("cane")) return "cane-spirit"
   if (value.includes("trial")) return "trial"
   return "other"
 }
@@ -193,8 +205,8 @@ export default function BatchesPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [ginBatches, setGinBatches] = useState<GinBatchRecord[]>(() => buildGinBatchFallback())
-  const [activeCategory, setActiveCategory] = useState<string>("dry-season")
+  const [ginBatches, setGinBatches] = useState<GinBatchRecord[]>([])
+  const [activeCategory, setActiveCategory] = useState<string>("rainforest")
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [batchListCollapsed, setBatchListCollapsed] = useState(false)
@@ -215,7 +227,14 @@ export default function BatchesPage() {
         }
 
         const payload: { gin: GinBatchRecord[]; rum: any[] } = await response.json()
-        const batches = (payload.gin?.length ?? 0) > 0 ? payload.gin : buildGinBatchFallback()
+        let batches = payload.gin ?? []
+        if ((batches?.length ?? 0) === 0) {
+          const fbRes = await fetch("/api/fallback/gin-batches", { signal: controller.signal })
+          if (fbRes.ok) {
+            const fb = await fbRes.json()
+            batches = Array.isArray(fb) ? fb : []
+          }
+        }
         setGinBatches(batches)
         
         // Auto-select first batch if none selected
@@ -362,4 +381,3 @@ export default function BatchesPage() {
     </div>
   )
 }
-

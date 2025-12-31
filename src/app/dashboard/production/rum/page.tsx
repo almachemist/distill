@@ -2,9 +2,22 @@
 
 import { useEffect, useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { buildRumBatchFallback, type RumBatchSummary } from "@/modules/production/services/batch-fallback.service"
 import { RumDetailPanel } from "./RumDetailPanel"
 
+type RumBatchSummary = {
+  batch_id: string
+  product_name: string | null
+  product_type?: string | null
+  status?: string | null
+  still_used: string | null
+  fermentation_start_date: string | null
+  distillation_date: string | null
+  hearts_volume_l: number | null
+  hearts_abv_percent: number | null
+  hearts_lal: number | null
+  fill_date?: string | null
+  cask_number: string | null
+}
 type RumBatchRecord = RumBatchSummary & Record<string, any>
 
 function formatDate(value: string | null | undefined) {
@@ -31,13 +44,23 @@ const RumCard: React.FC<{
   onSelect: () => void
   isSelected: boolean
 }> = ({ run, onSelect, isSelected }) => {
+  const router = useRouter()
   const heartsVolume = run.hearts_volume_l || 0
   const heartsABV = run.hearts_abv_percent || 0
   const heartsLAL = run.hearts_lal || (heartsVolume * heartsABV / 100)
+  const productName = (run.product_name || 'Rum').replace(/\s+—\s+.*/g, '').trim()
   
   return (
-    <button
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onSelect}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          onSelect()
+        }
+      }}
       className={`bg-white border rounded-xl p-4 flex flex-col gap-3 transition text-left w-full ${
         isSelected ? 'border-amber-700 shadow-md' : 'border-stone-200 hover:border-amber-700'
       }`}
@@ -71,7 +94,23 @@ const RumCard: React.FC<{
         <p>Still: {run.still_used || "Roberta"}</p>
         {run.cask_number && <p>Cask: {run.cask_number}</p>}
       </div>
-    </button>
+      <div className="pt-2">
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            const params = new URLSearchParams({
+              spiritType: productName,
+              volume: String(heartsVolume || 0),
+              bottleSize: String(750),
+            })
+            router.push(`/dashboard/production/bottling?${params.toString()}`)
+          }}
+          className="inline-flex items-center rounded-md bg-amber-600 text-white text-xs font-medium px-3 py-1.5 hover:bg-amber-700 transition-colors"
+        >
+          Bottle
+        </button>
+      </div>
+    </div>
   )
 }
 
@@ -80,7 +119,7 @@ function RumPageContent() {
   const searchParams = useSearchParams()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [rumBatches, setRumBatches] = useState<RumBatchRecord[]>(() => buildRumBatchFallback())
+  const [rumBatches, setRumBatches] = useState<RumBatchRecord[]>([])
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
   const [batchListCollapsed, setBatchListCollapsed] = useState(false)
   const [statusFilter, setStatusFilter] = useState<'all' | 'ongoing' | 'completed'>('all')
@@ -109,7 +148,14 @@ function RumPageContent() {
         }
 
         const payload: { gin: any[]; rum: RumBatchRecord[] } = await response.json()
-        const batches = (payload.rum?.length ?? 0) > 0 ? payload.rum : buildRumBatchFallback()
+        let batches = payload.rum ?? []
+        if ((batches?.length ?? 0) === 0) {
+          const fbRes = await fetch("/api/fallback/rum-batches", { signal: controller.signal })
+          if (fbRes.ok) {
+            const fb = await fbRes.json()
+            batches = Array.isArray(fb) ? fb : []
+          }
+        }
         setRumBatches(batches)
 
         // Auto-select first batch if none selected
@@ -159,7 +205,14 @@ function RumPageContent() {
       const response = await fetch("/api/production/batches")
       if (response.ok) {
         const payload: { gin: any[]; rum: RumBatchRecord[] } = await response.json()
-        const batches = (payload.rum?.length ?? 0) > 0 ? payload.rum : buildRumBatchFallback()
+        let batches = payload.rum ?? []
+        if ((batches?.length ?? 0) === 0) {
+          const fbRes = await fetch("/api/fallback/rum-batches")
+          if (fbRes.ok) {
+            const fb = await fbRes.json()
+            batches = Array.isArray(fb) ? fb : []
+          }
+        }
         setRumBatches(batches)
         setSelectedRunId(null)
       }
