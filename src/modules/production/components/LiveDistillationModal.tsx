@@ -306,10 +306,11 @@ export default function LiveDistillationModal({
 
                     {/* Phase Notes */}
                     <div className="mb-3">
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor={`phase_notes_${phase.id}`} className="block text-sm font-medium text-gray-700 mb-1">
                         Phase Notes:
                       </label>
                       <textarea
+                        id={`phase_notes_${phase.id}`}
                         value={phase.notes}
                         onChange={(e) => updatePhaseNotes(phase.id, e.target.value)}
                         placeholder={`Add observations for ${phase.name.toLowerCase()}...`}
@@ -344,8 +345,9 @@ export default function LiveDistillationModal({
                 
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Temperature (°C)</label>
+                    <label htmlFor="metrics_temperature" className="block text-sm font-medium text-gray-700 mb-1">Temperature (°C)</label>
                     <input
+                      id="metrics_temperature"
                       type="number"
                       step="0.1"
                       value={currentMetrics.temperature}
@@ -356,8 +358,9 @@ export default function LiveDistillationModal({
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Pressure (bar)</label>
+                    <label htmlFor="metrics_pressure" className="block text-sm font-medium text-gray-700 mb-1">Pressure (bar)</label>
                     <input
+                      id="metrics_pressure"
                       type="number"
                       step="0.1"
                       value={currentMetrics.pressure}
@@ -368,8 +371,9 @@ export default function LiveDistillationModal({
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
+                    <label htmlFor="metrics_abv_percent" className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
                     <input
+                      id="metrics_abv_percent"
                       type="number"
                       step="0.1"
                       value={currentMetrics.abv}
@@ -380,8 +384,9 @@ export default function LiveDistillationModal({
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
+                    <label htmlFor="metrics_volume_l" className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
                     <input
+                      id="metrics_volume_l"
                       type="number"
                       step="0.1"
                       value={currentMetrics.volume}
@@ -392,8 +397,9 @@ export default function LiveDistillationModal({
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Flow Rate (L/h)</label>
+                    <label htmlFor="metrics_flow_rate_lh" className="block text-sm font-medium text-gray-700 mb-1">Flow Rate (L/h)</label>
                     <input
+                      id="metrics_flow_rate_lh"
                       type="number"
                       step="0.1"
                       value={currentMetrics.flowRate}

@@ -5,6 +5,15 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
+function log(level: 'info' | 'error', message: string, meta?: Record<string, any>) {
+  const entry = { level, message, time: new Date().toISOString(), ...(meta || {}) }
+  if (level === 'error') console.error(JSON.stringify(entry))
+  else console.log(JSON.stringify(entry))
+}
+function getReqId(req: NextRequest) {
+  return req.headers.get('x-request-id') || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
+}
+
 type NoteRow = {
   id?: string
   organization_id?: string
@@ -50,9 +59,10 @@ export async function GET(request: NextRequest) {
       .maybeSingle()
     if (error) throw error
     const row = data as NoteRow | null
+    log('info', 'product_notes_fetch', { organization_id, productName: name, found: !!row, reqId: getReqId(request) })
     return NextResponse.json({ productName: name, notes: row?.notes || '', updated_at: row?.updated_at || null }, { status: 200 })
   } catch (error) {
-    console.error('GET /api/products/notes error:', error)
+    log('error', 'product_notes_fetch_error', { error: (error as any)?.message, reqId: getReqId(request) })
     return NextResponse.json({ productName: '', notes: '', updated_at: null }, { status: 200 })
   }
 }
@@ -81,9 +91,10 @@ export async function POST(request: NextRequest) {
       .select('*')
       .maybeSingle()
     if (error) throw error
+    log('info', 'product_notes_saved', { organization_id, productName, reqId: getReqId(request) })
     return NextResponse.json({ ok: true, productName, notes: (data as NoteRow)?.notes || notes }, { status: 200 })
   } catch (error) {
-    console.error('POST /api/products/notes error:', error)
+    log('error', 'product_notes_save_error', { error: (error as any)?.message, reqId: getReqId(request) })
     return NextResponse.json({ error: 'Failed to save notes' }, { status: 500 })
   }
 }

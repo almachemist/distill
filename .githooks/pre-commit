@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Guard: Do not allow deletions in batch card data files
+FILES="
+src/modules/production/data/rainforest.json
+src/modules/production/data/dryseason.json
+src/modules/production/data/wetseason.json
+src/modules/production/data/Navy.json
+src/modules/production/data/signature-gin-batches.json
+"
+
+for f in $FILES; do
+  if git diff --cached --no-ext-diff --unified=0 -- "$f" | grep -E '^-([^-]|$)' >/dev/null 2>&1; then
+    echo "Commit blocked: deletions detected in $f"
+    echo "Rule: Never delete any content from batch cards data files."
+    exit 1
+  fi
+done
+
+exit 0
+

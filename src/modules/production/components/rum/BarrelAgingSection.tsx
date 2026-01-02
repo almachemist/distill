@@ -56,11 +56,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
         <h3 className="text-lg font-semibold text-blue-900 mb-4">Batch Tracking</h3>
 
         <div>
-          <label className="block text-sm font-medium text-blue-800 mb-2">
+          <label htmlFor="batch_name_display" className="block text-sm font-medium text-blue-800 mb-2">
             Batch Name
           </label>
           <input
             type="text"
+            id="batch_name_display"
             value={batch.batch_name ?? ''}
             disabled
             className="w-full px-3 py-2 border border-blue-300 rounded-md bg-white text-stone-900"
@@ -77,11 +78,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
         
         <div className="grid grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="fill_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               Final ABV (%)
             </label>
             <input
               type="text"
+              id="fill_abv_percent"
               value={batch.fill_abv_percent ?? batch.final_abv_after_dilution_percent ?? ''}
               onChange={(e) => updateField('fill_abv_percent', parseToNumber(e.target.value))}
               onBlur={(e) => {
@@ -102,11 +104,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="volume_filled_l" className="block text-sm font-medium text-stone-700 mb-2">
               Final Volume (L)
             </label>
             <input
               type="text"
+              id="volume_filled_l"
               value={batch.volume_filled_l ?? batch.final_volume_after_dilution_l ?? ''}
               onChange={(e) => updateField('volume_filled_l', parseToNumber(e.target.value))}
               onBlur={(e) => {
@@ -126,12 +129,13 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="lal_filled" className="block text-sm font-medium text-stone-700 mb-2">
               LAL Filled
             </label>
             <input
               type="number"
               step="0.01"
+              id="lal_filled"
               value={batch.lal_filled ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -149,11 +153,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
         
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="fill_date" className="block text-sm font-medium text-stone-700 mb-2">
               Fill Date
             </label>
             <input
               type="date"
+              id="fill_date"
               value={batch.fill_date ?? ''}
               onChange={(e) => updateField('fill_date', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -161,11 +166,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="cask_number" className="block text-sm font-medium text-stone-700 mb-2">
               Cask Number
             </label>
             <input
               type="text"
+              id="cask_number"
               value={batch.cask_number ?? ''}
               onChange={(e) => updateField('cask_number', e.target.value)}
               placeholder="e.g., CASK-001"
@@ -174,11 +180,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="cask_type" className="block text-sm font-medium text-stone-700 mb-2">
               Cask Type
             </label>
             <input
               type="text"
+              id="cask_type"
               value={batch.cask_type ?? ''}
               onChange={(e) => updateField('cask_type', e.target.value)}
               placeholder="e.g., Ex-Bourbon, Ex-Sherry"
@@ -187,12 +194,13 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="cask_size_l" className="block text-sm font-medium text-stone-700 mb-2">
               Cask Size (L)
             </label>
             <input
               type="number"
               step="1"
+              id="cask_size_l"
               value={batch.cask_size_l ?? ''}
               onChange={(e) => updateField('cask_size_l', parseInt(e.target.value) || undefined)}
               placeholder="0"
@@ -201,11 +209,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="maturation_location" className="block text-sm font-medium text-stone-700 mb-2">
               Maturation Location
             </label>
             <input
               type="text"
+              id="maturation_location"
               value={batch.maturation_location ?? ''}
               onChange={(e) => updateField('maturation_location', e.target.value)}
               placeholder="e.g., Warehouse A, Rack 3"
@@ -214,11 +223,12 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="expected_bottling_date" className="block text-sm font-medium text-stone-700 mb-2">
               Expected Bottling Date
             </label>
             <input
               type="date"
+              id="expected_bottling_date"
               value={batch.expected_bottling_date ?? ''}
               onChange={(e) => updateField('expected_bottling_date', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -229,10 +239,11 @@ export function BarrelAgingSection({ batch, updateField }: BarrelAgingSectionPro
 
       {/* Notes */}
       <div className="border-t border-stone-200 pt-6">
-        <label className="block text-sm font-medium text-stone-700 mb-2">
+        <label htmlFor="barrel_aging_notes" className="block text-sm font-medium text-stone-700 mb-2">
           Barrel Aging Notes
         </label>
         <textarea
+          id="barrel_aging_notes"
           value={batch.barrel_aging_notes ?? ''}
           onChange={(e) => updateField('barrel_aging_notes', e.target.value)}
           rows={4}

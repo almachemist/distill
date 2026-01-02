@@ -319,10 +319,11 @@ function DilutionContent() {
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">
+                  <label htmlFor={`step_${index}_new_make_volume`} className="block text-xs font-medium text-graphite/70 mb-1">
                     New Make Volume (L)
                   </label>
                   <input
+                    id={`step_${index}_new_make_volume`}
                     type="number"
                     step="0.1"
                     value={step.newMakeVolume}
@@ -333,10 +334,11 @@ function DilutionContent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">
+                  <label htmlFor={`step_${index}_current_abv`} className="block text-xs font-medium text-graphite/70 mb-1">
                     Current ABV (%)
                   </label>
                   <input
+                    id={`step_${index}_current_abv`}
                     type="number"
                     step="0.1"
                     value={step.actualABV.toFixed(2)}
@@ -346,10 +348,11 @@ function DilutionContent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">
+                  <label htmlFor={`step_${index}_target_abv`} className="block text-xs font-medium text-graphite/70 mb-1">
                     Target ABV (%)
                   </label>
                   <input
+                    id={`step_${index}_target_abv`}
                     type="number"
                     step="0.1"
                     value={step.targetABV}
@@ -359,9 +362,9 @@ function DilutionContent() {
                 </div>
 
                 <div className="bg-copper-10 p-3 rounded-lg">
-                  <label className="block text-xs font-medium text-copper mb-1">
+                  <p className="block text-xs font-medium text-copper mb-1">
                     Water Needed (L)
-                  </label>
+                  </p>
                   <div className="text-lg font-bold text-copper">
                     {calculateWaterNeeded(step)}
                   </div>
@@ -370,10 +373,11 @@ function DilutionContent() {
 
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">
+                  <label htmlFor={`step_${index}_water_added`} className="block text-xs font-medium text-graphite/70 mb-1">
                     Water Added (L)
                   </label>
                   <input
+                    id={`step_${index}_water_added`}
                     type="number"
                     step="0.1"
                     value={step.waterAdded}
@@ -383,10 +387,11 @@ function DilutionContent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">
+                  <label htmlFor={`step_${index}_ethanol_added`} className="block text-xs font-medium text-graphite/70 mb-1">
                     Ethanol Added (L) <span className="text-xs">(if needed)</span>
                   </label>
                   <input
+                    id={`step_${index}_ethanol_added`}
                     type="number"
                     step="0.1"
                     value={step.ethanolAdded}
@@ -396,10 +401,11 @@ function DilutionContent() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">
+                  <label htmlFor={`step_${index}_final_volume`} className="block text-xs font-medium text-graphite/70 mb-1">
                     Final Volume (L)
                   </label>
                   <input
+                    id={`step_${index}_final_volume`}
                     type="number"
                     value={step.finalVolume.toFixed(2)}
                     readOnly
@@ -409,10 +415,11 @@ function DilutionContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-graphite/70 mb-1">
+                <label htmlFor={`step_${index}_notes`} className="block text-xs font-medium text-graphite/70 mb-1">
                   Notes
                 </label>
                 <textarea
+                  id={`step_${index}_notes`}
                   value={step.notes}
                   onChange={(e) => updateDilutionStep(index, 'notes', e.target.value)}
                   className="w-full px-3 py-2 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -460,10 +467,11 @@ function DilutionContent() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="bottling_date" className="block text-sm font-medium text-graphite mb-2">
                 Bottling Date
               </label>
               <input
+                id="bottling_date"
                 type="date"
                 value={finalOutput.bottlingDate}
                 onChange={(e) => setFinalOutput({ ...finalOutput, bottlingDate: e.target.value })}
@@ -473,10 +481,11 @@ function DilutionContent() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="final_notes" className="block text-sm font-medium text-graphite mb-2">
               Final Notes
             </label>
             <textarea
+              id="final_notes"
               value={finalOutput.notes}
               onChange={(e) => setFinalOutput({ ...finalOutput, notes: e.target.value })}
               className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"

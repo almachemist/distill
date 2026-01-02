@@ -194,10 +194,11 @@ function BotanicalSteepingContent() {
           {/* Time & Temperature */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="steeping_date" className="block text-sm font-medium text-graphite mb-2">
                 Date
               </label>
               <input
+                id="steeping_date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -205,10 +206,11 @@ function BotanicalSteepingContent() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="steeping_temp" className="block text-sm font-medium text-graphite mb-2">
                 Temperature (°C)
               </label>
               <input
+                id="steeping_temp"
                 type="number"
                 value={temperature}
                 onChange={(e) => setTemperature(e.target.value)}
@@ -220,10 +222,11 @@ function BotanicalSteepingContent() {
 
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="steeping_start_time" className="block text-sm font-medium text-graphite mb-2">
                 Start Time
               </label>
               <input
+                id="steeping_start_time"
                 type="time"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
@@ -231,10 +234,11 @@ function BotanicalSteepingContent() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="steeping_end_time" className="block text-sm font-medium text-graphite mb-2">
                 End Time
               </label>
               <input
+                id="steeping_end_time"
                 type="time"
                 value={endTime}
                 onChange={(e) => setEndTime(e.target.value)}
@@ -242,10 +246,10 @@ function BotanicalSteepingContent() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <div className="block text-sm font-medium text-graphite mb-2">
                 Duration
-              </label>
-              <div className="w-full px-4 py-3 bg-beige border border-copper-15 rounded-lg text-graphite font-medium">
+              </div>
+              <div className="w-full px-4 py-3 bg-beige border border-copper-15 rounded-lg text-graphite font-medium" aria-live="polite">
                 {calculateDuration()}
               </div>
             </div>

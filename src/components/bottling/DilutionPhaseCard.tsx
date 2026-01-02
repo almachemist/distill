@@ -35,10 +35,11 @@ export default function DilutionPhaseCard({
       <div className="space-y-3">
         {/* Date */}
         <div>
-          <label className="block text-xs text-[#777777] mb-1">
+          <label htmlFor={`dilution_phase_${phaseNumber}_date`} className="block text-xs text-[#777777] mb-1">
             Date
           </label>
           <input
+            id={`dilution_phase_${phaseNumber}_date`}
             type="date"
             value={phase.date}
             onChange={(e) => onUpdate({ ...phase, date: e.target.value })}
@@ -53,10 +54,11 @@ export default function DilutionPhaseCard({
 
         {/* Water Added */}
         <div>
-          <label className="block text-xs text-[#777777] mb-1">
+          <label htmlFor={`dilution_phase_${phaseNumber}_water_added_L`} className="block text-xs text-[#777777] mb-1">
             Water Added (L)
           </label>
           <input
+            id={`dilution_phase_${phaseNumber}_water_added_L`}
             type="number"
             step="0.1"
             min="0"
@@ -77,10 +79,11 @@ export default function DilutionPhaseCard({
 
         {/* Notes */}
         <div>
-          <label className="block text-xs text-[#777777] mb-1">
+          <label htmlFor={`dilution_phase_${phaseNumber}_notes`} className="block text-xs text-[#777777] mb-1">
             Notes (optional)
           </label>
           <textarea
+            id={`dilution_phase_${phaseNumber}_notes`}
             value={phase.notes || ''}
             onChange={(e) => onUpdate({ ...phase, notes: e.target.value })}
             rows={2}
@@ -98,4 +101,3 @@ export default function DilutionPhaseCard({
     </div>
   )
 }
-

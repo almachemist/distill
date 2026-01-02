@@ -520,8 +520,9 @@ function RumDistillationContent() {
             <h3 className="font-semibold text-copper mb-3">Hearts (Main Cut)</h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Time</label>
+                <label htmlFor="hearts_time" className="block text-sm font-medium text-graphite mb-2">Time</label>
                 <input
+                  id="hearts_time"
                   type="time"
                   value={heartsTime}
                   onChange={(e) => setHeartsTime(e.target.value)}
@@ -530,8 +531,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Volume (L)</label>
+                <label htmlFor="hearts_volume" className="block text-sm font-medium text-graphite mb-2">Volume (L)</label>
                 <input
+                  id="hearts_volume"
                   type="number"
                   step="0.1"
                   value={heartsVolume}
@@ -541,8 +543,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">ABV (%)</label>
+                <label htmlFor="hearts_abv" className="block text-sm font-medium text-graphite mb-2">ABV (%)</label>
                 <input
+                  id="hearts_abv"
                   type="number"
                   step="0.1"
                   value={heartsABV}
@@ -552,8 +555,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">LAL</label>
+                <label htmlFor="hearts_lal" className="block text-sm font-medium text-graphite mb-2">LAL</label>
                 <input
+                  id="hearts_lal"
                   type="number"
                   value={heartsLAL.toFixed(2)}
                   readOnly
@@ -562,8 +566,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Notes</label>
+                <label htmlFor="hearts_notes" className="block text-sm font-medium text-graphite mb-2">Notes</label>
                 <input
+                  id="hearts_notes"
                   type="text"
                   value={heartsNotes}
                   onChange={(e) => setHeartsNotes(e.target.value)}
@@ -590,8 +595,9 @@ function RumDistillationContent() {
               {tailsSegments.map((segment, index) => (
                 <div key={index} className="grid grid-cols-2 md:grid-cols-6 gap-3 p-3 bg-beige rounded-lg">
                   <div>
-                    <label className="block text-xs font-medium text-graphite mb-1">Time</label>
+                    <label htmlFor={`tails_${index}_time`} className="block text-xs font-medium text-graphite mb-1">Time</label>
                     <input
+                      id={`tails_${index}_time`}
                       type="time"
                       value={segment.time}
                       onChange={(e) => updateTailsSegment(index, 'time', e.target.value)}
@@ -600,8 +606,9 @@ function RumDistillationContent() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-graphite mb-1">Volume (L)</label>
+                    <label htmlFor={`tails_${index}_volume`} className="block text-xs font-medium text-graphite mb-1">Volume (L)</label>
                     <input
+                      id={`tails_${index}_volume`}
                       type="number"
                       step="0.1"
                       value={segment.volume}
@@ -611,8 +618,9 @@ function RumDistillationContent() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-graphite mb-1">ABV (%)</label>
+                    <label htmlFor={`tails_${index}_abv`} className="block text-xs font-medium text-graphite mb-1">ABV (%)</label>
                     <input
+                      id={`tails_${index}_abv`}
                       type="number"
                       step="0.1"
                       value={segment.abv}
@@ -622,8 +630,9 @@ function RumDistillationContent() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-graphite mb-1">LAL</label>
+                    <label htmlFor={`tails_${index}_lal`} className="block text-xs font-medium text-graphite mb-1">LAL</label>
                     <input
+                      id={`tails_${index}_lal`}
                       type="number"
                       value={segment.lal.toFixed(2)}
                       readOnly
@@ -632,8 +641,9 @@ function RumDistillationContent() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-graphite mb-1">Notes</label>
+                    <label htmlFor={`tails_${index}_notes`} className="block text-xs font-medium text-graphite mb-1">Notes</label>
                     <input
+                      id={`tails_${index}_notes`}
                       type="text"
                       value={segment.notes}
                       onChange={(e) => updateTailsSegment(index, 'notes', e.target.value)}

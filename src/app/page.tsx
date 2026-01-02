@@ -8,8 +8,8 @@ export default function Home() {
       <nav className="container mx-auto px-6 py-6">
         <div className="flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <Image src="/logo.png" alt="Distil" width={40} height={40} className="rounded-lg" />
-            <span className="text-2xl font-bold text-gray-900">Distil</span>
+            <Image src="/logo.png" alt="Distil" width={20} height={20} className="rounded-lg" />
+            <span className="text-lg font-bold text-gray-900">Distil</span>
           </div>
           <div className="flex space-x-4">
             <Link 
@@ -30,28 +30,32 @@ export default function Home() {
 
       {/* Hero Section */}
       <main className="container mx-auto px-6 py-20">
-        <div className="text-center max-w-4xl mx-auto">
-          <Image src="/distil_log.jpg" alt="Distil Hero" width={1200} height={600} className="w-full rounded-xl mb-10 object-cover" />
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-            Modern Distillery Management
-          </h1>
-          <p className="text-xl text-gray-600 mb-8">
-            Track barrels, manage inventory, monitor production, and ensure compliance 
-            with a comprehensive system built for craft distilleries.
-          </p>
-          <div className="flex justify-center space-x-4">
-            <Link 
-              href="/auth/signup"
-              className="px-8 py-3 bg-[#894128] text-white rounded-lg hover:bg-[#743722] font-medium text-lg"
-            >
-              Start Free Trial
-            </Link>
-            <Link 
-              href="#features"
-              className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 font-medium text-lg"
-            >
-              Learn More
-            </Link>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="flex justify-center md:justify-start">
+            <Image src="/distil_log.jpg" alt="Distil Hero" width={640} height={640} className="rounded-xl object-contain w-full max-w-sm md:max-w-md" />
+          </div>
+          <div>
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              Modern Distillery Management
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              Track barrels, manage inventory, monitor production, and ensure compliance 
+              with a comprehensive system built for craft distilleries.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link 
+                href="/auth/signup"
+                className="px-8 py-3 bg-[#894128] text-white rounded-lg hover:bg-[#743722] font-medium text-lg"
+              >
+                Start Free Trial
+              </Link>
+              <Link 
+                href="#features"
+                className="px-8 py-3 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 font-medium text-lg"
+              >
+                Learn More
+              </Link>
+            </div>
           </div>
         </div>
 

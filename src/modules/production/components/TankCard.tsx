@@ -51,18 +51,18 @@ export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onComb
   const showBarrel = (currentVolume || 0) > 0 && !!tank.product
 
   return (
-    <div className={`rounded-xl border-2 ${colorClasses[statusColorKey as keyof typeof colorClasses]} p-6 shadow-sm hover:shadow-md transition`}>
+    <div className="rounded-xl border border-copper-30 bg-white p-6 shadow-soft hover:shadow-md transition">
       <div className="flex items-start justify-between mb-4">
         <div>
           <h3 className="text-lg font-bold text-gray-900">{tankName}</h3>
           <p className="text-sm text-gray-600">{tank.tank_id}</p>
           {tank.has_lid === false && (
-            <span className="inline-block mt-1 px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs rounded">
+            <span className="inline-block mt-1 px-2 py-0.5 bg-copper-10 text-graphite text-xs rounded">
               No Lid
             </span>
           )}
         </div>
-        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${colorClasses[statusColorKey as keyof typeof colorClasses]}`}>
+        <span className="px-3 py-1 rounded-full text-xs font-semibold bg-copper-5 text-graphite border border-copper">
           {statusLabel}
         </span>
       </div>
@@ -99,17 +99,7 @@ export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onComb
               </span>
             </div>
             <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
-              <div
-                className={`h-2 rounded-full transition-all ${
-                  statusColorKey === 'green' ? 'bg-green-500' :
-                  statusColorKey === 'blue' ? 'bg-blue-500' :
-                  statusColorKey === 'yellow' ? 'bg-yellow-500' :
-                  statusColorKey === 'orange' ? 'bg-orange-500' :
-                  statusColorKey === 'purple' ? 'bg-purple-500' :
-                  'bg-gray-400'
-                }`}
-                style={{ width: `${fillPercentage}%` }}
-              />
+              <div className="h-2 rounded-full transition-all bg-copper" style={{ width: `${fillPercentage}%` }} />
             </div>
           </div>
         )}
@@ -168,7 +158,7 @@ export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onComb
           {showBarrel && (
             <Link
               href={`/dashboard/barrels/new?${qp}`}
-              className="w-full inline-flex items-center justify-center bg-amber-600 hover:bg-amber-700 text-white font-medium py-2 px-4 rounded-lg transition"
+              className="w-full inline-flex items-center justify-center bg-copper hover:bg-copper/90 text-white font-medium py-2 px-4 rounded-lg transition"
             >
               Transfer to Barrels
             </Link>
@@ -176,7 +166,7 @@ export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onComb
           {showBottling && (
             <Link
               href={`/dashboard/production/bottling/new?${qp}`}
-              className="w-full inline-flex items-center justify-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition"
+              className="w-full inline-flex items-center justify-center bg-copper-green hover:opacity-90 text-white font-medium py-2 px-4 rounded-lg transition"
             >
               Start Bottling
             </Link>
@@ -187,31 +177,31 @@ export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onComb
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
         <button
           onClick={() => onTransform && onTransform(tank)}
-          className="w-full inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition"
+          className="w-full inline-flex items-center justify-center bg-copper hover:bg-copper/90 text-white font-medium py-2 px-4 rounded-lg transition"
         >
           Transform Product
         </button>
         <button
           onClick={() => onInfuse && onInfuse(tank)}
-          className="w-full inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition"
+          className="w-full inline-flex items-center justify-center bg-copper-amber hover:opacity-90 text-white font-medium py-2 px-4 rounded-lg transition"
         >
           Add Ingredients / Infusion
         </button>
         <button
           onClick={() => onAdjust && onAdjust(tank)}
-          className="w-full inline-flex items-center justify-center bg-yellow-600 hover:bg-yellow-700 text-white font-medium py-2 px-4 rounded-lg transition"
+          className="w-full inline-flex items-center justify-center bg-copper-red hover:opacity-90 text-white font-medium py-2 px-4 rounded-lg transition"
         >
           Adjust Volume / ABV
         </button>
         <button
           onClick={() => onCombine && onCombine(tank)}
-          className="w-full inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition"
+          className="w-full inline-flex items-center justify-center bg-graphite hover:opacity-90 text-white font-medium py-2 px-4 rounded-lg transition"
         >
           Combine Tanks
         </button>
         <button
           onClick={() => onViewHistory && onViewHistory(tank)}
-          className="w-full inline-flex items-center justify-center bg-gray-700 hover:bg-gray-800 text-white font-medium py-2 px-4 rounded-lg transition"
+          className="w-full inline-flex items-center justify-center bg-graphite hover:opacity-90 text-white font-medium py-2 px-4 rounded-lg transition"
         >
           View History
         </button>
@@ -219,7 +209,7 @@ export function TankCard({ tank, onEdit, onTransform, onInfuse, onAdjust, onComb
 
       <button
         onClick={() => onEdit(tank)}
-        className="mt-4 w-full bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-4 rounded-lg transition"
+        className="mt-4 w-full bg-copper hover:bg-copper/90 text-white font-medium py-2 px-4 rounded-lg transition"
       >
         Edit
       </button>

@@ -115,13 +115,15 @@ export default function DailyDetailsCard({
     value, 
     type = "text", 
     className = "",
-    placeholder = ""
+    placeholder = "",
+    id
   }: {
     field: string
     value: string
     type?: string
     className?: string
     placeholder?: string
+    id?: string
   }) => {
     const isEditing = editingField === field
 
@@ -129,6 +131,7 @@ export default function DailyDetailsCard({
       <div className="relative">
         {isEditing ? (
           <input
+            id={id}
             type={type}
             value={value}
             onChange={(e) => handleChange(field, e.target.value)}
@@ -298,35 +301,39 @@ export default function DailyDetailsCard({
         <h3 className="text-lg font-medium text-slate-700 mb-4">Batch Information</h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-slate-500 mb-2">Date:</label>
+            <label htmlFor="daily_date" className="block text-sm font-medium text-slate-500 mb-2">Date:</label>
             <EditableField 
               field="date" 
               value={data.date} 
               type="date"
+              id="daily_date"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-500 mb-2">Still:</label>
+            <label htmlFor="daily_still" className="block text-sm font-medium text-slate-500 mb-2">Still:</label>
             <EditableField 
               field="still" 
               value={data.still}
               placeholder="Enter still name"
+              id="daily_still"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-500 mb-2">Volume:</label>
+            <label htmlFor="daily_volume" className="block text-sm font-medium text-slate-500 mb-2">Volume:</label>
             <EditableField 
               field="volume" 
               value={data.volume}
               placeholder="e.g., 1000L"
+              id="daily_volume"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-500 mb-2">ABV:</label>
+            <label htmlFor="daily_abv" className="block text-sm font-medium text-slate-500 mb-2">ABV:</label>
             <EditableField 
               field="abv" 
               value={data.abv}
               placeholder="e.g., 47.9%"
+              id="daily_abv"
             />
           </div>
         </div>

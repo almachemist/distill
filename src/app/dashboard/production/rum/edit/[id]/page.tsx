@@ -366,10 +366,11 @@ export default function EditRumBatchPage() {
 
           {/* Overall Status */}
           <div className="mt-4 pt-4 border-t border-stone-200">
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="overall_status" className="block text-sm font-medium text-stone-700 mb-2">
               Overall Batch Status
             </label>
             <select
+              id="overall_status"
               value={batch.overall_status || 'draft'}
               onChange={(e) => setBatch({ ...batch, overall_status: e.target.value as any })}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -443,4 +444,3 @@ export default function EditRumBatchPage() {
     </div>
   )
 }
-

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { getCachedCustomerAnalytics } from '@/modules/crm/analytics'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function GET() {
   try {
@@ -28,4 +29,3 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to build CRM customers' }, { status: 500 })
   }
 }
-

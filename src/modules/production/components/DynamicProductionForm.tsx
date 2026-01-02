@@ -75,10 +75,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
               
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="run_spirit_run_id" className="block text-sm font-medium text-neutral-700 mb-2">
                     Spirits Run ID
                   </label>
                   <input
+                    id="run_spirit_run_id"
                     type="text"
                     value={batch.spiritRunId || ''}
                     onChange={(e) => updateField('spiritRunId', e.target.value)}
@@ -88,10 +89,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="run_sku" className="block text-sm font-medium text-neutral-700 mb-2">
                     SKU
                   </label>
                   <input
+                    id="run_sku"
                     type="text"
                     value={batch.sku || ''}
                     onChange={(e) => updateField('sku', e.target.value)}
@@ -101,10 +103,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="run_date" className="block text-sm font-medium text-neutral-700 mb-2">
                     Date
                   </label>
                   <input
+                    id="run_date"
                     type="date"
                     value={batch.date || ''}
                     onChange={(e) => updateField('date', e.target.value)}
@@ -113,10 +116,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="run_boiler_start_time" className="block text-sm font-medium text-neutral-700 mb-2">
                     Boiler Start Time
                   </label>
                   <input
+                    id="run_boiler_start_time"
                     type="time"
                     value={batch.boilerStartTime || ''}
                     onChange={(e) => updateField('boilerStartTime', e.target.value)}
@@ -125,10 +129,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div className="col-span-2">
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="run_still_used" className="block text-sm font-medium text-neutral-700 mb-2">
                     Still Used
                   </label>
                   <select
+                    id="run_still_used"
                     value={batch.stillUsed || ''}
                     onChange={(e) => updateField('stillUsed', e.target.value)}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -281,10 +286,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
 
               <div className="grid grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="still_elements" className="block text-sm font-medium text-neutral-700 mb-2">
                     Elements
                   </label>
                   <input
+                    id="still_elements"
                     type="text"
                     value={batch.stillSetup?.elements ?? ''}
                     onChange={(e) => updateNestedField('stillSetup', 'elements', e.target.value)}
@@ -294,10 +300,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="still_plates" className="block text-sm font-medium text-neutral-700 mb-2">
                     Plates
                   </label>
                   <input
+                    id="still_plates"
                     type="text"
                     value={batch.stillSetup?.plates ?? ''}
                     onChange={(e) => updateNestedField('stillSetup', 'plates', e.target.value)}
@@ -307,10 +314,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div className="col-span-2">
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="still_steeping" className="block text-sm font-medium text-neutral-700 mb-2">
                     Steeping
                   </label>
                   <input
+                    id="still_steeping"
                     type="text"
                     value={batch.stillSetup?.steeping ?? ''}
                     onChange={(e) => updateNestedField('stillSetup', 'steeping', e.target.value)}
@@ -320,10 +328,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div className="col-span-2">
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="still_options_tags" className="block text-sm font-medium text-neutral-700 mb-2">
                     Options / Tags
                   </label>
                   <input
+                    id="still_options_tags"
                     type="text"
                     value={batch.stillSetup?.options ?? ''}
                     onChange={(e) => updateNestedField('stillSetup', 'options', e.target.value)}
@@ -823,10 +832,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
 
               <div className="grid grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_total_volume_l" className="block text-sm font-medium text-neutral-700 mb-2">
                     Final Volume (L)
                   </label>
                   <input
+                    id="final_total_volume_l"
                     type="number"
                     step="0.1"
                     value={batch.finalOutput?.totalVolume_L || ''}
@@ -845,10 +855,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_abv_percent" className="block text-sm font-medium text-neutral-700 mb-2">
                     Final ABV (%)
                   </label>
                   <input
+                    id="final_abv_percent"
                     type="number"
                     step="0.1"
                     value={batch.finalOutput?.abv_percent || ''}
@@ -859,10 +870,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_lal" className="block text-sm font-medium text-neutral-700 mb-2">
                     Final LAL
                   </label>
                   <input
+                    id="final_lal"
                     type="number"
                     step="0.01"
                     value={batch.finalOutput?.lal || ''}
@@ -880,10 +892,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_bottling_date" className="block text-sm font-medium text-neutral-700 mb-2">
                     Bottling Date
                   </label>
                   <input
+                    id="final_bottling_date"
                     type="date"
                     value={batch.bottlingDate || ''}
                     onChange={(e) => updateField('bottlingDate', e.target.value)}
@@ -892,10 +905,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_bottle_size_ml" className="block text-sm font-medium text-neutral-700 mb-2">
                     Bottle Size (ml)
                   </label>
                   <select
+                    id="final_bottle_size_ml"
                     value={batch.bottleSize_ml || ''}
                     onChange={(e) => updateField('bottleSize_ml', parseInt(e.target.value) || 0)}
                     className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -908,10 +922,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_total_bottles" className="block text-sm font-medium text-neutral-700 mb-2">
                     Total Bottles
                   </label>
                   <input
+                    id="final_total_bottles"
                     type="number"
                     value={batch.totalBottles || ''}
                     onChange={(e) => updateField('totalBottles', parseInt(e.target.value) || 0)}
@@ -928,10 +943,11 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
                 </div>
 
                 <div className="col-span-2">
-                  <label className="block text-sm font-medium text-neutral-700 mb-2">
+                  <label htmlFor="final_notes" className="block text-sm font-medium text-neutral-700 mb-2">
                     Notes
                   </label>
                   <textarea
+                    id="final_notes"
                     value={batch.finalOutput?.notes || ''}
                     onChange={(e) => updateNestedField('finalOutput', 'notes', e.target.value)}
                     placeholder="Batch #5, Rainforest Gin..."
@@ -998,4 +1014,3 @@ export function DynamicProductionForm({ batch, recipe, onUpdate, onSave, isSavin
     </div>
   )
 }
-

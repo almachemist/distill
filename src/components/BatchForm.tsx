@@ -174,24 +174,27 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Spirit Run ID</label>
+              <label htmlFor="spirit_run_id" className="block text-sm font-medium text-gray-700 mb-1">Spirit Run ID</label>
               <TextInput
+                id="spirit_run_id"
                 value={formData.spiritRunId ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, spiritRunId: value || '' }))}
                 placeholder="e.g., SPIRIT-GIN-RF-30"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">SKU</label>
+              <label htmlFor="sku" className="block text-sm font-medium text-gray-700 mb-1">SKU</label>
               <TextInput
+                id="sku"
                 value={formData.sku ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, sku: value || '' }))}
                 placeholder="e.g., Rainforest Gin"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+              <label htmlFor="batch_date" className="block text-sm font-medium text-gray-700 mb-1">Date</label>
               <input
+                id="batch_date"
                 type="date"
                 value={formData.date}
                 onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
@@ -199,24 +202,27 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
+              <label htmlFor="still_used" className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
               <TextInput
+                id="still_used"
                 value={formData.stillUsed ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, stillUsed: value || '' }))}
                 placeholder="e.g., Carrie, Roberta"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Boiler On</label>
+              <label htmlFor="boiler_on" className="block text-sm font-medium text-gray-700 mb-1">Boiler On</label>
               <TextInput
+                id="boiler_on"
                 value={formData.boilerOn ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, boilerOn: value ?? null }))}
                 placeholder="e.g., 35A, 07:05"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description</label>
               <TextInput
+                id="description"
                 value={formData.description ?? null}
                 onChange={(value) => setFormData(prev => ({ ...prev, description: value ?? null }))}
                 placeholder="Batch description"
@@ -250,16 +256,18 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <div key={component.id || index} className="bg-white p-4 rounded-lg border">
                 <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Source</label>
+                    <label htmlFor={`charge_component_${index}_source`} className="block text-sm font-medium text-gray-700 mb-1">Source</label>
                     <TextInput
+                      id={`charge_component_${index}_source`}
                       value={component.source}
                       onChange={(value) => updateArrayItem('chargeAdjustment', index, 'source', value)}
                       placeholder="e.g., Manildra NC96"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                    <label htmlFor={`charge_component_${index}_type`} className="block text-sm font-medium text-gray-700 mb-1">Type</label>
                     <select
+                      id={`charge_component_${index}_type`}
                       value={component.type}
                       onChange={(e) => updateArrayItem('chargeAdjustment', index, 'type', e.target.value)}
                       className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent w-full"
@@ -271,23 +279,26 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
+                    <label htmlFor={`charge_component_${index}_volume_L`} className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
                     <NumberInput
+                      id={`charge_component_${index}_volume_L`}
                       value={component.volume_L}
                       onChange={(value) => updateArrayItem('chargeAdjustment', index, 'volume_L', value)}
                       placeholder="0.0"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
+                    <label htmlFor={`charge_component_${index}_abv_percent`} className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
                     <PercentInput
+                      id={`charge_component_${index}_abv_percent`}
                       value={component.abv_percent}
                       onChange={(value) => updateArrayItem('chargeAdjustment', index, 'abv_percent', value)}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">LAL</label>
+                    <label htmlFor={`charge_component_${index}_lal`} className="block text-sm font-medium text-gray-700 mb-1">LAL</label>
                     <NumberInput
+                      id={`charge_component_${index}_lal`}
                       value={component.lal}
                       onChange={(value) => updateArrayItem('chargeAdjustment', index, 'lal', value)}
                       placeholder="0.0"
@@ -333,39 +344,44 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
               <div key={run.id || index} className="bg-white p-4 rounded-lg border">
                 <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Time</label>
+                    <label htmlFor={`run_${index}_time`} className="block text-sm font-medium text-gray-700 mb-1">Time</label>
                     <TextInput
+                      id={`run_${index}_time`}
                       value={run.time}
                       onChange={(value) => updateArrayItem('runData', index, 'time', value)}
                       placeholder="e.g., 08:30 AM"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Phase</label>
+                    <label htmlFor={`run_${index}_phase`} className="block text-sm font-medium text-gray-700 mb-1">Phase</label>
                     <TextInput
+                      id={`run_${index}_phase`}
                       value={run.phase}
                       onChange={(value) => updateArrayItem('runData', index, 'phase', value)}
                       placeholder="e.g., Foreshots"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
+                    <label htmlFor={`run_${index}_volume_L`} className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
                     <NumberInput
+                      id={`run_${index}_volume_L`}
                       value={run.volume_L}
                       onChange={(value) => updateArrayItem('runData', index, 'volume_L', value)}
                       placeholder="0.0"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
+                    <label htmlFor={`run_${index}_abv_percent`} className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
                     <PercentInput
+                      id={`run_${index}_abv_percent`}
                       value={run.abv_percent}
                       onChange={(value) => updateArrayItem('runData', index, 'abv_percent', value)}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">LAL</label>
+                    <label htmlFor={`run_${index}_lal`} className="block text-sm font-medium text-gray-700 mb-1">LAL</label>
                     <NumberInput
+                      id={`run_${index}_lal`}
                       value={run.lal}
                       onChange={(value) => updateArrayItem('runData', index, 'lal', value)}
                       placeholder="0.0"
@@ -382,8 +398,9 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
                   </div>
                 </div>
                 <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Observations</label>
+                  <label htmlFor={`run_${index}_observations`} className="block text-sm font-medium text-gray-700 mb-1">Observations</label>
                   <TextInput
+                    id={`run_${index}_observations`}
                     value={run.observations}
                     onChange={(value) => updateArrayItem('runData', index, 'observations', value)}
                     placeholder="Run observations..."
@@ -431,4 +448,3 @@ export function BatchForm({ initialBatch, onSave, onCancel }: BatchFormProps) {
     </div>
   );
 }
-

@@ -174,11 +174,12 @@ export function RecipeDetail({ recipeId, embedded = false, view = 'all' }: Recip
           <h1 className="text-2xl font-bold text-gray-900">{recipe.name}</h1>
           {embedded && (
             <div className="mt-2">
-              <label className="block text-sm text-gray-600 mb-1">Batelada (L)</label>
+              <label htmlFor="embedded_batch_l" className="block text-sm text-gray-600 mb-1">Batelada (L)</label>
               <input
                 type="number"
                 min="1"
                 step="0.1"
+                id="embedded_batch_l"
                 value={batchTargetL}
                 onChange={(e) => setBatchTargetL(Number(e.target.value))}
                 className="w-40 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -206,22 +207,21 @@ export function RecipeDetail({ recipeId, embedded = false, view = 'all' }: Recip
           <h3 className="text-lg font-semibold mb-3">Batch Calculator</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="target_batch_size" className="block text-sm font-medium text-gray-700 mb-1">
               Target Batch Size (L)
             </label>
             <input
               type="number"
               min="1"
               step="0.1"
+              id="target_batch_size"
               value={batchTargetL}
               onChange={(e) => setBatchTargetL(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Recipe Base Size
-            </label>
+            <p className="block text-sm font-medium text-gray-700 mb-1">Recipe Base Size</p>
             <p className="px-3 py-2 bg-white border border-gray-300 rounded-md">
               {recipe.name.includes('Rainforest Gin') ? '546' : 
                recipe.name.includes('Signature Dry Gin') ? '495' : 
@@ -232,9 +232,7 @@ export function RecipeDetail({ recipeId, embedded = false, view = 'all' }: Recip
             </p>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Scale Factor
-            </label>
+            <p className="block text-sm font-medium text-gray-700 mb-1">Scale Factor</p>
             <p className="px-3 py-2 bg-white border border-gray-300 rounded-md">
               {scaleFactor.toFixed(2)}x
             </p>

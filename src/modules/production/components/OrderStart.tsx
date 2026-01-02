@@ -159,11 +159,12 @@ export function OrderStart() {
 
       {/* Product Name */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="order_product_name" className="block text-sm font-medium text-gray-700 mb-2">
           Product Name
         </label>
         <input
           type="text"
+          id="order_product_name"
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -403,6 +404,5 @@ function IngredientLotPicker({
     </div>
   )
 }
-
 
 

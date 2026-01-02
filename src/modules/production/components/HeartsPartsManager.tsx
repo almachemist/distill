@@ -235,8 +235,9 @@ export default function HeartsPartsManager({
               {/* Basic Info */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Label</label>
+                  <label htmlFor="hearts_label" className="block text-sm font-medium text-gray-700">Label</label>
                   <input
+                    id="hearts_label"
                     type="text"
                     value={editingPart.label}
                     onChange={(e) => setEditingPart({ ...editingPart, label: e.target.value })}
@@ -244,9 +245,10 @@ export default function HeartsPartsManager({
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Start Time</label>
+                  <label htmlFor="hearts_start_time" className="block text-sm font-medium text-gray-700">Start Time</label>
                   <div className="flex gap-2">
                     <input
+                      id="hearts_start_time"
                       type="text"
                       value={editingPart.startTime || ''}
                       onChange={(e) => setEditingPart({ ...editingPart, startTime: e.target.value })}
@@ -266,9 +268,10 @@ export default function HeartsPartsManager({
               {/* End Time */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">End Time</label>
+                  <label htmlFor="hearts_end_time" className="block text-sm font-medium text-gray-700">End Time</label>
                   <div className="flex gap-2">
                     <input
+                      id="hearts_end_time"
                       type="text"
                       value={editingPart.endTime || ''}
                       onChange={(e) => setEditingPart({ ...editingPart, endTime: e.target.value })}
@@ -291,8 +294,9 @@ export default function HeartsPartsManager({
               {/* Volume and ABV */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Volume (L)</label>
+                  <label htmlFor="hearts_volume_l" className="block text-sm font-medium text-gray-700">Volume (L)</label>
                   <input
+                    id="hearts_volume_l"
                     type="number"
                     step="0.1"
                     value={editingPart.volumeL || ''}
@@ -304,8 +308,9 @@ export default function HeartsPartsManager({
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">ABV (%)</label>
+                  <label htmlFor="hearts_abv_percent" className="block text-sm font-medium text-gray-700">ABV (%)</label>
                   <input
+                    id="hearts_abv_percent"
                     type="number"
                     step="0.1"
                     value={editingPart.abvPercent || ''}
@@ -328,8 +333,9 @@ export default function HeartsPartsManager({
               {/* Additional Fields */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Density</label>
+                  <label htmlFor="hearts_density" className="block text-sm font-medium text-gray-700">Density</label>
                   <input
+                    id="hearts_density"
                     type="number"
                     step="0.001"
                     value={editingPart.density || ''}
@@ -341,8 +347,9 @@ export default function HeartsPartsManager({
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Condenser Temp (°C)</label>
+                  <label htmlFor="hearts_condenser_temp_c" className="block text-sm font-medium text-gray-700">Condenser Temp (°C)</label>
                   <input
+                    id="hearts_condenser_temp_c"
                     type="number"
                     step="0.1"
                     value={editingPart.condenserTempC || ''}
@@ -357,8 +364,9 @@ export default function HeartsPartsManager({
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Current (A)</label>
+                  <label htmlFor="hearts_current_a" className="block text-sm font-medium text-gray-700">Current (A)</label>
                   <input
+                    id="hearts_current_a"
                     type="number"
                     step="0.1"
                     value={editingPart.currentA || ''}
@@ -370,8 +378,9 @@ export default function HeartsPartsManager({
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Receiving Vessel</label>
+                  <label htmlFor="hearts_receiving_vessel" className="block text-sm font-medium text-gray-700">Receiving Vessel</label>
                   <input
+                    id="hearts_receiving_vessel"
                     type="text"
                     value={editingPart.receivingVessel || ''}
                     onChange={(e) => setEditingPart({ ...editingPart, receivingVessel: e.target.value })}
@@ -381,8 +390,9 @@ export default function HeartsPartsManager({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700">Notes</label>
+                <label htmlFor="hearts_notes" className="block text-sm font-medium text-gray-700">Notes</label>
                 <textarea
+                  id="hearts_notes"
                   rows={3}
                   value={editingPart.notes || ''}
                   onChange={(e) => setEditingPart({ ...editingPart, notes: e.target.value })}

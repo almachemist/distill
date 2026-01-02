@@ -8,11 +8,20 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
+import { z } from 'zod'
 export const runtime = 'nodejs'
 
 const CALENDAR_2026_FILE = join(process.cwd(), 'data', 'production_calendar_2026_v4.json')
 const CALENDAR_DEC_FILE = join(process.cwd(), 'data', 'production_calendar_december_2025.json')
 
+function log(level: 'info' | 'error', message: string, meta?: Record<string, any>) {
+  const entry = { level, message, time: new Date().toISOString(), ...(meta || {}) }
+  if (level === 'error') console.error(JSON.stringify(entry))
+  else console.log(JSON.stringify(entry))
+}
+function getReqId(req: NextRequest) {
+  return req.headers.get('x-request-id') || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
+}
 interface WeekPlan {
   week_number: number
   week_start: string
@@ -45,10 +54,26 @@ interface CalendarData {
  */
 export async function PATCH(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { id, productName, batch, tank, notes, productType, clear, weekStart, remove, type: eventType } = body
+    const UpdateSchema = z.object({
+      id: z.string().min(1),
+      productName: z.string().optional(),
+      batch: z.string().regex(/^\d+\/\d+$/).optional(),
+      tank: z.string().optional(),
+      notes: z.string().optional(),
+      productType: z.enum(['ADMIN','GIN','RUM','VODKA','CANE_SPIRIT','LIQUEUR']).optional(),
+      clear: z.boolean().optional(),
+      weekStart: z.string().optional(),
+      remove: z.boolean().optional(),
+      type: z.enum(['production','bottling','admin','maintenance','barrel','npd','other']).optional()
+    })
+    const raw = await request.json()
+    const parsed = UpdateSchema.safeParse(raw)
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid payload', details: parsed.error.flatten() }, { status: 400 })
+    }
+    const { id, productName, batch, tank, notes, productType, clear, weekStart, remove, type: eventType } = parsed.data
 
-    console.log('📝 Updating static event:', { id, productName, batch, tank, notes, productType, clear })
+    log('info', 'static_update_attempt', { id, productName, batch, tank, productType, clear, reqId: getReqId(request) })
 
     // Extract week number from ID (format: "static-50" or "static-dec-50")
     const isDecember = id.startsWith('static-dec-')
@@ -101,7 +126,7 @@ export async function PATCH(request: NextRequest) {
       data.generated_at = new Date().toISOString()
       writeFileSync(calendarFile, JSON.stringify(data, null, 2), 'utf-8')
 
-      console.log('✅ Static event cleared successfully')
+      log('info', 'static_event_cleared', { id, week: week.week_number, reqId: getReqId(request) })
       return NextResponse.json({ message: 'Static event cleared', week }, { status: 200 })
     }
 
@@ -127,7 +152,7 @@ export async function PATCH(request: NextRequest) {
       data.generated_at = new Date().toISOString()
       writeFileSync(calendarFile, JSON.stringify(data, null, 2), 'utf-8')
 
-      console.log('✅ Static event deleted')
+      log('info', 'static_event_deleted', { id, week: week.week_number, reqId: getReqId(request) })
       return NextResponse.json({ message: 'Static event deleted', week }, { status: 200 })
     }
 
@@ -204,7 +229,7 @@ export async function PATCH(request: NextRequest) {
             data.generated_at = new Date().toISOString()
             writeFileSync(calendarFile, JSON.stringify(data, null, 2), 'utf-8')
 
-            console.log(`✅ Static bottling moved from ${isDecember ? 'Dec 2025' : '2026'} W${weekNumber} to ${targetIsDecember ? 'Dec 2025' : '2026'} W${targetWeekNo}`)
+            log('info', 'static_bottling_moved', { fromWeek: weekNumber, fromDec: isDecember, toWeek: targetWeekNo, toDec: targetIsDecember, reqId: getReqId(request) })
             return NextResponse.json({ message: 'Static bottling moved', from: { week_number: weekNumber }, to: { week_number: targetWeekNo } }, { status: 200 })
           }
 
@@ -248,7 +273,7 @@ export async function PATCH(request: NextRequest) {
           data.generated_at = new Date().toISOString()
           writeFileSync(calendarFile, JSON.stringify(data, null, 2), 'utf-8')
 
-          console.log(`✅ Static event moved from ${isDecember ? 'Dec 2025' : '2026'} W${weekNumber} to ${targetIsDecember ? 'Dec 2025' : '2026'} W${targetWeekNo}`)
+          log('info', 'static_event_moved', { fromWeek: weekNumber, fromDec: isDecember, toWeek: targetWeekNo, toDec: targetIsDecember, reqId: getReqId(request) })
           return NextResponse.json({ message: 'Static event moved', from: { week_number: weekNumber }, to: { week_number: targetWeekNo } }, { status: 200 })
         }
       }
@@ -338,14 +363,14 @@ export async function PATCH(request: NextRequest) {
     // Write back to file
     writeFileSync(calendarFile, JSON.stringify(data, null, 2), 'utf-8')
 
-    console.log('✅ Static event updated successfully')
+    log('info', 'static_event_updated', { id, week: week.week_number, reqId: getReqId(request) })
 
     return NextResponse.json({
       message: 'Static event updated',
       week
     }, { status: 200 })
   } catch (error) {
-    console.error('PATCH /api/calendar-events/static-update error:', error)
+    log('error', 'static_update_error', { error: (error as any)?.message, reqId: getReqId(request) })
     return NextResponse.json(
       { error: 'Failed to update static event' },
       { status: 500 }

@@ -137,9 +137,10 @@ export default function LiveSessionTracker({ session, onUpdate }: LiveSessionTra
       {/* Quick Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Temperature (°C)</label>
+          <label htmlFor="live_temperature_c" className="block text-sm font-medium text-gray-700 mb-1">Temperature (°C)</label>
           <input
             type="number"
+            id="live_temperature_c"
             value={temperature || ''}
             onChange={(e) => setTemperature(e.target.value ? parseFloat(e.target.value) : undefined)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -147,10 +148,11 @@ export default function LiveSessionTracker({ session, onUpdate }: LiveSessionTra
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Pressure (bar)</label>
+          <label htmlFor="live_pressure_bar" className="block text-sm font-medium text-gray-700 mb-1">Pressure (bar)</label>
           <input
             type="number"
             step="0.1"
+            id="live_pressure_bar"
             value={pressure || ''}
             onChange={(e) => setPressure(e.target.value ? parseFloat(e.target.value) : undefined)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -158,10 +160,11 @@ export default function LiveSessionTracker({ session, onUpdate }: LiveSessionTra
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
+          <label htmlFor="live_abv_percent" className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
           <input
             type="number"
             step="0.1"
+            id="live_abv_percent"
             value={abv || ''}
             onChange={(e) => setAbv(e.target.value ? parseFloat(e.target.value) : undefined)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -169,10 +172,11 @@ export default function LiveSessionTracker({ session, onUpdate }: LiveSessionTra
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
+          <label htmlFor="live_volume_l" className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
           <input
             type="number"
             step="0.1"
+            id="live_volume_l"
             value={volume || ''}
             onChange={(e) => setVolume(e.target.value ? parseFloat(e.target.value) : undefined)}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -183,10 +187,11 @@ export default function LiveSessionTracker({ session, onUpdate }: LiveSessionTra
 
       {/* Notes Input */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="live_notes" className="block text-sm font-medium text-gray-700 mb-2">
           Current Observations
         </label>
         <textarea
+          id="live_notes"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           placeholder="Describe what's happening now... (e.g., 'Starting distillation', 'Adjusting temperature', 'First drop collected')"

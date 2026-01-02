@@ -1134,8 +1134,8 @@ export default function TanksPage() {
       {/* Header */}
       <div className="mb-8 flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Production Tanks</h1>
-          <p className="text-gray-600 mt-2">Monitor and manage all production tanks</p>
+          <h1 className="text-3xl font-bold text-graphite">Production Tanks</h1>
+          <p className="text-[#777777] mt-2">Monitor and manage all production tanks</p>
         </div>
         <div className="flex items-center gap-3">
           <button
@@ -1154,13 +1154,13 @@ export default function TanksPage() {
               setSelectedTank(newTank)
               setIsModalOpen(true)
             }}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition"
+            className="px-6 py-3 bg-copper hover:bg-copper/90 text-white rounded-lg font-medium transition"
           >
             + Add New Tank
           </button>
           <button
             onClick={handleClearAll}
-            className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition"
+            className="px-6 py-3 bg-graphite hover:opacity-90 text-white rounded-lg font-medium transition"
           >
             Clear All Tanks
           </button>
@@ -1169,22 +1169,22 @@ export default function TanksPage() {
 
       {/* Summary Dashboard */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Total Tanks</div>
-          <div className="text-3xl font-bold text-gray-900">{totalTanks}</div>
+        <div className="bg-white rounded-lg border border-copper-30 p-4">
+          <div className="text-sm text-graphite mb-1">Total Tanks</div>
+          <div className="text-3xl font-bold text-graphite">{totalTanks}</div>
         </div>
-        <div className="bg-blue-50 rounded-lg border border-blue-200 p-4">
-          <div className="text-sm text-blue-700 mb-1">In Use</div>
-          <div className="text-3xl font-bold text-blue-900">{tanksInUse}</div>
+        <div className="bg-beige rounded-lg border border-copper-30 p-4">
+          <div className="text-sm text-graphite mb-1">In Use</div>
+          <div className="text-3xl font-bold text-graphite">{tanksInUse}</div>
         </div>
-        <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-          <div className="text-sm text-gray-600 mb-1">Empty</div>
-          <div className="text-3xl font-bold text-gray-900">{emptyTanks}</div>
+        <div className="bg-beige rounded-lg border border-copper-30 p-4">
+          <div className="text-sm text-graphite mb-1">Empty</div>
+          <div className="text-3xl font-bold text-graphite">{emptyTanks}</div>
         </div>
-        <div className="bg-green-50 rounded-lg border border-green-200 p-4">
-          <div className="text-sm text-green-700 mb-1">Utilization</div>
-          <div className="text-3xl font-bold text-green-900">{utilizationPercent.toFixed(0)}%</div>
-          <div className="text-xs text-green-600 mt-1">
+        <div className="bg-beige rounded-lg border border-copper-30 p-4">
+          <div className="text-sm text-graphite mb-1">Utilization</div>
+          <div className="text-3xl font-bold text-graphite">{utilizationPercent.toFixed(0)}%</div>
+          <div className="text-xs text-graphite mt-1">
             {totalVolume.toFixed(0)}L / {totalCapacity.toFixed(0)}L
           </div>
         </div>
@@ -1192,19 +1192,19 @@ export default function TanksPage() {
 
       {/* Redistillation Alert */}
       {redistillationTanks.length > 0 && showRedistillationAlert && (
-        <div className="bg-orange-50 border-l-4 border-orange-500 p-4 mb-6 rounded-r-lg">
+        <div className="bg-copper-10 border-l-4 border-copper p-4 mb-6 rounded-r-lg">
           <div className="flex items-start justify-between">
             <div className="flex items-start">
               <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-orange-500" viewBox="0 0 20 20" fill="currentColor">
+                <svg className="h-5 w-5 text-copper" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </div>
               <div className="ml-3">
-                <h3 className="text-sm font-medium text-orange-800">
+                <h3 className="text-sm font-medium text-graphite">
                   {redistillationTanks.length} tank{redistillationTanks.length > 1 ? 's' : ''} pending redistillation
                 </h3>
-                <div className="mt-2 text-sm text-orange-700">
+                <div className="mt-2 text-sm text-[#777777]">
                   <ul className="list-disc list-inside space-y-1">
                     {redistillationTanks.map(tank => (
                       <li key={tank.id}>
@@ -1217,7 +1217,7 @@ export default function TanksPage() {
             </div>
             <button
               onClick={() => setShowRedistillationAlert(false)}
-              className="flex-shrink-0 ml-4 text-orange-500 hover:text-orange-700"
+              className="flex-shrink-0 ml-4 text-copper hover:opacity-80"
             >
               <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -1229,9 +1229,9 @@ export default function TanksPage() {
 
       {/* Tank Grid */}
       {tanks.length === 0 ? (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-          <p className="text-yellow-800">No tanks found in database.</p>
-          <p className="text-sm text-yellow-700 mt-2">Run the import script to load real tank inventory.</p>
+        <div className="bg-copper-10 border border-copper-30 rounded-lg p-6">
+          <p className="text-graphite">No tanks found in database.</p>
+          <p className="text-sm text-[#777777] mt-2">Run the import script to load real tank inventory.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -1268,7 +1268,7 @@ export default function TanksPage() {
       {isTransformOpen && selectedTank && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="bg-indigo-700 text-white p-6 rounded-t-xl">
+            <div className="bg-copper text-white p-6 rounded-t-xl">
               <h2 className="text-2xl font-bold">Transform Product</h2>
               <p className="text-sm mt-1">{selectedTank.tank_id} • {selectedTank.tank_name}</p>
             </div>
@@ -1279,7 +1279,7 @@ export default function TanksPage() {
                   type="text"
                   value={transformProductName}
                   onChange={(e) => setTransformProductName(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                   placeholder="Spiced Rum"
                 />
               </div>
@@ -1288,7 +1288,7 @@ export default function TanksPage() {
                 <select
                   value={transformRecipeId}
                   onChange={(e) => setTransformRecipeId(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                  className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                 >
                   <option value="">Select recipe...</option>
                   {availableRecipes.map(r => (
@@ -1306,7 +1306,7 @@ export default function TanksPage() {
               </button>
               <button
                 onClick={performTransform}
-                className="px-6 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition"
+                className="px-6 py-2 bg-copper hover:bg-copper/90 text-white rounded-lg transition"
               >
                 Transform
               </button>
@@ -1318,7 +1318,7 @@ export default function TanksPage() {
       {isAdjustOpen && selectedTank && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="bg-yellow-700 text-white p-6 rounded-t-xl">
+            <div className="bg-copper-red text-white p-6 rounded-t-xl">
               <h2 className="text-2xl font-bold">Adjust Volume / ABV</h2>
               <p className="text-sm mt-1">{selectedTank.tank_id} • {selectedTank.tank_name}</p>
             </div>
@@ -1330,7 +1330,7 @@ export default function TanksPage() {
                     type="number"
                     value={adjustAbv}
                     onChange={(e) => setAdjustAbv(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                     step="0.1"
                     min="0"
                     max="100"
@@ -1343,7 +1343,7 @@ export default function TanksPage() {
                     type="number"
                     value={adjustVolume}
                     onChange={(e) => setAdjustVolume(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                    className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                     step="0.1"
                     min="0"
                     placeholder="500"
@@ -1356,7 +1356,7 @@ export default function TanksPage() {
                   type="text"
                   value={adjustNotes}
                   onChange={(e) => setAdjustNotes(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500"
+                  className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                   placeholder="Evaporation, transfer loss, measurement update..."
                 />
               </div>
@@ -1370,7 +1370,7 @@ export default function TanksPage() {
               </button>
               <button
                 onClick={performAdjust}
-                className="px-6 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition"
+                className="px-6 py-2 bg-copper hover:bg-copper/90 text-white rounded-lg transition"
               >
                 Apply
               </button>
@@ -1382,7 +1382,7 @@ export default function TanksPage() {
       {isInfusionOpen && selectedTank && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="bg-purple-700 text-white p-6 rounded-t-xl">
+            <div className="bg-copper-amber text-white p-6 rounded-t-xl">
               <h2 className="text-2xl font-bold">Add Ingredients / Infusion</h2>
               <p className="text-sm mt-1">{selectedTank.tank_id} • {selectedTank.tank_name}</p>
             </div>

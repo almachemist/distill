@@ -59,11 +59,12 @@ export function RumRecipeCalculator() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Volume Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="rum_volume" className="block text-sm font-medium text-gray-700 mb-2">
               Rum Volume (L)
             </label>
             <input
               type="number"
+              id="rum_volume"
               value={inputVolume}
               onChange={(e) => setInputVolume(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
@@ -74,11 +75,12 @@ export function RumRecipeCalculator() {
 
           {/* ABV Input */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="current_abv" className="block text-sm font-medium text-gray-700 mb-2">
               Current ABV (%)
             </label>
             <input
               type="number"
+              id="current_abv"
               value={inputABV}
               onChange={(e) => setInputABV(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
@@ -89,10 +91,11 @@ export function RumRecipeCalculator() {
 
           {/* Recipe Selection */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="recipe_select" className="block text-sm font-medium text-gray-700 mb-2">
               Recipe
             </label>
             <select
+              id="recipe_select"
               value={selectedRecipe}
               onChange={(e) => setSelectedRecipe(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
@@ -194,4 +197,3 @@ export function RumRecipeCalculator() {
     </div>
   )
 }
-

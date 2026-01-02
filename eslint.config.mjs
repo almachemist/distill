@@ -30,12 +30,16 @@ const eslintConfig = [
     rules: {
       "react-hooks/exhaustive-deps": "off",
       "react/no-unescaped-entities": "off",
-      "@next/next/no-html-link-for-pages": "off"
+      "@next/next/no-html-link-for-pages": "off",
+      "jsx-a11y/alt-text": "warn",
+      "jsx-a11y/label-has-associated-control": "warn",
+      "jsx-a11y/no-redundant-roles": "warn",
+      "jsx-a11y/heading-has-content": "warn",
+      "jsx-a11y/aria-props": "warn"
     }
   },
   {
-    files: ["**/*.{ts,tsx}"],
-    ignores: ["**/*.{ts,tsx}"]
+    files: ["**/*.{ts,tsx}"]
   }
 ];
 

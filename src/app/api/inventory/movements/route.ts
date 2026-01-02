@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
+import { z } from 'zod'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -12,6 +13,28 @@ type MovementRecord = {
   reason?: string
   changes: Array<{ id: string; sku: string; delta: number; before: number; after: number; note?: string }>
 }
+
+function log(level: 'info' | 'error', message: string, meta?: Record<string, any>) {
+  const entry = { level, message, time: new Date().toISOString(), ...(meta || {}) }
+  if (level === 'error') console.error(JSON.stringify(entry))
+  else console.log(JSON.stringify(entry))
+}
+function getReqId(req: NextRequest) {
+  return req.headers.get('x-request-id') || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
+}
+
+const MovementChangeSchema = z.object({
+  id: z.string().min(1).optional(),
+  sku: z.string().min(1).optional(),
+  delta: z.number(),
+  note: z.string().optional()
+}).refine(ch => !!(ch.id || ch.sku), { message: 'id_or_sku_required' })
+
+const MovementPayloadSchema = z.object({
+  reference: z.string().optional(),
+  reason: z.string().optional(),
+  changes: z.array(MovementChangeSchema).min(1)
+})
 
 async function getOrgId(supabase: any): Promise<string> {
   if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
@@ -83,10 +106,13 @@ export async function POST(req: NextRequest) {
   try {
     const supabase = await createClient()
     const org = await getOrgId(supabase)
-    const payload = await req.json() as { reference?: string; reason?: string; changes: MovementChange[] }
-    if (!payload?.changes || !Array.isArray(payload.changes) || payload.changes.length === 0) {
-      return NextResponse.json({ error: 'No changes provided' }, { status: 400 })
+    const body = await req.json()
+    const parsed = MovementPayloadSchema.safeParse(body)
+    if (!parsed.success) {
+      return NextResponse.json({ error: 'Invalid payload', details: parsed.error.flatten() }, { status: 400 })
     }
+    const payload = parsed.data
+    log('info', 'inventory_movements_apply_attempt', { org, count: payload.changes.length, reason: payload.reason, reqId: getReqId(req) })
     const pending = new Map<string, { item_id: string; delta: number; note?: string }>()
     const notFound: MovementChange[] = []
     for (const ch of payload.changes) {
@@ -114,6 +140,7 @@ export async function POST(req: NextRequest) {
       pending.set(item_id, { item_id, delta: (prev?.delta || 0) + Number(ch.delta || 0), note: ch.note || prev?.note })
     }
     if (notFound.length) {
+      log('error', 'inventory_movements_items_not_found', { org, notFoundCount: notFound.length, reqId: getReqId(req) })
       return NextResponse.json({ error: 'Some items not found', notFound }, { status: 404 })
     }
 
@@ -121,6 +148,7 @@ export async function POST(req: NextRequest) {
       if (delta < 0) {
         const available = await getOnHand(supabase, org, item_id)
         if (available + delta < 0) {
+          log('error', 'inventory_movements_insufficient_stock', { org, id: item_id, requestedDelta: delta, available, reqId: getReqId(req) })
           return NextResponse.json({ error: 'Insufficient stock', detail: { id: item_id, requestedDelta: delta, available } }, { status: 400 })
         }
       }
@@ -146,8 +174,10 @@ export async function POST(req: NextRequest) {
       applied.push({ id: item_id, sku: item_id, delta, before: after - delta, after, note: payload.reference })
     }
     const out: MovementRecord = { dt: new Date().toISOString(), reference: payload.reference, reason: payload.reason, changes: applied }
+    log('info', 'inventory_movements_applied', { org, appliedCount: applied.length, reqId: getReqId(req) })
     return NextResponse.json(out)
   } catch (e: any) {
+    log('error', 'inventory_movements_error', { error: e?.message, reqId: getReqId(req) })
     return NextResponse.json({ error: e?.message || 'Failed to apply movements' }, { status: 500 })
   }
 }

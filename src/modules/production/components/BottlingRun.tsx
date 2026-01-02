@@ -348,10 +348,11 @@ export function BottlingRun() {
         <h3 className="text-lg font-semibold mb-4">Run Configuration</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="bottling_source_tank" className="block text-sm font-medium text-gray-700 mb-1">
               Source Tank
             </label>
             <input
+              id="bottling_source_tank"
               type="text"
               value={sourceTank}
               onChange={(e) => setSourceTank(e.target.value)}
@@ -360,10 +361,11 @@ export function BottlingRun() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="bottling_unit_size" className="block text-sm font-medium text-gray-700 mb-1">
               Unit Size (ml)
             </label>
             <select
+              id="bottling_unit_size"
               value={unitSize}
               onChange={(e) => setUnitSize(Number(e.target.value))}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -373,10 +375,11 @@ export function BottlingRun() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="bottling_run_size" className="block text-sm font-medium text-gray-700 mb-1">
               Run Size (units)
             </label>
             <input
+              id="bottling_run_size"
               type="number"
               min="1"
               value={runSize}
@@ -385,12 +388,13 @@ export function BottlingRun() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="bottling_closure_cork" className="block text-sm font-medium text-gray-700 mb-1">
               Closure Type
             </label>
             <div className="space-y-2">
               <label className="flex items-center">
                 <input
+                  id="bottling_closure_cork"
                   type="radio"
                   value="cork"
                   checked={closureType === 'cork'}
@@ -401,6 +405,7 @@ export function BottlingRun() {
               </label>
               <label className="flex items-center">
                 <input
+                  id="bottling_closure_cap"
                   type="radio"
                   value="cap"
                   checked={closureType === 'cap'}

@@ -131,11 +131,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
       {/* Basic Info */}
       <div className="grid grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="batch_name" className="block text-sm font-medium text-stone-700 mb-2">
             Batch Name <span className="text-red-600">*</span>
           </label>
           <input
             type="text"
+            id="batch_name"
             value={batch.batch_name ?? ''}
             onChange={(e) => updateField('batch_name', e.target.value)}
             placeholder="e.g., RUM-2025-001"
@@ -147,11 +148,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="fermentation_date" className="block text-sm font-medium text-stone-700 mb-2">
             Date
           </label>
           <input
             type="date"
+            id="fermentation_date"
             value={batch.fermentation_date ?? ''}
             onChange={(e) => updateField('fermentation_date', e.target.value)}
             className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -159,11 +161,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="fermentation_day" className="block text-sm font-medium text-stone-700 mb-2">
             Day
           </label>
           <input
             type="number"
+            id="fermentation_day"
             value={batch.fermentation_day ?? ''}
             onChange={(e) => updateField('fermentation_day', parseInt(e.target.value) || undefined)}
             placeholder="1"
@@ -175,9 +178,9 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
       {/* Substrates */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <label className="block text-sm font-medium text-stone-700">
+          <span className="block text-sm font-medium text-stone-700">
             Substrate(s) Added
-          </label>
+          </span>
           <button
             onClick={addSubstrate}
             className="px-3 py-1 text-xs text-amber-700 border border-amber-700 rounded-md hover:bg-amber-50"
@@ -193,9 +196,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           {(batch.substrates ?? []).map((substrate, index) => (
             <div key={index} className="grid grid-cols-12 gap-3 items-end">
               <div className="col-span-5">
-                <label className="block text-xs text-stone-600 mb-1">Substrate Name</label>
+                <label htmlFor={`substrate_name_${index}`} className="block text-xs text-stone-600 mb-1">Substrate Name</label>
                 <input
                   type="text"
+                  id={`substrate_name_${index}`}
                   value={substrate.name}
                   onChange={(e) => updateSubstrate(index, 'name', e.target.value)}
                   placeholder="e.g., Cane Juice, Molasses"
@@ -203,9 +207,10 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
                 />
               </div>
               <div className="col-span-3">
-                <label className="block text-xs text-stone-600 mb-1">Batch / Year</label>
+                <label htmlFor={`substrate_batch_year_${index}`} className="block text-xs text-stone-600 mb-1">Batch / Year</label>
                 <input
                   type="text"
+                  id={`substrate_batch_year_${index}`}
                   value={substrate.batch_or_year ?? ''}
                   onChange={(e) => updateSubstrate(index, 'batch_or_year', e.target.value)}
                   placeholder="2025"
@@ -213,10 +218,11 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
                 />
               </div>
               <div className="col-span-3">
-                <label className="block text-xs text-stone-600 mb-1">Volume (L)</label>
+                <label htmlFor={`substrate_volume_${index}`} className="block text-xs text-stone-600 mb-1">Volume (L)</label>
                 <input
                   type="number"
                   step="0.1"
+                  id={`substrate_volume_${index}`}
                   value={substrate.volume_l}
                   onChange={(e) => updateSubstrate(index, 'volume_l', parseFloat(e.target.value) || 0)}
                   placeholder="0"
@@ -252,12 +258,13 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
       {/* Water */}
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="water_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
             Water Volume Added (L)
           </label>
           <input
             type="number"
             step="0.1"
+            id="water_volume_l"
             value={batch.water_volume_l ?? ''}
             onChange={(e) => updateField('water_volume_l', parseFloat(e.target.value) || 0)}
             placeholder="0"
@@ -269,11 +276,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
       {/* Dunder */}
       <div className="grid grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="dunder_batch" className="block text-sm font-medium text-stone-700 mb-2">
             Dunder Batch
           </label>
           <input
             type="text"
+            id="dunder_batch"
             value={batch.dunder_batch ?? ''}
             onChange={(e) => updateField('dunder_batch', e.target.value)}
             placeholder="e.g., DUNDER-001"
@@ -282,12 +290,13 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="dunder_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
             Dunder Volume (L)
           </label>
           <input
             type="number"
             step="0.1"
+            id="dunder_volume_l"
             value={batch.dunder_volume_l ?? ''}
             onChange={(e) => updateField('dunder_volume_l', parseFloat(e.target.value) || undefined)}
             placeholder="0"
@@ -296,11 +305,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="dunder_ph" className="block text-sm font-medium text-stone-700 mb-2">
             Dunder pH
           </label>
           <input
             type="text"
+            id="dunder_ph"
             value={batch.dunder_ph ?? ''}
             onChange={(e) => {
               const formatted = formatPH(e.target.value)
@@ -319,11 +329,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
       {/* Initial Conditions */}
       <div className="grid grid-cols-3 gap-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="initial_brix" className="block text-sm font-medium text-stone-700 mb-2">
             Initial Brix
           </label>
           <input
             type="text"
+            id="initial_brix"
             value={batch.initial_brix ?? ''}
             onChange={(e) => {
               const formatted = formatDecimal(e.target.value)
@@ -339,11 +350,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="initial_ph" className="block text-sm font-medium text-stone-700 mb-2">
             Initial pH
           </label>
           <input
             type="text"
+            id="initial_ph"
             value={batch.initial_ph ?? ''}
             onChange={(e) => {
               const formatted = formatPH(e.target.value)
@@ -359,11 +371,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="initial_temperature_c" className="block text-sm font-medium text-stone-700 mb-2">
             Initial Temperature (°C)
           </label>
           <input
             type="text"
+            id="initial_temperature_c"
             value={batch.initial_temperature_c ?? ''}
             onChange={(e) => {
               const formatted = formatDecimal(e.target.value)
@@ -381,11 +394,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
 
       {/* Temperature Control */}
       <div>
-        <label className="block text-sm font-medium text-stone-700 mb-2">
+        <label htmlFor="temperature_control_settings" className="block text-sm font-medium text-stone-700 mb-2">
           Temperature Control Settings
         </label>
         <input
           type="text"
+          id="temperature_control_settings"
           value={batch.temperature_control_settings ?? ''}
           onChange={(e) => updateField('temperature_control_settings', e.target.value)}
           placeholder="e.g., 28-30°C"
@@ -399,11 +413,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
 
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="yeast_type" className="block text-sm font-medium text-stone-700 mb-2">
               Yeast Type
             </label>
             <input
               type="text"
+              id="yeast_type"
               value={batch.yeast_type ?? ''}
               onChange={(e) => updateField('yeast_type', e.target.value)}
               placeholder="e.g., SafSpirit M-1"
@@ -412,12 +427,13 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="yeast_mass_g" className="block text-sm font-medium text-stone-700 mb-2">
               Yeast Mass Added (g)
             </label>
             <input
               type="number"
               step="0.1"
+              id="yeast_mass_g"
               value={batch.yeast_mass_g ?? ''}
               onChange={(e) => updateField('yeast_mass_g', parseFloat(e.target.value) || 0)}
               placeholder="0"
@@ -426,11 +442,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="yeast_rehydration_temperature_c" className="block text-sm font-medium text-stone-700 mb-2">
               Yeast Rehydration Temperature (°C)
             </label>
           <input
             type="text"
+            id="yeast_rehydration_temperature_c"
             value={batch.yeast_rehydration_temperature_c ?? ''}
             onChange={(e) => {
               const formatted = formatDecimal(e.target.value)
@@ -446,12 +463,13 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="yeast_rehydration_time_min" className="block text-sm font-medium text-stone-700 mb-2">
               Yeast Rehydration Time (min)
             </label>
             <input
               type="number"
               step="1"
+              id="yeast_rehydration_time_min"
               value={batch.yeast_rehydration_time_min ?? ''}
               onChange={(e) => updateField('yeast_rehydration_time_min', parseInt(e.target.value) || undefined)}
               placeholder="0"
@@ -467,11 +485,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
 
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="chems_added" className="block text-sm font-medium text-stone-700 mb-2">
               Chems Added
             </label>
             <input
               type="text"
+              id="chems_added"
               value={batch.chems_added ?? ''}
               onChange={(e) => updateField('chems_added', e.target.value)}
               placeholder="e.g., Citric Acid 50g"
@@ -480,11 +499,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="nutrients_added" className="block text-sm font-medium text-stone-700 mb-2">
               Nutrients Added
             </label>
             <input
               type="text"
+              id="nutrients_added"
               value={batch.nutrients_added ?? ''}
               onChange={(e) => updateField('nutrients_added', e.target.value)}
               placeholder="e.g., DAP 100g, Fermaid 50g"
@@ -587,11 +607,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
 
         <div className="grid grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="final_brix" className="block text-sm font-medium text-stone-700 mb-2">
               Final Brix
             </label>
           <input
             type="text"
+            id="final_brix"
             value={batch.final_brix ?? ''}
             onChange={(e) => {
               const formatted = formatDecimal(e.target.value)
@@ -607,11 +628,12 @@ export function FermentationSection({ batch, updateField }: FermentationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="final_ph" className="block text-sm font-medium text-stone-700 mb-2">
               Final pH
             </label>
           <input
             type="text"
+            id="final_ph"
             value={batch.final_ph ?? ''}
             onChange={(e) => {
               const formatted = formatPH(e.target.value)

@@ -287,10 +287,11 @@ export default function DistillationCutsModal({
                     {/* Cut Data Fields */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor={`cut_volume_${cut.id}`} className="block text-sm font-medium text-gray-700 mb-1">
                           Volume (L)
                         </label>
                         <input
+                          id={`cut_volume_${cut.id}`}
                           type="number"
                           step="0.1"
                           value={cut.volume || ''}
@@ -301,10 +302,11 @@ export default function DistillationCutsModal({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor={`cut_abv_${cut.id}`} className="block text-sm font-medium text-gray-700 mb-1">
                           ABV (%)
                         </label>
                         <input
+                          id={`cut_abv_${cut.id}`}
                           type="number"
                           step="0.1"
                           value={cut.abv || ''}
@@ -315,10 +317,11 @@ export default function DistillationCutsModal({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <label htmlFor={`cut_tank_${cut.id}`} className="block text-sm font-medium text-gray-700 mb-1">
                           Tank
                         </label>
                         <select
+                          id={`cut_tank_${cut.id}`}
                           value={cut.tank}
                           onChange={(e) => updateCutField(cut.id, 'tank', e.target.value)}
                           className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -331,9 +334,9 @@ export default function DistillationCutsModal({
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                        <p className="block text-sm font-medium text-gray-700 mb-1">
                           LAL
-                        </label>
+                        </p>
                         <div className="w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm">
                           {(cut.volume * cut.abv / 100).toFixed(2)}L
                         </div>
@@ -342,10 +345,11 @@ export default function DistillationCutsModal({
 
                     {/* Cut Notes */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                      <label htmlFor={`cut_notes_${cut.id}`} className="block text-sm font-medium text-gray-700 mb-1">
                         Notes:
                       </label>
                       <textarea
+                        id={`cut_notes_${cut.id}`}
                         value={cut.notes}
                         onChange={(e) => updateCutField(cut.id, 'notes', e.target.value)}
                         placeholder={`Add observations for ${cut.name.toLowerCase()}...`}
@@ -432,10 +436,11 @@ export default function DistillationCutsModal({
                 
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="power_kw" className="block text-sm font-medium text-gray-700 mb-1">
                       Power (kW)
                     </label>
                     <input
+                      id="power_kw"
                       type="number"
                       step="0.1"
                       value={powerData.powerKW || ''}
@@ -478,10 +483,11 @@ export default function DistillationCutsModal({
                   )}
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="power_notes" className="block text-sm font-medium text-gray-700 mb-1">
                       Power Notes
                     </label>
                     <textarea
+                      id="power_notes"
                       value={powerData.notes}
                       onChange={(e) => updatePowerField('notes', e.target.value)}
                       placeholder="Power adjustments, issues, etc..."

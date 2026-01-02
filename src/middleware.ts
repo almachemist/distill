@@ -6,8 +6,23 @@ function isValidUrl(u: string | null | undefined): u is string {
 }
 
 export async function middleware(request: NextRequest) {
+  const existingReqId = request.headers.get('x-request-id') || ''
+  const reqId = existingReqId || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
+  const headers = new Headers(request.headers)
+  headers.set('x-request-id', reqId)
+
+  // For API routes, only propagate x-request-id and do not apply auth redirects
+  const { pathname } = request.nextUrl
+  if (pathname.startsWith('/api')) {
+    const resp = NextResponse.next({
+      request: { headers },
+    })
+    resp.headers.set('x-request-id', reqId)
+    return resp
+  }
+
   let supabaseResponse = NextResponse.next({
-    request,
+    request: { headers },
   })
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
@@ -37,8 +52,6 @@ export async function middleware(request: NextRequest) {
       )
     : null
 
-  const { pathname } = request.nextUrl
-
   // Public routes that don't require authentication
   const publicRoutes = ['/auth/login', '/auth/signup', '/auth/reset-password']
   const isPublicRoute = pathname === '/' || publicRoutes.some(route => pathname.startsWith(route))
@@ -63,6 +76,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
+  supabaseResponse.headers.set('x-request-id', reqId)
   return supabaseResponse
 }
 
@@ -76,6 +90,7 @@ export const config = {
      * - public folder
      * - api routes
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$|api).*)',
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/api/:path*',
   ],
 }

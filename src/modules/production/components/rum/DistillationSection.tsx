@@ -158,11 +158,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
       {/* Basic Info */}
       <div className="grid grid-cols-2 gap-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="batch_name" className="block text-sm font-medium text-stone-700 mb-2">
             Batch Name
           </label>
           <input
             type="text"
+            id="batch_name"
             value={batch.batch_name ?? ''}
             disabled
             className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -173,11 +174,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="distillation_date" className="block text-sm font-medium text-stone-700 mb-2">
             Distillation Date
           </label>
           <input
             type="date"
+            id="distillation_date"
             value={batch.distillation_date ?? ''}
             onChange={(e) => updateField('distillation_date', e.target.value)}
             className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -191,11 +193,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         
         <div className="grid grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="boiler_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               Boiler Volume (L)
             </label>
           <input
             type="text"
+            id="boiler_volume_l"
             value={batch.boiler_volume_l ?? ''}
             onChange={(e) => updateField('boiler_volume_l', parseNumber(e.target.value))}
             onBlur={(e) => {
@@ -212,11 +215,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="boiler_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               Boiler ABV (%)
             </label>
             <input
               type="text"
+              id="boiler_abv_percent"
               value={batch.boiler_abv_percent ?? ''}
               onChange={(e) => {
                 // Format and limit to 3 digits max (e.g., 855 → 85.5)
@@ -237,12 +241,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="boiler_lal" className="block text-sm font-medium text-stone-700 mb-2">
               Boiler LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="boiler_lal"
               value={batch.boiler_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -260,11 +265,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         
         <div className="grid grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_added_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               Volume (L)
             </label>
           <input
             type="text"
+            id="heads_added_volume_l"
             value={batch.heads_added_volume_l ?? ''}
             onChange={(e) => updateField('heads_added_volume_l', parseNumber(e.target.value))}
             onBlur={(e) => {
@@ -280,11 +286,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_added_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               ABV (%)
             </label>
           <input
             type="text"
+            id="heads_added_abv_percent"
             value={batch.heads_added_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -304,12 +311,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_added_lal" className="block text-sm font-medium text-stone-700 mb-2">
               LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="heads_added_lal"
               value={batch.heads_added_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -327,11 +335,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         
         <div className="grid grid-cols-4 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort1_content" className="block text-sm font-medium text-stone-700 mb-2">
               Content
             </label>
             <input
               type="text"
+              id="retort1_content"
               value={batch.retort1_content ?? ''}
               onChange={(e) => updateField('retort1_content', e.target.value)}
               placeholder="e.g., Heads"
@@ -340,11 +349,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort1_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               R1 Volume (L)
             </label>
           <input
             type="text"
+            id="retort1_volume_l"
             value={batch.retort1_volume_l ?? ''}
             onChange={(e) => updateField('retort1_volume_l', parseNumber(e.target.value))}
             onBlur={(e) => {
@@ -360,11 +370,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort1_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               R1 ABV (%)
             </label>
           <input
             type="text"
+            id="retort1_abv_percent"
             value={batch.retort1_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -384,12 +395,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort1_lal" className="block text-sm font-medium text-stone-700 mb-2">
               R1 LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="retort1_lal"
               value={batch.retort1_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -404,11 +416,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         
         <div className="grid grid-cols-4 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort2_content" className="block text-sm font-medium text-stone-700 mb-2">
               Content
             </label>
             <input
               type="text"
+              id="retort2_content"
               value={batch.retort2_content ?? ''}
               onChange={(e) => updateField('retort2_content', e.target.value)}
               placeholder="e.g., Tails"
@@ -417,11 +430,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort2_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               R2 Volume (L)
             </label>
           <input
             type="text"
+            id="retort2_volume_l"
             value={batch.retort2_volume_l ?? ''}
             onChange={(e) => updateField('retort2_volume_l', parseNumber(e.target.value))}
             onBlur={(e) => {
@@ -437,11 +451,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort2_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               R2 ABV (%)
             </label>
           <input
             type="text"
+            id="retort2_abv_percent"
             value={batch.retort2_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -461,12 +476,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="retort2_lal" className="block text-sm font-medium text-stone-700 mb-2">
               R2 LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="retort2_lal"
               value={batch.retort2_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -481,11 +497,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="power_input_boiler_a" className="block text-sm font-medium text-stone-700 mb-2">
               Power Input Boiler (A)
             </label>
           <input
             type="text"
+            id="power_input_boiler_a"
             value={batch.power_input_boiler_a ?? ''}
             onChange={(e) => updateField('power_input_boiler_a', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_boiler_a', parseNumber(e.target.value))}
@@ -495,11 +512,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="still_heat_starting_time" className="block text-sm font-medium text-stone-700 mb-2">
               Still Heat Starting Time
             </label>
             <input
               type="time"
+              id="still_heat_starting_time"
               value={batch.still_heat_starting_time ?? ''}
               onChange={(e) => updateField('still_heat_starting_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -507,11 +525,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="power_input_r1_a" className="block text-sm font-medium text-stone-700 mb-2">
               Power Input R1 (A)
             </label>
           <input
             type="text"
+            id="power_input_r1_a"
             value={batch.power_input_r1_a ?? ''}
             onChange={(e) => updateField('power_input_r1_a', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_r1_a', parseNumber(e.target.value))}
@@ -521,11 +540,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="r1_heat_starting_time" className="block text-sm font-medium text-stone-700 mb-2">
               R1 Heat Starting Time
             </label>
             <input
               type="time"
+              id="r1_heat_starting_time"
               value={batch.r1_heat_starting_time ?? ''}
               onChange={(e) => updateField('r1_heat_starting_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -533,11 +553,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="power_input_r2_a" className="block text-sm font-medium text-stone-700 mb-2">
               Power Input R2 (A)
             </label>
           <input
             type="text"
+            id="power_input_r2_a"
             value={batch.power_input_r2_a ?? ''}
             onChange={(e) => updateField('power_input_r2_a', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_r2_a', parseNumber(e.target.value))}
@@ -547,11 +568,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="r2_heat_starting_time" className="block text-sm font-medium text-stone-700 mb-2">
               R2 Heat Starting Time
             </label>
             <input
               type="time"
+              id="r2_heat_starting_time"
               value={batch.r2_heat_starting_time ?? ''}
               onChange={(e) => updateField('r2_heat_starting_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -566,11 +588,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="first_spirit_pot_temperature_c" className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit Pot Temperature (°C)
             </label>
           <input
             type="text"
+            id="first_spirit_pot_temperature_c"
             value={batch.first_spirit_pot_temperature_c ?? ''}
             onChange={(e) => {
               const formatted = formatTemperature(e.target.value)
@@ -586,11 +609,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="r1_temperature_c" className="block text-sm font-medium text-stone-700 mb-2">
               R1 Temperature (°C)
             </label>
           <input
             type="text"
+            id="r1_temperature_c"
             value={batch.r1_temperature_c ?? ''}
             onChange={(e) => {
               const formatted = formatTemperature(e.target.value)
@@ -606,11 +630,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="r2_temperature_c" className="block text-sm font-medium text-stone-700 mb-2">
               R2 Temperature (°C)
             </label>
           <input
             type="text"
+            id="r2_temperature_c"
             value={batch.r2_temperature_c ?? ''}
             onChange={(e) => {
               const formatted = formatTemperature(e.target.value)
@@ -626,11 +651,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="first_spirit_time" className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit Time
             </label>
             <input
               type="time"
+              id="first_spirit_time"
               value={batch.first_spirit_time ?? ''}
               onChange={(e) => updateField('first_spirit_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -638,11 +664,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="first_spirit_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit ABV (%)
             </label>
           <input
             type="text"
+            id="first_spirit_abv_percent"
             value={batch.first_spirit_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -658,11 +685,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="first_spirit_density" className="block text-sm font-medium text-stone-700 mb-2">
               First Spirit Density
             </label>
           <input
             type="text"
+            id="first_spirit_density"
             value={batch.first_spirit_density ?? ''}
             onChange={(e) => {
               const formatted = formatDensity(e.target.value)
@@ -685,11 +713,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-4 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="power_input_pot_a" className="block text-sm font-medium text-stone-700 mb-2">
               Power Input Pot (A)
             </label>
           <input
             type="text"
+            id="power_input_pot_a"
             value={batch.power_input_pot_a ?? ''}
             onChange={(e) => updateField('power_input_pot_a', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_pot_a', parseNumber(e.target.value))}
@@ -699,11 +728,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="r1_power_input_a" className="block text-sm font-medium text-stone-700 mb-2">
               R1 Power Input (A)
             </label>
           <input
             type="text"
+            id="r1_power_input_a"
             value={batch.r1_power_input_a ?? ''}
             onChange={(e) => updateField('r1_power_input_a', parseNumber(e.target.value))}
             onBlur={(e) => updateField('r1_power_input_a', parseNumber(e.target.value))}
@@ -713,11 +743,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="r2_power_input_a" className="block text-sm font-medium text-stone-700 mb-2">
               R2 Power Input (A)
             </label>
           <input
             type="text"
+            id="r2_power_input_a"
             value={batch.r2_power_input_a ?? ''}
             onChange={(e) => updateField('r2_power_input_a', parseNumber(e.target.value))}
             onBlur={(e) => updateField('r2_power_input_a', parseNumber(e.target.value))}
@@ -727,11 +758,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="flow_l_per_h" className="block text-sm font-medium text-stone-700 mb-2">
               Flow (L/h)
             </label>
           <input
             type="text"
+            id="flow_l_per_h"
             value={batch.flow_l_per_h ?? ''}
             onChange={(e) => updateField('flow_l_per_h', parseNumber(e.target.value))}
             onBlur={(e) => updateField('flow_l_per_h', parseNumber(e.target.value))}
@@ -748,11 +780,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-2 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="foreshots_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               Volume (L)
             </label>
           <input
             type="text"
+            id="foreshots_volume_l"
             value={batch.foreshots_volume_l ?? ''}
             onChange={(e) => updateField('foreshots_volume_l', parseToNumber(e.target.value))}
             onBlur={(e) => updateField('foreshots_volume_l', parseToNumber(e.target.value))}
@@ -762,11 +795,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="foreshots_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               ABV (%)
             </label>
           <input
             type="text"
+            id="foreshots_abv_percent"
             value={batch.foreshots_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -789,11 +823,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-5 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_cut_time" className="block text-sm font-medium text-stone-700 mb-2">
               Heads Cut Time
             </label>
             <input
               type="time"
+              id="heads_cut_time"
               value={batch.heads_cut_time ?? ''}
               onChange={(e) => updateField('heads_cut_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -801,11 +836,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_cut_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               Heads ABV (%)
             </label>
           <input
             type="text"
+            id="heads_cut_abv_percent"
             value={batch.heads_cut_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -825,11 +861,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_cut_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               Heads Volume (L)
             </label>
           <input
             type="text"
+            id="heads_cut_volume_l"
             value={batch.heads_cut_volume_l ?? ''}
             onChange={(e) => updateField('heads_cut_volume_l', parseToNumber(e.target.value))}
             onBlur={(e) => {
@@ -845,12 +882,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_cut_lal" className="block text-sm font-medium text-stone-700 mb-2">
               Heads LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="heads_cut_lal"
               value={batch.heads_cut_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -858,11 +896,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="heads_cut_density" className="block text-sm font-medium text-stone-700 mb-2">
               Heads Density
             </label>
           <input
             type="text"
+            id="heads_cut_density"
             value={batch.heads_cut_density ?? ''}
             onChange={(e) => {
               const formatted = formatDensity(e.target.value)
@@ -885,11 +924,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-5 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_cut_time" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Cut Time
             </label>
             <input
               type="time"
+              id="hearts_cut_time"
               value={batch.hearts_cut_time ?? ''}
               onChange={(e) => updateField('hearts_cut_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -897,11 +937,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_cut_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Cut ABV (%)
             </label>
           <input
             type="text"
+            id="hearts_cut_abv_percent"
             value={batch.hearts_cut_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -917,11 +958,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Volume (L)
             </label>
           <input
             type="text"
+            id="hearts_volume_l"
             value={batch.hearts_volume_l ?? ''}
             onChange={(e) => updateField('hearts_volume_l', parseToNumber(e.target.value))}
             onBlur={(e) => {
@@ -937,11 +979,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts ABV (%)
             </label>
           <input
             type="text"
+            id="hearts_abv_percent"
             value={batch.hearts_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -962,12 +1005,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_lal" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="hearts_lal"
               value={batch.hearts_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -977,11 +1021,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_cut_density" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Cut Density
             </label>
           <input
             type="text"
+            id="hearts_cut_density"
             value={batch.hearts_cut_density ?? ''}
             onChange={(e) => {
               const formatted = formatDensity(e.target.value)
@@ -997,11 +1042,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="hearts_density" className="block text-sm font-medium text-stone-700 mb-2">
               Hearts Density
             </label>
           <input
             type="text"
+            id="hearts_density"
             value={batch.hearts_density ?? ''}
             onChange={(e) => {
               const formatted = formatDensity(e.target.value)
@@ -1018,11 +1064,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         </div>
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="power_input_changed_to" className="block text-sm font-medium text-stone-700 mb-2">
             Power Input Changed To (A)
           </label>
           <input
             type="text"
+            id="power_input_changed_to"
             value={batch.power_input_changed_to ?? ''}
             onChange={(e) => updateField('power_input_changed_to', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_changed_to', parseNumber(e.target.value))}
@@ -1041,11 +1088,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-5 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="early_tails_cut_time" className="block text-sm font-medium text-stone-700 mb-2">
               Early Tails Cut Time
             </label>
             <input
               type="time"
+              id="early_tails_cut_time"
               value={batch.early_tails_cut_time ?? ''}
               onChange={(e) => updateField('early_tails_cut_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -1053,11 +1101,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="early_tails_cut_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               ETails Cut ABV (%)
             </label>
           <input
             type="text"
+            id="early_tails_cut_abv_percent"
             value={batch.early_tails_cut_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -1073,11 +1122,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="early_tails_total_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               ETails Total ABV (%)
             </label>
           <input
             type="text"
+            id="early_tails_total_abv_percent"
             value={batch.early_tails_total_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -1098,11 +1148,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="early_tails_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               ETails Volume (L)
             </label>
           <input
             type="text"
+            id="early_tails_volume_l"
             value={batch.early_tails_volume_l ?? ''}
             onChange={(e) => updateField('early_tails_volume_l', parseToNumber(e.target.value))}
             onBlur={(e) => {
@@ -1118,12 +1169,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="early_tails_lal" className="block text-sm font-medium text-stone-700 mb-2">
               ETails LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="early_tails_lal"
               value={batch.early_tails_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -1133,11 +1185,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-2 gap-6 mt-4">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="early_tails_density" className="block text-sm font-medium text-stone-700 mb-2">
               ETails Density
             </label>
           <input
             type="text"
+            id="early_tails_density"
             value={batch.early_tails_density ?? ''}
             onChange={(e) => {
               const formatted = formatDensity(e.target.value)
@@ -1153,11 +1206,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="power_input_changed_to_2" className="block text-sm font-medium text-stone-700 mb-2">
               Power Input Changed To (A)
             </label>
           <input
             type="text"
+            id="power_input_changed_to_2"
             value={batch.power_input_changed_to_2 ?? ''}
             onChange={(e) => updateField('power_input_changed_to_2', parseNumber(e.target.value))}
             onBlur={(e) => updateField('power_input_changed_to_2', parseNumber(e.target.value))}
@@ -1177,11 +1231,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-5 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="late_tails_cut_time" className="block text-sm font-medium text-stone-700 mb-2">
               Late Tails Cut Time
             </label>
             <input
               type="time"
+              id="late_tails_cut_time"
               value={batch.late_tails_cut_time ?? ''}
               onChange={(e) => updateField('late_tails_cut_time', e.target.value)}
               className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
@@ -1189,11 +1244,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="late_tails_cut_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               LTails Cut ABV (%)
             </label>
           <input
             type="text"
+            id="late_tails_cut_abv_percent"
             value={batch.late_tails_cut_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -1209,11 +1265,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="late_tails_total_abv_percent" className="block text-sm font-medium text-stone-700 mb-2">
               LTails Total ABV (%)
             </label>
           <input
             type="text"
+            id="late_tails_total_abv_percent"
             value={batch.late_tails_total_abv_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -1234,11 +1291,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="late_tails_volume_l" className="block text-sm font-medium text-stone-700 mb-2">
               LTails Volume (L)
             </label>
           <input
             type="text"
+            id="late_tails_volume_l"
             value={batch.late_tails_volume_l ?? ''}
             onChange={(e) => updateField('late_tails_volume_l', parseToNumber(e.target.value))}
             onBlur={(e) => {
@@ -1254,12 +1312,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="late_tails_lal" className="block text-sm font-medium text-stone-700 mb-2">
               LTails LAL
             </label>
             <input
               type="number"
               step="0.01"
+              id="late_tails_lal"
               value={batch.late_tails_lal ?? ''}
               readOnly
               className="w-full px-3 py-2 border border-stone-300 rounded-md bg-stone-50 text-stone-600"
@@ -1268,11 +1327,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
         </div>
 
         <div className="mt-4">
-          <label className="block text-sm font-medium text-stone-700 mb-2">
+          <label htmlFor="late_tails_density" className="block text-sm font-medium text-stone-700 mb-2">
             LTails Density
           </label>
           <input
             type="text"
+            id="late_tails_density"
             value={batch.late_tails_density ?? ''}
             onChange={(e) => {
               const formatted = formatDensity(e.target.value)
@@ -1300,12 +1360,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
           <div className="grid grid-cols-3 gap-6 mb-4">
             <div>
-              <label className="block text-xs text-amber-800 mb-1">
+              <label htmlFor="dilution_hearts_volume_l" className="block text-xs text-amber-800 mb-1">
                 Hearts Volume (L)
               </label>
               <input
                 type="number"
                 step="0.1"
+                id="dilution_hearts_volume_l"
                 value={batch.hearts_volume_l ?? ''}
                 readOnly
                 className="w-full px-3 py-2 border border-amber-300 rounded-md bg-white text-stone-900"
@@ -1313,12 +1374,13 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             </div>
 
             <div>
-              <label className="block text-xs text-amber-800 mb-1">
+              <label htmlFor="dilution_hearts_abv_percent" className="block text-xs text-amber-800 mb-1">
                 Hearts ABV (%)
               </label>
               <input
                 type="number"
                 step="0.01"
+                id="dilution_hearts_abv_percent"
                 value={batch.hearts_abv_percent ?? ''}
                 readOnly
                 className="w-full px-3 py-2 border border-amber-300 rounded-md bg-white text-stone-900"
@@ -1326,11 +1388,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
             </div>
 
             <div>
-              <label className="block text-xs text-amber-800 mb-1">
+              <label htmlFor="dilution_target_abv_percent" className="block text-xs text-amber-800 mb-1">
                 Target ABV (%)
               </label>
               <input
                 type="text"
+                id="dilution_target_abv_percent"
                 value={batch.final_abv_after_dilution_percent ?? ''}
                 onChange={(e) => {
                   const formatted = formatABV(e.target.value)
@@ -1384,11 +1447,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
 
         <div className="grid grid-cols-3 gap-6">
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="water_added_for_dilution_l" className="block text-sm font-medium text-stone-700 mb-2">
               Water Added for Dilution (L)
             </label>
           <input
             type="text"
+            id="water_added_for_dilution_l"
             value={batch.water_added_for_dilution_l ?? ''}
             onChange={(e) => updateField('water_added_for_dilution_l', parseNumber(e.target.value))}
             onBlur={(e) => updateField('water_added_for_dilution_l', parseNumber(e.target.value))}
@@ -1398,11 +1462,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="final_abv_after_dilution_percent" className="block text-sm font-medium text-stone-700 mb-2">
               Final ABV (%)
             </label>
           <input
             type="text"
+            id="final_abv_after_dilution_percent"
             value={batch.final_abv_after_dilution_percent ?? ''}
             onChange={(e) => {
               const formatted = formatABV(e.target.value)
@@ -1418,11 +1483,12 @@ export function DistillationSection({ batch, updateField }: DistillationSectionP
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="final_volume_after_dilution_l" className="block text-sm font-medium text-stone-700 mb-2">
               Final Volume (L)
             </label>
           <input
             type="text"
+            id="final_volume_after_dilution_l"
             value={batch.final_volume_after_dilution_l ?? ''}
             onChange={(e) => updateField('final_volume_after_dilution_l', parseNumber(e.target.value))}
             onBlur={(e) => updateField('final_volume_after_dilution_l', parseNumber(e.target.value))}

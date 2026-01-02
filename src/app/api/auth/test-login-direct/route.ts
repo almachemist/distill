@@ -3,11 +3,24 @@ import { createServerClient } from '@supabase/ssr'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 export const runtime = 'nodejs'
 
+const RATE_WINDOW_MS = 60000
+const RATE_MAX = 10
+const buckets = new Map<string, { count: number; start: number }>()
+function allow(req: NextRequest): boolean {
+  const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0]?.trim() || 'unknown'
+  const now = Date.now()
+  const b = buckets.get(ip)
+  if (!b || now - b.start >= RATE_WINDOW_MS) { buckets.set(ip, { count: 1, start: now }); return true }
+  b.count += 1
+  return b.count <= RATE_MAX
+}
+
 function isValidUrl(u: string | null | undefined): u is string {
   return typeof u === 'string' && (u.startsWith('http://') || u.startsWith('https://'))
 }
 
 export async function GET(req: NextRequest) {
+  if (!allow(req)) return NextResponse.json({ error: 'rate_limited' }, { status: 429 })
   const urlParam = new URL(req.url)
   const email = (urlParam.searchParams.get('email') || '').toLowerCase()
   const allowAny = (process.env.ALLOW_TEST_LOGIN_ANY || 'false').toLowerCase() === 'true'

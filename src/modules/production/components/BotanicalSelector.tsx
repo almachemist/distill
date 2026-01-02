@@ -180,10 +180,11 @@ export function BotanicalSelector({ selections, onChange }: BotanicalSelectorPro
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {/* Botanical Selector */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor={`botanical_select_${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                   Botanical <span className="text-red-500">*</span>
                 </label>
                 <select
+                  id={`botanical_select_${index}`}
                   value={selection.inventory_item_id}
                   onChange={(e) => updateBotanical(index, 'inventory_item_id', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
@@ -199,10 +200,11 @@ export function BotanicalSelector({ selections, onChange }: BotanicalSelectorPro
 
               {/* Quantity */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor={`botanical_qty_g_${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                   Quantity (g) <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id={`botanical_qty_g_${index}`}
                   type="number"
                   value={selection.quantity_g || ''}
                   onChange={(e) => updateBotanical(index, 'quantity_g', parseFloat(e.target.value) || 0)}

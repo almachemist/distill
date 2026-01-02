@@ -97,10 +97,10 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="bg-gray-800 text-white p-6 rounded-t-xl">
+        <div className="bg-graphite text-white p-6 rounded-t-xl">
           <h2 className="text-2xl font-bold">{isNewTank ? 'Add New Tank' : `Edit ${tank.tank_name}`}</h2>
           {!isNewTank && (
-            <p className="text-gray-300 text-sm mt-1">{tank.tank_id} - Capacity: {tank.capacity_l} L</p>
+            <p className="text-[#D0D0D0] text-sm mt-1">{tank.tank_id} - Capacity: {tank.capacity_l} L</p>
           )}
         </div>
 
@@ -109,40 +109,43 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
           {/* Tank ID and Name */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="tank_id" className="block text-sm font-medium text-gray-700 mb-2">
                 Tank ID {isNewTank && <span className="text-red-500">*</span>}
               </label>
               <input
                 type="text"
+                id="tank_id"
                 value={tankId}
                 onChange={(e) => setTankId(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                 placeholder="e.g., TK-11"
                 disabled={!isNewTank}
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="tank_name" className="block text-sm font-medium text-gray-700 mb-2">
                 Tank Name {isNewTank && <span className="text-red-500">*</span>}
               </label>
               <input
                 type="text"
+                id="tank_name"
                 value={tankName}
                 onChange={(e) => setTankName(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                 placeholder="e.g., Tank 11"
               />
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="tank_capacity_l" className="block text-sm font-medium text-gray-700 mb-2">
               Capacity (L)
             </label>
             <input
               type="number"
+              id="tank_capacity_l"
               value={capacity}
               onChange={(e) => setCapacity(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
               placeholder="1000"
               step="1"
               min="0"
@@ -151,29 +154,31 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
 
           {/* Product */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="tank_product" className="block text-sm font-medium text-gray-700 mb-2">
               Product
             </label>
-            <input
-              type="text"
-              value={product}
-              onChange={(e) => setProduct(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="e.g., Rainforest Gin, Navy Strength Gin"
-            />
-          </div>
+              <input
+                type="text"
+                id="tank_product"
+                value={product}
+                onChange={(e) => setProduct(e.target.value)}
+                className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
+                placeholder="e.g., Rainforest Gin, Navy Strength Gin"
+              />
+            </div>
 
           {/* ABV and Volume */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="tank_abv_percent" className="block text-sm font-medium text-gray-700 mb-2">
                 ABV (%)
               </label>
               <input
                 type="number"
+                id="tank_abv_percent"
                 value={abv}
                 onChange={(e) => setAbv(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                 placeholder="40.0"
                 step="0.1"
                 min="0"
@@ -181,14 +186,15 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="tank_volume_l" className="block text-sm font-medium text-gray-700 mb-2">
                 Volume (L)
               </label>
               <input
                 type="number"
+                id="tank_volume_l"
                 value={volume}
                 onChange={(e) => setVolume(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
                 placeholder="500"
                 step="0.1"
                 min="0"
@@ -199,13 +205,14 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
 
           {/* Status */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="tank_status" className="block text-sm font-medium text-gray-700 mb-2">
               Status
             </label>
             <select
+              id="tank_status"
               value={status}
               onChange={(e) => setStatus(e.target.value as TankStatus)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
             >
               {Object.entries(TANK_STATUS_LABELS).map(([value, label]) => (
                 <option key={value} value={value}>
@@ -217,13 +224,14 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="tank_notes" className="block text-sm font-medium text-gray-700 mb-2">
               Notes
             </label>
             <textarea
+              id="tank_notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
               placeholder="Add any notes about this tank..."
               rows={3}
             />
@@ -231,14 +239,15 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
 
           {/* User Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="tank_user_name" className="block text-sm font-medium text-gray-700 mb-2">
               Your Name
             </label>
             <input
               type="text"
+              id="tank_user_name"
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
               placeholder="e.g., Gabi"
             />
           </div>
@@ -251,7 +260,7 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
               <button
                 onClick={handleDelete}
                 disabled={isSaving}
-                className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium transition disabled:opacity-50"
+                className="px-6 py-2 bg-graphite hover:opacity-90 text-white rounded-lg font-medium transition disabled:opacity-50"
               >
                 Delete Tank
               </button>
@@ -268,7 +277,7 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
             <button
               onClick={handleSave}
               disabled={isSaving}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition disabled:opacity-50"
+              className="px-6 py-2 bg-copper hover:bg-copper/90 text-white rounded-lg transition disabled:opacity-50"
             >
               {isSaving ? 'Saving...' : isNewTank ? 'Add Tank' : 'Save Changes'}
             </button>

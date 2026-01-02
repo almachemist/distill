@@ -6,6 +6,7 @@ interface PercentInputProps {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  id?: string;
 }
 
 export function PercentInput({ 
@@ -13,12 +14,14 @@ export function PercentInput({
   onChange, 
   placeholder = "%", 
   className = "",
-  disabled = false 
+  disabled = false,
+  id
 }: PercentInputProps) {
   return (
     <input
       type="text"
       inputMode="decimal"
+      id={id}
       value={value ?? ""}
       onChange={(e) => {
         const s = e.target.value;
@@ -43,6 +46,7 @@ interface NumberInputProps {
   className?: string;
   disabled?: boolean;
   step?: string;
+  id?: string;
 }
 
 export function NumberInput({ 
@@ -51,12 +55,14 @@ export function NumberInput({
   placeholder = "", 
   className = "",
   disabled = false,
-  step = "0.1"
+  step = "0.1",
+  id
 }: NumberInputProps) {
   return (
     <input
       type="number"
       step={step}
+      id={id}
       value={value ?? ""}
       onChange={(e) => {
         const s = e.target.value;
@@ -80,6 +86,7 @@ interface TextInputProps {
   placeholder?: string;
   className?: string;
   disabled?: boolean;
+  id?: string;
 }
 
 export function TextInput({ 
@@ -87,11 +94,13 @@ export function TextInput({
   onChange, 
   placeholder = "", 
   className = "",
-  disabled = false
+  disabled = false,
+  id
 }: TextInputProps) {
   return (
     <input
       type="text"
+      id={id}
       value={value ?? ""}
       onChange={(e) => {
         const s = e.target.value;
@@ -103,4 +112,3 @@ export function TextInput({
     />
   );
 }
-

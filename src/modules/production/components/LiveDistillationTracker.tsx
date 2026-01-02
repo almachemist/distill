@@ -637,8 +637,9 @@ export default function LiveDistillationTracker({
                     {phase.phase === 'Preparation' && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Ethanol Added (L)</label>
+                          <label htmlFor="prep_ethanol_added_l" className="block text-sm font-medium text-gray-700 mb-1">Ethanol Added (L)</label>
                           <input
+                            id="prep_ethanol_added_l"
                             type="number"
                             step="0.1"
                             value={phase.data.ethanolAdded_L || ''}
@@ -650,8 +651,9 @@ export default function LiveDistillationTracker({
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Ethanol ABV (%)</label>
+                          <label htmlFor="prep_ethanol_abv_percent" className="block text-sm font-medium text-gray-700 mb-1">Ethanol ABV (%)</label>
                           <input
+                            id="prep_ethanol_abv_percent"
                             type="number"
                             step="0.1"
                             value={phase.data.ethanolABV_percent || ''}
@@ -663,8 +665,9 @@ export default function LiveDistillationTracker({
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Water Added (L)</label>
+                          <label htmlFor="prep_water_added_l" className="block text-sm font-medium text-gray-700 mb-1">Water Added (L)</label>
                           <input
+                            id="prep_water_added_l"
                             type="number"
                             step="0.1"
                             value={phase.data.waterAdded_L || ''}
@@ -676,8 +679,9 @@ export default function LiveDistillationTracker({
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
+                          <label htmlFor="prep_still_used" className="block text-sm font-medium text-gray-700 mb-1">Still Used</label>
                           <select
+                            id="prep_still_used"
                             value={phase.data.stillUsed}
                             onChange={(e) => updatePhaseData('Preparation', 'stillUsed', e.target.value)}
                             disabled={viewMode !== 'draft'}
@@ -708,8 +712,9 @@ export default function LiveDistillationTracker({
                               {phase.data.others.map((other: any, index: number) => (
                                 <div key={index} className="grid grid-cols-1 md:grid-cols-4 gap-3 p-3 bg-gray-50 rounded-lg">
                                   <div>
-                                    <label className="block text-xs font-medium text-gray-600 mb-1">Name</label>
+                                    <label htmlFor={`prep_other_name_${index}`} className="block text-xs font-medium text-gray-600 mb-1">Name</label>
                                     <input
+                                      id={`prep_other_name_${index}`}
                                       type="text"
                                       value={other.name}
                                       onChange={(e) => updateOtherComponent(index, 'name', e.target.value)}
@@ -718,8 +723,9 @@ export default function LiveDistillationTracker({
                                     />
                                   </div>
                                   <div>
-                                    <label className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
+                                    <label htmlFor={`prep_other_volume_l_${index}`} className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
                                     <input
+                                      id={`prep_other_volume_l_${index}`}
                                       type="number"
                                       step="0.1"
                                       value={other.volume_L || ''}
@@ -728,8 +734,9 @@ export default function LiveDistillationTracker({
                                     />
                                   </div>
                                   <div>
-                                    <label className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
+                                    <label htmlFor={`prep_other_abv_percent_${index}`} className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
                                     <input
+                                      id={`prep_other_abv_percent_${index}`}
                                       type="number"
                                       step="0.1"
                                       value={other.abv_percent || ''}
@@ -739,8 +746,9 @@ export default function LiveDistillationTracker({
                                   </div>
                                   <div className="flex items-end gap-2">
                                     <div className="flex-1">
-                                      <label className="block text-xs font-medium text-gray-600 mb-1">Notes</label>
+                                      <label htmlFor={`prep_other_notes_${index}`} className="block text-xs font-medium text-gray-600 mb-1">Notes</label>
                                       <input
+                                        id={`prep_other_notes_${index}`}
                                         type="text"
                                         value={other.notes}
                                         onChange={(e) => updateOtherComponent(index, 'notes', e.target.value)}
@@ -751,7 +759,7 @@ export default function LiveDistillationTracker({
                                     <button
                                       onClick={() => removeOtherComponent(index)}
                                       className="px-2 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700"
-                                    >
+                                      >
                                       Remove
                                     </button>
                                   </div>
@@ -767,8 +775,9 @@ export default function LiveDistillationTracker({
                         </div>
                         
                         <div className="md:col-span-2">
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
+                          <label htmlFor="prep_notes" className="block text-sm font-medium text-gray-700 mb-1">Notes</label>
                           <textarea
+                            id="prep_notes"
                             value={phase.data.notes}
                             onChange={(e) => updatePhaseData('Preparation', 'notes', e.target.value)}
                             className="w-full h-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -783,8 +792,9 @@ export default function LiveDistillationTracker({
                       <div className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Steeping Time (hours)</label>
+                            <label htmlFor="steeping_time_hours" className="block text-sm font-medium text-gray-700 mb-1">Steeping Time (hours)</label>
                             <input
+                              id="steeping_time_hours"
                               type="number"
                               step="0.1"
                               value={phase.data.steepingTime_hours || ''}
@@ -793,8 +803,9 @@ export default function LiveDistillationTracker({
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Steeping Temp (°C)</label>
+                            <label htmlFor="steeping_temp_c" className="block text-sm font-medium text-gray-700 mb-1">Steeping Temp (°C)</label>
                             <input
+                              id="steeping_temp_c"
                               type="number"
                               step="0.1"
                               value={phase.data.steepingTemp_C || ''}
@@ -846,8 +857,9 @@ export default function LiveDistillationTracker({
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Steeping Notes</label>
+                          <label htmlFor="steeping_notes" className="block text-sm font-medium text-gray-700 mb-1">Steeping Notes</label>
                           <textarea
+                            id="steeping_notes"
                             value={phase.data.notes}
                             onChange={(e) => updatePhaseData('Botanical Steeping', 'notes', e.target.value)}
                             className="w-full h-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -861,8 +873,9 @@ export default function LiveDistillationTracker({
                     {phase.phase === 'Heating' && (
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Elements On</label>
+                          <label htmlFor="heating_elements_on" className="block text-sm font-medium text-gray-700 mb-1">Elements On</label>
                           <input
+                            id="heating_elements_on"
                             type="number"
                             value={phase.data.elementsOn || ''}
                             onChange={(e) => updatePhaseData('Heating', 'elementsOn', parseInt(e.target.value) || 0)}
@@ -870,8 +883,9 @@ export default function LiveDistillationTracker({
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Amperage (A)</label>
+                          <label htmlFor="heating_amperage_a" className="block text-sm font-medium text-gray-700 mb-1">Amperage (A)</label>
                           <input
+                            id="heating_amperage_a"
                             type="number"
                             step="0.1"
                             value={phase.data.amperage_A || ''}
@@ -880,8 +894,9 @@ export default function LiveDistillationTracker({
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Power (kW)</label>
+                          <label htmlFor="heating_power_kw" className="block text-sm font-medium text-gray-700 mb-1">Power (kW)</label>
                           <input
+                            id="heating_power_kw"
                             type="number"
                             step="0.1"
                             value={phase.data.power_kW || ''}
@@ -890,8 +905,9 @@ export default function LiveDistillationTracker({
                           />
                         </div>
                         <div className="md:col-span-3">
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Heating Notes</label>
+                          <label htmlFor="heating_notes" className="block text-sm font-medium text-gray-700 mb-1">Heating Notes</label>
                           <textarea
+                            id="heating_notes"
                             value={phase.data.notes}
                             onChange={(e) => updatePhaseData('Heating', 'notes', e.target.value)}
                             className="w-full h-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -906,8 +922,9 @@ export default function LiveDistillationTracker({
                       <div className="space-y-4">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
+                            <label htmlFor={`collection_volume_l_${phase.phase.toLowerCase()}`} className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
                             <input
+                              id={`collection_volume_l_${phase.phase.toLowerCase()}`}
                               type="number"
                               step="0.1"
                               value={phase.data.volume_L || ''}
@@ -916,8 +933,9 @@ export default function LiveDistillationTracker({
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
+                            <label htmlFor={`collection_abv_percent_${phase.phase.toLowerCase()}`} className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
                             <input
+                              id={`collection_abv_percent_${phase.phase.toLowerCase()}`}
                               type="number"
                               step="0.1"
                               value={phase.data.abv_percent || ''}
@@ -926,8 +944,9 @@ export default function LiveDistillationTracker({
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Density</label>
+                            <label htmlFor={`collection_density_${phase.phase.toLowerCase()}`} className="block text-sm font-medium text-gray-700 mb-1">Density</label>
                             <input
+                              id={`collection_density_${phase.phase.toLowerCase()}`}
                               type="number"
                               step="0.001"
                               value={phase.data.density || ''}
@@ -937,8 +956,9 @@ export default function LiveDistillationTracker({
                             />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Receiving Vessel</label>
+                            <label htmlFor={`collection_receiving_vessel_${phase.phase.toLowerCase()}`} className="block text-sm font-medium text-gray-700 mb-1">Receiving Vessel</label>
                             <select
+                              id={`collection_receiving_vessel_${phase.phase.toLowerCase()}`}
                               value={phase.data.receivingVessel}
                               onChange={(e) => updatePhaseData(phase.phase, 'receivingVessel', e.target.value)}
                               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
@@ -950,8 +970,9 @@ export default function LiveDistillationTracker({
                             </select>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Destination</label>
+                            <label htmlFor={`collection_destination_${phase.phase.toLowerCase()}`} className="block text-sm font-medium text-gray-700 mb-1">Destination</label>
                             <input
+                              id={`collection_destination_${phase.phase.toLowerCase()}`}
                               type="text"
                               value={phase.data.destination}
                               onChange={(e) => updatePhaseData(phase.phase, 'destination', e.target.value)}
@@ -967,8 +988,9 @@ export default function LiveDistillationTracker({
                         </div>
                         
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">Collection Notes</label>
+                          <label htmlFor={`collection_notes_${phase.phase.toLowerCase()}`} className="block text-sm font-medium text-gray-700 mb-1">Collection Notes</label>
                           <textarea
+                            id={`collection_notes_${phase.phase.toLowerCase()}`}
                             value={phase.data.notes}
                             onChange={(e) => updatePhaseData(phase.phase, 'notes', e.target.value)}
                             className="w-full h-20 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"

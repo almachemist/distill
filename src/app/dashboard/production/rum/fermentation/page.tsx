@@ -151,8 +151,9 @@ export default function RumFermentationPage() {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Batch ID</label>
+              <label htmlFor="batch_id" className="block text-sm font-medium text-graphite mb-2">Batch ID</label>
               <input
+                id="batch_id"
                 type="text"
                 value={batchId}
                 onChange={(e) => setBatchId(e.target.value)}
@@ -162,8 +163,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Product Name</label>
+              <label htmlFor="product_name" className="block text-sm font-medium text-graphite mb-2">Product Name</label>
               <input
+                id="product_name"
                 type="text"
                 value={productName}
                 onChange={(e) => setProductName(e.target.value)}
@@ -173,8 +175,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Product Type</label>
+              <label htmlFor="product_type" className="block text-sm font-medium text-graphite mb-2">Product Type</label>
               <select
+                id="product_type"
                 value={productType}
                 onChange={(e) => setProductType(e.target.value as 'rum' | 'cane_spirit')}
                 className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -185,8 +188,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Start Date</label>
+              <label htmlFor="start_date" className="block text-sm font-medium text-graphite mb-2">Start Date</label>
               <input
+                id="start_date"
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
@@ -202,8 +206,9 @@ export default function RumFermentationPage() {
           
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Type</label>
+              <label htmlFor="substrate_type" className="block text-sm font-medium text-graphite mb-2">Type</label>
               <select
+                id="substrate_type"
                 value={substrateType}
                 onChange={(e) => setSubstrateType(e.target.value)}
                 className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -215,8 +220,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Batch/Year</label>
+              <label htmlFor="substrate_batch" className="block text-sm font-medium text-graphite mb-2">Batch/Year</label>
               <input
+                id="substrate_batch"
                 type="text"
                 value={substrateBatch}
                 onChange={(e) => setSubstrateBatch(e.target.value)}
@@ -226,8 +232,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Mass (kg)</label>
+              <label htmlFor="substrate_mass_kg" className="block text-sm font-medium text-graphite mb-2">Mass (kg)</label>
               <input
+                id="substrate_mass_kg"
                 type="number"
                 step="0.1"
                 value={substrateMassKg}
@@ -237,8 +244,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Water (kg)</label>
+              <label htmlFor="water_mass_kg" className="block text-sm font-medium text-graphite mb-2">Water (kg)</label>
               <input
+                id="water_mass_kg"
                 type="number"
                 step="0.1"
                 value={waterMassKg}
@@ -248,8 +256,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Initial Brix</label>
+              <label htmlFor="initial_brix" className="block text-sm font-medium text-graphite mb-2">Initial Brix</label>
               <input
+                id="initial_brix"
                 type="number"
                 step="0.1"
                 value={initialBrix}
@@ -259,8 +268,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Initial pH</label>
+              <label htmlFor="initial_ph" className="block text-sm font-medium text-graphite mb-2">Initial pH</label>
               <input
+                id="initial_ph"
                 type="number"
                 step="0.01"
                 value={initialPH}
@@ -286,8 +296,9 @@ export default function RumFermentationPage() {
           {dunderAdded && (
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Type</label>
+                <label htmlFor="dunder_type" className="block text-sm font-medium text-graphite mb-2">Type</label>
                 <input
+                  id="dunder_type"
                   type="text"
                   value={dunderType}
                   onChange={(e) => setDunderType(e.target.value)}
@@ -297,8 +308,9 @@ export default function RumFermentationPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Volume (L)</label>
+                <label htmlFor="dunder_volume_l" className="block text-sm font-medium text-graphite mb-2">Volume (L)</label>
                 <input
+                  id="dunder_volume_l"
                   type="number"
                   step="0.1"
                   value={dunderVolumeL}
@@ -308,8 +320,9 @@ export default function RumFermentationPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">pH (optional)</label>
+                <label htmlFor="dunder_ph" className="block text-sm font-medium text-graphite mb-2">pH (optional)</label>
                 <input
+                  id="dunder_ph"
                   type="number"
                   step="0.01"
                   value={dunderPH || ''}
@@ -328,8 +341,9 @@ export default function RumFermentationPage() {
           
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Anti-Foam (mL)</label>
+              <label htmlFor="anti_foam_ml" className="block text-sm font-medium text-graphite mb-2">Anti-Foam (mL)</label>
               <input
+                id="anti_foam_ml"
                 type="number"
                 step="1"
                 value={antiFoamML || ''}
@@ -339,8 +353,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Citric Acid (g)</label>
+              <label htmlFor="citric_acid_g" className="block text-sm font-medium text-graphite mb-2">Citric Acid (g)</label>
               <input
+                id="citric_acid_g"
                 type="number"
                 step="0.1"
                 value={citricAcidG || ''}
@@ -350,8 +365,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Fermaid (g)</label>
+              <label htmlFor="fermaid_g" className="block text-sm font-medium text-graphite mb-2">Fermaid (g)</label>
               <input
+                id="fermaid_g"
                 type="number"
                 step="1"
                 value={fermaidG || ''}
@@ -361,8 +377,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">DAP (g)</label>
+              <label htmlFor="dap_g" className="block text sm font-medium text-graphite mb-2">DAP (g)</label>
               <input
+                id="dap_g"
                 type="number"
                 step="1"
                 value={dapG || ''}
@@ -372,8 +389,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Calcium Carbonate (g)</label>
+              <label htmlFor="calcium_carbonate_g" className="block text-sm font-medium text-graphite mb-2">Calcium Carbonate (g)</label>
               <input
+                id="calcium_carbonate_g"
                 type="number"
                 step="1"
                 value={calciumCarbonateG || ''}
@@ -384,8 +402,9 @@ export default function RumFermentationPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">Additional Nutrients</label>
+            <label htmlFor="additional_nutrients" className="block text-sm font-medium text-graphite mb-2">Additional Nutrients</label>
             <textarea
+              id="additional_nutrients"
               value={additionalNutrients}
               onChange={(e) => setAdditionalNutrients(e.target.value)}
               rows={2}
@@ -401,8 +420,9 @@ export default function RumFermentationPage() {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Yeast Type</label>
+              <label htmlFor="yeast_type" className="block text-sm font-medium text-graphite mb-2">Yeast Type</label>
               <input
+                id="yeast_type"
                 type="text"
                 value={yeastType}
                 onChange={(e) => setYeastType(e.target.value)}
@@ -412,8 +432,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Mass (g)</label>
+              <label htmlFor="yeast_mass_g" className="block text-sm font-medium text-graphite mb-2">Mass (g)</label>
               <input
+                id="yeast_mass_g"
                 type="number"
                 step="1"
                 value={yeastMassG}
@@ -423,8 +444,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Rehydration Temp (°C)</label>
+              <label htmlFor="yeast_rehydration_temp" className="block text-sm font-medium text-graphite mb-2">Rehydration Temp (°C)</label>
               <input
+                id="yeast_rehydration_temp"
                 type="number"
                 step="0.1"
                 value={yeastRehydrationTempC}
@@ -434,8 +456,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Rehydration Time (min)</label>
+              <label htmlFor="yeast_rehydration_time_min" className="block text-sm font-medium text-graphite mb-2">Rehydration Time (min)</label>
               <input
+                id="yeast_rehydration_time_min"
                 type="number"
                 step="1"
                 value={yeastRehydrationTimeMin}
@@ -456,8 +479,9 @@ export default function RumFermentationPage() {
             <div className="grid grid-cols-5 gap-3">
               {Object.entries(tempCurve).map(([key, value]) => (
                 <div key={key}>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">{key}</label>
+                  <label htmlFor={`temp_${key}`} className="block text-xs font-medium text-graphite/70 mb-1">{key}</label>
                   <input
+                    id={`temp_${key}`}
                     type="number"
                     step="0.1"
                     value={value}
@@ -475,8 +499,9 @@ export default function RumFermentationPage() {
             <div className="grid grid-cols-5 gap-3">
               {Object.entries(brixCurve).map(([key, value]) => (
                 <div key={key}>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">{key}</label>
+                  <label htmlFor={`brix_${key}`} className="block text-xs font-medium text-graphite/70 mb-1">{key}</label>
                   <input
+                    id={`brix_${key}`}
                     type="number"
                     step="0.1"
                     value={value}
@@ -494,8 +519,9 @@ export default function RumFermentationPage() {
             <div className="grid grid-cols-5 gap-3">
               {Object.entries(phCurve).map(([key, value]) => (
                 <div key={key}>
-                  <label className="block text-xs font-medium text-graphite/70 mb-1">{key}</label>
+                  <label htmlFor={`ph_${key}`} className="block text-xs font-medium text-graphite/70 mb-1">{key}</label>
                   <input
+                    id={`ph_${key}`}
                     type="number"
                     step="0.01"
                     value={value}
@@ -514,8 +540,9 @@ export default function RumFermentationPage() {
           
           <div className="grid grid-cols-4 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Duration (hours)</label>
+              <label htmlFor="duration_hours" className="block text-sm font-medium text-graphite mb-2">Duration (hours)</label>
               <input
+                id="duration_hours"
                 type="number"
                 step="1"
                 value={durationHours}
@@ -525,8 +552,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Final Brix</label>
+              <label htmlFor="final_brix" className="block text-sm font-medium text-graphite mb-2">Final Brix</label>
               <input
+                id="final_brix"
                 type="number"
                 step="0.1"
                 value={finalBrix}
@@ -536,8 +564,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Final pH</label>
+              <label htmlFor="final_ph" className="block text-sm font-medium text-graphite mb-2">Final pH</label>
               <input
+                id="final_ph"
                 type="number"
                 step="0.01"
                 value={finalPH}
@@ -547,8 +576,9 @@ export default function RumFermentationPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Final ABV (%)</label>
+              <label htmlFor="final_abv" className="block text-sm font-medium text-graphite mb-2">Final ABV (%)</label>
               <input
+                id="final_abv"
                 type="number"
                 step="0.1"
                 value={finalABV}
@@ -559,8 +589,9 @@ export default function RumFermentationPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">Notes</label>
+            <label htmlFor="fermentation_notes" className="block text-sm font-medium text-graphite mb-2">Notes</label>
             <textarea
+              id="fermentation_notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}
@@ -582,4 +613,3 @@ export default function RumFermentationPage() {
     </div>
   )
 }
-

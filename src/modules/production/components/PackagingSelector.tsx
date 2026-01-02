@@ -209,10 +209,11 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
               {/* Packaging Type */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor={`packaging_type_${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                   Type
                 </label>
                 <select
+                  id={`packaging_type_${index}`}
                   value={selection.packaging_type}
                   onChange={(e) => updatePackaging(index, 'packaging_type', e.target.value as PackagingSelection['packaging_type'])}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
@@ -225,10 +226,11 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
 
               {/* Item Selector */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor={`packaging_item_${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                   Item <span className="text-red-500">*</span>
                 </label>
                 <select
+                  id={`packaging_item_${index}`}
                   value={selection.inventory_item_id}
                   onChange={(e) => updatePackaging(index, 'inventory_item_id', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
@@ -246,11 +248,12 @@ export function PackagingSelector({ selections, onChange }: PackagingSelectorPro
 
               {/* Quantity */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor={`packaging_quantity_${index}`} className="block text-sm font-medium text-gray-700 mb-2">
                   Quantity <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="number"
+                  id={`packaging_quantity_${index}`}
                   value={selection.quantity_used || ''}
                   onChange={(e) => updatePackaging(index, 'quantity_used', parseInt(e.target.value) || 0)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500"

@@ -303,13 +303,14 @@ export function StartGinBatch() {
 
       {/* Batch Size Input */}
       <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="gin_batch_target_l" className="block text-sm font-medium text-gray-700 mb-2">
           Batch Target (L)
         </label>
         <input
           type="number"
           min="1"
           step="0.1"
+          id="gin_batch_target_l"
           value={batchTargetL}
           onChange={(e) => setBatchTargetL(Number(e.target.value))}
           className="w-32 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

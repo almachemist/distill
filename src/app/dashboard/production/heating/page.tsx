@@ -83,10 +83,11 @@ function HeatingContent() {
           {/* Date & Time */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="heating_date" className="block text-sm font-medium text-graphite mb-2">
                 Date
               </label>
               <input
+                id="heating_date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -94,10 +95,11 @@ function HeatingContent() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="boiler_on_time" className="block text-sm font-medium text-graphite mb-2">
                 Boiler On Time
               </label>
               <input
+                id="boiler_on_time"
                 type="time"
                 value={boilerOnTime}
                 onChange={(e) => setBoilerOnTime(e.target.value)}
@@ -109,10 +111,11 @@ function HeatingContent() {
           {/* Power & Elements */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="power_setting" className="block text-sm font-medium text-graphite mb-2">
                 Power Setting
               </label>
               <select
+                id="power_setting"
                 value={powerSetting}
                 onChange={(e) => setPowerSetting(e.target.value)}
                 className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -125,10 +128,11 @@ function HeatingContent() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="heating_elements" className="block text-sm font-medium text-graphite mb-2">
                 Heating Elements
               </label>
               <input
+                id="heating_elements"
                 type="text"
                 value={elements}
                 onChange={(e) => setElements(e.target.value)}
@@ -141,10 +145,11 @@ function HeatingContent() {
           {/* Still Configuration */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="plates" className="block text-sm font-medium text-graphite mb-2">
                 Plates
               </label>
               <input
+                id="plates"
                 type="text"
                 value={plates}
                 onChange={(e) => setPlates(e.target.value)}
@@ -153,10 +158,11 @@ function HeatingContent() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="deflegmator" className="block text-sm font-medium text-graphite mb-2">
                 Deflegmator
               </label>
               <select
+                id="deflegmator"
                 value={deflegmator}
                 onChange={(e) => setDeflegmator(e.target.value)}
                 className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -171,10 +177,11 @@ function HeatingContent() {
           {/* Temperature */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="warm_up_temp" className="block text-sm font-medium text-graphite mb-2">
                 Warm-up Temperature (°C)
               </label>
               <input
+                id="warm_up_temp"
                 type="number"
                 value={warmUpTemp}
                 onChange={(e) => setWarmUpTemp(e.target.value)}
@@ -184,10 +191,11 @@ function HeatingContent() {
               <p className="text-xs text-graphite/50 mt-1">Temperature before heating started</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="start_temp" className="block text-sm font-medium text-graphite mb-2">
                 Start Temperature (°C)
               </label>
               <input
+                id="start_temp"
                 type="number"
                 value={startTemp}
                 onChange={(e) => setStartTemp(e.target.value)}
@@ -200,10 +208,11 @@ function HeatingContent() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="heating_notes" className="block text-sm font-medium text-graphite mb-2">
               Notes
             </label>
             <textarea
+              id="heating_notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}

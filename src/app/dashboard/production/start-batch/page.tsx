@@ -217,9 +217,9 @@ export default function PreparationPage() {
         <div className="bg-white rounded-xl border border-copper-15 p-6 shadow-sm space-y-6">
           {/* Product Type Selection */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <div className="block text-sm font-medium text-graphite mb-2">
               Product Type
-            </label>
+            </div>
             <div className="grid grid-cols-3 gap-3">
               {(['gin', 'vodka', 'ethanol'] as const).map((type) => (
                 <button
@@ -249,10 +249,11 @@ export default function PreparationPage() {
           {/* Recipe Selection (only for Gin) */}
           {productType === 'gin' && (
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="recipe_select" className="block text-sm font-medium text-graphite mb-2">
                 Recipe
               </label>
               <select
+                id="recipe_select"
                 value={selectedRecipeId}
                 onChange={(e) => setSelectedRecipeId(e.target.value)}
                 className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -269,10 +270,11 @@ export default function PreparationPage() {
 
           {/* Batch ID */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="batch_id" className="block text-sm font-medium text-graphite mb-2">
               Batch ID
             </label>
             <input
+              id="batch_id"
               type="text"
               value={batchId}
               onChange={(e) => setBatchId(e.target.value)}
@@ -284,10 +286,11 @@ export default function PreparationPage() {
           {/* Date & Time */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="batch_date" className="block text-sm font-medium text-graphite mb-2">
                 Date
               </label>
               <input
+                id="batch_date"
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -295,10 +298,11 @@ export default function PreparationPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">
+              <label htmlFor="start_time" className="block text-sm font-medium text-graphite mb-2">
                 Start Time
               </label>
               <input
+                id="start_time"
                 type="time"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
@@ -319,10 +323,11 @@ export default function PreparationPage() {
 
           {/* Water */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="water_added_l" className="block text-sm font-medium text-graphite mb-2">
               Water Added (L)
             </label>
             <input
+              id="water_added_l"
               type="number"
               value={waterVolume}
               onChange={(e) => setWaterVolume(Number(e.target.value))}
@@ -332,10 +337,11 @@ export default function PreparationPage() {
 
           {/* Still Used */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="still_used" className="block text-sm font-medium text-graphite mb-2">
               Still Used
             </label>
             <select
+              id="still_used"
               value={stillUsed}
               onChange={(e) => setStillUsed(e.target.value)}
               className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
@@ -350,9 +356,9 @@ export default function PreparationPage() {
           <div>
             <div className="mb-3">
               <div className="flex items-center justify-between mb-1">
-                <label className="block text-sm font-medium text-graphite">
+                <div className="block text-sm font-medium text-graphite">
                   Other Components (Optional)
-                </label>
+                </div>
                 <button
                   onClick={addOtherComponent}
                   type="button"
@@ -435,10 +441,11 @@ export default function PreparationPage() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="notes" className="block text-sm font-medium text-graphite mb-2">
               Notes
             </label>
             <textarea
+              id="notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}

@@ -163,10 +163,11 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
     <div className="space-y-4">
       {/* Ethanol Batch Selector */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
+        <label htmlFor="ethanol_batch_select" className="block text-sm font-medium text-gray-700 mb-2">
           Select Ethanol Batch <span className="text-red-500">*</span>
         </label>
         <select
+          id="ethanol_batch_select"
           value={selectedBatchId}
           onChange={(e) => handleBatchChange(e.target.value)}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -187,10 +188,11 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
       {selectedBatchId && (
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="ethanol_quantity_l" className="block text-sm font-medium text-gray-700 mb-2">
               Quantity (L) <span className="text-red-500">*</span>
             </label>
             <input
+              id="ethanol_quantity_l"
               type="number"
               value={quantity}
               onChange={(e) => handleQuantityChange(parseFloat(e.target.value) || 0)}
@@ -206,10 +208,11 @@ export function EthanolBatchSelector({ value, onChange, requiredQuantity }: Etha
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="ethanol_abv_percent" className="block text-sm font-medium text-gray-700 mb-2">
               ABV (%)
             </label>
             <input
+              id="ethanol_abv_percent"
               type="number"
               value={abv}
               onChange={(e) => setAbv(parseFloat(e.target.value) || 0)}

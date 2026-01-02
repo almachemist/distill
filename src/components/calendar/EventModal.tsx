@@ -146,10 +146,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Event Type */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="event_type" className="block text-sm font-medium text-stone-700 mb-2">
               Event Type *
             </label>
             <select
+              id="event_type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value as CalendarEventType })}
               className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-900"
@@ -167,10 +168,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Product Type */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="product_type" className="block text-sm font-medium text-stone-700 mb-2">
               Product Type
             </label>
             <select
+              id="product_type"
               value={formData.productType || ''}
               onChange={(e) => setFormData({ ...formData, productType: e.target.value as ProductType || undefined })}
               className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-900"
@@ -187,10 +189,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Product Name */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="product_name" className="block text-sm font-medium text-stone-700 mb-2">
               Product Name
             </label>
             <input
+              id="product_name"
               type="text"
               value={formData.productName || ''}
               onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
@@ -202,10 +205,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
           {/* Batch Number */}
           {formData.type === 'production' && (
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-2">
+              <label htmlFor="batch_number" className="block text-sm font-medium text-stone-700 mb-2">
                 Batch Number
               </label>
               <input
+                id="batch_number"
                 type="text"
                 value={formData.batch || ''}
                 onChange={(e) => setFormData({ ...formData, batch: e.target.value })}
@@ -220,11 +224,12 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Week Start */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="week_start" className="block text-sm font-medium text-stone-700 mb-2">
 
               Week Start *
             </label>
             <input
+              id="week_start"
               type="text"
               value={formData.weekStart}
               onChange={(e) => setFormData({ ...formData, weekStart: e.target.value })}
@@ -239,10 +244,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Pick a Date (auto-fills Week Start) */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="week_start_date" className="block text-sm font-medium text-stone-700 mb-2">
               Pick a date (auto-fills Week Start)
             </label>
             <input
+              id="week_start_date"
               type="date"
               onChange={(e) => {
                 const code = isoWeekFromDate(e.target.value)
@@ -258,10 +264,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Week End (optional) */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="week_end" className="block text-sm font-medium text-stone-700 mb-2">
               Week End (optional)
             </label>
             <input
+              id="week_end"
               type="text"
               value={formData.weekEnd || ''}
               onChange={(e) => setFormData({ ...formData, weekEnd: e.target.value })}
@@ -272,11 +279,12 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Tank */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="tank" className="block text-sm font-medium text-stone-700 mb-2">
 
               Tank
             </label>
             <input
+              id="tank"
               type="text"
               value={formData.tank || ''}
               onChange={(e) => setFormData({ ...formData, tank: e.target.value })}
@@ -287,10 +295,11 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <label htmlFor="notes" className="block text-sm font-medium text-stone-700 mb-2">
               Notes
             </label>
             <textarea
+              id="notes"
               value={formData.notes || ''}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-stone-900"
@@ -301,9 +310,9 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
 
           {/* Color Preview */}
           <div>
-            <label className="block text-sm font-medium text-stone-700 mb-2">
+            <p className="block text-sm font-medium text-stone-700 mb-2">
               Color Preview
-            </label>
+            </p>
             <div
               className="w-full h-16 rounded-lg border-2 flex items-center justify-center font-medium"
               style={{
@@ -364,4 +373,3 @@ export function EventModal({ isOpen, onClose, onSave, onDelete, onClear, event, 
     </div>
   )
 }
-

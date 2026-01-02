@@ -121,36 +121,40 @@ export default function SimpleBatchEditModal({
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
+                <label htmlFor="edit_date" className="block text-sm font-medium text-gray-700 mb-1">Date</label>
                 <input
                   type="date"
+                  id="edit_date"
                   value={editedSession.date}
                   onChange={(e) => handleChange('date', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Still</label>
+                <label htmlFor="edit_still" className="block text-sm font-medium text-gray-700 mb-1">Still</label>
                 <input
                   type="text"
+                  id="edit_still"
                   value={editedSession.still}
                   onChange={(e) => handleChange('still', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Boiler On</label>
+                <label htmlFor="edit_boiler_on" className="block text-sm font-medium text-gray-700 mb-1">Boiler On</label>
                 <input
                   type="text"
+                  id="edit_boiler_on"
                   value={editedSession.boilerOn}
                   onChange={(e) => handleChange('boilerOn', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                <label htmlFor="edit_description" className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                 <input
                   type="text"
+                  id="edit_description"
                   value={editedSession.description || ''}
                   onChange={(e) => handleChange('description', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -165,32 +169,35 @@ export default function SimpleBatchEditModal({
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Charge Total</h3>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
+                  <label htmlFor="charge_total_volume_l" className="block text-sm font-medium text-gray-700 mb-1">Volume (L)</label>
                   <input
                     type="number"
                     step="0.1"
+                    id="charge_total_volume_l"
                     value={editedSession.charge.total.volume_L || ''}
                     onChange={(e) => handleChargeChange('volume_L', parseFloat(e.target.value) || 0)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
+                  <label htmlFor="charge_total_abv_percent" className="block text-sm font-medium text-gray-700 mb-1">ABV (%)</label>
                   <input
                     type="number"
                     step="0.1"
                     min="0"
                     max="96"
+                    id="charge_total_abv_percent"
                     value={editedSession.charge.total.abv_percent || ''}
                     onChange={(e) => handleChargeChange('abv_percent', parseFloat(e.target.value) || 0)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">LAL</label>
+                  <label htmlFor="charge_total_lal" className="block text-sm font-medium text-gray-700 mb-1">LAL</label>
                   <input
                     type="number"
                     step="0.1"
+                    id="charge_total_lal"
                     value={editedSession.charge.total.lal || ''}
                     onChange={(e) => handleChargeChange('lal', parseFloat(e.target.value) || 0)}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -207,39 +214,43 @@ export default function SimpleBatchEditModal({
                       <div key={idx} className="bg-white rounded-lg p-3 border border-gray-200">
                         <div className="grid grid-cols-4 gap-3">
                           <div>
-                            <label className="block text-xs font-medium text-gray-600 mb-1">Source</label>
+                            <label htmlFor={`charge_component_${idx}_source`} className="block text-xs font-medium text-gray-600 mb-1">Source</label>
                             <input
                               type="text"
+                              id={`charge_component_${idx}_source`}
                               value={comp.source}
                               onChange={(e) => handleChargeComponentChange(idx, 'source', e.target.value)}
                               className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
+                            <label htmlFor={`charge_component_${idx}_volume_L`} className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
                             <input
                               type="number"
                               step="0.1"
+                              id={`charge_component_${idx}_volume_L`}
                               value={comp.volume_L || ''}
                               onChange={(e) => handleChargeComponentChange(idx, 'volume_L', parseFloat(e.target.value) || 0)}
                               className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
+                            <label htmlFor={`charge_component_${idx}_abv_percent`} className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
                             <input
                               type="number"
                               step="0.1"
+                              id={`charge_component_${idx}_abv_percent`}
                               value={comp.abv_percent || ''}
                               onChange={(e) => handleChargeComponentChange(idx, 'abv_percent', parseFloat(e.target.value) || 0)}
                               className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-gray-600 mb-1">LAL</label>
+                            <label htmlFor={`charge_component_${idx}_lal`} className="block text-xs font-medium text-gray-600 mb-1">LAL</label>
                             <input
                               type="number"
                               step="0.1"
+                              id={`charge_component_${idx}_lal`}
                               value={comp.lal || ''}
                               onChange={(e) => handleChargeComponentChange(idx, 'lal', parseFloat(e.target.value) || 0)}
                               className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
@@ -339,38 +350,42 @@ export default function SimpleBatchEditModal({
                       <div className="font-medium text-gray-900 mb-2">{title}</div>
                       <div className="grid grid-cols-4 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
+                          <label htmlFor={`output_${idx}_volume`} className="block text-xs font-medium text-gray-600 mb-1">Volume (L)</label>
                           <input
                             type="number"
                             step="0.1"
+                            id={`output_${idx}_volume`}
                             value={isPhase ? ((out as OutputPhase).volumeL || '') : ((out as OutputDetail).volume_L || '')}
                             onChange={(e) => handleOutputChange(idx, isPhase ? 'volumeL' : 'volume_L', parseFloat(e.target.value) || 0)}
                             className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
+                          <label htmlFor={`output_${idx}_abv`} className="block text-xs font-medium text-gray-600 mb-1">ABV (%)</label>
                           <input
                             type="number"
                             step="0.1"
+                            id={`output_${idx}_abv`}
                             value={isPhase ? ((out as OutputPhase).abv || '') : ((out as OutputDetail).abv_percent || '')}
                             onChange={(e) => handleOutputChange(idx, isPhase ? 'abv' : 'abv_percent', parseFloat(e.target.value) || 0)}
                             className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Vessel</label>
+                          <label htmlFor={`output_${idx}_vessel`} className="block text-xs font-medium text-gray-600 mb-1">Vessel</label>
                           <input
                             type="text"
+                            id={`output_${idx}_vessel`}
                             value={isPhase ? (((out as OutputPhase).vessel || '')) : (((out as OutputDetail).receivingVessel || ''))}
                             onChange={(e) => handleOutputChange(idx, isPhase ? 'vessel' : 'receivingVessel', e.target.value)}
                             className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-gray-600 mb-1">Observations</label>
+                          <label htmlFor={`output_${idx}_observations`} className="block text-xs font-medium text-gray-600 mb-1">Observations</label>
                           <input
                             type="text"
+                            id={`output_${idx}_observations`}
                             value={isPhase ? (((out as OutputPhase).observations || '')) : ''}
                             onChange={(e) => handleOutputChange(idx, 'observations', e.target.value)}
                             className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500"

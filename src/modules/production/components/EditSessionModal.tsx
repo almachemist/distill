@@ -82,10 +82,11 @@ export default function EditSessionModal({
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="edit_sku" className="block text-sm font-medium text-gray-700 mb-2">
                   Product Name (SKU)
                 </label>
                 <input
+                  id="edit_sku"
                   type="text"
                   value={formData.sku}
                   onChange={(e) => handleChange('sku', e.target.value)}
@@ -95,10 +96,11 @@ export default function EditSessionModal({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="edit_spirit_run" className="block text-sm font-medium text-gray-700 mb-2">
                   Spirit Run ID
                 </label>
                 <input
+                  id="edit_spirit_run"
                   type="text"
                   value={formData.spiritRun}
                   onChange={(e) => handleChange('spiritRun', e.target.value)}
@@ -109,10 +111,11 @@ export default function EditSessionModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="edit_description" className="block text-sm font-medium text-gray-700 mb-2">
                 Description
               </label>
               <textarea
+                id="edit_description"
                 value={formData.description}
                 onChange={(e) => handleChange('description', e.target.value)}
                 rows={3}
@@ -123,10 +126,11 @@ export default function EditSessionModal({
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="edit_date" className="block text-sm font-medium text-gray-700 mb-2">
                   Date
                 </label>
                 <input
+                  id="edit_date"
                   type="date"
                   value={formData.date}
                   onChange={(e) => handleChange('date', e.target.value)}
@@ -135,10 +139,11 @@ export default function EditSessionModal({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="edit_still_used" className="block text-sm font-medium text-gray-700 mb-2">
                   Still Used
                 </label>
                 <select
+                  id="edit_still_used"
                   value={formData.stillUsed}
                   onChange={(e) => handleChange('stillUsed', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
@@ -152,10 +157,11 @@ export default function EditSessionModal({
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="edit_notes" className="block text-sm font-medium text-gray-700 mb-2">
                 Notes
               </label>
               <textarea
+                id="edit_notes"
                 value={formData.notes}
                 onChange={(e) => handleChange('notes', e.target.value)}
                 rows={4}
@@ -185,7 +191,6 @@ export default function EditSessionModal({
     </div>
   )
 }
-
 
 
 
