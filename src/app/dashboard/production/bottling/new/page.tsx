@@ -29,10 +29,10 @@ const PRODUCT_LIST = [
   { value: 'Wet Season Gin', label: 'Wet Season Gin', type: 'gin' as ProductType },
   { value: 'Dry Season Gin', label: 'Dry Season Gin', type: 'gin' as ProductType },
   { value: 'Australian Cane Spirit', label: 'Australian Cane Spirit', type: 'cane_spirit' as ProductType },
-  { value: 'Pineapple Rum', label: 'Pineapple Rum', type: 'rum' as ProductType },
-  { value: 'Spiced Rum', label: 'Spiced Rum', type: 'rum' as ProductType },
+  { value: 'Pineapple Rum', label: 'Pineapple Rum', type: 'pineapple_rum' as ProductType },
+  { value: 'Spiced Rum', label: 'Spiced Rum', type: 'spiced_rum' as ProductType },
   { value: 'Reserve Cask Rum', label: 'Reserve Cask Rum', type: 'rum' as ProductType },
-  { value: 'Coffee Liqueur', label: 'Coffee Liqueur', type: 'liqueur' as ProductType },
+  { value: 'Coffee Liqueur', label: 'Coffee Liqueur', type: 'coffee_liqueur' as ProductType },
 
   // Merchant Mae Products
   { value: 'Merchant Mae Gin', label: 'Merchant Mae Gin', type: 'gin' as ProductType },
@@ -74,7 +74,7 @@ function NewBottlingRunContent() {
   
   // Handle deep link (e.g., ?batchId=RAIN-24-3)
   useEffect(() => {
-    const batchId = searchParams.get('batchId')
+    const batchId = searchParams?.get('batchId')
     if (batchId && allBatches.length > 0 && selectedBatches.length === 0) {
       const batch = allBatches.find(b => b.batchCode === batchId || b.id === batchId)
       if (batch) {
@@ -85,10 +85,10 @@ function NewBottlingRunContent() {
 
   useEffect(() => {
     if (deeplinkApplied) return
-    const tankId = searchParams.get('tankId') || ''
-    const productParam = searchParams.get('product') || ''
-    const volumeParam = parseFloat(searchParams.get('volume') || '') || 0
-    const abvParam = parseFloat(searchParams.get('abv') || '') || 0
+    const tankId = searchParams?.get('tankId') || ''
+    const productParam = searchParams?.get('product') || ''
+    const volumeParam = parseFloat(searchParams?.get('volume') || '') || 0
+    const abvParam = parseFloat(searchParams?.get('abv') || '') || 0
     if (!tankId && !productParam && !volumeParam && !abvParam) return
     function inferType(name: string): ProductType {
       const p = PRODUCT_LIST.find(p => p.value === name)
@@ -98,6 +98,7 @@ function NewBottlingRunContent() {
       if (n.includes('gin')) return 'gin'
       if (n.includes('vodka')) return 'vodka'
       if (n.includes('cane')) return 'cane_spirit'
+      if (n.includes('coffee')) return 'coffee_liqueur'
       if (n.includes('liqueur')) return 'other_liqueur'
       return 'gin'
     }
@@ -124,6 +125,13 @@ function NewBottlingRunContent() {
     setManualMode(false)
     setDeeplinkApplied(true)
   }, [searchParams, deeplinkApplied])
+
+  useEffect(() => {
+    const s = searchParams?.get('search') || ''
+    if (s && !filterSearch) {
+      setFilterSearch(s)
+    }
+  }, [searchParams])
 
   async function loadBatches() {
     try {
@@ -342,7 +350,40 @@ function NewBottlingRunContent() {
 
       const j = await res.json()
       alert('Bottling run saved and inventory updated successfully!')
-      window.location.href = '/dashboard/production'
+      try {
+        const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
+        const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
+        if (useStatic) {
+          const DEV_TANKS_KEY = 'dev_tanks_data_v1'
+          const raw = typeof window !== 'undefined' ? window.localStorage.getItem(DEV_TANKS_KEY) : null
+          const list = raw ? JSON.parse(raw) : null
+          if (Array.isArray(list)) {
+            const tankUse: Record<string, number> = {}
+            for (const sb of selectedBatches || []) {
+              const tc = sb?.batch?.tankCode
+              if (!tc) continue
+              const use = Number(sb?.volumeToUseLitres || 0)
+              tankUse[tc] = (tankUse[tc] || 0) + use
+            }
+            const updated = list.map((t: any) => {
+              const tc = String(t?.tank_id || '')
+              if (!tc || !(tc in tankUse)) return t
+              const available = Number(t.current_volume_l ?? 0)
+              const remaining = Math.max(available - tankUse[tc], 0)
+              const newStatus = remaining <= 0 ? 'bottled_empty' : (t.status || 'ready_to_bottle')
+              return {
+                ...t,
+                current_volume_l: remaining,
+                status: newStatus,
+                last_updated_by: 'Bottling',
+                updated_at: new Date().toISOString()
+              }
+            })
+            window.localStorage.setItem(DEV_TANKS_KEY, JSON.stringify(updated))
+          }
+        }
+      } catch {}
+      window.location.href = '/dashboard/inventory'
     } catch (e: any) {
       alert(e?.message || 'Failed to save bottling run')
     }
@@ -353,6 +394,16 @@ function NewBottlingRunContent() {
   const summary = calculateBottlingSummary(selectedBatches, dilutionPhases, bottleEntries)
   const selectedInputVolume = selectedBatches.reduce((s, sb) => s + (sb.volumeToUseLitres || 0), 0)
   const plannedBottleVolume = bottleEntries.reduce((s, e) => s + (e.volumeBottled_L || 0), 0)
+
+  useEffect(() => {
+    setBottleEntries(prev =>
+      prev.map(e => {
+        const volume = e.volumeBottled_L || 0
+        const lal = (volume * (summary.finalABV || 0)) / 100
+        return { ...e, lalBottled: lal }
+      })
+    )
+  }, [summary.finalABV])
 
   // Filter available batches
   const filteredBatches = allBatches.filter(batch => {
@@ -506,10 +557,11 @@ function NewBottlingRunContent() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                  <label htmlFor="manual_select_product" className="block text-sm font-medium text-amber-900 mb-2">
                     Select Product
                   </label>
                   <select
+                    id="manual_select_product"
                     value={productName}
                     onChange={(e) => {
                       const selectedProduct = PRODUCT_LIST.find(p => p.value === e.target.value)
@@ -545,10 +597,11 @@ function NewBottlingRunContent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                  <label htmlFor="manual_volume" className="block text-sm font-medium text-amber-900 mb-2">
                     Volume (Litres)
                   </label>
                   <input
+                    id="manual_volume"
                     type="number"
                     step="0.1"
                     value={manualVolume || ''}
@@ -559,10 +612,11 @@ function NewBottlingRunContent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                  <label htmlFor="manual_abv" className="block text-sm font-medium text-amber-900 mb-2">
                     ABV (%)
                   </label>
                   <input
+                    id="manual_abv"
                     type="number"
                     step="0.1"
                     value={manualABV || ''}
@@ -573,10 +627,11 @@ function NewBottlingRunContent() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-amber-900 mb-2">
+                  <label htmlFor="manual_tank_code" className="block text-sm font-medium text-amber-900 mb-2">
                     Tank Code (Optional)
                   </label>
                   <input
+                    id="manual_tank_code"
                     type="text"
                     value={manualTankCode}
                     onChange={(e) => setManualTankCode(e.target.value)}
@@ -645,10 +700,11 @@ function NewBottlingRunContent() {
                     <div className="rounded-lg border border-[#E5E5E5] bg-white p-3">
                       <div className="grid grid-cols-4 gap-4 items-end">
                         <div>
-                          <label className="block text-xs text-[#777777] mb-1">
+                          <label htmlFor={`selected_${index}_use_volume`} className="block text-xs text-[#777777] mb-1">
                             Use Volume (L)
                           </label>
                           <input
+                            id={`selected_${index}_use_volume`}
                             type="number"
                             step="0.1"
                             min="0"
@@ -691,10 +747,11 @@ function NewBottlingRunContent() {
                           </div>
                         </div>
                         <div>
-                          <label className="block text-xs text-[#777777] mb-1">
+                          <label htmlFor={`selected_${index}_abv`} className="block text-xs text-[#777777] mb-1">
                             ABV (%)
                           </label>
                           <input
+                            id={`selected_${index}_abv`}
                             type="number"
                             step="0.1"
                             min="0"
@@ -713,10 +770,11 @@ function NewBottlingRunContent() {
                           />
                         </div>
                         <div>
-                          <label className="block text-xs text-[#777777] mb-1">
+                          <label htmlFor={`selected_${index}_available_volume`} className="block text-xs text-[#777777] mb-1">
                             Available Volume (L)
                           </label>
                           <input
+                            id={`selected_${index}_available_volume`}
                             type="number"
                             step="0.1"
                             min="0"

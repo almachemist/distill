@@ -17,8 +17,10 @@ export default function TanksPage() {
   const [currentAction, setCurrentAction] = useState<null | 'transform' | 'infusion' | 'adjust' | 'combine' | 'history'>(null)
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const [historyEntries, setHistoryEntries] = useState<TankHistoryEntry[]>([])
+  const [localHistory, setLocalHistory] = useState<Record<string, TankHistoryEntry[]>>({})
   const [combineSource, setCombineSource] = useState<Tank | null>(null)
   const [combineSelectedIds, setCombineSelectedIds] = useState<string[]>([])
+  const [combineTargetId, setCombineTargetId] = useState<string>('')
   const [combineNewName, setCombineNewName] = useState('')
   const [combineProductName, setCombineProductName] = useState('')
   const [isInfusionOpen, setIsInfusionOpen] = useState(false)
@@ -36,6 +38,27 @@ export default function TanksPage() {
   const [adjustNotes, setAdjustNotes] = useState<string>('')
   const supabase = createClient()
   const USE_STATIC = ['1','true','yes'].includes((process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase())
+  const DEV_TANKS_KEY = 'dev_tanks_data_v1'
+  const readLocalTanks = (): Tank[] | null => {
+    try {
+      const raw = typeof window !== 'undefined' ? window.localStorage.getItem(DEV_TANKS_KEY) : null
+      if (!raw) return null
+      const parsed = JSON.parse(raw)
+      return Array.isArray(parsed) ? parsed : null
+    } catch {
+      return null
+    }
+  }
+  const writeLocalTanks = (list: Tank[]) => {
+    try {
+      if (typeof window !== 'undefined') window.localStorage.setItem(DEV_TANKS_KEY, JSON.stringify(list))
+    } catch {}
+  }
+  const clearLocalTanks = () => {
+    try {
+      if (typeof window !== 'undefined') window.localStorage.removeItem(DEV_TANKS_KEY)
+    } catch {}
+  }
 
   // Calculate summary statistics
   const totalTanks = tanks.length
@@ -69,149 +92,35 @@ export default function TanksPage() {
     try {
       setLoading(true)
       console.log('Loading tanks...')
-      if ((USE_STATIC || process.env.NODE_ENV === 'development') && devCleared) {
-        setTanks([])
-        setLoading(false)
-        setError(null)
-        return
-      }
       if (USE_STATIC || process.env.NODE_ENV === 'development') {
+        if (devCleared) {
+          clearLocalTanks()
+          setTanks([])
+          setLoading(false)
+          setError(null)
+          return
+        }
+        const saved = readLocalTanks()
+        if (saved) {
+          setTanks(saved)
+          setLoading(false)
+          setError(null)
+          return
+        }
         const devOrg = '00000000-0000-0000-0000-000000000001'
         const now = new Date().toISOString()
         const devTanks: Tank[] = [
-          {
-            id: 'T-330-01',
-            organization_id: devOrg,
-            tank_id: 'T-330-01',
-            tank_name: '330L Rum Blend',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Rum Blend',
-            current_abv: 63.0,
-            current_volume_l: 51,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-330-02',
-            organization_id: devOrg,
-            tank_id: 'T-330-02',
-            tank_name: '330L Vodka (2nd Distillation)',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Vodka (Second Distillation)',
-            current_abv: 86.7,
-            current_volume_l: 250,
-            status: 'pending_redistillation',
-            notes: 'To be distilled again',
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-615-01',
-            organization_id: devOrg,
-            tank_id: 'T-615-01',
-            tank_name: '615L White Rum',
-            tank_type: 'spirits',
-            capacity_l: 615,
-            product: 'White Rum',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-330-03',
-            organization_id: devOrg,
-            tank_id: 'T-330-03',
-            tank_name: '330L Vodka (Double Distilled)',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Vodka (Double Distilled)',
-            current_abv: 80.0,
-            current_volume_l: 233,
-            status: 'pending_redistillation',
-            notes: 'Should be distilled again',
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-400-01',
-            organization_id: devOrg,
-            tank_id: 'T-400-01',
-            tank_name: '400L Cane Spirit 2501',
-            tank_type: 'spirits',
-            capacity_l: 400,
-            product: 'Cane Spirit Batch 2501',
-            current_abv: 64.5,
-            current_volume_l: 20,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-317-01',
-            organization_id: devOrg,
-            tank_id: 'T-317-01',
-            tank_name: '317L Cane Spirit 25-2 (No Lid)',
-            tank_type: 'spirits',
-            capacity_l: 317,
-            has_lid: false,
-            product: 'Cane Spirit Batch 25-2',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'unavailable',
-            notes: 'Avoid use (no lid)',
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-100-01',
-            organization_id: devOrg,
-            tank_id: 'T-100-01',
-            tank_name: '100L Coffee Liqueur Infusion',
-            tank_type: 'spirits',
-            capacity_l: 100,
-            product: 'Coffee Liqueur Infusion',
-            current_abv: 44.0,
-            current_volume_l: 30,
-            status: 'infusing',
-            extra_materials: { coffee_kg: 3 },
-            started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
-            notes: null,
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-230-01',
-            organization_id: devOrg,
-            tank_id: 'T-230-01',
-            tank_name: '230L Coffee Liqueur Infusion',
-            tank_type: 'spirits',
-            capacity_l: 230,
-            product: 'Coffee Liqueur Infusion',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'infusing',
-            notes: null,
-            last_updated_by: 'User',
-            created_at: now,
-            updated_at: now
-          }
+          { id: 'T-330-01', organization_id: devOrg, tank_id: 'T-330-01', tank_name: '330L Rum Blend', tank_type: 'spirits', capacity_l: 330, product: 'Rum Blend', current_abv: 63.0, current_volume_l: 51, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'RUM-25-001', created_at: now, updated_at: now },
+          { id: 'T-330-02', organization_id: devOrg, tank_id: 'T-330-02', tank_name: '330L Vodka (2nd Distillation)', tank_type: 'spirits', capacity_l: 330, product: 'Vodka (Second Distillation)', current_abv: 86.7, current_volume_l: 250, status: 'pending_redistillation', notes: 'To be distilled again', last_updated_by: 'User', batch_id: 'VODKA-26-002', created_at: now, updated_at: now },
+          { id: 'T-615-01', organization_id: devOrg, tank_id: 'T-615-01', tank_name: '615L White Rum', tank_type: 'spirits', capacity_l: 615, product: 'White Rum', current_abv: null, current_volume_l: null, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'RUM-25-002', created_at: now, updated_at: now },
+          { id: 'T-330-03', organization_id: devOrg, tank_id: 'T-330-03', tank_name: '330L Vodka (Double Distilled)', tank_type: 'spirits', capacity_l: 330, product: 'Vodka (Double Distilled)', current_abv: 80.0, current_volume_l: 233, status: 'pending_redistillation', notes: 'Should be distilled again', last_updated_by: 'User', batch_id: 'VODKA-26-003', created_at: now, updated_at: now },
+          { id: 'T-400-01', organization_id: devOrg, tank_id: 'T-400-01', tank_name: '400L Cane Spirit 2501', tank_type: 'spirits', capacity_l: 400, product: 'Cane Spirit Batch 2501', current_abv: 64.5, current_volume_l: 20, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'CS-25-2501', created_at: now, updated_at: now },
+          { id: 'T-317-01', organization_id: devOrg, tank_id: 'T-317-01', tank_name: '317L Cane Spirit 25-2 (No Lid)', tank_type: 'spirits', capacity_l: 317, has_lid: false, product: 'Cane Spirit Batch 25-2', current_abv: null, current_volume_l: null, status: 'unavailable', notes: 'Avoid use (no lid)', last_updated_by: 'User', batch_id: 'CS-25-25-2', created_at: now, updated_at: now },
+          { id: 'T-100-01', organization_id: devOrg, tank_id: 'T-100-01', tank_name: '100L Coffee Liqueur Infusion', tank_type: 'spirits', capacity_l: 100, product: 'Coffee Liqueur Infusion', current_abv: 44.0, current_volume_l: 30, status: 'infusing', extra_materials: { coffee_kg: 3 }, started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(), notes: null, last_updated_by: 'User', batch_id: 'LIQ-25-COFFEE-001', created_at: now, updated_at: now },
+          { id: 'T-230-01', organization_id: devOrg, tank_id: 'T-230-01', tank_name: '230L Coffee Liqueur Infusion', tank_type: 'spirits', capacity_l: 230, product: 'Coffee Liqueur Infusion', current_abv: null, current_volume_l: null, status: 'infusing', notes: null, last_updated_by: 'User', batch_id: 'LIQ-25-COFFEE-002', created_at: now, updated_at: now }
         ]
         setTanks(devTanks)
+        writeLocalTanks(devTanks)
         setLoading(false)
         setError(null)
         return
@@ -240,6 +149,7 @@ export default function TanksPage() {
               status: 'holding',
               notes: null,
               last_updated_by: 'User',
+              batch_id: 'RUM-25-001',
               created_at: now,
               updated_at: now
             },
@@ -256,6 +166,7 @@ export default function TanksPage() {
               status: 'pending_redistillation',
               notes: 'To be distilled again',
               last_updated_by: 'User',
+              batch_id: 'VODKA-26-002',
               created_at: now,
               updated_at: now
             },
@@ -272,6 +183,7 @@ export default function TanksPage() {
               status: 'holding',
               notes: null,
               last_updated_by: 'User',
+              batch_id: 'RUM-25-002',
               created_at: now,
               updated_at: now
             },
@@ -288,6 +200,7 @@ export default function TanksPage() {
               status: 'pending_redistillation',
               notes: 'Should be distilled again',
               last_updated_by: 'User',
+              batch_id: 'VODKA-26-003',
               created_at: now,
               updated_at: now
             },
@@ -304,6 +217,7 @@ export default function TanksPage() {
               status: 'holding',
               notes: null,
               last_updated_by: 'User',
+              batch_id: 'CS-25-2501',
               created_at: now,
               updated_at: now
             },
@@ -321,6 +235,7 @@ export default function TanksPage() {
               status: 'unavailable',
               notes: 'Avoid use (no lid)',
               last_updated_by: 'User',
+              batch_id: 'CS-25-25-2',
               created_at: now,
               updated_at: now
             },
@@ -339,6 +254,7 @@ export default function TanksPage() {
               started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
               notes: null,
               last_updated_by: 'User',
+              batch_id: 'LIQ-25-COFFEE-001',
               created_at: now,
               updated_at: now
             },
@@ -355,6 +271,7 @@ export default function TanksPage() {
               status: 'infusing',
               notes: null,
               last_updated_by: 'User',
+              batch_id: 'LIQ-25-COFFEE-002',
               created_at: now,
               updated_at: now
             }
@@ -383,6 +300,7 @@ export default function TanksPage() {
             status: 'holding',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'RUM-25-001',
             created_at: now,
             updated_at: now
           },
@@ -399,6 +317,7 @@ export default function TanksPage() {
             status: 'pending_redistillation',
             notes: 'To be distilled again',
             last_updated_by: 'User',
+            batch_id: 'VODKA-26-002',
             created_at: now,
             updated_at: now
           },
@@ -415,6 +334,7 @@ export default function TanksPage() {
             status: 'holding',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'RUM-25-002',
             created_at: now,
             updated_at: now
           },
@@ -431,6 +351,7 @@ export default function TanksPage() {
             status: 'pending_redistillation',
             notes: 'Should be distilled again',
             last_updated_by: 'User',
+            batch_id: 'VODKA-26-003',
             created_at: now,
             updated_at: now
           },
@@ -447,6 +368,7 @@ export default function TanksPage() {
             status: 'holding',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'CS-25-2501',
             created_at: now,
             updated_at: now
           },
@@ -464,6 +386,7 @@ export default function TanksPage() {
             status: 'unavailable',
             notes: 'Avoid use (no lid)',
             last_updated_by: 'User',
+            batch_id: 'CS-25-25-2',
             created_at: now,
             updated_at: now
           },
@@ -482,6 +405,7 @@ export default function TanksPage() {
             started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'LIQ-25-COFFEE-001',
             created_at: now,
             updated_at: now
           },
@@ -498,6 +422,7 @@ export default function TanksPage() {
             status: 'infusing',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'LIQ-25-COFFEE-002',
             created_at: now,
             updated_at: now
           }
@@ -528,6 +453,7 @@ export default function TanksPage() {
             status: 'holding',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'RUM-25-001',
             created_at: now,
             updated_at: now
           },
@@ -544,6 +470,7 @@ export default function TanksPage() {
             status: 'pending_redistillation',
             notes: 'To be distilled again',
             last_updated_by: 'User',
+            batch_id: 'VODKA-26-002',
             created_at: now,
             updated_at: now
           },
@@ -560,6 +487,7 @@ export default function TanksPage() {
             status: 'holding',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'RUM-25-002',
             created_at: now,
             updated_at: now
           },
@@ -576,6 +504,7 @@ export default function TanksPage() {
             status: 'pending_redistillation',
             notes: 'Should be distilled again',
             last_updated_by: 'User',
+            batch_id: 'VODKA-26-003',
             created_at: now,
             updated_at: now
           },
@@ -592,6 +521,7 @@ export default function TanksPage() {
             status: 'holding',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'CS-25-2501',
             created_at: now,
             updated_at: now
           },
@@ -609,6 +539,7 @@ export default function TanksPage() {
             status: 'unavailable',
             notes: 'Avoid use (no lid)',
             last_updated_by: 'User',
+            batch_id: 'CS-25-25-2',
             created_at: now,
             updated_at: now
           },
@@ -627,6 +558,7 @@ export default function TanksPage() {
             started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'LIQ-25-COFFEE-001',
             created_at: now,
             updated_at: now
           },
@@ -643,6 +575,7 @@ export default function TanksPage() {
             status: 'infusing',
             notes: null,
             last_updated_by: 'User',
+            batch_id: 'LIQ-25-COFFEE-002',
             created_at: now,
             updated_at: now
           }
@@ -667,6 +600,7 @@ export default function TanksPage() {
       setDevCleared(true)
       setTanks([])
       setError(null)
+      clearLocalTanks()
       return
     }
     setTanks([])
@@ -737,8 +671,12 @@ export default function TanksPage() {
   }
 
   const handleViewHistory = async (tank: Tank) => {
+    setSelectedTank(tank)
     if (USE_STATIC || process.env.NODE_ENV === 'development') {
-      setHistoryEntries([])
+      const entries = (localHistory[tank.id] || []).slice().sort((a, b) => {
+        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+      })
+      setHistoryEntries(entries)
       setIsHistoryOpen(true)
       setCurrentAction('history')
       return
@@ -760,6 +698,7 @@ export default function TanksPage() {
   const handleCombine = (tank: Tank) => {
     setCombineSource(tank)
     setCombineSelectedIds([])
+    setCombineTargetId(tank.id)
     setCombineNewName('')
     setCombineProductName('')
     setCurrentAction('combine')
@@ -785,12 +724,15 @@ export default function TanksPage() {
             status: updates.status || 'empty',
             notes: updates.notes ?? null,
             last_updated_by: updates.last_updated_by,
+            batch_id: (updates as any)?.batch_id || `MAN-${new Date().getFullYear().toString().slice(-2)}-${String(Math.floor(Math.random()*1000)).padStart(3,'0')}`,
             created_at: now,
             updated_at: now
           }
-          setTanks([newTank, ...tanks])
+          const next = [newTank, ...tanks]
+          setTanks(next)
+          writeLocalTanks(next)
         } else {
-          setTanks(tanks.map(t => {
+          const next = tanks.map(t => {
             if (t.id !== tankId) return t
             return {
               ...t,
@@ -802,9 +744,12 @@ export default function TanksPage() {
               status: updates.status ?? t.status,
               notes: updates.notes ?? t.notes,
               last_updated_by: updates.last_updated_by,
+              batch_id: (updates as any)?.batch_id ?? t.batch_id,
               updated_at: now
             }
-          }))
+          })
+          setTanks(next)
+          writeLocalTanks(next)
         }
         setCurrentAction(null)
         return
@@ -825,7 +770,8 @@ export default function TanksPage() {
             current_volume_l: updates.current_volume_l,
             status: updates.status || 'empty',
             notes: updates.notes,
-            last_updated_by: updates.last_updated_by
+            last_updated_by: updates.last_updated_by,
+            batch_id: (updates as any)?.batch_id
           })
 
         if (error) throw error
@@ -877,105 +823,193 @@ export default function TanksPage() {
 
   const performCombine = async () => {
     if (!combineSource) return
-    const ids = [combineSource.id, ...combineSelectedIds]
-    const selected = tanks.filter(t => ids.includes(t.id))
-    const volumes = selected.map(t => Number(t.current_volume_l || t.volume || 0))
-    const totalVolume = volumes.reduce((a, b) => a + b, 0)
-    if (totalVolume <= 0) {
+    const fallbackTarget = combineTargetId || (combineSelectedIds[0] || '')
+    if (!fallbackTarget) {
+      alert('Select a destination tank')
+      return
+    }
+    const srcIds = [combineSource.id, ...combineSelectedIds].filter(id => id !== fallbackTarget)
+    const dest = tanks.find(t => t.id === fallbackTarget)
+    if (!dest) return
+    const now = new Date().toISOString()
+
+    const inferPrefix = (name?: string | null) => {
+      const n = (name || '').toLowerCase()
+      if (n.includes('gin')) return 'GIN'
+      if (n.includes('vodka')) return 'VODKA'
+      if (n.includes('rum')) return 'RUM'
+      if (n.includes('cane')) return 'CS'
+      if (n.includes('liqueur')) return 'LIQ'
+      return 'BLEND'
+    }
+    const genBatchId = (base?: string | null) => {
+      const prefix = inferPrefix(base)
+      const yr = new Date().getFullYear().toString().slice(-2)
+      const rand = String(Math.floor(Math.random() * 10000)).padStart(4, '0')
+      return `${prefix}-${yr}-${rand}`
+    }
+
+    const destVol = Number(dest.current_volume_l || dest.volume || 0)
+    const destAbvRaw = Number(dest.current_abv || dest.abv || 0)
+    const destAbv = Number.isFinite(destAbvRaw) ? destAbvRaw : 0
+    const sources = tanks.filter(t => srcIds.includes(t.id))
+    const sourcePairs = sources.map(t => {
+      const v = Number(t.current_volume_l || t.volume || 0)
+      const aRaw = Number(t.current_abv || t.abv || 0)
+      const a = Number.isFinite(aRaw) ? aRaw : 0
+      return { v, a }
+    })
+    const sourceTankIds = sources.map(s => s.tank_id).filter(Boolean)
+    const productParts = [
+      ...(dest.product ? [dest.product] : dest.tank_name ? [dest.tank_name] : []),
+      ...sources.map(s => (s.product ? s.product : (s.tank_name || s.tank_id)))
+    ]
+      .map(s => String(s || '').trim())
+      .filter(Boolean)
+    const uniqueProducts = Array.from(new Set(productParts))
+    const combinedProductName = (combineProductName.trim() || (uniqueProducts.length ? uniqueProducts.join(' + ') : 'Blend'))
+    const blendedIds = [dest.tank_id, ...sourceTankIds].filter(Boolean)
+    const combinedTankName = (combineNewName.trim() || `Blend of ${blendedIds.join(' + ')}`)
+    const sourceVolume = sourcePairs.reduce((sum, p) => sum + p.v, 0)
+    if (sourceVolume <= 0) {
+      alert('No source volume to merge')
       setCurrentAction(null)
       return
     }
-    const abvPairs = selected.map(t => {
-      const v = Number(t.current_volume_l || t.volume || 0)
-      const a = Number(t.current_abv || t.abv || 0)
-      return { v, a: Number.isFinite(a) ? a : 0 }
-    })
-    const weightedAbv = abvPairs.reduce((sum, p) => sum + (p.v * p.a), 0) / (totalVolume || 1)
-    const newTankName = combineNewName.trim() || `${combineSource.tank_name || combineSource.tank_id} Blend`
-    const productName = combineProductName.trim() || (combineSource.product ? `${combineSource.product} Blend` : 'Blend')
-    const capacitySum = selected.reduce((sum, t) => sum + Number(t.capacity_l || t.capacity || 0), 0)
-    const now = new Date().toISOString()
+    const totalVolume = destVol + sourceVolume
+    const totalAlcohol = (destVol * destAbv) + sourcePairs.reduce((sum, p) => sum + (p.v * p.a), 0)
+    const newAbv = totalAlcohol / (totalVolume || 1)
 
     if (USE_STATIC || process.env.NODE_ENV === 'development') {
-      const newId = `BLEND-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
-      const newTank: Tank = {
-        id: newId,
-        organization_id: combineSource.organization_id,
-        tank_id: newId,
-        tank_name: newTankName,
-        tank_type: 'spirits',
-        capacity_l: capacitySum || 1000,
-        product: productName,
-        current_abv: Number.isFinite(weightedAbv) ? Number(weightedAbv.toFixed(2)) : null,
-        current_volume_l: Number(totalVolume.toFixed(2)),
-        status: 'holding',
-        notes: null,
-        last_updated_by: 'Blend',
-        created_at: now,
-        updated_at: now
-      }
-      const updated = tanks.map(t => {
-        if (ids.includes(t.id)) {
+      const prevDest = { ...dest }
+      const newBatchId = genBatchId(dest.product || dest.tank_name)
+      const nextList: Tank[] = tanks.map(t => {
+        if (t.id === dest.id) {
+          return {
+            ...t,
+            current_volume_l: Number(totalVolume.toFixed(2)),
+            current_abv: Number.isFinite(newAbv) ? Number(newAbv.toFixed(2)) : t.current_abv,
+            product: combinedProductName || t.product,
+            tank_name: combinedTankName || t.tank_name,
+            batch_id: newBatchId,
+            notes: [`Merged from ${sourceTankIds.join(', ')}`, t.notes || ''].filter(Boolean).join('; '),
+            last_updated_by: 'Blend',
+            updated_at: now
+          } as Tank
+        }
+        if (srcIds.includes(t.id)) {
           return {
             ...t,
             current_volume_l: 0,
-            notes: `Merged into ${newTankName}`,
-            updated_at: now,
-            last_updated_by: 'Blend'
-          }
+            status: 'empty' as const,
+            product: null,
+            current_abv: null,
+            tank_name: '',
+            notes: [`Merged into ${dest.tank_id}`, t.notes || ''].filter(Boolean).join('; '),
+            last_updated_by: 'Blend',
+            updated_at: now
+          } as Tank
         }
         return t
       })
-      setTanks([newTank, ...updated])
+      setTanks(nextList)
+      writeLocalTanks(nextList)
+      const destEntry: TankHistoryEntry = {
+        id: `hist-${Math.random().toString(36).slice(2, 10)}`,
+        organization_id: dest.organization_id,
+        tank_id: dest.id,
+        action: 'Blend in',
+        user_name: 'Blend',
+        previous_values: {
+          tank_name: prevDest.tank_name,
+          product: prevDest.product,
+          current_abv: prevDest.current_abv,
+          current_volume_l: prevDest.current_volume_l,
+          batch_id: (prevDest as any).batch_id
+        },
+        new_values: {
+          tank_name: combinedTankName || prevDest.tank_name,
+          product: combinedProductName || prevDest.product,
+          current_abv: Number.isFinite(newAbv) ? Number(newAbv.toFixed(2)) : prevDest.current_abv,
+          current_volume_l: Number(totalVolume.toFixed(2)),
+          batch_id: newBatchId
+        },
+        notes: `Merged sources: ${sourceTankIds.join(', ')}`,
+        created_at: now
+      }
+      const sourceEntries: TankHistoryEntry[] = sources.map(s => ({
+        id: `hist-${Math.random().toString(36).slice(2, 10)}`,
+        organization_id: s.organization_id,
+        tank_id: s.id,
+        action: 'Blend out',
+        user_name: 'Blend',
+        previous_values: {
+          tank_name: s.tank_name,
+          product: s.product,
+          current_abv: s.current_abv,
+          current_volume_l: s.current_volume_l
+        },
+        new_values: {
+          tank_name: '',
+          product: null,
+          current_abv: null,
+          current_volume_l: 0
+        },
+        notes: `Merged into ${dest.tank_id}`,
+        created_at: now
+      }))
+      setLocalHistory(prev => {
+        const next = { ...prev }
+        next[dest.id] = [destEntry, ...(next[dest.id] || [])]
+        for (const entry of sourceEntries) {
+          next[entry.tank_id] = [entry, ...(next[entry.tank_id] || [])]
+        }
+        return next
+      })
       setCombineSource(null)
       setCombineSelectedIds([])
+      setCombineTargetId('')
       setCombineNewName('')
       setCombineProductName('')
       setCurrentAction(null)
       return
     }
 
-    const { data: newTankRow, error: insertErr } = await supabase
-      .from('tanks')
-      .insert({
-        organization_id: combineSource.organization_id,
-        tank_id: `${combineSource.tank_id}-BLEND-${Date.now()}`,
-        tank_name: newTankName,
-        tank_type: 'spirits',
-        capacity_l: capacitySum || 1000,
-        product: productName,
-        current_abv: Number.isFinite(weightedAbv) ? Number(weightedAbv.toFixed(2)) : null,
-        current_volume_l: Number(totalVolume.toFixed(2)),
-        status: 'holding',
-        notes: null,
-        last_updated_by: 'Blend'
-      })
-      .select()
-      .single()
-    if (insertErr) {
-      return
+    const prevDest = {
+      tank_name: dest.tank_name,
+      capacity_l: dest.capacity_l,
+      product: dest.product,
+      current_abv: dest.current_abv,
+      current_volume_l: dest.current_volume_l,
+      status: dest.status,
+      notes: dest.notes
     }
+    const newBatchId = genBatchId(dest.product || dest.tank_name)
+    const destUpdates = {
+      current_volume_l: Number(totalVolume.toFixed(2)),
+      current_abv: Number.isFinite(newAbv) ? Number(newAbv.toFixed(2)) : null,
+      product: combinedProductName || dest.product,
+      tank_name: combinedTankName || dest.tank_name,
+      batch_id: newBatchId,
+      notes: [`Merged from ${sourceTankIds.join(', ')}`, dest.notes || ''].filter(Boolean).join('; '),
+      last_updated_by: 'Blend'
+    }
+    await supabase
+      .from('tanks')
+      .update(destUpdates)
+      .eq('id', dest.id)
     await supabase
       .from('tank_history')
       .insert({
-        organization_id: combineSource.organization_id,
-        tank_id: newTankRow?.id || `${combineSource.tank_id}-BLEND`,
+        organization_id: dest.organization_id,
+        tank_id: dest.id,
         action: 'Blend in',
         user_name: 'Blend',
-        previous_values: null,
-        new_values: {
-          tank_name: newTankName,
-          capacity_l: capacitySum || 1000,
-          product: productName,
-          current_abv: Number.isFinite(weightedAbv) ? Number(weightedAbv.toFixed(2)) : null,
-          current_volume_l: Number(totalVolume.toFixed(2)),
-          status: 'holding',
-          notes: null,
-          last_updated_by: 'Blend'
-        },
-        notes: `Created by blending ${ids.join(', ')}`
+        previous_values: prevDest,
+        new_values: destUpdates,
+        notes: `Merged sources: ${srcIds.join(', ')}; New batch: ${newBatchId}`
       })
-    for (const t of selected) {
+    for (const t of sources) {
       const prev = {
         tank_name: t.tank_name,
         capacity_l: t.capacity_l,
@@ -987,7 +1021,11 @@ export default function TanksPage() {
       }
       const updates = {
         current_volume_l: 0,
-        notes: `Merged into ${newTankName}`,
+        status: 'empty' as const,
+        product: null,
+        current_abv: null,
+        tank_name: null,
+        notes: [`Merged into ${dest.tank_id}`, t.notes || ''].filter(Boolean).join('; '),
         last_updated_by: 'Blend'
       }
       await supabase
@@ -1003,12 +1041,13 @@ export default function TanksPage() {
           user_name: 'Blend',
           previous_values: prev,
           new_values: updates,
-          notes: `Merged into ${newTankName}`
+          notes: `Merged into ${dest.tank_id}`
         })
     }
     await loadTanks()
     setCombineSource(null)
     setCombineSelectedIds([])
+    setCombineTargetId('')
     setCombineNewName('')
     setCombineProductName('')
     setCurrentAction(null)
@@ -1148,6 +1187,7 @@ export default function TanksPage() {
                 tank_type: 'spirits',
                 capacity_l: 1000,
                 status: 'empty',
+                batch_id: '',
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString()
               }
@@ -1235,7 +1275,7 @@ export default function TanksPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {tanks.map(tank => (
+          {tanks.filter(t => t.status !== 'bottled_empty').map(tank => (
             <TankCard
               key={tank.id}
               tank={tank}
@@ -1274,8 +1314,9 @@ export default function TanksPage() {
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">New product name</label>
+                <label htmlFor="transform_product_name" className="block text-sm font-medium text-gray-700 mb-2">New product name</label>
                 <input
+                  id="transform_product_name"
                   type="text"
                   value={transformProductName}
                   onChange={(e) => setTransformProductName(e.target.value)}
@@ -1284,8 +1325,9 @@ export default function TanksPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Link recipe (optional)</label>
+                <label htmlFor="transform_recipe_id" className="block text-sm font-medium text-gray-700 mb-2">Link recipe (optional)</label>
                 <select
+                  id="transform_recipe_id"
                   value={transformRecipeId}
                   onChange={(e) => setTransformRecipeId(e.target.value)}
                   className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
@@ -1325,8 +1367,9 @@ export default function TanksPage() {
             <div className="p-6 space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">ABV (%)</label>
+                  <label htmlFor="adjust_abv" className="block text-sm font-medium text-gray-700 mb-2">ABV (%)</label>
                   <input
+                    id="adjust_abv"
                     type="number"
                     value={adjustAbv}
                     onChange={(e) => setAdjustAbv(e.target.value)}
@@ -1338,8 +1381,9 @@ export default function TanksPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Volume (L)</label>
+                  <label htmlFor="adjust_volume" className="block text sm font-medium text-gray-700 mb-2">Volume (L)</label>
                   <input
+                    id="adjust_volume"
                     type="number"
                     value={adjustVolume}
                     onChange={(e) => setAdjustVolume(e.target.value)}
@@ -1351,8 +1395,9 @@ export default function TanksPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Notes (optional)</label>
+                <label htmlFor="adjust_notes" className="block text-sm font-medium text-gray-700 mb-2">Notes (optional)</label>
                 <input
+                  id="adjust_notes"
                   type="text"
                   value={adjustNotes}
                   onChange={(e) => setAdjustNotes(e.target.value)}
@@ -1388,8 +1433,9 @@ export default function TanksPage() {
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Infusion type</label>
+                <label htmlFor="infusion_type" className="block text-sm font-medium text-gray-700 mb-2">Infusion type</label>
                 <input
+                  id="infusion_type"
                   type="text"
                   value={infusionType}
                   onChange={(e) => setInfusionType(e.target.value)}
@@ -1467,14 +1513,57 @@ export default function TanksPage() {
             </div>
             <div className="p-6 space-y-4">
               <div>
-                <div className="text-sm font-medium text-gray-700 mb-2">Select tanks to combine</div>
+                <div className="text-sm font-medium text-gray-700 mb-2">Select destination tank</div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  {tanks.filter(t => t.id !== combineSource.id).map(t => {
+                  <label className="flex items-center gap-3 border rounded-lg p-3">
+                    <span className="sr-only">Destination {combineSource.tank_id} {combineSource.tank_name}</span>
+                    <input
+                      type="radio"
+                      checked={combineTargetId === combineSource.id}
+                      onChange={() => setCombineTargetId(combineSource.id)}
+                      name="combine_destination"
+                    />
+                    <div className="flex-1">
+                      <div className="font-medium text-gray-900">{combineSource.tank_id} • {combineSource.tank_name} (current)</div>
+                      <div className="text-sm text-gray-600">
+                        {Number(combineSource.current_volume_l || combineSource.volume || 0).toFixed(0)}L @ {Number.isFinite(Number(combineSource.current_abv || combineSource.abv || 0)) ? Number(combineSource.current_abv || combineSource.abv || 0).toFixed(1) : '—'}%
+                      </div>
+                    </div>
+                  </label>
+                  {tanks
+                    .filter(t => t.id !== combineSource.id)
+                    .map(t => {
+                      const vol = Number(t.current_volume_l || t.volume || 0)
+                      const abv = Number(t.current_abv || t.abv || 0)
+                      const checked = combineTargetId === t.id
+                      return (
+                        <label key={t.id} className="flex items-center gap-3 border rounded-lg p-3">
+                          <span className="sr-only">Destination {t.tank_id} {t.tank_name}</span>
+                          <input
+                            type="radio"
+                            checked={checked}
+                            onChange={() => setCombineTargetId(t.id)}
+                            name="combine_destination"
+                          />
+                          <div className="flex-1">
+                            <div className="font-medium text-gray-900">{t.tank_id} • {t.tank_name}</div>
+                            <div className="text-sm text-gray-600">{vol.toFixed(0)}L @ {Number.isFinite(abv) ? abv.toFixed(1) : '—'}%</div>
+                          </div>
+                        </label>
+                      )
+                    })}
+                </div>
+              </div>
+              <div>
+                <div className="text-sm font-medium text-gray-700 mb-2">Select source tanks to merge into destination</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {tanks.filter(t => t.id !== combineSource.id && t.id !== combineTargetId).map(t => {
                     const vol = Number(t.current_volume_l || t.volume || 0)
                     const abv = Number(t.current_abv || t.abv || 0)
                     const checked = combineSelectedIds.includes(t.id)
                     return (
                       <label key={t.id} className="flex items-center gap-3 border rounded-lg p-3">
+                        <span className="sr-only">Select {t.tank_id} {t.tank_name}</span>
                         <input
                           type="checkbox"
                           checked={checked}
@@ -1494,34 +1583,13 @@ export default function TanksPage() {
                   })}
                 </div>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">New tank name</label>
-                  <input
-                    type="text"
-                    value={combineNewName}
-                    onChange={(e) => setCombineNewName(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Coffee Liqueur Blend"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Product name</label>
-                  <input
-                    type="text"
-                    value={combineProductName}
-                    onChange={(e) => setCombineProductName(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Coffee Liqueur"
-                  />
-                </div>
-              </div>
             </div>
             <div className="bg-gray-50 px-6 py-4 rounded-b-xl flex justify-between">
               <button
                 onClick={() => {
                   setCombineSource(null)
                   setCombineSelectedIds([])
+                  setCombineTargetId('')
                   setCombineNewName('')
                   setCombineProductName('')
                   setCurrentAction(null)
@@ -1557,6 +1625,42 @@ export default function TanksPage() {
                     <div className="text-sm text-gray-900">{new Date(h.created_at).toLocaleString()}</div>
                     <div className="text-sm font-semibold text-gray-800">{h.action}</div>
                     {h.notes && <div className="text-sm text-gray-600">{h.notes}</div>}
+                    {h.previous_values || h.new_values ? (
+                      <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        <div className="border rounded-lg p-2">
+                          <div className="font-medium text-gray-700">Previous</div>
+                          <div className="text-gray-800">
+                            <div>Tank Name: {String((h.previous_values as any)?.tank_name ?? '—')}</div>
+                            <div>Product: {String((h.previous_values as any)?.product ?? '—')}</div>
+                            <div>ABV: {(() => {
+                              const v = (h.previous_values as any)?.current_abv
+                              return v === null || v === undefined ? '—' : `${Number(v).toFixed(2)}%`
+                            })()}</div>
+                            <div>Volume: {(() => {
+                              const v = (h.previous_values as any)?.current_volume_l
+                              return v === null || v === undefined ? '—' : `${Number(v).toFixed(2)} L`
+                            })()}</div>
+                            <div>Status: {String((h.previous_values as any)?.status ?? '—')}</div>
+                          </div>
+                        </div>
+                        <div className="border rounded-lg p-2">
+                          <div className="font-medium text-gray-700">New</div>
+                          <div className="text-gray-800">
+                            <div>Tank Name: {String((h.new_values as any)?.tank_name ?? '—')}</div>
+                            <div>Product: {String((h.new_values as any)?.product ?? '—')}</div>
+                            <div>ABV: {(() => {
+                              const v = (h.new_values as any)?.current_abv
+                              return v === null || v === undefined ? '—' : `${Number(v).toFixed(2)}%`
+                            })()}</div>
+                            <div>Volume: {(() => {
+                              const v = (h.new_values as any)?.current_volume_l
+                              return v === null || v === undefined ? '—' : `${Number(v).toFixed(2)} L`
+                            })()}</div>
+                            <div>Status: {String((h.new_values as any)?.status ?? '—')}</div>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                 ))
               )}

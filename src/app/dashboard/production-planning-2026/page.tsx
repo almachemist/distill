@@ -430,7 +430,7 @@ function MaterialsTable({ materials }: { materials: MaterialNeed[] }) {
           </th>
         </tr>
       </thead>
-      <tbody className="divide-y divide-neutral-100 bg-white">
+      <tbody className="divide-y divide-copper-15 bg-white">
         {materials.map((material, idx) => (
           <tr key={idx} className="hover:bg-neutral-50 transition-colors duration-150">
             <td className="px-4 py-3 text-sm text-neutral-900 font-medium">{material.name}</td>
@@ -440,7 +440,7 @@ function MaterialsTable({ materials }: { materials: MaterialNeed[] }) {
             <td className="px-4 py-3 text-sm text-right text-neutral-600 tabular-nums">
               {material.current_stock.toLocaleString()} {material.uom}
             </td>
-            <td className="px-4 py-3 text-sm text-right font-semibold text-red-600 tabular-nums">
+            <td className="px-4 py-3 text-sm text-right font-semibold text-copper tabular-nums">
               {material.shortage > 0 ? `${material.shortage.toLocaleString()} ${material.uom}` : '-'}
             </td>
             <td className="px-4 py-3 text-right">
@@ -455,10 +455,10 @@ function MaterialsTable({ materials }: { materials: MaterialNeed[] }) {
 
 function StatusBadge({ status }: { status: string }) {
   const colors = {
-    CRITICAL: 'bg-red-100 text-red-700',
-    LOW: 'bg-orange-100 text-orange-700',
-    ADEQUATE: 'bg-yellow-50 text-yellow-700',
-    GOOD: 'bg-green-100 text-green-700',
+    CRITICAL: 'bg-beige text-copper',
+    LOW: 'bg-beige text-copper',
+    ADEQUATE: 'bg-beige text-graphite',
+    GOOD: 'bg-beige text-graphite',
   }
 
   return (
@@ -485,11 +485,11 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
         if (items.length === 0) return null
 
         return (
-          <div key={category} className="bg-[#F5EEE7] rounded-xl shadow-sm border border-[#C07A50] overflow-hidden">
+          <div key={category} className="bg-beige rounded-xl shadow-sm border border-copper overflow-hidden">
             {/* Category Header */}
-            <div className="bg-white px-6 py-4 border-b border-[#E0DAD2]">
-              <h3 className="text-lg font-semibold text-[#1A1A1A]">{category}</h3>
-              <p className="text-sm text-[#C07A50] mt-1">
+            <div className="bg-white px-6 py-4 border-b border-copper-20">
+              <h3 className="text-lg font-semibold text-graphite">{category}</h3>
+              <p className="text-sm text-copper mt-1">
                 Stock consumption timeline • {items.length} materials tracked
               </p>
             </div>
@@ -501,13 +501,13 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                   {/* Material Header */}
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="text-sm font-semibold text-[#1A1A1A]">{timeline.material_name}</h4>
-                      <p className="text-xs text-[#C07A50]/70 mt-1">
-                        Initial Stock: <span className="font-semibold text-[#1A1A1A]">{timeline.initial_stock.toLocaleString()} {timeline.uom}</span>
+                      <h4 className="text-sm font-semibold text-graphite">{timeline.material_name}</h4>
+                      <p className="text-xs text-copper/70 mt-1">
+                        Initial Stock: <span className="font-semibold text-graphite">{timeline.initial_stock.toLocaleString()} {timeline.uom}</span>
                       </p>
                     </div>
                     {timeline.batches.some(b => b.runs_out) && (
-                      <span className="inline-flex px-3 py-1 rounded-lg text-xs font-medium bg-[#FDEDEC] text-[#C0392B] border border-[#C0392B]/20">
+                      <span className="inline-flex px-3 py-1 rounded-lg text-xs font-medium bg-copper-5 text-copper border border-copper-30">
                         Runs Out
                       </span>
                     )}
@@ -516,48 +516,48 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                   {/* Timeline Table */}
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                      <thead className="bg-white border-b border-[#E0DAD2]">
+                      <thead className="bg-white border-b border-copper-20">
                         <tr>
-                          <th className="px-4 py-2 text-left text-xs font-semibold text-[#C07A50] uppercase">Batch</th>
-                          <th className="px-4 py-2 text-left text-xs font-semibold text-[#C07A50] uppercase">Product</th>
-                          <th className="px-4 py-2 text-left text-xs font-semibold text-[#C07A50] uppercase">Month</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C07A50] uppercase">Consumed</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C07A50] uppercase">Stock After</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C0392B] uppercase">Missing</th>
-                          <th className="px-4 py-2 text-right text-xs font-semibold text-[#C07A50] uppercase">Status</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-copper uppercase">Batch</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-copper uppercase">Product</th>
+                          <th className="px-4 py-2 text-left text-xs font-semibold text-copper uppercase">Month</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-copper uppercase">Consumed</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-copper uppercase">Stock After</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-copper uppercase">Missing</th>
+                          <th className="px-4 py-2 text-right text-xs font-semibold text-copper uppercase">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#E0DAD2]">
+                      <tbody className="divide-y divide-copper-20">
                         {timeline.batches.map((batch, idx) => {
                           const missing = batch.stock_after < 0 ? Math.abs(batch.stock_after) : 0
                           return (
                             <tr
                               key={idx}
                               className={`hover:bg-white/50 transition-colors duration-150 ${
-                                batch.runs_out ? 'bg-[#FDEDEC]' : 'bg-white'
+                                batch.runs_out ? 'bg-copper-5' : 'bg-white'
                               }`}
                             >
-                              <td className="px-4 py-3 text-[#C07A50]/70 font-medium">#{batch.batch_index + 1}</td>
-                              <td className="px-4 py-3 text-[#1A1A1A] font-medium">{batch.product}</td>
-                              <td className="px-4 py-3 text-[#C07A50]/70">{batch.month}</td>
-                              <td className="px-4 py-3 text-right text-[#C07A50] font-semibold tabular-nums">
+                              <td className="px-4 py-3 text-copper/70 font-medium">#{batch.batch_index + 1}</td>
+                              <td className="px-4 py-3 text-graphite font-medium">{batch.product}</td>
+                              <td className="px-4 py-3 text-copper/70">{batch.month}</td>
+                              <td className="px-4 py-3 text-right text-copper font-semibold tabular-nums">
                                 -{batch.consumed.toLocaleString()} {timeline.uom}
                               </td>
                               <td className={`px-4 py-3 text-right font-semibold tabular-nums ${
-                                batch.stock_after <= 0 ? 'text-[#C0392B]' : 'text-[#1E7F4A]'
+                                batch.stock_after <= 0 ? 'text-copper' : 'text-graphite'
                               }`}>
                                 {batch.stock_after.toLocaleString()} {timeline.uom}
                               </td>
-                              <td className="px-4 py-3 text-right font-bold text-[#C0392B] tabular-nums">
+                              <td className="px-4 py-3 text-right font-bold text-copper tabular-nums">
                                 {missing > 0 ? `${missing.toLocaleString()} ${timeline.uom}` : '-'}
                               </td>
                               <td className="px-4 py-3 text-right">
                                 {batch.runs_out ? (
-                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-[#FDEDEC] text-[#C0392B] border border-[#C0392B]/20">
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-copper-5 text-copper border border-copper-30">
                                     OUT
                                   </span>
                                 ) : (
-                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-[#E9F7EF] text-[#1E7F4A] border border-[#1E7F4A]/20">
+                                  <span className="inline-flex px-2 py-1 rounded text-xs font-medium bg-beige text-graphite border border-copper-20">
                                     OK
                                   </span>
                                 )}
@@ -570,12 +570,12 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
                   </div>
 
                   {/* Final Stock Summary */}
-                  <div className="flex items-center justify-between pt-2 border-t border-[#E0DAD2]">
-                    <p className="text-xs text-[#C07A50]/70">
+                  <div className="flex items-center justify-between pt-2 border-t border-copper-20">
+                    <p className="text-xs text-copper/70">
                       After {timeline.batches.length} batches
                     </p>
                     <p className={`text-sm font-semibold ${
-                      timeline.batches[timeline.batches.length - 1].stock_after <= 0 ? 'text-[#C0392B]' : 'text-[#1A1A1A]'
+                      timeline.batches[timeline.batches.length - 1].stock_after <= 0 ? 'text-copper' : 'text-graphite'
                     }`}>
                       Final Stock: {timeline.batches[timeline.batches.length - 1].stock_after.toLocaleString()} {timeline.uom}
                     </p>
@@ -589,4 +589,3 @@ function StockTimelineView({ timelines, batches }: { timelines: StockTimeline[];
     </div>
   )
 }
-

@@ -14,8 +14,8 @@ function EditProductionContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   
-  const id = params.id as string
-  const recipeId = searchParams.get('recipeId')
+  const id = (params as any)?.id as string || ''
+  const recipeId = searchParams?.get('recipeId')
   
   const [batch, setBatch] = useState<ProductionBatch | null>(null)
   const [recipe, setRecipe] = useState<Recipe | null>(null)
@@ -30,7 +30,7 @@ function EditProductionContent() {
     setIsLoading(true)
     try {
       // Load batch - getDraftBatch will try both tables if productType not specified
-      const productType = searchParams.get('type') as any
+      const productType = searchParams?.get('type') as any
       const batchData = await getDraftBatch(id, productType)
       if (batchData) {
         setBatch(batchData)
@@ -61,7 +61,7 @@ function EditProductionContent() {
     setIsSaving(true)
     try {
       // Get productType from batch or URL
-      const productType = batch.productType || (searchParams.get('type') as any)
+      const productType = batch.productType || (searchParams?.get('type') as any)
       console.log('handleSave - About to save batch:', {
         id: batch.id,
         productType,

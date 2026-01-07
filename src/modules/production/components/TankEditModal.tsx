@@ -21,6 +21,7 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
   const [volume, setVolume] = useState(tank.current_volume_l?.toString() || '')
   const [status, setStatus] = useState<TankStatus>(tank.status)
   const [notes, setNotes] = useState(tank.notes || '')
+  const [batchId, setBatchId] = useState(tank.batch_id || tank.batch || '')
   const [userName, setUserName] = useState('')
   const [isSaving, setIsSaving] = useState(false)
 
@@ -34,20 +35,21 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
       setVolume(tank.current_volume_l?.toString() || '')
       setStatus(tank.status)
       setNotes(tank.notes || '')
+      setBatchId(tank.batch_id || tank.batch || '')
     }
   }, [tank, isOpen])
 
   if (!isOpen) return null
 
   const handleSave = async () => {
-    if (isNewTank && (!tankId.trim() || !tankName.trim())) {
-      alert('Please enter Tank ID and Tank Name')
+    if (isNewTank && (!tankId.trim() || !tankName.trim() || !batchId.trim())) {
+      alert('Please enter Tank ID, Tank Name, and Batch ID')
       return
     }
 
     setIsSaving(true)
     try {
-      const updates: TankUpdateInput & { tank_id?: string; tank_name?: string; capacity_l?: number } = {
+      const updates: TankUpdateInput & { tank_id?: string; tank_name?: string; capacity_l?: number; batch_id?: string } = {
         product: product.trim() || null,
         current_abv: abv ? parseFloat(abv) : null,
         current_volume_l: volume ? parseFloat(volume) : null,
@@ -60,10 +62,12 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
         updates.tank_id = tankId.trim()
         updates.tank_name = tankName.trim()
         updates.capacity_l = capacity ? parseFloat(capacity) : 1000
+        updates.batch_id = batchId.trim()
       } else {
         // Allow editing tank name and capacity for existing tanks
         updates.tank_name = tankName.trim()
         updates.capacity_l = capacity ? parseFloat(capacity) : tank.capacity_l
+        updates.batch_id = batchId.trim() || undefined
       }
 
       await onSave(tank.id, updates)
@@ -166,6 +170,22 @@ export function TankEditModal({ tank, isOpen, onClose, onSave, onDelete }: TankE
                 placeholder="e.g., Rainforest Gin, Navy Strength Gin"
               />
             </div>
+          
+          {/* Batch ID */}
+          <div>
+            <label htmlFor="tank_batch_id" className="block text-sm font-medium text-gray-700 mb-2">
+              Batch ID {isNewTank && <span className="text-red-500">*</span>}
+            </label>
+            <input
+              type="text"
+              id="tank_batch_id"
+              value={batchId}
+              onChange={(e) => setBatchId(e.target.value)}
+              className="w-full px-4 py-2 border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
+              placeholder="e.g., RAIN-26-001"
+              required={isNewTank}
+            />
+          </div>
 
           {/* ABV and Volume */}
           <div className="grid grid-cols-2 gap-4">

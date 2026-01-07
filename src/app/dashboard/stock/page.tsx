@@ -114,14 +114,14 @@ export default function StockPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-50 px-6 py-8">
+      <div className="min-h-screen bg-beige px-6 py-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
-            <h1 className="text-3xl font-semibold text-neutral-900 tracking-tight">Inventory</h1>
-            <p className="text-sm text-neutral-500 mt-1">Loading inventory data...</p>
+            <h1 className="text-3xl font-semibold text-graphite tracking-tight">Inventory</h1>
+            <p className="text-sm text-graphite/70 mt-1">Loading inventory data...</p>
           </div>
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-900"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
           </div>
         </div>
       </div>
@@ -129,67 +129,67 @@ export default function StockPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 px-6 py-8">
+    <div className="min-h-screen bg-beige px-6 py-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-neutral-900 tracking-tight">Inventory</h1>
-          <p className="text-sm text-neutral-500 mt-1">
+          <h1 className="text-3xl font-semibold text-graphite tracking-tight">Inventory</h1>
+          <p className="text-sm text-graphite/70 mt-1">
             Real-time inventory levels and tracking
           </p>
         </div>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="p-5 rounded-xl shadow-sm border border-neutral-200 bg-white hover:shadow-md transition-shadow duration-200">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Items</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">{inventory.length}</p>
-            <p className="text-xs text-neutral-400 mt-1">Unique SKUs</p>
+          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
+            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Total Items</p>
+            <p className="text-3xl font-semibold text-graphite mt-2">{inventory.length}</p>
+            <p className="text-xs text-graphite/60 mt-1">Unique SKUs</p>
           </div>
 
-          <div className="p-5 rounded-xl shadow-sm border border-neutral-200 bg-white hover:shadow-md transition-shadow duration-200">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Total Inventory</p>
-            <p className="text-3xl font-semibold text-neutral-900 mt-2">{totalUnits.toLocaleString()}</p>
-            <p className="text-xs text-neutral-400 mt-1">Units in warehouse</p>
+          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
+            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Total Inventory</p>
+            <p className="text-3xl font-semibold text-graphite mt-2">{totalUnits.toLocaleString()}</p>
+            <p className="text-xs text-graphite/60 mt-1">Units in warehouse</p>
           </div>
 
-          <div className="p-5 rounded-xl shadow-sm border border-neutral-200 bg-white hover:shadow-md transition-shadow duration-200">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Low Inventory</p>
-            <p className="text-3xl font-semibold text-orange-600 mt-2">{lowStockCount}</p>
-            <p className="text-xs text-neutral-400 mt-1">Below 100 units</p>
+          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
+            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Low Inventory</p>
+            <p className="text-3xl font-semibold text-copper mt-2">{lowStockCount}</p>
+            <p className="text-xs text-graphite/60 mt-1">Below 100 units</p>
           </div>
 
-          <div className="p-5 rounded-xl shadow-sm border border-neutral-200 bg-white hover:shadow-md transition-shadow duration-200">
-            <p className="text-xs text-neutral-500 uppercase tracking-wide font-medium">Out of Inventory</p>
-            <p className="text-3xl font-semibold text-red-600 mt-2">{criticalStockCount}</p>
-            <p className="text-xs text-neutral-400 mt-1">Items at 0</p>
+          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
+            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Out of Inventory</p>
+            <p className="text-3xl font-semibold text-copper mt-2">{criticalStockCount}</p>
+            <p className="text-xs text-graphite/60 mt-1">Items at 0</p>
           </div>
         </div>
 
         {/* Inventory by Category */}
         <Tabs defaultValue="labels" className="w-full">
-          <TabsList className="bg-neutral-100 p-1 rounded-xl inline-flex gap-1">
+          <TabsList className="bg-beige border border-copper-30 p-1 rounded-xl inline-flex gap-1">
             <TabsTrigger
               value="labels"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Labels
             </TabsTrigger>
             <TabsTrigger
               value="bottles"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Bottles
             </TabsTrigger>
             <TabsTrigger
               value="packaging"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Packaging
             </TabsTrigger>
             <TabsTrigger
               value="botanicals"
-              className="px-6 py-2 rounded-lg data-[state=active]:bg-white data-[state=active]:shadow-sm transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Botanicals
             </TabsTrigger>
@@ -197,46 +197,46 @@ export default function StockPage() {
 
           {categories.map((category) => (
             <TabsContent key={category.name.toLowerCase()} value={category.name.toLowerCase()} className="mt-6">
-              <div className="bg-white rounded-xl shadow-sm border border-neutral-200 overflow-hidden">
+              <div className="bg-white rounded-xl shadow-soft border border-copper-30 overflow-hidden">
                 {/* Category Header */}
-                <div className="flex items-center justify-between px-6 py-5 border-b border-neutral-200 bg-gradient-to-r from-neutral-50 to-white">
-                  <h3 className="text-lg font-semibold text-neutral-900">{category.name}</h3>
+                <div className="flex items-center justify-between px-6 py-5 border-b border-copper-30 bg-gradient-to-r from-beige to-white">
+                  <h3 className="text-lg font-semibold text-graphite">{category.name}</h3>
                   <div className="flex items-center gap-4">
                     <div className="text-right">
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide">Items</p>
-                      <p className="text-sm font-semibold text-neutral-900">{category.items.length}</p>
+                      <p className="text-xs text-graphite/70 uppercase tracking-wide">Items</p>
+                      <p className="text-sm font-semibold text-graphite">{category.items.length}</p>
                     </div>
-                    <div className="h-8 w-px bg-neutral-200"></div>
+                    <div className="h-8 w-px bg-copper-15"></div>
                     <div className="text-right">
-                      <p className="text-xs text-neutral-500 uppercase tracking-wide">Total Units</p>
-                      <p className="text-sm font-semibold text-neutral-900">{category.items.reduce((sum, item) => sum + item.current_stock, 0).toLocaleString()}</p>
+                      <p className="text-xs text-graphite/70 uppercase tracking-wide">Total Units</p>
+                      <p className="text-sm font-semibold text-graphite">{category.items.reduce((sum, item) => sum + item.current_stock, 0).toLocaleString()}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Table */}
                 <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-neutral-200">
-                    <thead className="bg-neutral-50">
+                  <table className="min-w-full divide-y divide-copper-15">
+                    <thead className="bg-beige">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-graphite uppercase tracking-wider">
                           Product Name
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-graphite uppercase tracking-wider">
                           Category
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-right text-xs font-semibold text-graphite uppercase tracking-wider">
                           Inventory Level
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                        <th className="px-6 py-3 text-right text-xs font-semibold text-graphite uppercase tracking-wider">
                           Status
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-neutral-100 bg-white">
+                    <tbody className="divide-y divide-copper-15 bg-white">
                       {category.items.length === 0 ? (
                         <tr>
-                          <td colSpan={4} className="px-6 py-12 text-center text-sm text-neutral-400">
+                          <td colSpan={4} className="px-6 py-12 text-center text-sm text-graphite/60">
                             No items in this category
                           </td>
                         </tr>
@@ -246,40 +246,40 @@ export default function StockPage() {
                           .map((item, index) => (
                             <tr
                               key={item.id}
-                              className={`hover:bg-neutral-50 transition-colors duration-150 ${
-                                index % 2 === 0 ? 'bg-white' : 'bg-neutral-25'
+                              className={`hover:bg-copper-5 transition-colors duration-150 ${
+                                index % 2 === 0 ? 'bg-white' : 'bg-white'
                               }`}
                             >
-                              <td className="px-6 py-4 text-sm text-neutral-900 font-medium">
+                              <td className="px-6 py-4 text-sm text-graphite font-medium">
                                 {item.name}
                               </td>
-                              <td className="px-6 py-4 text-sm text-neutral-500">
-                                <span className="inline-flex px-2 py-1 rounded-md bg-neutral-100 text-neutral-700 text-xs font-medium">
+                              <td className="px-6 py-4 text-sm text-graphite/70">
+                                <span className="inline-flex px-2 py-1 rounded-md bg-beige text-graphite text-xs font-medium">
                                   {item.category}
                                 </span>
                               </td>
-                              <td className="px-6 py-4 text-sm text-right font-semibold text-neutral-900 tabular-nums">
+                              <td className="px-6 py-4 text-sm text-right font-semibold text-graphite tabular-nums">
                                 {item.current_stock.toLocaleString()}
                               </td>
                               <td className="px-6 py-4 text-sm text-right">
                                 {item.current_stock === 0 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-red-100 text-red-700 text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-red text-white text-xs font-semibold">
                                     Empty
                                   </span>
                                 ) : item.current_stock < 100 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-red-50 text-red-600 text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-red text-white text-xs font-semibold">
                                     Critical
                                   </span>
                                 ) : item.current_stock < 500 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-yellow-50 text-yellow-700 text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-amber text-onyx text-xs font-semibold">
                                     Low
                                   </span>
                                 ) : item.current_stock < 1000 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-10 text-graphite text-xs font-semibold">
                                     Adequate
                                   </span>
                                 ) : (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-green-100 text-green-700 text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-green text-white text-xs font-semibold">
                                     Healthy
                                   </span>
                                 )}
@@ -298,4 +298,3 @@ export default function StockPage() {
     </div>
   )
 }
-

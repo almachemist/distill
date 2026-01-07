@@ -15,8 +15,8 @@ interface Botanical {
 function BotanicalSteepingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const batchId = searchParams.get('batchId')
+  const recipeId = searchParams?.get('recipeId')
+  const batchId = searchParams?.get('batchId')
   
   const [recipe, setRecipe] = useState<RecipeWithIngredients | null>(null)
   const [botanicals, setBotanicals] = useState<Botanical[]>([])
@@ -315,10 +315,11 @@ function BotanicalSteepingContent() {
 
           {/* Notes */}
           <div>
-            <label className="block text-sm font-medium text-graphite mb-2">
+            <label htmlFor="steeping_notes" className="block text-sm font-medium text-graphite mb-2">
               Notes
             </label>
             <textarea
+              id="steeping_notes"
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               rows={3}

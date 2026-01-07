@@ -2,7 +2,6 @@
 
 import { Suspense, useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { BarrelService } from '@/modules/barrels/services/barrel.service'
 import type { CreateBarrelData } from '@/modules/barrels/types/barrel.types'
 import { createClient } from '@/lib/supabase/client'
 import type { Tank } from '@/modules/production/types/tank.types'
@@ -41,11 +40,11 @@ function NewBarrelContent() {
   })
 
   useEffect(() => {
-    const product = searchParams.get('product') || ''
-    const abv = parseFloat(searchParams.get('abv') || '') || 0
-    const volume = parseFloat(searchParams.get('volume') || '') || 0
-    const location = searchParams.get('location') || ''
-    const tankId = searchParams.get('tankId') || ''
+    const product = searchParams?.get('product') || ''
+    const abv = parseFloat(searchParams?.get('abv') || '') || 0
+    const volume = parseFloat(searchParams?.get('volume') || '') || 0
+    const location = searchParams?.get('location') || ''
+    const tankId = searchParams?.get('tankId') || ''
     if (product || abv || volume || location || tankId) {
       setFormData(prev => ({
         ...prev,
@@ -113,10 +112,18 @@ function NewBarrelContent() {
         setIsLoading(false)
         return
       }
-      const service = new BarrelService()
-      const barrel = await service.createBarrel(formData)
+      const res = await fetch('/api/barrels', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) {
+        const errText = await res.text()
+        throw new Error(errText || 'Failed to create barrel')
+      }
+      const created = await res.json()
 
-      const tankId = searchParams.get('tankId') || ''
+      const tankId = searchParams?.get('tankId') || ''
       if (tankId && !USE_STATIC) {
         const { data: tank, error: tankErr } = await supabase
           .from('tanks')
@@ -155,7 +162,7 @@ function NewBarrelContent() {
                   notes: tank.notes
                 },
                 new_values: updates,
-                notes: `Barrel ${barrel?.barrelNumber || ''}`
+                notes: `Barrel ${formData.barrelNumber}`
               })
           }
         }

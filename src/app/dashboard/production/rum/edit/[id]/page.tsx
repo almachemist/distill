@@ -8,7 +8,7 @@ import { RumProductionForm } from "@/modules/production/components/RumProduction
 export default function EditRumBatchPage() {
   const router = useRouter()
   const params = useParams()
-  const id = params.id as string
+  const id = (params as any)?.id as string || ''
   
   const [isSaving, setIsSaving] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
@@ -321,17 +321,17 @@ export default function EditRumBatchPage() {
             <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-2">
                 <div className={`w-3 h-3 rounded-full ${
-                  batch.aging_status === 'completed' ? 'bg-green-500' :
-                  batch.aging_status === 'in_progress' ? 'bg-amber-500' :
-                  batch.aging_status === 'skipped' ? 'bg-stone-400' :
-                  'bg-stone-300'
+                  batch.aging_status === 'completed' ? 'bg-copper' :
+                  batch.aging_status === 'in_progress' ? 'bg-copper-amber' :
+                  batch.aging_status === 'skipped' ? 'bg-graphite' :
+                  'bg-copper-10'
                 }`} />
-                <span className="text-sm font-medium text-stone-700">Aging</span>
+                <span className="text-sm font-medium text-graphite">Aging</span>
               </div>
               <select
                 value={batch.aging_status || 'not_started'}
                 onChange={(e) => setBatch({ ...batch, aging_status: e.target.value as any })}
-                className="text-xs px-2 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                className="text-xs px-2 py-1 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-copper text-graphite"
               >
                 <option value="not_started">Not Started</option>
                 <option value="in_progress">In Progress</option>
@@ -344,17 +344,17 @@ export default function EditRumBatchPage() {
             <div className="flex flex-col">
               <div className="flex items-center gap-2 mb-2">
                 <div className={`w-3 h-3 rounded-full ${
-                  batch.bottling_status === 'completed' ? 'bg-green-500' :
-                  batch.bottling_status === 'in_progress' ? 'bg-amber-500' :
-                  batch.bottling_status === 'skipped' ? 'bg-stone-400' :
-                  'bg-stone-300'
+                  batch.bottling_status === 'completed' ? 'bg-copper' :
+                  batch.bottling_status === 'in_progress' ? 'bg-copper-amber' :
+                  batch.bottling_status === 'skipped' ? 'bg-graphite' :
+                  'bg-copper-10'
                 }`} />
-                <span className="text-sm font-medium text-stone-700">Bottling</span>
+                <span className="text-sm font-medium text-graphite">Bottling</span>
               </div>
               <select
                 value={batch.bottling_status || 'not_started'}
                 onChange={(e) => setBatch({ ...batch, bottling_status: e.target.value as any })}
-                className="text-xs px-2 py-1 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+                className="text-xs px-2 py-1 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-copper text-graphite"
               >
                 <option value="not_started">Not Started</option>
                 <option value="in_progress">In Progress</option>
@@ -365,15 +365,15 @@ export default function EditRumBatchPage() {
           </div>
 
           {/* Overall Status */}
-          <div className="mt-4 pt-4 border-t border-stone-200">
-            <label htmlFor="overall_status" className="block text-sm font-medium text-stone-700 mb-2">
+          <div className="mt-4 pt-4 border-t border-copper-20">
+            <label htmlFor="overall_status" className="block text-sm font-medium text-graphite mb-2">
               Overall Batch Status
             </label>
             <select
               id="overall_status"
               value={batch.overall_status || 'draft'}
               onChange={(e) => setBatch({ ...batch, overall_status: e.target.value as any })}
-              className="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-600"
+              className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-copper text-graphite"
             >
               <option value="draft">Draft</option>
               <option value="fermenting">Fermenting</option>
@@ -399,33 +399,33 @@ export default function EditRumBatchPage() {
 
       {/* Status Selection Modal */}
       {showStatusModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-graphite bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
             <div className="p-6">
-              <h2 className="text-xl font-semibold text-stone-900 mb-2">
+              <h2 className="text-xl font-semibold text-graphite mb-2">
                 Batch Saved Successfully!
               </h2>
-              <p className="text-sm text-stone-600 mb-6">
+              <p className="text-sm text-graphite/70 mb-6">
                 Choose the status for this batch:
               </p>
 
               <div className="space-y-3">
                 <button
                   onClick={() => handleStatusUpdate('in_progress')}
-                  className="w-full px-4 py-3 text-left border-2 border-blue-300 bg-blue-50 rounded-lg hover:bg-blue-100 hover:border-blue-400 transition-colors"
+                  className="w-full px-4 py-3 text-left border-2 border-copper-30 bg-beige rounded-lg hover:bg-copper-20 hover:border-copper transition-colors"
                 >
-                  <div className="font-semibold text-blue-900">Mark as Ongoing</div>
-                  <div className="text-xs text-blue-700 mt-1">
+                  <div className="font-semibold text-graphite">Mark as Ongoing</div>
+                  <div className="text-xs text-graphite/70 mt-1">
                     Batch is still in progress (fermentation, distillation, or aging)
                   </div>
                 </button>
 
                 <button
                   onClick={() => handleStatusUpdate('completed')}
-                  className="w-full px-4 py-3 text-left border-2 border-green-300 bg-green-50 rounded-lg hover:bg-green-100 hover:border-green-400 transition-colors"
+                  className="w-full px-4 py-3 text-left border-2 border-copper-30 bg-beige rounded-lg hover:bg-copper-20 hover:border-copper transition-colors"
                 >
-                  <div className="font-semibold text-green-900">Mark as Completed</div>
-                  <div className="text-xs text-green-700 mt-1">
+                  <div className="font-semibold text-graphite">Mark as Completed</div>
+                  <div className="text-xs text-graphite/70 mt-1">
                     Batch is finished and ready for bottling or already bottled
                   </div>
                 </button>
@@ -433,7 +433,7 @@ export default function EditRumBatchPage() {
 
               <button
                 onClick={() => setShowStatusModal(false)}
-                className="w-full mt-4 px-4 py-2 text-sm text-stone-600 hover:text-stone-900"
+                className="w-full mt-4 px-4 py-2 text-sm text-graphite/70 hover:text-graphite"
               >
                 Cancel (keep current status)
               </button>

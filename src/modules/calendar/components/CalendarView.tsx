@@ -70,14 +70,14 @@ export default function CalendarView({ onEventClick, filters }: CalendarViewProp
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-lg">Loading calendar...</div>
+      <div className="flex items-center justify-center h-96 bg-beige rounded-lg border border-copper-30">
+        <div className="text-lg text-graphite">Loading calendar...</div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow">
+    <div className="p-4 bg-white rounded-lg shadow-soft border border-copper-30">
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
@@ -122,16 +122,17 @@ export function CalendarFilters({
   const statuses = ["PLANNED", "IN_PROGRESS", "DONE", "CANCELLED"];
 
   return (
-    <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+    <div className="mb-4 p-4 bg-beige rounded-lg border border-copper-30">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="calendar_event_type" className="block text-sm font-medium text-graphite mb-1">
             Event Type
           </label>
           <select
+            id="calendar_event_type"
             value={filters.type || ""}
             onChange={(e) => onFiltersChange({ ...filters, type: e.target.value || undefined })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
           >
             <option value="">All Types</option>
             {eventTypes.map(type => (
@@ -141,13 +142,14 @@ export function CalendarFilters({
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="calendar_status" className="block text-sm font-medium text-graphite mb-1">
             Status
           </label>
           <select
+            id="calendar_status"
             value={filters.status || ""}
             onChange={(e) => onFiltersChange({ ...filters, status: e.target.value || undefined })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
           >
             <option value="">All Statuses</option>
             {statuses.map(status => (
@@ -157,28 +159,30 @@ export function CalendarFilters({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="calendar_resource" className="block text-sm font-medium text-graphite mb-1">
             Resource
           </label>
           <input
+            id="calendar_resource"
             type="text"
             value={filters.resource || ""}
             onChange={(e) => onFiltersChange({ ...filters, resource: e.target.value || undefined })}
             placeholder="e.g., Carrie, VC-400"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="calendar_sku" className="block text-sm font-medium text-graphite mb-1">
             SKU
           </label>
           <input
+            id="calendar_sku"
             type="text"
             value={filters.sku || ""}
             onChange={(e) => onFiltersChange({ ...filters, sku: e.target.value || undefined })}
             placeholder="e.g., Merchant Mae Gin"
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
           />
         </div>
       </div>
@@ -186,7 +190,7 @@ export function CalendarFilters({
       <div className="mt-3 flex gap-2">
         <button
           onClick={() => onFiltersChange({})}
-          className="px-4 py-2 text-sm bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+          className="px-4 py-2 text-sm border border-copper-30 text-graphite rounded-md hover:bg-copper-10"
         >
           Clear Filters
         </button>

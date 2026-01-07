@@ -356,18 +356,18 @@ export default function FirestoreRecipesPage() {
 
   const getStatusBadge = (item: any) => {
     if (item.quantity === 0) {
-      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">⚠️ OUT</span>
+      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-5 text-copper">⚠️ OUT</span>
     }
     if (item.quantity <= (item.minThreshold || 0)) {
-      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">⚠️ LOW</span>
+      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-5 text-copper">⚠️ LOW</span>
     }
-    return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">✓ OK</span>
+    return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-beige text-graphite">✓ OK</span>
   }
 
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -377,20 +377,20 @@ export default function FirestoreRecipesPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Firestore Gin Recipe System</h1>
-          <p className="text-gray-600 mt-2">Complete Firestore integration with Gabi's exact data structure</p>
+          <h1 className="text-3xl font-bold text-graphite">Firestore Gin Recipe System</h1>
+          <p className="text-graphite/70 mt-2">Complete Firestore integration with Gabi's exact data structure</p>
         </div>
         <div className="flex space-x-3">
           <button
             onClick={handleInitializeSystem}
             disabled={isSeeding}
-            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
           >
             {isSeeding ? 'Initializing...' : 'Initialize Firestore System'}
           </button>
           <button
             onClick={loadData}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 font-medium"
+            className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 font-medium"
           >
             Refresh
           </button>
@@ -398,23 +398,23 @@ export default function FirestoreRecipesPage() {
       </div>
 
       {error && (
-        <div className="bg-red-50 border border-red-200 rounded-md p-4">
-          <p className="text-red-800">{error}</p>
+        <div className="bg-beige border border-copper-30 rounded-md p-4">
+          <p className="text-copper">{error}</p>
         </div>
       )}
 
       {/* Low Stock Banner */}
       {getLowStockItems().length > 0 && (
-        <div className="bg-red-50 border-l-4 border-red-400 p-4 mb-6">
+        <div className="bg-copper-5 border-l-4 border-copper p-4 mb-6">
           <div className="flex">
             <div className="flex-shrink-0">
-              <span className="text-red-400 text-xl">⚠️</span>
+              <span className="text-copper text-xl">⚠️</span>
             </div>
             <div className="ml-3 flex-1">
-              <h3 className="text-sm font-medium text-red-800">
+              <h3 className="text-sm font-medium text-copper">
                 ⚠️ Stock Alert: {getLowStockItems().length} items need attention
               </h3>
-              <div className="mt-2 text-sm text-red-700">
+              <div className="mt-2 text-sm text-graphite/80">
                 <ul className="list-disc list-inside ml-4">
                   {getLowStockItems().slice(0, 5).map(item => (
                     <li key={item.id}>
@@ -430,7 +430,7 @@ export default function FirestoreRecipesPage() {
       )}
 
       {/* Tabs */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-copper-20">
         <nav className="-mb-px flex space-x-8">
           {[
             { key: 'recipes', label: 'Gin Recipes', count: recipes.length },
@@ -442,8 +442,8 @@ export default function FirestoreRecipesPage() {
               onClick={() => setActiveTab(tab.key as any)}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.key
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-copper text-copper'
+                  : 'border-transparent text-graphite/60 hover:text-graphite hover:border-copper-20'
               }`}
             >
               {tab.label} ({tab.count})
@@ -457,16 +457,16 @@ export default function FirestoreRecipesPage() {
         <div className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {recipes.map((recipe) => (
-              <div key={recipe.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div key={recipe.id} className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{recipe.name}</h3>
-                    <p className="text-sm text-gray-600">{recipe.description}</p>
+                    <h3 className="text-lg font-semibold text-graphite">{recipe.name}</h3>
+                    <p className="text-sm text-graphite/70">{recipe.description}</p>
                   </div>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    recipe.difficulty === 'easy' ? 'bg-green-100 text-green-800' :
-                    recipe.difficulty === 'medium' ? 'bg-yellow-100 text-yellow-800' :
-                    'bg-red-100 text-red-800'
+                    recipe.difficulty === 'easy' ? 'bg-copper-green text-onyx' :
+                    recipe.difficulty === 'medium' ? 'bg-copper-amber text-onyx' :
+                    'bg-copper-red text-white'
                   }`}>
                     {recipe.difficulty}
                   </span>
@@ -474,19 +474,19 @@ export default function FirestoreRecipesPage() {
 
                 <div className="space-y-2 mb-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">ABV:</span>
+                    <span className="text-graphite/70">ABV:</span>
                     <span className="font-medium">{recipe.abv}%</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Batch Volume:</span>
+                    <span className="text-graphite/70">Batch Volume:</span>
                     <span className="font-medium">{recipe.batchVolume}L</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Total Cost:</span>
-                    <span className="font-medium text-green-600">${recipe.totalCost.toFixed(2)}</span>
+                    <span className="text-graphite/70">Total Cost:</span>
+                    <span className="font-medium text-copper">${recipe.totalCost.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Ingredients:</span>
+                    <span className="text-graphite/70">Ingredients:</span>
                     <span className="font-medium">{recipe.ingredients.length}</span>
                   </div>
                 </div>
@@ -494,13 +494,13 @@ export default function FirestoreRecipesPage() {
                 <div className="flex space-x-2">
                   <button
                     onClick={() => setSelectedRecipe(recipe)}
-                    className="flex-1 px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
+                    className="flex-1 px-3 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                   >
                     View Details
                   </button>
                   <button
                     onClick={() => handleStartProduction(recipe)}
-                    className="flex-1 px-3 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium"
+                    className="flex-1 px-3 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                   >
                     Start Production
                   </button>
@@ -514,38 +514,38 @@ export default function FirestoreRecipesPage() {
       {/* Inventory Tab */}
       {activeTab === 'inventory' && (
         <div className="bg-white shadow-sm rounded-lg">
-          <div className="px-6 py-4 border-b border-gray-200">
-            <h3 className="text-lg font-medium text-gray-900">Firestore Inventory</h3>
-            <p className="text-sm text-gray-600">Matches Gabi's exact data structure with Timestamp fields</p>
+          <div className="px-6 py-4 border-b border-copper-20">
+            <h3 className="text-lg font-medium text-graphite">Firestore Inventory</h3>
+            <p className="text-sm text-graphite/70">Matches Gabi's exact data structure with Timestamp fields</p>
           </div>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-copper-15">
+              <thead className="bg-beige">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Min Threshold</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Item</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Stock</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Min Threshold</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Price</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Status</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-white divide-y divide-copper-15">
                 {inventory.map((item) => (
                   <tr key={item.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{item.name}</div>
-                      <div className="text-sm text-gray-500">{item.unit}</div>
+                      <div className="text-sm font-medium text-graphite">{item.name}</div>
+                      <div className="text-sm text-graphite/60">{item.unit}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-semibold text-gray-900">
+                      <div className="text-sm font-semibold text-graphite">
                         {item.quantity.toLocaleString()}
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/60">
                       {item.minThreshold || 0}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/60">
                       ${item.pricePerKg?.toFixed(2) || '0.00'}/kg
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
@@ -559,7 +559,7 @@ export default function FirestoreRecipesPage() {
                             handleUpdateInventory(item.id, Number(newQty))
                           }
                         }}
-                        className="text-blue-600 hover:text-blue-800 text-sm font-medium"
+                        className="text-copper hover:text-copper/80 text-sm font-medium"
                       >
                         Update
                       </button>
@@ -575,98 +575,98 @@ export default function FirestoreRecipesPage() {
       {/* Production Tab */}
       {activeTab === 'production' && (
         <div className="space-y-6">
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">Firestore Production Management</h3>
-            <p className="text-blue-700 text-sm mb-4">
+          <div className="bg-beige border border-copper-30 rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-graphite mb-2">Firestore Production Management</h3>
+            <p className="text-graphite/70 text-sm mb-4">
               Production batches are automatically created in Firestore when you start production from a recipe.
               All ingredient consumption is tracked with Timestamp fields and inventory is updated in real-time.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
-                <span className="text-blue-800">Select recipe and check ingredient availability</span>
+                <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+                <span className="text-graphite">Select recipe and check ingredient availability</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
-                <span className="text-blue-800">Start production batch with automatic Firestore inventory deduction</span>
+                <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+                <span className="text-graphite">Start production batch with automatic Firestore inventory deduction</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
-                <span className="text-blue-800">Track costs and generate compliance reports with Timestamp tracking</span>
+                <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+                <span className="text-graphite">Track costs and generate compliance reports with Timestamp tracking</span>
               </div>
             </div>
           </div>
 
           {/* Quick Production Buttons */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Production</h3>
-            <p className="text-gray-600 text-sm mb-4">One-click production with automatic ingredient checking and inventory deduction</p>
+          <div className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
+            <h3 className="text-lg font-semibold text-graphite mb-4">Quick Production</h3>
+            <p className="text-graphite/70 text-sm mb-4">One-click production with automatic ingredient checking and inventory deduction</p>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-4 border border-green-200">
-                <h4 className="font-semibold text-green-900 mb-2">Rainforest Gin</h4>
-                <p className="text-sm text-green-700 mb-3">$430.44 per batch</p>
+              <div className="bg-beige rounded-lg p-4 border border-copper-30">
+                <h4 className="font-semibold text-graphite mb-2">Rainforest Gin</h4>
+                <p className="text-sm text-copper mb-3">$430.44 per batch</p>
                 <button
                   onClick={produceRainforestGin}
-                  className="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium"
+                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                 >
                   Produce Rainforest Gin
                 </button>
               </div>
               
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg p-4 border border-blue-200">
-                <h4 className="font-semibold text-blue-900 mb-2">Signature Dry Gin</h4>
-                <p className="text-sm text-blue-700 mb-3">$339.76 per batch</p>
+              <div className="bg-beige rounded-lg p-4 border border-copper-30">
+                <h4 className="font-semibold text-graphite mb-2">Signature Dry Gin</h4>
+                <p className="text-sm text-copper mb-3">$339.76 per batch</p>
                 <button
                   onClick={produceSignatureDryGin}
-                  className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
+                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                 >
                   Produce Signature Dry Gin
                 </button>
               </div>
               
-              <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-lg p-4 border border-indigo-200">
-                <h4 className="font-semibold text-indigo-900 mb-2">Navy Strength Gin</h4>
-                <p className="text-sm text-indigo-700 mb-3">$345.41 per batch</p>
-                <p className="text-xs text-indigo-600 mb-2">58.8% ABV</p>
+              <div className="bg-beige rounded-lg p-4 border border-copper-30">
+                <h4 className="font-semibold text-graphite mb-2">Navy Strength Gin</h4>
+                <p className="text-sm text-copper mb-3">$345.41 per batch</p>
+                <p className="text-xs text-graphite/70 mb-2">58.8% ABV</p>
                 <button
                   onClick={produceNavyStrengthGin}
-                  className="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-sm font-medium"
+                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                 >
                   Produce Navy Strength Gin
                 </button>
               </div>
               
-              <div className="bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg p-4 border border-purple-200">
-                <h4 className="font-semibold text-purple-900 mb-2">Merchant Made Gin</h4>
-                <p className="text-sm text-purple-700 mb-3">$312.17 per batch</p>
+              <div className="bg-beige rounded-lg p-4 border border-copper-30">
+                <h4 className="font-semibold text-graphite mb-2">Merchant Made Gin</h4>
+                <p className="text-sm text-copper mb-3">$312.17 per batch</p>
                 <button
                   onClick={produceMerchantMadeGin}
-                  className="w-full px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 text-sm font-medium"
+                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                 >
                   Produce MM Gin
                 </button>
               </div>
               
-              <div className="bg-gradient-to-r from-orange-50 to-orange-100 rounded-lg p-4 border border-orange-200">
-                <h4 className="font-semibold text-orange-900 mb-2">Dry Season Gin</h4>
-                <p className="text-sm text-orange-700 mb-3">$424.75 per batch</p>
-                <p className="text-xs text-orange-600 mb-2">(+$150 fresh market)</p>
+              <div className="bg-beige rounded-lg p-4 border border-copper-30">
+                <h4 className="font-semibold text-graphite mb-2">Dry Season Gin</h4>
+                <p className="text-sm text-copper mb-3">$424.75 per batch</p>
+                <p className="text-xs text-graphite/70 mb-2">(+$150 fresh market)</p>
                 <button
                   onClick={produceDrySeasonGin}
-                  className="w-full px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-orange-700 text-sm font-medium"
+                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                 >
                   Produce Dry Season Gin
                 </button>
               </div>
               
-              <div className="bg-gradient-to-r from-teal-50 to-teal-100 rounded-lg p-4 border border-teal-200">
-                <h4 className="font-semibold text-teal-900 mb-2">Wet Season Gin</h4>
-                <p className="text-sm text-teal-700 mb-3">$409.44 per batch</p>
-                <p className="text-xs text-teal-600 mb-2">(+$150 fresh market)</p>
+              <div className="bg-beige rounded-lg p-4 border border-copper-30">
+                <h4 className="font-semibold text-graphite mb-2">Wet Season Gin</h4>
+                <p className="text-sm text-copper mb-3">$409.44 per batch</p>
+                <p className="text-xs text-graphite/70 mb-2">(+$150 fresh market)</p>
                 <button
                   onClick={produceWetSeasonGin}
-                  className="w-full px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 text-sm font-medium"
+                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
                 >
                   Produce Wet Season Gin
                 </button>
@@ -678,17 +678,17 @@ export default function FirestoreRecipesPage() {
 
       {/* Recipe Detail Modal */}
       {selectedRecipe && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
+        <div className="fixed inset-0 bg-graphite bg-opacity-50 overflow-y-auto h-full w-full z-50">
           <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
             <div className="mt-3">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h3 className="text-xl font-medium text-gray-900">{selectedRecipe.name}</h3>
-                  <p className="text-sm text-gray-500">{selectedRecipe.description}</p>
+                  <h3 className="text-xl font-medium text-graphite">{selectedRecipe.name}</h3>
+                  <p className="text-sm text-graphite/60">{selectedRecipe.description}</p>
                 </div>
                 <button
                   onClick={() => setSelectedRecipe(null)}
-                  className="bg-gray-100 rounded-md p-1.5 text-gray-400 hover:text-gray-500"
+                  className="bg-beige rounded-md p-1.5 text-graphite/60 hover:text-graphite"
                 >
                   ✕
                 </button>
@@ -696,44 +696,44 @@ export default function FirestoreRecipesPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-3">Recipe Details</h4>
+                  <h4 className="text-sm font-medium text-graphite mb-3">Recipe Details</h4>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
-                      <span className="text-gray-600">ABV:</span>
+                      <span className="text-graphite/70">ABV:</span>
                       <span className="font-medium">{selectedRecipe.abv}%</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Batch Volume:</span>
+                      <span className="text-graphite/70">Batch Volume:</span>
                       <span className="font-medium">{selectedRecipe.batchVolume}L</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Production Time:</span>
+                      <span className="text-graphite/70">Production Time:</span>
                       <span className="font-medium">{selectedRecipe.productionTime}h</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Difficulty:</span>
+                      <span className="text-graphite/70">Difficulty:</span>
                       <span className="font-medium capitalize">{selectedRecipe.difficulty}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-gray-600">Total Cost:</span>
-                      <span className="font-medium text-green-600">${selectedRecipe.totalCost.toFixed(2)}</span>
+                      <span className="text-graphite/70">Total Cost:</span>
+                      <span className="font-medium text-copper">${selectedRecipe.totalCost.toFixed(2)}</span>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-medium text-gray-700 mb-3">Ingredients ({selectedRecipe.ingredients.length})</h4>
+                  <h4 className="text-sm font-medium text-graphite mb-3">Ingredients ({selectedRecipe.ingredients.length})</h4>
                   <div className="space-y-2 max-h-64 overflow-y-auto">
                     {selectedRecipe.ingredients.map((ingredient: any, index: number) => (
-                      <div key={index} className="flex justify-between items-center p-2 bg-gray-50 rounded">
+                      <div key={index} className="flex justify-between items-center p-2 bg-beige rounded">
                         <div>
-                          <div className="text-sm font-medium text-gray-900">{ingredient.name}</div>
+                          <div className="text-sm font-medium text-graphite">{ingredient.name}</div>
                         </div>
                         <div className="text-right">
-                          <div className="text-sm font-medium text-gray-900">
+                          <div className="text-sm font-medium text-graphite">
                             {ingredient.quantity} {ingredient.unit}
                           </div>
-                          <div className="text-xs text-gray-500">
+                          <div className="text-xs text-graphite/60">
                             ${ingredient.pricePerBatch.toFixed(2)}
                           </div>
                         </div>
@@ -746,7 +746,7 @@ export default function FirestoreRecipesPage() {
               <div className="mt-6 flex justify-end space-x-3">
                 <button
                   onClick={() => setSelectedRecipe(null)}
-                  className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                  className="px-4 py-2 bg-beige text-graphite rounded-md hover:bg-copper-20"
                 >
                   Close
                 </button>
@@ -755,7 +755,7 @@ export default function FirestoreRecipesPage() {
                     handleStartProduction(selectedRecipe)
                     setSelectedRecipe(null)
                   }}
-                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+                  className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90"
                 >
                   Start Production
                 </button>

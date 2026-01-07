@@ -133,57 +133,57 @@ export default function LabelRequirementsPage() {
   return (
     <div className="p-8 max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Label Requirements for 2026 Production</h1>
-        <p className="text-gray-600">Based on production plan - Total bottles: 13,531</p>
-        <p className="text-blue-600 font-semibold mt-2">✨ Includes 30% buffer for 2027 early production & bulk pricing</p>
+        <h1 className="text-3xl font-bold text-graphite mb-2">Label Requirements for 2026 Production</h1>
+        <p className="text-graphite/70">Based on production plan - Total bottles: 13,531</p>
+        <p className="text-copper font-semibold mt-2">✨ Includes 30% buffer for 2027 early production & bulk pricing</p>
       </div>
 
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-red-50 border-2 border-red-200 rounded-lg p-6">
-          <h3 className="text-red-800 font-semibold mb-2">CRITICAL ORDERS</h3>
-          <p className="text-4xl font-bold text-red-600">{criticalOrders.length}</p>
-          <p className="text-sm text-red-700 mt-2">Order immediately</p>
+        <div className="bg-beige border-2 border-copper-30 rounded-lg p-6">
+          <h3 className="text-graphite font-semibold mb-2">CRITICAL ORDERS</h3>
+          <p className="text-4xl font-bold text-copper">{criticalOrders.length}</p>
+          <p className="text-sm text-graphite/70 mt-2">Order immediately</p>
         </div>
         
-        <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6">
-          <h3 className="text-yellow-800 font-semibold mb-2">ORDERS NEEDED</h3>
-          <p className="text-4xl font-bold text-yellow-600">{regularOrders.length}</p>
-          <p className="text-sm text-yellow-700 mt-2">Order soon</p>
+        <div className="bg-beige border-2 border-copper-30 rounded-lg p-6">
+          <h3 className="text-graphite font-semibold mb-2">ORDERS NEEDED</h3>
+          <p className="text-4xl font-bold text-copper">{regularOrders.length}</p>
+          <p className="text-sm text-graphite/70 mt-2">Order soon</p>
         </div>
         
-        <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
-          <h3 className="text-blue-800 font-semibold mb-2">TOTAL LABELS TO ORDER</h3>
-          <p className="text-4xl font-bold text-blue-600">{totalOrderQuantity.toLocaleString()}</p>
-          <p className="text-sm text-blue-700 mt-2">Across {criticalOrders.length + regularOrders.length} products</p>
-          <p className="text-xs text-blue-600 mt-1">+30% buffer included</p>
+        <div className="bg-beige border-2 border-copper-30 rounded-lg p-6">
+          <h3 className="text-graphite font-semibold mb-2">TOTAL LABELS TO ORDER</h3>
+          <p className="text-4xl font-bold text-copper">{totalOrderQuantity.toLocaleString()}</p>
+          <p className="text-sm text-graphite/70 mt-2">Across {criticalOrders.length + regularOrders.length} products</p>
+          <p className="text-xs text-graphite/70 mt-1">+30% buffer included</p>
         </div>
       </div>
 
       {/* Critical Orders */}
       {criticalOrders.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-red-600">CRITICAL - Order Immediately</h2>
+          <h2 className="text-2xl font-bold mb-4 text-copper">CRITICAL - Order Immediately</h2>
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <table className="min-w-full">
-              <thead className="bg-red-100">
+              <thead className="bg-beige">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Product</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Current Stock</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">2026 Production</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Shortage</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Recommended Order</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase">Product</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Current Stock</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">2026 Production</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Shortage</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Recommended Order</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-copper-15">
                 {criticalOrders.map((req, idx) => (
-                  <tr key={idx} className="hover:bg-red-50">
-                    <td className="px-6 py-4 font-semibold">{req.product}</td>
-                    <td className="px-6 py-4 text-right">{req.currentStock.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right font-semibold">{req.production2026.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right text-red-600 font-bold">{Math.abs(req.remaining).toLocaleString()}</td>
+                  <tr key={idx} className="hover:bg-copper-5">
+                    <td className="px-6 py-4 font-semibold text-graphite">{req.product}</td>
+                    <td className="px-6 py-4 text-right text-graphite">{req.currentStock.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right font-semibold text-graphite">{req.production2026.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right text-copper font-bold">{Math.abs(req.remaining).toLocaleString()}</td>
                     <td className="px-6 py-4 text-right">
-                      <span className="bg-red-600 text-white px-4 py-2 rounded font-bold">
+                      <span className="bg-copper text-white px-4 py-2 rounded font-bold">
                         {req.recommendedOrder.toLocaleString()}
                       </span>
                     </td>
@@ -198,27 +198,27 @@ export default function LabelRequirementsPage() {
       {/* Regular Orders */}
       {regularOrders.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-yellow-600">HIGH PRIORITY - Order Soon</h2>
+          <h2 className="text-2xl font-bold mb-4 text-copper">HIGH PRIORITY - Order Soon</h2>
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <table className="min-w-full">
-              <thead className="bg-yellow-100">
+              <thead className="bg-beige">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Product</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Current Stock</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">2026 Production</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Shortage</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Recommended Order</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase">Product</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Current Stock</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">2026 Production</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Shortage</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Recommended Order</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-copper-15">
                 {regularOrders.map((req, idx) => (
-                  <tr key={idx} className="hover:bg-yellow-50">
-                    <td className="px-6 py-4 font-semibold">{req.product}</td>
-                    <td className="px-6 py-4 text-right">{req.currentStock.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right font-semibold">{req.production2026.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right text-yellow-600 font-bold">{Math.abs(req.remaining).toLocaleString()}</td>
+                  <tr key={idx} className="hover:bg-copper-5">
+                    <td className="px-6 py-4 font-semibold text-graphite">{req.product}</td>
+                    <td className="px-6 py-4 text-right text-graphite">{req.currentStock.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right font-semibold text-graphite">{req.production2026.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right text-copper font-bold">{Math.abs(req.remaining).toLocaleString()}</td>
                     <td className="px-6 py-4 text-right">
-                      <span className="bg-yellow-600 text-white px-4 py-2 rounded font-bold">
+                      <span className="bg-copper text-white px-4 py-2 rounded font-bold">
                         {req.recommendedOrder.toLocaleString()}
                       </span>
                     </td>
@@ -233,24 +233,24 @@ export default function LabelRequirementsPage() {
       {/* Sufficient Stock */}
       {sufficient.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-2xl font-bold mb-4 text-green-600">Sufficient Stock - No Order Needed</h2>
+          <h2 className="text-2xl font-bold mb-4 text-graphite">Sufficient Stock - No Order Needed</h2>
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <table className="min-w-full">
-              <thead className="bg-green-100">
+              <thead className="bg-beige">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase">Product</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Current Stock</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">2026 Production</th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-gray-700 uppercase">Remaining After</th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase">Product</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Current Stock</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">2026 Production</th>
+                  <th className="px-6 py-3 text-right text-xs font-medium text-graphite/60 uppercase">Remaining After</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200">
+              <tbody className="divide-y divide-copper-15">
                 {sufficient.map((req, idx) => (
-                  <tr key={idx} className="hover:bg-green-50">
-                    <td className="px-6 py-4">{req.product}</td>
-                    <td className="px-6 py-4 text-right">{req.currentStock.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right">{req.production2026.toLocaleString()}</td>
-                    <td className="px-6 py-4 text-right text-green-600 font-semibold">+{req.remaining.toLocaleString()}</td>
+                  <tr key={idx} className="hover:bg-copper-5">
+                    <td className="px-6 py-4 text-graphite">{req.product}</td>
+                    <td className="px-6 py-4 text-right text-graphite">{req.currentStock.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right text-graphite">{req.production2026.toLocaleString()}</td>
+                    <td className="px-6 py-4 text-right text-copper font-semibold">+{req.remaining.toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
@@ -260,7 +260,7 @@ export default function LabelRequirementsPage() {
       )}
 
       {/* Order Summary */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8">
+      <div className="bg-copper text-white rounded-lg p-8 border border-copper">
         <h2 className="text-2xl font-bold mb-6">ORDER SUMMARY</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -283,9 +283,9 @@ export default function LabelRequirementsPage() {
       </div>
 
       {/* Notes */}
-      <div className="mt-8 bg-gray-50 rounded-lg p-6">
-        <h3 className="font-bold mb-3">Notes:</h3>
-        <ul className="list-disc list-inside space-y-2 text-gray-700">
+      <div className="mt-8 bg-beige rounded-lg p-6">
+        <h3 className="font-bold text-graphite mb-3">Notes:</h3>
+        <ul className="list-disc list-inside space-y-2 text-graphite/80">
           <li>Each bottle uses 1 label (front label only)</li>
           <li><strong>30% buffer included</strong> for 2027 early production, printing defects, and labeling mistakes</li>
           <li>Recommended quantities are rounded to standard printing minimums (500, 1000, 1500, 2000, 2500, 5000, 6500)</li>
@@ -297,4 +297,3 @@ export default function LabelRequirementsPage() {
     </div>
   )
 }
-

@@ -119,8 +119,8 @@ export default function ProductsHubPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Produtos</h1>
-          <p className="text-gray-600 mt-1">Relatórios de batches, bottling e anotações por produto</p>
+          <h1 className="text-2xl font-bold text-graphite">Produtos</h1>
+          <p className="text-graphite/70 mt-1">Relatórios de batches, bottling e anotações por produto</p>
         </div>
       </div>
 
@@ -136,24 +136,24 @@ export default function ProductsHubPage() {
             const m = metrics[p.value] || { batches: 0, bottling: 0 }
             const slug = slugify(p.value)
             return (
-              <div key={p.value} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div key={p.value} className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{p.label}</h3>
-                    <p className="text-gray-600 text-sm">{p.type.toUpperCase()}</p>
+                    <h3 className="text-lg font-semibold text-graphite">{p.label}</h3>
+                    <p className="text-graphite/70 text-sm">{p.type.toUpperCase()}</p>
                   </div>
-                  <Link href={`/dashboard/products/${slug}`} className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+                  <Link href={`/dashboard/products/${slug}`} className="text-copper hover:text-copper/80 text-sm font-medium">
                     Abrir
                   </Link>
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="rounded-md border border-gray-200 p-4">
-                    <p className="text-xs uppercase tracking-wide text-gray-500">Batches</p>
-                    <p className="text-xl font-bold text-gray-900">{formatNumber(m.batches)}</p>
+                  <div className="rounded-md border border-copper-15 p-4">
+                    <p className="text-xs uppercase tracking-wide text-graphite/60">Batches</p>
+                    <p className="text-xl font-bold text-graphite">{formatNumber(m.batches)}</p>
                   </div>
-                  <div className="rounded-md border border-gray-200 p-4">
-                    <p className="text-xs uppercase tracking-wide text-gray-500">Bottling</p>
-                    <p className="text-xl font-bold text-gray-900">{formatNumber(m.bottling)}</p>
+                  <div className="rounded-md border border-copper-15 p-4">
+                    <p className="text-xs uppercase tracking-wide text-graphite/60">Bottling</p>
+                    <p className="text-xl font-bold text-graphite">{formatNumber(m.bottling)}</p>
                   </div>
                 </div>
               </div>

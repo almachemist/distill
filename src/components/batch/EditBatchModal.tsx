@@ -183,8 +183,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
             <h3 className="text-lg font-semibold text-graphite mb-4">Basic Information</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-graphite mb-1">Date</label>
+                <label htmlFor="batch_date" className="block text-sm font-medium text-graphite mb-1">Date</label>
                 <input
+                  id="batch_date"
                   type="date"
                   value={editedBatch.date}
                   onChange={(e) => updateField(['date'], e.target.value)}
@@ -192,8 +193,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-graphite mb-1">Still Used</label>
+                <label htmlFor="still_used" className="block text-sm font-medium text-graphite mb-1">Still Used</label>
                 <input
+                  id="still_used"
                   type="text"
                   value={editedBatch.still_used}
                   onChange={(e) => updateField(['still_used'], e.target.value)}
@@ -201,8 +203,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-graphite mb-1">Boiler On Time</label>
+                <label htmlFor="boiler_on_time" className="block text-sm font-medium text-graphite mb-1">Boiler On Time</label>
                 <input
+                  id="boiler_on_time"
                   type="text"
                   value={editedBatch.boiler_on_time || ''}
                   onChange={(e) => updateField(['boiler_on_time'], e.target.value)}
@@ -219,8 +222,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
               <h3 className="text-lg font-semibold text-graphite mb-4">Charge Total</h3>
               <div className="grid grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
+                  <label htmlFor="charge_total_volume_l" className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
                   <input
+                    id="charge_total_volume_l"
                     type="number"
                     step="0.1"
                     value={fmt(editedBatch.charge.total.volume_l)}
@@ -239,8 +243,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
+                  <label htmlFor="charge_total_abv_percent" className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
                   <input
+                    id="charge_total_abv_percent"
                     type="number"
                     step="0.1"
                     min="0"
@@ -261,8 +266,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-graphite mb-1">LAL (auto-calculated)</label>
+                  <label htmlFor="charge_total_lal" className="block text-sm font-medium text-graphite mb-1">LAL (auto-calculated)</label>
                   <input
+                    id="charge_total_lal"
                     type="number"
                     step="0.1"
                     value={fmt(editedBatch.charge.total.lal)}
@@ -282,8 +288,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       <div key={idx} className="bg-white rounded-lg p-3 border border-copper-15">
                         <div className="grid grid-cols-4 gap-3">
                           <div>
-                            <label className="block text-xs font-medium text-graphite mb-1">Source</label>
+                            <label htmlFor={`comp_${idx}_source`} className="block text-xs font-medium text-graphite mb-1">Source</label>
                             <input
+                              id={`comp_${idx}_source`}
                               type="text"
                               value={comp.source}
                               onChange={(e) => {
@@ -295,8 +302,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-graphite mb-1">Volume (L)</label>
+                            <label htmlFor={`comp_${idx}_volume_l`} className="block text-xs font-medium text-graphite mb-1">Volume (L)</label>
                             <input
+                              id={`comp_${idx}_volume_l`}
                               type="number"
                               step="0.1"
                               value={fmt(comp.volume_l)}
@@ -319,8 +327,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-graphite mb-1">ABV (%)</label>
+                            <label htmlFor={`comp_${idx}_abv_percent`} className="block text-xs font-medium text-graphite mb-1">ABV (%)</label>
                             <input
+                              id={`comp_${idx}_abv_percent`}
                               type="number"
                               step="0.1"
                               value={fmt(comp.abv_percent)}
@@ -343,8 +352,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                             />
                           </div>
                           <div>
-                            <label className="block text-xs font-medium text-graphite mb-1">LAL (auto)</label>
+                            <label htmlFor={`comp_${idx}_lal`} className="block text-xs font-medium text-graphite mb-1">LAL (auto)</label>
                             <input
+                              id={`comp_${idx}_lal`}
                               type="number"
                               step="0.1"
                               value={fmt(comp.lal)}
@@ -375,8 +385,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                   <h3 className="text-lg font-semibold text-graphite mb-4">Foreshots</h3>
                   <div className="grid grid-cols-4 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
+                      <label htmlFor="foreshots_volume_l" className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
                       <input
+                        id="foreshots_volume_l"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.foreshots.volume_l)}
@@ -395,8 +406,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
+                      <label htmlFor="foreshots_abv_percent" className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
                       <input
+                        id="foreshots_abv_percent"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.foreshots.abv_percent)}
@@ -415,8 +427,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">LAL (auto)</label>
+                      <label htmlFor="foreshots_lal" className="block text-sm font-medium text-graphite mb-1">LAL (auto)</label>
                       <input
+                        id="foreshots_lal"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.foreshots.lal)}
@@ -426,8 +439,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Vessel</label>
+                      <label htmlFor="foreshots_vessel" className="block text-sm font-medium text-graphite mb-1">Vessel</label>
                       <input
+                        id="foreshots_vessel"
                         type="text"
                         value={editedBatch.cuts.foreshots.receiving_vessel || ''}
                         onChange={(e) => updateField(['cuts', 'foreshots', 'receiving_vessel'], e.target.value)}
@@ -444,8 +458,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                   <h3 className="text-lg font-semibold text-graphite mb-4">Heads</h3>
                   <div className="grid grid-cols-4 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
+                      <label htmlFor="heads_volume_l" className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
                       <input
+                        id="heads_volume_l"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.heads.volume_l)}
@@ -464,8 +479,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
+                      <label htmlFor="heads_abv_percent" className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
                       <input
+                        id="heads_abv_percent"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.heads.abv_percent)}
@@ -484,8 +500,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">LAL (auto)</label>
+                      <label htmlFor="heads_lal" className="block text-sm font-medium text-graphite mb-1">LAL (auto)</label>
                       <input
+                        id="heads_lal"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.heads.lal)}
@@ -495,8 +512,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Vessel</label>
+                      <label htmlFor="heads_vessel" className="block text-sm font-medium text-graphite mb-1">Vessel</label>
                       <input
+                        id="heads_vessel"
                         type="text"
                         value={editedBatch.cuts.heads.receiving_vessel || ''}
                         onChange={(e) => updateField(['cuts', 'heads', 'receiving_vessel'], e.target.value)}
@@ -513,8 +531,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                   <h3 className="text-lg font-semibold text-graphite mb-4">Hearts Cut</h3>
                   <div className="grid grid-cols-4 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
+                      <label htmlFor="hearts_volume_l" className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
                       <input
+                        id="hearts_volume_l"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.hearts.volume_l)}
@@ -533,8 +552,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
+                      <label htmlFor="hearts_abv_percent" className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
                       <input
+                        id="hearts_abv_percent"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.hearts.abv_percent)}
@@ -553,8 +573,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">LAL (auto-calculated)</label>
+                      <label htmlFor="hearts_lal" className="block text-sm font-medium text-graphite mb-1">LAL (auto-calculated)</label>
                       <input
+                        id="hearts_lal"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.hearts.lal)}
@@ -564,8 +585,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Vessel</label>
+                      <label htmlFor="hearts_vessel" className="block text-sm font-medium text-graphite mb-1">Vessel</label>
                       <input
+                        id="hearts_vessel"
                         type="text"
                         value={editedBatch.cuts.hearts.receiving_vessel || ''}
                         onChange={(e) => updateField(['cuts', 'hearts', 'receiving_vessel'], e.target.value)}
@@ -582,8 +604,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                   <h3 className="text-lg font-semibold text-graphite mb-4">Tails</h3>
                   <div className="grid grid-cols-4 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
+                      <label htmlFor="tails_volume_l" className="block text-sm font-medium text-graphite mb-1">Volume (L)</label>
                       <input
+                        id="tails_volume_l"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.tails.volume_l)}
@@ -602,8 +625,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
+                      <label htmlFor="tails_abv_percent" className="block text-sm font-medium text-graphite mb-1">ABV (%)</label>
                       <input
+                        id="tails_abv_percent"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.tails.abv_percent)}
@@ -622,8 +646,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">LAL (auto)</label>
+                      <label htmlFor="tails_lal" className="block text-sm font-medium text-graphite mb-1">LAL (auto)</label>
                       <input
+                        id="tails_lal"
                         type="number"
                         step="0.1"
                         value={fmt(editedBatch.cuts.tails.lal)}
@@ -633,8 +658,9 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-graphite mb-1">Vessel</label>
+                      <label htmlFor="tails_vessel" className="block text-sm font-medium text-graphite mb-1">Vessel</label>
                       <input
+                        id="tails_vessel"
                         type="text"
                         value={editedBatch.cuts.tails.receiving_vessel || ''}
                         onChange={(e) => updateField(['cuts', 'tails', 'receiving_vessel'], e.target.value)}
@@ -777,4 +803,3 @@ export function EditBatchModal({ batch, isOpen, onClose, onSave }: EditBatchModa
     </div>
   )
 }
-

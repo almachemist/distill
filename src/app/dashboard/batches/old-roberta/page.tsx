@@ -110,8 +110,8 @@ export default function OldRobertaBatchesPage() {
 
         <div className="flex flex-wrap gap-3 items-center">
           <div className="flex items-center gap-2">
-            <label className="text-sm text-stone-600">Filter</label>
-            <select value={filter} onChange={e => setFilter(e.target.value as any)} className="text-sm border border-stone-200 rounded-md px-3 py-2 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
+            <label htmlFor="old_roberta_filter" className="text-sm text-stone-600">Filter</label>
+            <select id="old_roberta_filter" value={filter} onChange={e => setFilter(e.target.value as any)} className="text-sm border border-stone-200 rounded-md px-3 py-2 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500">
               <option value="all">All</option>
               <option value="Rum">Rum</option>
               <option value="Cane Spirit">Cane Spirit</option>
@@ -119,8 +119,8 @@ export default function OldRobertaBatchesPage() {
           </div>
 
           <div className="ml-auto flex items-center gap-2">
-            <label className="text-sm text-stone-600">Import JSON</label>
-            <input type="file" accept="application/json,.json" disabled={importing} onChange={e => onImport(e.target.files?.[0] || null)} className="text-sm" />
+            <label htmlFor="old_roberta_import" className="text-sm text-stone-600">Import JSON</label>
+            <input id="old_roberta_import" type="file" accept="application/json,.json" disabled={importing} onChange={e => onImport(e.target.files?.[0] || null)} className="text-sm" />
           </div>
         </div>
 
@@ -299,4 +299,3 @@ export default function OldRobertaBatchesPage() {
     </div>
   )
 }
-

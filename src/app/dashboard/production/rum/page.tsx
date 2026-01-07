@@ -127,7 +127,7 @@ function RumPageContent() {
 
   // Set filter from URL on mount
   useEffect(() => {
-    const filter = searchParams.get('filter')
+    const filter = searchParams?.get('filter')
     if (filter === 'ongoing' || filter === 'completed') {
       setStatusFilter(filter)
     }

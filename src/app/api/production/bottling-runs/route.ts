@@ -17,7 +17,10 @@ const PKG_NAMES = {
   CAP_200: { name: 'Cap 200ml', category: 'packaging_closure' },
   CARTON_6P_700: { name: 'Carton 6-pack 700ml', category: 'packaging_carton' },
   SLEEVE_700: { name: 'Tamper Sleeve 700ml', category: 'packaging_sleeve' },
-  SLEEVE_200: { name: 'Tamper Sleeve 200ml', category: 'packaging_sleeve' }
+  SLEEVE_200: { name: 'Tamper Sleeve 200ml', category: 'packaging_sleeve' },
+  BOTTLE_1000: { name: 'Bottle 1000ml', category: 'packaging_bottle' },
+  CORK_1000: { name: 'Cork 1000ml', category: 'packaging_closure' },
+  SLEEVE_1000: { name: 'Tamper Sleeve 1000ml', category: 'packaging_sleeve' }
 }
 
 async function getOrganizationId(supabase: any): Promise<string> {
@@ -81,6 +84,7 @@ async function getOnHand(supabase: any, organization_id: string, item_id: string
 function buildBottlingChanges(body: BottlingRun): Change[] {
   const q700 = sumBySize(body.bottleEntries || [], 700)
   const q200 = sumBySize(body.bottleEntries || [], 200)
+  const q1000 = sumBySize(body.bottleEntries || [], 1000)
   const changes: Change[] = []
   if (q700 > 0) {
     changes.push({ name: PKG_NAMES.BOTTLE_700.name, category: PKG_NAMES.BOTTLE_700.category, delta: -q700, uom: 'unit' })
@@ -97,6 +101,13 @@ function buildBottlingChanges(body: BottlingRun): Change[] {
     changes.push({ name: PKG_NAMES.SLEEVE_200.name, category: PKG_NAMES.SLEEVE_200.category, delta: -q200, uom: 'unit' })
     changes.push({ name: `${body.productName} 200ml`, category: 'finished_good', delta: +q200, uom: 'unit' })
     changes.push({ name: `Label 200ml - ${body.productName}`, category: 'packaging_label', delta: -q200, uom: 'unit' })
+  }
+  if (q1000 > 0) {
+    changes.push({ name: PKG_NAMES.BOTTLE_1000.name, category: PKG_NAMES.BOTTLE_1000.category, delta: -q1000, uom: 'unit' })
+    changes.push({ name: PKG_NAMES.CORK_1000.name, category: PKG_NAMES.CORK_1000.category, delta: -q1000, uom: 'unit' })
+    changes.push({ name: PKG_NAMES.SLEEVE_1000.name, category: PKG_NAMES.SLEEVE_1000.category, delta: -q1000, uom: 'unit' })
+    changes.push({ name: `${body.productName} 1000ml`, category: 'finished_good', delta: +q1000, uom: 'unit' })
+    changes.push({ name: `Label 1000ml - ${body.productName}`, category: 'packaging_label', delta: -q1000, uom: 'unit' })
   }
   return changes
 }

@@ -20,8 +20,9 @@ export class BarrelService {
   async createBarrel(data: CreateBarrelData): Promise<Barrel> {
     // In development mode, use mock organization ID
     let organizationId = '00000000-0000-0000-0000-000000000001'
+    const isDev = process.env.NODE_ENV === 'development'
     
-    if (process.env.NODE_ENV !== 'development') {
+    if (!isDev) {
       // Get the user's organization ID
       const { data: { user } } = await this.supabase.auth.getUser()
       if (!user) {
@@ -55,7 +56,6 @@ export class BarrelService {
         abv: data.abv.toString(),
         notes_comments: data.notes,
         status: 'Aging',
-        created_by: organizationId, // Use organization ID as fallback
       })
       .select()
       .single()
@@ -70,8 +70,9 @@ export class BarrelService {
   async getBarrels(filter?: BarrelFilter): Promise<Barrel[]> {
     // In development mode, use mock organization ID
     let organizationId = '00000000-0000-0000-0000-000000000001'
+    const isDev = process.env.NODE_ENV === 'development'
     
-    if (process.env.NODE_ENV !== 'development') {
+    if (!isDev) {
       // Get the user's organization ID
       const { data: { user } } = await this.supabase.auth.getUser()
       if (!user) {
@@ -91,7 +92,10 @@ export class BarrelService {
       organizationId = profile.organization_id
     }
 
-    let query = this.supabase.from('tracking').select('*').eq('organization_id', organizationId)
+    let query = this.supabase.from('tracking').select('*')
+    if (!isDev) {
+      query = query.eq('organization_id', organizationId)
+    }
 
     if (filter) {
       if (filter.status) {
@@ -124,11 +128,22 @@ export class BarrelService {
   }
 
   async getBarrelById(id: string): Promise<Barrel | null> {
-    const { data, error } = await this.supabase
+    // Try fetching by UUID id first; fallback to legacy barrel_id
+    let { data, error } = await this.supabase
       .from('tracking')
       .select('*')
-      .eq('id', id) // Using UUID id as primary key
+      .eq('id', id)
       .single()
+
+    if (error?.code === 'PGRST116' || error?.message?.includes('No rows found')) {
+      const byLegacy = await this.supabase
+        .from('tracking')
+        .select('*')
+        .eq('barrel_id', id)
+        .single()
+      data = byLegacy.data
+      error = byLegacy.error || null
+    }
 
     if (error) {
       if (error.code === 'PGRST116') {
@@ -181,8 +196,9 @@ export class BarrelService {
   async getBarrelStats(): Promise<BarrelStats> {
     // In development mode, use mock organization ID
     let organizationId = '00000000-0000-0000-0000-000000000001'
+    const isDev = process.env.NODE_ENV === 'development'
     
-    if (process.env.NODE_ENV !== 'development') {
+    if (!isDev) {
       // Get the user's organization ID
       const { data: { user } } = await this.supabase.auth.getUser()
       if (!user) {
@@ -202,10 +218,11 @@ export class BarrelService {
       organizationId = profile.organization_id
     }
 
-    const { data: barrels, error } = await this.supabase
-      .from('tracking')
-      .select('*')
-      .eq('organization_id', organizationId)
+    let statsQuery = this.supabase.from('tracking').select('*')
+    if (!isDev) {
+      statsQuery = statsQuery.eq('organization_id', organizationId)
+    }
+    const { data: barrels, error } = await statsQuery
 
     if (error) {
       throw new Error(error.message)

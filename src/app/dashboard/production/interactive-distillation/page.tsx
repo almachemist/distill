@@ -143,20 +143,20 @@ export default function InteractiveDistillationPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
       </div>
     )
   }
 
   if (error) {
-    return <div className="text-red-500">Error: {error}</div>
+    return <div className="text-copper">Error: {error}</div>
   }
 
   return (
     <div className="space-y-6">
       {/* Success Message */}
       {showSuccess && (
-        <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+        <div className="fixed top-4 right-4 bg-copper text-white px-6 py-3 rounded-lg shadow-lg z-50">
           ✅ Data saved successfully!
         </div>
       )}
@@ -171,8 +171,8 @@ export default function InteractiveDistillationPage() {
               onClick={() => setSelectedSession(session)}
               className={`p-4 rounded-lg border cursor-pointer transition-colors ${
                 selectedSession?.id === session.id
-                  ? 'border-blue-500 bg-blue-50'
-                  : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  ? 'border-copper bg-beige'
+                  : 'border-gray-200 hover:border-copper-30 hover:bg-beige'
               }`}
             >
               <div className="font-medium text-gray-900">{session.sku}</div>

@@ -7,9 +7,9 @@ function BatchSummaryContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   
-  const recipe = searchParams.get('recipe')
-  const target = searchParams.get('target')
-  const transactions = searchParams.get('transactions')
+  const recipe = searchParams?.get('recipe')
+  const target = searchParams?.get('target')
+  const transactions = searchParams?.get('transactions')
 
   return (
     <div className="space-y-6">
@@ -86,7 +86,6 @@ export default function BatchSummaryPage() {
     </Suspense>
   )
 }
-
 
 
 

@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 function RumDistillationContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const batchId = searchParams.get('batchId') || ''
+  const batchId = searchParams?.get('batchId') || ''
 
   // Load fermentation data
   const [fermentationData, setFermentationData] = useState<any>(null)
@@ -215,8 +215,9 @@ function RumDistillationContent() {
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Date</label>
+              <label htmlFor="distillation_date" className="block text-sm font-medium text-graphite mb-2">Date</label>
               <input
+                id="distillation_date"
                 type="date"
                 value={distillationDate}
                 onChange={(e) => setDistillationDate(e.target.value)}
@@ -225,8 +226,9 @@ function RumDistillationContent() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-graphite mb-2">Start Time</label>
+              <label htmlFor="start_time" className="block text-sm font-medium text-graphite mb-2">Start Time</label>
               <input
+                id="start_time"
                 type="time"
                 value={startTime}
                 onChange={(e) => setStartTime(e.target.value)}
@@ -246,8 +248,9 @@ function RumDistillationContent() {
               <h3 className="font-semibold text-blue-900">Boiler (Wash)</h3>
               
               <div>
-                <label className="block text-xs font-medium text-blue-700 mb-1">Volume (L)</label>
+                <label htmlFor="boiler_volume" className="block text-xs font-medium text-blue-700 mb-1">Volume (L)</label>
                 <input
+                  id="boiler_volume"
                   type="number"
                   step="0.1"
                   value={boilerVolume}
@@ -257,8 +260,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-blue-700 mb-1">ABV (%)</label>
+                <label htmlFor="boiler_abv" className="block text-xs font-medium text-blue-700 mb-1">ABV (%)</label>
                 <input
+                  id="boiler_abv"
                   type="number"
                   step="0.1"
                   value={boilerABV}
@@ -268,8 +272,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-blue-700 mb-1">LAL</label>
+                <label htmlFor="boiler_lal" className="block text-xs font-medium text-blue-700 mb-1">LAL</label>
                 <input
+                  id="boiler_lal"
                   type="number"
                   value={boilerLAL.toFixed(2)}
                   readOnly
@@ -278,8 +283,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-blue-700 mb-1">Elements</label>
+                <label htmlFor="boiler_elements" className="block text-xs font-medium text-blue-700 mb-1">Elements</label>
                 <input
+                  id="boiler_elements"
                   type="text"
                   value={boilerElements}
                   onChange={(e) => setBoilerElements(e.target.value)}
@@ -293,8 +299,9 @@ function RumDistillationContent() {
               <h3 className="font-semibold text-amber-900">Retort 1 (Late Tails)</h3>
               
               <div>
-                <label className="block text-xs font-medium text-amber-700 mb-1">Content</label>
+                <label htmlFor="retort1_content" className="block text-xs font-medium text-amber-700 mb-1">Content</label>
                 <input
+                  id="retort1_content"
                   type="text"
                   value={retort1Content}
                   onChange={(e) => setRetort1Content(e.target.value)}
@@ -304,8 +311,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-amber-700 mb-1">Volume (L)</label>
+                <label htmlFor="retort1_volume" className="block text-xs font-medium text-amber-700 mb-1">Volume (L)</label>
                 <input
+                  id="retort1_volume"
                   type="number"
                   step="0.1"
                   value={retort1Volume}
@@ -315,8 +323,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-amber-700 mb-1">ABV (%)</label>
+                <label htmlFor="retort1_abv" className="block text-xs font-medium text-amber-700 mb-1">ABV (%)</label>
                 <input
+                  id="retort1_abv"
                   type="number"
                   step="0.1"
                   value={retort1ABV}
@@ -326,8 +335,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-amber-700 mb-1">LAL</label>
+                <label htmlFor="retort1_lal" className="block text-xs font-medium text-amber-700 mb-1">LAL</label>
                 <input
+                  id="retort1_lal"
                   type="number"
                   value={retort1LAL.toFixed(2)}
                   readOnly
@@ -336,8 +346,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-amber-700 mb-1">Elements</label>
+                <label htmlFor="retort1_elements" className="block text-xs font-medium text-amber-700 mb-1">Elements</label>
                 <input
+                  id="retort1_elements"
                   type="text"
                   value={retort1Elements}
                   onChange={(e) => setRetort1Elements(e.target.value)}
@@ -351,8 +362,9 @@ function RumDistillationContent() {
               <h3 className="font-semibold text-orange-900">Retort 2 (Early Tails)</h3>
               
               <div>
-                <label className="block text-xs font-medium text-orange-700 mb-1">Content</label>
+                <label htmlFor="retort2_content" className="block text-xs font-medium text-orange-700 mb-1">Content</label>
                 <input
+                  id="retort2_content"
                   type="text"
                   value={retort2Content}
                   onChange={(e) => setRetort2Content(e.target.value)}
@@ -362,8 +374,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-orange-700 mb-1">Volume (L)</label>
+                <label htmlFor="retort2_volume" className="block text-xs font-medium text-orange-700 mb-1">Volume (L)</label>
                 <input
+                  id="retort2_volume"
                   type="number"
                   step="0.1"
                   value={retort2Volume}
@@ -373,8 +386,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-orange-700 mb-1">ABV (%)</label>
+                <label htmlFor="retort2_abv" className="block text-xs font-medium text-orange-700 mb-1">ABV (%)</label>
                 <input
+                  id="retort2_abv"
                   type="number"
                   step="0.1"
                   value={retort2ABV}
@@ -384,8 +398,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-orange-700 mb-1">LAL</label>
+                <label htmlFor="retort2_lal" className="block text-xs font-medium text-orange-700 mb-1">LAL</label>
                 <input
+                  id="retort2_lal"
                   type="number"
                   value={retort2LAL.toFixed(2)}
                   readOnly
@@ -394,8 +409,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-orange-700 mb-1">Elements</label>
+                <label htmlFor="retort2_elements" className="block text-xs font-medium text-orange-700 mb-1">Elements</label>
                 <input
+                  id="retort2_elements"
                   type="text"
                   value={retort2Elements}
                   onChange={(e) => setRetort2Elements(e.target.value)}
@@ -423,8 +439,9 @@ function RumDistillationContent() {
             <h3 className="font-semibold text-graphite mb-3">Foreshots</h3>
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Time</label>
+                <label htmlFor="foreshots_time" className="block text-sm font-medium text-graphite mb-2">Time</label>
                 <input
+                  id="foreshots_time"
                   type="time"
                   value={foreshotsTime}
                   onChange={(e) => setForeshotsTime(e.target.value)}
@@ -433,8 +450,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">ABV (%)</label>
+                <label htmlFor="foreshots_abv" className="block text-sm font-medium text-graphite mb-2">ABV (%)</label>
                 <input
+                  id="foreshots_abv"
                   type="number"
                   step="0.1"
                   value={foreshotsABV}
@@ -444,8 +462,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Notes</label>
+                <label htmlFor="foreshots_notes" className="block text-sm font-medium text-graphite mb-2">Notes</label>
                 <input
+                  id="foreshots_notes"
                   type="text"
                   value={foreshotsNotes}
                   onChange={(e) => setForeshotsNotes(e.target.value)}
@@ -461,8 +480,9 @@ function RumDistillationContent() {
             <h3 className="font-semibold text-graphite mb-3">Heads</h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Time</label>
+                <label htmlFor="heads_time" className="block text-sm font-medium text-graphite mb-2">Time</label>
                 <input
+                  id="heads_time"
                   type="time"
                   value={headsTime}
                   onChange={(e) => setHeadsTime(e.target.value)}
@@ -471,8 +491,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Volume (L)</label>
+                <label htmlFor="heads_volume" className="block text-sm font-medium text-graphite mb-2">Volume (L)</label>
                 <input
+                  id="heads_volume"
                   type="number"
                   step="0.1"
                   value={headsVolume}
@@ -482,8 +503,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">ABV (%)</label>
+                <label htmlFor="heads_abv" className="block text-sm font-medium text-graphite mb-2">ABV (%)</label>
                 <input
+                  id="heads_abv"
                   type="number"
                   step="0.1"
                   value={headsABV}
@@ -493,8 +515,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">LAL</label>
+                <label htmlFor="heads_lal" className="block text-sm font-medium text-graphite mb-2">LAL</label>
                 <input
+                  id="heads_lal"
                   type="number"
                   value={headsLAL.toFixed(2)}
                   readOnly
@@ -503,8 +526,9 @@ function RumDistillationContent() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-graphite mb-2">Notes</label>
+                <label htmlFor="heads_notes" className="block text-sm font-medium text-graphite mb-2">Notes</label>
                 <input
+                  id="heads_notes"
                   type="text"
                   value={headsNotes}
                   onChange={(e) => setHeadsNotes(e.target.value)}

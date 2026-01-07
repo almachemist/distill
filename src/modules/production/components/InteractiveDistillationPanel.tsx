@@ -174,10 +174,10 @@ export default function InteractiveDistillationPanel({
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'ok': return 'text-green-600'
-      case 'pending': return 'text-yellow-600'
-      case 'issue': return 'text-red-600'
-      default: return 'text-green-600'
+      case 'ok': return 'text-graphite'
+      case 'pending': return 'text-copper/70'
+      case 'issue': return 'text-copper'
+      default: return 'text-graphite'
     }
   }
 
@@ -198,8 +198,8 @@ export default function InteractiveDistillationPanel({
             onClick={() => setIsEditing(!isEditing)}
             className={`px-4 py-2 rounded-lg font-medium ${
               isEditing 
-                ? 'bg-gray-600 text-white hover:bg-gray-700' 
-                : 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-graphite text-white hover:bg-graphite/90' 
+                : 'bg-copper text-white hover:bg-copper/90'
             }`}
           >
             {isEditing ? 'View Mode' : 'Edit Mode'}
@@ -207,7 +207,7 @@ export default function InteractiveDistillationPanel({
           {hasChanges && (
             <button
               onClick={() => onSave(data)}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700"
+              className="px-4 py-2 bg-copper text-white rounded-lg font-medium hover:bg-copper/90"
             >
               Save Changes
             </button>
@@ -222,7 +222,7 @@ export default function InteractiveDistillationPanel({
           {isEditing && (
             <button
               onClick={addChargeComponent}
-              className="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+              className="px-3 py-1 bg-copper text-white rounded-lg text-sm hover:bg-copper/90"
             >
               + Add Component
             </button>
@@ -249,7 +249,7 @@ export default function InteractiveDistillationPanel({
                         type="text"
                         value={component.source}
                         onChange={(e) => updateCharge(index, 'source', e.target.value)}
-                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                       />
                     ) : (
                       <span className="text-sm font-medium text-gray-900">{component.source}</span>
@@ -262,7 +262,7 @@ export default function InteractiveDistillationPanel({
                         step="0.1"
                         value={component.volume_L}
                         onChange={(e) => updateCharge(index, 'volume_L', Number(e.target.value))}
-                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                       />
                     ) : (
                       <span className="text-sm text-gray-900">{component.volume_L}</span>
@@ -275,7 +275,7 @@ export default function InteractiveDistillationPanel({
                         step="0.1"
                         value={component.abv}
                         onChange={(e) => updateCharge(index, 'abv', Number(e.target.value))}
-                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                       />
                     ) : (
                       <span className="text-sm text-gray-900">{component.abv}</span>
@@ -288,7 +288,7 @@ export default function InteractiveDistillationPanel({
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => removeChargeComponent(index)}
-                        className="text-red-600 hover:text-red-800 text-sm"
+                        className="text-copper hover:text-copper/80 text-sm"
                       >
                         Remove
                       </button>
@@ -315,7 +315,7 @@ export default function InteractiveDistillationPanel({
           {isEditing && (
             <button
               onClick={addBotanical}
-              className="px-3 py-1 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700"
+              className="px-3 py-1 bg-copper text-white rounded-lg text-sm hover:bg-copper/90"
             >
               + Add Botanical
             </button>
@@ -343,7 +343,7 @@ export default function InteractiveDistillationPanel({
                         type="text"
                         value={botanical.name}
                         onChange={(e) => updateBotanical(index, 'name', e.target.value)}
-                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                       />
                     ) : (
                       <span className="text-sm font-medium text-gray-900">{botanical.name}</span>
@@ -355,7 +355,7 @@ export default function InteractiveDistillationPanel({
                         type="text"
                         value={botanical.notes}
                         onChange={(e) => updateBotanical(index, 'notes', e.target.value)}
-                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                         placeholder="Notes..."
                       />
                     ) : (
@@ -368,7 +368,7 @@ export default function InteractiveDistillationPanel({
                         type="number"
                         value={botanical.weight_g}
                         onChange={(e) => updateBotanical(index, 'weight_g', Number(e.target.value))}
-                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                       />
                     ) : (
                       <span className="text-sm text-gray-900">{botanical.weight_g}</span>
@@ -382,7 +382,7 @@ export default function InteractiveDistillationPanel({
                       <select
                         value={botanical.status}
                         onChange={(e) => updateBotanical(index, 'status', e.target.value as any)}
-                        className="px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="px-2 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                       >
                         <option value="ok">✅ OK</option>
                         <option value="pending">⚠️ Pending</option>
@@ -398,7 +398,7 @@ export default function InteractiveDistillationPanel({
                     <td className="px-6 py-4 whitespace-nowrap">
                       <button
                         onClick={() => removeBotanical(index)}
-                        className="text-red-600 hover:text-red-800 text-sm"
+                        className="text-copper hover:text-copper/80 text-sm"
                       >
                         Remove
                       </button>
@@ -446,7 +446,7 @@ export default function InteractiveDistillationPanel({
                         step="0.1"
                         value={cut.volume_L || ''}
                         onChange={(e) => updateCut(cutType as any, 'volume_L', e.target.value ? Number(e.target.value) : null)}
-                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                         placeholder="0.0"
                       />
                     ) : (
@@ -460,7 +460,7 @@ export default function InteractiveDistillationPanel({
                         step="0.1"
                         value={cut.abv || ''}
                         onChange={(e) => updateCut(cutType as any, 'abv', e.target.value ? Number(e.target.value) : null)}
-                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-20 px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                         placeholder="0.0"
                       />
                     ) : (
@@ -473,7 +473,7 @@ export default function InteractiveDistillationPanel({
                         type="text"
                         value={cut.notes}
                         onChange={(e) => updateCut(cutType as any, 'notes', e.target.value)}
-                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className="w-full px-3 py-1 border border-gray-300 rounded focus:ring-2 focus:ring-copper focus:border-copper"
                         placeholder="Observations..."
                       />
                     ) : (
@@ -494,35 +494,35 @@ export default function InteractiveDistillationPanel({
           value={data.notes}
           onChange={(e) => updateNotes(e.target.value)}
           disabled={!isEditing}
-          className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+          className="w-full h-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper disabled:bg-gray-100 disabled:cursor-not-allowed"
           placeholder="Add observations about the distillation, adjustments, aroma, problems, yield, etc..."
         />
       </div>
 
       {/* Actions */}
-      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">Actions</h2>
-        <div className="flex gap-4">
-          <button
-            onClick={() => onSave(data)}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
-          >
-            💾 Save to Database
-          </button>
-          <button
-            onClick={() => onDuplicate(data)}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
-          >
-            📋 Duplicate Batch
-          </button>
-          <button
-            onClick={() => onExport(data)}
-            className="px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
-          >
-            📄 Export PDF
-          </button>
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-semibold text-gray-900 mb-4">Actions</h2>
+          <div className="flex gap-4">
+            <button
+              onClick={() => onSave(data)}
+              className="px-6 py-3 bg-copper text-white rounded-lg font-medium hover:bg-copper/90 transition-colors"
+            >
+              💾 Save to Database
+            </button>
+            <button
+              onClick={() => onDuplicate(data)}
+              className="px-6 py-3 bg-beige text-graphite rounded-lg font-medium border border-copper-30 hover:bg-beige transition-colors"
+            >
+              📋 Duplicate Batch
+            </button>
+            <button
+              onClick={() => onExport(data)}
+              className="px-6 py-3 bg-beige text-graphite rounded-lg font-medium border border-copper-30 hover:bg-beige transition-colors"
+            >
+              📄 Export PDF
+            </button>
+          </div>
         </div>
-      </div>
     </div>
   )
 }

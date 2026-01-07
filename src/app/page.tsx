@@ -20,7 +20,7 @@ export default function Home() {
             </Link>
             <Link 
               href="/auth/signup"
-              className="px-6 py-2 bg-[#894128] text-white rounded-lg hover:bg-[#743722] font-medium"
+              className="px-6 py-2 bg-brand text-white rounded-lg hover:bg-brand font-medium"
             >
               Get Started
             </Link>
@@ -45,7 +45,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4">
               <Link 
                 href="/auth/signup"
-                className="px-8 py-3 bg-[#894128] text-white rounded-lg hover:bg-[#743722] font-medium text-lg"
+                className="px-8 py-3 bg-brand text-white rounded-lg hover:bg-brand font-medium text-lg"
               >
                 Start Free Trial
               </Link>
@@ -67,8 +67,8 @@ export default function Home() {
           
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-              <div className="w-12 h-12 bg-[#F1ECE4] rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-[#894128]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
               </div>
@@ -80,8 +80,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-              <div className="w-12 h-12 bg-[#F1ECE4] rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-[#894128]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </div>
@@ -93,8 +93,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-              <div className="w-12 h-12 bg-[#F1ECE4] rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-[#894128]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v1a3 3 0 003 3h0a3 3 0 003-3v-1m3-3.87a3 3 0 01-1.8-5.36 8.032 8.032 0 01-12.4 0 3 3 0 01-1.8 5.36" />
                 </svg>
               </div>
@@ -106,8 +106,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-              <div className="w-12 h-12 bg-[#F1ECE4] rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-[#894128]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </div>
@@ -119,8 +119,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-              <div className="w-12 h-12 bg-[#F1ECE4] rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-[#894128]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
@@ -132,8 +132,8 @@ export default function Home() {
             </div>
 
             <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
-              <div className="w-12 h-12 bg-[#F1ECE4] rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-6 h-6 text-[#894128]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-beige rounded-lg flex items-center justify-center mb-4">
+                <svg className="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </div>
@@ -147,7 +147,7 @@ export default function Home() {
         </div>
 
         {/* CTA Section */}
-        <div className="mt-32 text-center bg-[#F1ECE4] rounded-2xl p-12">
+        <div className="mt-32 text-center bg-beige rounded-2xl p-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Ready to Modernize Your Distillery?
           </h2>
@@ -156,7 +156,7 @@ export default function Home() {
           </p>
           <Link 
             href="/auth/signup"
-            className="inline-block px-8 py-3 bg-[#894128] text-white rounded-lg hover:bg-[#743722] font-medium text-lg"
+            className="inline-block px-8 py-3 bg-brand text-white rounded-lg hover:bg-brand font-medium text-lg"
           >
             Start Your Free Trial
           </Link>

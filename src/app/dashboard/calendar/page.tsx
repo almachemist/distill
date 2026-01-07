@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import type { ReactElement } from 'react'
 import { EventModal } from '@/components/calendar/EventModal'
 import type { CalendarEvent, CalendarEventInput } from '@/types/calendar-event.types'
+import { getProductColor, getTextColor, getBorderColor, DISTILLERY_COLORS } from '@/utils/calendar-colors'
 
 interface ProductionRun {
   product: string
@@ -196,31 +197,18 @@ export default function CalendarPage() {
   const bottlingWeeks = data.calendar.filter(w => w.bottling)
   const adminWeeks = data.calendar.filter(w => w.mode === 'ADMIN' && !w.bottling)
 
-  const getModeColor = (mode: string) => {
-    switch (mode) {
-      // Gin - Beige forte (#D7C4A2 - warm, sophisticated, barrel-like)
-      case 'GIN': return 'bg-[#D7C4A2] text-stone-900 border-[#C4B190]'
-
-      // Rum/Cane - Copper (#A65E2E - classic copper, warm, distillery metal)
-      case 'RUM': return 'bg-[#A65E2E] text-white border-[#8B4E25]'
-      case 'CANE_SPIRIT': return 'bg-[#A65E2E] text-white border-[#8B4E25]'
-      case 'RESERVE_RUM_BLEND': return 'bg-[#A65E2E] text-white border-[#8B4E25]'
-      case 'RESERVE_RUM_BOTTLE': return 'bg-[#C17F50] text-white border-[#A65E2E]'
-
-      // Vodka - Gray (#777 - neutral, industrial, not black)
-      case 'VODKA': return 'bg-[#777] text-white border-[#666]'
-
-      // Liqueur - Copper (brown spirit)
-      case 'LIQUEUR': return 'bg-[#A65E2E] text-white border-[#8B4E25]'
-
-      // Bottling - Discrete gray (no background, just text)
-      case 'BOTTLING': return 'bg-stone-100 text-stone-600 border-stone-300'
-
-      // Admin - Light gray (#EEE)
-      case 'ADMIN': return 'bg-[#EEE] text-stone-600 border-stone-300'
-
-      default: return 'bg-white text-stone-600 border-stone-200'
+  const getModeStyle = (mode: string) => {
+    let bg: string = DISTILLERY_COLORS.EMPTY
+    if (mode === 'RESERVE_RUM_BLEND' || mode === 'RESERVE_RUM_BOTTLE') {
+      bg = DISTILLERY_COLORS.RUM
+    } else if (mode === 'BOTTLING') {
+      bg = DISTILLERY_COLORS.ADMIN
+    } else {
+      bg = getProductColor(mode as any)
     }
+    const color = getTextColor(bg)
+    const borderColor = getBorderColor(bg)
+    return { backgroundColor: bg, color, borderColor }
   }
 
   const getModeLabel = (mode: string) => {
@@ -262,7 +250,7 @@ export default function CalendarPage() {
         </div>
 
         {/* Main card - clean and focused */}
-        <div className={`border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md ${getModeColor(week.mode)}`}>
+        <div className="border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md" style={getModeStyle(week.mode)}>
           {/* Product name - prominent */}
           <div className="font-semibold text-base mb-1">
             {run.product}
@@ -351,7 +339,7 @@ export default function CalendarPage() {
             </div>
           </div>
 
-          <div className={`border rounded-lg p-4 h-40 overflow-hidden ${getModeColor(week.mode)}`}>
+          <div className="border rounded-lg p-4 h-40 overflow-hidden" style={getModeStyle(week.mode)}>
             <div className="font-medium text-sm mb-1">
               {getModeLabel(week.mode)}
             </div>
@@ -523,7 +511,7 @@ export default function CalendarPage() {
         <div className="flex items-center justify-between mb-2">
           <div className="text-xs font-medium text-stone-500">W{weekNo.toString().padStart(2, '0')}</div>
         </div>
-        <div className={`border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md ${getModeColor(modeForColor)}`}>
+        <div className="border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md" style={getModeStyle(modeForColor)}>
           <div className="font-semibold text-base mb-1">{ev.productName || (ev.type[0].toUpperCase()+ev.type.slice(1))}</div>
           {ev.batch && (
             <div className="text-sm opacity-75 mb-3">Batch {ev.batch}</div>

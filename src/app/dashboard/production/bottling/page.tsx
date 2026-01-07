@@ -112,7 +112,7 @@ export default function BottlingPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -120,7 +120,7 @@ export default function BottlingPage() {
   return (
     <Suspense fallback={
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
       </div>
     }>
     <div className="space-y-6">
@@ -183,10 +183,11 @@ export default function BottlingPage() {
           
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="selected_spirit" className="block text-sm font-medium text-gray-700 mb-2">
                 Selected Spirit
               </label>
               <input
+                id="selected_spirit"
                 type="text"
                 value={bottlingRun.spiritType}
                 readOnly
@@ -196,10 +197,11 @@ export default function BottlingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="volume_to_bottle" className="block text-sm font-medium text-gray-700 mb-2">
                 Volume to Bottle (Liters)
               </label>
               <input
+                id="volume_to_bottle"
                 type="number"
                 value={bottlingRun.volume}
                 onChange={(e) => setBottlingRun(prev => ({ ...prev, volume: parseFloat(e.target.value) || 0 }))}
@@ -210,10 +212,11 @@ export default function BottlingPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="bottle_size" className="block text-sm font-medium text-gray-700 mb-2">
                 Bottle Size (ml)
               </label>
               <select
+                id="bottle_size"
                 value={bottlingRun.bottleSize}
                 onChange={(e) => setBottlingRun(prev => ({ ...prev, bottleSize: parseInt(e.target.value) }))}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

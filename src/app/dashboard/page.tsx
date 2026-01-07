@@ -128,8 +128,8 @@ export default function DashboardPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
-          <p className="text-red-600 mb-2">Failed to load dashboard data</p>
-          <p className="text-sm text-gray-500">{statsError}</p>
+          <p className="text-copper mb-2">Failed to load dashboard data</p>
+          <p className="text-sm text-graphite/70">{statsError}</p>
         </div>
       </div>
     )

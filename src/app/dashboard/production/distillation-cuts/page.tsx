@@ -18,8 +18,8 @@ type Cut = {
 function DistillationCutsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const batchId = searchParams.get('batchId')
+  const recipeId = searchParams?.get('recipeId')
+  const batchId = searchParams?.get('batchId')
   
   const [loading, setLoading] = useState(false)
   const [activePhase, setActivePhase] = useState<'foreshots' | 'heads' | 'hearts' | 'tails'>('foreshots')
@@ -392,7 +392,7 @@ function DistillationCutsContent() {
                     {cuts.length > 1 && (
                       <button
                         onClick={() => removeCutEntry(phase, index)}
-                        className="text-red-600 hover:text-red-800 text-xs px-2 py-1"
+                        className="text-copper hover:text-copper/80 text-xs px-2 py-1"
                       >
                         Remove
                       </button>
@@ -448,10 +448,10 @@ function DistillationCutsContent() {
 
         {/* Content */}
         <div className="bg-white rounded-xl border border-copper-15 p-6 shadow-sm">
-          {activePhase === 'foreshots' && renderCutTable('foreshots', foreshots, 'Foreshots', 'text-red-600')}
-          {activePhase === 'heads' && renderCutTable('heads', heads, 'Heads', 'text-orange-600')}
-          {activePhase === 'hearts' && renderCutTable('hearts', hearts, 'Hearts (Middle Run)', 'text-green-600')}
-          {activePhase === 'tails' && renderCutTable('tails', tails, 'Tails', 'text-blue-600')}
+          {activePhase === 'foreshots' && renderCutTable('foreshots', foreshots, 'Foreshots', 'text-copper')}
+          {activePhase === 'heads' && renderCutTable('heads', heads, 'Heads', 'text-copper')}
+          {activePhase === 'hearts' && renderCutTable('hearts', hearts, 'Hearts (Middle Run)', 'text-copper')}
+          {activePhase === 'tails' && renderCutTable('tails', tails, 'Tails', 'text-copper')}
         </div>
 
         {/* Summary Card */}
@@ -462,10 +462,10 @@ function DistillationCutsContent() {
               const cuts = { foreshots, heads, hearts, tails }[phase]
               const total = getCutTotal(cuts)
               const colors = {
-                foreshots: 'border-red-200 bg-red-50',
-                heads: 'border-orange-200 bg-orange-50',
-                hearts: 'border-green-200 bg-green-50',
-                tails: 'border-blue-200 bg-blue-50'
+                foreshots: 'border-copper-30 bg-beige',
+                heads: 'border-copper-30 bg-beige',
+                hearts: 'border-copper-30 bg-beige',
+                tails: 'border-copper-30 bg-beige'
               }
               
               return (

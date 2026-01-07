@@ -6,8 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 function HeatingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const batchId = searchParams.get('batchId')
+  const recipeId = searchParams?.get('recipeId')
+  const batchId = searchParams?.get('batchId')
   
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -24,8 +24,8 @@ function HeatingContent() {
   const [notes, setNotes] = useState('')
 
   const handleSubmit = () => {
-    if (!recipeId || !batchId) {
-      setError('Missing recipe or batch ID')
+    if (!batchId) {
+      setError('Missing batch ID')
       return
     }
 
@@ -73,8 +73,8 @@ function HeatingContent() {
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
-            <p className="text-red-800 text-sm">{error}</p>
+          <div className="bg-beige border border-copper-30 rounded-xl p-4 mb-6">
+            <p className="text-copper text-sm">{error}</p>
           </div>
         )}
 
@@ -224,14 +224,14 @@ function HeatingContent() {
           {/* Actions */}
           <div className="flex justify-between pt-4">
             <button
-              onClick={() => router.push(`/dashboard/production/botanical-steeping?recipeId=${recipeId}&batchId=${batchId}`)}
+              onClick={() => router.push(`/dashboard/production/botanical-steeping?recipeId=${recipeId || ''}&batchId=${batchId || ''}`)}
               className="px-6 py-3 bg-copper-10 hover:bg-copper-20 text-graphite rounded-lg font-medium transition-colors border border-copper-30"
             >
               ← Back to Steeping
             </button>
             <button
               onClick={handleSubmit}
-              disabled={loading || !recipeId || !batchId}
+              disabled={loading || !batchId}
               className="px-6 py-3 bg-copper hover:bg-copper/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Saving...' : 'Save & Continue →'}

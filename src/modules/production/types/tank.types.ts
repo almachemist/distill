@@ -37,7 +37,7 @@ export interface Tank {
   notes?: string | null
 
   // Batch linking
-  batch_id?: string | null
+  batch_id: string
   batch?: string | null
 
   // Infusion details
@@ -78,6 +78,7 @@ export interface TankUpdateInput {
   extra_materials?: Record<string, unknown> | null
   started_on?: string | null
   expected_completion?: string | null
+  batch_id?: string
 }
 
 export const TANK_STATUS_LABELS: Record<TankStatus, string> = {

@@ -41,7 +41,7 @@ export default function InventoryReportsPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -51,14 +51,14 @@ export default function InventoryReportsPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Reports & Analytics</h1>
-          <p className="text-gray-600 mt-2">Comprehensive analytics and cost analysis for your distillery</p>
+          <h1 className="text-3xl font-bold text-graphite">Reports & Analytics</h1>
+          <p className="text-graphite/70 mt-2">Comprehensive analytics and cost analysis for your distillery</p>
         </div>
         <div className="flex gap-3">
           <select
             value={dateRange}
             onChange={(e) => setDateRange(e.target.value as any)}
-            className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-copper focus:border-copper text-graphite"
           >
             <option value="7d">Last 7 days</option>
             <option value="30d">Last 30 days</option>
@@ -67,7 +67,7 @@ export default function InventoryReportsPage() {
           </select>
           <button
             onClick={() => window.location.reload()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium"
+            className="px-4 py-2 bg-copper text-white rounded-lg hover:bg-copper/90 text-sm font-medium"
           >
             Refresh
           </button>
@@ -75,7 +75,7 @@ export default function InventoryReportsPage() {
       </div>
 
       {/* Tab Navigation */}
-      <div className="border-b border-gray-200">
+      <div className="border-b border-copper-15">
         <nav className="-mb-px flex space-x-8">
           {[
             { key: 'inventory', label: 'Inventory Reports', description: 'Stock levels and inventory analytics' },
@@ -87,13 +87,13 @@ export default function InventoryReportsPage() {
               onClick={() => setActiveTab(tab.key as any)}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
                 activeTab === tab.key
-                  ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  ? 'border-copper text-copper'
+                  : 'border-transparent text-graphite/60 hover:text-graphite hover:border-copper-30'
               }`}
             >
               <div className="text-left">
                 <div>{tab.label}</div>
-                <div className="text-xs font-normal text-gray-400">{tab.description}</div>
+                <div className="text-xs font-normal text-graphite/50">{tab.description}</div>
               </div>
             </button>
           ))}
@@ -120,26 +120,26 @@ export default function InventoryReportsPage() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="bg-white overflow-hidden shadow rounded-lg">
                 <div className="px-4 py-5 sm:p-6">
-                  <dt className="text-sm font-medium text-gray-500 truncate">Total Items</dt>
-                  <dd className="mt-1 text-3xl font-semibold text-gray-900">{stats.totalItems}</dd>
+                  <dt className="text-sm font-medium text-graphite/60 truncate">Total Items</dt>
+                  <dd className="mt-1 text-3xl font-semibold text-graphite">{stats.totalItems}</dd>
                 </div>
               </div>
               <div className="bg-white overflow-hidden shadow rounded-lg">
                 <div className="px-4 py-5 sm:p-6">
-                  <dt className="text-sm font-medium text-gray-500 truncate">Low Stock Items</dt>
-                  <dd className="mt-1 text-3xl font-semibold text-yellow-600">{stats.lowStockItems}</dd>
+                  <dt className="text-sm font-medium text-graphite/60 truncate">Low Stock Items</dt>
+                  <dd className="mt-1 text-3xl font-semibold text-graphite">{stats.lowStockItems}</dd>
                 </div>
               </div>
               <div className="bg-white overflow-hidden shadow rounded-lg">
                 <div className="px-4 py-5 sm:p-6">
-                  <dt className="text-sm font-medium text-gray-500 truncate">Alcohol Items</dt>
-                  <dd className="mt-1 text-3xl font-semibold text-red-600">{stats.alcoholItems}</dd>
+                  <dt className="text-sm font-medium text-graphite/60 truncate">Alcohol Items</dt>
+                  <dd className="mt-1 text-3xl font-semibold text-graphite">{stats.alcoholItems}</dd>
                 </div>
               </div>
               <div className="bg-white overflow-hidden shadow rounded-lg">
                 <div className="px-4 py-5 sm:p-6">
-                  <dt className="text-sm font-medium text-gray-500 truncate">Total Value</dt>
-                  <dd className="mt-1 text-3xl font-semibold text-green-600">${stats.totalValue.toFixed(2)}</dd>
+                  <dt className="text-sm font-medium text-graphite/60 truncate">Total Value</dt>
+                  <dd className="mt-1 text-3xl font-semibold text-graphite">${stats.totalValue.toFixed(2)}</dd>
                 </div>
               </div>
             </div>
@@ -147,74 +147,74 @@ export default function InventoryReportsPage() {
             {/* Charts Placeholder */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Category Breakdown */}
-              <div className="bg-white shadow rounded-lg p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Items by Category</h3>
+              <div className="bg-white rounded-lg shadow-soft border border-copper-30 p-6">
+                <h3 className="text-lg font-medium text-graphite mb-4">Items by Category</h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-4 h-4 rounded-full bg-blue-500 mr-3"></div>
-                      <span className="text-sm font-medium text-gray-900">RAW MATERIALS</span>
+                      <div className="w-4 h-4 rounded-full bg-copper mr-3"></div>
+                      <span className="text-sm font-medium text-graphite">RAW MATERIALS</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-500 mr-2">12 items</span>
-                      <span className="text-sm font-medium text-gray-900">48.0%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="w-4 h-4 rounded-full bg-red-500 mr-3"></div>
-                      <span className="text-sm font-medium text-gray-900">FINISHED GOODS</span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="text-sm text-gray-500 mr-2">8 items</span>
-                      <span className="text-sm font-medium text-gray-900">32.0%</span>
+                      <span className="text-sm text-graphite/70 mr-2">12 items</span>
+                      <span className="text-sm font-medium text-graphite">48.0%</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-4 h-4 rounded-full bg-green-500 mr-3"></div>
-                      <span className="text-sm font-medium text-gray-900">BOTANICALS</span>
+                      <div className="w-4 h-4 rounded-full bg-copper-red mr-3"></div>
+                      <span className="text-sm font-medium text-graphite">FINISHED GOODS</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-500 mr-2">5 items</span>
-                      <span className="text-sm font-medium text-gray-900">20.0%</span>
+                      <span className="text-sm text-graphite/70 mr-2">8 items</span>
+                      <span className="text-sm font-medium text-graphite">32.0%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 rounded-full bg-copper-green mr-3"></div>
+                      <span className="text-sm font-medium text-graphite">BOTANICALS</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-sm text-graphite/70 mr-2">5 items</span>
+                      <span className="text-sm font-medium text-graphite">20.0%</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Stock Status */}
-              <div className="bg-white shadow rounded-lg p-6">
-                <h3 className="text-lg font-medium text-gray-900 mb-4">Stock Status Overview</h3>
+              <div className="bg-white rounded-lg shadow-soft border border-copper-30 p-6">
+                <h3 className="text-lg font-medium text-graphite mb-4">Stock Status Overview</h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-4 h-4 rounded-full bg-green-500 mr-3"></div>
-                      <span className="text-sm font-medium text-gray-900">In Stock</span>
+                      <div className="w-4 h-4 rounded-full bg-copper-green mr-3"></div>
+                      <span className="text-sm font-medium text-graphite">In Stock</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-500 mr-2">20 items</span>
-                      <span className="text-sm font-medium text-green-600">80.0%</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="w-4 h-4 rounded-full bg-yellow-500 mr-3"></div>
-                      <span className="text-sm font-medium text-gray-900">Low Stock</span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="text-sm text-gray-500 mr-2">3 items</span>
-                      <span className="text-sm font-medium text-yellow-600">12.0%</span>
+                      <span className="text-sm text-graphite/70 mr-2">20 items</span>
+                      <span className="text-sm font-medium text-graphite">80.0%</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                      <div className="w-4 h-4 rounded-full bg-red-500 mr-3"></div>
-                      <span className="text-sm font-medium text-gray-900">Out of Stock</span>
+                      <div className="w-4 h-4 rounded-full bg-copper-amber mr-3"></div>
+                      <span className="text-sm font-medium text-graphite">Low Stock</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-sm text-gray-500 mr-2">2 items</span>
-                      <span className="text-sm font-medium text-red-600">8.0%</span>
+                      <span className="text-sm text-graphite/70 mr-2">3 items</span>
+                      <span className="text-sm font-medium text-graphite">12.0%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center">
+                      <div className="w-4 h-4 rounded-full bg-copper-red mr-3"></div>
+                      <span className="text-sm font-medium text-graphite">Out of Stock</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-sm text-graphite/70 mr-2">2 items</span>
+                      <span className="text-sm font-medium text-graphite">8.0%</span>
                     </div>
                   </div>
                 </div>
@@ -222,67 +222,67 @@ export default function InventoryReportsPage() {
             </div>
 
             {/* Recent Transactions */}
-            <div className="bg-white shadow rounded-lg">
-              <div className="px-6 py-4 border-b border-gray-200">
-                <h3 className="text-lg font-medium text-gray-900">Recent Transactions</h3>
+            <div className="bg-white rounded-lg shadow-soft border border-copper-30">
+              <div className="px-6 py-4 border-b border-copper-30">
+                <h3 className="text-lg font-medium text-graphite">Recent Transactions</h3>
               </div>
               <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-50">
+                <table className="min-w-full divide-y divide-copper-15">
+                  <thead className="bg-beige">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
                         Item
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
                         Transaction
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
                         Quantity
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
                         Date
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
                         Note
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  <tbody className="bg-white divide-y divide-copper-15">
+                    <tr className="hover:bg-beige">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-graphite">
                         Juniper Berries
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full text-green-600">
+                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full text-copper">
                           Received
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite">
                         5.0 kg
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/70">
                         {new Date().toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/70">
                         Fresh batch from supplier
                       </td>
                     </tr>
-                    <tr className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <tr className="hover:bg-beige">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-graphite">
                         Signature Gin
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full text-red-600">
+                        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full text-copper">
                           Consumed
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite">
                         2.5 L
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/70">
                         {new Date(Date.now() - 86400000).toLocaleDateString()}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/70">
                         Bottling run #2024-001
                       </td>
                     </tr>
@@ -293,19 +293,19 @@ export default function InventoryReportsPage() {
 
             {/* Low Stock Alert */}
             {stats.lowStockItems > 0 && (
-              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+              <div className="bg-beige border border-copper-30 rounded-lg p-6">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="h-5 w-5 text-copper" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <h3 className="text-sm font-medium text-yellow-800">
+                    <h3 className="text-sm font-medium text-graphite">
                       Low Stock Alert
                     </h3>
-                    <div className="mt-2 text-sm text-yellow-700">
-                      <p>
+                    <div className="mt-2 text-sm">
+                      <p className="text-graphite/80">
                         You have {stats.lowStockItems} items with low stock levels. 
                         Consider reordering to avoid production delays.
                       </p>
@@ -321,20 +321,20 @@ export default function InventoryReportsPage() {
           <div className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Distillation Costs */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-lg shadow-soft border border-copper-30 p-6">
                 <div className="text-center">
-                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-blue-100 mb-4">
-                    <svg className="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-beige mb-4">
+                    <svg className="h-6 w-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Distillation Costs</h3>
-                  <p className="text-gray-600 mb-4">
+                  <h3 className="text-lg font-medium text-graphite mb-2">Distillation Costs</h3>
+                  <p className="text-graphite/70 mb-4">
                     Energy, water, and ethanol cost analysis for distillation processes
                   </p>
                   <Link
                     href="/dashboard/production/distillation-costs"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-copper hover:bg-copper/90"
                   >
                     View Distillation Costs
                   </Link>
@@ -342,20 +342,20 @@ export default function InventoryReportsPage() {
               </div>
 
               {/* Gin Cost Analysis */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-lg shadow-soft border border-copper-30 p-6">
                 <div className="text-center">
-                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-green-100 mb-4">
-                    <svg className="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-beige mb-4">
+                    <svg className="h-6 w-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Gin Cost Analysis</h3>
-                  <p className="text-gray-600 mb-4">
+                  <h3 className="text-lg font-medium text-graphite mb-2">Gin Cost Analysis</h3>
+                  <p className="text-graphite/70 mb-4">
                     Complete gin production cost breakdown from batch to bottle
                   </p>
                   <Link
                     href="/dashboard/production/gin-cost-analysis"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-copper hover:bg-copper/90"
                   >
                     View Gin Costs
                   </Link>
@@ -363,20 +363,20 @@ export default function InventoryReportsPage() {
               </div>
 
               {/* Packaging Costs */}
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="bg-white rounded-lg shadow-soft border border-copper-30 p-6">
                 <div className="text-center">
-                  <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-md bg-purple-100 mb-4">
-                    <svg className="h-6 w-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="mx-auto flex items-center justifyCenter h-12 w-12 rounded-md bg-beige mb-4">
+                    <svg className="h-6 w-6 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Packaging Costs</h3>
-                  <p className="text-gray-600 mb-4">
+                  <h3 className="text-lg font-medium text-graphite mb-2">Packaging Costs</h3>
+                  <p className="text-graphite/70 mb-4">
                     Bottle, label, and packaging cost analysis per gin product
                   </p>
                   <Link
                     href="/dashboard/production/packaging-costs"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700"
+                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-copper hover:bg-copper/90"
                   >
                     View Packaging Costs
                   </Link>
@@ -385,12 +385,12 @@ export default function InventoryReportsPage() {
             </div>
 
             {/* Cost Summary */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Cost Analysis Overview</h3>
+            <div className="bg-white rounded-lg shadow-soft border border-copper-30 p-6">
+              <h3 className="text-lg font-semibold text-graphite mb-4">Cost Analysis Overview</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-3">Production Cost Components</h4>
-                  <ul className="space-y-2 text-sm text-gray-600">
+                  <h4 className="font-medium text-graphite mb-3">Production Cost Components</h4>
+                  <ul className="space-y-2 text-sm text-graphite/70">
                     <li>• <strong>Ethanol:</strong> Raw material cost for spirit base</li>
                     <li>• <strong>Botanicals:</strong> Herbs, spices, and flavoring agents</li>
                     <li>• <strong>Energy:</strong> Electricity for distillation process</li>
@@ -399,8 +399,8 @@ export default function InventoryReportsPage() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-medium text-gray-900 mb-3">Key Metrics</h4>
-                  <ul className="space-y-2 text-sm text-gray-600">
+                  <h4 className="font-medium text-graphite mb-3">Key Metrics</h4>
+                  <ul className="space-y-2 text-sm text-graphite/70">
                     <li>• <strong>Cost per LAL:</strong> Cost per Litre of Absolute Alcohol</li>
                     <li>• <strong>Cost per Bottle:</strong> Total production cost per bottle</li>
                     <li>• <strong>Efficiency:</strong> Distillation yield and recovery rates</li>

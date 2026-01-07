@@ -9,7 +9,7 @@ import type { Barrel } from '@/modules/barrels/types/barrel.types'
 export default function BarrelDetailPage() {
   const router = useRouter()
   const params = useParams()
-  const barrelId = params.id as string
+  const barrelId = (params as any)?.id as string || ''
   
   const [barrel, setBarrel] = useState<Barrel | null>(null)
   const [isLoading, setIsLoading] = useState(true)

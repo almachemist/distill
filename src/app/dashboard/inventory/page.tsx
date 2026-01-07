@@ -212,23 +212,23 @@ export default function InventoryPage() {
       </div>
 
       {'/* Instructions * /'}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-        <h3 className="text-lg font-semibold text-blue-900 mb-2">Simplified Inventory System</h3>
-        <p className="text-blue-700 text-sm mb-4">
+      <div className="bg-beige border border-copper-30 rounded-lg p-6">
+        <h3 className="text-lg font-semibold text-graphite mb-2">Simplified Inventory System</h3>
+        <p className="text-graphite/70 text-sm mb-4">
           This system organizes your inventory into 3 production-focused categories: Raw Materials, Packaging, and Finished Products.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
-            <span className="text-blue-800">Raw Materials: Spirits, botanicals, water</span>
+            <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
+            <span className="text-graphite">Raw Materials: Spirits, botanicals, water</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
-            <span className="text-blue-800">Packaging: Bottles, labels, closures, boxes</span>
+            <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
+            <span className="text-graphite">Packaging: Bottles, labels, closures, boxes</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
-            <span className="text-blue-800">Finished Products: Your gin varieties</span>
+            <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
+            <span className="text-graphite">Finished Products: Your gin varieties</span>
           </div>
         </div>
       </div>

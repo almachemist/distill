@@ -1,14 +1,15 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, useCallback, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
 import { EthanolBatchSelector, EthanolSelection } from '@/modules/production/components/EthanolBatchSelector'
 import { BotanicalSelector, BotanicalSelection } from '@/modules/production/components/BotanicalSelector'
 import { PackagingSelector, PackagingSelection } from '@/modules/production/components/PackagingSelector'
 
-export default function PreparationPage() {
+function PreparationContent() {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const recipeRepo = new RecipeRepository()
   
   const [recipes, setRecipes] = useState<Array<{id: string, name: string}>>([])
@@ -30,14 +31,17 @@ export default function PreparationPage() {
   const [notes, setNotes] = useState('')
   const [showBotanicals, setShowBotanicals] = useState(false)
   const [showPackaging, setShowPackaging] = useState(false)
+  const [tankIdParam, setTankIdParam] = useState<string | null>(null)
+  const [tankVolume, setTankVolume] = useState<number>(0)
+  const [tankAbv, setTankAbv] = useState<number>(0)
 
   // Calculations
   const calculateLAL = (volume: number, abv: number): number => {
     return Math.round((volume * abv / 100) * 10) / 10
   }
 
-  const ethanolVolume = ethanolSelection?.quantity_l || 0
-  const ethanolABV = ethanolSelection?.abv || 0
+  const ethanolVolume = tankIdParam ? tankVolume : (ethanolSelection?.quantity_l || 0)
+  const ethanolABV = tankIdParam ? tankAbv : (ethanolSelection?.abv || 0)
   const ethanolLAL = calculateLAL(ethanolVolume, ethanolABV)
   const otherLAL = otherComponents.reduce((sum, comp) => sum + calculateLAL(comp.volume, comp.abv), 0)
   const totalVolume = ethanolVolume + waterVolume + otherComponents.reduce((sum, c) => sum + c.volume, 0)
@@ -45,7 +49,7 @@ export default function PreparationPage() {
   const avgABV = totalVolume > 0 ? (totalLAL / totalVolume) * 100 : 0
 
   // Cost calculations
-  const ethanolCost = ethanolSelection?.total_cost || 0
+  const ethanolCost = tankIdParam ? 0 : (ethanolSelection?.total_cost || 0)
   const botanicalCost = botanicals.reduce((sum, b) => sum + b.total_cost, 0)
   const packagingCost = packaging.reduce((sum, p) => sum + p.total_cost, 0)
   const totalCost = ethanolCost + botanicalCost + packagingCost
@@ -65,6 +69,22 @@ export default function PreparationPage() {
   useEffect(() => {
     loadRecipes()
   }, [loadRecipes])
+  
+  useEffect(() => {
+    const rid = searchParams?.get('redistillTankId')
+    const vol = searchParams?.get('volume')
+    const abv = searchParams?.get('abv')
+    const pt = searchParams?.get('productType')
+    if (rid) {
+      setTankIdParam(rid)
+      setTankVolume(vol ? Number(vol) : 0)
+      setTankAbv(abv ? Number(abv) : 0)
+      setProductType(pt === 'ethanol' ? 'ethanol' : 'vodka')
+      setBatchId(`VODKA-${rid}`)
+    } else if (pt === 'vodka' || pt === 'ethanol' || pt === 'gin') {
+      setProductType(pt as any)
+    }
+  }, [searchParams])
 
   const addOtherComponent = () => {
     setOtherComponents([...otherComponents, { name: '', volume: 0, abv: 0 }])
@@ -90,7 +110,7 @@ export default function PreparationPage() {
       setError('Please enter a Batch ID')
       return
     }
-    if (!ethanolSelection) {
+    if (!tankIdParam && !ethanolSelection) {
       setError('Please select an ethanol batch from inventory')
       return
     }
@@ -99,43 +119,57 @@ export default function PreparationPage() {
     setError(null)
 
     try {
-      // Save batch with inventory integration
-      const response = await fetch('/api/production/batches-with-inventory', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          batch_id: batchId,
-          batch_type: productType === 'ethanol' ? 'vodka' : productType, // Map ethanol to vodka for now
-          product_name: selectedRecipe?.name || productType,
-          date,
-          still_used: stillUsed,
-          notes,
-          ethanol: ethanolSelection,
-          water_quantity_l: waterVolume,
-          botanicals: botanicals.length > 0 ? botanicals : undefined,
-          packaging: packaging.length > 0 ? packaging : undefined,
-          created_by: 'current_user', // TODO: Get from auth
-          organization_id: '00000000-0000-0000-0000-000000000001' // TODO: Get from auth
+      if (!tankIdParam) {
+        const response = await fetch('/api/production/batches-with-inventory', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            batch_id: batchId,
+            batch_type: productType === 'ethanol' ? 'vodka' : productType,
+            product_name: selectedRecipe?.name || productType,
+            date,
+            still_used: stillUsed,
+            notes,
+            ethanol: ethanolSelection,
+            water_quantity_l: waterVolume,
+            botanicals: botanicals.length > 0 ? botanicals : undefined,
+            packaging: packaging.length > 0 ? packaging : undefined,
+            created_by: 'current_user',
+            organization_id: '00000000-0000-0000-0000-000000000001'
+          })
         })
-      })
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to save batch')
+        if (!response.ok) {
+          const errorData = await response.json()
+          throw new Error(errorData.error || 'Failed to save batch')
+        }
+        await response.json()
       }
-
-      const result = await response.json()
-      console.log('Batch saved successfully:', result)
 
       // Also save to localStorage for backward compatibility
       const components = [
-        {
-          name: ethanolSelection.item_name,
-          type: 'ethanol',
-          volume_l: ethanolSelection.quantity_l,
-          abv_percent: ethanolSelection.abv,
-          lal: ethanolLAL
-        },
+        tankIdParam
+          ? {
+              name: `Tank ${tankIdParam}`,
+              type: 'ethanol',
+              volume_l: tankVolume,
+              abv_percent: tankAbv,
+              lal: ethanolLAL
+            }
+          : ethanolSelection
+            ? {
+                name: ethanolSelection.item_name,
+                type: 'ethanol',
+                volume_l: ethanolSelection.quantity_l,
+                abv_percent: ethanolSelection.abv,
+                lal: ethanolLAL
+              }
+            : {
+                name: 'Ethanol',
+                type: 'ethanol',
+                volume_l: 0,
+                abv_percent: 0,
+                lal: 0
+              },
         {
           name: 'Water',
           type: 'water',
@@ -312,14 +346,54 @@ export default function PreparationPage() {
           </div>
 
           {/* Ethanol Batch Selector */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Ethanol Selection</h3>
-            <EthanolBatchSelector
-              value={ethanolSelection || undefined}
-              onChange={setEthanolSelection}
-              requiredQuantity={500}
-            />
-          </div>
+          {!tankIdParam ? (
+            <div className="bg-beige border border-copper-30 rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-graphite mb-4">Ethanol Selection</h3>
+              <EthanolBatchSelector
+                value={ethanolSelection || undefined}
+                onChange={setEthanolSelection}
+                requiredQuantity={500}
+              />
+            </div>
+          ) : (
+            <div className="bg-beige border border-copper-30 rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-graphite mb-4">Redistillation Source</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                  <div className="text-xs text-graphite/70 mb-1">Tank</div>
+                  <div className="px-4 py-3 bg-white border border-copper-30 rounded-lg text-graphite text-sm">{tankIdParam}</div>
+                </div>
+                <div>
+                  <label htmlFor="tank_volume_l" className="block text-sm font-medium text-graphite mb-2">
+                    Volume (L)
+                  </label>
+                  <input
+                    id="tank_volume_l"
+                    type="number"
+                    value={tankVolume}
+                    onChange={(e) => setTankVolume(Number(e.target.value))}
+                    className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="tank_abv_percent" className="block text-sm font-medium text-graphite mb-2">
+                    ABV (%)
+                  </label>
+                  <input
+                    id="tank_abv_percent"
+                    type="number"
+                    value={tankAbv}
+                    onChange={(e) => setTankAbv(Number(e.target.value))}
+                    className="w-full px-4 py-3 bg-white border border-copper-30 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper text-graphite"
+                    step="0.1"
+                    min="0"
+                    max="100"
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-graphite/60 mt-2">Using tank contents as ethanol source</p>
+            </div>
+          )}
 
           {/* Water */}
           <div>
@@ -456,13 +530,13 @@ export default function PreparationPage() {
 
           {/* Botanicals Section (for Gin only) */}
           {productType === 'gin' && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+            <div className="bg-beige border border-copper-30 rounded-lg p-4">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-semibold text-gray-900">Botanicals (Optional)</h3>
+                <h3 className="text-lg font-semibold text-graphite">Botanicals (Optional)</h3>
                 <button
                   type="button"
                   onClick={() => setShowBotanicals(!showBotanicals)}
-                  className="text-sm text-green-700 hover:text-green-800 font-medium"
+                  className="text-sm text-copper hover:text-copper/80 font-medium"
                 >
                   {showBotanicals ? 'Hide' : 'Show'} Botanicals
                 </button>
@@ -477,13 +551,13 @@ export default function PreparationPage() {
           )}
 
           {/* Packaging Section (Optional) */}
-          <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+          <div className="bg-beige border border-copper-30 rounded-lg p-4">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold text-gray-900">Packaging (Optional)</h3>
+              <h3 className="text-lg font-semibold text-graphite">Packaging (Optional)</h3>
               <button
                 type="button"
                 onClick={() => setShowPackaging(!showPackaging)}
-                className="text-sm text-purple-700 hover:text-purple-800 font-medium"
+                className="text-sm text-copper hover:text-copper/80 font-medium"
               >
                 {showPackaging ? 'Hide' : 'Show'} Packaging
               </button>
@@ -514,7 +588,7 @@ export default function PreparationPage() {
               </div>
               <div>
                 <div className="text-xs text-graphite/70 mb-1">Total Cost</div>
-                <div className="text-2xl font-bold text-green-700">${totalCost.toFixed(2)}</div>
+                <div className="text-2xl font-bold text-copper">${totalCost.toFixed(2)}</div>
               </div>
             </div>
 
@@ -548,7 +622,7 @@ export default function PreparationPage() {
           <div className="flex justify-end pt-4">
             <button
               onClick={handleSubmit}
-              disabled={loading || !selectedRecipeId || !batchId}
+              disabled={loading || !batchId || (productType === 'gin' && !selectedRecipeId) || (!tankIdParam && !ethanolSelection)}
               className="px-6 py-3 bg-copper hover:bg-copper/90 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Saving...' : 'Save & Continue →'}
@@ -557,5 +631,13 @@ export default function PreparationPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function StartBatchPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}>
+      <PreparationContent />
+    </Suspense>
   )
 }

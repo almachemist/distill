@@ -44,7 +44,7 @@ export default function QuickEventForm({ onEventCreated }: QuickEventFormProps) 
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+        className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 focus:outline-none focus:ring-2 focus:ring-brand"
       >
         + Quick Event
       </button>
@@ -57,26 +57,28 @@ export default function QuickEventForm({ onEventCreated }: QuickEventFormProps) 
         <h3 className="text-lg font-semibold mb-4">Create Quick Event</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
               Title
             </label>
             <input
+              id="title"
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="type" className="block text-sm font-medium text-gray-700 mb-1">
               Type
             </label>
             <select
+              id="type"
               value={formData.type}
               onChange={(e) => setFormData({ ...formData, type: e.target.value as CalendarEventType })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
             >
               <option value="DISTILLATION">Distillation</option>
               <option value="BOTTLING">Bottling</option>
@@ -90,81 +92,86 @@ export default function QuickEventForm({ onEventCreated }: QuickEventFormProps) 
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="resource" className="block text-sm font-medium text-gray-700 mb-1">
               Resource (optional)
             </label>
             <input
+              id="resource"
               type="text"
               value={formData.resource}
               onChange={(e) => setFormData({ ...formData, resource: e.target.value })}
               placeholder="e.g., Carrie, VC-400"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="sku" className="block text-sm font-medium text-gray-700 mb-1">
               SKU (optional)
             </label>
             <input
+              id="sku"
               type="text"
               value={formData.sku}
               onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
               placeholder="e.g., Merchant Mae Gin"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="startsAt" className="block text-sm font-medium text-gray-700 mb-1">
                 Start Time
               </label>
               <input
+                id="startsAt"
                 type="datetime-local"
                 value={formData.startsAt}
                 onChange={(e) => setFormData({ ...formData, startsAt: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="endsAt" className="block text-sm font-medium text-gray-700 mb-1">
                 End Time
               </label>
               <input
+                id="endsAt"
                 type="datetime-local"
                 value={formData.endsAt}
                 onChange={(e) => setFormData({ ...formData, endsAt: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
               Notes (optional)
             </label>
             <textarea
+              id="notes"
               value={formData.notes}
               onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
               rows={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-copper-30 rounded-md focus:outline-none focus:ring-2 focus:ring-brand"
             />
           </div>
 
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-1 px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 focus:outline-none focus:ring-2 focus:ring-brand"
             >
               Create Event
             </button>
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="flex-1 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
+              className="flex-1 px-4 py-2 bg-beige text-graphite rounded-md hover:bg-copper-20 border border-copper-30 focus:outline-none focus:ring-2 focus:ring-brand"
             >
               Cancel
             </button>
