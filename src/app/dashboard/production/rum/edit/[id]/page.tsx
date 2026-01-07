@@ -8,7 +8,7 @@ import { RumProductionForm } from "@/modules/production/components/RumProduction
 export default function EditRumBatchPage() {
   const router = useRouter()
   const params = useParams()
-  const id = (params as any)?.id as string || ''
+  const id = params.id as string
   
   const [isSaving, setIsSaving] = useState(false)
   const [isLoading, setIsLoading] = useState(true)

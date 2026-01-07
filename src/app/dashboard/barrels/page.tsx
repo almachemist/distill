@@ -2,261 +2,34 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { BarrelService } from '@/modules/barrels/services/barrel.service'
 import type { Barrel, BarrelStats } from '@/modules/barrels/types/barrel.types'
-import { createClient } from '@/lib/supabase/client'
-export const dynamic = 'force-dynamic'
 
 export default function BarrelsPage() {
   const [barrels, setBarrels] = useState<Barrel[]>([])
   const [stats, setStats] = useState<BarrelStats | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [filter, setFilter] = useState<string>('all')
-  const tableName = (process.env.NEXT_PUBLIC_BARRELS_TABLE || 'tracking')
-  const getStatusColors = (status?: string) => {
-    const s = (status || '').toLowerCase()
-    if (s.includes('less than 2 years')) {
-      return {
-        cardBg: 'bg-copper-10',
-        avatarBg: 'bg-copper',
-        avatarText: 'text-white',
-        pillBg: 'bg-copper-10',
-        pillText: 'text-graphite',
-        pillBorder: 'border border-copper-30',
-      }
-    }
-    if (s.includes('greater than 2 years')) {
-      return {
-        cardBg: 'bg-copper-20',
-        avatarBg: 'bg-copper-amber',
-        avatarText: 'text-white',
-        pillBg: 'bg-copper-20',
-        pillText: 'text-graphite',
-        pillBorder: 'border border-copper-30',
-      }
-    }
-    if (s === 'aging') {
-      return {
-        cardBg: 'bg-copper-10',
-        avatarBg: 'bg-copper',
-        avatarText: 'text-white',
-        pillBg: 'bg-copper-10',
-        pillText: 'text-graphite',
-        pillBorder: 'border border-copper-30',
-      }
-    }
-    if (s === 'bottled' || s === 'ready') {
-      return {
-        cardBg: 'bg-gray-100',
-        avatarBg: 'bg-graphite',
-        avatarText: 'text-white',
-        pillBg: 'bg-gray-200',
-        pillText: 'text-graphite',
-        pillBorder: 'border border-gray-300',
-      }
-    }
-    if (s === 'emptied' || s === 'transferred') {
-      return {
-        cardBg: 'bg-gray-50',
-        avatarBg: 'bg-gray-300',
-        avatarText: 'text-graphite',
-        pillBg: 'bg-gray-200',
-        pillText: 'text-graphite',
-        pillBorder: 'border border-gray-300',
-      }
-    }
-    if (s === 'maintenance') {
-      return {
-        cardBg: 'bg-copper-10',
-        avatarBg: 'bg-copper-amber',
-        avatarText: 'text-white',
-        pillBg: 'bg-copper-20',
-        pillText: 'text-graphite',
-        pillBorder: 'border border-copper-30',
-      }
-    }
-    return {
-      cardBg: 'bg-white',
-      avatarBg: 'bg-copper-red',
-      avatarText: 'text-white',
-      pillBg: 'bg-copper-red',
-      pillText: 'text-white',
-      pillBorder: '',
-    }
-  }
-  const parseDate = (s: string | null | undefined) => {
-    if (!s) return null
-    const v = String(s).trim()
-    if (!v) return null
-    if (v.includes('/')) {
-      const p = v.split('/')
-      if (p.length >= 3) {
-        const dd = parseInt(p[0], 10)
-        const mm = parseInt(p[1], 10)
-        const yy = parseInt(p[2], 10)
-        if (Number.isFinite(dd) && Number.isFinite(mm) && Number.isFinite(yy) && mm >= 1 && mm <= 12 && dd >= 1 && dd <= 31) {
-          const d = new Date(yy, mm - 1, dd)
-          if (Number.isFinite(d.getTime())) return d
-        }
-      }
-    }
-    const t = new Date(v).getTime()
-    if (!Number.isFinite(t)) return null
-    return new Date(t)
-  }
 
   useEffect(() => {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => {
-      try { controller.abort() } catch {}
-      setIsLoading(false)
-    }, 10000)
-    loadBarrels(controller.signal).finally(() => clearTimeout(timeout))
-    return () => {
-      clearTimeout(timeout)
-      controller.abort()
-    }
+    loadBarrels()
   }, [filter])
 
-  const loadBarrels = async (signal?: AbortSignal) => {
+  const loadBarrels = async () => {
     setIsLoading(true)
+    const service = new BarrelService()
+    
     try {
-      const params = new URLSearchParams()
-      if (filter !== 'all') params.set('status', filter)
-      const qs = params.toString()
-      const url = qs ? `/api/barrels?${qs}` : '/api/barrels'
-      const res = await fetch(url, { cache: 'no-store', credentials: 'same-origin', signal })
-      const json = await res.json().catch(() => null)
-      if (!res.ok || !json) {
-        const supabase = createClient()
-        let q = supabase.from(tableName).select('*')
-        if (filter !== 'all') q = q.eq('status', filter)
-        const { data } = await q.order('created_at', { ascending: false })
-        const fallback = (data || []).map((b: any) => {
-          const isUuid = typeof b.id === 'string' && b.id.includes('-')
-          const idVal = isUuid ? b.id : (b.barrel_id || String(b.id || (b.barrel_number || '')))
-          const vol =
-            typeof b.volume_l !== 'undefined' ? parseFloat(String(b.volume_l)) :
-            typeof b.liters !== 'undefined' ? parseFloat(String(b.liters)) :
-            parseFloat(String(b.volume || '0'))
-          const abvVal =
-            typeof b.abv !== 'undefined' ? parseFloat(String(b.abv)) :
-            typeof b.strength !== 'undefined' ? parseFloat(String(b.strength)) : 0
-          const fill =
-            (b as any).date_filled_normalized || b.date_filled || b.fill_date || b.filled_date || ''
-          const size =
-            b.size || b.barrel_size || ''
-          const loc =
-            b.location_normalized || b.location || b.location_name || ''
-          const sizeVal = (String(size).trim() === '0' ? '' : String(size))
-          return {
-            id: idVal,
-            barrelNumber: b.barrel_number || b.barrel_id || '',
-            spiritType: b.spirit || '',
-            prevSpirit: b.prev_spirit,
-            barrelType: b.barrel || b.barrel_type || '',
-            barrelSize: sizeVal,
-            liters: Number.isFinite(vol) ? vol : 0,
-            fillDate: fill,
-            location: loc,
-            status: (b.status || 'Aging') as Barrel['status'],
-            currentVolume: Number.isFinite(vol) ? vol : 0,
-            originalVolume: Number.isFinite(vol) ? vol : 0,
-            abv: Number.isFinite(abvVal) ? abvVal : 0,
-            notes: b.notes_comments || b.notes || '',
-            organizationId: b.organization_id || '',
-            createdAt: b.created_at || '',
-            updatedAt: b.updated_at || '',
-          }
-        })
-        setBarrels(fallback)
-        const now = Date.now()
-        const averageAge = fallback.length
-          ? Math.round(
-              fallback.reduce((acc, b) => {
-                const df = b.fillDate ? new Date(b.fillDate).getTime() : now
-                return acc + Math.floor((now - df) / (1000 * 60 * 60 * 24))
-              }, 0) / fallback.length
-            )
-          : 0
-        const totalVolume = fallback.reduce((sum, b) => sum + (b.currentVolume || 0), 0)
-        const byStatus = fallback.reduce(
-          (acc: Record<string, number>, b) => {
-            const s = b.status || 'Aging'
-            acc[s] = (acc[s] || 0) + 1
-            return acc
-          },
-          {} as Record<string, number>
-        )
-        const bySpiritType = fallback.reduce((acc: Record<string, number>, b) => {
-          const s = b.spiritType || ''
-          if (!s) return acc
-          acc[s] = (acc[s] || 0) + 1
-          return acc
-        }, {})
-        const byLocation = fallback.reduce((acc: Record<string, number>, b) => {
-          const raw = b.location || ''
-          const s = raw ? (raw.toLowerCase().includes('warehouse') ? 'Warehouse' : raw) : 'Warehouse'
-          if (!s) return acc
-          acc[s] = (acc[s] || 0) + 1
-          return acc
-        }, {})
-        setStats({
-          totalBarrels: fallback.length,
-          activeBarrels: fallback.filter(b => b.status !== 'Emptied').length,
-          totalVolume,
-          averageAge,
-          byStatus: byStatus as any,
-          bySpiritType,
-          byLocation,
-        })
-        return
-      }
-      const mapped = (json.barrels || []).map((b: any) => {
-        const isUuid = typeof b.id === 'string' && b.id.includes('-')
-        const idVal = isUuid ? b.id : (b.barrel_id || String(b.id || (b.barrel_number || '')))
-        const vol =
-          typeof b.volume_l !== 'undefined' ? parseFloat(String(b.volume_l)) :
-          typeof b.liters !== 'undefined' ? parseFloat(String(b.liters)) :
-          parseFloat(String(b.volume || '0'))
-        const abvVal =
-          typeof b.abv !== 'undefined' ? parseFloat(String(b.abv)) :
-          typeof b.strength !== 'undefined' ? parseFloat(String(b.strength)) : 0
-        const fill =
-          b.date_filled_normalized || b.date_filled || b.fill_date || b.filled_date || ''
-        const size =
-          b.size || b.barrel_size || ''
-        const loc =
-          b.location_normalized || b.location || b.location_name || ''
-        const sizeVal = (String(size).trim() === '0' ? '' : String(size))
-        return {
-          id: idVal,
-          barrelNumber: b.barrel_number || b.barrel_id || '',
-          spiritType: b.spirit || '',
-          prevSpirit: b.prev_spirit,
-          barrelType: b.barrel || b.barrel_type || '',
-          barrelSize: sizeVal,
-          liters: Number.isFinite(vol) ? vol : 0,
-          fillDate: fill,
-          location: loc,
-          status: (b.status || 'Aging') as Barrel['status'],
-          currentVolume: Number.isFinite(vol) ? vol : 0,
-          originalVolume: Number.isFinite(vol) ? vol : 0,
-          abv: Number.isFinite(abvVal) ? abvVal : 0,
-          notes: b.notes_comments || b.notes || '',
-          organizationId: b.organization_id || '',
-          createdAt: b.created_at || '',
-          updatedAt: b.updated_at || '',
-        }
-      })
-      setBarrels(mapped)
-      setStats(json.stats as BarrelStats)
-    } catch (error: any) {
-      const msg = String(error?.message || '')
-      const isAbort = error?.name === 'AbortError' || msg.toLowerCase().includes('abort')
-      if (!isAbort) {
-        setStats(null)
-        setBarrels([])
-      }
+      const filterOptions = filter === 'all' ? undefined : { status: filter as Barrel['status'] }
+      const [barrelsData, statsData] = await Promise.all([
+        service.getBarrels(filterOptions),
+        service.getBarrelStats()
+      ])
+      
+      setBarrels(barrelsData)
+      setStats(statsData)
+    } catch (error) {
+      console.error('Error loading barrels:', error)
     } finally {
       setIsLoading(false)
     }
@@ -327,7 +100,7 @@ export default function BarrelsPage() {
       {/* Filter Tabs */}
       <div className="border-b border-copper-15">
         <nav className="-mb-px flex space-x-8">
-          {(stats ? ['all', ...Object.keys(stats.byStatus || {})] : ['all', 'Aging', 'Ready', 'Emptied', 'Maintenance', 'Testing']).map((status) => (
+          {['all', 'Aging', 'Ready', 'Emptied', 'Maintenance', 'Testing'].map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
@@ -344,7 +117,7 @@ export default function BarrelsPage() {
                 <span className="ml-2 bg-beige text-graphite py-0.5 px-2 rounded-full text-xs">
                   {status === 'all' 
                     ? stats.totalBarrels 
-                    : (stats.byStatus as any)[status] || 0}
+                    : stats.byStatus[status as keyof typeof stats.byStatus] || 0}
                 </span>
               )}
             </button>
@@ -365,16 +138,18 @@ export default function BarrelsPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {barrels.map((barrel) => {
-              const colors = getStatusColors(barrel.status)
-              return (
-              <Link key={barrel.id || barrel.barrelNumber} href={`/dashboard/barrels/${barrel.id}`} className="block">
-                <div className={`${colors.cardBg} rounded-xl border border-copper-20 shadow-sm hover:shadow-md transition`}>
+            {barrels.map((barrel) => (
+              <Link key={barrel.id} href={`/dashboard/barrels/${barrel.id}`} className="block">
+                <div className="bg-white rounded-xl border border-copper-20 shadow-sm hover:shadow-md transition">
                   <div className="px-5 py-4 border-b border-copper-15 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className={`
                         h-10 w-10 rounded-full flex items-center justify-center text-white font-bold
-                        ${colors.avatarBg} ${colors.avatarText}
+                        ${barrel.status === 'Aging' ? 'bg-copper' :
+                          barrel.status === 'Ready' ? 'bg-graphite' :
+                          barrel.status === 'Emptied' ? 'bg-beige text-graphite' :
+                          barrel.status === 'Maintenance' ? 'bg-copper-amber' :
+                          'bg-copper-red'}
                       `}>
                         {barrel.barrelNumber.charAt(0)}
                       </div>
@@ -389,7 +164,11 @@ export default function BarrelsPage() {
                     </div>
                     <span className={`
                       inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                      ${colors.pillBg} ${colors.pillText} ${colors.pillBorder}
+                      ${barrel.status === 'Aging' ? 'bg-copper-10 text-graphite border border-copper-30' :
+                        barrel.status === 'Ready' ? 'bg-graphite text-white' :
+                        barrel.status === 'Emptied' ? 'bg-beige text-graphite border border-copper-30' :
+                        barrel.status === 'Maintenance' ? 'bg-copper-20 text-graphite border border-copper-30' :
+                        'bg-copper-red text-white'}
                     `}>
                       {barrel.status}
                     </span>
@@ -412,10 +191,7 @@ export default function BarrelsPage() {
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Filled</p>
                       <p className="text-sm font-medium text-graphite">
-                        {(() => {
-                          const d = parseDate(barrel.fillDate)
-                          return d ? d.toLocaleDateString() : '—'
-                        })()}
+                        {barrel.fillDate ? new Date(barrel.fillDate).toLocaleDateString() : '—'}
                       </p>
                     </div>
                   </div>
@@ -427,11 +203,7 @@ export default function BarrelsPage() {
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Age (days)</p>
                       <p className="text-sm font-medium text-graphite">
-                        {(() => {
-                          const d = parseDate(barrel.fillDate)
-                          if (!d) return '—'
-                          return Math.floor((Date.now() - d.getTime()) / (1000 * 60 * 60 * 24))
-                        })()}
+                        {barrel.fillDate ? Math.floor((Date.now() - new Date(barrel.fillDate).getTime()) / (1000 * 60 * 60 * 24)) : '—'}
                       </p>
                     </div>
                     <div className="col-span-2">
@@ -443,7 +215,7 @@ export default function BarrelsPage() {
                   </div>
                 </div>
               </Link>
-            )})}
+            ))}
           </div>
         )}
       </div>

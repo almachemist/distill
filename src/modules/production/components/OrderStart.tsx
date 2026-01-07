@@ -21,9 +21,8 @@ export function OrderStart() {
 
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams?.get('recipeId') || null
-  const batchTargetLParam = searchParams?.get('batchTargetL')
-  const batchTargetL = batchTargetLParam ? Number(batchTargetLParam) : 100
+  const recipeId = searchParams.get('recipeId')
+  const batchTargetL = Number(searchParams.get('batchTargetL')) || 100
 
   const productionRepo = new ProductionRepository()
   const recipeRepo = new RecipeRepository()
@@ -42,7 +41,7 @@ export function OrderStart() {
       setLoading(true)
       
       // Load recipe details
-      const recipeData = recipeId ? await recipeRepo.fetchRecipeWithIngredients(recipeId) : null
+      const recipeData = await recipeRepo.fetchRecipeWithIngredients(recipeId!)
       if (!recipeData) {
         setError('Recipe not found')
         return
@@ -51,7 +50,7 @@ export function OrderStart() {
       setProductName(recipeData.name + ' - ' + new Date().toLocaleDateString())
 
       // Calculate batch requirements
-      const calculation = recipeId ? await productionRepo.calculateBatch(recipeId, batchTargetL) : null
+      const calculation = await productionRepo.calculateBatch(recipeId!, batchTargetL)
       setBatchCalc(calculation)
 
     } catch (err) {
@@ -405,4 +404,5 @@ function IngredientLotPicker({
     </div>
   )
 }
+
 

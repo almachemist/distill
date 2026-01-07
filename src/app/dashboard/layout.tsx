@@ -3,7 +3,7 @@
 import { useAuth } from '@/modules/auth/hooks/useAuth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ReactNode, useEffect } from 'react'
+import { ReactNode } from 'react'
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth()
@@ -14,77 +14,6 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     router.push('/auth/login')
   }
 
-  useEffect(() => {
-    const isAbortish = (text: string, name?: string) => {
-      const t = text.toLowerCase()
-      return (
-        (name === 'AbortError') ||
-        t.includes('net::err_aborted') ||
-        t.includes('abort') ||
-        t.includes('_rsc=') ||
-        t.includes('/dashboard/barrels') ||
-        t.includes('ide_webview_request_time=')
-      )
-    }
-    const onError = (e: any) => {
-      const msg = String(e?.message || e?.error?.message || '')
-      const name = String(e?.error?.name || '')
-      if (isAbortish(msg, name)) {
-        e.preventDefault?.()
-        e.stopImmediatePropagation?.()
-        return true
-      }
-      return false
-    }
-    const onRejection = (e: any) => {
-      const msg = String(e?.reason?.message || '')
-      const name = String(e?.reason?.name || '')
-      if (isAbortish(msg, name)) {
-        e.preventDefault?.()
-        e.stopImmediatePropagation?.()
-        return true
-      }
-      return false
-    }
-    window.addEventListener('error', onError, true)
-    window.addEventListener('unhandledrejection', onRejection, true)
-    const originalError = console.error
-    const originalWarn = console.warn
-    const originalLog = console.log
-    const filterArgs = (args: any[]) =>
-      args
-        .map((a) =>
-          typeof a === 'string'
-            ? a
-            : a && typeof a === 'object' && 'message' in a
-            ? String((a as any).message)
-            : ''
-        )
-        .join(' ')
-    console.error = (...args: any[]) => {
-      const text = filterArgs(args)
-      if (isAbortish(text)) return
-      originalError(...args)
-    }
-    console.warn = (...args: any[]) => {
-      const text = filterArgs(args)
-      if (isAbortish(text)) return
-      originalWarn(...args)
-    }
-    console.log = (...args: any[]) => {
-      const text = filterArgs(args)
-      if (isAbortish(text)) return
-      originalLog(...args)
-    }
-    return () => {
-      window.removeEventListener('error', onError, true)
-      window.removeEventListener('unhandledrejection', onRejection, true)
-      console.error = originalError
-      console.warn = originalWarn
-      console.log = originalLog
-    }
-  }, [])
-
   return (
     <div className="min-h-screen bg-beige">
       <nav className="bg-white shadow-sm border-b border-copper-30">
@@ -92,10 +21,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <div className="flex justify-between h-16">
             <div className="flex">
               <div className="flex-shrink-0 flex items-center">
-                <Link href="/dashboard" className="flex items-center gap-2">
-                  <img src="/logo.png" alt="Distil" className="h-8 w-8 rounded-sm" />
-                  <span className="text-xl font-bold text-graphite">Distil</span>
-                </Link>
+                <h1 className="text-xl font-bold text-graphite">Distil</h1>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <Link

@@ -18,8 +18,8 @@ type Cut = {
 function DistillationCutsContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams?.get('recipeId')
-  const batchId = searchParams?.get('batchId')
+  const recipeId = searchParams.get('recipeId')
+  const batchId = searchParams.get('batchId')
   
   const [loading, setLoading] = useState(false)
   const [activePhase, setActivePhase] = useState<'foreshots' | 'heads' | 'hearts' | 'tails'>('foreshots')

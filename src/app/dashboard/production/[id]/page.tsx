@@ -97,8 +97,7 @@ export default function BatchDetailsPage() {
   const params = useParams<{ id: string }>()
   const [activeTab, setActiveTab] = useState<TabId>('overview')
 
-  const id = (params as any)?.id as string || ''
-  const batch = useMemo(() => batches.find((item) => item.batch_id === id), [id])
+  const batch = useMemo(() => batches.find((item) => item.batch_id === params.id), [params.id])
 
   if (!batch) {
     notFound()

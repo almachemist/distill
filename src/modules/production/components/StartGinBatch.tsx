@@ -118,8 +118,8 @@ export function StartGinBatch() {
 
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams?.get('recipeId') || null
-  const urlBatchTargetL = searchParams?.get('batchTargetL') || null
+  const recipeId = searchParams.get('recipeId')
+  const urlBatchTargetL = searchParams.get('batchTargetL')
 
   const stockRepo = useMemo(() => new StockRepository(), [])
   const recipeRepo = useMemo(() => new RecipeRepository(), [])
@@ -127,7 +127,7 @@ export function StartGinBatch() {
   const loadRecipe = useCallback(async () => {
     try {
       setLoading(true)
-      const recipeData = recipeId ? await recipeRepo.fetchRecipeWithIngredients(recipeId) : null
+      const recipeData = await recipeRepo.fetchRecipeWithIngredients(recipeId!)
       if (!recipeData) {
         setError('Recipe not found')
         return

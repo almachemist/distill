@@ -6,8 +6,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 function HeatingContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const recipeId = searchParams?.get('recipeId')
-  const batchId = searchParams?.get('batchId')
+  const recipeId = searchParams.get('recipeId')
+  const batchId = searchParams.get('batchId')
   
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)

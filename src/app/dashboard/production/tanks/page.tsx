@@ -883,7 +883,7 @@ export default function TanksPage() {
     if (USE_STATIC || process.env.NODE_ENV === 'development') {
       const prevDest = { ...dest }
       const newBatchId = genBatchId(dest.product || dest.tank_name)
-      const nextList: Tank[] = tanks.map(t => {
+      const nextList = tanks.map(t => {
         if (t.id === dest.id) {
           return {
             ...t,
@@ -895,20 +895,20 @@ export default function TanksPage() {
             notes: [`Merged from ${sourceTankIds.join(', ')}`, t.notes || ''].filter(Boolean).join('; '),
             last_updated_by: 'Blend',
             updated_at: now
-          } as Tank
+          }
         }
         if (srcIds.includes(t.id)) {
           return {
             ...t,
             current_volume_l: 0,
-            status: 'empty' as const,
+            status: 'empty',
             product: null,
             current_abv: null,
             tank_name: '',
             notes: [`Merged into ${dest.tank_id}`, t.notes || ''].filter(Boolean).join('; '),
             last_updated_by: 'Blend',
             updated_at: now
-          } as Tank
+          }
         }
         return t
       })
@@ -1187,7 +1187,6 @@ export default function TanksPage() {
                 tank_type: 'spirits',
                 capacity_l: 1000,
                 status: 'empty',
-                batch_id: '',
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString()
               }

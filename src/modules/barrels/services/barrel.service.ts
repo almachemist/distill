@@ -56,6 +56,7 @@ export class BarrelService {
         abv: data.abv.toString(),
         notes_comments: data.notes,
         status: 'Aging',
+        created_by: organizationId, // Use organization ID as fallback
       })
       .select()
       .single()
@@ -128,22 +129,11 @@ export class BarrelService {
   }
 
   async getBarrelById(id: string): Promise<Barrel | null> {
-    // Try fetching by UUID id first; fallback to legacy barrel_id
-    let { data, error } = await this.supabase
+    const { data, error } = await this.supabase
       .from('tracking')
       .select('*')
-      .eq('id', id)
+      .eq('id', id) // Using UUID id as primary key
       .single()
-
-    if (error?.code === 'PGRST116' || error?.message?.includes('No rows found')) {
-      const byLegacy = await this.supabase
-        .from('tracking')
-        .select('*')
-        .eq('barrel_id', id)
-        .single()
-      data = byLegacy.data
-      error = byLegacy.error || null
-    }
 
     if (error) {
       if (error.code === 'PGRST116') {

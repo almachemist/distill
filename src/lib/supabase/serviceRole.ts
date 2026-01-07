@@ -7,8 +7,8 @@ function isValidUrl(u: string | null | undefined): u is string {
 export function createServiceRoleClient() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY
-  if (!isValidUrl(url) || typeof key !== 'string' || !key) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is not configured')
+  if (!isValidUrl(url) || typeof key !== 'string') {
+    throw new Error('Missing Supabase service role environment variables')
   }
   return createSbClient(url, key)
 }

@@ -1,13 +1,13 @@
 'use client'
 
-import { useState, useEffect, useCallback, Suspense } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
 import { EthanolBatchSelector, EthanolSelection } from '@/modules/production/components/EthanolBatchSelector'
 import { BotanicalSelector, BotanicalSelection } from '@/modules/production/components/BotanicalSelector'
 import { PackagingSelector, PackagingSelection } from '@/modules/production/components/PackagingSelector'
 
-function PreparationContent() {
+export default function PreparationPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const recipeRepo = new RecipeRepository()
@@ -71,10 +71,10 @@ function PreparationContent() {
   }, [loadRecipes])
   
   useEffect(() => {
-    const rid = searchParams?.get('redistillTankId')
-    const vol = searchParams?.get('volume')
-    const abv = searchParams?.get('abv')
-    const pt = searchParams?.get('productType')
+    const rid = searchParams.get('redistillTankId')
+    const vol = searchParams.get('volume')
+    const abv = searchParams.get('abv')
+    const pt = searchParams.get('productType')
     if (rid) {
       setTankIdParam(rid)
       setTankVolume(vol ? Number(vol) : 0)
@@ -155,21 +155,13 @@ function PreparationContent() {
               abv_percent: tankAbv,
               lal: ethanolLAL
             }
-          : ethanolSelection
-            ? {
-                name: ethanolSelection.item_name,
-                type: 'ethanol',
-                volume_l: ethanolSelection.quantity_l,
-                abv_percent: ethanolSelection.abv,
-                lal: ethanolLAL
-              }
-            : {
-                name: 'Ethanol',
-                type: 'ethanol',
-                volume_l: 0,
-                abv_percent: 0,
-                lal: 0
-              },
+          : {
+              name: ethanolSelection.item_name,
+              type: 'ethanol',
+              volume_l: ethanolSelection.quantity_l,
+              abv_percent: ethanolSelection.abv,
+              lal: ethanolLAL
+            },
         {
           name: 'Water',
           type: 'water',
@@ -631,13 +623,5 @@ function PreparationContent() {
         </div>
       </div>
     </div>
-  )
-}
-
-export default function StartBatchPage() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}>
-      <PreparationContent />
-    </Suspense>
   )
 }

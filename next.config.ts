@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import path from "path";
 import { fileURLToPath } from "url";
-// PWA disabled due to build/runtime errors with Next 15
+import withPWA from "next-pwa";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -23,4 +23,35 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+  runtimeCaching: [
+    {
+      urlPattern: /^\/api\/calendar-data\/.*$/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "calendar-data",
+        expiration: { maxEntries: 50, maxAgeSeconds: 7 * 24 * 60 * 60 },
+      },
+    },
+    {
+      urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "images",
+        expiration: { maxEntries: 100, maxAgeSeconds: 30 * 24 * 60 * 60 },
+      },
+    },
+    {
+      urlPattern: /\.(?:woff2?|ttf|otf)$/i,
+      handler: "CacheFirst",
+      options: {
+        cacheName: "fonts",
+        expiration: { maxEntries: 20, maxAgeSeconds: 365 * 24 * 60 * 60 },
+      },
+    },
+  ],
+})(nextConfig);

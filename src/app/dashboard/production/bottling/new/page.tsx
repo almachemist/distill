@@ -74,7 +74,7 @@ function NewBottlingRunContent() {
   
   // Handle deep link (e.g., ?batchId=RAIN-24-3)
   useEffect(() => {
-    const batchId = searchParams?.get('batchId')
+    const batchId = searchParams.get('batchId')
     if (batchId && allBatches.length > 0 && selectedBatches.length === 0) {
       const batch = allBatches.find(b => b.batchCode === batchId || b.id === batchId)
       if (batch) {
@@ -85,10 +85,10 @@ function NewBottlingRunContent() {
 
   useEffect(() => {
     if (deeplinkApplied) return
-    const tankId = searchParams?.get('tankId') || ''
-    const productParam = searchParams?.get('product') || ''
-    const volumeParam = parseFloat(searchParams?.get('volume') || '') || 0
-    const abvParam = parseFloat(searchParams?.get('abv') || '') || 0
+    const tankId = searchParams.get('tankId') || ''
+    const productParam = searchParams.get('product') || ''
+    const volumeParam = parseFloat(searchParams.get('volume') || '') || 0
+    const abvParam = parseFloat(searchParams.get('abv') || '') || 0
     if (!tankId && !productParam && !volumeParam && !abvParam) return
     function inferType(name: string): ProductType {
       const p = PRODUCT_LIST.find(p => p.value === name)
@@ -127,7 +127,7 @@ function NewBottlingRunContent() {
   }, [searchParams, deeplinkApplied])
 
   useEffect(() => {
-    const s = searchParams?.get('search') || ''
+    const s = searchParams.get('search') || ''
     if (s && !filterSearch) {
       setFilterSearch(s)
     }
