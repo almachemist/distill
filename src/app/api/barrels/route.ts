@@ -14,20 +14,31 @@ function parseDateLike(v: any) {
 }
 
 function mapBarrel(b: any) {
-  const vol =
+  const volCurrent =
+    typeof b.current_volume_l !== 'undefined' ? toNum(b.current_volume_l) :
     typeof b.volume_l !== 'undefined' ? toNum(b.volume_l) :
     typeof b.liters !== 'undefined' ? toNum(b.liters) :
+    typeof b.current_volume !== 'undefined' ? toNum(b.current_volume) :
     toNum(b.volume)
+  const volOriginal =
+    typeof b.original_volume_l !== 'undefined' ? toNum(b.original_volume_l) :
+    typeof b.original_volume !== 'undefined' ? toNum(b.original_volume) :
+    typeof b.filled_liters !== 'undefined' ? toNum(b.filled_liters) :
+    volCurrent
   const abv =
     typeof b.abv !== 'undefined' ? toNum(b.abv) :
-    typeof b.strength !== 'undefined' ? toNum(b.strength) : 0
+    typeof b.strength !== 'undefined' ? toNum(b.strength) :
+    typeof b.current_abv !== 'undefined' ? toNum(b.current_abv) :
+    typeof b.abv_percent !== 'undefined' ? toNum(b.abv_percent) : 0
   const size =
     typeof b.size !== 'undefined' ? String(b.size) :
-    typeof b.barrel_size !== 'undefined' ? String(b.barrel_size) : ''
+    typeof b.barrel_size !== 'undefined' ? String(b.barrel_size) :
+    typeof b.capacity !== 'undefined' ? String(b.capacity) :
+    typeof b.capacity_l !== 'undefined' ? String(b.capacity_l) : ''
   const fill =
     b.date_filled_normalized || b.date_filled || b.fill_date || b.filled_date || ''
   const loc =
-    b.location_normalized || b.location || b.location_name || ''
+    b.location_normalized || b.location || b.location_name || b.warehouse || ''
 
   const id =
     (typeof b.id === 'string' && b.id) ? b.id :
@@ -38,18 +49,30 @@ function mapBarrel(b: any) {
   return {
     id,
     barrelNumber: b.barrel_number || b.barrel_id || '',
-    spiritType: b.spirit || '',
+    spiritType: b.spirit || b.spirit_type || '',
     prevSpirit: b.prev_spirit,
-    barrelType: b.barrel || b.barrel_type || '',
+    barrelType: b.barrel || b.barrel_type || b.cask || b.cask_type || '',
     barrelSize: String(size).trim() === '0' ? '' : size,
-    liters: vol,
+    liters: volCurrent,
     fillDate: fill,
     location: loc,
     status: b.status || 'Aging',
-    currentVolume: vol,
-    originalVolume: vol,
+    currentVolume: volCurrent,
+    originalVolume: volOriginal,
     abv,
     notes: b.notes_comments || b.notes || '',
+    batch: b.batch || b.batch_id || b.batch_code || b.batch_name || '',
+    dateMature: b.date_mature || b.mature_date || b.maturation_date || b.date_maturation || '',
+    tastingNotes: b.tasting_notes || b.tasting || '',
+    angelsShare: (() => {
+      const raw = (typeof b.angelsshare !== 'undefined'
+        ? String(b.angelsshare)
+        : (typeof b.angels_share !== 'undefined' ? String(b.angels_share) : '')
+      ).trim()
+      const lower = raw.toLowerCase()
+      return raw && lower !== 'null' && lower !== 'undefined' ? raw : ''
+    })(),
+    lastInspection: b.last_inspection || b.inspection_date || '',
     organizationId: b.organization_id || '',
     createdBy: b.created_by || null,
     createdAt: b.created_at || '',
@@ -129,16 +152,27 @@ export async function GET(req: Request) {
       acc[s] = (acc[s] || 0) + 1
       return acc
     }, {} as Record<string, number>)
-    const stats = {
-      totalBarrels: barrels.length,
-      activeBarrels: barrels.filter(b => b.status !== 'Emptied').length,
-      totalVolume,
-      averageAge,
-      byStatus,
-      bySpiritType,
-      byLocation
+  const stats = {
+    totalBarrels: barrels.length,
+    activeBarrels: barrels.filter(b => b.status !== 'Emptied').length,
+    totalVolume,
+    averageAge,
+    byStatus,
+    bySpiritType,
+    byLocation
+  }
+  const enriched = barrels.map(b => {
+    if (!b.angelsShare && (b.originalVolume || 0) > 0) {
+      const loss = (b.originalVolume || 0) - (b.currentVolume || 0)
+      const pct = ((loss / (b.originalVolume || 1)) * 100)
+      const pctStr = Number.isFinite(pct) ? `${pct.toFixed(1)}%` : ''
+      const lossStr = Number.isFinite(loss) ? `${loss.toFixed(1)} L` : ''
+      const joined = [lossStr, pctStr].filter(Boolean).join(' ')
+      return { ...b, angelsShare: joined }
     }
-    return NextResponse.json({ barrels, stats, table: chosen })
+    return b
+  })
+  return NextResponse.json({ barrels: enriched, stats, table: chosen })
   } catch (e: any) {
     const emptyStats = {
       totalBarrels: 0,

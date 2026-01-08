@@ -12,6 +12,42 @@ function BarrelsContent() {
   const [isLoading, setIsLoading] = useState(true)
   const [filter, setFilter] = useState<string>('all')
 
+  const parseDateFlexible = (s?: string) => {
+    const raw = (s ?? '').trim()
+    if (!raw) return NaN
+    const direct = Date.parse(raw)
+    if (Number.isFinite(direct)) return direct
+    const m = raw.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/)
+    if (m) {
+      let a = parseInt(m[1], 10)
+      let b = parseInt(m[2], 10)
+      const y = parseInt(m[3], 10)
+      let day = a
+      let month = b
+      if (a <= 12 && b > 12) {
+        day = b
+        month = a
+      }
+      return new Date(y, month - 1, day).getTime()
+    }
+    return NaN
+  }
+  const formatDate = (s?: string) => {
+    const t = parseDateFlexible(s)
+    return Number.isFinite(t) ? new Date(t).toLocaleDateString() : '—'
+  }
+  const ageDays = (s?: string) => {
+    const t = parseDateFlexible(s)
+    return Number.isFinite(t) ? Math.floor((Date.now() - t) / (1000 * 60 * 60 * 24)) : '—'
+  }
+  const safeLabel = (s?: string) => {
+    const v = (s ?? '').trim()
+    if (!v) return ''
+    const lower = v.toLowerCase()
+    return lower === 'null' || lower === 'undefined' ? '' : v
+  }
+  const safeNumber = (n?: number) => (Number.isFinite(n as number) ? (n as number) : 0)
+
   useEffect(() => {
     loadBarrels()
   }, [filter])
@@ -19,7 +55,7 @@ function BarrelsContent() {
   const loadBarrels = async () => {
     setIsLoading(true)
     try {
-      const statusParam = filter === 'all' ? 'all' : (filter as Barrel['status'])
+      const statusParam = filter === 'all' ? 'all' : filter
       const res = await fetch(`/api/barrels?status=${encodeURIComponent(statusParam)}`, { cache: 'no-store' })
       if (!res.ok) {
         throw new Error(`Failed to load barrels: ${res.status}`)
@@ -33,6 +69,20 @@ function BarrelsContent() {
       setIsLoading(false)
     }
   }
+
+  const statusClass = (s: string) => {
+    if (s === 'Aging') return 'bg-copper-10 text-graphite border border-copper-30'
+    if (s === 'Ready') return 'bg-graphite text-white'
+    if (s === 'Emptied') return 'bg-beige text-graphite border border-copper-30'
+    if (s === 'Maintenance') return 'bg-copper-20 text-graphite border border-copper-30'
+    if (s === 'Testing') return 'bg-copper-20 text-graphite border border-copper-30'
+    if (s === 'Less than 2 years') return 'bg-beige text-graphite border border-copper-30'
+    if (s === 'Greater than 2 years') return 'bg-copper-amber text-graphite border border-copper-30'
+    if (s === 'Bottled') return 'bg-copper-red text-white'
+    return 'bg-copper-10 text-graphite border border-copper-30'
+  }
+
+  const menuStatuses = ['all', ...Array.from(new Set(Object.keys(stats?.byStatus || {})))]
 
   return (
     <div className="space-y-6">
@@ -99,7 +149,7 @@ function BarrelsContent() {
       {/* Filter Tabs */}
       <div className="border-b border-copper-15">
         <nav className="-mb-px flex space-x-8">
-          {['all', 'Aging', 'Ready', 'Emptied', 'Maintenance', 'Testing'].map((status) => (
+          {menuStatuses.map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
@@ -114,9 +164,9 @@ function BarrelsContent() {
               {status === 'all' ? 'All Barrels' : status}
               {stats && (
                 <span className="ml-2 bg-beige text-graphite py-0.5 px-2 rounded-full text-xs">
-                  {status === 'all' 
-                    ? stats.totalBarrels 
-                    : stats.byStatus[status as keyof typeof stats.byStatus] || 0}
+                  {status === 'all'
+                    ? stats.totalBarrels
+                    : (stats.byStatus[status as keyof typeof stats.byStatus] || 0)}
                 </span>
               )}
             </button>
@@ -157,17 +207,14 @@ function BarrelsContent() {
                           {barrel.barrelNumber}
                         </div>
                         <div className="text-sm text-graphite/70">
-                          {barrel.spiritType} • {barrel.barrelType}{barrel.barrelSize ? ` • ${barrel.barrelSize}` : ''}
+                          {safeLabel(barrel.spiritType)}
+                          {safeLabel(barrel.barrelType) ? ` • ${safeLabel(barrel.barrelType)}` : ''}
+                          {safeLabel(barrel.barrelSize) ? ` • ${safeLabel(barrel.barrelSize)}` : ''}
                         </div>
                       </div>
                     </div>
                     <span className={`
-                      inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                      ${barrel.status === 'Aging' ? 'bg-copper-10 text-graphite border border-copper-30' :
-                        barrel.status === 'Ready' ? 'bg-graphite text-white' :
-                        barrel.status === 'Emptied' ? 'bg-beige text-graphite border border-copper-30' :
-                        barrel.status === 'Maintenance' ? 'bg-copper-20 text-graphite border border-copper-30' :
-                        'bg-copper-red text-white'}
+                      inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass(barrel.status)}
                     `}>
                       {barrel.status}
                     </span>
@@ -176,21 +223,21 @@ function BarrelsContent() {
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Volume</p>
                       <p className="text-sm font-medium text-graphite">
-                        {barrel.currentVolume}L / {barrel.originalVolume}L
+                        {safeNumber(barrel.currentVolume)}L / {safeNumber(barrel.originalVolume)}L
                       </p>
                     </div>
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">ABV</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.abv}%</p>
+                      <p className="text-sm font-medium text-graphite">{safeNumber(barrel.abv)}%</p>
                     </div>
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Location</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.location}</p>
+                      <p className="text-sm font-medium text-graphite">{safeLabel(barrel.location) || '—'}</p>
                     </div>
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Filled</p>
                       <p className="text-sm font-medium text-graphite">
-                        {barrel.fillDate ? new Date(barrel.fillDate).toLocaleDateString() : '—'}
+                        {formatDate(barrel.fillDate)}
                       </p>
                     </div>
                     <div>
@@ -200,13 +247,13 @@ function BarrelsContent() {
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Mature Date</p>
                       <p className="text-sm font-medium text-graphite">
-                        {barrel.dateMature ? new Date(barrel.dateMature).toLocaleDateString() : '—'}
+                        {formatDate(barrel.dateMature)}
                       </p>
                     </div>
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Last Inspection</p>
                       <p className="text-sm font-medium text-graphite">
-                        {barrel.lastInspection ? new Date(barrel.lastInspection).toLocaleDateString() : '—'}
+                        {formatDate(barrel.lastInspection)}
                       </p>
                     </div>
                     <div>
@@ -220,17 +267,13 @@ function BarrelsContent() {
                       <p className="text-sm font-medium text-graphite">{barrel.prevSpirit || '—'}</p>
                     </div>
                     <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Organization</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.organizationId || '—'}</p>
-                    </div>
-                    <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Created By</p>
                       <p className="text-sm font-medium text-graphite">{barrel.createdBy || '—'}</p>
                     </div>
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Age (days)</p>
                       <p className="text-sm font-medium text-graphite">
-                        {barrel.fillDate ? Math.floor((Date.now() - new Date(barrel.fillDate).getTime()) / (1000 * 60 * 60 * 24)) : '—'}
+                        {ageDays(barrel.fillDate)}
                       </p>
                     </div>
                     <div className="col-span-2">
@@ -243,6 +286,26 @@ function BarrelsContent() {
                       <p className="text-xs text-copper uppercase tracking-wide">Tasting Notes</p>
                       <p className="text-sm text-graphite">
                         {barrel.tastingNotes ? (barrel.tastingNotes.length > 160 ? `${barrel.tastingNotes.slice(0, 160)}…` : barrel.tastingNotes) : '—'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">ID</p>
+                      <p className="text-sm font-medium text-graphite">{barrel.id}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Liters</p>
+                      <p className="text-sm font-medium text-graphite">{barrel.liters?.toLocaleString() ?? '—'} L</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Created At</p>
+                      <p className="text-sm font-medium text-graphite">
+                        {formatDate(barrel.createdAt)}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Updated At</p>
+                      <p className="text-sm font-medium text-graphite">
+                        {formatDate(barrel.updatedAt)}
                       </p>
                     </div>
                   </div>

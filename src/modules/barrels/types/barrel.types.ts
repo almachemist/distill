@@ -8,7 +8,7 @@ export interface Barrel {
   liters: number
   fillDate: string
   location: string
-  status: 'Aging' | 'Ready' | 'Emptied' | 'Maintenance' | 'Testing'
+  status: 'Aging' | 'Ready' | 'Emptied' | 'Maintenance' | 'Testing' | 'Less than 2 years' | 'Greater than 2 years' | 'Bottled'
   currentVolume: number
   originalVolume: number
   abv: number
@@ -82,7 +82,7 @@ export interface BarrelStats {
   activeBarrels: number
   totalVolume: number
   averageAge: number
-  byStatus: Record<Barrel['status'], number>
+  byStatus: Record<string, number>
   bySpiritType: Record<string, number>
   byLocation: Record<string, number>
 }

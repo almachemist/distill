@@ -22,7 +22,8 @@ export function DashboardMiniChart({ title, data, color, valueLabel = '' }: Dash
 
   const maxValue = Math.max(...data.map(d => d.value))
   const minValue = Math.min(...data.map(d => d.value))
-  const range = maxValue - minValue || 1
+  const range = maxValue - minValue
+  const safeRange = range === 0 ? 1 : range
 
   const colorMap = {
     copper: {
@@ -45,10 +46,13 @@ export function DashboardMiniChart({ title, data, color, valueLabel = '' }: Dash
   const padding = 10
   const chartWidth = width - padding * 2
   const chartHeight = height - padding * 2
+  const n = data.length
 
   const points = data.map((d, i) => {
-    const x = padding + (i / (data.length - 1)) * chartWidth
-    const y = padding + chartHeight - ((d.value - minValue) / range) * chartHeight
+    const xRatio = n > 1 ? (i / (n - 1)) : 0.5
+    const x = padding + xRatio * chartWidth
+    const yRatio = ((d.value - minValue) / safeRange)
+    const y = padding + chartHeight - yRatio * chartHeight
     return { x, y, value: d.value }
   })
 
@@ -121,7 +125,8 @@ export function DashboardMiniChart({ title, data, color, valueLabel = '' }: Dash
         {/* Month labels */}
         {data.map((d, i) => {
           if (i % 2 !== 0) return null // Show every other month
-          const x = padding + (i / (data.length - 1)) * chartWidth
+          const xRatio = n > 1 ? (i / (n - 1)) : 0.5
+          const x = padding + xRatio * chartWidth
           return (
             <text
               key={i}
@@ -139,10 +144,27 @@ export function DashboardMiniChart({ title, data, color, valueLabel = '' }: Dash
 
       {/* Summary stats */}
       <div className="mt-4 flex items-center justify-between text-xs text-gray-600">
-        <span>Total: <strong className="text-stone-900">{data.reduce((sum, d) => sum + d.value, 0).toLocaleString()}</strong> {valueLabel}</span>
-        <span>Avg: <strong className="text-stone-900">{Math.round(data.reduce((sum, d) => sum + d.value, 0) / data.length).toLocaleString()}</strong> {valueLabel}</span>
+        <span>
+          Total:{' '}
+          <strong className="text-stone-900">
+            {data
+              .reduce((sum, d) => sum + (Number.isFinite(d.value) ? d.value : 0), 0)
+              .toLocaleString()}
+          </strong>{' '}
+          {valueLabel}
+        </span>
+        <span>
+          Avg:{' '}
+          <strong className="text-stone-900">
+            {(() => {
+              const s = data.reduce((sum, d) => sum + (Number.isFinite(d.value) ? d.value : 0), 0)
+              const avg = data.length > 0 ? Math.round(s / data.length) : 0
+              return Number.isFinite(avg) ? avg.toLocaleString() : '0'
+            })()}
+          </strong>{' '}
+          {valueLabel}
+        </span>
       </div>
     </div>
   )
 }
-
