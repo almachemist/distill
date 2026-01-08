@@ -65,10 +65,10 @@ const CalendarEventUpdateSchema = z.object({
  */
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  context: RouteContext<"/api/calendar-events/[id]">
 ) {
   try {
-    const { id } = await params
+    const { id } = await context.params
     const body = await request.json()
     const parsed = CalendarEventUpdateSchema.safeParse(body)
     if (!parsed.success) {
@@ -142,10 +142,10 @@ export async function PATCH(
  */
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  context: RouteContext<"/api/calendar-events/[id]">
 ) {
   try {
-    const { id } = await params
+    const { id } = await context.params
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'not_authenticated' }, { status: 401 })

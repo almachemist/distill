@@ -91,6 +91,11 @@ describe('AuthService', () => {
         data: { user: mockUser, session: {} },
         error: null,
       })
+      mockSupabaseClient.auth.signInWithPassword.mockResolvedValue({
+        data: { user: mockUser, session: {} },
+        error: null,
+      })
+      mockSupabaseClient.rpc = vi.fn().mockResolvedValue({ data: {}, error: null })
 
       // Mock for organizations insert
       const orgMock = {

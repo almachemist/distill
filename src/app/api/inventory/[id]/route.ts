@@ -26,11 +26,11 @@ async function getOrgId(supabase: any): Promise<string> {
   return profile.organization_id
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PATCH(req: NextRequest, context: RouteContext<"/api/inventory/[id]">) {
   try {
     const supabase = await createClient()
     const org = await getOrgId(supabase)
-    const { id } = await params
+    const { id } = await context.params
     const patch = await req.json()
     if (Object.prototype.hasOwnProperty.call(patch, 'currentStock')) {
       return NextResponse.json({ error: 'Use /api/inventory/movements to adjust stock' }, { status: 400 })
@@ -53,11 +53,11 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(req: NextRequest, context: RouteContext<"/api/inventory/[id]">) {
   try {
     const supabase = await createClient()
     const org = await getOrgId(supabase)
-    const { id } = await params
+    const { id } = await context.params
     const { error } = await supabase
       .from('items')
       .delete()

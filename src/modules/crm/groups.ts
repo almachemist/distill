@@ -18,6 +18,11 @@ function getPaths() {
   }
 }
 
+function isReadOnlyDeployment(): boolean {
+  const v = String(process.env.VERCEL || '').toLowerCase()
+  return v === '1' || v === 'true' || v === 'yes' || process.env.NODE_ENV === 'production'
+}
+
 function loadGroupDefs(): CustomerGroupDef[] {
   const { defs } = getPaths()
   if (!fs.existsSync(defs)) return []
@@ -128,7 +133,9 @@ export function generateAndCacheCustomerGroups(): CustomerGroupView[] {
   }
 
   const { cache } = getPaths()
-  fs.writeFileSync(cache, JSON.stringify({ generatedAt: new Date().toISOString(), groups }, null, 2), 'utf-8')
+  if (!isReadOnlyDeployment()) {
+    fs.writeFileSync(cache, JSON.stringify({ generatedAt: new Date().toISOString(), groups }, null, 2), 'utf-8')
+  }
   return groups
 }
 
@@ -144,4 +151,3 @@ export function getCachedCustomerGroups(): CustomerGroupView[] {
   }
   return generateAndCacheCustomerGroups()
 }
-

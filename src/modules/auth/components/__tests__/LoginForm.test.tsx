@@ -45,14 +45,14 @@ describe('LoginForm', () => {
 
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /sign in/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Sign In$/i })).toBeInTheDocument()
   })
 
   it('should show validation errors for empty fields', async () => {
     const user = userEvent.setup()
     render(<LoginForm />)
 
-    const submitButton = screen.getByRole('button', { name: /sign in/i })
+    const submitButton = screen.getByRole('button', { name: /^Sign In$/i })
     await user.click(submitButton)
 
     await waitFor(() => {
@@ -71,7 +71,7 @@ describe('LoginForm', () => {
     await user.type(emailInput, 'invalid-email')
     await user.type(passwordInput, 'password123')
 
-    const submitButton = screen.getByRole('button', { name: /sign in/i })
+    const submitButton = screen.getByRole('button', { name: /^Sign In$/i })
     await user.click(submitButton)
 
     await waitFor(() => {
@@ -91,7 +91,7 @@ describe('LoginForm', () => {
     await user.type(emailInput, 'test@example.com')
     await user.type(passwordInput, 'password123')
 
-    const submitButton = screen.getByRole('button', { name: /sign in/i })
+    const submitButton = screen.getByRole('button', { name: /^Sign In$/i })
     await user.click(submitButton)
 
     await waitFor(() => {
@@ -114,7 +114,7 @@ describe('LoginForm', () => {
     await user.type(emailInput, 'test@example.com')
     await user.type(passwordInput, 'password123')
 
-    const submitButton = screen.getByRole('button', { name: /sign in/i })
+    const submitButton = screen.getByRole('button', { name: /^Sign In$/i })
     await user.click(submitButton)
 
     await waitFor(() => {
@@ -134,7 +134,7 @@ describe('LoginForm', () => {
     await user.type(emailInput, 'test@example.com')
     await user.type(passwordInput, 'wrongpassword')
 
-    const submitButton = screen.getByRole('button', { name: /sign in/i })
+    const submitButton = screen.getByRole('button', { name: /^Sign In$/i })
     await user.click(submitButton)
 
     await waitFor(() => {
@@ -154,7 +154,7 @@ describe('LoginForm', () => {
     await user.type(emailInput, 'test@example.com')
     await user.type(passwordInput, 'password123')
 
-    const submitButton = screen.getByRole('button', { name: /sign in/i })
+    const submitButton = screen.getByRole('button', { name: /^Sign In$/i })
     await user.click(submitButton)
 
     await waitFor(() => {

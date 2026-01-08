@@ -22,8 +22,8 @@ async function resolveOrganizationId() {
   return null
 }
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ batchId: string }> }) {
-  const { batchId } = await params
+export async function GET(req: NextRequest, context: RouteContext<"/api/production/old-roberta/batch/[batchId]">) {
+  const { batchId } = await context.params
   const id = decodeURIComponent(batchId)
   const supabase = createServiceRoleClient()
   const orgId = await resolveOrganizationId()

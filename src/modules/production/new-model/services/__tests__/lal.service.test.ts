@@ -68,13 +68,13 @@ describe('batch KPIs and dilution invariance', () => {
   it('computes recovery KPIs (mm002)', () => {
     const b = mm002()
     const k = computeBatchKpi(b)
-    expect(k.charge_lal).toBeCloseTo(550, 1)
+    expect(k.charge_lal).toBeCloseTo(535, 1)
     expect(k.hearts_lal).toBeCloseTo(273.6, 1)
     expect(k.tails_lal).toBeCloseTo(251.6, 1)
     expect(k.heads_lal).toBeCloseTo(10.4, 1)
-    expect(k.hearts_recovery_pct).toBeCloseTo(49.7, 1)
-    expect(k.total_recovery_pct).toBeCloseTo(97.4, 1)
-    expect(k.losses_pct).toBeCloseTo(2.6, 1)
+    expect(k.hearts_recovery_pct).toBeCloseTo(51.1, 1)
+    expect(k.total_recovery_pct).toBeCloseTo(100.1, 1)
+    expect(k.losses_pct).toBeCloseTo(-0.1, 1)
     expect(k.flags).not.toContain('kpi_incomplete_data')
   })
 

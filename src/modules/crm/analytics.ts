@@ -30,6 +30,11 @@ function getPaths() {
   }
 }
 
+function isReadOnlyDeployment(): boolean {
+  const v = String(process.env.VERCEL || '').toLowerCase()
+  return v === '1' || v === 'true' || v === 'yes' || process.env.NODE_ENV === 'production'
+}
+
 function loadProcessed(): ProcessedSale[] {
   const { processed } = getPaths()
   if (!fs.existsSync(processed)) return []
@@ -163,7 +168,9 @@ export function generateAndCacheCustomerAnalytics(): CustomerAnalytics[] {
   }
 
   const { cache } = getPaths()
-  fs.writeFileSync(cache, JSON.stringify({ generatedAt: new Date().toISOString(), customers }, null, 2), 'utf-8')
+  if (!isReadOnlyDeployment()) {
+    fs.writeFileSync(cache, JSON.stringify({ generatedAt: new Date().toISOString(), customers }, null, 2), 'utf-8')
+  }
   return customers
 }
 
@@ -179,4 +186,3 @@ export function getCachedCustomerAnalytics(): CustomerAnalytics[] {
   }
   return generateAndCacheCustomerAnalytics()
 }
-

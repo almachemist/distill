@@ -82,6 +82,18 @@ function BarrelsContent() {
     return 'bg-copper-10 text-graphite border border-copper-30'
   }
 
+  const cardBackgroundClass = (s: string) => {
+    if (s === 'Aging') return 'bg-copper-10'
+    if (s === 'Ready') return 'bg-graphite-10'
+    if (s === 'Emptied') return 'bg-beige'
+    if (s === 'Maintenance') return 'bg-copper-10'
+    if (s === 'Testing') return 'bg-copper-10'
+    if (s === 'Less than 2 years') return 'bg-brand-10'
+    if (s === 'Greater than 2 years') return 'bg-copper-green-10'
+    if (s === 'Bottled') return 'bg-graphite-10'
+    return 'bg-copper-10'
+  }
+
   const menuStatuses = ['all', ...Array.from(new Set(Object.keys(stats?.byStatus || {})))]
 
   return (
@@ -189,7 +201,7 @@ function BarrelsContent() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {barrels.map((barrel) => (
               <Link key={barrel.id} href={`/dashboard/barrels/${barrel.id}`} className="block">
-                <div className="bg-white rounded-xl border border-copper-20 shadow-sm hover:shadow-md transition">
+                <div className={`rounded-xl border border-copper-20 shadow-sm hover:shadow-md transition ${cardBackgroundClass(barrel.status)}`}>
                   <div className="px-5 py-4 border-b border-copper-15 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className={`

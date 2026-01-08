@@ -18,11 +18,11 @@ async function getOrgId(supabase: any): Promise<string> {
   return profile.organization_id
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PATCH(req: NextRequest, context: RouteContext<"/api/suppliers/[id]">) {
   try {
     const supabase = await createClient()
     const org = await getOrgId(supabase)
-    const { id } = await params
+    const { id } = await context.params
     const patch = await req.json()
     const updates: any = {}
     if (patch.name !== undefined) updates.name = patch.name

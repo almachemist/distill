@@ -47,7 +47,10 @@ body {
 .bg-copper-red { background-color: var(--copper-red); }
 .bg-copper-amber { background-color: var(--copper-amber); }
 .bg-copper-green { background-color: var(--copper-green); }
+.bg-copper-green-10 { background-color: rgba(122, 185, 122, 0.10); }
 .bg-graphite { background-color: var(--graphite); }
+.bg-graphite-10 { background-color: rgba(46, 46, 46, 0.10); }
+.bg-brand-10 { background-color: rgba(var(--brand-rgb), 0.10); }
 
 /* Focus and hover states for copper */
 .focus\:ring-copper:focus {

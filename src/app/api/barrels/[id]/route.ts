@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 
 function toNum(v: any) {
   const n = parseFloat(String(v ?? ''))
@@ -72,10 +75,15 @@ async function findRecordByKeys(supabase: any, table: string, id: string) {
   return { record: null, matchedKey: '' }
 }
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function GET(req: NextRequest, context: RouteContext<"/api/barrels/[id]">) {
   try {
-    const supabase = createServiceRoleClient()
-    const { id: rawId } = await params
+    let supabase: any
+    try {
+      supabase = createServiceRoleClient()
+    } catch {
+      supabase = await createClient()
+    }
+    const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
     const configured = process.env.NEXT_PUBLIC_BARRELS_TABLE || ''
     const candidates = [configured, 'tracking', 'barrels', 'barrel_tracking', 'barrels_tracking'].filter(Boolean)
@@ -112,10 +120,15 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(req: NextRequest, context: RouteContext<"/api/barrels/[id]">) {
   try {
-    const supabase = createServiceRoleClient()
-    const { id: rawId } = await params
+    let supabase: any
+    try {
+      supabase = createServiceRoleClient()
+    } catch {
+      supabase = await createClient()
+    }
+    const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
     const configured = process.env.NEXT_PUBLIC_BARRELS_TABLE || ''
     const candidates = [configured, 'tracking', 'barrels', 'barrel_tracking', 'barrels_tracking'].filter(Boolean)

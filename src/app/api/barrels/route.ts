@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server'
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 
 function toNum(v: any) {
@@ -121,6 +124,13 @@ export async function GET(req: Request) {
       rows = df || []
       chosen = fallback
     }
+    rows = rows.filter((b: any) => {
+      const notes = String(b.notes_comments ?? b.notes ?? '').trim().toLowerCase()
+      const id = String(b.id ?? b.barrel_id ?? b.barrel_number ?? '')
+      if (notes === 'test barrel created via api') return false
+      if (id === 'd357edcc-d588-4114-9a10-7c0881bc108c') return false
+      return true
+    })
     
     const barrels = rows.map(mapBarrel)
     const now = Date.now()
@@ -193,7 +203,7 @@ export async function POST(req: Request) {
     const table = process.env.NEXT_PUBLIC_BARRELS_TABLE || 'tracking'
     const supabase = createServiceRoleClient()
     if (body && body.purgeTest) {
-      const patterns = ['Test barrel creation', 'Testing new ID structure']
+      const patterns = ['Test barrel creation', 'Testing new ID structure', 'Test barrel created via API', 'Test barrel created via api']
       const { error } = await supabase.from(table).delete().or(
         patterns.map(p => `notes_comments.ilike.%${p}%`).join(',')
       )

@@ -15,13 +15,13 @@ function isValidUUID(str: string): boolean {
 // GET - Get single rum batch by ID (can be id or batch_id)
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  context: RouteContext<"/api/production/rum/batches/[id]">
 ) {
   try {
     const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
     const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
     if (useStatic) {
-      const { id } = await params
+      const { id } = await context.params
       const fallbackBatches = buildRumBatchFallback()
       const fallbackBatch = fallbackBatches.find((b: any) => b.batch_id === id || b.id === id)
       if (fallbackBatch) return NextResponse.json(fallbackBatch)
@@ -33,7 +33,7 @@ export async function GET(
     } catch {
       supabase = await createClient()
     }
-    const { id } = await params
+    const { id } = await context.params
 
     let data = null
     let error = null
@@ -89,7 +89,7 @@ export async function GET(
 // PUT - Update rum batch
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  context: RouteContext<"/api/production/rum/batches/[id]">
 ) {
   try {
     let supabase: any
@@ -98,7 +98,7 @@ export async function PUT(
     } catch {
       supabase = await createClient()
     }
-    const { id } = await params
+    const { id } = await context.params
     const batch: RumCaneSpiritBatch = await request.json()
 
     // Helper to ensure numeric values are actually numbers or null

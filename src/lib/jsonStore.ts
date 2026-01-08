@@ -8,6 +8,11 @@ async function ensureDir(dir: string) {
   try { await fsp.mkdir(dir, { recursive: true }) } catch {}
 }
 
+function isReadOnlyDeployment(): boolean {
+  const v = String(process.env.VERCEL || '').toLowerCase()
+  return v === '1' || v === 'true' || v === 'yes' || process.env.NODE_ENV === 'production'
+}
+
 export async function readJson<T>(relPath: string, defaultValue: T): Promise<T> {
   const full = path.join(process.cwd(), relPath)
   await ensureDir(path.dirname(full))
@@ -16,7 +21,9 @@ export async function readJson<T>(relPath: string, defaultValue: T): Promise<T> 
     return JSON.parse(raw) as T
   } catch (e: any) {
     if (e && (e.code === 'ENOENT' || e.code === 'ENOTDIR')) {
-      await writeJson(relPath, defaultValue)
+      if (!isReadOnlyDeployment()) {
+        await writeJson(relPath, defaultValue)
+      }
       return defaultValue
     }
     throw e
@@ -24,6 +31,9 @@ export async function readJson<T>(relPath: string, defaultValue: T): Promise<T> 
 }
 
 export async function writeJson<T>(relPath: string, data: T): Promise<void> {
+  if (isReadOnlyDeployment()) {
+    return
+  }
   const full = path.join(process.cwd(), relPath)
   await ensureDir(path.dirname(full))
   const tmp = `${full}.tmp-${Date.now()}`
@@ -41,4 +51,3 @@ export function fileExistsSync(relPath: string): boolean {
     return false
   }
 }
-

@@ -1,11 +1,7 @@
 import { RecipeDetail } from '@/modules/recipes/components/RecipeDetail'
 
-interface PageProps {
-  params: Promise<{ id: string }>
-}
-
-export default async function RecipeDetailPage({ params }: PageProps) {
-  const { id } = await params
+export default async function RecipeDetailPage(props: PageProps<"/dashboard/recipes/[id]">) {
+  const { id } = await props.params
   return <RecipeDetail recipeId={id} />
 }
 

@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     '/app/api/calendar-data/**': ['data/**'],
     '/app/api/forecast/**': ['data/**'],
+    '/app/api/production/old-roberta/**': ['src/modules/production/data/**', 'data/**'],
+    '/app/api/production/rum/**': ['src/modules/production/data/**'],
+    '/app/api/production/batches/**': ['src/modules/production/data/**'],
+    '/app/api/calendar-events/**': ['data/**'],
+    '/app/api/crm/**': ['data/**'],
   },
 };
 

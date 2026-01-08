@@ -10,6 +10,11 @@ export const runtime = 'nodejs'
 const STORE_PATH = 'data/old_roberta_distillations.json'
 const REPO_CS_PATH = 'src/modules/production/data/old_cane_spirit.json'
 
+function isReadOnlyDeployment(): boolean {
+  const v = String(process.env.VERCEL || '').toLowerCase()
+  return v === '1' || v === 'true' || v === 'yes' || process.env.NODE_ENV === 'production'
+}
+
 async function resolveOrganizationId() {
   if (process.env.NODE_ENV === 'development') {
     return '00000000-0000-0000-0000-000000000001'
@@ -117,15 +122,17 @@ export async function POST() {
       console.warn('Supabase upsert (cane) skipped:', e)
     }
 
-    // Write-through to local store with dedupe by batch_id
-    const existing = await readJson<OldRobertaFile>(STORE_PATH, { batches: [] })
-    const byId = new Map<string, OldRobertaBatch>()
-    for (const b of existing.batches) byId.set(b.batch_id, b)
-    for (const b of cleaned) byId.set(b.batch_id, b)
-    const merged: OldRobertaFile = { batches: Array.from(byId.values()) }
-    await writeJson(STORE_PATH, merged)
-
-    return NextResponse.json({ ok: true, imported: cleaned.length, total: merged.batches.length })
+    // Write-through to local store with dedupe by batch_id (skip on read-only deployments)
+    if (!isReadOnlyDeployment()) {
+      const existing = await readJson<OldRobertaFile>(STORE_PATH, { batches: [] })
+      const byId = new Map<string, OldRobertaBatch>()
+      for (const b of existing.batches) byId.set(b.batch_id, b)
+      for (const b of cleaned) byId.set(b.batch_id, b)
+      const merged: OldRobertaFile = { batches: Array.from(byId.values()) }
+      await writeJson(STORE_PATH, merged)
+      return NextResponse.json({ ok: true, imported: cleaned.length, total: merged.batches.length })
+    }
+    return NextResponse.json({ ok: true, imported: cleaned.length, total: cleaned.length })
   } catch (err: any) {
     console.error('Old Roberta cane spirit import failed:', err)
     return NextResponse.json({ error: err?.message || 'Failed to import old cane spirit' }, { status: 400 })

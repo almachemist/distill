@@ -31,8 +31,8 @@ function getCustomerSync(id: string): CustomerDetail {
   return c as unknown as CustomerDetail
 }
 
-export default async function CustomerProfilePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
+export default async function CustomerProfilePage(props: PageProps<"/dashboard/crm/[id]">) {
+  const { id } = await props.params
   const c = getCustomerSync(id)
 
   return (
@@ -136,4 +136,3 @@ function Card({ title, value, subtitle }: { title: string; value: string; subtit
     </div>
   )
 }
-

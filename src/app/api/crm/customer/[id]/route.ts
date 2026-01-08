@@ -6,7 +6,7 @@ export const runtime = 'nodejs'
 
 export async function GET(
   _req: Request,
-  context: { params: Promise<{ id: string }> }
+  context: RouteContext<"/api/crm/customer/[id]">
 ) {
   try {
     const { id } = await context.params

@@ -9,6 +9,8 @@ import { NextRequest, NextResponse } from 'next/server'
 import { readFileSync, writeFileSync, existsSync } from 'fs'
 import { join } from 'path'
 import { z } from 'zod'
+import { createClient } from '@/lib/supabase/server'
+import { assignEventColor } from '@/utils/calendar-colors'
 export const runtime = 'nodejs'
 
 const CALENDAR_2026_FILE = join(process.cwd(), 'data', 'production_calendar_2026_v4.json')
@@ -21,6 +23,44 @@ function log(level: 'info' | 'error', message: string, meta?: Record<string, any
 }
 function getReqId(req: NextRequest) {
   return req.headers.get('x-request-id') || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
+}
+function isReadOnlyDeployment(): boolean {
+  const v = String(process.env.VERCEL || '').toLowerCase()
+  return v === '1' || v === 'true' || v === 'yes' || process.env.NODE_ENV === 'production'
+}
+async function getOrganizationId() {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { supabase, orgId: null, userId: null }
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('organization_id')
+    .eq('id', user.id)
+    .maybeSingle()
+  return { supabase, orgId: profile?.organization_id || null, userId: user.id }
+}
+
+function toEventPayloadFromWeek(week: WeekPlan, id: string) {
+  const hasBott = week.bottling === true || (Array.isArray(week.bottling_tasks) && week.bottling_tasks.length > 0)
+  const hasProd = week.production_runs.length > 0
+  const type = hasBott ? 'bottling' : (hasProd ? 'production' : 'admin')
+  const baseTitle = hasProd ? (week.production_runs[0]?.product || 'Production') : (Array.isArray(week.bottling_tasks) && week.bottling_tasks[0] ? week.bottling_tasks[0] : (type === 'bottling' ? 'Bottling' : ''))
+  const productType = (week.mode === 'BOTTLING') ? undefined : (week.mode as any)
+  const color = assignEventColor(productType, type as any)
+  const notes = Array.isArray(week.notes) && week.notes.length > 0 ? week.notes[0] : null
+  return {
+    id,
+    title: baseTitle,
+    type,
+    starts_at: week.week_start,
+    ends_at: week.week_end,
+    color,
+    notes,
+    resource: productType,
+    status: 'PLANNED',
+    all_day: true,
+    timezone: 'Australia/Brisbane',
+  }
 }
 interface WeekPlan {
   week_number: number
@@ -70,6 +110,98 @@ export async function PATCH(request: NextRequest) {
     const parsed = UpdateSchema.safeParse(raw)
     if (!parsed.success) {
       return NextResponse.json({ error: 'Invalid payload', details: parsed.error.flatten() }, { status: 400 })
+    }
+    if (isReadOnlyDeployment()) {
+      const { id, productName, notes, productType, weekStart, remove, type: eventType } = parsed.data
+      const { supabase, orgId, userId } = await getOrganizationId()
+      if (!orgId || !userId) {
+        return NextResponse.json({ error: 'not_authenticated' }, { status: 401 })
+      }
+      const isDecember = id.startsWith('static-dec-')
+      const weekNumber = parseInt(id.replace('static-dec-', '').replace('static-', ''))
+      if (isNaN(weekNumber)) {
+        return NextResponse.json({ error: 'Invalid event ID' }, { status: 400 })
+      }
+      let calendarFile = isDecember ? CALENDAR_DEC_FILE : CALENDAR_2026_FILE
+      if (!existsSync(calendarFile)) {
+        return NextResponse.json({ error: 'Calendar file not found' }, { status: 404 })
+      }
+      const data: CalendarData = JSON.parse(readFileSync(calendarFile, 'utf-8'))
+      const weekIndex = data.calendar.findIndex(w => w.week_number === weekNumber)
+      if (weekIndex === -1) {
+        return NextResponse.json({ error: 'Week not found' }, { status: 404 })
+      }
+      let targetWeek = data.calendar[weekIndex]
+      if (typeof weekStart === 'string' && weekStart.trim().length > 0) {
+        const code = weekStart.trim()
+        let targetYear: number | null = null
+        let targetWeekNo: number | null = null
+        const m = code.match(/^(\d{4})-W(\d{1,2})$/i)
+        if (m) {
+          targetYear = parseInt(m[1], 10)
+          targetWeekNo = parseInt(m[2], 10)
+        } else {
+          const m2 = code.match(/^W?(\d{1,2})$/i)
+          if (m2) {
+            targetWeekNo = parseInt(m2[1], 10)
+            targetYear = isDecember ? 2025 : 2026
+          }
+        }
+        if (targetYear && targetWeekNo) {
+          const targetIsDecember = targetYear === 2025
+          const targetFile = targetIsDecember ? CALENDAR_DEC_FILE : CALENDAR_2026_FILE
+          if (existsSync(targetFile)) {
+            const targetData: CalendarData = JSON.parse(readFileSync(targetFile, 'utf-8'))
+            const targetIndex = targetData.calendar.findIndex(w => w.week_number === targetWeekNo)
+            if (targetIndex !== -1) {
+              targetWeek = targetData.calendar[targetIndex]
+              calendarFile = targetFile
+            }
+          }
+        }
+      }
+      if (remove === true || parsed.data.clear === true) {
+        const { error } = await supabase
+          .from('calendar_events')
+          .delete()
+          .eq('organization_id', orgId)
+          .eq('id', id)
+        if (error) {
+          return NextResponse.json({ error: error.message }, { status: 500 })
+        }
+        log('info', 'static_event_removed_supabase', { orgId, userId, id, reqId: getReqId(request) })
+        return NextResponse.json({ message: 'Event removed from Supabase' }, { status: 200 })
+      }
+      const base = toEventPayloadFromWeek(targetWeek, id)
+      const t = (eventType || base.type) as any
+      const r = productType || base.resource
+      const title = productName || base.title || (t === 'bottling' ? 'Bottling' : 'Production')
+      const color = assignEventColor(r as any, t)
+      const payload = {
+        id,
+        organization_id: orgId,
+        type: t,
+        title,
+        starts_at: targetWeek.week_start,
+        ends_at: targetWeek.week_end || targetWeek.week_start,
+        color,
+        notes: typeof notes === 'string' ? notes : (base.notes || null),
+        resource: r,
+        status: 'planned',
+        all_day: true,
+        timezone: 'Australia/Brisbane',
+      }
+      const { data: row, error } = await supabase
+        .from('calendar_events')
+        .upsert(payload, { onConflict: 'id' })
+        .select()
+        .single()
+      if (error) {
+        log('error', 'static_event_supabase_upsert_error', { error: error.message, orgId, userId, id, reqId: getReqId(request) })
+        return NextResponse.json({ error: error.message }, { status: 500 })
+      }
+      log('info', 'static_event_supabase_upserted', { orgId, userId, id, reqId: getReqId(request) })
+      return NextResponse.json({ message: 'Event updated in Supabase', event: row }, { status: 200 })
     }
     const { id, productName, batch, tank, notes, productType, clear, weekStart, remove, type: eventType } = parsed.data
 

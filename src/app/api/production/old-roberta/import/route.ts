@@ -7,6 +7,11 @@ export const runtime = 'nodejs'
 
 const STORE_PATH = 'data/old_roberta_distillations.json'
 
+function isReadOnlyDeployment(): boolean {
+  const v = String(process.env.VERCEL || '').toLowerCase()
+  return v === '1' || v === 'true' || v === 'yes' || process.env.NODE_ENV === 'production'
+}
+
 function normalizePayload(payload: any): OldRobertaFile {
   if (!payload) return { batches: [] }
   if (Array.isArray(payload)) return { batches: payload as OldRobertaBatch[] }
@@ -113,15 +118,17 @@ export async function POST(req: NextRequest) {
     }
 
     // Also write-through to local JSON for offline/dev use and easy export
-    const existing = await readJson<OldRobertaFile>(STORE_PATH, { batches: [] })
-    // Deduplicate by batch_id (new entries override existing on same id)
-    const byId = new Map<string, OldRobertaBatch>()
-    for (const b of existing.batches) byId.set(b.batch_id, b)
-    for (const b of cleaned) byId.set(b.batch_id, b)
-    const merged: OldRobertaFile = { batches: Array.from(byId.values()) }
-    await writeJson(STORE_PATH, merged)
-
-    return NextResponse.json({ ok: true, imported: cleaned.length, total: merged.batches.length })
+    if (!isReadOnlyDeployment()) {
+      const existing = await readJson<OldRobertaFile>(STORE_PATH, { batches: [] })
+      // Deduplicate by batch_id (new entries override existing on same id)
+      const byId = new Map<string, OldRobertaBatch>()
+      for (const b of existing.batches) byId.set(b.batch_id, b)
+      for (const b of cleaned) byId.set(b.batch_id, b)
+      const merged: OldRobertaFile = { batches: Array.from(byId.values()) }
+      await writeJson(STORE_PATH, merged)
+      return NextResponse.json({ ok: true, imported: cleaned.length, total: merged.batches.length })
+    }
+    return NextResponse.json({ ok: true, imported: cleaned.length, total: cleaned.length })
   } catch (err: any) {
     console.error('Old Roberta import failed:', err)
     return NextResponse.json({ error: err?.message || 'Failed to import' }, { status: 400 })

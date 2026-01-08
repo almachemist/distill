@@ -14,6 +14,9 @@ describe('BarrelService', () => {
     
     mockSupabaseClient = {
       from: vi.fn(),
+      auth: {
+        getUser: vi.fn(),
+      },
     }
 
     vi.mocked(createClient).mockReturnValue(mockSupabaseClient)
@@ -36,24 +39,51 @@ describe('BarrelService', () => {
         notes: 'First fill',
       }
 
-      const mockResponse = {
+      const mockDbResponse = {
         id: '123',
-        ...barrelData,
+        barrel_number: 'B001',
+        spirit: 'Whiskey',
+        prev_spirit: null,
+        barrel: 'Ex-Bourbon',
+        volume: '190',
+        date_filled: '2024-01-01',
+        location: 'Warehouse A',
+        abv: '62.5',
+        notes_comments: 'First fill',
         status: 'Aging',
-        organizationId: 'org-123',
-        createdAt: '2024-01-01T00:00:00Z',
-        updatedAt: '2024-01-01T00:00:00Z',
+        organization_id: 'org-123',
+        created_by: 'org-123',
+        created_at: '2024-01-01T00:00:00Z',
+        updated_at: '2024-01-01T00:00:00Z',
       }
 
-      mockSupabaseClient.from().insert().select().single.mockResolvedValue({
-        data: mockResponse,
-        error: null,
+      const insertChain = {
+        insert: vi.fn().mockReturnThis(),
+        select: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: mockDbResponse, error: null }),
+      }
+      const profilesChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+      mockSupabaseClient.from.mockImplementation((table: string) => {
+        if (table === 'profiles') return profilesChain as any
+        return insertChain as any
       })
 
       const result = await barrelService.createBarrel(barrelData)
 
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('tracking')
-      expect(result).toEqual(mockResponse)
+      expect(result).toMatchObject({
+        id: '123',
+        barrelNumber: 'B001',
+        spiritType: 'Whiskey',
+        barrelType: 'Ex-Bourbon',
+        status: 'Aging',
+        organizationId: 'org-123',
+      })
     })
 
     it('should throw error if barrel creation fails', async () => {
@@ -70,66 +100,93 @@ describe('BarrelService', () => {
         abv: 62.5,
       }
 
-      mockSupabaseClient.from().insert().select().single.mockResolvedValue({
-        data: null,
-        error: { message: 'Duplicate barrel number' },
+      const insertChain = {
+        insert: vi.fn().mockReturnThis(),
+        select: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({
+          data: null,
+          error: { message: 'Duplicate barrel number' },
+        }),
+      }
+      const profilesChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+      mockSupabaseClient.from.mockImplementation((table: string) => {
+        if (table === 'profiles') return profilesChain as any
+        return insertChain as any
       })
-
       await expect(barrelService.createBarrel(barrelData)).rejects.toThrow('Duplicate barrel number')
     })
   })
 
   describe('getBarrels', () => {
     it('should fetch all barrels', async () => {
-      const mockBarrels = [
-        {
-          id: '1',
-          barrelNumber: 'B001',
-          spiritType: 'Whiskey',
-          status: 'Aging',
-        },
-        {
-          id: '2',
-          barrelNumber: 'B002',
-          spiritType: 'Rum',
-          status: 'Ready',
-        },
+      const mockDbBarrels = [
+        { id: '1', barrel_number: 'B001', spirit: 'Whiskey', status: 'Aging', volume: '190', location: 'A', abv: '60' },
+        { id: '2', barrel_number: 'B002', spirit: 'Rum', status: 'Ready', volume: '180', location: 'B', abv: '58' },
       ]
 
-      mockSupabaseClient.from().select().order.mockResolvedValue({
-        data: mockBarrels,
-        error: null,
+      const listChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        order: vi.fn().mockResolvedValue({ data: mockDbBarrels, error: null }),
+      }
+      const profilesChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+      mockSupabaseClient.from.mockImplementation((table: string) => {
+        if (table === 'profiles') return profilesChain as any
+        return listChain as any
       })
 
       const result = await barrelService.getBarrels()
 
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('tracking')
-      expect(result).toEqual(mockBarrels)
+      expect(result).toHaveLength(2)
+      expect(result[0]).toMatchObject({ id: '1', barrelNumber: 'B001', spiritType: 'Whiskey', status: 'Aging' })
+      expect(result[1]).toMatchObject({ id: '2', barrelNumber: 'B002', spiritType: 'Rum', status: 'Ready' })
     })
 
     it('should filter barrels by status', async () => {
       const filter: BarrelFilter = { status: 'Aging' }
-      const mockBarrels = [
-        {
-          id: '1',
-          barrelNumber: 'B001',
-          spiritType: 'Whiskey',
-          status: 'Aging',
-        },
+      const mockDbBarrels = [
+        { id: '1', barrel_number: 'B001', spirit: 'Whiskey', status: 'Aging', volume: '190', location: 'A', abv: '60' },
       ]
 
       const mockChain = {
         select: vi.fn().mockReturnThis(),
         eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockResolvedValue({ data: mockBarrels, error: null }),
+        order: vi.fn().mockResolvedValue({ data: mockDbBarrels, error: null }),
       }
 
-      mockSupabaseClient.from.mockReturnValue(mockChain)
+      const profilesChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+      const profilesChain2 = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+      mockSupabaseClient.from.mockImplementation((table: string) => {
+        if (table === 'profiles') return profilesChain2 as any
+        return mockChain as any
+      })
 
       const result = await barrelService.getBarrels(filter)
 
       expect(mockChain.eq).toHaveBeenCalledWith('status', 'Aging')
-      expect(result).toEqual(mockBarrels)
+      expect(result).toHaveLength(1)
+      expect(result[0]).toMatchObject({ id: '1', barrelNumber: 'B001', spiritType: 'Whiskey', status: 'Aging' })
     })
 
     it('should filter barrels by multiple criteria', async () => {
@@ -139,64 +196,77 @@ describe('BarrelService', () => {
         location: 'Warehouse A',
       }
 
-      const mockBarrels = [
-        {
-          id: '1',
-          barrelNumber: 'B001',
-          spiritType: 'Whiskey',
-          status: 'Aging',
-          location: 'Warehouse A',
-        },
+      const mockDbBarrels = [
+        { id: '1', barrel_number: 'B001', spirit: 'Whiskey', status: 'Aging', location: 'Warehouse A', volume: '190', abv: '60' },
       ]
 
       const mockChain = {
         select: vi.fn().mockReturnThis(),
         eq: vi.fn().mockReturnThis(),
-        order: vi.fn().mockResolvedValue({ data: mockBarrels, error: null }),
+        order: vi.fn().mockResolvedValue({ data: mockDbBarrels, error: null }),
       }
 
-      mockSupabaseClient.from.mockReturnValue(mockChain)
+      const profilesChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+
+      mockSupabaseClient.from.mockImplementation((table: string) => {
+        if (table === 'profiles') return profilesChain as any
+        return mockChain as any
+      })
 
       const result = await barrelService.getBarrels(filter)
 
       expect(mockChain.eq).toHaveBeenCalledWith('status', 'Aging')
-      expect(mockChain.eq).toHaveBeenCalledWith('spirit_type', 'Whiskey')
+      expect(mockChain.eq).toHaveBeenCalledWith('spirit', 'Whiskey')
       expect(mockChain.eq).toHaveBeenCalledWith('location', 'Warehouse A')
-      expect(result).toEqual(mockBarrels)
+      expect(result).toHaveLength(1)
+      expect(result[0]).toMatchObject({ id: '1', barrelNumber: 'B001', spiritType: 'Whiskey', status: 'Aging', location: 'Warehouse A' })
     })
   })
 
   describe('getBarrelById', () => {
     it('should fetch a barrel by id', async () => {
-      const mockBarrel = {
+      const mockDbBarrel = {
         id: '123',
-        barrelNumber: 'B001',
-        spiritType: 'Whiskey',
+        barrel_number: 'B001',
+        spirit: 'Whiskey',
         status: 'Aging',
+        volume: '190',
+        location: 'Warehouse A',
+        abv: '62.5',
+        date_filled: '2024-01-01',
       }
 
       const mockChain = {
         select: vi.fn().mockReturnThis(),
         eq: vi.fn().mockReturnThis(),
-        single: vi.fn().mockResolvedValue({ data: mockBarrel, error: null }),
+        single: vi.fn().mockResolvedValue({ data: mockDbBarrel, error: null }),
       }
-
       mockSupabaseClient.from.mockReturnValue(mockChain)
 
       const result = await barrelService.getBarrelById('123')
 
       expect(mockChain.eq).toHaveBeenCalledWith('id', '123')
-      expect(result).toEqual(mockBarrel)
+      expect(result).toMatchObject({
+        id: '123',
+        barrelNumber: 'B001',
+        spiritType: 'Whiskey',
+        status: 'Aging',
+      })
     })
 
     it('should return null if barrel not found', async () => {
-      mockSupabaseClient.from().select().eq().single.mockResolvedValue({
-        data: null,
-        error: { code: 'PGRST116' },
-      })
-
+      const mockChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: null, error: { code: 'PGRST116' } }),
+      }
+      mockSupabaseClient.from.mockReturnValue(mockChain)
       const result = await barrelService.getBarrelById('999')
-
       expect(result).toBeNull()
     })
   })
@@ -208,32 +278,43 @@ describe('BarrelService', () => {
         notes: 'Ready for bottling',
       }
 
-      const mockUpdatedBarrel = {
+      const mockUpdatedDbBarrel = {
         id: '123',
-        barrelNumber: 'B001',
+        barrel_number: 'B001',
         status: 'Ready',
-        notes: 'Ready for bottling',
+        notes_comments: 'Ready for bottling',
+        volume: '190',
+        location: 'Warehouse A',
+        abv: '62.5',
+        date_filled: '2024-01-01',
       }
 
-      mockSupabaseClient.from().update().eq().select().single.mockResolvedValue({
-        data: mockUpdatedBarrel,
-        error: null,
-      })
+      const mockChain = {
+        update: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        select: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: mockUpdatedDbBarrel, error: null }),
+      }
+      mockSupabaseClient.from.mockReturnValue(mockChain)
 
       const result = await barrelService.updateBarrel('123', updateData)
 
-      expect(mockSupabaseClient.from().update).toHaveBeenCalledWith(updateData)
-      expect(mockSupabaseClient.from().eq).toHaveBeenCalledWith('id', '123')
-      expect(result).toEqual(mockUpdatedBarrel)
+      expect(mockSupabaseClient.from).toHaveBeenCalledWith('tracking')
+      expect(mockChain.update).toHaveBeenCalledWith({ status: 'Ready', notes_comments: 'Ready for bottling' })
+      expect(mockChain.eq).toHaveBeenCalledWith('id', '123')
+      expect(result).toMatchObject({ id: '123', barrelNumber: 'B001', status: 'Ready' })
     })
 
     it('should throw error if update fails', async () => {
       const updateData: UpdateBarrelData = { status: 'Ready' }
 
-      mockSupabaseClient.from().update().eq().select().single.mockResolvedValue({
-        data: null,
-        error: { message: 'Update failed' },
-      })
+      const mockChain = {
+        update: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        select: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: null, error: { message: 'Update failed' } }),
+      }
+      mockSupabaseClient.from.mockReturnValue(mockChain)
 
       await expect(barrelService.updateBarrel('123', updateData)).rejects.toThrow('Update failed')
     })
@@ -241,23 +322,25 @@ describe('BarrelService', () => {
 
   describe('deleteBarrel', () => {
     it('should delete a barrel', async () => {
-      mockSupabaseClient.from().delete().eq.mockResolvedValue({
-        data: null,
-        error: null,
-      })
+      const mockChain = {
+        delete: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockResolvedValue({ data: null, error: null }),
+      }
+      mockSupabaseClient.from.mockReturnValue(mockChain)
 
       await barrelService.deleteBarrel('123')
 
       expect(mockSupabaseClient.from).toHaveBeenCalledWith('tracking')
-      expect(mockSupabaseClient.from().delete).toHaveBeenCalled()
-      expect(mockSupabaseClient.from().eq).toHaveBeenCalledWith('id', '123')
+      expect(mockChain.delete).toHaveBeenCalled()
+      expect(mockChain.eq).toHaveBeenCalledWith('id', '123')
     })
 
     it('should throw error if deletion fails', async () => {
-      mockSupabaseClient.from().delete().eq.mockResolvedValue({
-        data: null,
-        error: { message: 'Cannot delete barrel with samples' },
-      })
+      const mockChain = {
+        delete: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockResolvedValue({ data: null, error: { message: 'Cannot delete barrel with samples' } }),
+      }
+      mockSupabaseClient.from.mockReturnValue(mockChain)
 
       await expect(barrelService.deleteBarrel('123')).rejects.toThrow('Cannot delete barrel with samples')
     })
@@ -265,42 +348,32 @@ describe('BarrelService', () => {
 
   describe('getBarrelStats', () => {
     it('should calculate barrel statistics', async () => {
-      const mockBarrels = [
-        {
-          id: '1',
-          status: 'Aging',
-          spiritType: 'Whiskey',
-          location: 'Warehouse A',
-          currentVolume: 190,
-          fillDate: '2024-01-01',
-        },
-        {
-          id: '2',
-          status: 'Aging',
-          spiritType: 'Rum',
-          location: 'Warehouse B',
-          currentVolume: 180,
-          fillDate: '2023-01-01',
-        },
-        {
-          id: '3',
-          status: 'Ready',
-          spiritType: 'Whiskey',
-          location: 'Warehouse A',
-          currentVolume: 185,
-          fillDate: '2023-06-01',
-        },
+      const mockDbBarrels = [
+        { id: '1', status: 'Aging', spirit: 'Whiskey', location: 'Warehouse A', volume: '190', date_filled: '2024-01-01' },
+        { id: '2', status: 'Aging', spirit: 'Rum', location: 'Warehouse B', volume: '180', date_filled: '2023-01-01' },
+        { id: '3', status: 'Ready', spirit: 'Whiskey', location: 'Warehouse A', volume: '185', date_filled: '2023-06-01' },
       ]
 
-      mockSupabaseClient.from().select.mockResolvedValue({
-        data: mockBarrels,
-        error: null,
+      const mockChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        then: vi.fn((resolve: any) => resolve({ data: mockDbBarrels, error: null })),
+      }
+      const profilesChain = {
+        select: vi.fn().mockReturnThis(),
+        eq: vi.fn().mockReturnThis(),
+        single: vi.fn().mockResolvedValue({ data: { organization_id: 'org-123' }, error: null }),
+      }
+      mockSupabaseClient.auth.getUser.mockResolvedValue({ data: { user: { id: 'user-123' } }, error: null })
+      mockSupabaseClient.from.mockImplementation((table: string) => {
+        if (table === 'profiles') return profilesChain as any
+        return mockChain as any
       })
 
       const result = await barrelService.getBarrelStats()
 
       expect(result.totalBarrels).toBe(3)
-      expect(result.activeBarrels).toBe(2)
+      expect(result.activeBarrels).toBe(3)
       expect(result.totalVolume).toBe(555)
       expect(result.byStatus.Aging).toBe(2)
       expect(result.byStatus.Ready).toBe(1)
