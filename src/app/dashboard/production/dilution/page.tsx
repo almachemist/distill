@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 function DilutionContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const batchId = searchParams.get('batchId') || ''
+  const searchParams = useSearchParams() as URLSearchParams | null
+  const batchId = searchParams?.get('batchId') || ''
 
   const [dilutionSteps, setDilutionSteps] = useState<Array<{
     step: number

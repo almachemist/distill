@@ -1,15 +1,15 @@
-'use client'
+"use client"
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { RecipeRepository } from '@/modules/recipes/services/recipe.repository'
 import { EthanolBatchSelector, EthanolSelection } from '@/modules/production/components/EthanolBatchSelector'
 import { BotanicalSelector, BotanicalSelection } from '@/modules/production/components/BotanicalSelector'
 import { PackagingSelector, PackagingSelection } from '@/modules/production/components/PackagingSelector'
 
-export default function PreparationPage() {
+function PreparationContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams() as URLSearchParams | null
   const recipeRepo = new RecipeRepository()
   
   const [recipes, setRecipes] = useState<Array<{id: string, name: string}>>([])
@@ -71,10 +71,10 @@ export default function PreparationPage() {
   }, [loadRecipes])
   
   useEffect(() => {
-    const rid = searchParams.get('redistillTankId')
-    const vol = searchParams.get('volume')
-    const abv = searchParams.get('abv')
-    const pt = searchParams.get('productType')
+    const rid = searchParams?.get('redistillTankId')
+    const vol = searchParams?.get('volume')
+    const abv = searchParams?.get('abv')
+    const pt = searchParams?.get('productType')
     if (rid) {
       setTankIdParam(rid)
       setTankVolume(vol ? Number(vol) : 0)
@@ -156,10 +156,10 @@ export default function PreparationPage() {
               lal: ethanolLAL
             }
           : {
-              name: ethanolSelection.item_name,
+              name: ethanolSelection!.item_name,
               type: 'ethanol',
-              volume_l: ethanolSelection.quantity_l,
-              abv_percent: ethanolSelection.abv,
+              volume_l: ethanolSelection!.quantity_l,
+              abv_percent: ethanolSelection!.abv,
               lal: ethanolLAL
             },
         {
@@ -623,5 +623,13 @@ export default function PreparationPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+export default function PreparationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+      <PreparationContent />
+    </Suspense>
   )
 }

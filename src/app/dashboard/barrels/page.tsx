@@ -1,11 +1,12 @@
-'use client'
+"use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import Link from 'next/link'
-import { BarrelService } from '@/modules/barrels/services/barrel.service'
 import type { Barrel, BarrelStats } from '@/modules/barrels/types/barrel.types'
 
-export default function BarrelsPage() {
+export const dynamic = 'force-dynamic'
+
+function BarrelsContent() {
   const [barrels, setBarrels] = useState<Barrel[]>([])
   const [stats, setStats] = useState<BarrelStats | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -17,17 +18,15 @@ export default function BarrelsPage() {
 
   const loadBarrels = async () => {
     setIsLoading(true)
-    const service = new BarrelService()
-    
     try {
-      const filterOptions = filter === 'all' ? undefined : { status: filter as Barrel['status'] }
-      const [barrelsData, statsData] = await Promise.all([
-        service.getBarrels(filterOptions),
-        service.getBarrelStats()
-      ])
-      
-      setBarrels(barrelsData)
-      setStats(statsData)
+      const statusParam = filter === 'all' ? 'all' : (filter as Barrel['status'])
+      const res = await fetch(`/api/barrels?status=${encodeURIComponent(statusParam)}`, { cache: 'no-store' })
+      if (!res.ok) {
+        throw new Error(`Failed to load barrels: ${res.status}`)
+      }
+      const json = await res.json() as { barrels: Barrel[]; stats: BarrelStats }
+      setBarrels(json.barrels || [])
+      setStats(json.stats || null)
     } catch (error) {
       console.error('Error loading barrels:', error)
     } finally {
@@ -194,11 +193,39 @@ export default function BarrelsPage() {
                         {barrel.fillDate ? new Date(barrel.fillDate).toLocaleDateString() : '—'}
                       </p>
                     </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Batch</p>
+                      <p className="text-sm font-medium text-graphite">{barrel.batch || '—'}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Mature Date</p>
+                      <p className="text-sm font-medium text-graphite">
+                        {barrel.dateMature ? new Date(barrel.dateMature).toLocaleDateString() : '—'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Last Inspection</p>
+                      <p className="text-sm font-medium text-graphite">
+                        {barrel.lastInspection ? new Date(barrel.lastInspection).toLocaleDateString() : '—'}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Angel&apos;s Share</p>
+                      <p className="text-sm font-medium text-graphite">{barrel.angelsShare || '—'}</p>
+                    </div>
                   </div>
                   <div className="px-5 pb-5 grid grid-cols-2 gap-4 border-t border-copper-15">
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Prev. Spirit</p>
                       <p className="text-sm font-medium text-graphite">{barrel.prevSpirit || '—'}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Organization</p>
+                      <p className="text-sm font-medium text-graphite">{barrel.organizationId || '—'}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-copper uppercase tracking-wide">Created By</p>
+                      <p className="text-sm font-medium text-graphite">{barrel.createdBy || '—'}</p>
                     </div>
                     <div>
                       <p className="text-xs text-copper uppercase tracking-wide">Age (days)</p>
@@ -212,6 +239,12 @@ export default function BarrelsPage() {
                         {barrel.notes ? (barrel.notes.length > 160 ? `${barrel.notes.slice(0, 160)}…` : barrel.notes) : '—'}
                       </p>
                     </div>
+                    <div className="col-span-2">
+                      <p className="text-xs text-copper uppercase tracking-wide">Tasting Notes</p>
+                      <p className="text-sm text-graphite">
+                        {barrel.tastingNotes ? (barrel.tastingNotes.length > 160 ? `${barrel.tastingNotes.slice(0, 160)}…` : barrel.tastingNotes) : '—'}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -220,5 +253,13 @@ export default function BarrelsPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function BarrelsPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-graphite/60">Loading barrels...</div>}>
+      <BarrelsContent />
+    </Suspense>
   )
 }

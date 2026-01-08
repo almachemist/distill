@@ -16,3 +16,7 @@
   - Removing fields or objects
   - Rewriting or replacing existing lines
 
+## Design Change Policy
+- Nunca alterar qualquer aspecto visual sem aprovação explícita do usuário.
+- Qualquer modificação de UI/UX (cores, tipografia, espaçamento, layout, componentes) exige permissão prévia e confirmação por escrito.
+- Reverter imediatamente qualquer alteração visual não autorizada.

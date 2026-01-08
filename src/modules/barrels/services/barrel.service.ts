@@ -23,23 +23,17 @@ export class BarrelService {
     const isDev = process.env.NODE_ENV === 'development'
     
     if (!isDev) {
-      // Get the user's organization ID
       const { data: { user } } = await this.supabase.auth.getUser()
-      if (!user) {
-        throw new Error('User not authenticated')
+      if (user) {
+        const { data: profile } = await this.supabase
+          .from('profiles')
+          .select('organization_id')
+          .eq('id', user.id)
+          .single()
+        if (profile?.organization_id) {
+          organizationId = profile.organization_id
+        }
       }
-
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-
-      if (!profile?.organization_id) {
-        throw new Error('User has no organization')
-      }
-      
-      organizationId = profile.organization_id
     }
 
     const { data: barrel, error } = await this.supabase
@@ -189,23 +183,17 @@ export class BarrelService {
     const isDev = process.env.NODE_ENV === 'development'
     
     if (!isDev) {
-      // Get the user's organization ID
       const { data: { user } } = await this.supabase.auth.getUser()
-      if (!user) {
-        throw new Error('User not authenticated')
+      if (user) {
+        const { data: profile } = await this.supabase
+          .from('profiles')
+          .select('organization_id')
+          .eq('id', user.id)
+          .single()
+        if (profile?.organization_id) {
+          organizationId = profile.organization_id
+        }
       }
-
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-
-      if (!profile?.organization_id) {
-        throw new Error('User has no organization')
-      }
-      
-      organizationId = profile.organization_id
     }
 
     let statsQuery = this.supabase.from('tracking').select('*')
@@ -380,7 +368,13 @@ export class BarrelService {
       originalVolume: parseFloat(data.volume) || 0,
       abv: parseFloat(data.abv) || 0,
       notes: data.notes_comments,
+      batch: data.batch,
+      dateMature: data.date_mature,
+      tastingNotes: data.tasting_notes,
+      angelsShare: data.angelsshare,
+      lastInspection: data.last_inspection,
       organizationId: data.organization_id,
+      createdBy: data.created_by ?? null,
       createdAt: data.created_at,
       updatedAt: data.updated_at,
     }

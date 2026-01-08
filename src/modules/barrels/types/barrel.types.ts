@@ -13,7 +13,13 @@ export interface Barrel {
   originalVolume: number
   abv: number
   notes?: string
+  batch?: string
+  dateMature?: string
+  tastingNotes?: string
+  angelsShare?: string
+  lastInspection?: string
   organizationId: string
+  createdBy?: string | null
   createdAt: string
   updatedAt: string
 }

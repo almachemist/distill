@@ -116,7 +116,7 @@ const RumCard: React.FC<{
 
 function RumPageContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams() as URLSearchParams | null
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [rumBatches, setRumBatches] = useState<RumBatchRecord[]>([])
@@ -127,7 +127,7 @@ function RumPageContent() {
 
   // Set filter from URL on mount
   useEffect(() => {
-    const filter = searchParams.get('filter')
+    const filter = searchParams?.get('filter')
     if (filter === 'ongoing' || filter === 'completed') {
       setStatusFilter(filter)
     }

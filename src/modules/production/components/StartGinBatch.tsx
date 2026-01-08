@@ -117,9 +117,9 @@ export function StartGinBatch() {
   const [error, setError] = useState<string | null>(null)
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const urlBatchTargetL = searchParams.get('batchTargetL')
+  const searchParams = useSearchParams() as URLSearchParams | null
+  const recipeId = searchParams?.get('recipeId')
+  const urlBatchTargetL = searchParams?.get('batchTargetL')
 
   const stockRepo = useMemo(() => new StockRepository(), [])
   const recipeRepo = useMemo(() => new RecipeRepository(), [])

@@ -3,13 +3,12 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
-import { BarrelService } from '@/modules/barrels/services/barrel.service'
 import type { Barrel } from '@/modules/barrels/types/barrel.types'
 
 export default function BarrelDetailPage() {
   const router = useRouter()
-  const params = useParams()
-  const barrelId = params.id as string
+  const params = useParams() as { id?: string } | null
+  const barrelId = params?.id as string
   
   const [barrel, setBarrel] = useState<Barrel | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -21,14 +20,21 @@ export default function BarrelDetailPage() {
   }, [barrelId])
 
   const loadBarrel = async () => {
+    if (!barrelId) {
+      setError('Missing barrel id')
+      setIsLoading(false)
+      return
+    }
     try {
-      const service = new BarrelService()
-      const data = await service.getBarrelById(barrelId)
-      if (!data) {
-        setError('Barrel not found')
-      } else {
-        setBarrel(data)
+      const res = await fetch(`/api/barrels/${encodeURIComponent(barrelId)}`, { cache: 'no-store' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        throw new Error(json?.error || `Failed to load barrel: ${res.status}`)
       }
+      const json = await res.json() as { barrel: Barrel }
+      const data = json?.barrel || null
+      if (!data) setError('Barrel not found')
+      else setBarrel(data)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to load barrel')
     } finally {
@@ -42,8 +48,11 @@ export default function BarrelDetailPage() {
     }
 
     try {
-      const service = new BarrelService()
-      await service.deleteBarrel(barrelId)
+      const res = await fetch(`/api/barrels/${encodeURIComponent(barrelId)}`, { method: 'DELETE' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        throw new Error(json?.error || `Failed to delete barrel: ${res.status}`)
+      }
       router.push('/dashboard/barrels')
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to delete barrel')
@@ -182,6 +191,30 @@ export default function BarrelDetailPage() {
               })}
             </p>
           </div>
+          <div>
+            <h3 className="text-sm font-medium text-gray-500">Batch</h3>
+            <p className="mt-1 text-lg">{barrel.batch || '—'}</p>
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-gray-500">Mature Date</h3>
+            <p className="mt-1 text-lg">
+              {barrel.dateMature ? new Date(barrel.dateMature).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              }) : '—'}
+            </p>
+          </div>
+          <div>
+            <h3 className="text-sm font-medium text-gray-500">Last Inspection</h3>
+            <p className="mt-1 text-lg">
+              {barrel.lastInspection ? new Date(barrel.lastInspection).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              }) : '—'}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -215,6 +248,10 @@ export default function BarrelDetailPage() {
             <h3 className="text-sm font-medium text-gray-500">Proof</h3>
             <p className="mt-1 text-lg">{(barrel.abv * 2).toFixed(1)}</p>
           </div>
+          <div>
+            <h3 className="text-sm font-medium text-gray-500">Angel&apos;s Share (recorded)</h3>
+            <p className="mt-1 text-lg">{barrel.angelsShare || '—'}</p>
+          </div>
         </div>
       </div>
 
@@ -223,6 +260,12 @@ export default function BarrelDetailPage() {
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Notes</h2>
           <p className="text-gray-700 whitespace-pre-wrap">{barrel.notes}</p>
+        </div>
+      )}
+      {barrel.tastingNotes && (
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <h2 className="text-xl font-semibold mb-4">Tasting Notes</h2>
+          <p className="text-gray-700 whitespace-pre-wrap">{barrel.tastingNotes}</p>
         </div>
       )}
 

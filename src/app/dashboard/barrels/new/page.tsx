@@ -9,7 +9,7 @@ import type { Tank } from '@/modules/production/types/tank.types'
 
 function NewBarrelContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams() as URLSearchParams | null
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const supabase = createClient()
@@ -41,6 +41,7 @@ function NewBarrelContent() {
   })
 
   useEffect(() => {
+    if (!searchParams) return
     const product = searchParams.get('product') || ''
     const abv = parseFloat(searchParams.get('abv') || '') || 0
     const volume = parseFloat(searchParams.get('volume') || '') || 0
@@ -116,7 +117,7 @@ function NewBarrelContent() {
       const service = new BarrelService()
       const barrel = await service.createBarrel(formData)
 
-      const tankId = searchParams.get('tankId') || ''
+      const tankId = searchParams?.get('tankId') || ''
       if (tankId && !USE_STATIC) {
         const { data: tank, error: tankErr } = await supabase
           .from('tanks')

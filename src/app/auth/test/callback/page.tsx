@@ -9,8 +9,8 @@ function CallbackInner() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const access_token = params.get('access_token')
-    const refresh_token = params.get('refresh_token')
+    const access_token = params?.get('access_token')
+    const refresh_token = params?.get('refresh_token')
     if (!access_token || !refresh_token) {
       setError('Missing session tokens')
       return

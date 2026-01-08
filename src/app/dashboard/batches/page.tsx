@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { DetailPanel } from "./DetailPanel"
 
+export const dynamic = 'force-dynamic'
+
 type GinBatchSummary = {
   run_id: string
   batch_id?: string

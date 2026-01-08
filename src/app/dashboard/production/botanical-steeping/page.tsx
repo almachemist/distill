@@ -14,9 +14,9 @@ interface Botanical {
 
 function BotanicalSteepingContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const batchId = searchParams.get('batchId')
+  const searchParams = useSearchParams() as URLSearchParams | null
+  const recipeId = searchParams?.get('recipeId')
+  const batchId = searchParams?.get('batchId')
   
   const [recipe, setRecipe] = useState<RecipeWithIngredients | null>(null)
   const [botanicals, setBotanicals] = useState<Botanical[]>([])

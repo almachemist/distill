@@ -20,9 +20,9 @@ export function OrderStart() {
   const [creating, setCreating] = useState(false)
 
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const batchTargetL = Number(searchParams.get('batchTargetL')) || 100
+  const searchParams = useSearchParams() as URLSearchParams | null
+  const recipeId = searchParams?.get('recipeId')
+  const batchTargetL = Number(searchParams?.get('batchTargetL')) || 100
 
   const productionRepo = new ProductionRepository()
   const recipeRepo = new RecipeRepository()
@@ -404,5 +404,4 @@ function IngredientLotPicker({
     </div>
   )
 }
-
 

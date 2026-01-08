@@ -94,10 +94,11 @@ const deriveProductLabel = (batch: ProductionBatch): string =>
   batch.product_group.startsWith('RUM') ? 'Rum' : 'Cane Spirit'
 
 export default function BatchDetailsPage() {
-  const params = useParams<{ id: string }>()
+  const params = useParams() as { id?: string } | null
   const [activeTab, setActiveTab] = useState<TabId>('overview')
 
-  const batch = useMemo(() => batches.find((item) => item.batch_id === params.id), [params.id])
+  const id = params?.id
+  const batch = useMemo(() => batches.find((item) => item.batch_id === id), [id])
 
   if (!batch) {
     notFound()

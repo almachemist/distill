@@ -13,16 +13,16 @@ type Summary = {
 
 function SummaryInner() {
   const router = useRouter()
-  const params = useSearchParams()
+  const params = useSearchParams() as URLSearchParams | null
   const [data, setData] = useState<Summary>({ spiritType: '', volume: 0, bottleSize: 700, quantity: 0 })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const spiritType = params.get('spiritType') || ''
-    const volume = Number(params.get('volume') || 0)
-    const bottleSize = Number(params.get('bottleSize') || 700)
-    const quantityParam = Number(params.get('quantity') || 0)
+    const spiritType = params?.get('spiritType') || ''
+    const volume = Number(params?.get('volume') || 0)
+    const bottleSize = Number(params?.get('bottleSize') || 700)
+    const quantityParam = Number(params?.get('quantity') || 0)
     const calcQty = quantityParam || Math.floor((volume * 1000) / bottleSize)
     setData({ spiritType, volume, bottleSize, quantity: calcQty })
   }, [params])

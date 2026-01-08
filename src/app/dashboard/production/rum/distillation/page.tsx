@@ -5,8 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 
 function RumDistillationContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const batchId = searchParams.get('batchId') || ''
+  const searchParams = useSearchParams() as URLSearchParams | null
+  const batchId = searchParams?.get('batchId') || ''
 
   // Load fermentation data
   const [fermentationData, setFermentationData] = useState<any>(null)

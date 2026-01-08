@@ -125,13 +125,23 @@ export default function TanksPage() {
         setError(null)
         return
       }
-      const { data, error } = await supabase
-        .from('tanks')
-        .select('*')
-        .order('tank_id')
-      if (error) {
-        const isNet = String(error?.message || '').toLowerCase().includes('failed to fetch')
-        const isCfg = String(error?.message || '').toLowerCase().includes('supabase is not configured')
+      const url = typeof window !== 'undefined'
+        ? `${window.location.origin}/api/production/tanks`
+        : '/api/production/tanks'
+      const res = await fetch(url, { cache: 'no-store' })
+      let data: Tank[] = []
+      let apiError: string | null = null
+      try {
+        const json = await res.json()
+        data = Array.isArray(json?.tanks) ? json.tanks : []
+        apiError = typeof json?.error === 'string' && json.error ? json.error : null
+      } catch {
+        apiError = 'Failed to parse response'
+      }
+      if (!res.ok || apiError) {
+        const errStr = String(apiError || `HTTP ${res.status}`)
+        const isNet = errStr.toLowerCase().includes('failed to fetch')
+        const isCfg = errStr.toLowerCase().includes('supabase is not configured')
         if (isNet || isCfg) {
           const devOrg = '00000000-0000-0000-0000-000000000001'
           const now = new Date().toISOString()
@@ -587,8 +597,9 @@ export default function TanksPage() {
           setTimeout(() => loadTanks(retryCount + 1), 1000)
           return
         }
-        console.error('Error loading tanks:', error)
-        setError(error.message || 'Unknown error loading tanks')
+        const msg = typeof (error as any)?.message === 'string' ? (error as any).message : 'Unknown error loading tanks'
+        console.error('Error loading tanks:', msg)
+        setError(msg)
       }
     } finally {
       setLoading(false)
@@ -901,7 +912,7 @@ export default function TanksPage() {
           return {
             ...t,
             current_volume_l: 0,
-            status: 'empty',
+            status: 'empty' as const,
             product: null,
             current_abv: null,
             tank_name: '',
@@ -1187,6 +1198,7 @@ export default function TanksPage() {
                 tank_type: 'spirits',
                 capacity_l: 1000,
                 status: 'empty',
+                batch_id: '',
                 created_at: new Date().toISOString(),
                 updated_at: new Date().toISOString()
               }

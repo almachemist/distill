@@ -2,7 +2,6 @@
 
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { DistillationRunRepository } from '@/modules/production/services/distillation-run.repository'
 
 type Cut = {
   id: string
@@ -17,9 +16,9 @@ type Cut = {
 
 function DistillationCutsContent() {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const recipeId = searchParams.get('recipeId')
-  const batchId = searchParams.get('batchId')
+  const searchParams = useSearchParams() as URLSearchParams | null
+  const recipeId = searchParams?.get('recipeId')
+  const batchId = searchParams?.get('batchId')
   
   const [loading, setLoading] = useState(false)
   const [activePhase, setActivePhase] = useState<'foreshots' | 'heads' | 'hearts' | 'tails'>('foreshots')
@@ -166,111 +165,7 @@ function DistillationCutsContent() {
     localStorage.setItem('distillation_cuts', JSON.stringify(cutsData))
 
     // Navigate to dilution phase (final step before saving to DB)
-    router.push(`/dashboard/production/dilution?batchId=${batchId}`)
-  }
-
-  // Deprecated: Old save logic (moved to dilution page)
-  const handleSubmitOLD = async () => {
-    if (!recipeId || !batchId) {
-      alert('Missing recipe or batch ID')
-      return
-    }
-
-    try {
-      setLoading(true)
-      
-      // Load all previous steps from localStorage
-      const preparationData = JSON.parse(localStorage.getItem('distillation_preparation') || '{}')
-      const steepingData = JSON.parse(localStorage.getItem('distillation_steeping') || '{}')
-      const heatingData = JSON.parse(localStorage.getItem('distillation_heating') || '{}')
-      
-      // Calculate totals
-      const foreshotsTotal = getCutTotal(foreshots)
-      const headsTotal = getCutTotal(heads)
-      const heartsTotal = getCutTotal(hearts)
-      const tailsTotal = getCutTotal(tails)
-      
-      // Prepare data for Supabase
-      const productType = preparationData.productType || 'gin'
-      const productLabel = productType === 'ethanol' ? 'Ethanol Recovery' : productType.charAt(0).toUpperCase() + productType.slice(1)
-      
-      const distillationRunData = {
-        batchId,
-        sku: batchId,
-        displayName: `${batchId} (${productLabel})`,
-        productId: productType,
-        recipeId: productType === 'gin' ? recipeId : undefined,
-        date: preparationData.date || new Date().toISOString().split('T')[0],
-        stillUsed: preparationData.stillUsed || heatingData.stillUsed || 'Unknown',
-        
-        // Charge
-        chargeComponents: preparationData.components || [],
-        chargeTotalVolume: preparationData.totalVolume || 0,
-        chargeTotalABV: preparationData.averageABV || 0,
-        chargeTotalLAL: preparationData.totalLAL || 0,
-        
-        // Botanicals
-        botanicals: steepingData.botanicals || [],
-        steepingStartTime: steepingData.startTime,
-        steepingEndTime: steepingData.endTime,
-        steepingTemp: steepingData.temperature,
-        
-        // Heating
-        boilerOnTime: heatingData.boilerOnTime,
-        powerSetting: heatingData.powerSetting,
-        heatingElements: heatingData.elements,
-        plates: heatingData.plates,
-        deflegmator: heatingData.deflegmator,
-        
-        // Cuts
-        foreshotsVolume: foreshotsTotal.volume,
-        foreshotsABV: foreshotsTotal.abv,
-        foreshotsLAL: foreshotsTotal.lal,
-        
-        headsVolume: headsTotal.volume,
-        headsABV: headsTotal.abv,
-        headsLAL: headsTotal.lal,
-        
-        heartsVolume: heartsTotal.volume,
-        heartsABV: heartsTotal.abv,
-        heartsLAL: heartsTotal.lal,
-        
-        tailsVolume: tailsTotal.volume,
-        tailsABV: tailsTotal.abv,
-        tailsLAL: tailsTotal.lal,
-        
-        heartsSegments: hearts.length > 1 ? hearts : undefined,
-        tailsSegments: tails.length > 1 ? tails : undefined,
-        
-        // Final output (same as hearts for now)
-        finalOutputVolume: heartsTotal.volume,
-        finalOutputABV: heartsTotal.abv,
-        finalOutputLAL: heartsTotal.lal,
-        
-        notes: `${preparationData.notes || ''}\n${steepingData.notes || ''}\n${heatingData.notes || ''}`.trim()
-      }
-      
-      // Save to Supabase
-      console.log('💾 Saving batch to Supabase:', distillationRunData)
-      const repository = new DistillationRunRepository()
-      const savedBatch = await repository.create(distillationRunData)
-      
-      console.log('✅ Batch saved to Supabase successfully:', savedBatch)
-      
-      // Clean up localStorage (no longer needed)
-      localStorage.removeItem('distillation_preparation')
-      localStorage.removeItem('distillation_steeping')
-      localStorage.removeItem('distillation_heating')
-      localStorage.removeItem('distillation_cuts')
-      
-      alert(`✅ Batch ${batchId} saved successfully!\n\nYou can now view it in the Batches page.`)
-      router.push('/dashboard/batches')
-    } catch (error) {
-      console.error('Error saving batch:', error)
-      alert(`Error saving batch: ${error instanceof Error ? error.message : 'Unknown error'}\n\nPlease try again.`)
-    } finally {
-      setLoading(false)
-    }
+  router.push(`/dashboard/production/dilution?batchId=${batchId}`)
   }
 
   const renderCutTable = (
