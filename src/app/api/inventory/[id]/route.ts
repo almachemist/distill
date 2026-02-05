@@ -5,6 +5,8 @@ import { InventoryItem, InventoryCategory } from '@/types/inventory'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
+type ContextWithIdParam = { params: { id: string } }
+
 function mapFrontToDbCategory(front: InventoryCategory): string {
   if (front === 'Spirits') return 'finished_good'
   if (front === 'Packaging') return 'packaging_other'
@@ -26,11 +28,11 @@ async function getOrgId(supabase: any): Promise<string> {
   return profile.organization_id
 }
 
-export async function PATCH(req: NextRequest, context: RouteContext<"/api/inventory/[id]">) {
+export async function PATCH(req: NextRequest, context: ContextWithIdParam) {
   try {
     const supabase = await createClient()
     const org = await getOrgId(supabase)
-    const { id } = await context.params
+    const { id } = context.params
     const patch = await req.json()
     if (Object.prototype.hasOwnProperty.call(patch, 'currentStock')) {
       return NextResponse.json({ error: 'Use /api/inventory/movements to adjust stock' }, { status: 400 })
@@ -53,11 +55,11 @@ export async function PATCH(req: NextRequest, context: RouteContext<"/api/invent
   }
 }
 
-export async function DELETE(req: NextRequest, context: RouteContext<"/api/inventory/[id]">) {
+export async function DELETE(req: NextRequest, context: ContextWithIdParam) {
   try {
     const supabase = await createClient()
     const org = await getOrgId(supabase)
-    const { id } = await context.params
+    const { id } = context.params
     const { error } = await supabase
       .from('items')
       .delete()

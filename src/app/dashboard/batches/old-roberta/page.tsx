@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 type Batch = {
   batch_id: string
@@ -15,14 +15,22 @@ type Batch = {
 
 export default function OldRobertaBatchesPage() {
   const router = useRouter()
+  const searchParams = useSearchParams() as URLSearchParams | null
   const [batches, setBatches] = useState<Batch[]>([])
   const [filter, setFilter] = useState<'all' | 'Rum' | 'Cane Spirit'>('all')
   const [importing, setImporting] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [selected, setSelected] = useState<Batch | null>(null)
+  const [requestedBatchId, setRequestedBatchId] = useState<string | null>(null)
   const [detail, setDetail] = useState<any | null>(null)
   const [loadingDetail, setLoadingDetail] = useState(false)
   const [detailError, setDetailError] = useState<string | null>(null)
+
+  const toDomId = (value: any) => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return ''
+    return raw.replace(/[^A-Za-z0-9_-]/g, '_')
+  }
 
   const fetchData = async () => {
     setMessage(null)
@@ -36,6 +44,31 @@ export default function OldRobertaBatchesPage() {
   }
 
   useEffect(() => { fetchData() }, [])
+
+  // Deep-link selection: /dashboard/batches/old-roberta?batch=SPIRIT-CANE-010
+  useEffect(() => {
+    const batch = searchParams?.get('batch')
+    const trimmed = String(batch ?? '').trim()
+    if (!trimmed) return
+    setRequestedBatchId(trimmed)
+  }, [searchParams])
+
+  // When batches load (or requested changes), auto-select the requested batch
+  useEffect(() => {
+    if (!requestedBatchId) return
+    if (selected?.batch_id === requestedBatchId) return
+    const match = batches.find((b) => b?.batch_id === requestedBatchId)
+    if (match) setSelected(match)
+  }, [batches, requestedBatchId, selected?.batch_id])
+
+  useEffect(() => {
+    const id = requestedBatchId || selected?.batch_id
+    if (!id) return
+    const el = document.getElementById(`old-roberta-batch-card-${toDomId(id)}`)
+    if (el) {
+      el.scrollIntoView({ block: 'center' })
+    }
+  }, [requestedBatchId, selected?.batch_id])
   // Load full details when a card is selected
   useEffect(() => {
     let alive = true
@@ -280,8 +313,12 @@ export default function OldRobertaBatchesPage() {
           {filtered.map((b) => {
             const heartsLAL = b.hearts_lal ?? ((b.hearts_volume_l && b.hearts_abv_percent) ? (b.hearts_volume_l * (b.hearts_abv_percent / 100)) : null)
             return (
-              <button key={b.batch_id} onClick={() => setSelected(b)}
-                className="text-left bg-white border border-stone-200 rounded-xl p-4 flex flex-col gap-2 hover:shadow-sm hover:border-stone-300 transition cursor-pointer">
+              <button
+                key={b.batch_id}
+                id={`old-roberta-batch-card-${toDomId(b.batch_id)}`}
+                onClick={() => setSelected(b)}
+                className="text-left bg-white border border-stone-200 rounded-xl p-4 flex flex-col gap-2 hover:shadow-sm hover:border-stone-300 transition cursor-pointer"
+              >
                 <div className="flex items-center justify-between">
                   <h3 className="text-sm font-semibold text-stone-900">{b.batch_id}</h3>
                   <span className="text-xs text-stone-500">{b.product_type}</span>

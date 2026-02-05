@@ -4,12 +4,14 @@ import { getCachedCustomerAnalytics } from '@/modules/crm/analytics'
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 
+type ContextWithIdParam = { params: { id: string } }
+
 export async function GET(
   _req: Request,
-  context: RouteContext<"/api/crm/customer/[id]">
+  context: ContextWithIdParam
 ) {
   try {
-    const { id } = await context.params
+    const { id } = context.params
     const customers = getCachedCustomerAnalytics()
     const customer = customers.find(c => c.customerId === id)
     if (!customer) return NextResponse.json({ error: 'Not found' }, { status: 404 })
