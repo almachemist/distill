@@ -1,0 +1,366 @@
+{
+  "recipe": "Rainforest Gin",
+  "runs": [
+    {
+      "run_id": "SPIRIT-GIN-RF-31",
+      "sku": "Rainforest Gin",
+      "date": "2026-01-12",
+      "still_used": "Carrie",
+      "boiler_start_time": "06:30",
+      "charge_adjustment": {
+        "sources": [
+          {
+            "source": "Manildra NC96",
+            "type": "Ethanol",
+            "volume_l": 0,
+            "abv_percent": 0,
+            "lal": 0.0
+          },
+          {
+            "source": "Filtered Water",
+            "type": "Dilution",
+            "volume_l": 0,
+            "abv_percent": 0.0,
+            "lal": 0.0
+          },
+          {
+            "source": "Saltwater",
+            "type": "Other",
+            "volume_l": 0,
+            "abv_percent": 0.0,
+            "lal": 0.0
+          }
+        ],
+        "total_charge": {
+          "volume_l": 1000,
+          "abv_percent": 51.0,
+          "lal": 510.0
+        },
+        "still_setup": {
+          "elements": "2 new ones",
+          "steeping": "18 hours (Juniper, Coriander)",
+          "plates": null,
+          "options": "5.2173E+15"
+        }
+      },
+      "botanicals": [
+        {
+          "name": "Juniper",
+          "notes": "ok",
+          "weight_g": 6360,
+          "ratio_percent": 36.7,
+          "time": "10:00:00",
+          "phase": "Heads",
+          "volume_l": 14.0,
+          "volume_percent": 4.8,
+          "vc_tank_volume_l": null,
+          "abv_percent": 85.0,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": null,
+          "observations": null
+        },
+        {
+          "name": "Coriander",
+          "notes": "ok",
+          "weight_g": 1410,
+          "ratio_percent": 8.1,
+          "time": null,
+          "phase": "Middle Run (Hearts)",
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 0.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": null,
+          "observations": null
+        },
+        {
+          "name": "Angelica",
+          "notes": "ok",
+          "weight_g": 175,
+          "ratio_percent": 1.0,
+          "time": "16:30:00",
+          "phase": "Middle Run (Hearts)",
+          "volume_l": 141.0,
+          "volume_percent": 48.5,
+          "vc_tank_volume_l": 141.0,
+          "abv_percent": 79.7,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": null,
+          "observations": null
+        },
+        {
+          "name": "Cassia",
+          "notes": "ok",
+          "weight_g": 25,
+          "ratio_percent": 0.1,
+          "time": null,
+          "phase": null,
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 141.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": null,
+          "observations": null
+        },
+        {
+          "name": "Lemon Myrtle",
+          "notes": "ok",
+          "weight_g": 141,
+          "ratio_percent": 0.8,
+          "time": null,
+          "phase": "TAILS",
+          "volume_l": 220.0,
+          "volume_percent": 75.6,
+          "vc_tank_volume_l": 361.0,
+          "abv_percent": 81.0,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": null,
+          "observations": "Another day distilling the left over; to be used for distilling vodka"
+        },
+        {
+          "name": "Lemon Aspen",
+          "notes": "ok",
+          "weight_g": 71,
+          "ratio_percent": 0.4,
+          "time": null,
+          "phase": null,
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 361.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": null,
+          "observations": "Distilled until 60%"
+        },
+        {
+          "name": "Grapefruit",
+          "notes": "ok",
+          "weight_g": 567,
+          "ratio_percent": 3.3,
+          "time": null,
+          "phase": null,
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 361.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": 0.0,
+          "observations": null
+        },
+        {
+          "name": "Macadamia",
+          "notes": "ok",
+          "weight_g": 102,
+          "ratio_percent": 0.6,
+          "time": null,
+          "phase": null,
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 361.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": 0.0,
+          "observations": null
+        },
+        {
+          "name": "Liquorise",
+          "notes": "ok",
+          "weight_g": 51,
+          "ratio_percent": 0.3,
+          "time": null,
+          "phase": null,
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 361.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": 0.0,
+          "observations": null
+        },
+        {
+          "name": "Cardamon",
+          "notes": "ok",
+          "weight_g": 141,
+          "ratio_percent": 0.8,
+          "time": null,
+          "phase": null,
+          "volume_l": null,
+          "volume_percent": 0.0,
+          "vc_tank_volume_l": 361.0,
+          "abv_percent": null,
+          "ambient_temp_c": null,
+          "head_temp_c": null,
+          "condenser_temp_c": null,
+          "lal": 0.0,
+          "observations": null
+        },
+        {
+          "name": "Pepperberry",
+          "notes": null,
+          "weight_g": 102,
+          "ratio_percent": 0.6,
+          "phase": null
+        },
+        {
+          "name": "Vanilla",
+          "notes": "ok",
+          "weight_g": 25,
+          "ratio_percent": 0.1,
+          "phase": "Foreshots",
+          "receiving_vessel": "Buket",
+          "output": "Discarded",
+          "volume_l": 2.0,
+          "volume_percent": 1.3,
+          "abv_percent": 0.0,
+          "lal": 0.0
+        },
+        {
+          "name": "Mango",
+          "notes": "ok",
+          "weight_g": 176,
+          "ratio_percent": 1.0,
+          "phase": "Heads",
+          "receiving_vessel": "IBC-02",
+          "output": "FEINTS-GIN-000x",
+          "volume_l": 12.0,
+          "volume_percent": null,
+          "abv_percent": 83.0,
+          "lal": 0.0
+        }
+      ],
+      "totals": {
+        "botanicals_total_g": 17316,
+        "botanicals_per_lal_g": 34.0,
+        "total_output": {
+          "total_run_l": 397.0,
+          "lal": 21.0,
+          "hearts": {
+            "id": "GIN-RF-0031",
+            "receiving_vessel": "VC-400",
+            "volume_l": 141.0,
+            "abv_percent": 79.7,
+            "lal": 21.0
+          },
+          "tails": {
+            "id": "FEINTS-GIN-000x",
+            "receiving_vessel": "IBC-02",
+            "volume_l": 242.0,
+            "abv_percent": 79.4,
+            "lal": 0.0
+          }
+        }
+      },
+      "dilution_steps": [
+        {
+          "step": 1,
+          "date_added": "2025-08-02",
+          "new_make_l": 291.0,
+          "filtered_water_l": 259.0,
+          "new_volume_l": 550.0,
+          "abv_percent": 42.0,
+          "lal": 231.0,
+          "notes": "x litres required overall"
+        },
+        {
+          "step": 2,
+          "date_added": null,
+          "new_make_l": 550.0,
+          "filtered_water_l": null,
+          "new_volume_l": null,
+          "abv_percent": null,
+          "lal": 0.0,
+          "notes": null
+        },
+        {
+          "step": 3,
+          "date_added": null,
+          "new_make_l": 550.0,
+          "filtered_water_l": null,
+          "new_volume_l": null,
+          "abv_percent": null,
+          "lal": 0.0,
+          "notes": null
+        },
+        {
+          "step": 4,
+          "date_added": null,
+          "new_make_l": 550.0,
+          "filtered_water_l": null,
+          "new_volume_l": null,
+          "abv_percent": null,
+          "lal": 0.0,
+          "notes": null
+        }
+      ],
+      "final_output": {
+        "volume_l": 550.0,
+        "abv_percent": null,
+        "lal": null
+      },
+      "combined_dilution": {
+        "label": "COMBINED",
+        "new_make_l": 291.0,
+        "filtered_water_l": null,
+        "new_volume_l": 291.0,
+        "abv_percent": 24.1,
+        "lal": 70.1,
+        "notes": "x litres required overall",
+        "additional_steps": [
+          { "step": 2, "new_volume_l": 291.0 },
+          { "step": 3, "new_volume_l": 291.0 },
+          { "step": 4, "new_volume_l": 291.0 },
+          { "step": 5, "new_volume_l": 291.0 },
+          { "step": 6, "new_volume_l": 291.0 },
+          { "step": 7, "new_volume_l": 291.0 }
+        ],
+        "final_output_run": {
+          "filtered_water_l": 0.0,
+          "new_volume_l": 291.0
+        }
+      },
+      "raw": {
+        "totals_row_in_sheet": {
+          "heads_hearts_total_run_l": 291.0,
+          "volume_percent": -24.1,
+          "abv_percent": 124.1
+        }
+      }
+    }
+  ],
+  "bottling": {
+    "batches": [
+      {
+        "size_ml": 200,
+        "quantity": 202,
+        "volume_total_l": 40.4
+      },
+      {
+        "size_ml": 700,
+        "quantity": 404,
+        "volume_total_l": 282.8
+      }
+    ],
+    "total_bottled_l": 323.2,
+    "notes": "RF-0031 packaged into 202x200 mL and 404x700 mL formats."
+  }
+}

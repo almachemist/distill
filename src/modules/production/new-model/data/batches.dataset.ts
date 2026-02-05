@@ -1959,6 +1959,362 @@ export const batchesDataset: BatchesDataset = {
           editable: true
         }
       }
+    ],
+    "2026-01": [
+      {
+        batch_id: "VODKA-004",
+        product_id: "VODKA-TD",
+        sku: "Ethanol for liquors and vodka TRIPLE DISTILLED",
+        display_name: "Vodka Triple Distilled 004",
+        date: "2026-01-11",
+        still_used: "Carrie",
+
+        charge: {
+          components: [
+            { source: "Early tails already distilled (ethanol)", volume_l: 950, abv_percent: 40.0, lal: 380.0 },
+            { source: "Filtered Water", volume_l: 0, abv_percent: 0.0, lal: 0.0 },
+            { source: "Saltwater", volume_l: 0, abv_percent: 0.0, lal: 0.0 }
+          ],
+          total: { volume_l: 925.0, abv_percent: 52.5, lal: 485.6 }
+        },
+
+        run_summary: {
+          condenser_temp_c: null,
+          power_settings: ["35A"],
+          observations: [
+            "Warmed up to 70C day before; still at 50C at 6AM",
+            "Boiler on at 35A with plates water running and deflegmator on",
+            "Foreshots discarded; hearts collected in three parts for vodka blend"
+          ]
+        },
+
+        cuts: {
+          foreshots: {
+            volume_l: 2.0,
+            abv_percent: 90.0,
+            lal: 1.8,
+            notes: "Discarded"
+          },
+          heads: {
+            volume_l: null,
+            abv_percent: null,
+            lal: null,
+            notes: "No heads data recorded"
+          },
+          hearts: {
+            volume_l: 363.0,
+            abv_percent: 86.0,
+            lal: 312.2,
+            notes: "Collected across three segments"
+          },
+          tails: {
+            volume_l: 0.0,
+            abv_percent: null,
+            lal: 0.0,
+            notes: "No tails collected"
+          },
+          hearts_segments: [
+            { time_start: "15:00", volume_l: 110, abv_percent: 87.2, lal: 96.0, notes: "Part 1 – 33A" },
+            { time_start: "16:30", volume_l: 262, abv_percent: 86.0, lal: 225.3, notes: "Part 2 – 26A (Tank 1)" },
+            { time_start: "14:00", volume_l: 101, abv_percent: 85.0, lal: 85.9, notes: "Part 3 – 25A (Tank 2)" }
+          ]
+        },
+
+        dilution: {
+          instructions_note: "Dilution steps captured during blend adjustments",
+          steps: [
+            {
+              step_id: "D1",
+              source_volume_l: 288.0,
+              water_added_l: 363.0,
+              new_volume_l: 651.0,
+              target_abv_percent: 38.0,
+              lal: null,
+              calculation_note: "Recorded on 2025-10-13"
+            },
+            {
+              step_id: "D2",
+              source_volume_l: 651.0,
+              water_added_l: null,
+              new_volume_l: null,
+              target_abv_percent: 58.6,
+              lal: null,
+              calculation_note: "2025-10-14 — added 110 L ethanol @ 96%"
+            },
+            {
+              step_id: "D3",
+              source_volume_l: 651.0,
+              water_added_l: 168.0,
+              new_volume_l: null,
+              target_abv_percent: 38.0,
+              lal: null,
+              calculation_note: "2025-10-14 adjustment"
+            }
+          ],
+          combined: {
+            final_output_run: {
+              new_make_l: 1700.0,
+              total_volume_l: 1700.0,
+              lal: 646.0
+            },
+            notes: "Final blend intended for vodka production"
+          }
+        },
+
+        data_integrity: {
+          source_sheet_cells_with_errors: [],
+          fields_with_nulls_due_to_missing_values: [
+            "cuts.heads.volume_l",
+            "cuts.heads.abv_percent",
+            "cuts.heads.lal",
+            "cuts.tails.abv_percent",
+            "dilution.steps[1].water_added_l",
+            "dilution.steps[1].new_volume_l",
+            "dilution.steps[1].lal",
+            "dilution.steps[2].new_volume_l",
+            "dilution.steps[2].lal"
+          ]
+        },
+
+        audit: {
+          created_at: "2026-02-04T00:00:00+10:00",
+          created_by: "Cascade",
+          last_edited_at: "2026-02-04T00:00:00+10:00",
+          editable: true
+        }
+      },
+      {
+        batch_id: "SPIRIT-GIN-RF-31",
+        product_id: "GIN-RF",
+        sku: "Rainforest Gin",
+        display_name: "Rainforest Gin SPIRIT-GIN-RF-31",
+        date: "2026-01-12",
+        boiler_on_time: "06:30",
+        still_used: "Carrie",
+
+        charge: {
+          components: [
+            { source: "Manildra NC96", type: "Ethanol", volume_l: 0, abv_percent: 0.0, lal: 0.0 },
+            { source: "Filtered Water", type: "Dilution", volume_l: 0, abv_percent: 0.0, lal: 0.0 },
+            { source: "Saltwater", type: "Other", volume_l: 0, abv_percent: 0.0, lal: 0.0 }
+          ],
+          total: { volume_l: 1000.0, abv_percent: 51.0, lal: 510.0 }
+        },
+
+        botanicals: {
+          per_lal_g: null,
+          items: [
+            { name: "Juniper", time: "10:00", notes: "ok", phase: "Heads", volume_l: 14.0, weight_g: 6360, ratio_percent: 36.7, abv_percent: 85.0 },
+            { name: "Coriander", notes: "ok", phase: "Middle Run (Hearts)", weight_g: 1410, ratio_percent: 8.1 },
+            { name: "Angelica", time: "16:30", notes: "ok", phase: "Middle Run (Hearts)", volume_l: 141.0, weight_g: 175, ratio_percent: 1.0, abv_percent: 79.7, receiving_vessel: "VC-400" },
+            { name: "Cassia", notes: "ok", weight_g: 25, ratio_percent: 0.1 },
+            { name: "Lemon Myrtle", notes: "ok", phase: "TAILS", volume_l: 220.0, weight_g: 141, ratio_percent: 0.8, abv_percent: 75.6, observations: "Another day distilling the left over; to be used for distilling vodka", receiving_vessel: "IBC-02" },
+            { name: "Lemon Aspen", notes: "ok", weight_g: 71, ratio_percent: 0.4, observations: "Distilled until 60%" },
+            { name: "Grapefruit", notes: "ok", weight_g: 567, ratio_percent: 3.3 },
+            { name: "Macadamia", notes: "ok", weight_g: 102, ratio_percent: 0.6 },
+            { name: "Liquorise", notes: "ok", weight_g: 51, ratio_percent: 0.3 },
+            { name: "Cardamon", notes: "ok", weight_g: 141, ratio_percent: 0.8 },
+            { name: "Pepperberry", weight_g: 102, ratio_percent: 0.6 },
+            { name: "Vanilla", notes: "ok", phase: "Foreshots", volume_l: 2.0, weight_g: 25, ratio_percent: 0.1, receiving_vessel: "Buket" },
+            { name: "Mango", notes: "ok", phase: "Heads", volume_l: 12.0, weight_g: 176, ratio_percent: 1.0, abv_percent: 83.0, receiving_vessel: "IBC-02" }
+          ]
+        },
+
+        still_setup: {
+          steeping_duration_hours: 18,
+          steeped_items: ["Juniper", "Coriander"],
+          heating_elements: ["2 new ones"],
+          condenser_temp_c: null
+        },
+
+        run_summary: {
+          condenser_temp_c: null,
+          power_settings: [],
+          observations: ["Deflegmator reading captured as 5.2173E+15"]
+        },
+
+        cuts: {
+          foreshots: {
+            receiving_vessel: "Buket",
+            volume_l: 2.0,
+            lal: 0.0
+          },
+          heads: {
+            receiving_vessel: "IBC-02",
+            volume_l: 12.0,
+            abv_percent: 83.0,
+            lal: 0.0
+          },
+          hearts: {
+            receiving_vessel: "VC-400",
+            volume_l: 141.0,
+            abv_percent: 79.7,
+            lal: 21.0
+          },
+          tails: {
+            receiving_vessel: "IBC-02",
+            volume_l: 242.0,
+            abv_percent: 79.4,
+            lal: 0.0,
+            notes: "Recorded tails line"
+          }
+        },
+
+        phase_outputs: [
+          { phase: "Foreshots", receiving_vessel: "Buket", volume_l: 2.0, lal: 0.0 },
+          { phase: "Heads", receiving_vessel: "IBC-02", volume_l: 12.0, abv_percent: 83.0, lal: 0.0 },
+          { phase: "Hearts", receiving_vessel: "VC-400", volume_l: 141.0, abv_percent: 79.7, lal: 21.0 },
+          { phase: "Tails", receiving_vessel: "IBC-02", volume_l: 242.0, abv_percent: 79.4, lal: 0.0 }
+        ],
+
+        dilution: {
+          steps: [
+            {
+              step_id: "D1",
+              step: 1,
+              date_added: "2025-08-02",
+              filtered_water_l: 259.0,
+              new_volume_l: 550.0,
+              new_make_l: 291.0,
+              abv_percent: null,
+              lal: null
+            }
+          ],
+          combined: {
+            final_output_run: {
+              new_make_l: 291.0,
+              total_volume_l: 550.0,
+              lal: null
+            }
+          }
+        },
+
+        data_integrity: {
+          source_sheet_cells_with_errors: ["still_used original: Roberta"],
+          fields_with_nulls_due_to_missing_values: [
+            "charge.components[0].volume_l",
+            "charge.components[0].abv_percent",
+            "charge.components[0].lal",
+            "charge.components[1].volume_l",
+            "charge.components[1].abv_percent",
+            "charge.components[1].lal",
+            "charge.components[2].volume_l",
+            "charge.components[2].abv_percent",
+            "charge.components[2].lal",
+            "botanicals.per_lal_g",
+            "botanicals.items[0].lal",
+            "botanicals.items[0].head_temp_c",
+            "botanicals.items[0].ambient_temp_c",
+            "botanicals.items[0].condenser_temp_c",
+            "botanicals.items[0].receiving_vessel",
+            "botanicals.items[0].observations",
+            "botanicals.items[1].time",
+            "botanicals.items[1].volume_l",
+            "botanicals.items[1].abv_percent",
+            "botanicals.items[1].lal",
+            "botanicals.items[1].head_temp_c",
+            "botanicals.items[1].ambient_temp_c",
+            "botanicals.items[1].condenser_temp_c",
+            "botanicals.items[1].receiving_vessel",
+            "botanicals.items[1].observations",
+            "botanicals.items[2].lal",
+            "botanicals.items[2].head_temp_c",
+            "botanicals.items[2].ambient_temp_c",
+            "botanicals.items[2].condenser_temp_c",
+            "botanicals.items[2].observations",
+            "botanicals.items[3].volume_l",
+            "botanicals.items[3].abv_percent",
+            "botanicals.items[3].lal",
+            "botanicals.items[3].head_temp_c",
+            "botanicals.items[3].ambient_temp_c",
+            "botanicals.items[3].condenser_temp_c",
+            "botanicals.items[3].receiving_vessel",
+            "botanicals.items[3].observations",
+            "botanicals.items[4].lal",
+            "botanicals.items[4].head_temp_c",
+            "botanicals.items[4].ambient_temp_c",
+            "botanicals.items[4].condenser_temp_c",
+            "botanicals.items[5].volume_l",
+            "botanicals.items[5].abv_percent",
+            "botanicals.items[5].lal",
+            "botanicals.items[5].head_temp_c",
+            "botanicals.items[5].ambient_temp_c",
+            "botanicals.items[5].condenser_temp_c",
+            "botanicals.items[5].receiving_vessel",
+            "botanicals.items[6].volume_l",
+            "botanicals.items[6].abv_percent",
+            "botanicals.items[6].lal",
+            "botanicals.items[6].head_temp_c",
+            "botanicals.items[6].ambient_temp_c",
+            "botanicals.items[6].condenser_temp_c",
+            "botanicals.items[6].receiving_vessel",
+            "botanicals.items[6].observations",
+            "botanicals.items[7].volume_l",
+            "botanicals.items[7].abv_percent",
+            "botanicals.items[7].lal",
+            "botanicals.items[7].head_temp_c",
+            "botanicals.items[7].ambient_temp_c",
+            "botanicals.items[7].condenser_temp_c",
+            "botanicals.items[7].receiving_vessel",
+            "botanicals.items[7].observations",
+            "botanicals.items[8].volume_l",
+            "botanicals.items[8].abv_percent",
+            "botanicals.items[8].lal",
+            "botanicals.items[8].head_temp_c",
+            "botanicals.items[8].ambient_temp_c",
+            "botanicals.items[8].condenser_temp_c",
+            "botanicals.items[8].receiving_vessel",
+            "botanicals.items[8].observations",
+            "botanicals.items[9].volume_l",
+            "botanicals.items[9].abv_percent",
+            "botanicals.items[9].lal",
+            "botanicals.items[9].head_temp_c",
+            "botanicals.items[9].ambient_temp_c",
+            "botanicals.items[9].condenser_temp_c",
+            "botanicals.items[9].receiving_vessel",
+            "botanicals.items[9].observations",
+            "botanicals.items[10].notes",
+            "botanicals.items[10].volume_l",
+            "botanicals.items[10].abv_percent",
+            "botanicals.items[10].lal",
+            "botanicals.items[10].head_temp_c",
+            "botanicals.items[10].ambient_temp_c",
+            "botanicals.items[10].condenser_temp_c",
+            "botanicals.items[10].receiving_vessel",
+            "botanicals.items[10].observations",
+            "botanicals.items[11].abv_percent",
+            "botanicals.items[11].lal",
+            "botanicals.items[11].head_temp_c",
+            "botanicals.items[11].ambient_temp_c",
+            "botanicals.items[11].condenser_temp_c",
+            "botanicals.items[11].observations",
+            "botanicals.items[12].time",
+            "botanicals.items[12].lal",
+            "botanicals.items[12].head_temp_c",
+            "botanicals.items[12].ambient_temp_c",
+            "botanicals.items[12].condenser_temp_c",
+            "cuts.foreshots.abv_percent",
+            "cuts.foreshots.notes",
+            "cuts.heads.lal",
+            "cuts.tails.lal",
+            "phase_outputs.foreshots.abv_percent",
+            "phase_outputs.foreshots.lal",
+            "dilution.instructions_note",
+            "dilution.steps[0].source_volume_l",
+            "dilution.steps[0].abv_percent",
+            "dilution.steps[0].lal",
+            "dilution.steps[0].notes",
+            "dilution.combined.final_output_run.lal"
+          ]
+        },
+
+        audit: {
+          created_at: "2026-02-04T00:00:00+10:00",
+          created_by: "Cascade",
+          last_edited_at: "2026-02-04T00:00:00+10:00",
+          editable: true
+        }
+      }
     ]
   },
 

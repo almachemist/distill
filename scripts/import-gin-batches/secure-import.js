@@ -26,9 +26,9 @@ const CONFIG = {
   supabaseUrl: process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://dscmknufpfhxjcanzdsr.supabase.co',
   supabaseKey: process.env.SUPABASE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVICE_KEY,
   gin: {
-    batchesDir: join(process.cwd(), '../data/batches'),
-    filePredicate: (filename) => filename.startsWith('signature-dry-gin-') && filename.endsWith('.json'),
-    table: 'batches'
+    batchesDir: join(process.cwd(), 'scripts/data/batches'),
+    filePredicate: (filename) => (/^(signature-dry-gin-|rainforest-gin-)/i).test(filename) && filename.endsWith('.json'),
+    table: 'distillation_runs'
   },
   rum: {
     datasetPath: join(process.cwd(), '../../src/app/rum/rum_production_data.json'),
@@ -83,31 +83,154 @@ async function importGinBatch(batchFile) {
     const { runs, recipe } = JSON.parse(fileContent);
     const run = runs[0];
 
-    console.log(`\n📦 Processing ${run.run_id}...`);
+    if (!run) {
+      console.warn(`⚠️ No runs found in ${batchFile}`);
+      return false;
+    }
 
-    // Normalize still name to CARRIE
+    const runId = run.run_id || run.batch_id || null;
+    if (!runId) {
+      console.warn(`⚠️ Skipping ${batchFile}: missing run_id/batch_id`);
+      return false;
+    }
+
+    console.log(`\n📦 Processing ${runId}...`);
+
+    // Normalize still name to CARRIE for Supabase record
     const stillUsed = 'CARRIE';
     if (run.still_used && run.still_used.toUpperCase() !== 'CARRIE') {
       console.log(`   Normalized still from ${run.still_used} to CARRIE`);
     }
 
-    const { data, error } = await supabase
+    const charge = run.charge || (run.charge_adjustment ? {
+      components: run.charge_adjustment.sources,
+      total: run.charge_adjustment.total_charge
+    } : {});
+    const cuts = (run.distillation && run.distillation.cuts) || run.cuts || {};
+    const hearts = cuts.hearts || {};
+    const heads = cuts.heads || {};
+    const foreshots = cuts.foreshots || {};
+    const tailsSegments = cuts.tails_segments || run.tails_segments || [];
+    const chargeTotals = charge.total || run.charge_adjustment?.total_charge || {};
+    const dilution = run.dilution || {};
+    const totals = run.totals?.total_output || {};
+
+    const numericOrNull = (value) => {
+      if (value === null || value === undefined || value === '') return null;
+      const num = Number(value);
+      return Number.isFinite(num) ? num : null;
+    };
+
+    const buildLegacyChargeComponents = () => {
+      const legacy = run.charge || {};
+      const components = [];
+
+      if (
+        legacy.ethanol_source ||
+        legacy.ethanol_volume_L !== undefined
+      ) {
+        components.push({
+          source: legacy.ethanol_source || 'Ethanol',
+          type: 'Ethanol',
+          volume_l: numericOrNull(legacy.ethanol_volume_L),
+          abv_percent: numericOrNull(legacy.ethanol_abv_percent),
+          lal: numericOrNull(legacy.ethanol_LAL)
+        });
+      }
+
+      if (legacy.water_volume_L !== undefined) {
+        components.push({
+          source: 'Filtered Water',
+          type: 'Water',
+          volume_l: numericOrNull(legacy.water_volume_L),
+          abv_percent: numericOrNull(legacy.water_abv_percent),
+          lal: numericOrNull(legacy.water_LAL)
+        });
+      }
+
+      if (legacy.other_volume_L !== undefined && numericOrNull(legacy.other_volume_L) !== null) {
+        components.push({
+          source: 'Other',
+          type: 'Other',
+          volume_l: numericOrNull(legacy.other_volume_L),
+          abv_percent: null,
+          lal: null
+        });
+      }
+
+      if (!components.length) {
+        components.push({
+          source: 'Charge',
+          type: 'Unknown',
+          volume_l: numericOrNull(legacy.total_charge_L),
+          abv_percent: numericOrNull(legacy.charge_abv_percent),
+          lal: numericOrNull(legacy.total_LAL)
+        });
+      }
+
+      return components;
+    };
+
+    const chargeComponents = Array.isArray(charge.components) && charge.components.length
+      ? charge.components
+      : buildLegacyChargeComponents();
+
+    const resolvedHearts = Object.keys(hearts).length ? hearts : totals.hearts || {};
+    const resolvedHeads = Object.keys(heads).length ? heads : totals.heads || {};
+    const resolvedForeshots = Object.keys(foreshots).length ? foreshots : totals.foreshots || {};
+    const resolvedTails = totals.tails || {};
+
+    const record = {
+      batch_id: runId,
+      sku: recipe || run.recipe || run.product || null,
+      display_name: run.display_name || recipe || run.product || `Cane Spirit ${runId}`,
+      still_used: stillUsed,
+      date: run.date || null,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+
+      charge_components: chargeComponents,
+      charge_total_volume_l: chargeTotals.volume_l ?? charge.total_volume_l ?? numericOrNull(run.charge?.total_charge_L) ?? null,
+      charge_total_abv_percent: chargeTotals.abv_percent ?? charge.total_abv_percent ?? numericOrNull(run.charge?.charge_abv_percent) ?? null,
+      charge_total_lal: chargeTotals.lal ?? charge.total_lal ?? numericOrNull(run.charge?.total_LAL) ?? null,
+
+      boiler_on_time: run.boiler_on_time || charge.boiler_on_time || null,
+      heating_elements: run.heating_elements || charge.heating_elements || null,
+      power_setting: run.power_setting || null,
+
+      foreshots_volume_l: resolvedForeshots.volume_l ?? foreshots.volume_l ?? null,
+      foreshots_abv_percent: resolvedForeshots.abv_percent ?? foreshots.abv_percent ?? null,
+      foreshots_lal: resolvedForeshots.lal ?? foreshots.lal ?? null,
+
+      heads_volume_l: resolvedHeads.volume_l ?? heads.volume_l ?? null,
+      heads_abv_percent: resolvedHeads.abv_percent ?? heads.abv_percent ?? null,
+      heads_lal: resolvedHeads.lal ?? heads.lal ?? null,
+
+      hearts_volume_l: resolvedHearts.volume_l ?? hearts.volume_l ?? null,
+      hearts_abv_percent: resolvedHearts.abv_percent ?? hearts.abv_percent ?? null,
+      hearts_lal: resolvedHearts.lal ?? hearts.lal ?? null,
+
+      tails_volume_l: run.tails_volume_l ?? resolvedTails.volume_l ?? null,
+      tails_abv_percent: run.tails_abv_percent ?? resolvedTails.abv_percent ?? null,
+      tails_lal: run.tails_lal ?? resolvedTails.lal ?? null,
+      tails_segments: Array.isArray(tailsSegments) && tailsSegments.length > 0
+        ? tailsSegments
+        : (Array.isArray(run.totals?.tail_segments) ? run.totals.tail_segments : null),
+
+      dilution_steps: Array.isArray(dilution.steps) ? dilution.steps : null,
+      final_output_volume_l: dilution.final_output_volume_l ?? dilution.final_volume_l ?? null,
+      final_output_abv_percent: dilution.final_output_abv_percent ?? null,
+      final_output_lal: dilution.final_output_lal ?? null,
+
+      notes: run.notes || (run.distillation && run.distillation.notes) || null,
+    };
+
+    const { error } = await supabase
       .from(CONFIG.gin.table)
-      .upsert({
-        run_id: run.run_id,
-        recipe,
-        date: run.date,
-        still_used: stillUsed,
-        location: run.location,
-        updated_at: new Date().toISOString()
-      }, {
-        onConflict: 'run_id'
-      })
-      .select()
-      .single();
+      .upsert(record, { onConflict: 'batch_id' });
 
     if (error) throw error;
-    console.log(`✅ ${run.run_id} - ${recipe} (${run.date})`);
+    console.log(`✅ ${runId} - ${record.display_name || record.sku || 'Cane Spirit'} (${record.date || 'no date'})`);
     return true;
   } catch (error) {
     console.error(`❌ Error in ${batchFile}:`, error.message);
@@ -137,9 +260,13 @@ function normalizeRumRecord(record) {
     return curve;
   };
 
+  const batchId = record.batch_id || record.batchId || record.id || 'UNKNOWN';
+
   const fermentation = record.fermentation ?? {};
-  const distillation = (record.distillation_runs && record.distillation_runs[0]) ?? (record.distillation ?? {});
-  const cask = record.cask ?? (record.maturation ?? {});
+  const distillationRuns = Array.isArray(record.distillation_runs)
+    ? record.distillation_runs.filter(Boolean)
+    : [];
+  const distillation = (distillationRuns[0]) ?? (record.distillation ?? {});
 
   // Merge substrate info if present at root-level
   const substrate = record.substrate ?? fermentation.substrate ?? fermentation?.substrate?.material ?? null;
@@ -219,8 +346,125 @@ function normalizeRumRecord(record) {
   const rt1 = getRetortByIndex(distillation, 0) || {};
   const rt2 = getRetortByIndex(distillation, 1) || {};
 
+  let heartsVolume = numericOrNull(heartsCut?.volume_l);
+  let heartsAbv = numericOrNull(heartsCut?.abv_percent);
+  let heartsLal = numericOrNull(heartsCut?.lal);
+  let usedCombinedHearts = false;
+
+  const aggregateHeartsFromRuns = (runs) => {
+    if (!Array.isArray(runs) || runs.length === 0) {
+      return { volume: null, abv: null, lal: null, validRuns: 0, runCount: 0, latestIso: null };
+    }
+
+    let totalVolume = 0;
+    let totalLal = 0;
+    let validRuns = 0;
+    let latest = null;
+
+    for (const run of runs) {
+      const heartData = extractHearts(run);
+      if (!heartData) continue;
+
+      validRuns++;
+
+      if (heartData.volume !== null) {
+        totalVolume += heartData.volume;
+      }
+
+      if (heartData.lal !== null) {
+        totalLal += heartData.lal;
+      }
+
+      if (heartData.isoDate) {
+        const ts = Date.parse(heartData.isoDate);
+        if (!Number.isNaN(ts) && (!latest || ts > latest.ts)) {
+          latest = { iso: heartData.isoDate, ts };
+        }
+      }
+    }
+
+    if (validRuns === 0) {
+      return { volume: null, abv: null, lal: null, validRuns: 0, runCount: runs.length, latestIso: null };
+    }
+
+    const volumeFinal = totalVolume > 0 ? Number(totalVolume.toFixed(3)) : null;
+    const lalFinal = totalLal > 0 ? Number(totalLal.toFixed(3)) : null;
+    const abvFinal = (volumeFinal !== null && lalFinal !== null && volumeFinal > 0)
+      ? Number(((lalFinal / volumeFinal) * 100).toFixed(3))
+      : null;
+
+    return {
+      volume: volumeFinal,
+      abv: abvFinal,
+      lal: lalFinal,
+      validRuns,
+      runCount: runs.length,
+      latestIso: latest ? latest.iso : null
+    };
+  };
+
+  const aggregatedHearts = aggregateHeartsFromRuns(distillationRuns);
+
+  if (aggregatedHearts.validRuns > 0) {
+    if (aggregatedHearts.volume !== null) {
+      heartsVolume = aggregatedHearts.volume;
+    }
+    if (aggregatedHearts.lal !== null) {
+      heartsLal = aggregatedHearts.lal;
+    }
+    if (aggregatedHearts.abv !== null) {
+      heartsAbv = aggregatedHearts.abv;
+    } else if (heartsVolume !== null && heartsLal !== null && heartsVolume > 0) {
+      heartsAbv = Number(((heartsLal / heartsVolume) * 100).toFixed(3));
+    }
+  }
+
+  const combinedHearts = distillation.hearts || {};
+  if (combinedHearts && (combinedHearts.volume_l !== undefined || combinedHearts.lal !== undefined)) {
+    const combinedVolume = numericOrNull(combinedHearts.volume_l ?? combinedHearts.volume ?? combinedHearts.total_volume_l);
+    const combinedLal = numericOrNull(combinedHearts.lal ?? combinedHearts.total_lal);
+    const combinedAbv = numericOrNull(combinedHearts.abv_percent ?? combinedHearts.abv ?? combinedHearts.avg_abv_percent);
+
+    if (combinedVolume !== null) heartsVolume = combinedVolume;
+
+    if (combinedLal !== null) heartsLal = combinedLal;
+
+    if (combinedAbv !== null) heartsAbv = combinedAbv;
+
+    usedCombinedHearts = true;
+  }
+
+  if (aggregatedHearts.validRuns > 0) {
+    const logLabel = usedCombinedHearts
+      ? 'Applied combined hearts summary'
+      : `Aggregated hearts across ${aggregatedHearts.validRuns}/${aggregatedHearts.runCount} distillations`;
+    console.log(`   ↳ ${logLabel} -> ${heartsVolume ?? '—'} L (${heartsLal ?? '—'} LAL @ ${heartsAbv ?? '—'}% ABV)`);
+  }
+
+  const distillationDateFromRuns = (() => {
+    if (aggregatedHearts.latestIso) return aggregatedHearts.latestIso;
+    const isoDates = [];
+    for (const run of distillationRuns) {
+      const iso = isoOrNull(run?.date ?? run?.distillation_date);
+      if (iso) isoDates.push(iso);
+    }
+    if (isoDates.length === 0) return null;
+    return isoDates.reduce((latest, iso) => {
+      const ts = Date.parse(iso);
+      if (Number.isNaN(ts)) return latest;
+      if (!latest || ts > latest.ts) {
+        return { iso, ts };
+      }
+      return latest;
+    }, null)?.iso ?? null;
+  })();
+
+  const distillationDateFinal = distillationDateFromRuns
+    ?? isoOrNull(distillation.date)
+    ?? isoOrNull(record.distillation_date);
+
   return {
-    batch_id: record.batch_id,
+    batch_id: batchId,
     product_name: record.product ?? record.product_name ?? 'Rum',
     product_type: (record.product_variant?.includes('cane') ? 'cane_spirit' : 'rum'),
     still_used: 'Roberta',
@@ -260,7 +504,7 @@ function normalizeRumRecord(record) {
     final_abv_percent: numericOrNull(fermentation.final_abv_percent ?? record.fermentation?.final_abv_percent),
     fermentation_notes: fermentation.notes ?? record.notes ?? null,
 
-    distillation_date: isoOrNull(distillation.date),
+    distillation_date: distillationDateFinal,
     boiler_volume_l: numericOrNull(distillation.boiler_volume_l ?? distillation.boiler?.volume_L ?? distillation.boiler?.volume_l),
     boiler_abv_percent: numericOrNull(distillation.boiler_abv_percent ?? distillation.boiler?.abv_percent),
     boiler_lal: numericOrNull(distillation.boiler_lal ?? distillation.boiler?.lal),
@@ -291,9 +535,9 @@ function normalizeRumRecord(record) {
     heads_notes: headsCut?.notes ?? null,
 
     hearts_time: heartsCut?.time ?? null,
-    hearts_volume_l: numericOrNull(heartsCut?.volume_l),
-    hearts_abv_percent: numericOrNull(heartsCut?.abv_percent),
-    hearts_lal: numericOrNull(heartsCut?.lal),
+    hearts_volume_l: heartsVolume,
+    hearts_abv_percent: heartsAbv,
+    hearts_lal: heartsLal,
     hearts_notes: heartsCut?.notes ?? null,
 
     tails_segments: tailsSegments,
@@ -308,18 +552,18 @@ function normalizeRumRecord(record) {
     heart_yield_percent: numericOrNull(distillation.summary?.heart_yield_percent ?? distillation.yield?.heart_fraction_percent),
     distillation_notes: distillation.notes ?? null,
 
-    output_product_name: cask.product_name ?? record.product ?? null,
-    fill_date: isoOrNull(cask.fill_date),
-    cask_number: cask.cask_number ?? cask.number ?? null,
-    cask_origin: cask.origin ?? cask.cask_info ?? null,
-    cask_type: cask.type ?? null,
-    cask_size_l: numericOrNull(cask.size_l ?? cask.volume_filled_l ?? cask.volume_L),
-    fill_abv_percent: numericOrNull(cask.fill_abv_percent ?? cask.fill_abv_percent),
-    volume_filled_l: numericOrNull(cask.volume_filled_l ?? cask.volume_L),
-    lal_filled: numericOrNull(cask.lal_filled),
+    output_product_name: record.product ?? null,
+    fill_date: isoOrNull(record.fill_date),
+    cask_number: record.cask_number ?? record.number ?? null,
+    cask_origin: record.origin ?? record.cask_info ?? null,
+    cask_type: record.type ?? null,
+    cask_size_l: numericOrNull(record.size_l ?? record.volume_filled_l ?? record.volume_L),
+    fill_abv_percent: numericOrNull(record.fill_abv_percent),
+    volume_filled_l: numericOrNull(record.volume_filled_l ?? record.volume_L),
+    lal_filled: numericOrNull(record.lal_filled),
 
-    maturation_location: cask.maturation_location ?? null,
-    expected_bottling_date: isoOrNull(cask.expected_bottling_date),
+    maturation_location: record.maturation_location ?? null,
+    expected_bottling_date: isoOrNull(record.expected_bottling_date),
 
     notes: record.notes ?? null
   };
@@ -355,6 +599,90 @@ async function importRumBatches() {
         try { parsed.push(JSON.parse(c)); } catch { /* ignore */ }
       }
       records = parsed;
+    }
+
+    const cloneRecord = (value) => {
+      try {
+        return JSON.parse(JSON.stringify(value));
+      } catch {
+        return value;
+      }
+    };
+
+    const dedupeRuns = (runs) => {
+      if (!Array.isArray(runs)) return [];
+      const seen = new Set();
+      const result = [];
+      for (const run of runs) {
+        if (!run || typeof run !== 'object') continue;
+        const keyParts = [];
+        if (run.run_id) keyParts.push(`id:${run.run_id}`);
+        if (run.run_number !== undefined) keyParts.push(`num:${run.run_number}`);
+        if (run.date) keyParts.push(`date:${run.date}`);
+        const key = keyParts.length ? keyParts.join('|') : JSON.stringify(run);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        result.push(run);
+      }
+      return result;
+    };
+
+    const mergeRumRecords = (base, incoming) => {
+      const merged = cloneRecord(base);
+      for (const key of Object.keys(incoming)) {
+        const value = incoming[key];
+        if (value === undefined || value === null) continue;
+
+        if (key === 'distillation_runs') {
+          const baseRuns = Array.isArray(merged.distillation_runs) ? merged.distillation_runs : [];
+          const incomingRuns = Array.isArray(value) ? value : [];
+          merged.distillation_runs = dedupeRuns([...baseRuns, ...incomingRuns]);
+          continue;
+        }
+
+        if (Array.isArray(value)) {
+          merged[key] = value;
+          continue;
+        }
+
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+          const baseValue = merged[key];
+          merged[key] = (baseValue && typeof baseValue === 'object' && !Array.isArray(baseValue))
+            ? { ...baseValue, ...value }
+            : { ...value };
+          continue;
+        }
+
+        merged[key] = value;
+      }
+      return merged;
+    };
+
+    const mergeRecordsByBatchId = (list) => {
+      if (!Array.isArray(list)) return [];
+      const mergedMap = new Map();
+      const anonymous = [];
+      for (const item of list) {
+        if (!item || typeof item !== 'object') continue;
+        const key = item.batch_id || item.batchId || item.id || null;
+        if (!key) {
+          anonymous.push(item);
+          continue;
+        }
+        if (!mergedMap.has(key)) {
+          mergedMap.set(key, cloneRecord(item));
+        } else {
+          const combined = mergeRumRecords(mergedMap.get(key), item);
+          mergedMap.set(key, combined);
+        }
+      }
+      return [...mergedMap.values(), ...anonymous];
+    };
+
+    const originalCount = Array.isArray(records) ? records.length : 0;
+    records = mergeRecordsByBatchId(records);
+    if (records.length !== originalCount) {
+      console.log(`🔁 Consolidated ${originalCount} entries into ${records.length} unique batch records`);
     }
 
     console.log(`Found ${records.length} rum records to process`);

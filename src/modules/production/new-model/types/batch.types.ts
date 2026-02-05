@@ -18,6 +18,7 @@ export interface ChargeComponent {
   volume_l: NullableNumber
   abv_percent: NullableNumber
   lal: NullableNumber
+  type?: string
 }
 
 export interface ChargeTotal {
@@ -39,6 +40,15 @@ export interface BotanicalItem {
   ratio_percent?: NullableNumber
   time?: string
   phase?: string
+  notes?: string
+  volume_l?: NullableNumber
+  lal?: NullableNumber
+  abv_percent?: NullableNumber
+  head_temp_c?: NullableNumber
+  ambient_temp_c?: NullableNumber
+  condenser_temp_c?: NullableNumber
+  receiving_vessel?: string
+  observations?: string
 }
 
 export interface Botanicals {
@@ -115,6 +125,13 @@ export interface DilutionStep {
   target_abv_percent?: NullableNumber
   lal?: NullableNumber
   calculation_note?: string
+  step?: number
+  date?: string
+  date_added?: string
+  filtered_water_l?: NullableNumber
+  abv_percent?: NullableNumber
+  new_make_l?: NullableNumber
+  notes?: string
 }
 
 export interface DilutionCombined {
