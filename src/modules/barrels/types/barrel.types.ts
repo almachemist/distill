@@ -8,9 +8,9 @@ export interface Barrel {
   liters: number
   fillDate: string
   location: string
-  status: 'Aging' | 'Ready' | 'Emptied' | 'Maintenance' | 'Testing' | 'Less than 2 years' | 'Greater than 2 years' | 'Bottled'
+  status: 'Aging' | 'Ready' | 'Emptied' | 'Maintenance' | 'Testing' | 'Less than 2 years' | 'Greater than 2 years' | 'Bottled' | 'Decanted' | 'Blended' | 'Transferred'
   currentVolume: number
-  originalVolume: number
+  originalVolume: number | null
   abv: number
   notes?: string
   batch?: string
@@ -34,13 +34,14 @@ export interface CreateBarrelData {
   fillDate: string
   location: string
   currentVolume: number
-  originalVolume: number
+  originalVolume: number | null
   abv: number
   notes?: string
 }
 
 export interface UpdateBarrelData extends Partial<CreateBarrelData> {
   status?: Barrel['status']
+  batch?: Barrel['batch']
 }
 
 export interface BarrelMovement {

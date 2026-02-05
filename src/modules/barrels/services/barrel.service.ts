@@ -10,6 +10,40 @@ import type {
   BarrelSample,
 } from '../types/barrel.types'
 
+const normalizeDate = (value?: any): string => {
+  const raw = String(value ?? '').trim()
+  if (!raw) return ''
+
+  const direct = Date.parse(raw)
+  if (Number.isFinite(direct)) {
+    return new Date(direct).toISOString()
+  }
+
+  const match = raw.match(/^([0-9]{1,2})[\/\-]([0-9]{1,2})[\/\-]([0-9]{2,4})$/)
+  if (match) {
+    let day = parseInt(match[1], 10)
+    let month = parseInt(match[2], 10)
+    let year = parseInt(match[3], 10)
+
+    if (year < 100) {
+      year += 2000
+    }
+
+    if (day <= 12 && month > 12) {
+      const tmp = day
+      day = month
+      month = tmp
+    }
+
+    const ts = Date.UTC(year, month - 1, day)
+    if (Number.isFinite(ts)) {
+      return new Date(ts).toISOString()
+    }
+  }
+
+  return ''
+}
+
 export class BarrelService {
   private supabase: SupabaseClient
 
@@ -123,10 +157,29 @@ export class BarrelService {
   }
 
   async getBarrelById(id: string): Promise<Barrel | null> {
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(String(id || '').trim())
+
+    if (isUuid) {
+      const { data, error } = await this.supabase
+        .from('tracking')
+        .select('*')
+        .eq('id', id) // Using UUID id as primary key
+        .single()
+
+      if (error) {
+        if (error.code === 'PGRST116') {
+          return null
+        }
+        throw new Error(error.message)
+      }
+
+      return this.mapToBarrel(data)
+    }
+
     const { data, error } = await this.supabase
       .from('tracking')
       .select('*')
-      .eq('id', id) // Using UUID id as primary key
+      .eq('barrel_number', id)
       .single()
 
     if (error) {
@@ -137,6 +190,26 @@ export class BarrelService {
     }
 
     return this.mapToBarrel(data)
+  }
+
+  private async resolveTrackingUuid(idOrBarrelNumber: string): Promise<string> {
+    const raw = String(idOrBarrelNumber || '').trim()
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(raw)
+    if (isUuid) return raw
+
+    const { data, error } = await this.supabase
+      .from('tracking')
+      .select('id')
+      .eq('barrel_number', raw)
+      .single()
+
+    if (error) {
+      throw new Error(error.message)
+    }
+    if (!data?.id) {
+      throw new Error('Barrel not found')
+    }
+    return String(data.id)
   }
 
   async updateBarrel(id: string, data: UpdateBarrelData): Promise<Barrel> {
@@ -152,10 +225,12 @@ export class BarrelService {
     if (data.notes !== undefined) updateData.notes_comments = data.notes
     if (data.status !== undefined) updateData.status = data.status
 
+    const resolvedId = await this.resolveTrackingUuid(id)
+
     const { data: barrel, error } = await this.supabase
       .from('tracking')
       .update(updateData)
-      .eq('id', id) // Using UUID id as primary key
+      .eq('id', resolvedId) // Using UUID id as primary key
       .select()
       .single()
 
@@ -167,10 +242,12 @@ export class BarrelService {
   }
 
   async deleteBarrel(id: string): Promise<void> {
+    const resolvedId = await this.resolveTrackingUuid(id)
+
     const { error } = await this.supabase
       .from('tracking')
       .delete()
-      .eq('id', id) // Using UUID id as primary key
+      .eq('id', resolvedId) // Using UUID id as primary key
 
     if (error) {
       throw new Error(error.message)
@@ -353,6 +430,20 @@ export class BarrelService {
   }
 
   private mapToBarrel(data: any): Barrel {
+    const toNumOrNull = (v: any): number | null => {
+      if (v === null || v === undefined) return null
+      const raw = String(v).trim()
+      if (!raw) return null
+      const n = parseFloat(raw)
+      return Number.isFinite(n) ? n : null
+    }
+
+    const original =
+      typeof data.original_volume_l !== 'undefined' ? toNumOrNull(data.original_volume_l) :
+      typeof data.original_volume !== 'undefined' ? toNumOrNull(data.original_volume) :
+      typeof data.filled_liters !== 'undefined' ? toNumOrNull(data.filled_liters) :
+      null
+
     return {
       id: data.id, // UUID primary key
       barrelNumber: data.barrel_number, // Human-readable barrel number
@@ -361,22 +452,22 @@ export class BarrelService {
       barrelType: data.barrel || '',
       barrelSize: '', // Not stored in current schema
       liters: parseFloat(data.volume) || 0,
-      fillDate: data.date_filled,
+      fillDate: normalizeDate(data.date_filled),
       location: data.location || '',
       status: data.status || 'Aging',
       currentVolume: parseFloat(data.volume) || 0,
-      originalVolume: parseFloat(data.volume) || 0,
+      originalVolume: original,
       abv: parseFloat(data.abv) || 0,
       notes: data.notes_comments,
       batch: data.batch,
-      dateMature: data.date_mature,
+      dateMature: normalizeDate(data.date_mature),
       tastingNotes: data.tasting_notes,
       angelsShare: data.angelsshare,
-      lastInspection: data.last_inspection,
+      lastInspection: normalizeDate(data.last_inspection),
       organizationId: data.organization_id,
       createdBy: data.created_by ?? null,
-      createdAt: data.created_at,
-      updatedAt: data.updated_at,
+      createdAt: normalizeDate(data.created_at) || data.created_at,
+      updatedAt: normalizeDate(data.updated_at) || data.updated_at,
     }
   }
 }

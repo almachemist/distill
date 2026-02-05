@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import Link from 'next/link'
-import { BarrelService } from '@/modules/barrels/services/barrel.service'
 import type { Barrel, UpdateBarrelData } from '@/modules/barrels/types/barrel.types'
 
 export default function EditBarrelPage() {
@@ -24,8 +23,13 @@ export default function EditBarrelPage() {
 
   const loadBarrel = async () => {
     try {
-      const service = new BarrelService()
-      const data = await service.getBarrelById(barrelId)
+      const res = await fetch(`/api/barrels/${encodeURIComponent(barrelId)}`, { cache: 'no-store' })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        throw new Error(json?.error || `Failed to load barrel: ${res.status}`)
+      }
+      const json = await res.json() as { barrel?: Barrel }
+      const data = json?.barrel || null
       if (!data) {
         setError('Barrel not found')
       } else {
@@ -42,6 +46,7 @@ export default function EditBarrelPage() {
           prevSpirit: data.prevSpirit ?? undefined,
           notes: data.notes,
           status: data.status,
+          batch: data.batch ?? '',
         })
       }
     } catch (err) {
@@ -57,9 +62,17 @@ export default function EditBarrelPage() {
     setError(null)
 
     try {
-      const service = new BarrelService()
-      await service.updateBarrel(barrelId, formData)
-      router.push(`/dashboard/barrels/${barrelId}`)
+      const targetId = barrel?.id || barrelId
+      const res = await fetch(`/api/barrels/${encodeURIComponent(targetId)}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}))
+        throw new Error(json?.error || `Failed to update barrel: ${res.status}`)
+      }
+      router.push(`/dashboard/barrels/${encodeURIComponent(targetId)}`)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update barrel')
       setIsSaving(false)
@@ -70,9 +83,19 @@ export default function EditBarrelPage() {
     const { name, value } = e.target
     setFormData(prev => ({
       ...prev,
-      [name]: name === 'currentVolume' || name === 'originalVolume' || name === 'abv'
-        ? parseFloat(value) || 0
-        : value
+      [name]: (() => {
+        if (name === 'originalVolume') {
+          const raw = String(value ?? '').trim()
+          if (!raw) return null
+          const n = parseFloat(raw)
+          return Number.isFinite(n) ? n : null
+        }
+        if (name === 'currentVolume' || name === 'abv') {
+          const n = parseFloat(String(value ?? ''))
+          return Number.isFinite(n) ? n : 0
+        }
+        return value
+      })()
     }))
   }
 
@@ -197,6 +220,22 @@ export default function EditBarrelPage() {
           />
         </div>
 
+        {/* Batches */}
+        <div>
+          <label htmlFor="batch" className="block text-sm font-medium text-gray-700">
+            Batches
+          </label>
+          <input
+            type="text"
+            id="batch"
+            name="batch"
+            value={formData.batch || ''}
+            onChange={handleChange}
+            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            placeholder="SPIRIT-CANE-010, SPIRIT-CANE-011"
+          />
+        </div>
+
         {/* Volume and ABV */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div>
@@ -208,7 +247,7 @@ export default function EditBarrelPage() {
               id="originalVolume"
               name="originalVolume"
               step="0.1"
-              value={formData.originalVolume}
+              value={formData.originalVolume ?? ''}
               onChange={handleChange}
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />

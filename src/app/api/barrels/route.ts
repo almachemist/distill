@@ -9,11 +9,67 @@ function toNum(v: any) {
   return Number.isFinite(n) ? n : 0
 }
 
-function parseDateLike(v: any) {
-  const s = String(v ?? '').trim()
-  if (!s) return ''
-  const t = new Date(s).getTime()
-  return Number.isFinite(t) ? new Date(t).toISOString() : ''
+function toNumOrNull(v: any): number | null {
+  if (v === null || v === undefined) return null
+  const raw = String(v).trim()
+  if (!raw) return null
+  const n = parseFloat(raw)
+  return Number.isFinite(n) ? n : null
+}
+
+function normalizeDateInput(value: any): string {
+  const raw = String(value ?? '').trim()
+  if (!raw) return ''
+  const lower = raw.toLowerCase()
+  if (lower === 'invalid date' || lower === 'null' || lower === 'undefined') return ''
+
+  let s = raw
+  if (/^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}/.test(s)) {
+    s = s.replace(/\s+/, 'T')
+  }
+  if (/[+-]\d{2}$/.test(s)) {
+    s = `${s}:00`
+  }
+  if (/[+-]\d{4}$/.test(s)) {
+    s = s.replace(/([+-]\d{2})(\d{2})$/, '$1:$2')
+  }
+  if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?$/.test(s)) {
+    s = `${s}Z`
+  }
+  return s
+}
+
+function toIsoDateLike(v: any) {
+  const raw = normalizeDateInput(v)
+  if (!raw) return ''
+  const direct = Date.parse(raw)
+  if (Number.isFinite(direct)) return new Date(direct).toISOString()
+
+  const ymd = raw.match(/^(\d{4})[\/\-.](\d{1,2})[\/\-.](\d{1,2})$/)
+  if (ymd) {
+    const year = parseInt(ymd[1], 10)
+    const month = parseInt(ymd[2], 10)
+    const day = parseInt(ymd[3], 10)
+    const t = Date.UTC(year, month - 1, day)
+    return Number.isFinite(t) ? new Date(t).toISOString() : ''
+  }
+
+  const dmy = raw.match(/^([0-9]{1,2})[\/\-.]([0-9]{1,2})[\/\-.]([0-9]{2,4})$/)
+  if (dmy) {
+    let day = parseInt(dmy[1], 10)
+    let month = parseInt(dmy[2], 10)
+    let year = parseInt(dmy[3], 10)
+    if (year < 100) year += 2000
+    if (day <= 12 && month > 12) {
+      const tmp = day
+      day = month
+      month = tmp
+    }
+    const t = Date.UTC(year, month - 1, day)
+    return Number.isFinite(t) ? new Date(t).toISOString() : ''
+  }
+
+  return ''
 }
 
 function mapBarrel(b: any) {
@@ -23,11 +79,12 @@ function mapBarrel(b: any) {
     typeof b.liters !== 'undefined' ? toNum(b.liters) :
     typeof b.current_volume !== 'undefined' ? toNum(b.current_volume) :
     toNum(b.volume)
+
   const volOriginal =
-    typeof b.original_volume_l !== 'undefined' ? toNum(b.original_volume_l) :
-    typeof b.original_volume !== 'undefined' ? toNum(b.original_volume) :
-    typeof b.filled_liters !== 'undefined' ? toNum(b.filled_liters) :
-    volCurrent
+    typeof b.original_volume_l !== 'undefined' ? toNumOrNull(b.original_volume_l) :
+    typeof b.original_volume !== 'undefined' ? toNumOrNull(b.original_volume) :
+    typeof b.filled_liters !== 'undefined' ? toNumOrNull(b.filled_liters) :
+    null
   const abv =
     typeof b.abv !== 'undefined' ? toNum(b.abv) :
     typeof b.strength !== 'undefined' ? toNum(b.strength) :
@@ -39,7 +96,11 @@ function mapBarrel(b: any) {
     typeof b.capacity !== 'undefined' ? String(b.capacity) :
     typeof b.capacity_l !== 'undefined' ? String(b.capacity_l) : ''
   const fill =
-    b.date_filled_normalized || b.date_filled || b.fill_date || b.filled_date || ''
+    toIsoDateLike(b.date_filled_normalized) ||
+    toIsoDateLike(b.date_filled) ||
+    toIsoDateLike(b.fill_date) ||
+    toIsoDateLike(b.filled_date) ||
+    ''
   const loc =
     b.location_normalized || b.location || b.location_name || b.warehouse || ''
 
@@ -65,7 +126,12 @@ function mapBarrel(b: any) {
     abv,
     notes: b.notes_comments || b.notes || '',
     batch: b.batch || b.batch_id || b.batch_code || b.batch_name || '',
-    dateMature: b.date_mature || b.mature_date || b.maturation_date || b.date_maturation || '',
+    dateMature:
+      toIsoDateLike(b.date_mature) ||
+      toIsoDateLike(b.mature_date) ||
+      toIsoDateLike(b.maturation_date) ||
+      toIsoDateLike(b.date_maturation) ||
+      '',
     tastingNotes: b.tasting_notes || b.tasting || '',
     angelsShare: (() => {
       const raw = (typeof b.angelsshare !== 'undefined'
@@ -75,11 +141,11 @@ function mapBarrel(b: any) {
       const lower = raw.toLowerCase()
       return raw && lower !== 'null' && lower !== 'undefined' ? raw : ''
     })(),
-    lastInspection: b.last_inspection || b.inspection_date || '',
+    lastInspection: toIsoDateLike(b.last_inspection) || toIsoDateLike(b.inspection_date) || '',
     organizationId: b.organization_id || '',
     createdBy: b.created_by || null,
-    createdAt: b.created_at || '',
-    updatedAt: b.updated_at || ''
+    createdAt: toIsoDateLike(b.created_at) || '',
+    updatedAt: toIsoDateLike(b.updated_at) || ''
   }
 }
 
@@ -137,7 +203,7 @@ export async function GET(req: Request) {
     const averageAge = barrels.length
       ? Math.round(
           barrels.reduce((acc, b) => {
-            const t = parseDateLike(b.fillDate)
+            const t = toIsoDateLike(b.fillDate)
             const df = t ? new Date(t).getTime() : now
             return acc + Math.floor((now - df) / (1000 * 60 * 60 * 24))
           }, 0) / barrels.length
