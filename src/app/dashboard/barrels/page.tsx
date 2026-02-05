@@ -12,39 +12,136 @@ function BarrelsContent() {
   const [isLoading, setIsLoading] = useState(true)
   const [filter, setFilter] = useState<string>('all')
 
-  const parseDateFlexible = (s?: string) => {
-    const raw = (s ?? '').trim()
-    if (!raw) return NaN
-    const direct = Date.parse(raw)
-    if (Number.isFinite(direct)) return direct
-    const m = raw.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/)
-    if (m) {
-      let a = parseInt(m[1], 10)
-      let b = parseInt(m[2], 10)
-      const y = parseInt(m[3], 10)
-      let day = a
-      let month = b
-      if (a <= 12 && b > 12) {
-        day = b
-        month = a
-      }
-      return new Date(y, month - 1, day).getTime()
+  type UiStatus = 'aging' | 'ready' | 'bottled' | 'transferred' | 'unknown'
+
+  const toUiStatus = (barrel: Barrel): UiStatus => {
+    const raw = String(barrel.status || '').toLowerCase()
+    if (raw.includes('transferred') || raw.includes('emptied')) return 'transferred'
+    if (raw.includes('bottled')) return 'bottled'
+    if (raw.includes('ready') || raw.includes('greater than') || raw.includes('good')) return 'ready'
+
+    const fillRaw = String((barrel as any)?.fillDate ?? '').trim()
+    const t = fillRaw ? Date.parse(fillRaw) : NaN
+    if (Number.isFinite(t)) {
+      const ageDays = Math.floor((Date.now() - t) / (1000 * 60 * 60 * 24))
+      if (ageDays >= 365 * 2) return 'ready'
+      return 'aging'
     }
+
+    if (raw.includes('aging') || raw.includes('active') || raw.includes('less than')) return 'aging'
+    return 'unknown'
+  }
+
+  const tileClasses = (status: UiStatus) => {
+    if (status === 'ready') return 'bg-[#2F5D3A]'
+    if (status === 'aging') return 'bg-[#6B4E2E]'
+    if (status === 'bottled') return 'bg-[#0B1633]'
+    if (status === 'transferred') return 'bg-[#8A8F98]'
+    return 'bg-[#8A8F98]'
+  }
+
+  const dropletSvg = (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path
+        d="M12 2.5C12 2.5 6 9.2 6 14.2C6 18 8.9 21 12 21C15.1 21 18 18 18 14.2C18 9.2 12 2.5 12 2.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+
+  const toDateTimestamp = (value?: string) => {
+    const raw = (value ?? '').trim()
+    if (!raw) return NaN
+
+    const iso = raw.match(/^\d{4}-\d{2}-\d{2}(T.*)?$/)
+    if (iso) {
+      try {
+        return new Date(raw).getTime()
+      } catch {}
+    }
+
+    const parsed = Date.parse(raw)
+    if (Number.isFinite(parsed)) {
+      return parsed
+    }
+
+    const legacy = raw.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/)
+    if (legacy) {
+      let day = parseInt(legacy[1], 10)
+      let month = parseInt(legacy[2], 10)
+      let year = parseInt(legacy[3], 10)
+      if (year < 100) year += 2000
+      if (day <= 12 && month > 12) {
+        const tmp = day
+        day = month
+        month = tmp
+      }
+      return new Date(year, month - 1, day).getTime()
+    }
+
     return NaN
   }
-  const formatDate = (s?: string) => {
-    const t = parseDateFlexible(s)
-    return Number.isFinite(t) ? new Date(t).toLocaleDateString() : '—'
+
+  const formatDate = (value?: string) => {
+    const timestamp = toDateTimestamp(value)
+    if (!Number.isFinite(timestamp)) return '—'
+    const formatted = new Date(timestamp).toLocaleDateString()
+    return String(formatted).toLowerCase() === 'invalid date' ? '—' : formatted
   }
-  const ageDays = (s?: string) => {
-    const t = parseDateFlexible(s)
-    return Number.isFinite(t) ? Math.floor((Date.now() - t) / (1000 * 60 * 60 * 24)) : '—'
+
+  const ageDays = (value?: string) => {
+    const timestamp = toDateTimestamp(value)
+    return Number.isFinite(timestamp) ? Math.floor((Date.now() - timestamp) / (1000 * 60 * 60 * 24)) : '—'
+  }
+
+  const toAgeLabel = (fillDate?: string) => {
+    const d = ageDays(fillDate)
+    if (d === '—') return '—'
+    const days = Number(d)
+    if (!Number.isFinite(days)) return '—'
+    if (days < 365) return `${days}d`
+    const years = Math.floor(days / 365)
+    const months = Math.floor((days % 365) / 30)
+    if (months <= 0) return `${years}y`
+    return `${years}y ${months}m`
+  }
+
+  const clamp01 = (n: number) => Math.max(0, Math.min(1, n))
+
+  const agingProgress = (fillDate?: string, matureDate?: string) => {
+    const fillTs = toDateTimestamp(fillDate)
+    const matureTs = toDateTimestamp(matureDate)
+    const now = Date.now()
+    if (!Number.isFinite(fillTs) || !Number.isFinite(matureTs) || matureTs <= fillTs) return null
+    return clamp01((now - fillTs) / (matureTs - fillTs))
+  }
+
+  const normalizeStatus = (s: string) => {
+    if (s === 'Decanted') return 'Decanted'
+    if (s === 'Blended') return 'Blended'
+    if (s === 'Bottled') return 'Bottled'
+    if (s === 'Emptied') return 'Transferred'
+    if (s === 'Less than 2 years') return '<2y'
+    return 'Aging'
   }
   const safeLabel = (s?: string) => {
     const v = (s ?? '').trim()
     if (!v) return ''
     const lower = v.toLowerCase()
     return lower === 'null' || lower === 'undefined' ? '' : v
+  }
+  const formatBatchList = (value?: string | null) => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return ''
+    const parts = raw
+      .split(/[;,]/g)
+      .map((s) => s.trim())
+      .filter(Boolean)
+    const uniq: string[] = []
+    for (const p of parts) {
+      if (!uniq.includes(p)) uniq.push(p)
+    }
+    return uniq.join(', ')
   }
   const safeNumber = (n?: number) => (Number.isFinite(n as number) ? (n as number) : 0)
 
@@ -71,15 +168,13 @@ function BarrelsContent() {
   }
 
   const statusClass = (s: string) => {
-    if (s === 'Aging') return 'bg-copper-10 text-graphite border border-copper-30'
-    if (s === 'Ready') return 'bg-graphite text-white'
-    if (s === 'Emptied') return 'bg-beige text-graphite border border-copper-30'
-    if (s === 'Maintenance') return 'bg-copper-20 text-graphite border border-copper-30'
-    if (s === 'Testing') return 'bg-copper-20 text-graphite border border-copper-30'
-    if (s === 'Less than 2 years') return 'bg-beige text-graphite border border-copper-30'
-    if (s === 'Greater than 2 years') return 'bg-copper-amber text-graphite border border-copper-30'
-    if (s === 'Bottled') return 'bg-copper-red text-white'
-    return 'bg-copper-10 text-graphite border border-copper-30'
+    const ns = normalizeStatus(s)
+    if (ns === 'Decanted') return 'bg-copper-10 text-graphite border border-copper-30'
+    if (ns === 'Blended') return 'bg-copper-10 text-graphite border border-copper-30'
+    if (ns === 'Bottled') return 'bg-graphite text-white'
+    if (ns === 'Transferred') return 'bg-beige text-graphite border border-copper-30'
+    if (ns === '<2y') return 'bg-copper-10 text-graphite border border-copper-30'
+    return 'bg-graphite/5 text-graphite border border-graphite/10'
   }
 
   const cardBackgroundClass = (s: string) => {
@@ -198,132 +293,38 @@ function BarrelsContent() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {barrels.map((barrel) => (
-              <Link key={barrel.id} href={`/dashboard/barrels/${barrel.id}`} className="block">
-                <div className={`rounded-xl border border-copper-20 shadow-sm hover:shadow-md transition ${cardBackgroundClass(barrel.status)}`}>
-                  <div className="px-5 py-4 border-b border-copper-15 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className={`
-                        h-10 w-10 rounded-full flex items-center justify-center text-white font-bold
-                        ${barrel.status === 'Aging' ? 'bg-copper' :
-                          barrel.status === 'Ready' ? 'bg-graphite' :
-                          barrel.status === 'Emptied' ? 'bg-beige text-graphite' :
-                          barrel.status === 'Maintenance' ? 'bg-copper-amber' :
-                          'bg-copper-red'}
-                      `}>
-                        {barrel.barrelNumber.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="text-base font-semibold text-graphite">
-                          {barrel.barrelNumber}
+          <div className="mx-auto bg-white rounded-2xl shadow-sm border border-stone-200 p-4 sm:p-5">
+            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-10">
+              {barrels
+                .slice()
+                .sort((a, b) => String(a.barrelNumber || '').localeCompare(String(b.barrelNumber || '')))
+                .map((barrel) => {
+                  const code = String(barrel.barrelNumber || '').toUpperCase()
+                  const uiStatus = toUiStatus(barrel)
+                  const bg = tileClasses(uiStatus)
+                  const label = `Barrel ${code}, status ${uiStatus}`
+
+                  return (
+                    <Link
+                      key={barrel.id}
+                      href={`/dashboard/barrels/${barrel.id}`}
+                      aria-label={label}
+                      className={
+                        `${bg} rounded-lg aspect-square flex items-center justify-center text-white border-2 border-white ` +
+                        'transition-all duration-150 ease-out hover:brightness-[1.04] active:brightness-[0.98] active:scale-[0.99] cursor-pointer ' +
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite/20 focus-visible:ring-offset-2 focus-visible:ring-offset-white'
+                      }
+                    >
+                      <div className="flex flex-col items-center justify-center text-center select-none">
+                        <div className="flex items-center justify-center gap-2">
+                          <span className="text-white">{dropletSvg}</span>
+                          <span className="text-white text-sm font-semibold tracking-wide">{code}</span>
                         </div>
-                        <div className="text-sm text-graphite/70">
-                          {safeLabel(barrel.spiritType)}
-                          {safeLabel(barrel.barrelType) ? ` • ${safeLabel(barrel.barrelType)}` : ''}
-                          {safeLabel(barrel.barrelSize) ? ` • ${safeLabel(barrel.barrelSize)}` : ''}
-                        </div>
                       </div>
-                    </div>
-                    <span className={`
-                      inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusClass(barrel.status)}
-                    `}>
-                      {barrel.status}
-                    </span>
-                  </div>
-                  <div className="p-5 grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Volume</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {safeNumber(barrel.currentVolume)}L / {safeNumber(barrel.originalVolume)}L
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">ABV</p>
-                      <p className="text-sm font-medium text-graphite">{safeNumber(barrel.abv)}%</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Location</p>
-                      <p className="text-sm font-medium text-graphite">{safeLabel(barrel.location) || '—'}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Filled</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {formatDate(barrel.fillDate)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Batch</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.batch || '—'}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Mature Date</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {formatDate(barrel.dateMature)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Last Inspection</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {formatDate(barrel.lastInspection)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Angel&apos;s Share</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.angelsShare || '—'}</p>
-                    </div>
-                  </div>
-                  <div className="px-5 pb-5 grid grid-cols-2 gap-4 border-t border-copper-15">
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Prev. Spirit</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.prevSpirit || '—'}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Created By</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.createdBy || '—'}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Age (days)</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {ageDays(barrel.fillDate)}
-                      </p>
-                    </div>
-                    <div className="col-span-2">
-                      <p className="text-xs text-copper uppercase tracking-wide">Notes</p>
-                      <p className="text-sm text-graphite">
-                        {barrel.notes ? (barrel.notes.length > 160 ? `${barrel.notes.slice(0, 160)}…` : barrel.notes) : '—'}
-                      </p>
-                    </div>
-                    <div className="col-span-2">
-                      <p className="text-xs text-copper uppercase tracking-wide">Tasting Notes</p>
-                      <p className="text-sm text-graphite">
-                        {barrel.tastingNotes ? (barrel.tastingNotes.length > 160 ? `${barrel.tastingNotes.slice(0, 160)}…` : barrel.tastingNotes) : '—'}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">ID</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.id}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Liters</p>
-                      <p className="text-sm font-medium text-graphite">{barrel.liters?.toLocaleString() ?? '—'} L</p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Created At</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {formatDate(barrel.createdAt)}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-xs text-copper uppercase tracking-wide">Updated At</p>
-                      <p className="text-sm font-medium text-graphite">
-                        {formatDate(barrel.updatedAt)}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                    </Link>
+                  )
+                })}
+            </div>
           </div>
         )}
       </div>
