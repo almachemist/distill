@@ -763,7 +763,65 @@ export function buildRumBatchFallback(): RumBatchSummary[] {
       boiler_abv_percent: meta.boiler_abv_percent ?? null
     }
   }
-  const caneSpiritCS25Summary: RumBatchSummary[] = [
+  const caneSpiritCSSummary: RumBatchSummary[] = [
+    {
+      batch_id: 'CS-24-1',
+      product_name: 'Cane Spirit — CS-24-1',
+      product_type: 'cane_spirit',
+      status: 'completed',
+      still_used: 'Roberta',
+      fermentation_start_date: '2024-09-25',
+      distillation_date: '2024-10-02',
+      hearts_volume_l: null,
+      hearts_abv_percent: null,
+      hearts_lal: null,
+      fill_date: null,
+      cask_number: null,
+      initial_brix: 18.4,
+      initial_ph: 4.64,
+      yeast_type: 'Distillamax RM',
+      substrate_type: 'Cane Juice',
+      substrate_batch: null,
+      substrate_mass_kg: 2000,
+      water_mass_kg: 0,
+      anti_foam_ml: 150,
+      fermaid_g: 0,
+      dap_g: 0,
+      calcium_carbonate_g: 0,
+      temperature_curve: {
+        '0h': 32.0,
+        '24h': 26.8,
+        '48h': 26.0,
+        '72h': 25.6,
+      },
+      brix_curve: {
+        '0h': 12.2,
+        '24h': 8.6,
+        '48h': 2.4,
+        '72h': 2.0,
+      },
+      ph_curve: {
+        '0h': 3.59,
+        '24h': 3.56,
+        '48h': 3.56,
+        '72h': 3.56,
+      },
+      final_brix: 2.0,
+      final_ph: null,
+      boiler_volume_l: null,
+      boiler_abv_percent: null,
+      foreshots_volume_l: null,
+      foreshots_abv_percent: null,
+      heads_volume_l: 0,
+      heads_abv_percent: 0,
+      heads_lal: 0,
+      tails_volume_l: null,
+      tails_abv_percent: null,
+      early_tails_volume_l: null,
+      early_tails_abv_percent: null,
+      late_tails_volume_l: null,
+      late_tails_abv_percent: null,
+    },
     aggregate('CS-25-1', '2025-10-10'),
     aggregate('CS-25-2', '2025-10-31')
   ]
@@ -1033,7 +1091,7 @@ export function buildRumBatchFallback(): RumBatchSummary[] {
   }
 
   const mergedMap = new Map<string, RumBatchSummary>()
-  ;[...rumFromDataset, ...rumFromProductionJson, ...rumFromAppJson, ...caneSpiritCS25Summary, rum25Summary, rum25002Summary, rum24008Summary, rum24009Summary, cs241Summary, cs242Summary, cs243Summary].forEach((b) => {
+  ;[...rumFromDataset, ...rumFromProductionJson, ...rumFromAppJson, ...caneSpiritCSSummary, rum25Summary, rum25002Summary, rum24008Summary, rum24009Summary, cs241Summary, cs242Summary, cs243Summary].forEach((b) => {
     mergedMap.set(b.batch_id, b)
   })
 

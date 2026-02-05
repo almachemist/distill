@@ -6,6 +6,8 @@ import { buildRumBatchFallback } from '@/modules/production/services/batch-fallb
 
 export const runtime = 'nodejs'
 
+type ContextWithIdParam = { params: { id: string } }
+
 // Helper to check if string is a valid UUID
 function isValidUUID(str: string): boolean {
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
@@ -15,13 +17,13 @@ function isValidUUID(str: string): boolean {
 // GET - Get single rum batch by ID (can be id or batch_id)
 export async function GET(
   request: NextRequest,
-  context: RouteContext<"/api/production/rum/batches/[id]">
+  context: ContextWithIdParam
 ) {
   try {
     const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
-    if (useStatic) {
-      const { id } = await context.params
+    const useStaticOverride = flag === '1' || flag === 'true' || flag === 'yes'
+    if (useStaticOverride) {
+      const { id } = context.params
       const fallbackBatches = buildRumBatchFallback()
       const fallbackBatch = fallbackBatches.find((b: any) => b.batch_id === id || b.id === id)
       if (fallbackBatch) return NextResponse.json(fallbackBatch)
@@ -89,7 +91,7 @@ export async function GET(
 // PUT - Update rum batch
 export async function PUT(
   request: NextRequest,
-  context: RouteContext<"/api/production/rum/batches/[id]">
+  context: ContextWithIdParam
 ) {
   try {
     let supabase: any
@@ -98,7 +100,7 @@ export async function PUT(
     } catch {
       supabase = await createClient()
     }
-    const { id } = await context.params
+    const { id } = context.params
     const batch: RumCaneSpiritBatch = await request.json()
 
     // Helper to ensure numeric values are actually numbers or null

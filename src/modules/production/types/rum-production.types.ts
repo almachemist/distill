@@ -77,6 +77,12 @@ export interface DistillationCutDetail {
   abv_percent: NullableNumber
   lal: NullableNumber
   density?: NullableNumber
+  avg_abv_percent?: NullableNumber
+  lal_2?: NullableNumber
+  start_time?: NullableString
+  end_time?: NullableString
+  duration_minutes?: NullableNumber
+  collection_rate_ml_per_min?: NullableNumber
   notes?: NullableString
 }
 

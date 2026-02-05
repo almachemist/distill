@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, Suspense } from "react"
+import { useEffect, useRef, useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { RumDetailPanel } from "./RumDetailPanel"
 
@@ -45,13 +45,45 @@ const RumCard: React.FC<{
   isSelected: boolean
 }> = ({ run, onSelect, isSelected }) => {
   const router = useRouter()
-  const heartsVolume = run.hearts_volume_l || 0
-  const heartsABV = run.hearts_abv_percent || 0
-  const heartsLAL = run.hearts_lal || (heartsVolume * heartsABV / 100)
+  const toDomId = (value: any) => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return ''
+    return raw.replace(/[^A-Za-z0-9_-]/g, '_')
+  }
+  const asNum = (v: any): number | null => {
+    if (v === null || v === undefined) return null
+    if (typeof v === 'number') return Number.isFinite(v) ? v : null
+    const m = String(v).match(/-?\d+(\.\d+)?/)
+    if (!m) return null
+    const n = Number(m[0])
+    return Number.isFinite(n) ? n : null
+  }
+  const nonZero = (v: any): number | null => {
+    const n = asNum(v)
+    if (n === null) return null
+    return n > 0 ? n : null
+  }
+
+  const heartsVolume = nonZero(run.hearts_volume_l)
+  const heartsABV = nonZero(run.hearts_abv_percent)
+  const heartsLAL = nonZero(run.hearts_lal)
+
+  const heartsLALComputed = (heartsLAL ?? (
+    heartsVolume != null && heartsABV != null
+      ? heartsVolume * (heartsABV / 100)
+      : null
+  ))
+  const heartsABVComputed = (heartsABV ?? (
+    heartsVolume != null && heartsVolume > 0 && heartsLALComputed != null
+      ? (heartsLALComputed / heartsVolume) * 100
+      : null
+  ))
   const productName = (run.product_name || 'Rum').replace(/\s+—\s+.*/g, '').trim()
+  const label = `Rum batch ${run.batch_id}, status ${run.status || '—'}, still ${run.still_used || '—'}, fermentation ${formatDate(run.fermentation_start_date)}, distillation ${formatDate(run.distillation_date)}, hearts ${formatNumber(heartsVolume, 1)} L, ${formatNumber(heartsABVComputed, 1)}% ABV`
   
   return (
     <div
+      id={run?.batch_id ? `rum-batch-card-${toDomId(run.batch_id)}` : undefined}
       role="button"
       tabIndex={0}
       onClick={onSelect}
@@ -61,6 +93,7 @@ const RumCard: React.FC<{
           onSelect()
         }
       }}
+      aria-label={label}
       className={`bg-white border rounded-xl p-4 flex flex-col gap-3 transition text-left w-full ${
         isSelected ? 'border-amber-700 shadow-md' : 'border-stone-200 hover:border-amber-700'
       }`}
@@ -85,8 +118,8 @@ const RumCard: React.FC<{
             {formatNumber(heartsVolume, 1)}
           </p>
           <div className="text-xs text-stone-500 leading-tight">
-            <p>{formatNumber(heartsABV, 1)}% ABV</p>
-            <p>{formatNumber(heartsLAL, 1)} LAL</p>
+            <p>{formatNumber(heartsABVComputed, 1)}% ABV</p>
+            <p>{formatNumber(heartsLALComputed, 1)} LAL</p>
           </div>
         </div>
       </div>
@@ -121,9 +154,41 @@ function RumPageContent() {
   const [error, setError] = useState<string | null>(null)
   const [rumBatches, setRumBatches] = useState<RumBatchRecord[]>([])
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
+  const [requestedBatchId, setRequestedBatchId] = useState<string | null>(null)
   const [batchListCollapsed, setBatchListCollapsed] = useState(false)
   const [statusFilter, setStatusFilter] = useState<'all' | 'ongoing' | 'completed'>('all')
   const [sortOrder, setSortOrder] = useState<'oldest-first' | 'newest-first'>('oldest-first')
+
+  const lastRequestedRef = useRef<string>('')
+  const appliedRequestedRef = useRef<boolean>(false)
+
+  const toDomId = (value: any) => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return ''
+    return raw.replace(/[^A-Za-z0-9_-]/g, '_')
+  }
+
+  const normalizeBatchId = (value: string) => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return ''
+    // Handle user-friendly IDs like RUM-24-8 -> RUM-24-008 (3-digit suffix)
+    const m = raw.match(/^(RUM)-(\d{2,4})-(\d{1,3})$/i)
+    if (m) {
+      const prefix = m[1].toUpperCase()
+      const year = m[2]
+      const n = parseInt(m[3], 10)
+      if (Number.isFinite(n)) {
+        const suffix = String(n).padStart(3, '0')
+        return `${prefix}-${year}-${suffix}`
+      }
+    }
+    return raw
+  }
+
+  const normalizeForCompare = (value: any) => {
+    const raw = String(value ?? '').trim().toUpperCase().replace(/\s+/g, '').replace(/\//g, '-')
+    return normalizeBatchId(raw)
+  }
 
   // Set filter from URL on mount
   useEffect(() => {
@@ -132,6 +197,33 @@ function RumPageContent() {
       setStatusFilter(filter)
     }
   }, [searchParams])
+
+  // Select a specific batch from URL (?batch=RUM-24-5)
+  useEffect(() => {
+    const batch = searchParams?.get('batch')
+    const trimmed = String(batch ?? '').trim()
+    if (!trimmed) {
+      setRequestedBatchId(null)
+      lastRequestedRef.current = ''
+      appliedRequestedRef.current = false
+      return
+    }
+    const normalized = normalizeBatchId(trimmed)
+    setRequestedBatchId(normalized)
+    if (lastRequestedRef.current !== normalized) {
+      lastRequestedRef.current = normalized
+      appliedRequestedRef.current = false
+    }
+  }, [searchParams])
+
+  useEffect(() => {
+    const id = requestedBatchId || selectedRunId
+    if (!id) return
+    const el = document.getElementById(`rum-batch-card-${toDomId(id)}`)
+    if (el) {
+      el.scrollIntoView({ block: 'center' })
+    }
+  }, [requestedBatchId, selectedRunId])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -158,8 +250,8 @@ function RumPageContent() {
         }
         setRumBatches(batches)
 
-        // Auto-select first batch if none selected
-        if (!selectedRunId && batches.length > 0) {
+        // If no requested batch was provided, auto-select first
+        if (!requestedBatchId && !selectedRunId && batches.length > 0) {
           setSelectedRunId(batches[0].batch_id)
         }
       } catch (err) {
@@ -176,6 +268,18 @@ function RumPageContent() {
 
     return () => controller.abort()
   }, [])
+
+  useEffect(() => {
+    if (!requestedBatchId) return
+    if (!rumBatches.length) return
+    if (appliedRequestedRef.current) return
+    const wanted = normalizeForCompare(requestedBatchId)
+    const match = rumBatches.find((b) => normalizeForCompare(b?.batch_id) === wanted)
+    if (match && match.batch_id && selectedRunId !== match.batch_id) {
+      setSelectedRunId(match.batch_id)
+      appliedRequestedRef.current = true
+    }
+  }, [requestedBatchId, rumBatches])
 
   // Filter by status
   const filteredBatches = rumBatches.filter((batch) => {

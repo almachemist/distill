@@ -1077,6 +1077,968 @@
     "notes": "Two distillation runs (25/01 and 27/01) captured; many intermediate readings retained in raw log references."
   },
   {
+    "batch_id": "CS-24-1",
+    "date": "2024-09-25",
+    "day": "Wednesday",
+    "product": "Cane Spirit",
+    "product_variant": "Double Retort",
+    "fermentation": {
+      "substrate": "Cane Juice",
+      "substrate_batch": "2024",
+      "substrate_mass_kg": 2000,
+      "water_mass_kg": 0,
+      "antifoam_ml": 150,
+      "antifoam_notes": "150 mL anti-foam added at pitch",
+      "brix_initial": 18.4,
+      "ph_initial": 4.64,
+      "temperature_control": {
+        "chiller_set_c": 26
+      },
+      "yeast_type": "Distillamax RM",
+      "yeast_mass_g": 1000,
+      "yeast_rehydration_temp_c": 38,
+      "yeast_rehydration_time_min": 15,
+      "temperature_profile": {
+        "0h": 32.0,
+        "24h": 26.8,
+        "48h": 26.0,
+        "72h": 25.6
+      },
+      "brix_profile": {
+        "0h": 12.2,
+        "24h": 8.6,
+        "48h": 2.4,
+        "72h": 2.0
+      },
+      "ph_profile": {
+        "0h": 3.59,
+        "24h": 3.56,
+        "48h": 3.56,
+        "72h": 3.56
+      },
+      "final_brix": 2.0,
+      "final_ph": 3.56,
+      "notes": "Healthy fermentation with consistent cooling and stable pH." 
+    },
+    "distillation_runs": [
+      {
+        "date": "2024-10-01",
+        "boiler_volume_l": 1100,
+        "boiler_abv_percent": 8.7,
+        "boiler_lal": 95.7,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "blend_details": "105 L (58 L tails @ 63.4% + 47 L water)",
+          "volume_l": 105.0,
+          "abv_percent": 35.0,
+          "lal": 36.75
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "blend_details": "103 L (77 L tails @ 80.7% + 26 L water)",
+          "volume_l": 103.0,
+          "abv_percent": 60.0,
+          "lal": 61.8
+        },
+        "heating": {
+          "boiler_elements": "5 × 5750 W",
+          "boiler_start_time": "06:45",
+          "retort_1_elements": "2200 W",
+          "retort_1_start_time": "06:45",
+          "retort_2_elements": "2200 W",
+          "retort_2_start_time": "06:45"
+        },
+        "first_spirit": {
+          "time": "08:40",
+          "pot_temp_c": 85.0,
+          "abv_percent": 87.0,
+          "notes": "Current limit recorded as 2 in 35 A"
+        },
+        "cut_points": [
+          {
+            "phase": "Foreshots",
+            "time": "09:50",
+            "volume_l": 1.0,
+            "abv_percent": 81.0
+          },
+          {
+            "phase": "Heads",
+            "volume_l": 25.0,
+            "abv_percent": 81.9,
+            "lal": 20.475,
+            "density": 0.849
+          },
+          {
+            "phase": "Hearts",
+            "time": "12:25",
+            "volume_l": 55.0,
+            "abv_percent": 79.7,
+            "lal": 44.33,
+            "density": 0.854,
+            "notes": "Lab log also recorded 80.6% for proofing"
+          },
+          {
+            "phase": "Early Tails",
+            "time": "14:20",
+            "volume_l": 59.7,
+            "abv_percent": 72.2,
+            "lal": 61.37,
+            "notes": "Power held at 40 A"
+          },
+          {
+            "phase": "Late Tails",
+            "time": "16:05",
+            "volume_l": 27.0,
+            "abv_percent": 41.9,
+            "lal": 22.207,
+            "notes": "Power 40 A, condenser noted at 53 °C"
+          }
+        ],
+        "summary": {
+          "total_lal_start": 148.382,
+          "total_lal_end": 148.382,
+          "heart_yield_percent": 29.8
+        },
+        "notes": "CS-24-1 run bottled on completion; heating remarks logged as 'off for run'."
+      },
+      {
+        "date": "2024-10-03",
+        "boiler_volume_l": 850,
+        "boiler_abv_percent": 8.7,
+        "boiler_lal": 73.95,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "blend_details": "96.1 L (62 L tails @ 46.5% + 34.1 L water)",
+          "volume_l": 96.1,
+          "abv_percent": 30.0,
+          "lal": 28.83
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "blend_details": "91 L (76 L tails @ 72.2% + 15 L water)",
+          "volume_l": 91.0,
+          "abv_percent": 60.0,
+          "lal": 54.6
+        },
+        "heating": {
+          "boiler_elements": "5 × 5750 W",
+          "boiler_start_time": "06:00",
+          "retort_1_elements": "2200 W",
+          "retort_1_start_time": "06:00",
+          "retort_2_elements": "2200 W",
+          "retort_2_start_time": "06:00"
+        },
+        "first_spirit": {
+          "time": "08:20",
+          "pot_temp_c": 83.9,
+          "abv_percent": 83.0,
+          "notes": "Density at takeoff logged as 0.846"
+        },
+        "cut_points": [
+          {
+            "phase": "Foreshots",
+            "time": "08:50",
+            "volume_l": 2.0,
+            "abv_percent": 81.0
+          },
+          {
+            "phase": "Heads",
+            "volume_l": 15.0,
+            "abv_percent": 79.1,
+            "lal": 11.865,
+            "density": 0.857
+          },
+          {
+            "phase": "Hearts",
+            "volume_l": 76.0,
+            "abv_percent": 80.3,
+            "lal": 60.952,
+            "density": 0.852,
+            "notes": "Secondary hydrometer check recorded 80.2%"
+          },
+          {
+            "phase": "Early Tails",
+            "time": "14:00",
+            "volume_l": 62.0,
+            "abv_percent": 74.5,
+            "lal": 46.19,
+            "notes": "Supplemental reading captured 81.45 L total"
+          },
+          {
+            "phase": "Late Tails",
+            "time": "15:25",
+            "volume_l": 25.0,
+            "abv_percent": 45.4,
+            "lal": 11.35,
+            "notes": "Condenser outlet noted at 34 °C"
+          }
+        ],
+        "summary": {
+          "total_lal_start": 148.933,
+          "total_lal_end": 148.933,
+          "heart_yield_percent": 40.9
+        },
+        "notes": "Second draw bottled alongside first CS-24-1 hearts; power board recorded 'off for run'."
+      }
+    ],
+    "notes": "Double retort cane spirit run staged for bottling from 2024 cane harvest."
+  },
+  {
+    "batch_id": "CS-24-2",
+    "date": "2024-10-17",
+    "day": "Thursday",
+    "product": "Cane Spirit",
+    "product_variant": "Double Retort",
+    "fermentation": {
+      "substrate": "Cane Spirit Wash",
+      "substrate_batch": "2024",
+      "substrate_mass_kg": null,
+      "water_mass_kg": null,
+      "antifoam_ml": 150,
+      "notes": "Twin fermenters staged for double-retort charge; right tank held at 25.5 °C",
+      "fermenters": {
+        "left": {
+          "starting_brix": 18.1,
+          "starting_ph": 3.93,
+          "measurements": {
+            "series": [
+              { "temp_c": 27.5, "brix": 12.5, "ph": 3.54 },
+              { "temp_c": 25.7, "brix": 3.3, "ph": 3.47 }
+            ]
+          }
+        },
+        "right": {
+          "starting_brix": 17.8,
+          "starting_ph": 3.9,
+          "chiller_setting_c": 25.5,
+          "measurements": {
+            "series": [
+              { "temp_c": 28.1, "brix": 12.3, "ph": 3.47 },
+              { "temp_c": 25.8, "brix": 3.5, "ph": 3.45 }
+            ]
+          }
+        }
+      },
+      "yeast_type": "Distillamax RM",
+      "yeast_mass_g": 500,
+      "yeast_rehydration_temp_c": 37.5,
+      "yeast_rehydration_time_min": 15
+    },
+    "distillation_runs": [
+      {
+        "date": "2024-10-22",
+        "boiler_volume_l": 1000,
+        "boiler_abv_percent": 8.1,
+        "boiler_lal": 81.0,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "composition": "83 L (44 L tails @ 56.8% + 39 L water)",
+          "volume_l": 83.0,
+          "abv_percent": 30.0,
+          "lal": 24.9
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "composition": "86 L (71 L tails @ 72.7% + 15 L water)",
+          "volume_l": 86.0,
+          "abv_percent": 60.0,
+          "lal": 51.6
+        },
+        "heating": {
+          "boiler_elements": "5 × 5750 W",
+          "boiler_start_time": "06:00",
+          "first_spirit_time": "08:30",
+          "first_spirit_temp_c": 88.0,
+          "first_spirit_abv_percent": 88.0,
+          "current_limit": "2 in 35 A"
+        },
+        "cuts": {
+          "foreshots": {
+            "time": "09:30",
+            "volume_l": 1.0,
+            "abv_percent": 84.0
+          },
+          "heads": {
+            "volume_l": 23.0,
+            "abv_percent": 83.8,
+            "lal": 19.274,
+            "density": 0.828
+          },
+          "hearts": {
+            "time": "12:50",
+            "volume_l": 67.0,
+            "abv_percent": 80.7,
+            "hearts_abv_percent": 82.4,
+            "lal": 55.208,
+            "density": 0.846
+          },
+          "tails_segments": [
+            {
+              "time": "13:30",
+              "power": "40 A",
+              "phase": "Early Tails",
+              "volume_l": 65.0,
+              "abv_percent": 75.1,
+              "lal": 46.3367,
+              "density": 0.866
+            },
+            {
+              "time": "15:30",
+              "power": "40 A",
+              "phase": "Late Tails",
+              "volume_l": 20.0,
+              "abv_percent": 39.1,
+              "lal": 23.069
+            }
+          ]
+        },
+        "summary": {
+          "total_lal_start": 157.5,
+          "total_lal_end": 143.8877,
+          "heart_yield_percent": 35.1,
+          "lal_loss": 13.6123
+        },
+        "notes": "146 L @ 82% transferred on 2025-01-08 with cask marker \"43\"."
+      },
+      {
+        "date": "2024-10-28",
+        "boiler_volume_l": 1000,
+        "boiler_abv_percent": 8.1,
+        "boiler_lal": 81.0,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "composition": "76 L (59 L tails @ 39.1% + 17 L water)",
+          "volume_l": 76.0,
+          "abv_percent": 30.0,
+          "lal": 22.8
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "composition": "76 L (61 L tails @ 75.1% + 15 L water)",
+          "volume_l": 76.0,
+          "abv_percent": 60.0,
+          "lal": 45.6
+        },
+        "heating": {
+          "boiler_elements": "5 × 5750 W",
+          "boiler_start_time": "06:00",
+          "first_spirit_time": "08:15",
+          "first_spirit_temp_c": 85.0,
+          "first_spirit_abv_percent": 85.0,
+          "current_limit": "2 in 32 A"
+        },
+        "cuts": {
+          "foreshots": {
+            "time": "08:50",
+            "volume_l": 1.0,
+            "abv_percent": 84.0
+          },
+          "heads": {
+            "volume_l": 20.0,
+            "abv_percent": 84.0,
+            "lal": 16.8,
+            "density": 0.841
+          },
+          "hearts": {
+            "time": "12:45",
+            "volume_l": 79.0,
+            "abv_percent": 80.4,
+            "hearts_abv_percent": 82.5,
+            "lal": 65.175,
+            "density": 0.845
+          },
+          "tails_segments": [
+            {
+              "time": "13:45",
+              "power": "40 A",
+              "phase": "Early Tails",
+              "volume_l": 64.5,
+              "abv_percent": 73.7,
+              "lal": 35.72976,
+              "density": 0.876
+            },
+            {
+              "time": "15:10",
+              "power": "40 A",
+              "phase": "Late Tails",
+              "volume_l": 20.0,
+              "abv_percent": 41.3,
+              "lal": 14.042,
+              "density": 0.94
+            }
+          ]
+        },
+        "summary": {
+          "total_lal_start": 149.4,
+          "total_lal_end": 131.74676,
+          "heart_yield_percent": 43.6,
+          "lal_loss": 17.65324
+        },
+        "notes": "42 L water added post-run; recorded as produced 2024-10-28."
+      }
+    ],
+    "notes": "Second cane spirit series for 2024 harvest, both fermenters dedicated to Roberta double-retort program."
+  },
+  {
+    "batch_id": "CS-24-3",
+    "date": "2024-11-06",
+    "day": "Wednesday",
+    "product": "Cane Spirit",
+    "product_variant": "Double Retort",
+    "fermentation": {
+      "substrate": "Cane Juice",
+      "substrate_batch": "2024",
+      "substrate_mass_kg": null,
+      "water_mass_kg": null,
+      "notes": "Unknown as the IBC wasn’t here",
+      "fermenters": {
+        "left": {
+          "volume_l": 1000,
+          "measurements": {
+            "series": [
+              { "temp_c": 34.6, "brix": 13.0, "ph": 3.56 },
+              { "temp_c": 27.0, "brix": 10.0, "ph": 3.54 },
+              { "temp_c": 26.6, "brix": 4.1, "ph": 3.52 }
+            ]
+          }
+        },
+        "right": {
+          "volume_l": 1000,
+          "chiller_setting_c": 25.5,
+          "notes": "Chiller set at 25.5 one day after",
+          "measurements": {
+            "series": [
+              { "temp_c": 34.6, "brix": 12.5, "ph": 3.62 },
+              { "temp_c": 28.6, "brix": 9.0, "ph": 3.60 },
+              { "temp_c": 27.5, "brix": 3.5, "ph": 3.55 }
+            ]
+          }
+        }
+      },
+      "yeast_type": null,
+      "yeast_mass_g": null,
+      "yeast_rehydration_temp_c": null,
+      "yeast_rehydration_time_min": null
+    },
+    "distillation_runs": [
+      {
+        "date": "2024-11-12",
+        "boiler_volume_l": 1000,
+        "boiler_abv_percent": null,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "composition": "42 L tails @ 54.3% + 34 L water",
+          "volume_l": 76.0,
+          "abv_percent": 30.0,
+          "lal": 22.8
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "composition": "58 L tails @ 73.7% + 14 L water",
+          "volume_l": 72.0,
+          "abv_percent": 60.0,
+          "lal": 43.2
+        },
+        "heating": {
+          "boiler_start_time": "06:00",
+          "boiler_elements": "5 × 5750 W",
+          "current_limit": "2 in 32 A",
+          "first_spirit_time": "08:40",
+          "first_spirit_temp_c": 84.0
+        },
+        "cuts": {
+          "foreshots": {
+            "time": "09:50",
+            "volume_l": 2.0,
+            "abv_percent": 84.0
+          },
+          "heads": {
+            "volume_l": 20.0,
+            "abv_percent": 83.6,
+            "lal": 16.72,
+            "density": 0.842
+          },
+          "hearts": {
+            "time": "12:00",
+            "volume_l": 65.0,
+            "abv_percent": 82.0,
+            "lal": 53.3,
+            "density": 0.846
+          },
+          "tails_segments": [
+            {
+              "phase": "Early Tails",
+              "time": "13:50",
+              "volume_l": 46.5,
+              "abv_percent": 68.0,
+              "lal": 46.24,
+              "density": 0.88
+            }
+          ]
+        },
+        "summary": {
+          "total_lal_start": null,
+          "total_lal_end": null,
+          "heart_yield_percent": null
+        },
+        "notes": "CS-24-3 bottled"
+      },
+      {
+        "date": "2024-11-15",
+        "boiler_volume_l": 1000,
+        "boiler_abv_percent": null,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "composition": "55 L tails @ 50.8% + 23 L water",
+          "volume_l": 78.0,
+          "abv_percent": 35.0,
+          "lal": 27.3
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "composition": "68 L tails @ 68% + 9 L water",
+          "volume_l": 77.0,
+          "abv_percent": 60.0,
+          "lal": 46.2
+        },
+        "heating": {
+          "boiler_start_time": "06:00",
+          "boiler_elements": "5 × 5750 W",
+          "current_limit": "2 in 32 A",
+          "first_spirit_time": "08:50",
+          "first_spirit_temp_c": 86.0,
+          "first_spirit_density": 0.835
+        },
+        "cuts": {
+          "foreshots": {
+            "time": "09:50",
+            "volume_l": 2.0,
+            "abv_percent": 85.0
+          },
+          "heads": {
+            "volume_l": 20.0,
+            "abv_percent": 84.0,
+            "lal": 16.8,
+            "density": 0.841
+          },
+          "hearts": {
+            "time": "12:15",
+            "volume_l": 66.0,
+            "abv_percent": 82.0,
+            "lal": 54.12,
+            "density": 0.846
+          },
+          "tails_segments": [
+            {
+              "phase": "Early Tails",
+              "time": "13:45",
+              "volume_l": 64.5,
+              "abv_percent": 73.7,
+              "lal": 35.72976,
+              "density": 0.876
+            },
+            {
+              "phase": "Late Tails",
+              "time": "15:00",
+              "volume_l": 14.0,
+              "abv_percent": 53.6,
+              "lal": 7.504,
+              "density": 0.915,
+              "notes": "Together with early"
+            }
+          ]
+        },
+        "summary": {
+          "total_lal_start": null,
+          "total_lal_end": null,
+          "heart_yield_percent": null
+        },
+        "notes": "CS-24-3 bottled"
+      }
+    ],
+    "notes": "Cane spirit batch run on Roberta double retort across two cycles."
+  },
+  {
+    "batch_id": "CS-25-1",
+    "date": "2025-10-10",
+    "day": "Friday",
+    "product": "Cane Spirit",
+    "product_variant": "Double Retort",
+    "fermentation": {
+      "substrate": "Cane Juice",
+      "substrate_batch": "2025",
+      "substrate_mass_kg": 2000,
+      "water_mass_kg": 0,
+      "chiller_setting_c": 25,
+      "fermentation_notes": "Left tank staging cane acid, right destined for still",
+      "fermenters": {
+        "left": {
+          "volume_l": 1000,
+          "starting_brix": 17.2,
+          "starting_ph": null,
+          "notes": "Was already fermenting; used for cane acid",
+          "measurements": {
+            "series": [
+              { "order": 1, "temp_c": 29.7, "brix": 6.6, "ph": 3.7 },
+              { "order": 2, "temp_c": 26.9, "brix": 4.8, "ph": 3.6 },
+              { "order": 3, "temp_c": 26.2, "brix": 3.2, "ph": 3.5 },
+              { "order": 4, "temp_c": 26.6, "brix": 3.5, "ph": 3.45 },
+              { "order": 5, "temp_c": 26.4, "brix": 3.2, "ph": 3.46 }
+            ]
+          }
+        },
+        "right": {
+          "volume_l": 1000,
+          "starting_brix": 19.4,
+          "starting_ph": null,
+          "measurements": {
+            "series": [
+              { "order": 1, "temp_c": 27.1, "brix": 14.3, "ph": 3.8 },
+              { "order": 2, "temp_c": 27.4, "brix": 9.7, "ph": 3.6 },
+              { "order": 3, "temp_c": 26.3, "brix": 6.9, "ph": 3.6 },
+              { "order": 4, "temp_c": 26.5, "brix": 3.9, "ph": 3.55 },
+              { "order": 5, "temp_c": 25.5, "brix": 1.8, "ph": 3.58 },
+              { "order": 6, "temp_c": null, "brix": 1.8, "ph": 3.58 }
+            ]
+          }
+        }
+      },
+      "yeast_type": "Distillamax RM",
+      "yeast_mass_g": 500,
+      "yeast_rehydration_temp_c": 37.5,
+      "yeast_rehydration_time_min": 15
+    },
+    "distillation_runs": [
+      {
+        "date": "2025-10-17",
+        "linked_fermenters": ["Left fermenter", "Right fermenter"],
+        "boiler": {
+          "volume_l": 900,
+          "abv_percent": 9.5,
+          "lal": 85.5
+        },
+        "retort_1": {
+          "content": "Carrie",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        "retort_2": {
+          "content": "Carrie",
+          "volume_l": 0,
+          "abv_percent": 0,
+          "lal": 0
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:30",
+          "retort1_elements": null,
+          "retort2_elements": null,
+          "notes": "Additional heating fields recorded as 0"
+        },
+        "operational": {
+          "current_limit": "32 A",
+          "notes": "Logged as 'together with early'"
+        },
+        "events": [
+          {
+            "order": 1,
+            "label": "foreshots_or_pre_cut",
+            "volume_l": 18,
+            "notes": "Initial '18' notation"
+          },
+          {
+            "order": 2,
+            "label": "collection_note",
+            "notes": "2 L @ 87.5%"
+          },
+          {
+            "order": 3,
+            "time": "11:15",
+            "spirit_abv_percent": 84.6
+          },
+          {
+            "order": 4,
+            "label": "heads",
+            "time": "11:15",
+            "volume_l": 15,
+            "lal": 12.69,
+            "density": 0.83
+          },
+          {
+            "order": 5,
+            "time": "12:50",
+            "density": 0.895
+          },
+          {
+            "order": 6,
+            "label": "threshold_note",
+            "notes": "60%"
+          },
+          {
+            "order": 7,
+            "label": "hearts",
+            "volume_l": 22,
+            "abv_percent": 65.6,
+            "lal": 14.432,
+            "density": 0.891
+          },
+          {
+            "order": 8,
+            "time": "16:15",
+            "notes": "Tails 39/40/50 L sequence",
+            "values": [39, 40, 50]
+          }
+        ]
+      },
+      {
+        "date": null,
+        "notes": "Second distillation not supplied; placeholder entry maintained for schema consistency."
+      }
+    ],
+    "notes": "CS-25-1 cane spirit run bridging cane acid and still recharge."
+  },
+  {
+    "batch_id": "CS-25-2",
+    "date": "2025-10-31",
+    "day": "Friday",
+    "product": "Cane Spirit",
+    "product_variant": "Double Retort",
+    "fermentation": {
+      "substrate": "Cane Juice",
+      "substrate_batch": "2025",
+      "substrate_mass_kg": 2000,
+      "water_mass_kg": 0,
+      "temperature_control": {
+        "chiller_set_temp_c": 25
+      },
+      "cane_acid_added": {
+        "volume_l": 100,
+        "source": "Cane acid",
+        "notes": "100 L carried forward from CS-25-2 cane acid staging"
+      },
+      "fermenters": {
+        "left": {
+          "volume_l": 1000,
+          "initial_brix": 17.9,
+          "initial_ph": 3.91,
+          "measurements": {
+            "series": [
+              { "temp_c": 28.3, "brix": 12.8, "ph": 3.46 },
+              { "temp_c": 28.3, "brix": 12.8, "ph": 3.46 },
+              { "temp_c": null, "brix": 10.9, "ph": null },
+              { "temp_c": null, "brix": 9.2, "ph": 3.44 },
+              { "temp_c": null, "brix": 5.7, "ph": 3.45 }
+            ]
+          },
+          "final_brix": 5.7,
+          "final_ph": 3.45
+        },
+        "right": {
+          "volume_l": 1000,
+          "initial_brix": 17.4,
+          "initial_ph": 3.83,
+          "measurements": {
+            "series": [
+              { "temp_c": 27.8, "brix": 13.5, "ph": 3.39 },
+              { "temp_c": 27.8, "brix": 13.5, "ph": 3.39 },
+              { "temp_c": null, "brix": 9.6, "ph": null },
+              { "temp_c": null, "brix": 7.8, "ph": 3.4 },
+              { "temp_c": null, "brix": null, "ph": 3.4 }
+            ]
+          },
+          "final_brix": 7.8,
+          "final_ph": 3.4
+        }
+      }
+    },
+    "distillation_runs": [
+      {
+        "run_id": "CS-25-2-DR-01",
+        "date": "2025-11-11",
+        "fermenter_source": "Left fermenter",
+        "boiler": {
+          "volume_l": 900,
+          "abv_percent": 7.5,
+          "lal": 67.5
+        },
+        "retort_1": {
+          "content": "Mixed tails",
+          "volume_l": 79,
+          "abv_percent": 43,
+          "lal": 33.97
+        },
+        "retort_2": {
+          "content": "Mixed tails",
+          "volume_l": 71,
+          "abv_percent": 65.6,
+          "lal": 46.576
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:00",
+          "retort1_elements": "2200 W",
+          "retort1_start_time": "07:00",
+          "retort2_elements": "2200 W",
+          "retort2_start_time": "07:00",
+          "current_limit": "2 in 32 A",
+          "notes": "Logged as off for run"
+        },
+        "cuts": {
+          "foreshots": {
+            "volume_l": 2.0,
+            "abv_percent": 84.3,
+            "notes": "2 L @ 84.3%"
+          },
+          "heads": {
+            "time": "12:15",
+            "volume_l": 18,
+            "abv_percent": 84.1,
+            "lal": 15.138,
+            "density": 0.841
+          },
+          "hearts": {
+            "time": "15:30",
+            "volume_l": 81.8,
+            "abv_percent": 83.0,
+            "lal": 67.894,
+            "density": 0.85,
+            "additional": {
+              "abv_percent_alt": 80.6,
+              "density_alt": 0.844
+            }
+          },
+          "tails_segments": [
+            {
+              "time": "06:00",
+              "volume_l": 60,
+              "abv_percent": 72,
+              "notes": null
+            },
+            {
+              "time": "Day after",
+              "volume_l": 15,
+              "abv_percent": 40,
+              "notes": null
+            },
+            {
+              "time": "Follow-up",
+              "volume_l": 55,
+              "abv_percent": 39.6,
+              "notes": null
+            }
+          ]
+        },
+        "notes": "CS-25-2 — 154 L @ 81.8% earmarked for dilution and bottling"
+      },
+      {
+        "run_id": "CS-25-2-DR-02",
+        "date": "2025-11-15",
+        "fermenter_source": "Right fermenter",
+        "boiler": {
+          "volume_l": 900,
+          "abv_percent": 7.5,
+          "lal": 67.5
+        },
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "volume_l": 68,
+          "abv_percent": 30,
+          "lal": 20.4,
+          "details": "68 L (24 L H2O + 36 L tails @ 40% + 8 L head @ 83%)"
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "volume_l": 66,
+          "abv_percent": 60,
+          "lal": 39.6,
+          "details": "66 L (55 L tails @ 72% + 11 L H2O)"
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:15",
+          "retort1_elements": "2200 W",
+          "retort1_start_time": "07:00",
+          "retort2_elements": "2200 W",
+          "retort2_start_time": "07:00",
+          "first_spirit_time": "10:20",
+          "first_spirit_temp_c": 77,
+          "current_limit": "2 in 32 A",
+          "notes": "Logged as off for run"
+        },
+        "cuts": {
+          "foreshots": {
+            "volume_l": 2.0,
+            "abv_percent": 78.7,
+            "notes": "2 L @ 78.7%"
+          },
+          "heads": {
+            "time": "11:25",
+            "volume_l": 28,
+            "abv_percent": 79.0,
+            "lal": 22.12,
+            "density": 0.856
+          },
+          "hearts": {
+            "time": "12:55",
+            "volume_l": 45,
+            "abv_percent": 79.5,
+            "lal": 35.775,
+            "density": 0.857,
+            "additional": {
+              "abv_percent_alt": 78.8,
+              "density_alt": 0.854
+            }
+          },
+          "tails_segments": [
+            {
+              "time": "12:30",
+              "volume_l": 20,
+              "abv_percent": 58.5,
+              "lal": 92.92
+            }
+          ]
+        },
+        "notes": "Recorded as 'early and late together'"
+      }
+    ],
+    "bottling": {
+      "components": [
+        {
+          "source": "CS-25-2 hearts",
+          "volume_l": 221,
+          "abv_percent": 48,
+          "lal": 106.08
+        },
+        {
+          "source": "CS-25-1 hearts",
+          "volume_l": 28,
+          "abv_percent": 64.5,
+          "lal": 18.06
+        }
+      ],
+      "water_added_l": 9.625,
+      "final_abv_percent": 48,
+      "final_volume_l": 258.625,
+      "bottles": [
+        {
+          "size_ml": 200,
+          "quantity": 154,
+          "volume_total_l": 30.8
+        },
+        {
+          "size_ml": 700,
+          "quantity": 321,
+          "volume_total_l": 224.7
+        }
+      ],
+      "total_bottled_l": 255.5,
+      "loss_l": 3.125,
+      "notes": "Blend proofed to 48% prior to packaging; remainder accounted for as line loss / samples."
+    },
+    "notes": "CS-25-2 cane spirit wash carried through consecutive double-retort charges." 
+  },
+  {
     "batch_id": "RUM-24-3",
     "date": "2024-02-21",
     "day": "Wednesday",
@@ -2147,5 +3109,673 @@
       "notes": "Split hearts 240 L @ 63.7% into cask 41 and finishing small cask 50#1."
     },
     "notes": "Cane syrup rum with funky dunder backbone; back-to-back Roberta runs emphasized tropical esters for cask 41 staging."
+  },
+  {
+    "batch_id": "CS-25-1",
+    "date": "2025-10-10",
+    "day": "Friday",
+    "product": "Cane acid ferment",
+    "product_variant": "Cane Spirit",
+    "fermentation": {
+      "substrate": "Cane juice / cane acid base",
+      "substrate_batch": "2025",
+      "substrate_mass_kg": 1000,
+      "water_mass_kg": 0,
+      "brix_initial": null,
+      "actual_starting_brix": null,
+      "ph_initial": null,
+      "dunder": "None",
+      "dunder_ph": null,
+      "chemicals": "USED FOR CANE ACID",
+      "starting_temperature_c": 25,
+      "yeast_type": "Distillamax RM",
+      "yeast_mass_g": 500,
+      "yeast_rehydration_temp_c": 37.5,
+      "yeast_rehydration_time_min": 15,
+      "fermenters": {
+        "left": {
+          "starting_brix": 17.2,
+          "notes": "Was already fermenting",
+          "measurements": {
+            "series": [
+              { "temp_c": 29.7, "brix": 6.6, "ph": 3.7 },
+              { "temp_c": 26.9, "brix": 4.8, "ph": 3.6 },
+              { "temp_c": 26.2, "brix": 3.2, "ph": 3.5 },
+              { "temp_c": 26.6, "brix": 3.5, "ph": 3.45 },
+              { "temp_c": 26.4, "brix": 3.2, "ph": 3.46 }
+            ]
+          }
+        },
+        "right": {
+          "starting_brix": 19.4,
+          "measurements": {
+            "series": [
+              { "temp_c": 27.1, "brix": 14.3, "ph": 3.8 },
+              { "temp_c": 27.4, "brix": 9.7, "ph": 3.6 },
+              { "temp_c": 26.3, "brix": 6.9, "ph": 3.6 },
+              { "temp_c": 26.5, "brix": 3.9, "ph": 3.55 },
+              { "temp_c": 25.5, "brix": 1.8, "ph": 3.58 },
+              { "temp_c": 25.5, "brix": 1.8, "ph": 3.58 }
+            ]
+          }
+        }
+      }
+    },
+    "distillation_runs": [
+      {
+        "date": "2025-10-17",
+        "boiler_volume_l": 900,
+        "boiler_abv_percent": 9.5,
+        "boiler_lal": 85.5,
+        "retort_1": {
+          "content": "Carrie (primed)",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": null
+        },
+        "retort_2": {
+          "content": "Carrie (primed)",
+          "volume_l": 0,
+          "abv_percent": null,
+          "lal": null
+        },
+        "heating": {
+          "boiler_elements": "12000w",
+          "boiler_start_time": "06:30",
+          "first_spirit_time": "11:15",
+          "first_spirit_temp_c": 84.6,
+          "power_notes": "32 A"
+        },
+        "cuts": {
+          "foreshots": {
+            "volume_l": 2,
+            "abv_percent": 87.5
+          },
+          "heads": {
+            "volume_l": 15,
+            "abv_percent": 84.6,
+            "lal": 12.69
+          },
+          "hearts": {
+            "volume_l": 22,
+            "abv_percent": 65.6,
+            "lal": 14.432
+          }
+        },
+        "notes": "Logged as \"together with early\"; tails 39/40/50 L retained",
+        "raw": {
+          "unmapped_tokens": [
+            "12:50",
+            0.895,
+            "60%",
+            "4:15",
+            39,
+            40,
+            50
+          ]
+        }
+      }
+    ],
+    "raw": {
+      "lines": [
+        "10/10/2025 Friday CS-25-1 Left fermenter ...",
+        "10/10/2025 Friday CS-25-1 Right fermenter ..."
+      ]
+    }
+  },
+  {
+    "batch_id": "CS-25-2",
+    "date": "2025-10-31",
+    "day": "Friday",
+    "product": "Cane acid ferment",
+    "product_variant": "Cane Spirit",
+    "fermentation": {
+      "substrate": "Cane juice / cane acid base",
+      "substrate_batch": "2025",
+      "substrate_mass_kg": 1000,
+      "water_mass_kg": 0,
+      "brix_initial": 17.9,
+      "actual_starting_brix": 17.9,
+      "ph_initial": 3.91,
+      "dunder": "100 L cane acid reuse (from CS-25-2)",
+      "dunder_ph": null,
+      "chemicals": "100 L of cane acid transferred into ferment",
+      "starting_temperature_c": 25,
+      "yeast_type": "N/A",
+      "yeast_mass_g": 0,
+      "notes": "Cane acid staging wash split across left/right fermenters for Carrie retort recharge.",
+      "fermenters": {
+        "left": {
+          "starting_brix": 17.9,
+          "measurements": [
+            { "temp_c": 28.3, "brix": 12.8, "ph": 3.46 },
+            { "temp_c": 28.3, "brix": 12.8, "ph": 3.46 },
+            { "temp_c": null, "brix": 10.9, "ph": null },
+            { "temp_c": null, "brix": 9.2, "ph": 3.44 },
+            { "temp_c": null, "brix": 5.7, "ph": 3.45 }
+          ]
+        },
+        "right": {
+          "starting_brix": 17.4,
+          "measurements": [
+            { "temp_c": 27.8, "brix": 13.5, "ph": 3.39 },
+            { "temp_c": 27.8, "brix": 13.5, "ph": 3.39 },
+            { "temp_c": null, "brix": 9.6, "ph": null },
+            { "temp_c": null, "brix": 7.8, "ph": 3.4 }
+          ]
+        }
+      }
+    },
+    "distillation_runs": [
+      {
+        "date": "2025-11-11",
+        "boiler_volume_l": 900,
+        "boiler_abv_percent": 7.5,
+        "boiler_lal": 67.5,
+        "retort_1": {
+          "content": "Mixed tails",
+          "volume_l": 79,
+          "abv_percent": 43,
+          "lal": 33.97
+        },
+        "retort_2": {
+          "content": "Mixed tails",
+          "volume_l": 71,
+          "abv_percent": 65.6,
+          "lal": 46.576
+        },
+        "cuts": {
+          "hearts": {
+            "volume_l": 81.8,
+            "abv_percent": 83,
+            "lal": 67.894
+          }
+        },
+        "notes": "CS-25-2 — 154 L @ 81.8% earmarked for dilution and bottling"
+      },
+      {
+        "date": "2025-11-15",
+        "boiler_volume_l": 900,
+        "boiler_abv_percent": 7.5,
+        "boiler_lal": 67.5,
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "volume_l": 68,
+          "abv_percent": null,
+          "lal": 20.4
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "volume_l": 66,
+          "abv_percent": null,
+          "lal": 39.6
+        },
+        "cuts": {
+          "hearts": {
+            "volume_l": 45,
+            "abv_percent": 79.5,
+            "lal": 35.775
+          }
+        },
+        "notes": "Late and early tails packs combined"
+      }
+    ],
+    "raw": {
+      "lines": [
+        "31/10/2025 Friday CS-25-2 Left fermenter ...",
+        "31/10/2025 Friday CS-25-2 Right fermenter ..."
+      ]
+    }
+  },
+  {
+    "batch_id": "RUM-25-001",
+    "date": "2025-11-28",
+    "day": "Friday",
+    "product": "Rum",
+    "product_variant": "Cane Syrup",
+    "fermentation": {
+      "substrate": "Cane Syrup",
+      "substrate_batch": "2023",
+      "substrate_mass_kg": 500,
+      "water_mass_kg": 1400,
+      "antifoam_ml": 0,
+      "additional_water_l": "-",
+      "additional_substrate": "-",
+      "brix_initial": 17.9,
+      "actual_starting_brix": 17.9,
+      "ph_initial": 4.91,
+      "dunder": "100 L cane acid (CS-25-2 reuse)",
+      "dunder_ph": "-",
+      "chemicals": "-",
+      "starting_temperature_c": 26.5,
+      "fermaid_g": "-",
+      "dap_g": "-",
+      "calcium_carbonate_g": "-",
+      "yeast_type": "Distillamax RM",
+      "yeast_mass_g": 1000,
+      "yeast_rehydration_temp_c": 37.8,
+      "yeast_rehydration_time_min": 15,
+      "temperature_profile": {
+        "start": 26.5,
+        "24h": 26.5,
+        "48h": 28
+      },
+      "brix_profile": {
+        "start": 17.9,
+        "24h": 7.4,
+        "48h": 5.6,
+        "72h": 2.0,
+        "96h": 1.8
+      },
+      "ph_profile": {
+        "start": 4.91,
+        "24h": 4.48,
+        "48h": 4.41,
+        "72h": 4.47,
+        "96h": 4.46
+      },
+      "final_brix": 1.8,
+      "final_ph": 4.46,
+      "notes": "Cane syrup wash blended with CS-25-2 cane acid for retort feed ahead of Carrie double run."
+    },
+    "distillation_runs": [
+      {
+        "date": "2025-12-05",
+        "boiler_volume_l": 1100,
+        "boiler_abv_percent": 8.5,
+        "boiler_lal": 93.5,
+        "heads_addition": {
+          "description": "Mixed tails pack",
+          "volume_l": 83,
+          "abv_percent": 33,
+          "lal": 27.39
+        },
+        "retort_1": {
+          "content": "Mixed tails pack",
+          "volume_l": 83,
+          "abv_percent": 33,
+          "lal": 27.39
+        },
+        "retort_2": {
+          "content": "Mixed tails pack",
+          "volume_l": 82,
+          "abv_percent": 58.5,
+          "lal": 47.97
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:15",
+          "retort_1_elements": "2200 W",
+          "retort_1_start_time": "07:30",
+          "retort_2_elements": "2200 W",
+          "retort_2_start_time": "07:30"
+        },
+        "first_spirit": {
+          "time": "11:00",
+          "abv_percent": 78.0,
+          "notes": "-"
+        },
+        "cut_points": [
+          {
+            "phase": "Foreshots",
+            "time": "11:00",
+            "abv_percent": 82.0,
+            "volume_l": 2.0,
+            "lal": "-",
+            "notes": "Discarded"
+          },
+          {
+            "phase": "Heads",
+            "time": "12:00",
+            "abv_percent": 83.6,
+            "volume_l": 18.0,
+            "lal": 15.048,
+            "notes": "Returned to tails bank"
+          },
+          {
+            "phase": "Hearts",
+            "time": "16:30",
+            "abv_percent": 82.6,
+            "volume_l": 88.0,
+            "lal": 72.6,
+            "notes": "Logged for dilution (\"154 L @ 81.8% to be bottled\")"
+          },
+          {
+            "phase": "Tails",
+            "time": "13:40",
+            "abv_percent": 76.2,
+            "volume_l": 65.0,
+            "lal": 33.528,
+            "notes": "Day-after restart held around 33 A"
+          },
+          {
+            "phase": "Tails",
+            "time": "15:30",
+            "abv_percent": 53.0,
+            "volume_l": 18.0,
+            "lal": 13.108,
+            "notes": "Stored for future retort charge"
+          }
+        ],
+        "summary": {
+          "lal_in": 93.5,
+          "lal_out": 72.6,
+          "heart_yield_percent": 77.66
+        },
+        "notes": "Carrie run logged at 12000 W; power board note \"2 in 32 A\"."
+      },
+      {
+        "date": "2025-12-09",
+        "boiler_volume_l": 900,
+        "boiler_abv_percent": 8.5,
+        "boiler_lal": 76.5,
+        "heads_addition": {
+          "description": "Late tails from previous run",
+          "volume_l": 61.0,
+          "abv_percent": 30.0,
+          "lal": 18.3
+        },
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "volume_l": 61.0,
+          "abv_percent": 30.0,
+          "lal": 18.3
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "volume_l": 63.5,
+          "abv_percent": 60.0,
+          "lal": 38.1
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:00",
+          "retort_1_elements": "2200 W",
+          "retort_1_start_time": "07:30",
+          "retort_2_elements": "2200 W",
+          "retort_2_start_time": "07:30"
+        },
+        "first_spirit": {
+          "time": "10:30",
+          "abv_percent": 82.0,
+          "notes": "-"
+        },
+        "cut_points": [
+          {
+            "phase": "Foreshots",
+            "time": "10:30",
+            "abv_percent": 82.0,
+            "volume_l": 2.0,
+            "lal": "-",
+            "notes": "Discarded"
+          },
+          {
+            "phase": "Heads",
+            "time": "11:25",
+            "abv_percent": 83.6,
+            "volume_l": 18.0,
+            "lal": 15.048,
+            "notes": "-"
+          },
+          {
+            "phase": "Hearts",
+            "time": "14:15",
+            "abv_percent": 82.1,
+            "volume_l": 72.0,
+            "lal": 59.112,
+            "notes": "Reserved for RUM-25-001 bottling"
+          },
+          {
+            "phase": "Tails",
+            "time": "15:00",
+            "abv_percent": 75.1,
+            "volume_l": 66.0,
+            "lal": 28.538,
+            "notes": "Early tails held around 33 A"
+          },
+          {
+            "phase": "Tails",
+            "time": "17:20",
+            "abv_percent": 53.0,
+            "volume_l": 28.0,
+            "lal": 16.43,
+            "notes": "Late tails recharge"
+          }
+        ],
+        "summary": {
+          "lal_in": 76.5,
+          "lal_out": 59.112,
+          "heart_yield_percent": 77.28
+        },
+        "notes": "Supplemental Carrie run mirrored primary heat profile; retort power noted \"2 in 32 A\"."
+      }
+    ],
+    "notes": "Cane syrup campaign transitioning CS-25-2 acid into 2025 rum bottlings."
+  },
+  {
+    "batch_id": "RUM-25-002",
+    "date": "2025-12-11",
+    "day": "Thursday",
+    "product": "Rum",
+    "product_variant": "Molasses",
+    "fermentation": {
+      "substrate": "Molasses",
+      "substrate_batch": "2023",
+      "substrate_mass_kg": 500,
+      "water_mass_kg": 1500,
+      "antifoam_ml": 0,
+      "additional_water_l": "-",
+      "additional_substrate": "-",
+      "brix_initial": 19.0,
+      "actual_starting_brix": 19.0,
+      "ph_initial": 4.85,
+      "dunder": "100 L cane acid (CS-25-2 reuse)",
+      "dunder_ph": "-",
+      "chemicals": "-",
+      "starting_temperature_c": 30.0,
+      "fermaid_g": "-",
+      "dap_g": "-",
+      "calcium_carbonate_g": "-",
+      "yeast_type": "Reusing old one",
+      "yeast_mass_g": "-",
+      "yeast_rehydration_temp_c": "-",
+      "yeast_rehydration_time_min": "-",
+      "temperature_profile": {
+        "start": 30.0,
+        "24h": 30.0,
+        "48h": 26.8,
+        "72h": 26.8
+      },
+      "brix_profile": {
+        "start": 19.0,
+        "24h": 17.8,
+        "48h": 8.8,
+        "72h": 3.0,
+        "96h": 1.6
+      },
+      "ph_profile": {
+        "start": 4.85,
+        "24h": 4.73,
+        "48h": 4.28,
+        "72h": 4.25,
+        "96h": 4.25
+      },
+      "final_brix": 1.6,
+      "final_ph": 4.25,
+      "notes": "Molasses ferment recharged with cane acid and tails packs from CS-25-2 for Carrie hearts."
+    },
+    "distillation_runs": [
+      {
+        "date": "2025-12-18",
+        "boiler_volume_l": 1000,
+        "boiler_abv_percent": 8.0,
+        "boiler_lal": 80.0,
+        "heads_addition": {
+          "description": "Late tails from previous run",
+          "volume_l": 54.0,
+          "abv_percent": 30.0,
+          "lal": 16.2
+        },
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "volume_l": 54.0,
+          "abv_percent": 30.0,
+          "lal": 16.2
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "volume_l": 50.0,
+          "abv_percent": 60.0,
+          "lal": 29.4
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:15",
+          "retort_1_elements": "2200 W",
+          "retort_1_start_time": "07:30",
+          "retort_2_elements": "2200 W",
+          "retort_2_start_time": "07:30"
+        },
+        "first_spirit": {
+          "time": "10:30",
+          "abv_percent": 82.0,
+          "notes": "-"
+        },
+        "cut_points": [
+          {
+            "phase": "Foreshots",
+            "time": "10:30",
+            "abv_percent": 82.0,
+            "volume_l": 2.0,
+            "lal": "-",
+            "notes": "Discarded"
+          },
+          {
+            "phase": "Heads",
+            "time": "11:05",
+            "abv_percent": 84.3,
+            "volume_l": 18.0,
+            "lal": 15.174,
+            "notes": "-"
+          },
+          {
+            "phase": "Hearts",
+            "time": "14:15",
+            "abv_percent": 82.0,
+            "volume_l": 95.0,
+            "lal": 77.9,
+            "notes": "Hearts earmarked for cane spirit blend"
+          },
+          {
+            "phase": "Tails",
+            "time": "16:00",
+            "abv_percent": 66.0,
+            "volume_l": 50.0,
+            "lal": 34.98,
+            "notes": "Captured while maintaining 33 A"
+          },
+          {
+            "phase": "Tails",
+            "time": "17:15",
+            "abv_percent": 40.0,
+            "volume_l": 27.0,
+            "lal": 9.2,
+            "notes": "Reserved for retort recharge"
+          }
+        ],
+        "summary": {
+          "lal_in": 80.0,
+          "lal_out": 77.9,
+          "heart_yield_percent": 97.38
+        },
+        "notes": "Carrie run repeated 12000 W profile with \"2 in 32 A\" noted."
+      },
+      {
+        "date": "2025-12-22",
+        "boiler_volume_l": 1000,
+        "boiler_abv_percent": 8.0,
+        "boiler_lal": 80.0,
+        "heads_addition": {
+          "description": "Late tails from previous run",
+          "volume_l": 60.0,
+          "abv_percent": 30.0,
+          "lal": 18.0
+        },
+        "retort_1": {
+          "content": "Late tails from previous run",
+          "volume_l": 60.0,
+          "abv_percent": 30.0,
+          "lal": 18.0
+        },
+        "retort_2": {
+          "content": "Early tails from previous run",
+          "volume_l": 57.0,
+          "abv_percent": 60.0,
+          "lal": 34.2
+        },
+        "heating": {
+          "boiler_elements": "12000 W",
+          "boiler_start_time": "06:10",
+          "retort_1_elements": "2200 W",
+          "retort_1_start_time": "07:00",
+          "retort_2_elements": "2200 W",
+          "retort_2_start_time": "07:00"
+        },
+        "first_spirit": {
+          "time": "10:40",
+          "abv_percent": 83.0,
+          "notes": "-"
+        },
+        "cut_points": [
+          {
+            "phase": "Foreshots",
+            "time": "10:40",
+            "abv_percent": 83.0,
+            "volume_l": 2.0,
+            "lal": "-",
+            "notes": "Discarded"
+          },
+          {
+            "phase": "Heads",
+            "time": "11:30",
+            "abv_percent": 84.0,
+            "volume_l": 20.0,
+            "lal": 16.8,
+            "notes": "-"
+          },
+          {
+            "phase": "Hearts",
+            "time": "14:30",
+            "abv_percent": 81.0,
+            "volume_l": 40.0,
+            "lal": 32.4,
+            "notes": "Short hearts run to finish blend"
+          },
+          {
+            "phase": "Tails",
+            "time": "15:45",
+            "abv_percent": 73.9,
+            "volume_l": 65.0,
+            "lal": 32.516,
+            "notes": "Drawn under reduced boiler load"
+          },
+          {
+            "phase": "Tails",
+            "time": "17:15",
+            "abv_percent": 54.0,
+            "volume_l": 42.5,
+            "lal": 22.95,
+            "notes": "Late tails captured for retorts"
+          }
+        ],
+        "summary": {
+          "lal_in": 80.0,
+          "lal_out": 32.4,
+          "heart_yield_percent": 40.5
+        },
+        "notes": "Supplemental run duplicated 12000 W profile; retort power recorded \"2 in 32 A\"."
+      }
+    ],
+    "notes": "Molasses rum campaign using cane acid and retort packs from CS-25-2 for Carrie hearts."
   }
 ]

@@ -32,6 +32,165 @@ export const RumDetailPanel: React.FC<{
   const [showDeleteConfirm, setShowDeleteConfirm] = React.useState(false)
   const [isDeleting, setIsDeleting] = React.useState(false)
 
+  const [linkedBarrels, setLinkedBarrels] = React.useState<any[]>([])
+  const [loadingLinkedBarrels, setLoadingLinkedBarrels] = React.useState(false)
+  const [linkedBarrelsError, setLinkedBarrelsError] = React.useState<string | null>(null)
+
+  const parseBatchList = (value: any): string[] => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return []
+    const parts = raw
+      .split(/[;,]/g)
+      .map((s) => s.trim())
+      .filter(Boolean)
+    return Array.from(new Set(parts))
+  }
+
+  const normalizeToken = (value: any): string => {
+    const raw0 = String(value ?? '').trim()
+    if (!raw0) return ''
+    const raw = raw0.toUpperCase().replace(/\s+/g, '').replace(/\//g, '-')
+    const m = raw.match(/^(RUM)-(\d{2,4})-(\d{1,3})$/)
+    if (m) {
+      const n = parseInt(m[3], 10)
+      if (Number.isFinite(n)) {
+        return `${m[1]}-${m[2]}-${String(n).padStart(3, '0')}`
+      }
+    }
+    return raw
+  }
+
+  const unpadRumSuffix = (value: string): string => {
+    const raw = normalizeToken(value)
+    const m = raw.match(/^(RUM)-(\d{2,4})-(\d{3})$/)
+    if (!m) return raw
+    const n = parseInt(m[3], 10)
+    if (!Number.isFinite(n)) return raw
+    return `${m[1]}-${m[2]}-${String(n)}`
+  }
+
+  const caskNumberToBarrelCode = (value: any): string[] => {
+    const raw = String(value ?? '').trim()
+    if (!raw) return []
+    const n = parseInt(raw, 10)
+    if (!Number.isFinite(n)) return []
+    const map: Record<number, string[]> = {
+      3: ['DTD0001', 'DTD0002'],
+      4: ['DTD0003'],
+      5: ['DTD0004'],
+      6: ['DTD0005'],
+      7: ['DTD0006'],
+      8: ['DTD0007'],
+      9: ['DTD0008'],
+      10: ['DTD0009'],
+      11: ['DTD0010'],
+      12: ['DTD0011'],
+      13: ['DTD0012'],
+      14: ['DTD0013'],
+      15: ['DTD0014'],
+      16: ['DTD0015'],
+      17: ['DTD0016'],
+      18: ['DTD0017'],
+      19: ['DTD0018'],
+      20: ['DTD0019'],
+      21: ['DTD0020'],
+      22: ['DTD0021'],
+      23: ['DTD0022'],
+      24: ['DTD0023'],
+      25: ['DTD0024'],
+      26: ['DTD0025'],
+      27: ['DTD0026'],
+      28: ['DTD0027'],
+      29: ['DTD0028'],
+      30: ['DTD0029'],
+      31: ['DTD0030'],
+      32: ['DTD0045'],
+      33: ['DTD0031'],
+      34: ['DTD0032'],
+      35: ['DTD0034'],
+      36: ['DTD0033'],
+      37: ['DTD0036'],
+      38: ['DTD0035'],
+      39: ['DTD0037'],
+      40: ['DTD0039'],
+      41: ['DTD0041'],
+      42: ['DTD0043'],
+      43: ['DTD0044'],
+      50: ['DTD0038', 'DTD0040', 'DTD0042'],
+    }
+    return map[n] || []
+  }
+
+  const caskToBarrelId = (cask: any): string | null => {
+    const raw = String(cask ?? '').trim()
+    if (!raw) return null
+    const n = parseInt(raw, 10)
+    if (!Number.isFinite(n)) return null
+    const barrelNum = n + 1
+    return `DTD${String(barrelNum).padStart(4, '0')}`
+  }
+
+  const caskBarrelCodes = React.useMemo(() => {
+    const fromLinked = linkedBarrels
+      .map((b: any) => String(b?.barrelNumber || b?.barrel_number || b?.id || '').trim().toUpperCase())
+      .filter(Boolean)
+    const uniqueLinked = Array.from(new Set(fromLinked))
+    if (uniqueLinked.length > 0) return uniqueLinked
+    return caskNumberToBarrelCode((run as any)?.cask_number)
+  }, [linkedBarrels, run])
+
+  React.useEffect(() => {
+    const batchId = String((run as any)?.batch_id ?? '').trim()
+    if (!batchId) {
+      setLinkedBarrels([])
+      setLinkedBarrelsError(null)
+      return
+    }
+
+    let alive = true
+    ;(async () => {
+      try {
+        setLoadingLinkedBarrels(true)
+        setLinkedBarrelsError(null)
+
+        const res = await fetch('/api/barrels?status=all', { cache: 'no-store' })
+        if (!res.ok) {
+          const json = await res.json().catch(() => ({}))
+          throw new Error(json?.error || `Failed to load barrels: ${res.status}`)
+        }
+        const json = await res.json() as { barrels?: any[] }
+        const barrels = Array.isArray(json?.barrels) ? json.barrels : []
+
+        const norm = normalizeToken(batchId)
+        const alt = unpadRumSuffix(batchId)
+        const wanted = new Set([batchId, norm, alt].map((s) => normalizeToken(s)).filter(Boolean))
+
+        const matches = barrels.filter((b: any) => {
+          const tokens = parseBatchList(b?.batch)
+          for (const token of tokens) {
+            const nt = normalizeToken(token)
+            if (wanted.has(nt)) return true
+          }
+          return false
+        })
+
+        matches.sort((a: any, b: any) => String(a?.barrelNumber || a?.barrel_number || '').localeCompare(String(b?.barrelNumber || b?.barrel_number || '')))
+
+        if (!alive) return
+        setLinkedBarrels(matches)
+      } catch (e: any) {
+        if (!alive) return
+        setLinkedBarrels([])
+        setLinkedBarrelsError(String(e?.message || 'Failed to load linked barrels'))
+      } finally {
+        if (!alive) return
+        setLoadingLinkedBarrels(false)
+      }
+    })()
+
+    return () => { alive = false }
+  }, [run])
+
   if (!run) return (
     <div className="flex-1 flex items-center justify-center text-stone-400 text-sm">
       Select a rum batch to see details.
@@ -72,13 +231,13 @@ export const RumDetailPanel: React.FC<{
   const foreshotsABV = run.foreshots_abv_percent || 0
   const foreshotsLAL = foreshotsVol * (foreshotsABV / 100)
 
-  const headsVol = run.heads_volume_l || 0
-  const headsABV = run.heads_abv_percent || 0
-  const headsLAL = headsVol * (headsABV / 100)
+  const headsVol = run.heads_volume_l || run.distillation?.cuts?.heads?.volume_l || 0
+  const headsABV = run.heads_abv_percent || run.distillation?.cuts?.heads?.abv_percent || 0
+  const headsLAL = run.heads_lal || run.distillation?.cuts?.heads?.lal || (headsVol * (headsABV / 100))
 
-  const heartsVol = run.hearts_volume_l || 0
-  const heartsABV = run.hearts_abv_percent || 0
-  const heartsLAL = run.hearts_lal || (heartsVol * (heartsABV / 100))
+  const heartsVol = run.hearts_volume_l || run.distillation?.cuts?.hearts?.volume_l || 0
+  const heartsABV = run.hearts_abv_percent || run.distillation?.cuts?.hearts?.abv_percent || 0
+  const heartsLAL = run.hearts_lal || run.distillation?.cuts?.hearts?.lal || (heartsVol * (heartsABV / 100))
 
   const earlyTailsVol = run.early_tails_volume_l || 0
   const earlyTailsABV = run.early_tails_abv_percent || 0
@@ -541,7 +700,26 @@ export const RumDetailPanel: React.FC<{
 
               <div>
                 <dt className="text-xs text-stone-500 uppercase">Cask #</dt>
-                <dd className="font-medium text-stone-900">#{run.cask_number}</dd>
+                <dd className="font-medium text-stone-900">
+                  {(() => {
+                    return `#${run.cask_number}`
+                  })()}
+                </dd>
+                {caskBarrelCodes.length > 0 && (
+                  <div className="mt-1 flex flex-wrap gap-2">
+                    {caskBarrelCodes.map((code) => (
+                      <button
+                        key={code}
+                        type="button"
+                        onClick={() => router.push(`/dashboard/barrels/${encodeURIComponent(code)}`)}
+                        className="px-2 py-0.5 rounded-md bg-white border border-stone-200 text-xs font-semibold text-stone-700 hover:border-stone-300 hover:text-stone-900"
+                        title={`Open barrel ${code}`}
+                      >
+                        {code}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <div>
@@ -584,6 +762,37 @@ export const RumDetailPanel: React.FC<{
                 <dd className="font-medium text-stone-900">{formatDate(run.expected_bottling_date)}</dd>
               </div>
             </dl>
+
+            <div className="mt-4 pt-4 border-t border-stone-300">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-semibold text-stone-700 uppercase">Linked Barrels</h4>
+                <div className="text-xs text-stone-500">{loadingLinkedBarrels ? 'Loading…' : `${linkedBarrels.length}`}</div>
+              </div>
+
+              {linkedBarrelsError ? (
+                <div className="mt-2 text-xs text-red-700">{linkedBarrelsError}</div>
+              ) : linkedBarrels.length === 0 ? (
+                <div className="mt-2 text-xs text-stone-500">—</div>
+              ) : (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {linkedBarrels.map((b: any) => {
+                    const id = String(b?.id || b?.barrelNumber || b?.barrel_number || '').trim()
+                    const code = String(b?.barrelNumber || b?.barrel_number || id).toUpperCase()
+                    return (
+                      <button
+                        key={id || code}
+                        type="button"
+                        onClick={() => router.push(`/dashboard/barrels/${encodeURIComponent(id || code)}`)}
+                        className="px-2 py-1 rounded-md bg-white border border-stone-200 text-xs font-medium text-stone-700 hover:border-stone-300 hover:text-stone-900"
+                        title={`Open barrel ${code}`}
+                      >
+                        {code}
+                      </button>
+                    )
+                  })}
+                </div>
+              )}
+            </div>
 
             {/* Maturation Notes */}
             {run.notes && run.notes !== "-" && (

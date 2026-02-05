@@ -130,6 +130,17 @@ function toNum(v: any): number | null {
   return m ? Number(m[0]) : null
 }
 
+function normalizeRumBatchId(id: any): string {
+  const raw = String(id ?? '').trim()
+  if (!raw) return raw
+  const m = raw.match(/^(RUM)-(\d{2})-(\d+)$/i)
+  if (!m) return raw
+  const prefix = m[1].toUpperCase()
+  const year = m[2]
+  const n = m[3].padStart(3, '0')
+  return `${prefix}-${year}-${n}`
+}
+
 function summarizeGin(obj: any): GinApiRecord {
   const heartsObj =
     obj?.totals?.output?.hearts ||
@@ -418,7 +429,82 @@ export async function GET() {
         }))
       : []
 
-    const combinedRum = [...rumFromTable, ...caneSpiritRuns]
+    const coalesce = <T>(primary: T | null | undefined, fallback: T | null | undefined): T | null => {
+      const isEmpty = (value: any) =>
+        value === null ||
+        value === undefined ||
+        (typeof value === 'number' && (Number.isNaN(value) || value === 0)) ||
+        (typeof value === 'string' && value.trim() === '')
+      if (!isEmpty(primary)) return (primary ?? null) as T | null
+      if (!isEmpty(fallback)) return (fallback ?? null) as T | null
+      return null
+    }
+
+    const mergeRumSummary = (base: any, incoming: any) => {
+      const merged = { ...base }
+      merged.batch_id = normalizeRumBatchId(base.batch_id ?? incoming.batch_id)
+      merged.product_name = coalesce(base.product_name, incoming.product_name)
+      merged.product_type = coalesce(base.product_type, incoming.product_type)
+      merged.status = coalesce(base.status, incoming.status)
+      merged.still_used = coalesce(base.still_used, incoming.still_used)
+      merged.fermentation_start_date = coalesce(base.fermentation_start_date, incoming.fermentation_start_date)
+      merged.distillation_date = coalesce(base.distillation_date, incoming.distillation_date)
+
+      const heartsVolume = coalesce(base.hearts_volume_l, incoming.hearts_volume_l)
+      const heartsLal = coalesce(base.hearts_lal, incoming.hearts_lal)
+      const heartsAbv = coalesce(base.hearts_abv_percent, incoming.hearts_abv_percent)
+
+      merged.hearts_volume_l = heartsVolume
+      merged.hearts_lal = heartsLal
+      merged.hearts_abv_percent = heartsAbv ?? (
+        heartsVolume != null && heartsVolume > 0 && heartsLal != null
+          ? Number(((heartsLal / heartsVolume) * 100).toFixed(3))
+          : null
+      )
+      if ((merged.hearts_lal == null || merged.hearts_lal === 0) && merged.hearts_volume_l != null && merged.hearts_abv_percent != null) {
+        merged.hearts_lal = Number((merged.hearts_volume_l * (merged.hearts_abv_percent / 100)).toFixed(3))
+      }
+
+      merged.fill_date = coalesce(base.fill_date, incoming.fill_date)
+      merged.cask_number = coalesce(base.cask_number, incoming.cask_number)
+
+      return merged
+    }
+
+    const rumMap = new Map<string, any>()
+    for (const row of rumFromTable) {
+      if (!row?.batch_id) continue
+      const key = normalizeRumBatchId(row.batch_id)
+      rumMap.set(key, { ...row, batch_id: key })
+    }
+
+    // Merge fallback rum summaries as well, so static hearts metrics backfill missing/0 DB values
+    for (const row of FALLBACK_RESPONSE.rum) {
+      if (!row?.batch_id) continue
+      const key = normalizeRumBatchId(row.batch_id)
+      const existing = rumMap.get(key)
+      if (!existing) {
+        rumMap.set(key, { ...row, batch_id: key })
+        continue
+      }
+      const merged = mergeRumSummary(existing, row)
+      rumMap.set(key, merged)
+    }
+
+    for (const row of caneSpiritRuns) {
+      if (!row?.batch_id) continue
+      const key = normalizeRumBatchId(row.batch_id)
+      const existing = rumMap.get(key)
+      if (!existing) {
+        rumMap.set(key, { ...row, batch_id: key })
+        continue
+      }
+      const merged = mergeRumSummary(existing, row)
+      rumMap.set(key, merged)
+    }
+
+    const combinedRum = Array.from(rumMap.values())
+
     if (combinedRum.length > 0) {
       rum = combinedRum
         .sort((a: any, b: any) => {
