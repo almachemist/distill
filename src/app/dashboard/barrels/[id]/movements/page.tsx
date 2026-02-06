@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useParams } from 'next/navigation'
 
 type MovementRow = {
   id: string
@@ -18,9 +19,10 @@ const statusOptions = ['Aging', 'Decanted', 'Bottled', 'Blended'] as const
 
 type StatusOption = (typeof statusOptions)[number]
 
-export default function BarrelMovementsPage({ params }: { params: { id: string } }) {
+export default function BarrelMovementsPage() {
   const router = useRouter()
-  const barrelId = decodeURIComponent(params.id)
+  const params = useParams() as { id?: string } | null
+  const barrelId = decodeURIComponent(String(params?.id || ''))
 
   const [toStatus, setToStatus] = useState<StatusOption>('Decanted')
   const [notes, setNotes] = useState('')
@@ -50,6 +52,11 @@ export default function BarrelMovementsPage({ params }: { params: { id: string }
   }
 
   useEffect(() => {
+    if (!barrelId) {
+      setError('Missing barrel id')
+      setIsLoading(false)
+      return
+    }
     load()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [barrelId])

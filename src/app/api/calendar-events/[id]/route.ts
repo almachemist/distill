@@ -13,8 +13,6 @@ import { createClient } from '@/lib/supabase/server'
 import { z } from 'zod'
 export const runtime = 'nodejs'
 
-type ContextWithIdParam = { params: { id: string } }
-
 function log(level: 'info' | 'error', message: string, meta?: Record<string, any>) {
   const entry = { level, message, time: new Date().toISOString(), ...(meta || {}) }
   if (level === 'error') console.error(JSON.stringify(entry))
@@ -67,10 +65,10 @@ const CalendarEventUpdateSchema = z.object({
  */
 export async function PATCH(
   request: NextRequest,
-  context: ContextWithIdParam
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params
+    const { id } = await context.params
     const body = await request.json()
     const parsed = CalendarEventUpdateSchema.safeParse(body)
     if (!parsed.success) {
@@ -144,10 +142,10 @@ export async function PATCH(
  */
 export async function DELETE(
   request: NextRequest,
-  context: ContextWithIdParam
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = context.params
+    const { id } = await context.params
     const supabase = await createClient()
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) return NextResponse.json({ error: 'not_authenticated' }, { status: 401 })

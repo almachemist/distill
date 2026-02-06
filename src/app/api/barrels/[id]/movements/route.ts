@@ -4,8 +4,6 @@ export const dynamic = 'force-dynamic'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 import { createClient } from '@/lib/supabase/server'
 
-type ContextWithIdParam = { params: { id: string } }
-
 type MovementRow = {
   id: string
   barrel_uuid: string | null
@@ -60,7 +58,7 @@ function normalizeBarrelNumber(record: any) {
   return v || null
 }
 
-export async function GET(req: NextRequest, context: ContextWithIdParam) {
+export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     let supabase: any
     try {
@@ -69,7 +67,8 @@ export async function GET(req: NextRequest, context: ContextWithIdParam) {
       supabase = await createClient()
     }
 
-    const raw = decodeURIComponent(context.params.id)
+    const { id } = await context.params
+    const raw = decodeURIComponent(id)
 
     const located = await locateBarrel(supabase, raw)
     if (!located.record) {
@@ -102,7 +101,7 @@ export async function GET(req: NextRequest, context: ContextWithIdParam) {
   }
 }
 
-export async function POST(req: NextRequest, context: ContextWithIdParam) {
+export async function POST(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     let supabase: any
     try {
@@ -111,7 +110,8 @@ export async function POST(req: NextRequest, context: ContextWithIdParam) {
       supabase = await createClient()
     }
 
-    const raw = decodeURIComponent(context.params.id)
+    const { id } = await context.params
+    const raw = decodeURIComponent(id)
     const body = await req.json().catch(() => ({}))
     const toStatus = String(body?.toStatus || '').trim()
     const notes = typeof body?.notes === 'string' ? body.notes : null

@@ -6,6 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 function HeatingContent() {
   const router = useRouter()
   const searchParams = useSearchParams() as URLSearchParams | null
+  const runId = searchParams?.get('runId')
   const recipeId = searchParams?.get('recipeId')
   const batchId = searchParams?.get('batchId')
   
@@ -23,13 +24,12 @@ function HeatingContent() {
   const [startTemp, setStartTemp] = useState('')
   const [notes, setNotes] = useState('')
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!batchId) {
       setError('Missing batch ID')
       return
     }
 
-    // Save to localStorage for now
     const heatingData = {
       recipeId,
       batchId,
@@ -44,10 +44,45 @@ function HeatingContent() {
       notes
     }
     
+    // Save to localStorage for backward compatibility
     localStorage.setItem('distillation_heating', JSON.stringify(heatingData))
+
+    // Save step data to DB if we have a runId
+    if (runId) {
+      try {
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_step',
+            run_id: runId,
+            step_number: 2,
+            step_data: heatingData,
+          })
+        })
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'save_draft',
+            run_id: runId,
+            columns: {
+              boiler_on_time: boilerOnTime || null,
+              power_setting: powerSetting || null,
+              heating_elements: elements || null,
+              plates: plates || null,
+              deflegmator: deflegmator || null,
+            }
+          })
+        })
+      } catch (err) {
+        console.warn('Failed to save step to DB (non-blocking):', err)
+      }
+    }
     
     // Navigate to distillation cuts phase
-    router.push(`/dashboard/production/distillation-cuts?recipeId=${recipeId}&batchId=${batchId}`)
+    const runParam = runId ? `runId=${runId}&` : ''
+    router.push(`/dashboard/production/distillation-cuts?${runParam}recipeId=${recipeId}&batchId=${batchId}`)
   }
 
   return (
@@ -224,7 +259,10 @@ function HeatingContent() {
           {/* Actions */}
           <div className="flex justify-between pt-4">
             <button
-              onClick={() => router.push(`/dashboard/production/botanical-steeping?recipeId=${recipeId || ''}&batchId=${batchId || ''}`)}
+              onClick={() => {
+                const runParam = runId ? `runId=${runId}&` : ''
+                router.push(`/dashboard/production/botanical-steeping?${runParam}recipeId=${recipeId || ''}&batchId=${batchId || ''}`)
+              }}
               className="px-6 py-3 bg-copper-10 hover:bg-copper-20 text-graphite rounded-lg font-medium transition-colors border border-copper-30"
             >
               ← Back to Steeping

@@ -18,8 +18,13 @@ const RumRecipeCalculator = dynamic(() => import('@/modules/recipes/components/R
   loading: () => <div className="rounded-xl border border-gray-200 bg-white p-6">Loading calculator…</div>,
 })
 
+const RecipesList = dynamic(() => import('@/modules/recipes/components/RecipesList').then(mod => mod.RecipesList), {
+  ssr: false,
+  loading: () => <div className="rounded-xl border border-gray-200 bg-white p-6">Loading recipe cards…</div>,
+})
+
 export default function RecipesPage() {
-  const [activeTab, setActiveTab] = useState<'gin' | 'rum' | 'calculator'>('gin')
+  const [activeTab, setActiveTab] = useState<'cards' | 'gin' | 'rum' | 'calculator'>('cards')
 
   return (
     <div className="space-y-6">
@@ -34,6 +39,16 @@ export default function RecipesPage() {
       {/* Tabs */}
       <div className="border-b border-gray-200">
         <nav className="-mb-px flex space-x-8">
+          <button
+            onClick={() => setActiveTab('cards')}
+            className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition ${
+              activeTab === 'cards'
+                ? 'border-blue-500 text-blue-600'
+                : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
+            }`}
+          >
+            Recipe Cards
+          </button>
           <button
             onClick={() => setActiveTab('gin')}
             className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition ${
@@ -69,6 +84,7 @@ export default function RecipesPage() {
 
       {/* Content */}
       <div className="mt-2">
+        {activeTab === 'cards' && <RecipesList />}
         {activeTab === 'gin' && <GinRecipesBrowser />}
         {activeTab === 'rum' && <RumProductRecipesBrowser />}
         {activeTab === 'calculator' && <RumRecipeCalculator />}

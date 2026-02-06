@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useMemo, useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 
 type Batch = {
@@ -13,7 +13,7 @@ type Batch = {
   notes?: string | null
 }
 
-export default function OldRobertaBatchesPage() {
+function OldRobertaBatchesPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams() as URLSearchParams | null
   const [batches, setBatches] = useState<Batch[]>([])
@@ -334,5 +334,13 @@ export default function OldRobertaBatchesPage() {
         </div>
       </main>
     </div>
+  )
+}
+
+export default function OldRobertaBatchesPage() {
+  return (
+    <Suspense>
+      <OldRobertaBatchesPageContent />
+    </Suspense>
   )
 }

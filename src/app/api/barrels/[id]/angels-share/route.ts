@@ -4,8 +4,6 @@ export const dynamic = 'force-dynamic'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 import { createClient } from '@/lib/supabase/server'
 
-type ContextWithIdParam = { params: { id: string } }
-
 function toNum(v: any) {
   const n = parseFloat(String(v ?? ''))
   return Number.isFinite(n) ? n : 0
@@ -43,7 +41,7 @@ async function findRecordByKeys(supabase: any, table: string, id: string) {
   return { record: null, matchedKey: '' }
 }
 
-export async function POST(req: NextRequest, context: ContextWithIdParam) {
+export async function POST(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     let supabase: any
     try {
@@ -52,7 +50,7 @@ export async function POST(req: NextRequest, context: ContextWithIdParam) {
       supabase = await createClient()
     }
 
-    const { id: rawId } = context.params
+    const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
 
     const body = await req.json().catch(() => ({}))

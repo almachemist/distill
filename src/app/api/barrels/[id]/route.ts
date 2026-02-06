@@ -4,8 +4,6 @@ export const dynamic = 'force-dynamic'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 import { createClient } from '@/lib/supabase/server'
 
-type ContextWithIdParam = { params: { id: string } }
-
 function toNum(v: any) {
   const n = parseFloat(String(v ?? ''))
   return Number.isFinite(n) ? n : 0
@@ -19,7 +17,7 @@ function toNumOrNull(v: any): number | null {
   return Number.isFinite(n) ? n : null
 }
 
-export async function PATCH(req: NextRequest, context: ContextWithIdParam) {
+export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     let supabase: any
     try {
@@ -27,7 +25,7 @@ export async function PATCH(req: NextRequest, context: ContextWithIdParam) {
     } catch {
       supabase = await createClient()
     }
-    const { id: rawId } = context.params
+    const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
     const body = await req.json().catch(() => ({}))
 
@@ -298,7 +296,7 @@ function scoreMappedBarrel(b: any) {
   return score
 }
 
-export async function GET(req: NextRequest, context: ContextWithIdParam) {
+export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     let supabase: any
     try {
@@ -306,7 +304,8 @@ export async function GET(req: NextRequest, context: ContextWithIdParam) {
     } catch {
       supabase = await createClient()
     }
-    const { id: rawId } = context.params
+
+    const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
     const debug = (() => {
       try {
@@ -364,7 +363,7 @@ export async function GET(req: NextRequest, context: ContextWithIdParam) {
   }
 }
 
-export async function DELETE(req: NextRequest, context: ContextWithIdParam) {
+export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     let supabase: any
     try {
@@ -372,7 +371,8 @@ export async function DELETE(req: NextRequest, context: ContextWithIdParam) {
     } catch {
       supabase = await createClient()
     }
-    const { id: rawId } = context.params
+
+    const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
     const configured = process.env.NEXT_PUBLIC_BARRELS_TABLE || ''
     const candidates = [configured, 'tracking', 'barrels', 'barrel_tracking', 'barrels_tracking'].filter(Boolean)

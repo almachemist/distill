@@ -6,7 +6,10 @@ import { useRouter, useSearchParams } from 'next/navigation'
 function DilutionContent() {
   const router = useRouter()
   const searchParams = useSearchParams() as URLSearchParams | null
+  const runId = searchParams?.get('runId')
   const batchId = searchParams?.get('batchId') || ''
+  const [saving, setSaving] = useState(false)
+  const [finalizeError, setFinalizeError] = useState<string | null>(null)
 
   const [dilutionSteps, setDilutionSteps] = useState<Array<{
     step: number
@@ -135,122 +138,182 @@ function DilutionContent() {
     return '0'
   }
 
-  const handleSubmit = async () => {
+  const handleSaveDraft = async () => {
+    setSaving(true)
+    setFinalizeError(null)
     try {
-      // Load all previous steps from localStorage
-      const preparationData = JSON.parse(localStorage.getItem('distillation_preparation') || '{}')
-      const steepingData = JSON.parse(localStorage.getItem('distillation_steeping') || '{}')
-      const heatingData = JSON.parse(localStorage.getItem('distillation_heating') || '{}')
-      const cutsData = JSON.parse(localStorage.getItem('distillation_cuts') || '{}')
-      
-      // Calculate cuts totals
-      const getCutTotal = (cuts: any[]) => {
-        if (!cuts || cuts.length === 0) return { volume_l: 0, abv_percent: 0, lal: 0 }
-        const total = cuts.reduce((acc, cut) => ({
-          volume_l: acc.volume_l + (cut.volume_l || 0),
-          abv_percent: acc.abv_percent + (cut.abv_percent || 0),
-          lal: acc.lal + (cut.lal || 0)
-        }), { volume_l: 0, abv_percent: 0, lal: 0 })
-        total.abv_percent = cuts.length > 0 ? total.abv_percent / cuts.length : 0
-        return total
+      if (runId) {
+        // Save dilution step data to DB
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_step',
+            run_id: runId,
+            step_number: 4,
+            step_data: { dilutionSteps, finalOutput },
+          })
+        })
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'save_draft',
+            run_id: runId,
+            columns: {
+              dilution_steps: dilutionSteps,
+              final_output_volume_l: finalOutput.totalVolume,
+              final_output_abv_percent: finalOutput.finalABV,
+              final_output_lal: finalOutput.totalLAL,
+              notes: finalOutput.notes || null,
+            }
+          })
+        })
+        alert('Draft saved successfully!')
+      } else {
+        // Fallback: save via old DistillationRunRepository
+        await saveLegacy()
       }
-
-      const foreshotsTotal = getCutTotal(cutsData.foreshots)
-      const headsTotal = getCutTotal(cutsData.heads)
-      const heartsTotal = getCutTotal(cutsData.hearts)
-      const tailsTotal = getCutTotal(cutsData.tails)
-      
-      // Prepare data for Supabase
-      const productType = preparationData.productType || 'gin'
-      const productLabel = productType === 'ethanol' ? 'Ethanol Recovery' : productType.charAt(0).toUpperCase() + productType.slice(1)
-      
-      const distillationRunData = {
-        batchId,
-        sku: batchId,
-        displayName: `${batchId} (${productLabel})`,
-        productId: productType,
-        recipeId: productType === 'gin' ? cutsData.recipeId : null,
-        date: preparationData.date || new Date().toISOString().split('T')[0],
-        stillUsed: preparationData.stillUsed || heatingData.stillUsed || 'Unknown',
-        
-        // Charge
-        chargeComponents: preparationData.components || [],
-        chargeTotalVolume: preparationData.totalVolume || 0,
-        chargeTotalABV: preparationData.averageABV || 0,
-        chargeTotalLAL: preparationData.totalLAL || 0,
-        
-        // Botanicals (only for gin)
-        botanicals: productType === 'gin' ? steepingData.botanicals : null,
-        steepingStartTime: steepingData.startTime || null,
-        steepingEndTime: steepingData.endTime || null,
-        steepingTemp: steepingData.temperature || null,
-        
-        // Heating
-        boilerOnTime: heatingData.boilerOnTime || preparationData.startTime || null,
-        powerSetting: heatingData.powerSetting || null,
-        heatingElements: heatingData.heatingElements || null,
-        plates: heatingData.plates || null,
-        deflegmator: heatingData.deflegmator || null,
-        
-        // Cuts
-        foreshotsVolume: foreshotsTotal.volume_l,
-        foreshotsABV: foreshotsTotal.abv_percent,
-        foreshotsLAL: foreshotsTotal.lal,
-        
-        headsVolume: headsTotal.volume_l,
-        headsABV: headsTotal.abv_percent,
-        headsLAL: headsTotal.lal,
-        
-        heartsVolume: heartsTotal.volume_l,
-        heartsABV: heartsTotal.abv_percent,
-        heartsLAL: heartsTotal.lal,
-        
-        tailsVolume: tailsTotal.volume_l,
-        tailsABV: tailsTotal.abv_percent,
-        tailsLAL: tailsTotal.lal,
-        
-        // Multi-part cuts
-        heartsSegments: cutsData.hearts?.length > 1 ? cutsData.hearts : null,
-        tailsSegments: cutsData.tails?.length > 1 ? cutsData.tails : null,
-        
-        // Dilution
-        dilutionSteps,
-        
-        // Final Output
-        finalOutputVolume: finalOutput.totalVolume,
-        finalOutputABV: finalOutput.finalABV,
-        finalOutputLAL: finalOutput.totalLAL,
-        
-        notes: preparationData.notes || ''
-      }
-      
-      // Save to Supabase
-      const { DistillationRunRepository } = await import('@/modules/production/services/distillation-run.repository')
-      const repository = new DistillationRunRepository()
-      await repository.create(distillationRunData)
-      
-      console.log('✅ Saved distillation run to Supabase:', batchId)
-      
-      // Clear localStorage after successful save
-      localStorage.removeItem('distillation_preparation')
-      localStorage.removeItem('distillation_steeping')
-      localStorage.removeItem('distillation_heating')
-      localStorage.removeItem('distillation_cuts')
-      
-      // Keep a backup in localStorage with batch prefix
-      localStorage.setItem(`batch_${batchId}`, JSON.stringify(distillationRunData))
-      
-      // Navigate back to batches (production complete)
-      router.push('/dashboard/batches')
-      
     } catch (error) {
-      console.error('❌ Error saving distillation run:', error)
-      alert('Failed to save distillation run. Please try again.')
+      console.error('Error saving draft:', error)
+      alert('Failed to save draft. Please try again.')
+    } finally {
+      setSaving(false)
     }
   }
 
+  const handleFinalize = async () => {
+    setSaving(true)
+    setFinalizeError(null)
+    try {
+      if (runId) {
+        // Finalize via API — validates and creates batches row
+        const res = await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'finalize',
+            run_id: runId,
+            final_data: {
+              dilution_steps: dilutionSteps,
+              final_output_volume_l: finalOutput.totalVolume,
+              final_output_abv_percent: finalOutput.finalABV,
+              final_output_lal: finalOutput.totalLAL,
+              notes: finalOutput.notes || null,
+            }
+          })
+        })
+        const result = await res.json()
+        if (!res.ok) {
+          setFinalizeError(result.error || 'Finalization failed')
+          if (result.details) {
+            setFinalizeError(`${result.error}: ${result.details.join(', ')}`)
+          }
+          return
+        }
+        console.log('✅ Finalized batch:', result)
+
+        // Clear localStorage
+        localStorage.removeItem('distillation_preparation')
+        localStorage.removeItem('distillation_steeping')
+        localStorage.removeItem('distillation_heating')
+        localStorage.removeItem('distillation_cuts')
+
+        router.push('/dashboard/batches')
+      } else {
+        // Fallback: save via old DistillationRunRepository
+        await saveLegacy()
+        router.push('/dashboard/batches')
+      }
+    } catch (error) {
+      console.error('Error finalizing:', error)
+      setFinalizeError('Failed to finalize. Please try again.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  const saveLegacy = async () => {
+    const preparationData = JSON.parse(localStorage.getItem('distillation_preparation') || '{}')
+    const steepingData = JSON.parse(localStorage.getItem('distillation_steeping') || '{}')
+    const heatingData = JSON.parse(localStorage.getItem('distillation_heating') || '{}')
+    const cutsData = JSON.parse(localStorage.getItem('distillation_cuts') || '{}')
+    
+    const getCutTotal = (cuts: any[]) => {
+      if (!cuts || cuts.length === 0) return { volume_l: 0, abv_percent: 0, lal: 0 }
+      const total = cuts.reduce((acc: any, cut: any) => ({
+        volume_l: acc.volume_l + (cut.volume_l || 0),
+        abv_percent: acc.abv_percent + (cut.abv_percent || 0),
+        lal: acc.lal + (cut.lal || 0)
+      }), { volume_l: 0, abv_percent: 0, lal: 0 })
+      total.abv_percent = cuts.length > 0 ? total.abv_percent / cuts.length : 0
+      return total
+    }
+
+    const foreshotsTotal = getCutTotal(cutsData.foreshots)
+    const headsTotal = getCutTotal(cutsData.heads)
+    const heartsTotal = getCutTotal(cutsData.hearts)
+    const tailsTotal = getCutTotal(cutsData.tails)
+    
+    const productType = preparationData.productType || 'gin'
+    const productLabel = productType === 'ethanol' ? 'Ethanol Recovery' : productType.charAt(0).toUpperCase() + productType.slice(1)
+    
+    const distillationRunData = {
+      batchId,
+      sku: batchId,
+      displayName: `${batchId} (${productLabel})`,
+      productId: productType,
+      recipeId: productType === 'gin' ? cutsData.recipeId : null,
+      date: preparationData.date || new Date().toISOString().split('T')[0],
+      stillUsed: preparationData.stillUsed || heatingData.stillUsed || 'Unknown',
+      chargeComponents: preparationData.components || [],
+      chargeTotalVolume: preparationData.totalVolume || 0,
+      chargeTotalABV: preparationData.averageABV || 0,
+      chargeTotalLAL: preparationData.totalLAL || 0,
+      botanicals: productType === 'gin' ? steepingData.botanicals : null,
+      steepingStartTime: steepingData.startTime || null,
+      steepingEndTime: steepingData.endTime || null,
+      steepingTemp: steepingData.temperature || null,
+      boilerOnTime: heatingData.boilerOnTime || preparationData.startTime || null,
+      powerSetting: heatingData.powerSetting || null,
+      heatingElements: heatingData.heatingElements || null,
+      plates: heatingData.plates || null,
+      deflegmator: heatingData.deflegmator || null,
+      foreshotsVolume: foreshotsTotal.volume_l,
+      foreshotsABV: foreshotsTotal.abv_percent,
+      foreshotsLAL: foreshotsTotal.lal,
+      headsVolume: headsTotal.volume_l,
+      headsABV: headsTotal.abv_percent,
+      headsLAL: headsTotal.lal,
+      heartsVolume: heartsTotal.volume_l,
+      heartsABV: heartsTotal.abv_percent,
+      heartsLAL: heartsTotal.lal,
+      tailsVolume: tailsTotal.volume_l,
+      tailsABV: tailsTotal.abv_percent,
+      tailsLAL: tailsTotal.lal,
+      heartsSegments: cutsData.hearts?.length > 1 ? cutsData.hearts : null,
+      tailsSegments: cutsData.tails?.length > 1 ? cutsData.tails : null,
+      dilutionSteps,
+      finalOutputVolume: finalOutput.totalVolume,
+      finalOutputABV: finalOutput.finalABV,
+      finalOutputLAL: finalOutput.totalLAL,
+      notes: preparationData.notes || ''
+    }
+    
+    const { DistillationRunRepository } = await import('@/modules/production/services/distillation-run.repository')
+    const repository = new DistillationRunRepository()
+    await repository.create(distillationRunData)
+    
+    localStorage.removeItem('distillation_preparation')
+    localStorage.removeItem('distillation_steeping')
+    localStorage.removeItem('distillation_heating')
+    localStorage.removeItem('distillation_cuts')
+    localStorage.setItem(`batch_${batchId}`, JSON.stringify(distillationRunData))
+  }
+
   const handleBack = () => {
-    router.push(`/dashboard/production/distillation-cuts?batchId=${batchId}`)
+    const runParam = runId ? `runId=${runId}&` : ''
+    router.push(`/dashboard/production/distillation-cuts?${runParam}batchId=${batchId}`)
   }
 
   return (
@@ -495,20 +558,39 @@ function DilutionContent() {
           </div>
         </div>
 
+        {/* Finalize Error */}
+        {finalizeError && (
+          <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+            <p className="text-red-800 text-sm font-medium">Finalization Error</p>
+            <p className="text-red-700 text-sm mt-1">{finalizeError}</p>
+          </div>
+        )}
+
         {/* Navigation */}
         <div className="flex justify-between">
           <button
             onClick={handleBack}
-            className="px-6 py-3 bg-white border border-copper-30 text-graphite rounded-lg hover:bg-beige font-medium transition-all"
+            disabled={saving}
+            className="px-6 py-3 bg-white border border-copper-30 text-graphite rounded-lg hover:bg-beige font-medium transition-all disabled:opacity-50"
           >
             ← Back to Cuts
           </button>
-          <button
-            onClick={handleSubmit}
-            className="px-8 py-3 bg-copper text-white rounded-lg hover:bg-copper/90 font-medium shadow-md transition-all"
-          >
-            Save & Finish Batch →
-          </button>
+          <div className="flex gap-3">
+            <button
+              onClick={handleSaveDraft}
+              disabled={saving}
+              className="px-6 py-3 bg-white border border-copper-30 text-graphite rounded-lg hover:bg-beige font-medium transition-all disabled:opacity-50"
+            >
+              {saving ? 'Saving...' : 'Save Draft'}
+            </button>
+            <button
+              onClick={handleFinalize}
+              disabled={saving}
+              className="px-8 py-3 bg-copper text-white rounded-lg hover:bg-copper/90 font-medium shadow-md transition-all disabled:opacity-50"
+            >
+              {saving ? 'Finalizing...' : 'Finalize Batch →'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -364,7 +364,7 @@ export async function GET() {
           date: batch.date,
           still_used: batch.still_used,
           updated_at: batch.updated_at,
-          status: 'completed',
+          status: batch.status || 'completed',
           ...batch
         }))
       : []

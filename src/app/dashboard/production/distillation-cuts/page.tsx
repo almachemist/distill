@@ -17,6 +17,7 @@ type Cut = {
 function DistillationCutsContent() {
   const router = useRouter()
   const searchParams = useSearchParams() as URLSearchParams | null
+  const runId = searchParams?.get('runId')
   const recipeId = searchParams?.get('recipeId')
   const batchId = searchParams?.get('batchId')
   
@@ -153,7 +154,6 @@ function DistillationCutsContent() {
   }
 
   const handleSubmit = async () => {
-    // Save cuts data to localStorage
     const cutsData = {
       batchId,
       recipeId,
@@ -162,10 +162,59 @@ function DistillationCutsContent() {
       hearts,
       tails
     }
+    // Save to localStorage for backward compatibility
     localStorage.setItem('distillation_cuts', JSON.stringify(cutsData))
 
-    // Navigate to dilution phase (final step before saving to DB)
-  router.push(`/dashboard/production/dilution?batchId=${batchId}`)
+    // Save step data to DB if we have a runId
+    if (runId) {
+      try {
+        const foreshotsTotal = getCutTotal(foreshots)
+        const headsTotal = getCutTotal(heads)
+        const heartsTotal = getCutTotal(hearts)
+        const tailsTotal = getCutTotal(tails)
+
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_step',
+            run_id: runId,
+            step_number: 3,
+            step_data: cutsData,
+          })
+        })
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'save_draft',
+            run_id: runId,
+            columns: {
+              foreshots_volume_l: foreshotsTotal.volume,
+              foreshots_abv_percent: foreshotsTotal.abv,
+              foreshots_lal: foreshotsTotal.lal,
+              heads_volume_l: headsTotal.volume,
+              heads_abv_percent: headsTotal.abv,
+              heads_lal: headsTotal.lal,
+              hearts_volume_l: heartsTotal.volume,
+              hearts_abv_percent: heartsTotal.abv,
+              hearts_lal: heartsTotal.lal,
+              tails_volume_l: tailsTotal.volume,
+              tails_abv_percent: tailsTotal.abv,
+              tails_lal: tailsTotal.lal,
+              hearts_segments: hearts.length > 1 ? hearts : null,
+              tails_segments: tails.length > 1 ? tails : null,
+            }
+          })
+        })
+      } catch (err) {
+        console.warn('Failed to save step to DB (non-blocking):', err)
+      }
+    }
+
+    // Navigate to dilution phase
+    const runParam = runId ? `runId=${runId}&` : ''
+    router.push(`/dashboard/production/dilution?${runParam}batchId=${batchId}`)
   }
 
   const renderCutTable = (

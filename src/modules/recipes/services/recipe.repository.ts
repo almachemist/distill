@@ -12,7 +12,7 @@ import type {
   RecipeCsvRow
 } from '../types/recipe.types'
 
-type RecipeIngredientJoined = RecipeIngredient & { items: Item | Item[] }
+type RecipeIngredientJoined = RecipeIngredient & { items?: Item | Item[] | null }
 
 export class RecipeRepository {
   private supabase = createClient()
@@ -111,7 +111,7 @@ export class RecipeRepository {
         step,
         notes,
         created_at,
-        items!inner (
+        items (
           id,
           name,
           category,
@@ -132,9 +132,10 @@ export class RecipeRepository {
       ...recipe,
       ingredients: (ingredients || []).map((ing) => {
         const j = ing as RecipeIngredientJoined
+        const item = Array.isArray(j.items) ? j.items[0] : j.items
         return {
           ...j,
-          item: (Array.isArray(j.items) ? j.items[0] : j.items) as Item
+          item: (item ?? { id: j.item_id, name: 'Unknown item' }) as Item
         }
       })
     }
@@ -159,9 +160,10 @@ export class RecipeRepository {
 
     return (data ?? []).map((ing) => {
       const j = ing as RecipeIngredientJoined
+      const item = Array.isArray(j.items) ? j.items[0] : j.items
       return {
         ...j,
-        item: (Array.isArray(j.items) ? j.items[0] : j.items) as Item
+        item: (item ?? { id: j.item_id, name: 'Unknown item' }) as Item
       }
     })
   }

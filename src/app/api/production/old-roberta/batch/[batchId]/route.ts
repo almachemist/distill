@@ -4,8 +4,6 @@ import path from 'path'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 export const runtime = 'nodejs'
 
-type ContextWithBatchIdParam = { params: { batchId: string } }
-
 function stripAndWrapObjectsToArray(text: string): any[] {
   const noBlock = text.replace(/\/\*[\s\S]*?\*\//g, '')
   const noLine = noBlock.replace(/(^|[^:])\/\/.*$/gm, '$1')
@@ -24,8 +22,8 @@ async function resolveOrganizationId() {
   return null
 }
 
-export async function GET(req: NextRequest, context: ContextWithBatchIdParam) {
-  const { batchId } = context.params
+export async function GET(req: NextRequest, context: { params: Promise<{ batchId: string }> }) {
+  const { batchId } = await context.params
   const id = decodeURIComponent(batchId)
   const supabase = createServiceRoleClient()
   const orgId = await resolveOrganizationId()

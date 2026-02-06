@@ -119,33 +119,7 @@ function PreparationContent() {
     setError(null)
 
     try {
-      if (!tankIdParam) {
-        const response = await fetch('/api/production/batches-with-inventory', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            batch_id: batchId,
-            batch_type: productType === 'ethanol' ? 'vodka' : productType,
-            product_name: selectedRecipe?.name || productType,
-            date,
-            still_used: stillUsed,
-            notes,
-            ethanol: ethanolSelection,
-            water_quantity_l: waterVolume,
-            botanicals: botanicals.length > 0 ? botanicals : undefined,
-            packaging: packaging.length > 0 ? packaging : undefined,
-            created_by: 'current_user',
-            organization_id: '00000000-0000-0000-0000-000000000001'
-          })
-        })
-        if (!response.ok) {
-          const errorData = await response.json()
-          throw new Error(errorData.error || 'Failed to save batch')
-        }
-        await response.json()
-      }
-
-      // Also save to localStorage for backward compatibility
+      // Build charge components
       const components = [
         tankIdParam
           ? {
@@ -193,15 +167,79 @@ function PreparationContent() {
         notes
       }
 
+      // 1. Create production run row in Supabase immediately
+      const createRes = await fetch('/api/production/runs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'create',
+          batch_id: batchId,
+          product_type: productType === 'ethanol' ? 'vodka' : productType,
+          product_name: selectedRecipe?.name || productType,
+          recipe_id: selectedRecipeId || null,
+          date,
+          still_used: stillUsed,
+          step_payload: { step_0_preparation: preparationData },
+        })
+      })
+      if (!createRes.ok) {
+        const errData = await createRes.json()
+        throw new Error(errData.error || 'Failed to create production run')
+      }
+      const runData = await createRes.json()
+      const runId = runData.run_id
+
+      // 2. Save charge columns to the run
+      await fetch('/api/production/runs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'save_draft',
+          run_id: runId,
+          columns: {
+            charge_components: components,
+            charge_total_volume_l: totalVolume,
+            charge_total_abv_percent: avgABV,
+            charge_total_lal: totalLAL,
+            notes,
+          }
+        })
+      })
+
+      // 3. Optionally consume inventory (existing flow)
+      if (!tankIdParam && ethanolSelection) {
+        try {
+          await fetch('/api/production/batches-with-inventory', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              batch_id: batchId,
+              batch_type: productType === 'ethanol' ? 'vodka' : productType,
+              product_name: selectedRecipe?.name || productType,
+              date,
+              still_used: stillUsed,
+              notes,
+              ethanol: ethanolSelection,
+              water_quantity_l: waterVolume,
+              botanicals: botanicals.length > 0 ? botanicals : undefined,
+              packaging: packaging.length > 0 ? packaging : undefined,
+              created_by: 'current_user',
+              organization_id: '00000000-0000-0000-0000-000000000001'
+            })
+          })
+        } catch (invErr) {
+          console.warn('Inventory integration failed (non-blocking):', invErr)
+        }
+      }
+
+      // 4. Save to localStorage for backward compatibility
       localStorage.setItem('distillation_preparation', JSON.stringify(preparationData))
 
-      // Navigate based on product type
+      // 5. Navigate with run_id in query params
       if (productType === 'gin') {
-        // Gin goes to botanical steeping
-        router.push(`/dashboard/production/botanical-steeping?recipeId=${selectedRecipeId}&batchId=${batchId}`)
+        router.push(`/dashboard/production/botanical-steeping?runId=${runId}&recipeId=${selectedRecipeId}&batchId=${batchId}`)
       } else {
-        // Vodka and Ethanol skip botanical steeping, go directly to heating
-        router.push(`/dashboard/production/heating?batchId=${batchId}`)
+        router.push(`/dashboard/production/heating?runId=${runId}&batchId=${batchId}`)
       }
     } catch (err: any) {
       console.error('Error saving batch:', err)

@@ -49,7 +49,11 @@ export default function RecordAngelsSharePage() {
 
   const preview = useMemo(() => {
     if (!barrel) return null
-    const beforeVol = Number.isFinite(barrel.originalVolume) && barrel.originalVolume > 0 ? barrel.originalVolume : barrel.currentVolume
+    const maybeOriginal = barrel.originalVolume
+    const beforeVol = typeof maybeOriginal === 'number' && Number.isFinite(maybeOriginal) && maybeOriginal > 0
+      ? maybeOriginal
+      : barrel.currentVolume
+    if (typeof beforeVol !== 'number' || !Number.isFinite(beforeVol) || beforeVol <= 0) return null
     const beforeAbv = barrel.abv
 
     const aVol = parseFloat(afterVolume)

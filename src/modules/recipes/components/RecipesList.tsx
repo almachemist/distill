@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 import { RecipeRepository } from '../services/recipe.repository'
 import { InventorySeedService } from '../services/inventory-seed.service'
 import { MasterInventorySeedService } from '../services/master-inventory-seed.service'
@@ -26,6 +27,7 @@ export function RecipesList() {
   const [ginOnly, setGinOnly] = useState(false)
   
   const router = useRouter()
+  const supabase = useMemo(() => createClient(), [])
   const recipeRepo = useMemo(() => new RecipeRepository(), [])
   const inventorySeedService = useMemo(() => new InventorySeedService(), [])
   const masterInventorySeedService = useMemo(() => new MasterInventorySeedService(), [])
@@ -37,9 +39,30 @@ export function RecipesList() {
   const wetSeasonGinSeedService = useMemo(() => new WetSeasonGinSeedService(), [])
   const jsonImportService = useMemo(() => new JsonRecipeImportService(), [])
 
+  const [creatingRecipe, setCreatingRecipe] = useState(false)
+  const [createError, setCreateError] = useState<string | null>(null)
+  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [newRecipeName, setNewRecipeName] = useState('')
+  const [newRecipeDescription, setNewRecipeDescription] = useState('Experiment / Flavour trial | Experimental – Not for Sale')
+  const [newRecipeNotes, setNewRecipeNotes] = useState('')
+  const [newRecipeBaseL, setNewRecipeBaseL] = useState('0.2')
+  const [newRecipeTargetAbvPct, setNewRecipeTargetAbvPct] = useState('')
+
   const filteredRecipes = recipes.filter(recipe =>
     recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  const missingFormulationNames = useMemo(() => {
+    const required = [
+      'Coffee Liqueur',
+      'Berry Burst',
+      'Golden Sunrise',
+      'Banana Rum',
+      'Gingerbeer',
+    ]
+    const existing = new Set((recipes || []).map((r) => String(r?.name || '').trim()))
+    return required.filter((n) => !existing.has(n))
+  }, [recipes])
 
   const displayedRecipes = filteredRecipes
     .filter(r => !ginOnly || r.name.toLowerCase().includes('gin'))
@@ -234,6 +257,108 @@ const handleImportProvidedJson = useCallback(async () => {
   }
 }, [jsonImportService, providedJson, loadRecipes])
 
+const handleImportFormulations = useCallback(async () => {
+  try {
+    setImporting(true)
+    setImportMessage(null)
+    setImportError(null)
+
+    const payload = {
+      formulations: [
+        {
+          recipe_name: 'Coffee Liqueur',
+          recipe_type: 'Liqueur',
+          status: 'Production-ready',
+          created_date: null,
+          target_batch_size_l: 76.4,
+          final_abv_percent_provided: null,
+          notes: 'Alcohol is pre-distilled vodka. Do not create distillation/fermentation records from this recipe.',
+          traceability_notes: 'Base spirit should reference SKU-type, not a batch ID at recipe stage.',
+          ingredients: [
+            { name: 'Vodka', quantity: 42, unit: 'L', abv_percent: 40, notes: null },
+            { name: 'Simple Syrup (1:1)', quantity: 34.36, unit: 'L', notes: null },
+            { name: 'Coffee beans', quantity: 4.3, unit: 'kg', notes: null },
+            { name: 'Vanilla flavouring', quantity: 108, unit: 'ml', notes: null },
+            { name: 'Hazelnut flavouring', quantity: 108, unit: 'ml', notes: null },
+          ],
+        },
+        {
+          recipe_name: 'Berry Burst',
+          recipe_type: 'Experiment / Flavour trial',
+          status: 'Experimental – Not for Sale',
+          created_date: 'October 2025',
+          target_batch_size_l: 0.2,
+          final_abv_percent_provided: null,
+          notes: 'Drops are micro additions; keep as-entered.',
+          traceability_notes: null,
+          ingredients: [
+            { name: 'Vodka', quantity: 200, unit: 'ml', abv_percent: 37.5, notes: null },
+            { name: 'Blackberry flavour', quantity: 20, unit: 'drops', notes: null },
+            { name: 'Raspberry flavour', quantity: 12, unit: 'drops', notes: null },
+            { name: 'Glycerine', quantity: 4, unit: 'drops', notes: null },
+          ],
+        },
+        {
+          recipe_name: 'Golden Sunrise',
+          recipe_type: 'Experiment / Flavour trial',
+          status: 'Experimental – Not for Sale',
+          created_date: 'October 2025',
+          target_batch_size_l: 0.2,
+          final_abv_percent_provided: null,
+          notes: null,
+          traceability_notes: null,
+          ingredients: [
+            { name: 'Vodka', quantity: 200, unit: 'ml', abv_percent: 37.5, notes: null },
+            { name: 'Orange flavour', quantity: 13, unit: 'drops', notes: null },
+            { name: 'Peach flavour', quantity: 10, unit: 'drops', notes: null },
+            { name: 'Passionfruit flavour', quantity: 14, unit: 'drops', notes: null },
+            { name: 'Glycerine', quantity: 4, unit: 'drops', notes: null },
+          ],
+        },
+        {
+          recipe_name: 'Banana Rum',
+          recipe_type: 'Experiment / Flavour trial',
+          status: 'Experimental – Not for Sale',
+          created_date: 'October 2025',
+          target_batch_size_l: 0.2,
+          final_abv_percent_provided: null,
+          notes: 'Base spirit is white rum; no distillation implied.',
+          traceability_notes: 'Base spirit should reference SKU-type, not a batch ID at recipe stage.',
+          ingredients: [
+            { name: 'DTD White Rum', quantity: 200, unit: 'ml', abv_percent: 40, notes: null },
+            { name: 'Banana flavour', quantity: 47, unit: 'drops', notes: null },
+            { name: 'Caramel flavour', quantity: 10, unit: 'drops', notes: null },
+            { name: 'Caramel colour', quantity: 5, unit: 'drops', notes: null },
+          ],
+        },
+        {
+          recipe_name: 'Gingerbeer',
+          recipe_type: 'RTD / Cocktail-style blend',
+          status: 'Experimental',
+          created_date: '06/02/2026',
+          target_batch_size_l: 5.0,
+          final_abv_percent_provided: 4.5,
+          notes: 'This is a dilution/blend recipe. No distillation/fermentation record.',
+          traceability_notes: null,
+          ingredients: [
+            { name: 'Syrup', quantity: 0.83, unit: 'L', notes: null },
+            { name: 'Vodka', quantity: 0.6, unit: 'L', abv_percent: 37.5, notes: null },
+            { name: 'Water', quantity: 3.57, unit: 'L', notes: null },
+          ],
+        },
+      ],
+    }
+
+    const result = await jsonImportService.importFromJson(payload as any)
+    setImportMessage(`Formulations import completed: ${result.created} created, ${result.updated} updated`)
+    await loadRecipes()
+  } catch (e) {
+    setImportError(e instanceof Error ? e.message : 'Failed to import formulation recipes')
+  } finally {
+    setImporting(false)
+  }
+}, [jsonImportService, loadRecipes])
+
 const handleImportJson = useCallback(async () => {
   try {
     setImporting(true)
@@ -254,14 +379,138 @@ useEffect(() => {
   loadRecipes()
 }, [loadRecipes])
 
-// Auto-import provided JSON in dev if there are no recipes
+// Auto-import formulation recipe cards in dev if they are missing
 const autoImportRan = useRef(false)
 useEffect(() => {
-  if (process.env.NODE_ENV === 'development' && recipes.length === 0 && !importing && !autoImportRan.current) {
-    autoImportRan.current = true
-    handleImportProvidedJson()
+  if (process.env.NODE_ENV !== 'development') return
+  if (importing) return
+  if (autoImportRan.current) return
+  if (!Array.isArray(recipes)) return
+
+  const requiredNames = [
+    'Coffee Liqueur',
+    'Berry Burst',
+    'Golden Sunrise',
+    'Banana Rum',
+    'Gingerbeer',
+  ]
+
+  const existingNames = new Set(recipes.map((r) => (r?.name ?? '').trim()))
+  const anyMissing = requiredNames.some((n) => !existingNames.has(n))
+  if (!anyMissing) return
+
+  let cancelled = false
+  ;(async () => {
+    try {
+      setImporting(true)
+      setImportMessage(null)
+      setImportError(null)
+
+      const payload = {
+        formulations: [
+          {
+            recipe_name: 'Coffee Liqueur',
+            recipe_type: 'Liqueur',
+            status: 'Production-ready',
+            created_date: null,
+            target_batch_size_l: 76.4,
+            final_abv_percent_provided: null,
+            notes: 'Alcohol is pre-distilled vodka. Do not create distillation/fermentation records from this recipe.',
+            traceability_notes: 'Base spirit should reference SKU-type, not a batch ID at recipe stage.',
+            ingredients: [
+              { name: 'Vodka', quantity: 42, unit: 'L', abv_percent: 40, notes: null },
+              { name: 'Simple Syrup (1:1)', quantity: 34.36, unit: 'L', notes: null },
+              { name: 'Coffee beans', quantity: 4.3, unit: 'kg', notes: null },
+              { name: 'Vanilla flavouring', quantity: 108, unit: 'ml', notes: null },
+              { name: 'Hazelnut flavouring', quantity: 108, unit: 'ml', notes: null },
+            ],
+          },
+          {
+            recipe_name: 'Berry Burst',
+            recipe_type: 'Experiment / Flavour trial',
+            status: 'Experimental – Not for Sale',
+            created_date: 'October 2025',
+            target_batch_size_l: 0.2,
+            final_abv_percent_provided: null,
+            notes: 'Drops are micro additions; keep as-entered.',
+            traceability_notes: null,
+            ingredients: [
+              { name: 'Vodka', quantity: 200, unit: 'ml', abv_percent: 37.5, notes: null },
+              { name: 'Blackberry flavour', quantity: 20, unit: 'drops', notes: null },
+              { name: 'Raspberry flavour', quantity: 12, unit: 'drops', notes: null },
+              { name: 'Glycerine', quantity: 4, unit: 'drops', notes: null },
+            ],
+          },
+          {
+            recipe_name: 'Golden Sunrise',
+            recipe_type: 'Experiment / Flavour trial',
+            status: 'Experimental – Not for Sale',
+            created_date: 'October 2025',
+            target_batch_size_l: 0.2,
+            final_abv_percent_provided: null,
+            notes: null,
+            traceability_notes: null,
+            ingredients: [
+              { name: 'Vodka', quantity: 200, unit: 'ml', abv_percent: 37.5, notes: null },
+              { name: 'Orange flavour', quantity: 13, unit: 'drops', notes: null },
+              { name: 'Peach flavour', quantity: 10, unit: 'drops', notes: null },
+              { name: 'Passionfruit flavour', quantity: 14, unit: 'drops', notes: null },
+              { name: 'Glycerine', quantity: 4, unit: 'drops', notes: null },
+            ],
+          },
+          {
+            recipe_name: 'Banana Rum',
+            recipe_type: 'Experiment / Flavour trial',
+            status: 'Experimental – Not for Sale',
+            created_date: 'October 2025',
+            target_batch_size_l: 0.2,
+            final_abv_percent_provided: null,
+            notes: 'Base spirit is white rum; no distillation implied.',
+            traceability_notes: 'Base spirit should reference SKU-type, not a batch ID at recipe stage.',
+            ingredients: [
+              { name: 'DTD White Rum', quantity: 200, unit: 'ml', abv_percent: 40, notes: null },
+              { name: 'Banana flavour', quantity: 47, unit: 'drops', notes: null },
+              { name: 'Caramel flavour', quantity: 10, unit: 'drops', notes: null },
+              { name: 'Caramel colour', quantity: 5, unit: 'drops', notes: null },
+            ],
+          },
+          {
+            recipe_name: 'Gingerbeer',
+            recipe_type: 'RTD / Cocktail-style blend',
+            status: 'Experimental',
+            created_date: '06/02/2026',
+            target_batch_size_l: 5.0,
+            final_abv_percent_provided: 4.5,
+            notes: 'This is a dilution/blend recipe. No distillation/fermentation record.',
+            traceability_notes: null,
+            ingredients: [
+              { name: 'Syrup', quantity: 0.83, unit: 'L', notes: null },
+              { name: 'Vodka', quantity: 0.6, unit: 'L', abv_percent: 37.5, notes: null },
+              { name: 'Water', quantity: 3.57, unit: 'L', notes: null },
+            ],
+          },
+        ],
+      }
+
+      const result = await jsonImportService.importFromJson(payload as any)
+      if (cancelled) return
+
+      setImportMessage(`Formulations import completed: ${result.created} created, ${result.updated} updated`)
+      await loadRecipes()
+      autoImportRan.current = true
+    } catch (e) {
+      if (cancelled) return
+      setImportError(e instanceof Error ? e.message : 'Failed to import formulation recipes')
+    } finally {
+      if (cancelled) return
+      setImporting(false)
+    }
+  })()
+
+  return () => {
+    cancelled = true
   }
-}, [recipes.length, importing, handleImportProvidedJson])
+}, [recipes, importing, jsonImportService, loadRecipes])
 
 const handleRecipeView = useCallback((recipe: Recipe) => {
   setSelectedRecipeId(recipe.id)
@@ -388,11 +637,78 @@ const seedWetSeasonGin = useCallback(async () => {
   }
 }, [wetSeasonGinSeedService, loadRecipes])
 
+const importFormulationsServerSide = useCallback(async () => {
+  const res = await fetch('/api/recipes/formulations/import', { method: 'POST' })
+  const json = await res.json().catch(() => null)
+  if (!res.ok || !json?.success) {
+    const msg = String(json?.message || 'Failed to import formulation recipes')
+    throw new Error(msg)
+  }
+  return json as { success: true; created: number; updated: number }
+}, [])
+
 const toggleDeveloperTools = useCallback(() => {
   setShowDeveloperTools(prev => !prev)
 }, [])
 
 const selectedRecipe = useMemo(() => recipes.find(r => r.id === selectedRecipeId) ?? null, [recipes, selectedRecipeId])
+
+const resolveOrganizationId = useCallback(async (): Promise<string> => {
+  if (process.env.NODE_ENV === 'development') {
+    return '00000000-0000-0000-0000-000000000001'
+  }
+
+  const { data: { user }, error: userErr } = await supabase.auth.getUser()
+  if (userErr) throw new Error(userErr.message)
+  if (!user) throw new Error('User not authenticated')
+
+  const { data: profile, error: profileErr } = await supabase
+    .from('profiles')
+    .select('organization_id')
+    .eq('id', user.id)
+    .single()
+
+  if (profileErr) throw new Error(profileErr.message)
+  if (!profile?.organization_id) throw new Error('User has no organization')
+
+  return profile.organization_id
+}, [supabase])
+
+const handleCreateRecipe = useCallback(async () => {
+  try {
+    setCreateError(null)
+    setCreatingRecipe(true)
+
+    const name = newRecipeName.trim()
+    if (!name) throw new Error('Recipe name is required')
+
+    const orgId = await resolveOrganizationId()
+    const baselineFinalL = newRecipeBaseL.trim() ? parseFloat(newRecipeBaseL) : null
+    const targetAbvPct = newRecipeTargetAbvPct.trim() ? parseFloat(newRecipeTargetAbvPct) : null
+
+    const created = await recipeRepo.createRecipe({
+      organization_id: orgId,
+      name,
+      description: (newRecipeDescription || '').trim() || null,
+      notes: (newRecipeNotes || '').trim() || null,
+      baseline_final_l: Number.isFinite(baselineFinalL as any) ? baselineFinalL : null,
+      target_abv: Number.isFinite(targetAbvPct as any) ? (targetAbvPct! / 100) : null,
+    } as any)
+
+    await loadRecipes()
+    setSelectedRecipeId(created.id)
+    setShowCreateModal(false)
+    setNewRecipeName('')
+    setNewRecipeNotes('')
+    setNewRecipeTargetAbvPct('')
+    setNewRecipeBaseL('0.2')
+    setNewRecipeDescription('Experiment / Flavour trial | Experimental – Not for Sale')
+  } catch (e) {
+    setCreateError(e instanceof Error ? e.message : 'Failed to create recipe')
+  } finally {
+    setCreatingRecipe(false)
+  }
+}, [newRecipeName, newRecipeDescription, newRecipeNotes, newRecipeBaseL, newRecipeTargetAbvPct, recipeRepo, resolveOrganizationId, loadRecipes])
 
 if (loading) {
   return (
@@ -452,6 +768,49 @@ if (error) {
 
   return (
     <div className="space-y-8">
+      {missingFormulationNames.length > 0 && (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+            <div className="space-y-1">
+              <div className="text-sm font-semibold text-amber-900">Missing experimental recipe cards</div>
+              <div className="text-sm text-amber-800">
+                Not found in Supabase:
+                <span className="ml-1 font-medium">{missingFormulationNames.join(', ')}</span>
+              </div>
+              {(importMessage || importError) && (
+                <div className="text-sm">
+                  {importMessage && <p className="text-emerald-700">{importMessage}</p>}
+                  {importError && <p className="text-red-700">{importError}</p>}
+                </div>
+              )}
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <button
+                type="button"
+                onClick={async () => {
+                  try {
+                    setImportError(null)
+                    setImportMessage(null)
+                    setImporting(true)
+                    const result = await importFormulationsServerSide()
+                    setImportMessage(`Formulations import completed: ${result.created} created, ${result.updated} updated`)
+                    await loadRecipes()
+                  } catch (e) {
+                    setImportError(e instanceof Error ? e.message : 'Failed to import formulation recipes')
+                  } finally {
+                    setImporting(false)
+                  }
+                }}
+                disabled={importing}
+                className="rounded-lg bg-amber-700 px-3 py-2 text-sm font-medium text-white hover:bg-amber-600 disabled:opacity-60"
+              >
+                {importing ? 'Adding…' : 'Add missing cards'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Search & Filters */}
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="max-w-md flex-1">
@@ -470,12 +829,13 @@ if (error) {
             />
           </div>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
+
+        <div className="flex flex-wrap items-center gap-2">
           <label className="flex items-center gap-2 text-sm text-gray-600">
-            <span>Sort by</span>
+            <span>Sort:</span>
             <select
               value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as 'name' | 'updated')}
+              onChange={(e) => setSortBy(e.target.value as any)}
               className="rounded-lg border border-gray-300 px-2 py-1 text-sm"
             >
               <option value="name">Name</option>
@@ -493,6 +853,16 @@ if (error) {
           </label>
           <button
             type="button"
+            onClick={() => {
+              setCreateError(null)
+              setShowCreateModal(true)
+            }}
+            className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500"
+          >
+            New recipe card
+          </button>
+          <button
+            type="button"
             onClick={toggleDeveloperTools}
             className="rounded-lg border border-dashed border-blue-400 px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50"
           >
@@ -500,6 +870,116 @@ if (error) {
           </button>
         </div>
       </div>
+
+      {showCreateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
+          <div className="w-full max-w-xl rounded-xl bg-white shadow-xl">
+            <div className="border-b border-gray-200 px-5 py-4">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-lg font-semibold text-gray-900">Create recipe card</h3>
+                <button
+                  type="button"
+                  onClick={() => setShowCreateModal(false)}
+                  className="rounded-md p-1 text-gray-500 hover:bg-gray-100"
+                >
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="space-y-4 px-5 py-4">
+              {createError && (
+                <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+                  {createError}
+                </div>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700" htmlFor="new_recipe_name">Name</label>
+                <input
+                  id="new_recipe_name"
+                  value={newRecipeName}
+                  onChange={(e) => setNewRecipeName(e.target.value)}
+                  className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="e.g. Mango Chili Vodka Trial"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700" htmlFor="new_recipe_description">Type / Status</label>
+                <textarea
+                  id="new_recipe_description"
+                  value={newRecipeDescription}
+                  onChange={(e) => setNewRecipeDescription(e.target.value)}
+                  rows={2}
+                  className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700" htmlFor="new_recipe_notes">Notes</label>
+                <textarea
+                  id="new_recipe_notes"
+                  value={newRecipeNotes}
+                  onChange={(e) => setNewRecipeNotes(e.target.value)}
+                  rows={3}
+                  className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700" htmlFor="new_recipe_base_l">Base batch size (L)</label>
+                  <input
+                    id="new_recipe_base_l"
+                    type="number"
+                    step="any"
+                    min="0"
+                    value={newRecipeBaseL}
+                    onChange={(e) => setNewRecipeBaseL(e.target.value)}
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700" htmlFor="new_recipe_target_abv">Target ABV (%)</label>
+                  <input
+                    id="new_recipe_target_abv"
+                    type="number"
+                    step="any"
+                    min="0"
+                    value={newRecipeTargetAbvPct}
+                    onChange={(e) => setNewRecipeTargetAbvPct(e.target.value)}
+                    placeholder="Optional"
+                    className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-2 border-t border-gray-200 px-5 py-4">
+              <button
+                type="button"
+                onClick={() => setShowCreateModal(false)}
+                disabled={creatingRecipe}
+                className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 disabled:opacity-60"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={handleCreateRecipe}
+                disabled={creatingRecipe}
+                className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-60"
+              >
+                {creatingRecipe ? 'Creating…' : 'Create'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showDeveloperTools && (
         <div className="space-y-4 rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4">
@@ -589,6 +1069,14 @@ if (error) {
                 className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-60"
               >
                 {importing ? 'Importing…' : 'Import JSON'}
+              </button>
+              <button
+                type="button"
+                onClick={handleImportFormulations}
+                disabled={importing}
+                className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500 disabled:opacity-60"
+              >
+                {importing ? 'Importing…' : 'Import formulations'}
               </button>
               <button
                 type="button"

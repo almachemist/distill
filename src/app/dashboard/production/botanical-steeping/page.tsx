@@ -15,6 +15,7 @@ interface Botanical {
 function BotanicalSteepingContent() {
   const router = useRouter()
   const searchParams = useSearchParams() as URLSearchParams | null
+  const runId = searchParams?.get('runId')
   const recipeId = searchParams?.get('recipeId')
   const batchId = searchParams?.get('batchId')
   
@@ -127,13 +128,12 @@ function BotanicalSteepingContent() {
 
   const totalWeight = botanicals.reduce((sum, b) => sum + (b.adjusted_weight_g || b.weight_g), 0)
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!recipeId || !batchId) {
       setError('Missing recipe or batch ID')
       return
     }
 
-    // Save to localStorage for now
     const steepingData = {
       recipeId,
       batchId,
@@ -147,10 +147,45 @@ function BotanicalSteepingContent() {
       notes
     }
     
+    // Save to localStorage for backward compatibility
     localStorage.setItem('distillation_steeping', JSON.stringify(steepingData))
+
+    // Save step data to DB if we have a runId
+    if (runId) {
+      try {
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_step',
+            run_id: runId,
+            step_number: 1,
+            step_data: steepingData,
+          })
+        })
+        // Also save flattened columns
+        await fetch('/api/production/runs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'save_draft',
+            run_id: runId,
+            columns: {
+              botanicals: botanicals,
+              steeping_start_time: startTime || null,
+              steeping_end_time: endTime || null,
+              steeping_temp_c: temperature ? Number(temperature) : null,
+            }
+          })
+        })
+      } catch (err) {
+        console.warn('Failed to save step to DB (non-blocking):', err)
+      }
+    }
     
     // Navigate to heating phase
-    router.push(`/dashboard/production/heating?recipeId=${recipeId}&batchId=${batchId}`)
+    const runParam = runId ? `runId=${runId}&` : ''
+    router.push(`/dashboard/production/heating?${runParam}recipeId=${recipeId}&batchId=${batchId}`)
   }
 
   if (loading) {
