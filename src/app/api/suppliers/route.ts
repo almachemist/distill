@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 import { Supplier } from '@/types/inventory'
 import { z } from 'zod'
 
@@ -15,23 +15,12 @@ function getReqId(req: NextRequest) {
   return req.headers.get('x-request-id') || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
 }
 
-async function getOrgId(supabase: any): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 export async function GET(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const { data, error } = await supabase
       .from('suppliers')
       .select('id, name, contact_name, email, phone, notes')
@@ -54,8 +43,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const body = await req.json()
     const SupplierSchema = z.object({
       name: z.string().min(1),

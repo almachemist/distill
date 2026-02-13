@@ -96,7 +96,7 @@ async function handleCreate(supabase: any, body: any) {
     recipe_id,
     date,
     still_used = 'Carrie',
-    organization_id = '00000000-0000-0000-0000-000000000001',
+    organization_id,
     step_payload = {},
   } = body
 
@@ -322,7 +322,7 @@ async function handleFinalize(supabase: any, body: any) {
     .maybeSingle()
 
   const batchRecord = {
-    organization_id: run.organization_id || '00000000-0000-0000-0000-000000000001',
+    organization_id: run.organization_id,
     production_run_id: run_id,
     batch_code: batchId,
     product_name: run.display_name || run.sku || batchId,

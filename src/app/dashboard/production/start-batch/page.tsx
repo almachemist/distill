@@ -224,7 +224,7 @@ function PreparationContent() {
               botanicals: botanicals.length > 0 ? botanicals : undefined,
               packaging: packaging.length > 0 ? packaging : undefined,
               created_by: 'current_user',
-              organization_id: '00000000-0000-0000-0000-000000000001'
+              organization_id: await (await import('@/lib/auth/get-org-id')).getOrganizationId()
             })
           })
         } catch (invErr) {

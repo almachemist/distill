@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import type { TxnType } from '@/modules/recipes/types/recipe.types'
 
 export interface StockLevel {
@@ -38,20 +39,7 @@ export class StockRepository {
    * SUM of inventory_txns by sign (RECEIVE+PRODUCE+ADJUST - CONSUME-TRANSFER-DESTROY)
    */
   async onHand(itemId: string): Promise<number> {
-    // Get organization ID for filtering
-    let organizationId: string
-    if (process.env.NODE_ENV === 'development') {
-      organizationId = '00000000-0000-0000-0000-000000000001'
-    } else {
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .single()
-      if (!profile?.organization_id) {
-        throw new Error('User organization not found')
-      }
-      organizationId = profile.organization_id
-    }
+    const organizationId = await getOrganizationId()
 
     const { data, error } = await this.supabase
       .from('inventory_txns')
@@ -190,20 +178,7 @@ export class StockRepository {
    * Get all items with their on-hand quantities
    */
   async getStockLevels(): Promise<StockLevel[]> {
-    // Get organization ID for filtering
-    let organizationId: string
-    if (process.env.NODE_ENV === 'development') {
-      organizationId = '00000000-0000-0000-0000-000000000001'
-    } else {
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .single()
-      if (!profile?.organization_id) {
-        throw new Error('User organization not found')
-      }
-      organizationId = profile.organization_id
-    }
+    const organizationId = await getOrganizationId()
 
     const { data: items, error } = await this.supabase
       .from('items')
@@ -235,20 +210,7 @@ export class StockRepository {
    * Get lots for an item with their on-hand quantities
    */
   async getLotsForItem(itemId: string): Promise<LotStock[]> {
-    // Get organization ID for filtering
-    let organizationId: string
-    if (process.env.NODE_ENV === 'development') {
-      organizationId = '00000000-0000-0000-0000-000000000001'
-    } else {
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .single()
-      if (!profile?.organization_id) {
-        throw new Error('User organization not found')
-      }
-      organizationId = profile.organization_id
-    }
+    const organizationId = await getOrganizationId()
 
     const { data: lots, error } = await this.supabase
       .from('lots')
@@ -361,20 +323,7 @@ export class StockRepository {
     reference_type?: string
     notes?: string
   }): Promise<void> {
-    // Get organization ID
-    let organizationId: string
-    if (process.env.NODE_ENV === 'development') {
-      organizationId = '00000000-0000-0000-0000-000000000001'
-    } else {
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .single()
-      if (!profile?.organization_id) {
-        throw new Error('User organization not found')
-      }
-      organizationId = profile.organization_id
-    }
+    const organizationId = await getOrganizationId()
 
     const { error } = await this.supabase
       .from('inventory_txns')

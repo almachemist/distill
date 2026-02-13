@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 
 export class CompleteInventorySeedService {
   private supabase = createClient()
@@ -73,22 +74,7 @@ export class CompleteInventorySeedService {
     ]
 
     try {
-      // Get current user's organization
-      let organizationId: string
-      
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profile } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        if (!profile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       let created = 0
       let updated = 0
@@ -153,21 +139,7 @@ export class CompleteInventorySeedService {
   // Create initial stock lots for all items
   async createInitialStockLots(): Promise<{ lotsCreated: number }> {
     try {
-      let organizationId: string
-      
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profile } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        if (!profile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       // Get all items
       const { data: items, error: itemsError } = await this.supabase

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -35,18 +35,6 @@ const PKG_NAMES = {
 
 function withBuffer(n: number) { return Math.ceil(n * 1.10) }
 
-async function getOrgId(supabase: any): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 async function findItemByName(supabase: any, org: string, name: string) {
   const { data } = await supabase
@@ -84,8 +72,9 @@ function parseDate(d: string) { return new Date(d + (d.length === 10 ? 'T00:00:0
 
 export async function GET(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const { searchParams } = new URL(req.url)
     const from = searchParams.get('from') || new Date().toISOString().slice(0,10)
     const to = searchParams.get('to') || '2027-03-31'

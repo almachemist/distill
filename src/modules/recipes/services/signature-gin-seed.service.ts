@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 
 interface SignatureGinItem {
   name: string
@@ -20,21 +21,7 @@ export class SignatureGinSeedService {
   private supabase = createClient()
 
   async seedSignatureGinData(): Promise<{ itemsCreated: number; itemsUpdated: number; recipeCreated: boolean }> {
-    // Get organization ID
-    let organizationId: string
-    if (process.env.NODE_ENV === 'development') {
-      organizationId = '00000000-0000-0000-0000-000000000001'
-    } else {
-      const { data: userOrg, error: orgError } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .single()
-
-      if (orgError || !userOrg) {
-        throw new Error('User organization not found.')
-      }
-      organizationId = userOrg.organization_id
-    }
+    const organizationId = await getOrganizationId()
 
     // Seed items
     const items: SignatureGinItem[] = [

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 import { InventoryItem, InventoryCategory } from '@/types/inventory'
 import { z } from 'zod'
 
@@ -30,18 +30,6 @@ function mapDbToFrontCategory(dbCat?: string, isAlcohol?: boolean): InventoryCat
   return 'RawMaterials'
 }
 
-async function getOrgId(supabase: any): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 function isInventoryCategory(x: any): x is InventoryCategory {
   return ['Spirits','Packaging','Labels','Botanicals','RawMaterials'].includes(x)
@@ -57,8 +45,9 @@ const ItemSchema = z.object({
 
 export async function GET(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const { searchParams } = new URL(req.url)
     const category = searchParams.get('category')
     const { data: items, error } = await supabase
@@ -119,8 +108,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const payload = await req.json()
     const parsed = ItemSchema.safeParse(payload)
     if (!parsed.success) {

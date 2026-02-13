@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 import { z } from 'zod'
 
 export const runtime = 'nodejs'
@@ -36,18 +36,6 @@ const MovementPayloadSchema = z.object({
   changes: z.array(MovementChangeSchema).min(1)
 })
 
-async function getOrgId(supabase: any): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 async function getOnHand(supabase: any, org: string, item_id: string): Promise<number> {
   const { data } = await supabase
@@ -73,8 +61,9 @@ async function getOnHand(supabase: any, org: string, item_id: string): Promise<n
 
 export async function GET(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const { searchParams } = new URL(req.url)
     const limit = Math.max(1, Math.min(500, Number(searchParams.get('limit') || 100)))
     const { data, error } = await supabase
@@ -104,8 +93,9 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = await createClient()
-    const org = await getOrgId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: org } = auth
     const body = await req.json()
     const parsed = MovementPayloadSchema.safeParse(body)
     if (!parsed.success) {

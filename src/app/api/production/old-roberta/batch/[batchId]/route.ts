@@ -14,12 +14,15 @@ function stripAndWrapObjectsToArray(text: string): any[] {
   return JSON.parse(`[${joined}]`)
 }
 
-async function resolveOrganizationId() {
-  if (process.env.NODE_ENV === 'development') {
-    return '00000000-0000-0000-0000-000000000001'
+async function resolveOrganizationId(): Promise<string | null> {
+  try {
+    const { requireAuth } = await import('@/lib/api/auth')
+    const auth = await requireAuth()
+    if ('organizationId' in auth) return auth.organizationId
+    return null
+  } catch {
+    return null
   }
-  // In production we could resolve via user session, but this endpoint is server-side only
-  return null
 }
 
 export async function GET(req: NextRequest, context: { params: Promise<{ batchId: string }> }) {

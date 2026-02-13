@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import type { LotInsert, InventoryTxnInsert } from '../types/recipe.types'
 
 export class InventorySeedService {
@@ -6,25 +7,7 @@ export class InventorySeedService {
 
   async seedInventoryData(): Promise<{ lots: number; transactions: number }> {
     try {
-      // Get current user's organization
-      let organizationId: string
-      
-      // In development mode, use mock organization ID
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profileData } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        const profile = profileData as { organization_id: string | null } | null
-
-        if (!profile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       // Get items that should exist
       const { data: itemsData } = await this.supabase

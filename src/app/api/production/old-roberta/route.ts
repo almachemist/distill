@@ -1,25 +1,20 @@
 import { NextResponse } from 'next/server'
 import { readJson } from '@/lib/jsonStore'
 import type { OldRobertaFile } from '@/modules/production/types/old-roberta.types'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 export const runtime = 'nodejs'
 
 const STORE_PATH = 'data/old_roberta_distillations.json'
 
-async function resolveOrganizationId() {
-  if (process.env.NODE_ENV === 'development') {
-    return '00000000-0000-0000-0000-000000000001'
+async function resolveOrganizationId(): Promise<string | null> {
+  try {
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return null
+    return auth.organizationId
+  } catch {
+    return null
   }
-  const supabase = await createClient()
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return null
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .maybeSingle()
-  return profile?.organization_id ?? null
 }
 
 export async function GET() {

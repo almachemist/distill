@@ -50,30 +50,8 @@ export function BottlingRun() {
     try {
       setLoading(true)
       
-      // In development mode, use mock organization ID
-      let organizationId = '00000000-0000-0000-0000-000000000001'
-      
-      if (process.env.NODE_ENV !== 'development') {
-        const { createClient } = await import('@/lib/supabase/client')
-        const supabase = createClient()
-        
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) {
-          throw new Error('User not authenticated')
-        }
-
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('organization_id')
-          .eq('id', user.id)
-          .single()
-
-        if (!profile?.organization_id) {
-          throw new Error('User has no organization')
-        }
-        
-        organizationId = profile.organization_id
-      }
+      const { getOrganizationId } = await import('@/lib/auth/get-org-id')
+      const organizationId = await getOrganizationId()
       
       const { createClient } = await import('@/lib/supabase/client')
       const supabase = createClient()

@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import type { ItemCsvRow } from '../types/recipe.types'
 
 type SupabaseProfileRow = {
@@ -37,27 +38,7 @@ export class MasterInventorySeedService {
     ]
 
     try {
-      // Get current user's organization
-      let organizationId: string
-
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profile, error: profileError } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        if (profileError) {
-          throw profileError
-        }
-
-        const typedProfile = profile as SupabaseProfileRow | null
-        if (!typedProfile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = typedProfile.organization_id as string
-      }
+      const organizationId = await getOrganizationId()
 
       let created = 0
       let updated = 0

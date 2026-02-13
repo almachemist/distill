@@ -1,7 +1,6 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import type { SalesCategoryMap, SalesItemSummary } from '../types/sales.types'
-
-const DEV_ORG_ID = '00000000-0000-0000-0000-000000000001'
 
 type Granularity = 'monthly' | 'annual'
 
@@ -16,22 +15,7 @@ export class SalesImportService {
   private supabase = createClient()
 
   private async resolveOrganizationId(): Promise<string> {
-    if (process.env.NODE_ENV === 'development') {
-      return DEV_ORG_ID
-    }
-    const { data: { user } } = await this.supabase.auth.getUser()
-    if (!user) {
-      throw new Error('User not authenticated')
-    }
-    const { data: profile } = await this.supabase
-      .from('profiles')
-      .select('organization_id')
-      .eq('id', user.id)
-      .single()
-    if (!profile?.organization_id) {
-      throw new Error('User has no organization')
-    }
-    return profile.organization_id
+    return getOrganizationId()
   }
 
   private flattenSales(map: SalesCategoryMap): SalesItemSummary[] {

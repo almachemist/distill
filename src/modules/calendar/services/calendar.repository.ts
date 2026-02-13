@@ -1,30 +1,7 @@
 import { createClient } from "@/lib/supabase/client";
+import { getOrganizationId } from "@/lib/auth/get-org-id";
 import type { CalendarEvent, CalendarEventType, CalendarStatus, LinkedDocRef } from "../types/calendar.types";
 import { CALENDAR_COLORS } from "../types/calendar.types";
-
-async function getSupabase() {
-  const mod = await import("@/lib/supabase/client");
-  return mod.createClient();
-}
-
-// Helper function to get current user's organization ID
-const getOrganizationId = async (): Promise<string> => {
-  if (process.env.NODE_ENV === 'development') {
-    return '00000000-0000-0000-0000-000000000001'
-  }
-  const sb = await getSupabase();
-  const { data: { user } } = await sb.auth.getUser();
-  if (!user) throw new Error("User not authenticated");
-  
-  const { data: profile } = await sb
-    .from("profiles")
-    .select("organization_id")
-    .eq("id", user.id)
-    .single();
-    
-  if (!profile?.organization_id) throw new Error("User not associated with organization");
-  return profile.organization_id;
-};
 
 export const createCalendarEvent = async (e: Omit<CalendarEvent,"id"|"createdAt"|"updatedAt"|"color"> & { color?: string }) => {
   const organizationId = await getOrganizationId();
@@ -46,7 +23,7 @@ export const createCalendarEvent = async (e: Omit<CalendarEvent,"id"|"createdAt"
     organization_id: organizationId,
   };
   
-  const sb = await getSupabase();
+  const sb = createClient();
   const { data, error } = await sb
     .from("calendar_events")
     .insert(payload)
@@ -97,7 +74,7 @@ export const updateCalendarEvent = async (id: string, patch: Partial<CalendarEve
   if (patch.notes !== undefined) updateData.notes = patch.notes;
   if (patch.color !== undefined) updateData.color = patch.color;
   
-  const sb = await getSupabase();
+  const sb = createClient();
   const { error } = await sb
     .from("calendar_events")
     .update(updateData)
@@ -107,7 +84,7 @@ export const updateCalendarEvent = async (id: string, patch: Partial<CalendarEve
 };
 
 export const deleteCalendarEvent = async (id: string) => {
-  const sb = await getSupabase();
+  const sb = createClient();
   const { error } = await sb
     .from("calendar_events")
     .delete()
@@ -136,7 +113,7 @@ export const listCalendarEvents = async (opts?: {
     return [] as CalendarEvent[];
   }
   
-  const sb = await getSupabase();
+  const sb = createClient();
   let query = sb
     .from("calendar_events")
     .select("*")
@@ -189,7 +166,7 @@ export const listCalendarEvents = async (opts?: {
 };
 
 export const getCalendarEvent = async (id: string): Promise<CalendarEvent | null> => {
-  const sb = await getSupabase();
+  const sb = createClient();
   const { data, error } = await sb
     .from("calendar_events")
     .select("*")
@@ -227,7 +204,7 @@ export const findCalendarEventByLink = async (
   collection: LinkedDocRef['collection'],
   id: string
 ): Promise<CalendarEvent | null> => {
-  const sb = await getSupabase();
+  const sb = createClient();
   const { data, error } = await sb
     .from("calendar_events")
     .select("*")

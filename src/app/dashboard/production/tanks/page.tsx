@@ -107,7 +107,7 @@ export default function TanksPage() {
           setError(null)
           return
         }
-        const devOrg = '00000000-0000-0000-0000-000000000001'
+        const devOrg = 'static-fallback'
         const now = new Date().toISOString()
         const devTanks: Tank[] = [
           { id: 'T-330-01', organization_id: devOrg, tank_id: 'T-330-01', tank_name: '330L Rum Blend', tank_type: 'spirits', capacity_l: 330, product: 'Rum Blend', current_abv: 63.0, current_volume_l: 51, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'RUM-25-001', created_at: now, updated_at: now },
@@ -143,7 +143,7 @@ export default function TanksPage() {
         const isNet = errStr.toLowerCase().includes('failed to fetch')
         const isCfg = errStr.toLowerCase().includes('supabase is not configured')
         if (isNet || isCfg) {
-          const devOrg = '00000000-0000-0000-0000-000000000001'
+          const devOrg = 'static-fallback'
           const now = new Date().toISOString()
           const devTanks: Tank[] = [
             {
@@ -294,7 +294,7 @@ export default function TanksPage() {
           setTimeout(() => loadTanks(retryCount + 1), 1000)
           return
         }
-        const devOrg = '00000000-0000-0000-0000-000000000001'
+        const devOrg = 'static-fallback'
         const now = new Date().toISOString()
         const devTanks: Tank[] = [
           {
@@ -447,7 +447,7 @@ export default function TanksPage() {
       }
     } catch (error: any) {
       if (USE_STATIC || process.env.NODE_ENV === 'development') {
-        const devOrg = '00000000-0000-0000-0000-000000000001'
+        const devOrg = 'static-fallback'
         const now = new Date().toISOString()
         const devTanks: Tank[] = [
           {
@@ -724,7 +724,7 @@ export default function TanksPage() {
           const newTankId = updates.tank_id || `TK-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
           const newTank: Tank = {
             id: newTankId,
-            organization_id: tanks[0]?.organization_id || '00000000-0000-0000-0000-000000000001',
+            organization_id: tanks[0]?.organization_id || 'static-fallback',
             tank_id: newTankId,
             tank_name: updates.tank_name || '',
             tank_type: 'spirits',
@@ -771,7 +771,7 @@ export default function TanksPage() {
         const { error } = await supabase
           .from('tanks')
           .insert({
-            organization_id: tanks[0]?.organization_id || '00000000-0000-0000-0000-000000000001',
+            organization_id: tanks[0]?.organization_id || await (await import('@/lib/auth/get-org-id')).getOrganizationId(),
             tank_id: updates.tank_id,
             tank_name: updates.tank_name,
             tank_type: 'spirits',

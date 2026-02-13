@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 
 interface JsonBotanical {
   name: string
@@ -67,18 +68,7 @@ export class JsonRecipeImportService {
   }
 
   private async resolveOrganizationId(): Promise<string> {
-    if (process.env.NODE_ENV === 'development') {
-      return '00000000-0000-0000-0000-000000000001'
-    }
-    const { data: { user } } = await this.supabase.auth.getUser()
-    if (!user) throw new Error('User not authenticated')
-    const { data: profile } = await this.supabase
-      .from('profiles')
-      .select('organization_id')
-      .eq('id', user.id)
-      .single()
-    if (!profile?.organization_id) throw new Error('User has no organization')
-    return profile.organization_id
+    return getOrganizationId()
   }
 
   private async ensureItem(name: string, orgId: string, opts?: { uom?: string, isAlcohol?: boolean, abvPct?: number | null, category?: string }) {
