@@ -57,6 +57,7 @@ export default function ProductDetailPage() {
   const [notes, setNotes] = useState('')
   const [ginBatches, setGinBatches] = useState<any[]>([])
   const [rumBatches, setRumBatches] = useState<any[]>([])
+  const [skuRows, setSkuRows] = useState<Array<{ sku?: string; variation?: string; volume_ml?: number | string | null; metadata?: any }>>([])
 
   const productName = useMemo(() => {
     const id = String(params?.id || '')
@@ -83,6 +84,15 @@ export default function ProductDetailPage() {
       }
     }
     load()
+    ;(async () => {
+      try {
+        const res = await fetch(`/api/products/catalog?product_name=${encodeURIComponent(productName)}`, { cache: 'no-store' })
+        const json = await res.json()
+        if (!cancelled) setSkuRows(Array.isArray(json?.rows) ? json.rows : [])
+      } catch {
+        if (!cancelled) setSkuRows([])
+      }
+    })()
     ;(async () => {
       try {
         const res2 = await fetch(`/api/products/notes?name=${encodeURIComponent(productName)}`, { cache: 'no-store' })
@@ -114,6 +124,11 @@ export default function ProductDetailPage() {
     })()
     return () => { cancelled = true }
   }, [productName])
+
+  const carton = useMemo(() => {
+    const meta = skuRows.find(r => r?.metadata)?.metadata
+    return meta?.carton || null
+  }, [skuRows])
 
   const productGinRuns = useMemo(() => {
     const name = productName.toLowerCase()
@@ -165,6 +180,33 @@ export default function ProductDetailPage() {
       {!loading && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
+            {skuRows.length > 0 && (
+              <div className="bg-white rounded-lg border border-gray-200 p-6">
+                <h2 className="text-lg font-semibold text-gray-900">SKU</h2>
+                <div className="mt-3 space-y-2">
+                  {skuRows.map((r) => (
+                    <div key={`${r.sku}-${r.variation}-${r.volume_ml ?? ''}`} className="flex items-center justify-between rounded-md border border-gray-200 px-3 py-2">
+                      <div className="text-sm text-gray-700">
+                        <span className="font-medium">{r.variation || 'Standard'}</span>
+                        {r.volume_ml ? <span className="text-gray-500"> • {r.volume_ml} ml</span> : null}
+                      </div>
+                      <div className="text-sm font-mono text-gray-900">{r.sku}</div>
+                    </div>
+                  ))}
+                </div>
+                {carton && (
+                  <div className="mt-4 rounded-md border border-gray-200 p-4">
+                    <p className="text-sm font-semibold text-gray-900">Carton</p>
+                    <div className="mt-2 grid grid-cols-2 gap-2 text-sm text-gray-700">
+                      <p>Weight: {carton.weight_kg} kg</p>
+                      <p>Length: {carton.length_cm} cm</p>
+                      <p>Width: {carton.width_cm} cm</p>
+                      <p>Height: {carton.height_cm} cm</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
             <div className="bg-white rounded-lg border border-gray-200 p-6">
               <h2 className="text-lg font-semibold text-gray-900">Batches</h2>
               <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">

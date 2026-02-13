@@ -44,6 +44,7 @@ export default function ProductsHubPage() {
   const [bottlingRuns, setBottlingRuns] = useState<ApiBottlingRun[]>([])
   const [ginBatches, setGinBatches] = useState<any[]>([])
   const [rumBatches, setRumBatches] = useState<any[]>([])
+  const [catalogRows, setCatalogRows] = useState<Array<{ product_name?: string; sku?: string; variation?: string; volume_ml?: number | string | null }>>([])
 
   useEffect(() => {
     let cancelled = false
@@ -59,6 +60,15 @@ export default function ProductsHubPage() {
       }
     }
     load()
+    ;(async () => {
+      try {
+        const res = await fetch('/api/products/catalog', { cache: 'no-store' })
+        const json = await res.json()
+        if (!cancelled) setCatalogRows(Array.isArray(json?.rows) ? json.rows : [])
+      } catch {
+        if (!cancelled) setCatalogRows([])
+      }
+    })()
     ;(async () => {
       try {
         const [gRes, rRes] = await Promise.all([
@@ -82,6 +92,27 @@ export default function ProductsHubPage() {
       cancelled = true
     }
   }, [])
+
+  const skuByProduct = useMemo(() => {
+    const map: Record<string, Array<{ sku: string; variation: string; volume_ml: number | string | null }>> = {}
+    for (const row of catalogRows) {
+      const name = String(row.product_name || '').trim()
+      const sku = String(row.sku || '').trim()
+      if (!name || !sku) continue
+      const variation = String(row.variation || '').trim()
+      const volume_ml = row.volume_ml ?? null
+      if (!map[name]) map[name] = []
+      map[name].push({ sku, variation, volume_ml })
+    }
+    for (const k of Object.keys(map)) {
+      map[k] = map[k].sort((a, b) => {
+        const va = typeof a.volume_ml === 'string' ? Number(a.volume_ml) : (a.volume_ml ?? 0)
+        const vb = typeof b.volume_ml === 'string' ? Number(b.volume_ml) : (b.volume_ml ?? 0)
+        return (va || 0) - (vb || 0)
+      })
+    }
+    return map
+  }, [catalogRows])
 
   const metrics = useMemo(() => {
     const byProduct: Record<string, { batches: number; bottling: number }> = {}
@@ -135,12 +166,25 @@ export default function ProductsHubPage() {
           {PRODUCT_LIST.map((p) => {
             const m = metrics[p.value] || { batches: 0, bottling: 0 }
             const slug = slugify(p.value)
+            const skus = skuByProduct[p.value] || []
             return (
               <div key={p.value} className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-lg font-semibold text-graphite">{p.label}</h3>
                     <p className="text-graphite/70 text-sm">{p.type.toUpperCase()}</p>
+                    {skus.length > 0 && (
+                      <div className="mt-2 space-y-1">
+                        {skus.slice(0, 3).map((s) => (
+                          <p key={`${s.sku}-${s.variation}`} className="text-xs text-graphite/70">
+                            {s.variation ? `${s.variation}: ` : ''}<span className="font-mono">{s.sku}</span>
+                          </p>
+                        ))}
+                        {skus.length > 3 && (
+                          <p className="text-xs text-graphite/50">+{skus.length - 3} more</p>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <Link href={`/dashboard/products/${slug}`} className="text-copper hover:text-copper/80 text-sm font-medium">
                     Abrir
