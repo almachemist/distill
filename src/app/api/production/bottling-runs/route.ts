@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 import { BottlingRun, BottleEntry } from '@/types/bottling'
 
 export const runtime = 'nodejs'
@@ -23,18 +23,6 @@ const PKG_NAMES = {
   SLEEVE_1000: { name: 'Tamper Sleeve 1000ml', category: 'packaging_sleeve' }
 }
 
-async function getOrganizationId(supabase: any): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 async function findItemByName(supabase: any, organization_id: string, name: string) {
   const { data } = await supabase
@@ -119,7 +107,9 @@ export async function GET(request: NextRequest) {
     if (useStatic) {
       return NextResponse.json({ bottlingRuns: [] })
     }
-    const supabase = await createClient()
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase } = auth
     const { data, error } = await supabase
       .from('bottling_runs')
       .select('*')
@@ -160,8 +150,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ bottlingRun: mockRow, inventoryApplied: [] })
     }
 
-    const supabase = await createClient()
-    const organization_id = await getOrganizationId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: organization_id } = auth
 
     const changes = buildBottlingChanges(body)
 

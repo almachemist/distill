@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import type { SupabaseClient } from '@supabase/supabase-js'
+import { requireAuth } from '@/lib/api/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -24,18 +23,6 @@ type NoteRow = {
 
 const memoryStore = new Map<string, NoteRow>()
 
-async function getOrganizationId(supabase: SupabaseClient): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 export async function GET(request: NextRequest) {
   try {
@@ -49,8 +36,9 @@ export async function GET(request: NextRequest) {
       const row = memoryStore.get(name) || { product_name: name, notes: '' }
       return NextResponse.json({ productName: row.product_name, notes: row.notes, updated_at: row.updated_at || null }, { status: 200 })
     }
-    const supabase = await createClient()
-    const organization_id = await getOrganizationId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: organization_id } = auth
     const { data, error } = await supabase
       .from('product_notes')
       .select('*')
@@ -82,8 +70,9 @@ export async function POST(request: NextRequest) {
       memoryStore.set(productName, row)
       return NextResponse.json({ ok: true, productName, notes }, { status: 200 })
     }
-    const supabase = await createClient()
-    const organization_id = await getOrganizationId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: organization_id } = auth
     const upsertRow = { organization_id, product_name: productName, notes }
     const { data, error } = await supabase
       .from('product_notes')

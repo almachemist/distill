@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import type {
   Item,
   LotWithStock,
@@ -11,25 +12,6 @@ import type {
 
 export class StockRepository {
   private supabase = createClient()
-
-  private async getOrganizationId(): Promise<string> {
-    if (process.env.NODE_ENV === 'development') {
-      return '00000000-0000-0000-0000-000000000001'
-    }
-    const { data: { user } } = await this.supabase.auth.getUser()
-    if (!user) {
-      throw new Error('User not authenticated')
-    }
-    const { data: profile } = await this.supabase
-      .from('profiles')
-      .select('organization_id')
-      .eq('id', user.id)
-      .single()
-    if (!profile?.organization_id) {
-      throw new Error('User organization not found')
-    }
-    return profile.organization_id
-  }
 
   /**
    * Get current stock level for an item by summing all transactions
@@ -180,7 +162,7 @@ export class StockRepository {
     }
 
     // Prepare all transactions
-    const organization_id = await this.getOrganizationId()
+    const organization_id = await getOrganizationId()
     const transactions: InventoryTxnInsert[] = request.transactions.map(txn => ({
       item_id: txn.item_id,
       lot_id: txn.lot_id,

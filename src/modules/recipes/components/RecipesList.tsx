@@ -654,25 +654,9 @@ const toggleDeveloperTools = useCallback(() => {
 const selectedRecipe = useMemo(() => recipes.find(r => r.id === selectedRecipeId) ?? null, [recipes, selectedRecipeId])
 
 const resolveOrganizationId = useCallback(async (): Promise<string> => {
-  if (process.env.NODE_ENV === 'development') {
-    return '00000000-0000-0000-0000-000000000001'
-  }
-
-  const { data: { user }, error: userErr } = await supabase.auth.getUser()
-  if (userErr) throw new Error(userErr.message)
-  if (!user) throw new Error('User not authenticated')
-
-  const { data: profile, error: profileErr } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-
-  if (profileErr) throw new Error(profileErr.message)
-  if (!profile?.organization_id) throw new Error('User has no organization')
-
-  return profile.organization_id
-}, [supabase])
+  const { getOrganizationId } = await import('@/lib/auth/get-org-id')
+  return getOrganizationId()
+}, [])
 
 const handleCreateRecipe = useCallback(async () => {
   try {

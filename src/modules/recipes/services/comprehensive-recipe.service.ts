@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import {
   Recipe,
   Ingredient,
@@ -207,21 +208,7 @@ export class ComprehensiveRecipeService {
 
   async createRecipe(recipe: Omit<Recipe, 'id' | 'createdAt' | 'updatedAt'>): Promise<Recipe> {
     try {
-      let organizationId: string
-      
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profile } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        if (!profile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       // Create recipe
       const { data: recipeData, error: recipeError } = await this.supabase
@@ -380,21 +367,7 @@ export class ComprehensiveRecipeService {
   // Production Management
   async createProductionBatch(batch: Omit<ProductionBatch, 'id'>): Promise<ProductionBatch> {
     try {
-      let organizationId: string
-      
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profile } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        if (!profile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       const { data, error } = await this.supabase
         .from('production_orders')
@@ -459,21 +432,7 @@ export class ComprehensiveRecipeService {
   // Stock Management
   async createStockTransaction(transaction: Omit<StockTransaction, 'id'>): Promise<void> {
     try {
-      let organizationId: string
-      
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: profile } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .single()
-
-        if (!profile?.organization_id) {
-          throw new Error('User organization not found')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       const { error } = await this.supabase
         .from('inventory_txns')

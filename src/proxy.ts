@@ -5,7 +5,7 @@ function isValidUrl(u: string | null | undefined): u is string {
   return typeof u === 'string' && (u.startsWith('http://') || u.startsWith('https://'))
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const existingReqId = request.headers.get('x-request-id') || ''
   const reqId = existingReqId || `req_${Date.now().toString(36)}_${Math.random().toString(36).slice(2,8)}`
   const headers = new Headers(request.headers)
@@ -62,8 +62,7 @@ export async function middleware(request: NextRequest) {
     : null
 
   // Redirect to login if accessing protected route without auth
-  // Skip auth in development mode for easier testing
-  if (!user && !isPublicRoute && process.env.NODE_ENV !== 'development') {
+  if (!user && !isPublicRoute) {
     const url = request.nextUrl.clone()
     url.pathname = '/auth/login'
     return NextResponse.redirect(url)

@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/client'
+import { getOrganizationId } from '@/lib/auth/get-org-id'
 import type { 
   Recipe, 
   RecipeInsert, 
@@ -22,25 +23,7 @@ export class RecipeRepository {
    */
   async fetchRecipes(): Promise<Recipe[]> {
     try {
-      // Development: force dev organization to match seeded data; Production: use user's organization
-      let organizationId: string
-      if (process.env.NODE_ENV === 'development') {
-        organizationId = '00000000-0000-0000-0000-000000000001'
-      } else {
-        const { data: { user } } = await this.supabase.auth.getUser()
-        if (!user) {
-          throw new Error('User not authenticated')
-        }
-        const { data: profile } = await this.supabase
-          .from('profiles')
-          .select('organization_id')
-          .eq('id', user.id)
-          .single()
-        if (!profile?.organization_id) {
-          throw new Error('User has no organization')
-        }
-        organizationId = profile.organization_id
-      }
+      const organizationId = await getOrganizationId()
 
       const { data, error } = await this.supabase
         .from('recipes')
@@ -63,25 +46,7 @@ export class RecipeRepository {
    * Get a single recipe with all its ingredients
    */
   async fetchRecipeWithIngredients(recipeId: string): Promise<RecipeWithIngredients | null> {
-    // Development: force dev organization; Production: use user's organization
-    let organizationId: string
-    if (process.env.NODE_ENV === 'development') {
-      organizationId = '00000000-0000-0000-0000-000000000001'
-    } else {
-      const { data: { user } } = await this.supabase.auth.getUser()
-      if (!user) {
-        throw new Error('User not authenticated')
-      }
-      const { data: profile } = await this.supabase
-        .from('profiles')
-        .select('organization_id')
-        .eq('id', user.id)
-        .single()
-      if (!profile?.organization_id) {
-        throw new Error('User organization not found')
-      }
-      organizationId = profile.organization_id
-    }
+    const organizationId = await getOrganizationId()
 
     // Fetch recipe with organization filter
     const { data: recipe, error: recipeError } = await this.supabase

@@ -89,7 +89,7 @@ export function OrderStart() {
         product_name: productName,
         batch_target_l: batchCalc.batch_target_l,
         status: 'planned',
-        organization_id: '00000000-0000-0000-0000-000000000001' // TODO: Get from auth context
+        organization_id: await (await import('@/lib/auth/get-org-id')).getOrganizationId()
       })
 
       // Execute the batch (consume inventory)

@@ -1,27 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import type { SupabaseClient } from '@supabase/supabase-js'
+import { requireAuth } from '@/lib/api/auth'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
-async function getOrganizationId(supabase: SupabaseClient): Promise<string> {
-  if (process.env.NODE_ENV === 'development') return '00000000-0000-0000-0000-000000000001'
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) throw new Error('User not authenticated')
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-  if (!profile?.organization_id) throw new Error('User organization not found')
-  return profile.organization_id
-}
 
 export async function GET(request: NextRequest) {
   try {
-    const supabase = await createClient()
-    const organization_id = await getOrganizationId(supabase)
+    const auth = await requireAuth()
+    if (auth instanceof NextResponse) return auth
+    const { supabase, organizationId: organization_id } = auth
 
     const { searchParams } = new URL(request.url)
     const productName = (searchParams.get('product_name') || '').trim()

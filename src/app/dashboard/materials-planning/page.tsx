@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { createClient } from '@/lib/supabase/client'
-import materialsData from '@/../../data/materials_requirements_2026.json'
+import materialsData from '../../../../data/materials_requirements_2026.json'
 
 interface MaterialNeed {
   sku: string

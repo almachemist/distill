@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { requireAuth } from '@/lib/api/auth'
 import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 
 export const runtime = 'nodejs'
@@ -111,25 +111,9 @@ function requiredFormulations(): FormulationRecipe[] {
 }
 
 async function resolveOrganizationId(): Promise<string> {
-  if (process.env.NODE_ENV === 'development') {
-    return '00000000-0000-0000-0000-000000000001'
-  }
-
-  const sb = await createClient()
-  const { data: userRes, error: userErr } = await sb.auth.getUser()
-  if (userErr) throw new Error(userErr.message)
-  const user = userRes?.user
-  if (!user) throw new Error('User not authenticated')
-
-  const { data: profile, error: profileErr } = await sb
-    .from('profiles')
-    .select('organization_id')
-    .eq('id', user.id)
-    .single()
-
-  if (profileErr) throw new Error(profileErr.message)
-  if (!profile?.organization_id) throw new Error('User has no organization')
-  return profile.organization_id
+  const auth = await requireAuth()
+  if (auth instanceof NextResponse) throw new Error('User not authenticated')
+  return auth.organizationId
 }
 
 async function ensureItem(
