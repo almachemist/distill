@@ -13,7 +13,7 @@ import {
   YAxis
 } from 'recharts'
 
-import productionBatches from '@/modules/production/data/production_batches.json'
+import { useRumBatch } from '@/modules/production/hooks/useRumBatches'
 
 const tabs = [
   { id: 'overview', label: 'Overview' },
@@ -77,7 +77,71 @@ type ProductionBatch = {
   notes?: string
 }
 
-const batches: ProductionBatch[] = productionBatches.batches
+/**
+ * Convert DB JSONB curve ({"24h": 28.3, "72h": 26.6}) to chart array.
+ */
+function curveToArray(tempCurve: any, brixCurve: any, phCurve: any): FermentationPoint[] {
+  if (!tempCurve && !brixCurve && !phCurve) return []
+  const allKeys = new Set([
+    ...Object.keys(tempCurve || {}),
+    ...Object.keys(brixCurve || {}),
+    ...Object.keys(phCurve || {}),
+  ])
+  const sortedKeys = Array.from(allKeys).sort((a, b) => {
+    const numA = parseInt(a)
+    const numB = parseInt(b)
+    return numA - numB
+  })
+  return sortedKeys.map(key => ({
+    day: parseInt(key) / 24 || undefined,
+    date: key,
+    temp_c: tempCurve?.[key] ?? undefined,
+    brix: brixCurve?.[key] ?? undefined,
+    ph: phCurve?.[key] ?? undefined,
+  }))
+}
+
+/**
+ * Map a rum_production_runs DB row to the page's ProductionBatch format.
+ */
+function mapDbRowToBatch(row: any): ProductionBatch {
+  return {
+    batch_id: row.batch_id,
+    product_group: row.product_type === 'rum' ? `RUM-${row.batch_id?.split('-')[1] || ''}` : `CS-${row.batch_id?.split('-')[1] || ''}`,
+    date: row.fermentation_start_date || row.distillation_date || '',
+    feedstock: [row.substrate_type, row.substrate_batch].filter(Boolean).join(' ') || 'Unknown',
+    fermentation: {
+      volume_l: row.boiler_volume_l ? Number(row.boiler_volume_l) : null,
+      brix_start: row.initial_brix ? Number(row.initial_brix) : null,
+      ph_start: row.initial_ph ? Number(row.initial_ph) : null,
+      yeast: row.yeast_type || undefined,
+      notes: row.notes || undefined,
+      fermentation_data: curveToArray(row.temperature_curve, row.brix_curve, row.ph_curve),
+    },
+    distillation: row.distillation_date ? {
+      date: row.distillation_date,
+      charge_l: row.boiler_volume_l ? Number(row.boiler_volume_l) : undefined,
+      abv_in: row.boiler_abv_percent ? Number(row.boiler_abv_percent) : undefined,
+      lal_in: row.boiler_volume_l && row.boiler_abv_percent
+        ? Number((Number(row.boiler_volume_l) * Number(row.boiler_abv_percent) / 100).toFixed(1))
+        : undefined,
+      total_lal_out: row.hearts_lal ? Number(row.hearts_lal) : undefined,
+      lal_yield: row.hearts_lal && row.boiler_volume_l && row.boiler_abv_percent
+        ? Number(((Number(row.hearts_lal) / (Number(row.boiler_volume_l) * Number(row.boiler_abv_percent) / 100)) * 100).toFixed(1))
+        : undefined,
+    } : undefined,
+    output: row.hearts_volume_l ? {
+      volume_l: Number(row.hearts_volume_l),
+      abv: row.hearts_abv_percent ? Number(row.hearts_abv_percent) : undefined,
+      lal: row.hearts_lal ? Number(row.hearts_lal) : undefined,
+      cask: row.cask_number || undefined,
+      date: row.fill_date || undefined,
+      destination: row.cask_number ? `Cask ${row.cask_number}` : undefined,
+      status: row.fill_date ? 'Barreled' : 'New Make',
+    } : undefined,
+    notes: row.notes || undefined,
+  }
+}
 
 const formatValue = (value: number | string | null | undefined, suffix = ''): string => {
   if (value === null || value === undefined || value === '') {
@@ -97,10 +161,19 @@ export default function BatchDetailsPage() {
   const params = useParams() as { id?: string } | null
   const [activeTab, setActiveTab] = useState<TabId>('overview')
 
-  const id = params?.id
-  const batch = useMemo(() => batches.find((item) => item.batch_id === id), [id])
+  const id = params?.id ?? null
+  const { data: dbRow, isLoading, error } = useRumBatch(id)
+  const batch = useMemo(() => dbRow ? mapDbRowToBatch(dbRow) : null, [dbRow])
 
-  if (!batch) {
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+      </div>
+    )
+  }
+
+  if (error || !batch) {
     notFound()
   }
 

@@ -1,20 +1,32 @@
 "use client"
 
 import { useState } from 'react'
-import { rumBatchesDataset } from '@/modules/production/data/rum-batches.dataset'
+import { useRumBatches } from '@/modules/production/hooks/useRumBatches'
 
 type TabType = 'fermentation' | 'distillation' | 'cask' | 'graphs'
 
-// Using any type here because the page expects a flat structure but data has nested objects
-// TODO: Refactor page to match the nested RumProductionRunDB structure
 type RumBatchLegacy = any
 
 export default function RumBatchesPage() {
   const [expandedBatch, setExpandedBatch] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<TabType>('fermentation')
-  
-  // Cast to any to bypass type checking for legacy flat structure
-  const batches = rumBatchesDataset as any[]
+  const { data: batches = [], isLoading, error } = useRumBatches()
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A65E2E]"></div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-red-600">Failed to load rum batches: {(error as Error).message}</p>
+      </div>
+    )
+  }
 
   const toggleBatch = (batchId: string) => {
     setExpandedBatch(expandedBatch === batchId ? null : batchId)

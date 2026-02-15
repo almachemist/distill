@@ -1,9 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { DistillationSession, DistillationCost } from '@/modules/production/types/distillation-session.types'
 import { DistillationSessionCalculator } from '@/modules/production/services/distillation-session-calculator.service'
-import { distillationSessions } from '@/modules/production/data/distillation-sessions.data'
+import { useDistillationRuns } from '@/modules/production/hooks/useDistillationRuns'
+import { mapDbRowsToSessions } from '@/modules/production/services/distillation-session.mapper'
 import { useAuth } from '@/modules/auth/hooks/useAuth'
 import LiveSessionTracker from '@/modules/production/components/LiveSessionTracker'
 import LiveDistillationModal from '@/modules/production/components/LiveDistillationModal'
@@ -32,23 +33,30 @@ export default function BatchOverviewPage() {
   const [showSimpleEditModal, setShowSimpleEditModal] = useState(false)
   const [editingSession, setEditingSession] = useState<DistillationSession | null>(null)
 
+  const { data: dbRows, isLoading: runsLoading, error: runsError } = useDistillationRuns()
+
   useEffect(() => {
-    setLoading(true)
+    if (runsLoading) {
+      setLoading(true)
+      return
+    }
+    if (runsError) {
+      setError(runsError instanceof Error ? runsError.message : 'Failed to load distillation runs')
+      setLoading(false)
+      return
+    }
     try {
-      // Use all sessions from the centralized data file
-      // Sessions are already processed when imported
-      const processedSessions = distillationSessions.map(session => 
+      const mapped = mapDbRowsToSessions(dbRows || [])
+      const processedSessions = mapped.map(session =>
         DistillationSessionCalculator.processDistillationSession(session)
       )
-
-      console.log('Loaded sessions:', processedSessions.map(s => ({ id: s.id, sku: s.sku, date: s.date })))
       setSessions(processedSessions)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load distillation sessions')
+      setError(err instanceof Error ? err.message : 'Failed to process distillation sessions')
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [dbRows, runsLoading, runsError])
 
   // Filter sessions by year, month, and search term
   const filteredSessions = sessions.filter(session => {
