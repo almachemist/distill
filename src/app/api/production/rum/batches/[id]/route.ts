@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 
 import { RumCaneSpiritBatch } from '@/types/production-schemas'
-import { buildRumBatchFallback } from '@/modules/production/services/batch-fallback.service'
 
 export const runtime = 'nodejs'
 
@@ -18,15 +17,6 @@ export async function GET(
   context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStaticOverride = flag === '1' || flag === 'true' || flag === 'yes'
-    if (useStaticOverride) {
-      const { id } = await context.params
-      const fallbackBatches = buildRumBatchFallback()
-      const fallbackBatch = fallbackBatches.find((b: any) => b.batch_id === id || b.id === id)
-      if (fallbackBatch) return NextResponse.json(fallbackBatch)
-      return NextResponse.json({ error: 'Batch not found' }, { status: 404 })
-    }
     const supabase = await createClient()
     const { id } = await context.params
 
@@ -62,15 +52,6 @@ export async function GET(
       return NextResponse.json(data)
     }
 
-    // If not found in database, try fallback data
-    const fallbackBatches = buildRumBatchFallback()
-    const fallbackBatch = fallbackBatches.find((b: any) => b.batch_id === id || b.id === id)
-
-    if (fallbackBatch) {
-      return NextResponse.json(fallbackBatch)
-    }
-
-    // Not found anywhere
     return NextResponse.json({ error: 'Batch not found' }, { status: 404 })
   } catch (error) {
     console.error('Error in GET /api/production/rum/batches/[id]:', error)
