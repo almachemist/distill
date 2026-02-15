@@ -103,18 +103,18 @@ export function LoginForm() {
 
   if (showForgotPassword && !resetEmailSent) {
     return (
-      <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Reset Password</h2>
+      <div className="w-full max-w-md mx-auto p-6 bg-surface rounded-xl shadow-card border border-border">
+        <h2 className="text-2xl font-bold text-foreground mb-6">Reset Password</h2>
         
         {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+          <div className="mb-4 p-3 bg-destructive/5 border border-destructive/20 text-destructive rounded-lg text-sm">
             {error}
           </div>
         )}
 
         <div className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
               Email
             </label>
             <input
@@ -127,11 +127,11 @@ export function LoginForm() {
                   message: 'Invalid email address',
                 },
               })}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
               placeholder="Enter your email"
             />
             {errors.email && (
-              <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+              <p className="mt-1 text-sm text-destructive">{errors.email.message}</p>
             )}
           </div>
 
@@ -140,7 +140,7 @@ export function LoginForm() {
               type="button"
               onClick={handleForgotPassword}
               disabled={isLoading}
-              className="flex-1 py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 py-2 px-4 bg-copper text-white font-medium rounded-lg hover:bg-copper-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {isLoading ? 'Sending...' : 'Send Reset Email'}
             </button>
@@ -150,7 +150,7 @@ export function LoginForm() {
                 setShowForgotPassword(false)
                 setError(null)
               }}
-              className="flex-1 py-2 px-4 bg-gray-200 text-gray-700 font-medium rounded-md hover:bg-gray-300"
+              className="flex-1 py-2 px-4 border border-border text-foreground font-medium rounded-lg hover:bg-background transition-colors"
             >
               Back to Login
             </button>
@@ -162,9 +162,9 @@ export function LoginForm() {
 
   if (resetEmailSent) {
     return (
-      <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Check Your Email</h2>
-        <p className="text-gray-600 mb-4">
+      <div className="w-full max-w-md mx-auto p-6 bg-surface rounded-xl shadow-card border border-border">
+        <h2 className="text-2xl font-bold text-foreground mb-6">Check Your Email</h2>
+        <p className="text-muted-foreground mb-4">
           Reset email sent! Check your inbox for password reset instructions.
         </p>
         <button
@@ -173,7 +173,7 @@ export function LoginForm() {
             setResetEmailSent(false)
             setError(null)
           }}
-          className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700"
+          className="w-full py-2 px-4 bg-copper text-white font-medium rounded-lg hover:bg-copper-hover transition-colors"
         >
           Back to Login
         </button>
@@ -182,18 +182,18 @@ export function LoginForm() {
   }
 
   return (
-    <div className="w-full max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Sign In</h2>
+    <div className="w-full max-w-md mx-auto p-6 bg-surface rounded-xl shadow-card border border-border">
+      <h2 className="text-2xl font-bold text-foreground mb-6">Sign In</h2>
       
       {error && (
-        <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+        <div className="mb-4 p-3 bg-destructive/5 border border-destructive/20 text-destructive rounded-lg text-sm">
           {error}
         </div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1">
             Email
           </label>
           <input
@@ -206,16 +206,16 @@ export function LoginForm() {
                 message: 'Invalid email address',
               },
             })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
             placeholder="Enter your email"
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+            <p className="mt-1 text-sm text-destructive">{errors.email.message}</p>
           )}
         </div>
 
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="password" className="block text-sm font-medium text-foreground mb-1">
             Password
           </label>
           <input
@@ -228,18 +228,18 @@ export function LoginForm() {
                 message: 'Password must be at least 6 characters',
               },
             })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring"
             placeholder="Enter your password"
           />
           {errors.password && (
-            <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+            <p className="mt-1 text-sm text-destructive">{errors.password.message}</p>
           )}
         </div>
 
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-2 px-4 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-2 px-4 bg-copper text-white font-medium rounded-lg hover:bg-copper-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? 'Signing In...' : 'Sign In'}
         </button>
@@ -249,7 +249,7 @@ export function LoginForm() {
         <button
           type="button"
           onClick={() => setShowForgotPassword(true)}
-          className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
+          className="block w-full text-center text-sm text-copper hover:text-copper-hover transition-colors"
         >
           Forgot Password?
         </button>
@@ -276,14 +276,14 @@ export function LoginForm() {
               setIsLoading(false)
             }
           }}
-          className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
+          className="block w-full text-center text-sm text-copper hover:text-copper-hover transition-colors"
         >
           Sign In with Magic Link
         </button>
         <button
           type="button"
           onClick={handleResendConfirmation}
-          className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
+          className="block w-full text-center text-sm text-copper hover:text-copper-hover transition-colors"
         >
           Resend Confirmation Email
         </button>
@@ -317,15 +317,15 @@ export function LoginForm() {
                 setIsLoading(false)
               }
             }}
-            className="block w-full text-center text-sm text-blue-600 hover:text-blue-800"
+            className="block w-full text-center text-sm text-copper hover:text-copper-hover transition-colors"
           >
             Use Test Login (Bypass Confirmation)
           </button>
         )}
         
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-center text-sm text-muted-foreground">
           Don&apos;t have an account?{' '}
-          <Link href="/auth/signup" className="text-blue-600 hover:text-blue-800">
+          <Link href="/auth/signup" className="text-copper hover:text-copper-hover transition-colors">
             Sign Up
           </Link>
         </p>

@@ -1,86 +1,81 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --brand: #894128;
-  --brand-rgb: 137, 65, 40;
-  /* Copper Hybrid palette */
-  --copper: #B87333;
-  --graphite: #2E2E2E;
-  --onyx: #0A0A0A;
-  --beige: #E9E4D8;
-  --copper-red: #D86D5A;
-  --copper-amber: #E3B24C;
-  --copper-green: #7AB97A;
-}
+/* ─── Design tokens ─── */
+@theme {
+  /* Primary brand colors */
+  --color-copper: #B87333;
+  --color-copper-hover: #A36429;
+  --color-brand: #894128;
+  --color-brand-hover: #723620;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Semantic backgrounds */
+  --color-background: #FAFAF9;
+  --color-surface: #FFFFFF;
+  --color-accent: #FDF8F0;
+
+  /* Sidebar */
+  --color-sidebar: #1C1917;
+  --color-sidebar-hover: #292524;
+  --color-sidebar-active: #B87333;
+  --color-sidebar-foreground: #F5F5F4;
+  --color-sidebar-muted: #A8A29E;
+
+  /* Text */
+  --color-foreground: #1C1917;
+  --color-muted-foreground: #78716C;
+
+  /* Borders */
+  --color-border: #E7E5E4;
+  --color-border-strong: #D6D3D1;
+  --color-ring: #B87333;
+
+  /* Legacy aliases (backward-compat while migrating pages) */
+  --color-onyx: #1C1917;
+  --color-graphite: #44403C;
+  --color-beige: #FDF8F0;
+  --color-copper-5: oklch(from #B87333 l c h / 0.05);
+  --color-copper-10: oklch(from #B87333 l c h / 0.10);
+  --color-copper-20: oklch(from #B87333 l c h / 0.20);
+  --color-copper-15: oklch(from #B87333 l c h / 0.15);
+  --color-copper-30: oklch(from #B87333 l c h / 0.30);
+  --color-brand-10: oklch(from #894128 l c h / 0.10);
+  --color-graphite-10: oklch(from #44403C l c h / 0.10);
+
+  /* Status colors */
+  --color-destructive: #DC2626;
+  --color-destructive-foreground: #FFFFFF;
+  --color-success: #16A34A;
+  --color-success-foreground: #FFFFFF;
+  --color-warning: #D97706;
+  --color-warning-foreground: #FFFFFF;
+  --color-info: #2563EB;
+  --color-info-foreground: #FFFFFF;
+
+  /* Legacy status aliases */
+  --color-copper-red: #DC2626;
+  --color-copper-amber: #D97706;
+  --color-copper-green: #16A34A;
+  --color-copper-green-10: oklch(from #16A34A l c h / 0.10);
+
+  /* Shadows */
+  --shadow-soft: 0 1px 3px 0 rgba(0,0,0,0.06), 0 1px 2px -1px rgba(0,0,0,0.06);
+  --shadow-card: 0 1px 3px 0 rgba(0,0,0,0.04), 0 1px 2px -1px rgba(0,0,0,0.04);
+  --shadow-elevated: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.07);
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Copper Hybrid utilities */
-.text-onyx { color: var(--onyx); }
-.text-graphite { color: var(--graphite); }
-.text-copper { color: var(--copper); }
-.text-brand { color: var(--brand); }
-.bg-beige { background-color: var(--beige); }
-.bg-copper { background-color: var(--copper); }
-.bg-brand { background-color: var(--brand); }
-.bg-copper-5 { background-color: rgba(184, 115, 51, 0.05); }
-.bg-copper-10 { background-color: rgba(184, 115, 51, 0.10); }
-.bg-copper-20 { background-color: rgba(184, 115, 51, 0.20); }
-.border-copper { border-color: var(--copper); }
-.border-brand { border-color: var(--brand); }
-.border-copper-15 { border-color: rgba(184, 115, 51, 0.15); }
-.border-copper-30 { border-color: rgba(184, 115, 51, 0.30); }
-.shadow-soft { box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
-.bg-copper-red { background-color: var(--copper-red); }
-.bg-copper-amber { background-color: var(--copper-amber); }
-.bg-copper-green { background-color: var(--copper-green); }
-.bg-copper-green-10 { background-color: rgba(122, 185, 122, 0.10); }
-.bg-graphite { background-color: var(--graphite); }
-.bg-graphite-10 { background-color: rgba(46, 46, 46, 0.10); }
-.bg-brand-10 { background-color: rgba(var(--brand-rgb), 0.10); }
-
-/* Focus and hover states for copper */
-.focus\:ring-copper:focus {
-  --tw-ring-color: var(--copper);
-}
-
-.focus\:ring-brand:focus {
-  --tw-ring-color: var(--brand);
-}
-
-.hover\:bg-copper:hover {
-  background-color: var(--copper);
-}
-
-.hover\:bg-brand:hover {
-  background-color: var(--brand);
-}
-
-.hover\:bg-copper\/90:hover {
-  background-color: rgba(184, 115, 51, 0.9);
-}
-
-.hover\:bg-copper-20:hover {
-  background-color: rgba(184, 115, 51, 0.20);
-}
-
-.hover\:text-copper:hover {
-  color: var(--copper);
-}
-
-.hover\:text-brand:hover {
-  color: var(--brand);
-}
+/* Backward-compat: old manual classes that pages still reference */
+/* These will be removed as pages migrate to Tailwind token classes */
+.border-copper-15 { border-color: var(--color-copper-15); }
+.border-copper-30 { border-color: var(--color-copper-30); }

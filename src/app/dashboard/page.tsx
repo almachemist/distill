@@ -13,7 +13,7 @@ export default function DashboardPage() {
   if (statsLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A65E2E]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -37,8 +37,8 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* SECTION A — Hero */}
       <div>
-        <h1 className="text-3xl font-semibold text-[#1A1A1A] mb-2">Distillery Dashboard</h1>
-        <p className="text-[#777777]">Your distillery at a glance.</p>
+        <h1 className="text-3xl font-semibold text-foreground mb-2">Distillery Dashboard</h1>
+        <p className="text-muted-foreground">Your distillery at a glance.</p>
       </div>
 
       {/* SECTION B — KPI Tiles (3×2 grid) */}
@@ -107,13 +107,13 @@ export default function DashboardPage() {
           title="Batches"
           description="View all production batches, track progress, edit details."
           href="/dashboard/batches"
-          variant="light-gray"
+          variant="dark"
         />
         <DashboardNavCard
           title="Inventory"
           description="View stock levels, bottles, SKUs, upcoming shortages."
           href="/dashboard/inventory"
-          variant="beige"
+          variant="light"
         />
 
         {/* Row 2 */}
@@ -121,7 +121,7 @@ export default function DashboardPage() {
           title="Sales & CRM"
           description="Customer analytics, sales trends, churn risk analysis."
           href="/dashboard/crm"
-          variant="light-gray"
+          variant="dark"
         />
         <DashboardNavCard
           title="Calendar"
@@ -133,7 +133,7 @@ export default function DashboardPage() {
           title="Barrels"
           description="Barrel inventory, aging tracking, fill schedules."
           href="/dashboard/barrels"
-          variant="beige"
+          variant="light"
         />
       </div>
 

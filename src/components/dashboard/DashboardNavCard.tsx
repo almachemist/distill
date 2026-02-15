@@ -4,21 +4,21 @@ interface DashboardNavCardProps {
   title: string
   description: string
   href: string
-  variant?: 'copper' | 'beige' | 'light-gray'
+  variant?: 'copper' | 'light' | 'dark'
 }
 
-export function DashboardNavCard({ title, description, href, variant = 'light-gray' }: DashboardNavCardProps) {
+export function DashboardNavCard({ title, description, href, variant = 'light' }: DashboardNavCardProps) {
   const variantStyles = {
-    copper: 'bg-copper text-white hover:bg-copper/90',
-    beige: 'bg-beige text-graphite hover:bg-copper-20',
-    'light-gray': 'bg-graphite text-white hover:bg-graphite'
+    copper: 'bg-copper text-white hover:bg-copper-hover',
+    light: 'bg-surface text-foreground border border-border hover:border-copper/30 hover:shadow-elevated',
+    dark: 'bg-sidebar text-sidebar-foreground hover:bg-sidebar-hover',
   }
 
   return (
     <Link href={href}>
-      <div className={`rounded-lg shadow-sm p-6 transition-all hover:shadow-md hover:-translate-y-0.5 cursor-pointer ${variantStyles[variant]}`}>
+      <div className={`rounded-xl shadow-card p-6 transition-all hover:-translate-y-0.5 cursor-pointer ${variantStyles[variant]}`}>
         <h3 className="text-lg font-semibold mb-2">{title}</h3>
-        <p className={`text-sm ${variant === 'copper' ? 'text-white/90' : variant === 'light-gray' ? 'text-white/80' : 'text-graphite/80'}`}>
+        <p className={`text-sm ${variant === 'copper' ? 'text-white/90' : variant === 'dark' ? 'text-sidebar-muted' : 'text-muted-foreground'}`}>
           {description}
         </p>
       </div>
