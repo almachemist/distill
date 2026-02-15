@@ -3745,6 +3745,277 @@ export type Database = {
           },
         ]
       }
+      square_catalog_items: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          organization_id: string
+          sku: string | null
+          square_catalog_id: string
+          updated_at: string | null
+          variations: Json | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          organization_id: string
+          sku?: string | null
+          square_catalog_id: string
+          updated_at?: string | null
+          variations?: Json | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          organization_id?: string
+          sku?: string | null
+          square_catalog_id?: string
+          updated_at?: string | null
+          variations?: Json | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "square_catalog_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      square_connections: {
+        Row: {
+          access_token: string
+          created_at: string | null
+          id: string
+          last_sync_at: string | null
+          location_ids: string[] | null
+          merchant_id: string | null
+          organization_id: string
+          refresh_token: string | null
+          sync_status: string | null
+          token_expires_at: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          access_token: string
+          created_at?: string | null
+          id?: string
+          last_sync_at?: string | null
+          location_ids?: string[] | null
+          merchant_id?: string | null
+          organization_id: string
+          refresh_token?: string | null
+          sync_status?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          access_token?: string
+          created_at?: string | null
+          id?: string
+          last_sync_at?: string | null
+          location_ids?: string[] | null
+          merchant_id?: string | null
+          organization_id?: string
+          refresh_token?: string | null
+          sync_status?: string | null
+          token_expires_at?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "square_connections_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: true
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      square_customers: {
+        Row: {
+          company_name: string | null
+          created_at: string | null
+          display_name: string | null
+          email: string | null
+          first_order_date: string | null
+          id: string
+          last_order_date: string | null
+          metadata: Json | null
+          order_count: number | null
+          organization_id: string
+          phone: string | null
+          square_customer_id: string
+          total_spend_cents: number | null
+          total_units: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          first_order_date?: string | null
+          id?: string
+          last_order_date?: string | null
+          metadata?: Json | null
+          order_count?: number | null
+          organization_id: string
+          phone?: string | null
+          square_customer_id: string
+          total_spend_cents?: number | null
+          total_units?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          first_order_date?: string | null
+          id?: string
+          last_order_date?: string | null
+          metadata?: Json | null
+          order_count?: number | null
+          organization_id?: string
+          phone?: string | null
+          square_customer_id?: string
+          total_spend_cents?: number | null
+          total_units?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "square_customers_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      square_order_items: {
+        Row: {
+          category: string | null
+          created_at: string | null
+          id: string
+          item_name: string
+          organization_id: string
+          quantity: number | null
+          sku: string | null
+          square_item_id: string | null
+          square_order_id: string
+          total_price_cents: number | null
+          unit_price_cents: number | null
+          variation_name: string | null
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          item_name: string
+          organization_id: string
+          quantity?: number | null
+          sku?: string | null
+          square_item_id?: string | null
+          square_order_id: string
+          total_price_cents?: number | null
+          unit_price_cents?: number | null
+          variation_name?: string | null
+        }
+        Update: {
+          category?: string | null
+          created_at?: string | null
+          id?: string
+          item_name?: string
+          organization_id?: string
+          quantity?: number | null
+          sku?: string | null
+          square_item_id?: string | null
+          square_order_id?: string
+          total_price_cents?: number | null
+          unit_price_cents?: number | null
+          variation_name?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "square_order_items_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      square_orders: {
+        Row: {
+          closed_at: string | null
+          created_at: string | null
+          currency: string | null
+          id: string
+          location_id: string | null
+          metadata: Json | null
+          order_date: string
+          organization_id: string
+          source: string | null
+          square_customer_id: string | null
+          square_order_id: string
+          state: string | null
+          total_money_cents: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          closed_at?: string | null
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          location_id?: string | null
+          metadata?: Json | null
+          order_date: string
+          organization_id: string
+          source?: string | null
+          square_customer_id?: string | null
+          square_order_id: string
+          state?: string | null
+          total_money_cents?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          closed_at?: string | null
+          created_at?: string | null
+          currency?: string | null
+          id?: string
+          location_id?: string | null
+          metadata?: Json | null
+          order_date?: string
+          organization_id?: string
+          source?: string | null
+          square_customer_id?: string | null
+          square_order_id?: string
+          state?: string | null
+          total_money_cents?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "square_orders_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       status: {
         Row: {
           active: boolean | null
