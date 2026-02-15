@@ -1,39 +1,31 @@
-import { getCachedCustomerAnalytics } from '@/modules/crm/analytics'
+'use client'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
-
-type CustomerDetail = {
-  customerId: string
-  customerName: string
-  totalSpend: number
-  totalUnits: number
-  averageOrderValue: number
-  orderCount: number
-  firstOrderDate: string
-  lastOrderDate: string
-  averageDaysBetweenOrders: number
-  daysSinceLastOrder: number
-  churnRisk: number
-  topProducts: { sku: string; productName: string; units: number }[]
-  monthlySpend: { month: string; spend: number }[]
-  inactiveProducts: string[]
-  alerts?: string[]
-}
+import { useParams } from 'next/navigation'
+import { useCrmCustomerDetail } from '@/modules/crm/hooks/useCrmCustomerDetail'
 
 const currency = new Intl.NumberFormat('en-AU', { style: 'currency', currency: 'AUD' })
 const number = new Intl.NumberFormat('en-AU')
 
-function getCustomerSync(id: string): CustomerDetail {
-  const list = getCachedCustomerAnalytics() as any[]
-  const c = list.find(x => x.customerId === id)
-  if (!c) throw new Error('Customer not found')
-  return c as unknown as CustomerDetail
-}
+export default function CustomerProfilePage() {
+  const params = useParams() as { id?: string } | null
+  const customerId = params?.id ? decodeURIComponent(params.id) : null
+  const { data: c, isLoading, error } = useCrmCustomerDetail(customerId)
 
-export default async function CustomerProfilePage(props: PageProps<"/dashboard/crm/[id]">) {
-  const { id } = await props.params
-  const c = getCustomerSync(id)
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+      </div>
+    )
+  }
+
+  if (error || !c) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-stone-500">Customer not found.</p>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-8">

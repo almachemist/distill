@@ -3,7 +3,7 @@ export interface User {
   email: string
   name?: string
   displayName?: string
-  role: 'admin' | 'manager' | 'operator' | 'viewer'
+  role: 'owner' | 'admin' | 'manager' | 'operator' | 'viewer'
   organizationId: string
 }
 

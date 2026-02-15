@@ -1,52 +1,8 @@
-import salesAnalyticsData from '@/../data/sales_analytics_2025.json'
+'use client'
 
-interface SalesAnalytics {
-  summary: {
-    totalNetSales: number
-    totalGrossSales: number
-    totalUnits: number
-    totalDiscounts: number
-    totalSalesCount: number
-    avgTicket: number
-    dateRange: { start: string; end: string }
-    uniqueProducts: number
-    uniqueCustomers: number
-    uniqueChannels: number
-  }
-  byProduct: Array<{
-    item: string
-    category: string
-    totalNetSales: number
-    totalUnits: number
-    avgPrice: number
-    salesCount: number
-  }>
-  byChannel: Array<{
-    channel: string
-    totalNetSales: number
-    totalUnits: number
-    salesCount: number
-  }>
-  byCustomer: Array<{
-    customerId: string
-    customerName: string
-    totalNetSales: number
-    totalUnits: number
-    purchaseCount: number
-    avgTicket: number
-  }>
-  byMonth: Array<{
-    month: number
-    monthName: string
-    totalNetSales: number
-    totalUnits: number
-    salesCount: number
-    avgTicket: number
-    isProjected: boolean
-  }>
-}
-
-const analytics = salesAnalyticsData as SalesAnalytics
+import Link from 'next/link'
+import { useSalesAnalytics } from '@/modules/crm/hooks/useSalesAnalytics'
+import { useSquareConnection } from '@/modules/settings/hooks/useSquareConnection'
 
 const currencyFormatter = new Intl.NumberFormat('en-AU', {
   style: 'currency',
@@ -57,6 +13,45 @@ const currencyFormatter = new Intl.NumberFormat('en-AU', {
 const numberFormatter = new Intl.NumberFormat('en-AU')
 
 export default function SalesAnalyticsPage() {
+  const { data: connection, isLoading: connLoading } = useSquareConnection()
+  const { data: analytics, isLoading: dataLoading } = useSalesAnalytics()
+
+  if (connLoading || dataLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+      </div>
+    )
+  }
+
+  if (!connection || !analytics) {
+    return (
+      <div className="space-y-8">
+        <header className="space-y-2">
+          <h1 className="text-3xl font-semibold text-gray-900">Sales Analytics</h1>
+          <p className="text-gray-600">Sales intelligence powered by Square POS data</p>
+        </header>
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-12 text-center">
+          <div className="text-4xl mb-4">📈</div>
+          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            {!connection ? 'Connect Square POS' : 'No sales data yet'}
+          </h2>
+          <p className="text-gray-500 mb-6 max-w-md mx-auto">
+            {!connection
+              ? 'Connect your Square account to see real-time sales analytics.'
+              : 'Sync your Square data to start seeing sales analytics. Use the Sync button in Settings > Integrations.'}
+          </p>
+          <Link
+            href="/dashboard/settings"
+            className="inline-block px-5 py-2.5 bg-copper hover:bg-copper/90 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Go to Settings
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
   const { summary, byProduct, byChannel, byCustomer, byMonth } = analytics
 
   const topProducts = byProduct.slice(0, 10)
