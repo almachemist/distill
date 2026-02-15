@@ -350,39 +350,6 @@ function NewBottlingRunContent() {
 
       const j = await res.json()
       alert('Bottling run saved and inventory updated successfully!')
-      try {
-        const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-        const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
-        if (useStatic) {
-          const DEV_TANKS_KEY = 'dev_tanks_data_v1'
-          const raw = typeof window !== 'undefined' ? window.localStorage.getItem(DEV_TANKS_KEY) : null
-          const list = raw ? JSON.parse(raw) : null
-          if (Array.isArray(list)) {
-            const tankUse: Record<string, number> = {}
-            for (const sb of selectedBatches || []) {
-              const tc = sb?.batch?.tankCode
-              if (!tc) continue
-              const use = Number(sb?.volumeToUseLitres || 0)
-              tankUse[tc] = (tankUse[tc] || 0) + use
-            }
-            const updated = list.map((t: any) => {
-              const tc = String(t?.tank_id || '')
-              if (!tc || !(tc in tankUse)) return t
-              const available = Number(t.current_volume_l ?? 0)
-              const remaining = Math.max(available - tankUse[tc], 0)
-              const newStatus = remaining <= 0 ? 'bottled_empty' : (t.status || 'ready_to_bottle')
-              return {
-                ...t,
-                current_volume_l: remaining,
-                status: newStatus,
-                last_updated_by: 'Bottling',
-                updated_at: new Date().toISOString()
-              }
-            })
-            window.localStorage.setItem(DEV_TANKS_KEY, JSON.stringify(updated))
-          }
-        }
-      } catch {}
       window.location.href = '/dashboard/inventory'
     } catch (e: any) {
       alert(e?.message || 'Failed to save bottling run')

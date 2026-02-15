@@ -13,11 +13,9 @@ export default function TanksPage() {
   const [selectedTank, setSelectedTank] = useState<Tank | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [showRedistillationAlert, setShowRedistillationAlert] = useState(true)
-  const [devCleared, setDevCleared] = useState(false)
   const [currentAction, setCurrentAction] = useState<null | 'transform' | 'infusion' | 'adjust' | 'combine' | 'history'>(null)
   const [isHistoryOpen, setIsHistoryOpen] = useState(false)
   const [historyEntries, setHistoryEntries] = useState<TankHistoryEntry[]>([])
-  const [localHistory, setLocalHistory] = useState<Record<string, TankHistoryEntry[]>>({})
   const [combineSource, setCombineSource] = useState<Tank | null>(null)
   const [combineSelectedIds, setCombineSelectedIds] = useState<string[]>([])
   const [combineTargetId, setCombineTargetId] = useState<string>('')
@@ -37,28 +35,6 @@ export default function TanksPage() {
   const [adjustVolume, setAdjustVolume] = useState<string>('')
   const [adjustNotes, setAdjustNotes] = useState<string>('')
   const supabase = createClient()
-  const USE_STATIC = ['1','true','yes'].includes((process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase())
-  const DEV_TANKS_KEY = 'dev_tanks_data_v1'
-  const readLocalTanks = (): Tank[] | null => {
-    try {
-      const raw = typeof window !== 'undefined' ? window.localStorage.getItem(DEV_TANKS_KEY) : null
-      if (!raw) return null
-      const parsed = JSON.parse(raw)
-      return Array.isArray(parsed) ? parsed : null
-    } catch {
-      return null
-    }
-  }
-  const writeLocalTanks = (list: Tank[]) => {
-    try {
-      if (typeof window !== 'undefined') window.localStorage.setItem(DEV_TANKS_KEY, JSON.stringify(list))
-    } catch {}
-  }
-  const clearLocalTanks = () => {
-    try {
-      if (typeof window !== 'undefined') window.localStorage.removeItem(DEV_TANKS_KEY)
-    } catch {}
-  }
 
   // Calculate summary statistics
   const totalTanks = tanks.length
@@ -91,40 +67,6 @@ export default function TanksPage() {
   const loadTanks = async (retryCount: number = 0) => {
     try {
       setLoading(true)
-      console.log('Loading tanks...')
-      if (USE_STATIC || process.env.NODE_ENV === 'development') {
-        if (devCleared) {
-          clearLocalTanks()
-          setTanks([])
-          setLoading(false)
-          setError(null)
-          return
-        }
-        const saved = readLocalTanks()
-        if (saved) {
-          setTanks(saved)
-          setLoading(false)
-          setError(null)
-          return
-        }
-        const devOrg = 'static-fallback'
-        const now = new Date().toISOString()
-        const devTanks: Tank[] = [
-          { id: 'T-330-01', organization_id: devOrg, tank_id: 'T-330-01', tank_name: '330L Rum Blend', tank_type: 'spirits', capacity_l: 330, product: 'Rum Blend', current_abv: 63.0, current_volume_l: 51, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'RUM-25-001', created_at: now, updated_at: now },
-          { id: 'T-330-02', organization_id: devOrg, tank_id: 'T-330-02', tank_name: '330L Vodka (2nd Distillation)', tank_type: 'spirits', capacity_l: 330, product: 'Vodka (Second Distillation)', current_abv: 86.7, current_volume_l: 250, status: 'pending_redistillation', notes: 'To be distilled again', last_updated_by: 'User', batch_id: 'VODKA-26-002', created_at: now, updated_at: now },
-          { id: 'T-615-01', organization_id: devOrg, tank_id: 'T-615-01', tank_name: '615L White Rum', tank_type: 'spirits', capacity_l: 615, product: 'White Rum', current_abv: null, current_volume_l: null, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'RUM-25-002', created_at: now, updated_at: now },
-          { id: 'T-330-03', organization_id: devOrg, tank_id: 'T-330-03', tank_name: '330L Vodka (Double Distilled)', tank_type: 'spirits', capacity_l: 330, product: 'Vodka (Double Distilled)', current_abv: 80.0, current_volume_l: 233, status: 'pending_redistillation', notes: 'Should be distilled again', last_updated_by: 'User', batch_id: 'VODKA-26-003', created_at: now, updated_at: now },
-          { id: 'T-400-01', organization_id: devOrg, tank_id: 'T-400-01', tank_name: '400L Cane Spirit 2501', tank_type: 'spirits', capacity_l: 400, product: 'Cane Spirit Batch 2501', current_abv: 64.5, current_volume_l: 20, status: 'holding', notes: null, last_updated_by: 'User', batch_id: 'CS-25-2501', created_at: now, updated_at: now },
-          { id: 'T-317-01', organization_id: devOrg, tank_id: 'T-317-01', tank_name: '317L Cane Spirit 25-2 (No Lid)', tank_type: 'spirits', capacity_l: 317, has_lid: false, product: 'Cane Spirit Batch 25-2', current_abv: null, current_volume_l: null, status: 'unavailable', notes: 'Avoid use (no lid)', last_updated_by: 'User', batch_id: 'CS-25-25-2', created_at: now, updated_at: now },
-          { id: 'T-100-01', organization_id: devOrg, tank_id: 'T-100-01', tank_name: '100L Coffee Liqueur Infusion', tank_type: 'spirits', capacity_l: 100, product: 'Coffee Liqueur Infusion', current_abv: 44.0, current_volume_l: 30, status: 'infusing', extra_materials: { coffee_kg: 3 }, started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(), notes: null, last_updated_by: 'User', batch_id: 'LIQ-25-COFFEE-001', created_at: now, updated_at: now },
-          { id: 'T-230-01', organization_id: devOrg, tank_id: 'T-230-01', tank_name: '230L Coffee Liqueur Infusion', tank_type: 'spirits', capacity_l: 230, product: 'Coffee Liqueur Infusion', current_abv: null, current_volume_l: null, status: 'infusing', notes: null, last_updated_by: 'User', batch_id: 'LIQ-25-COFFEE-002', created_at: now, updated_at: now }
-        ]
-        setTanks(devTanks)
-        writeLocalTanks(devTanks)
-        setLoading(false)
-        setError(null)
-        return
-      }
       const url = typeof window !== 'undefined'
         ? `${window.location.origin}/api/production/tanks`
         : '/api/production/tanks'
@@ -139,306 +81,11 @@ export default function TanksPage() {
         apiError = 'Failed to parse response'
       }
       if (!res.ok || apiError) {
-        const errStr = String(apiError || `HTTP ${res.status}`)
-        const isNet = errStr.toLowerCase().includes('failed to fetch')
-        const isCfg = errStr.toLowerCase().includes('supabase is not configured')
-        if (isNet || isCfg) {
-          const devOrg = 'static-fallback'
-          const now = new Date().toISOString()
-          const devTanks: Tank[] = [
-            {
-              id: 'T-330-01',
-              organization_id: devOrg,
-              tank_id: 'T-330-01',
-              tank_name: '330L Rum Blend',
-              tank_type: 'spirits',
-              capacity_l: 330,
-              product: 'Rum Blend',
-              current_abv: 63.0,
-              current_volume_l: 51,
-              status: 'holding',
-              notes: null,
-              last_updated_by: 'User',
-              batch_id: 'RUM-25-001',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-330-02',
-              organization_id: devOrg,
-              tank_id: 'T-330-02',
-              tank_name: '330L Vodka (2nd Distillation)',
-              tank_type: 'spirits',
-              capacity_l: 330,
-              product: 'Vodka (Second Distillation)',
-              current_abv: 86.7,
-              current_volume_l: 250,
-              status: 'pending_redistillation',
-              notes: 'To be distilled again',
-              last_updated_by: 'User',
-              batch_id: 'VODKA-26-002',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-615-01',
-              organization_id: devOrg,
-              tank_id: 'T-615-01',
-              tank_name: '615L White Rum',
-              tank_type: 'spirits',
-              capacity_l: 615,
-              product: 'White Rum',
-              current_abv: null,
-              current_volume_l: null,
-              status: 'holding',
-              notes: null,
-              last_updated_by: 'User',
-              batch_id: 'RUM-25-002',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-330-03',
-              organization_id: devOrg,
-              tank_id: 'T-330-03',
-              tank_name: '330L Vodka (Double Distilled)',
-              tank_type: 'spirits',
-              capacity_l: 330,
-              product: 'Vodka (Double Distilled)',
-              current_abv: 80.0,
-              current_volume_l: 233,
-              status: 'pending_redistillation',
-              notes: 'Should be distilled again',
-              last_updated_by: 'User',
-              batch_id: 'VODKA-26-003',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-400-01',
-              organization_id: devOrg,
-              tank_id: 'T-400-01',
-              tank_name: '400L Cane Spirit 2501',
-              tank_type: 'spirits',
-              capacity_l: 400,
-              product: 'Cane Spirit Batch 2501',
-              current_abv: 64.5,
-              current_volume_l: 20,
-              status: 'holding',
-              notes: null,
-              last_updated_by: 'User',
-              batch_id: 'CS-25-2501',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-317-01',
-              organization_id: devOrg,
-              tank_id: 'T-317-01',
-              tank_name: '317L Cane Spirit 25-2 (No Lid)',
-              tank_type: 'spirits',
-              capacity_l: 317,
-              has_lid: false,
-              product: 'Cane Spirit Batch 25-2',
-              current_abv: null,
-              current_volume_l: null,
-              status: 'unavailable',
-              notes: 'Avoid use (no lid)',
-              last_updated_by: 'User',
-              batch_id: 'CS-25-25-2',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-100-01',
-              organization_id: devOrg,
-              tank_id: 'T-100-01',
-              tank_name: '100L Coffee Liqueur Infusion',
-              tank_type: 'spirits',
-              capacity_l: 100,
-              product: 'Coffee Liqueur Infusion',
-              current_abv: 44.0,
-              current_volume_l: 30,
-              status: 'infusing',
-              extra_materials: { coffee_kg: 3 },
-              started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
-              notes: null,
-              last_updated_by: 'User',
-              batch_id: 'LIQ-25-COFFEE-001',
-              created_at: now,
-              updated_at: now
-            },
-            {
-              id: 'T-230-01',
-              organization_id: devOrg,
-              tank_id: 'T-230-01',
-              tank_name: '230L Coffee Liqueur Infusion',
-              tank_type: 'spirits',
-              capacity_l: 230,
-              product: 'Coffee Liqueur Infusion',
-              current_abv: null,
-              current_volume_l: null,
-              status: 'infusing',
-              notes: null,
-              last_updated_by: 'User',
-              batch_id: 'LIQ-25-COFFEE-002',
-              created_at: now,
-              updated_at: now
-            }
-          ]
-          setTanks(devCleared ? [] : devTanks)
-          setError(null)
-          return
-        }
         if (retryCount < 2) {
           setTimeout(() => loadTanks(retryCount + 1), 1000)
           return
         }
-        const devOrg = 'static-fallback'
-        const now = new Date().toISOString()
-        const devTanks: Tank[] = [
-          {
-            id: 'T-330-01',
-            organization_id: devOrg,
-            tank_id: 'T-330-01',
-            tank_name: '330L Rum Blend',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Rum Blend',
-            current_abv: 63.0,
-            current_volume_l: 51,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'RUM-25-001',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-330-02',
-            organization_id: devOrg,
-            tank_id: 'T-330-02',
-            tank_name: '330L Vodka (2nd Distillation)',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Vodka (Second Distillation)',
-            current_abv: 86.7,
-            current_volume_l: 250,
-            status: 'pending_redistillation',
-            notes: 'To be distilled again',
-            last_updated_by: 'User',
-            batch_id: 'VODKA-26-002',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-615-01',
-            organization_id: devOrg,
-            tank_id: 'T-615-01',
-            tank_name: '615L White Rum',
-            tank_type: 'spirits',
-            capacity_l: 615,
-            product: 'White Rum',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'RUM-25-002',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-330-03',
-            organization_id: devOrg,
-            tank_id: 'T-330-03',
-            tank_name: '330L Vodka (Double Distilled)',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Vodka (Double Distilled)',
-            current_abv: 80.0,
-            current_volume_l: 233,
-            status: 'pending_redistillation',
-            notes: 'Should be distilled again',
-            last_updated_by: 'User',
-            batch_id: 'VODKA-26-003',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-400-01',
-            organization_id: devOrg,
-            tank_id: 'T-400-01',
-            tank_name: '400L Cane Spirit 2501',
-            tank_type: 'spirits',
-            capacity_l: 400,
-            product: 'Cane Spirit Batch 2501',
-            current_abv: 64.5,
-            current_volume_l: 20,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'CS-25-2501',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-317-01',
-            organization_id: devOrg,
-            tank_id: 'T-317-01',
-            tank_name: '317L Cane Spirit 25-2 (No Lid)',
-            tank_type: 'spirits',
-            capacity_l: 317,
-            has_lid: false,
-            product: 'Cane Spirit Batch 25-2',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'unavailable',
-            notes: 'Avoid use (no lid)',
-            last_updated_by: 'User',
-            batch_id: 'CS-25-25-2',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-100-01',
-            organization_id: devOrg,
-            tank_id: 'T-100-01',
-            tank_name: '100L Coffee Liqueur Infusion',
-            tank_type: 'spirits',
-            capacity_l: 100,
-            product: 'Coffee Liqueur Infusion',
-            current_abv: 44.0,
-            current_volume_l: 30,
-            status: 'infusing',
-            extra_materials: { coffee_kg: 3 },
-            started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'LIQ-25-COFFEE-001',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-230-01',
-            organization_id: devOrg,
-            tank_id: 'T-230-01',
-            tank_name: '230L Coffee Liqueur Infusion',
-            tank_type: 'spirits',
-            capacity_l: 230,
-            product: 'Coffee Liqueur Infusion',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'infusing',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'LIQ-25-COFFEE-002',
-            created_at: now,
-            updated_at: now
-          }
-        ]
-        setTanks(devCleared ? [] : devTanks)
-        setError(null)
+        setError(String(apiError || `HTTP ${res.status}`))
         return
       }
       setTanks(data || [])
@@ -446,174 +93,19 @@ export default function TanksPage() {
         setError('No tanks found in database')
       }
     } catch (error: any) {
-      if (USE_STATIC || process.env.NODE_ENV === 'development') {
-        const devOrg = 'static-fallback'
-        const now = new Date().toISOString()
-        const devTanks: Tank[] = [
-          {
-            id: 'T-330-01',
-            organization_id: devOrg,
-            tank_id: 'T-330-01',
-            tank_name: '330L Rum Blend',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Rum Blend',
-            current_abv: 63.0,
-            current_volume_l: 51,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'RUM-25-001',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-330-02',
-            organization_id: devOrg,
-            tank_id: 'T-330-02',
-            tank_name: '330L Vodka (2nd Distillation)',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Vodka (Second Distillation)',
-            current_abv: 86.7,
-            current_volume_l: 250,
-            status: 'pending_redistillation',
-            notes: 'To be distilled again',
-            last_updated_by: 'User',
-            batch_id: 'VODKA-26-002',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-615-01',
-            organization_id: devOrg,
-            tank_id: 'T-615-01',
-            tank_name: '615L White Rum',
-            tank_type: 'spirits',
-            capacity_l: 615,
-            product: 'White Rum',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'RUM-25-002',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-330-03',
-            organization_id: devOrg,
-            tank_id: 'T-330-03',
-            tank_name: '330L Vodka (Double Distilled)',
-            tank_type: 'spirits',
-            capacity_l: 330,
-            product: 'Vodka (Double Distilled)',
-            current_abv: 80.0,
-            current_volume_l: 233,
-            status: 'pending_redistillation',
-            notes: 'Should be distilled again',
-            last_updated_by: 'User',
-            batch_id: 'VODKA-26-003',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-400-01',
-            organization_id: devOrg,
-            tank_id: 'T-400-01',
-            tank_name: '400L Cane Spirit 2501',
-            tank_type: 'spirits',
-            capacity_l: 400,
-            product: 'Cane Spirit Batch 2501',
-            current_abv: 64.5,
-            current_volume_l: 20,
-            status: 'holding',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'CS-25-2501',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-317-01',
-            organization_id: devOrg,
-            tank_id: 'T-317-01',
-            tank_name: '317L Cane Spirit 25-2 (No Lid)',
-            tank_type: 'spirits',
-            capacity_l: 317,
-            has_lid: false,
-            product: 'Cane Spirit Batch 25-2',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'unavailable',
-            notes: 'Avoid use (no lid)',
-            last_updated_by: 'User',
-            batch_id: 'CS-25-25-2',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-100-01',
-            organization_id: devOrg,
-            tank_id: 'T-100-01',
-            tank_name: '100L Coffee Liqueur Infusion',
-            tank_type: 'spirits',
-            capacity_l: 100,
-            product: 'Coffee Liqueur Infusion',
-            current_abv: 44.0,
-            current_volume_l: 30,
-            status: 'infusing',
-            extra_materials: { coffee_kg: 3 },
-            started_on: new Date('2025-11-17T00:00:00.000Z').toISOString(),
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'LIQ-25-COFFEE-001',
-            created_at: now,
-            updated_at: now
-          },
-          {
-            id: 'T-230-01',
-            organization_id: devOrg,
-            tank_id: 'T-230-01',
-            tank_name: '230L Coffee Liqueur Infusion',
-            tank_type: 'spirits',
-            capacity_l: 230,
-            product: 'Coffee Liqueur Infusion',
-            current_abv: null,
-            current_volume_l: null,
-            status: 'infusing',
-            notes: null,
-            last_updated_by: 'User',
-            batch_id: 'LIQ-25-COFFEE-002',
-            created_at: now,
-            updated_at: now
-          }
-        ]
-        setTanks(devCleared ? [] : devTanks)
-        setError(null)
-      } else {
-        if (retryCount < 2) {
-          setTimeout(() => loadTanks(retryCount + 1), 1000)
-          return
-        }
-        const msg = typeof (error as any)?.message === 'string' ? (error as any).message : 'Unknown error loading tanks'
-        console.error('Error loading tanks:', msg)
-        setError(msg)
+      if (retryCount < 2) {
+        setTimeout(() => loadTanks(retryCount + 1), 1000)
+        return
       }
+      const msg = typeof error?.message === 'string' ? error.message : 'Unknown error loading tanks'
+      console.error('Error loading tanks:', msg)
+      setError(msg)
     } finally {
       setLoading(false)
     }
   }
 
   const handleClearAll = async () => {
-    if (USE_STATIC || process.env.NODE_ENV === 'development') {
-      setDevCleared(true)
-      setTanks([])
-      setError(null)
-      clearLocalTanks()
-      return
-    }
     setTanks([])
     setError(null)
   }
@@ -631,14 +123,6 @@ export default function TanksPage() {
     setIsTransformOpen(true)
     ;(async () => {
       try {
-        if (USE_STATIC || process.env.NODE_ENV === 'development') {
-          setAvailableRecipes([
-            { id: 'recipe-spiced-rum', name: 'Spiced Rum' },
-            { id: 'recipe-coffee-liqueur', name: 'Coffee Liqueur' },
-            { id: 'recipe-signature-gin', name: 'Signature Dry Gin' }
-          ])
-          return
-        }
         const { data } = await supabase.from('recipes').select('id, name').order('name')
         setAvailableRecipes((data || []).map((r: any) => ({ id: r.id, name: r.name })))
       } catch {
@@ -663,15 +147,6 @@ export default function TanksPage() {
     setInfusionItems([])
     setIsInfusionOpen(true)
     try {
-      if (USE_STATIC || process.env.NODE_ENV === 'development') {
-        setBotanicals([
-          { id: 'juniper', name: 'Juniper', unit: 'kg', currentStock: 50 },
-          { id: 'coriander', name: 'Coriander Seed', unit: 'kg', currentStock: 40 },
-          { id: 'vanilla', name: 'Vanilla Beans', unit: 'unit', currentStock: 200 },
-          { id: 'coffee', name: 'Coffee Beans', unit: 'kg', currentStock: 80 }
-        ])
-        return
-      }
       const res = await fetch('/api/inventory?category=Botanicals')
       const list = await res.json()
       const rows = Array.isArray(list) ? list : []
@@ -683,15 +158,6 @@ export default function TanksPage() {
 
   const handleViewHistory = async (tank: Tank) => {
     setSelectedTank(tank)
-    if (USE_STATIC || process.env.NODE_ENV === 'development') {
-      const entries = (localHistory[tank.id] || []).slice().sort((a, b) => {
-        return new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-      })
-      setHistoryEntries(entries)
-      setIsHistoryOpen(true)
-      setCurrentAction('history')
-      return
-    }
     const { data, error } = await supabase
       .from('tank_history')
       .select('*')
@@ -717,55 +183,6 @@ export default function TanksPage() {
 
   const handleSave = async (tankId: string, updates: TankUpdateInput & { tank_id?: string, tank_name?: string, capacity_l?: number }) => {
     try {
-      // Handle local/dev/static mode without Supabase writes
-      if (USE_STATIC || process.env.NODE_ENV === 'development') {
-        const now = new Date().toISOString()
-        if (!tankId) {
-          const newTankId = updates.tank_id || `TK-${Math.random().toString(36).slice(2, 8).toUpperCase()}`
-          const newTank: Tank = {
-            id: newTankId,
-            organization_id: tanks[0]?.organization_id || 'static-fallback',
-            tank_id: newTankId,
-            tank_name: updates.tank_name || '',
-            tank_type: 'spirits',
-            capacity_l: updates.capacity_l || 1000,
-            product: updates.product ?? null,
-            current_abv: updates.current_abv ?? null,
-            current_volume_l: updates.current_volume_l ?? null,
-            status: updates.status || 'empty',
-            notes: updates.notes ?? null,
-            last_updated_by: updates.last_updated_by,
-            batch_id: (updates as any)?.batch_id || `MAN-${new Date().getFullYear().toString().slice(-2)}-${String(Math.floor(Math.random()*1000)).padStart(3,'0')}`,
-            created_at: now,
-            updated_at: now
-          }
-          const next = [newTank, ...tanks]
-          setTanks(next)
-          writeLocalTanks(next)
-        } else {
-          const next = tanks.map(t => {
-            if (t.id !== tankId) return t
-            return {
-              ...t,
-              tank_name: updates.tank_name ?? t.tank_name,
-              capacity_l: updates.capacity_l ?? t.capacity_l,
-              product: updates.product ?? t.product,
-              current_abv: updates.current_abv ?? t.current_abv,
-              current_volume_l: updates.current_volume_l ?? t.current_volume_l,
-              status: updates.status ?? t.status,
-              notes: updates.notes ?? t.notes,
-              last_updated_by: updates.last_updated_by,
-              batch_id: (updates as any)?.batch_id ?? t.batch_id,
-              updated_at: now
-            }
-          })
-          setTanks(next)
-          writeLocalTanks(next)
-        }
-        setCurrentAction(null)
-        return
-      }
-
       if (!tankId) {
         // Creating new tank
         const { error } = await supabase
@@ -891,101 +308,6 @@ export default function TanksPage() {
     const totalAlcohol = (destVol * destAbv) + sourcePairs.reduce((sum, p) => sum + (p.v * p.a), 0)
     const newAbv = totalAlcohol / (totalVolume || 1)
 
-    if (USE_STATIC || process.env.NODE_ENV === 'development') {
-      const prevDest = { ...dest }
-      const newBatchId = genBatchId(dest.product || dest.tank_name)
-      const nextList = tanks.map(t => {
-        if (t.id === dest.id) {
-          return {
-            ...t,
-            current_volume_l: Number(totalVolume.toFixed(2)),
-            current_abv: Number.isFinite(newAbv) ? Number(newAbv.toFixed(2)) : t.current_abv,
-            product: combinedProductName || t.product,
-            tank_name: combinedTankName || t.tank_name,
-            batch_id: newBatchId,
-            notes: [`Merged from ${sourceTankIds.join(', ')}`, t.notes || ''].filter(Boolean).join('; '),
-            last_updated_by: 'Blend',
-            updated_at: now
-          }
-        }
-        if (srcIds.includes(t.id)) {
-          return {
-            ...t,
-            current_volume_l: 0,
-            status: 'empty' as const,
-            product: null,
-            current_abv: null,
-            tank_name: '',
-            notes: [`Merged into ${dest.tank_id}`, t.notes || ''].filter(Boolean).join('; '),
-            last_updated_by: 'Blend',
-            updated_at: now
-          }
-        }
-        return t
-      })
-      setTanks(nextList)
-      writeLocalTanks(nextList)
-      const destEntry: TankHistoryEntry = {
-        id: `hist-${Math.random().toString(36).slice(2, 10)}`,
-        organization_id: dest.organization_id,
-        tank_id: dest.id,
-        action: 'Blend in',
-        user_name: 'Blend',
-        previous_values: {
-          tank_name: prevDest.tank_name,
-          product: prevDest.product,
-          current_abv: prevDest.current_abv,
-          current_volume_l: prevDest.current_volume_l,
-          batch_id: (prevDest as any).batch_id
-        },
-        new_values: {
-          tank_name: combinedTankName || prevDest.tank_name,
-          product: combinedProductName || prevDest.product,
-          current_abv: Number.isFinite(newAbv) ? Number(newAbv.toFixed(2)) : prevDest.current_abv,
-          current_volume_l: Number(totalVolume.toFixed(2)),
-          batch_id: newBatchId
-        },
-        notes: `Merged sources: ${sourceTankIds.join(', ')}`,
-        created_at: now
-      }
-      const sourceEntries: TankHistoryEntry[] = sources.map(s => ({
-        id: `hist-${Math.random().toString(36).slice(2, 10)}`,
-        organization_id: s.organization_id,
-        tank_id: s.id,
-        action: 'Blend out',
-        user_name: 'Blend',
-        previous_values: {
-          tank_name: s.tank_name,
-          product: s.product,
-          current_abv: s.current_abv,
-          current_volume_l: s.current_volume_l
-        },
-        new_values: {
-          tank_name: '',
-          product: null,
-          current_abv: null,
-          current_volume_l: 0
-        },
-        notes: `Merged into ${dest.tank_id}`,
-        created_at: now
-      }))
-      setLocalHistory(prev => {
-        const next = { ...prev }
-        next[dest.id] = [destEntry, ...(next[dest.id] || [])]
-        for (const entry of sourceEntries) {
-          next[entry.tank_id] = [entry, ...(next[entry.tank_id] || [])]
-        }
-        return next
-      })
-      setCombineSource(null)
-      setCombineSelectedIds([])
-      setCombineTargetId('')
-      setCombineNewName('')
-      setCombineProductName('')
-      setCurrentAction(null)
-      return
-    }
-
     const prevDest = {
       tank_name: dest.tank_name,
       capacity_l: dest.capacity_l,
@@ -1110,7 +432,7 @@ export default function TanksPage() {
       status: 'infusing',
       last_updated_by: 'Infusion'
     }
-    if (infusionItems.length > 0 && !(USE_STATIC || process.env.NODE_ENV === 'development')) {
+    if (infusionItems.length > 0) {
       try {
         const changes = infusionItems
           .filter(it => Number.isFinite(it.quantity) && it.quantity > 0)

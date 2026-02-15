@@ -96,11 +96,6 @@ export async function GET(req: NextRequest) {
     log('info', 'inventory_list', { org, count: filtered.length, category: category || 'all', reqId: getReqId(req) })
     return NextResponse.json(filtered, { headers: { 'Cache-Control': 'no-store' } })
   } catch (e: any) {
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
-    if (useStatic) {
-      return NextResponse.json([], { headers: { 'Cache-Control': 'no-store' } })
-    }
     log('error', 'inventory_list_error', { error: e?.message, reqId: getReqId(req) })
     return NextResponse.json({ error: e?.message || 'Failed to load inventory' }, { status: 500 })
   }

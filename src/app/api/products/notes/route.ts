@@ -21,20 +21,11 @@ type NoteRow = {
   updated_at?: string
 }
 
-const memoryStore = new Map<string, NoteRow>()
-
-
 export async function GET(request: NextRequest) {
   try {
     const name = request.nextUrl.searchParams.get('name') || ''
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
     if (!name) {
       return NextResponse.json({ productName: '', notes: '', updated_at: null }, { status: 200 })
-    }
-    if (useStatic) {
-      const row = memoryStore.get(name) || { product_name: name, notes: '' }
-      return NextResponse.json({ productName: row.product_name, notes: row.notes, updated_at: row.updated_at || null }, { status: 200 })
     }
     const auth = await requireAuth()
     if (auth instanceof NextResponse) return auth
@@ -62,13 +53,6 @@ export async function POST(request: NextRequest) {
     const notes = String(body?.notes || '')
     if (!productName) {
       return NextResponse.json({ error: 'Missing productName' }, { status: 400 })
-    }
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
-    if (useStatic) {
-      const row: NoteRow = { product_name: productName, notes, updated_at: new Date().toISOString() }
-      memoryStore.set(productName, row)
-      return NextResponse.json({ ok: true, productName, notes }, { status: 200 })
     }
     const auth = await requireAuth()
     if (auth instanceof NextResponse) return auth

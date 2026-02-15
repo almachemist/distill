@@ -102,11 +102,6 @@ function buildBottlingChanges(body: BottlingRun): Change[] {
 
 export async function GET(request: NextRequest) {
   try {
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
-    if (useStatic) {
-      return NextResponse.json({ bottlingRuns: [] })
-    }
     const auth = await requireAuth()
     if (auth instanceof NextResponse) return auth
     const { supabase } = auth
@@ -124,30 +119,10 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes' || process.env.NODE_ENV === 'development'
     const body = await request.json() as BottlingRun
 
     if (!body.productType || !body.productName || !body.selectedBatches || body.selectedBatches.length === 0) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
-    }
-
-    // Fast path: static/test mode bypasses all database operations
-    if (useStatic || body.isTest) {
-      const changes = buildBottlingChanges(body)
-      const mockRow = {
-        id: `static-${Date.now()}`,
-        product_type: body.productType,
-        product_name: body.productName,
-        mode: body.mode,
-        selected_batches: body.selectedBatches,
-        dilution_phases: body.dilutionPhases || [],
-        bottle_entries: body.bottleEntries || [],
-        summary: body.summary,
-        notes: body.notes || (body.isTest ? 'TEST RUN' : null),
-        created_at: new Date().toISOString()
-      }
-      return NextResponse.json({ bottlingRun: mockRow, inventoryApplied: [] })
     }
 
     const auth = await requireAuth()

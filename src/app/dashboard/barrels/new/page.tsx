@@ -13,7 +13,6 @@ function NewBarrelContent() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const supabase = createClient()
-  const USE_STATIC = ['1','true','yes'].includes((process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase())
   const [sourceTank, setSourceTank] = useState<Tank | null>(null)
   
   // Generate a default barrel number based on date and random suffix
@@ -58,7 +57,7 @@ function NewBarrelContent() {
         notes: tankId ? `From tank ${tankId}` : prev.notes
       }))
     }
-    if (tankId && !USE_STATIC) {
+    if (tankId) {
       ;(async () => {
         const { data } = await supabase
           .from('tanks')
@@ -118,7 +117,7 @@ function NewBarrelContent() {
       const barrel = await service.createBarrel(formData)
 
       const tankId = searchParams?.get('tankId') || ''
-      if (tankId && !USE_STATIC) {
+      if (tankId) {
         const { data: tank, error: tankErr } = await supabase
           .from('tanks')
           .select('*')
