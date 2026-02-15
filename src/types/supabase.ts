@@ -4407,11 +4407,9 @@ export type Database = {
     }
     Functions: {
       complete_signup: {
-        Args: { display_name: string; org_name: string; user_id: string }
+        Args: { p_display_name: string; p_org_name: string; p_user_id: string }
         Returns: Json
       }
-      create_gin_tables: { Args: { gin_type: string }; Returns: undefined }
-      exec_sql: { Args: { sql: string }; Returns: undefined }
       show_limit: { Args: never; Returns: number }
       show_trgm: { Args: { "": string }; Returns: string[] }
       user_org_ids: { Args: never; Returns: string[] }

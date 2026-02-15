@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 import { readJson } from '@/lib/jsonStore'
 import type { OldRobertaFile } from '@/modules/production/types/old-roberta.types'
 import { requireAuth } from '@/lib/api/auth'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 export const runtime = 'nodejs'
 
 const STORE_PATH = 'data/old_roberta_distillations.json'
@@ -20,7 +20,7 @@ async function resolveOrganizationId(): Promise<string | null> {
 export async function GET() {
   // Prefer Supabase when available; fall back to JSON file
   try {
-    const supabase = createServiceRoleClient()
+    const supabase = await createClient()
     const orgId = await resolveOrganizationId()
     const query = supabase
       .from('old_roberta_batches')

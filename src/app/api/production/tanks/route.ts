@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 
 function toNum(v: any) {
   const n = parseFloat(String(v ?? ''))
@@ -8,7 +8,7 @@ function toNum(v: any) {
 
 export async function GET() {
   try {
-    const supabase = createServiceRoleClient()
+    const supabase = await createClient()
     const { data, error } = await supabase
       .from('tanks')
       .select('*')

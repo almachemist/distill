@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server"
 import { readFileSync } from "fs"
 import { join } from "path"
 import { createClient } from "@/lib/supabase/server"
-import { createServiceRoleClient } from "@/lib/supabase/serviceRole"
 import {
   buildGinBatchFallback,
   buildRumBatchFallback,
@@ -318,23 +317,19 @@ function integrateNdjsonGin(base: GinApiRecord[]): GinApiRecord[] {
 }
 
 export async function GET() {
-  let gin: GinApiRecord[] = FALLBACK_RESPONSE.gin
-  let rum: RumApiRecord[] = FALLBACK_RESPONSE.rum
+  const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
+  const useStatic = flag === '1' || flag === 'true' || flag === 'yes'
+
+  if (useStatic) {
+    const gin = integrateNdjsonGin(FALLBACK_RESPONSE.gin)
+    return NextResponse.json({ gin, rum: FALLBACK_RESPONSE.rum })
+  }
+
+  let gin: GinApiRecord[] = []
+  let rum: RumApiRecord[] = []
 
   try {
-    const flag = (process.env.NEXT_PUBLIC_USE_STATIC_DATA || '').toLowerCase()
-    const useStatic = flag === '1' || flag === 'true' || flag === 'yes'
-    if (useStatic) {
-      gin = integrateNdjsonGin(gin)
-      return NextResponse.json({ gin, rum })
-    }
-    // Prefer service role (server-side only) to avoid RLS issues; fall back to anon client
-    let supabase: any
-    try {
-      supabase = createServiceRoleClient()
-    } catch {
-      supabase = await createClient()
-    }
+    const supabase = await createClient()
 
     // Fetch both historical batches (distillation_runs) AND draft batches (production_batches)
     const [ginHistoricalResult, ginDraftResult, rumResult] = await Promise.allSettled([
@@ -382,22 +377,12 @@ export async function GET() {
         }))
       : []
 
-    // Merge and sort by date
-    if (historicalGin.length > 0 || draftGin.length > 0) {
-      gin = [...historicalGin, ...draftGin].sort((a, b) => {
-        const dateA = a.date ? new Date(a.date).getTime() : 0
-        const dateB = b.date ? new Date(b.date).getTime() : 0
-        return dateB - dateA
-      }) as GinApiRecord[]
-    } else {
-      const ginHistErr = ginHistoricalResult.status === 'rejected'
-        ? ginHistoricalResult.reason
-        : (ginHistoricalResult.value && ginHistoricalResult.value.error)
-      if (ginHistErr) {
-        console.warn("⚠️ Using static gin dataset:", typeof ginHistErr === 'object' ? (ginHistErr.message || ginHistErr) : ginHistErr)
-      }
-    }
-    gin = integrateNdjsonGin(gin)
+    // Merge and sort by date — use only DB results (no static fallback)
+    gin = [...historicalGin, ...draftGin].sort((a, b) => {
+      const dateA = a.date ? new Date(a.date).getTime() : 0
+      const dateB = b.date ? new Date(b.date).getTime() : 0
+      return dateB - dateA
+    }) as GinApiRecord[]
 
     // Build rum list from dedicated table plus cane spirit runs from distillation_runs
     const rumFromTable: any[] = (rumResult.status === 'fulfilled' && !rumResult.value.error && Array.isArray(rumResult.value.data))
@@ -478,19 +463,6 @@ export async function GET() {
       rumMap.set(key, { ...row, batch_id: key })
     }
 
-    // Merge fallback rum summaries as well, so static hearts metrics backfill missing/0 DB values
-    for (const row of FALLBACK_RESPONSE.rum) {
-      if (!row?.batch_id) continue
-      const key = normalizeRumBatchId(row.batch_id)
-      const existing = rumMap.get(key)
-      if (!existing) {
-        rumMap.set(key, { ...row, batch_id: key })
-        continue
-      }
-      const merged = mergeRumSummary(existing, row)
-      rumMap.set(key, merged)
-    }
-
     for (const row of caneSpiritRuns) {
       if (!row?.batch_id) continue
       const key = normalizeRumBatchId(row.batch_id)
@@ -505,24 +477,14 @@ export async function GET() {
 
     const combinedRum = Array.from(rumMap.values())
 
-    if (combinedRum.length > 0) {
-      rum = combinedRum
-        .sort((a: any, b: any) => {
-          const da = a.distillation_date ? new Date(a.distillation_date).getTime() : 0
-          const db = b.distillation_date ? new Date(b.distillation_date).getTime() : 0
-          return db - da
-        }) as RumApiRecord[]
-    } else {
-      const rumErr = rumResult.status === 'rejected'
-        ? rumResult.reason
-        : (rumResult.value && rumResult.value.error)
-      if (rumErr) {
-        console.warn("⚠️ Using static rum dataset:", typeof rumErr === 'object' ? (rumErr.message || rumErr) : rumErr)
-      }
-    }
+    rum = combinedRum
+      .sort((a: any, b: any) => {
+        const da = a.distillation_date ? new Date(a.distillation_date).getTime() : 0
+        const db = b.distillation_date ? new Date(b.distillation_date).getTime() : 0
+        return db - da
+      }) as RumApiRecord[]
   } catch (error) {
-    console.warn("⚠️ Using static production dataset:", (error as any)?.message || error)
-    gin = integrateNdjsonGin(gin)
+    console.warn("⚠️ Supabase query failed, returning empty dataset:", (error as any)?.message || error)
   }
 
   return NextResponse.json({ gin, rum })
@@ -530,12 +492,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    let supabase: any
-    try {
-      supabase = createServiceRoleClient()
-    } catch {
-      supabase = await createClient()
-    }
+    const supabase = await createClient()
     const obj = await request.json()
     const id = String(obj?.run_id || obj?.batch_id || '').trim()
     const name = String(obj?.sku || obj?.display_name || obj?.recipe || obj?.meta?.sku || '').trim() || 'Gin'

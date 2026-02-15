@@ -5,11 +5,15 @@
  * These are finishing recipes (base spirit + ingredients), not fermentation/distillation recipes
  */
 
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import type { SupabaseClient } from '@supabase/supabase-js'
 import { RUM_PRODUCT_RECIPES } from '../data/rum-product-recipes.dataset'
 
 export class RumProductSeedService {
-  private supabase = createServiceRoleClient()
+  private supabase: SupabaseClient
+
+  constructor(supabase: SupabaseClient) {
+    this.supabase = supabase
+  }
 
   /**
    * Seed all rum product recipes to Supabase

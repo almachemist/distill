@@ -75,9 +75,9 @@ export class AuthService {
     try {
       // Use the RPC function to complete signup with proper permissions
       const { data, error } = await this.supabase.rpc('complete_signup', {
-        user_id: authData.user.id,
-        org_name: organizationName,
-        display_name: displayName,
+        p_user_id: authData.user.id,
+        p_org_name: organizationName,
+        p_display_name: displayName,
       })
 
       if (error) {
@@ -134,20 +134,26 @@ export class AuthService {
   }
 
   async getUserProfile(userId: string): Promise<User | null> {
-    const { data, error } = await this.supabase
-      .from('profiles')
-      .select('*, organizations(name)')
-      .eq('id', userId)
-      .single()
+    const [profileResult, authResult] = await Promise.all([
+      this.supabase
+        .from('profiles')
+        .select('*, organizations(name)')
+        .eq('id', userId)
+        .single(),
+      this.supabase.auth.getUser(),
+    ])
 
-    if (error) {
+    if (profileResult.error) {
       // Silently handle profile errors
       return null
     }
 
+    const data = profileResult.data
+    const email = authResult.data?.user?.email ?? ''
+
     return {
       id: data.id,
-      email: data.email,
+      email,
       name: data.display_name,
       displayName: data.display_name,
       role: data.role,

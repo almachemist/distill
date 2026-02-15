@@ -4,7 +4,7 @@ import path from 'path'
 import { writeJson, readJson } from '@/lib/jsonStore'
 import type { OldRobertaBatch, OldRobertaFile } from '@/modules/production/types/old-roberta.types'
 import { requireAuth } from '@/lib/api/auth'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 export const runtime = 'nodejs'
 
 const STORE_PATH = 'data/old_roberta_distillations.json'
@@ -88,7 +88,7 @@ export async function POST() {
 
     // Upsert to Supabase
     try {
-      const supabase = createServiceRoleClient()
+      const supabase = await createClient()
       const orgId = await resolveOrganizationId()
       if (orgId) {
         const rows = cleaned.map(b => ({

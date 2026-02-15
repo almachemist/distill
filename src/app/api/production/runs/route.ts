@@ -1,14 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
-
-function getSupabase() {
-  try {
-    return createServiceRoleClient()
-  } catch {
-    return null
-  }
-}
 
 /**
  * POST /api/production/runs
@@ -21,7 +12,7 @@ function getSupabase() {
  */
 export async function POST(request: NextRequest) {
   try {
-    const supabase = getSupabase() || await createClient()
+    const supabase = await createClient()
     const body = await request.json()
     const { action } = body
 
@@ -49,7 +40,7 @@ export async function POST(request: NextRequest) {
  */
 export async function GET(request: NextRequest) {
   try {
-    const supabase = getSupabase() || await createClient()
+    const supabase = await createClient()
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
     const status = searchParams.get('status')

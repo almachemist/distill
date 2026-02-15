@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 import { createClient } from '@/lib/supabase/server'
 
 function toNum(v: any) {
@@ -19,12 +18,7 @@ function toNumOrNull(v: any): number | null {
 
 export async function PATCH(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    let supabase: any
-    try {
-      supabase = createServiceRoleClient()
-    } catch {
-      supabase = await createClient()
-    }
+    const supabase = await createClient()
     const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
     const body = await req.json().catch(() => ({}))
@@ -298,12 +292,7 @@ function scoreMappedBarrel(b: any) {
 
 export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    let supabase: any
-    try {
-      supabase = createServiceRoleClient()
-    } catch {
-      supabase = await createClient()
-    }
+    const supabase = await createClient()
 
     const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
@@ -365,12 +354,7 @@ export async function GET(req: NextRequest, context: { params: Promise<{ id: str
 
 export async function DELETE(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    let supabase: any
-    try {
-      supabase = createServiceRoleClient()
-    } catch {
-      supabase = await createClient()
-    }
+    const supabase = await createClient()
 
     const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)

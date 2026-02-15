@@ -22,8 +22,4 @@ const nextConfig = {
   },
 };
 
-// TODO: Re-enable PWA with a Turbopack-compatible solution (e.g. @serwist/next)
-// when PWA support is needed. The next-pwa package is kept as a dependency.
-// Previous PWA config preserved in DEVELOPMENT_PLAN.md for reference.
-
 export default nextConfig;

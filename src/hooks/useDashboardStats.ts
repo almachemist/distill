@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import salesAnalytics from '../../data/sales_analytics_2025.json'
 
 export interface DashboardStats {
   batchesThisYear: number
@@ -83,11 +82,11 @@ export function useDashboardStats() {
         })
         const avgEfficiency = efficiencyCount > 0 ? totalEfficiency / efficiencyCount : 0
 
-        // 4. Total units in stock (from sales analytics - using totalUnits as proxy)
-        const totalUnitsInStock = salesAnalytics.summary.totalUnits || 6299
+        // 4. Total units in stock (TODO Phase 2: fetch from inventory table)
+        const totalUnitsInStock = 0
 
-        // 5. Active recipes (hardcoded for now - TODO: fetch from recipes table)
-        const activeRecipes = 12
+        // 5. Active recipes (TODO Phase 2: fetch from recipes table)
+        const activeRecipes = 0
 
         // 6. Bottling runs this month (count batches with bottling_status = 'completed' this month)
         const bottlingRunsThisMonth = rumBatches.filter((batch: any) => {
@@ -113,10 +112,10 @@ export function useDashboardStats() {
           return { month: monthName, batches: batchCount }
         })
 
-        // 8. Sales trend (from sales analytics)
-        const salesTrend = salesAnalytics.byMonth.map((month: any) => ({
-          month: month.monthName.substring(0, 3),
-          units: month.totalUnits
+        // 8. Sales trend (TODO Phase 2: fetch from sales table)
+        const salesTrend = Array.from({ length: 12 }, (_, i) => ({
+          month: new Date(currentYear, i, 1).toLocaleDateString('en-US', { month: 'short' }),
+          units: 0
         }))
 
         setStats({

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 
 function toNum(v: any) {
   const n = parseFloat(String(v ?? ''))
@@ -153,7 +153,7 @@ export async function GET(req: Request) {
   try {
     const url = new URL(req.url)
     const status = url.searchParams.get('status') || 'all'
-    const supabase = createServiceRoleClient()
+    const supabase = await createClient()
     const configured = process.env.NEXT_PUBLIC_BARRELS_TABLE || ''
     const candidates = [configured, 'tracking', 'barrels', 'barrel_tracking', 'barrels_tracking'].filter(Boolean)
     
@@ -267,7 +267,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json().catch(() => ({}))
     const table = process.env.NEXT_PUBLIC_BARRELS_TABLE || 'tracking'
-    const supabase = createServiceRoleClient()
+    const supabase = await createClient()
     if (body && body.purgeTest) {
       const patterns = ['Test barrel creation', 'Testing new ID structure', 'Test barrel created via API', 'Test barrel created via api']
       const { error } = await supabase.from(table).delete().or(

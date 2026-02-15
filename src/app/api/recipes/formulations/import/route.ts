@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { requireAuth } from '@/lib/api/auth'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 
 export const runtime = 'nodejs'
 
@@ -154,7 +154,7 @@ async function ensureItem(
 
 export async function POST() {
   try {
-    const supabase = createServiceRoleClient()
+    const supabase = await createClient()
     const orgId = await resolveOrganizationId()
 
     let created = 0

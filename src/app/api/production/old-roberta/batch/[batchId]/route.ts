@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from 'next/server'
 import { readFile } from 'fs/promises'
 import path from 'path'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
+import { createClient } from '@/lib/supabase/server'
 export const runtime = 'nodejs'
 
 function stripAndWrapObjectsToArray(text: string): any[] {
@@ -28,7 +28,7 @@ async function resolveOrganizationId(): Promise<string | null> {
 export async function GET(req: NextRequest, context: { params: Promise<{ batchId: string }> }) {
   const { batchId } = await context.params
   const id = decodeURIComponent(batchId)
-  const supabase = createServiceRoleClient()
+  const supabase = await createClient()
   const orgId = await resolveOrganizationId()
 
   // 1) Fetch summary from Supabase

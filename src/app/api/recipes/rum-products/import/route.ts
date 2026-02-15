@@ -6,11 +6,13 @@
  */
 
 import { NextResponse } from 'next/server'
+import { createClient } from '@/lib/supabase/server'
 import { RumProductSeedService } from '@/modules/recipes/services/rum-product-seed.service'
 
 export async function POST() {
   try {
-    const seedService = new RumProductSeedService()
+    const supabase = await createClient()
+    const seedService = new RumProductSeedService(supabase)
     const result = await seedService.seedAllRumProductRecipes()
 
     if (result.success) {

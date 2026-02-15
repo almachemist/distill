@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-import { createServiceRoleClient } from '@/lib/supabase/serviceRole'
 import { createClient } from '@/lib/supabase/server'
 
 function toNum(v: any) {
@@ -43,12 +42,7 @@ async function findRecordByKeys(supabase: any, table: string, id: string) {
 
 export async function POST(req: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
-    let supabase: any
-    try {
-      supabase = createServiceRoleClient()
-    } catch {
-      supabase = await createClient()
-    }
+    const supabase = await createClient()
 
     const { id: rawId } = await context.params
     const id = decodeURIComponent(rawId)
