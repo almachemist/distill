@@ -46,7 +46,7 @@ export default function DashboardPage() {
         <DashboardKpiCard
           title="Batches This Year"
           value={stats.batchesThisYear}
-          subtitle="Production runs in 2025"
+          subtitle={`Production runs in ${new Date().getFullYear()}`}
           accent="copper"
         />
         <DashboardKpiCard
@@ -137,10 +137,10 @@ export default function DashboardPage() {
         />
       </div>
 
-      {/* SECTION E — Recent Distillations (TODO Phase 2: fetch from Supabase) */}
+      {/* SECTION E — Recent Distillations */}
       <DashboardRecentList
         title="Recent Distillations"
-        items={[]}
+        items={stats.recentDistillations}
       />
 
       {/* SECTION F — Upcoming Tasks (TODO Phase 2: fetch from Supabase) */}

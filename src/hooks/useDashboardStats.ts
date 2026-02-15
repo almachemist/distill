@@ -1,5 +1,12 @@
 import { useState, useEffect } from 'react'
 
+export interface RecentDistillation {
+  id: string
+  name: string
+  date: string
+  href: string
+}
+
 export interface DashboardStats {
   batchesThisYear: number
   pureAlcoholLAL: number
@@ -9,6 +16,7 @@ export interface DashboardStats {
   bottlingRunsThisMonth: number
   productionTrend: { month: string; batches: number }[]
   salesTrend: { month: string; units: number }[]
+  recentDistillations: RecentDistillation[]
 }
 
 export function useDashboardStats() {
@@ -82,11 +90,18 @@ export function useDashboardStats() {
         })
         const avgEfficiency = efficiencyCount > 0 ? totalEfficiency / efficiencyCount : 0
 
-        // 4. Total units in stock (TODO Phase 2: fetch from inventory table)
+        // 4. Total units in stock (TODO: Square POS integration)
         const totalUnitsInStock = 0
 
-        // 5. Active recipes (TODO Phase 2: fetch from recipes table)
-        const activeRecipes = 0
+        // 5. Active recipes — fetch real count from API
+        let activeRecipes = 0
+        try {
+          const recipesRes = await fetch('/api/recipes')
+          if (recipesRes.ok) {
+            const recipesData = await recipesRes.json()
+            activeRecipes = Array.isArray(recipesData) ? recipesData.length : (recipesData?.recipes?.length ?? 0)
+          }
+        } catch { /* ignore — show 0 */ }
 
         // 6. Bottling runs this month (count batches with bottling_status = 'completed' this month)
         const bottlingRunsThisMonth = rumBatches.filter((batch: any) => {
@@ -112,11 +127,27 @@ export function useDashboardStats() {
           return { month: monthName, batches: batchCount }
         })
 
-        // 8. Sales trend (TODO Phase 2: fetch from sales table)
+        // 8. Sales trend (TODO: Square POS integration)
         const salesTrend = Array.from({ length: 12 }, (_, i) => ({
           month: new Date(currentYear, i, 1).toLocaleDateString('en-US', { month: 'short' }),
           units: 0
         }))
+
+        // 9. Recent distillations (last 7, sorted by date)
+        const recentDistillations: RecentDistillation[] = allBatches
+          .filter((b: any) => b.date || b.distillation_date)
+          .sort((a: any, b: any) => {
+            const da = new Date(a.date || a.distillation_date).getTime()
+            const db = new Date(b.date || b.distillation_date).getTime()
+            return db - da
+          })
+          .slice(0, 7)
+          .map((b: any) => ({
+            id: b.batch_id || b.run_id || b.id,
+            name: b.display_name || b.sku || b.recipe || b.product_name || 'Unknown',
+            date: b.date || b.distillation_date || '',
+            href: '/dashboard/production/batch-overview'
+          }))
 
         setStats({
           batchesThisYear,
@@ -126,7 +157,8 @@ export function useDashboardStats() {
           activeRecipes,
           bottlingRunsThisMonth,
           productionTrend,
-          salesTrend
+          salesTrend,
+          recentDistillations
         })
       } catch (err) {
         console.error('Error fetching dashboard stats:', err)
