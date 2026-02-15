@@ -32,7 +32,7 @@ export default function CRMDashboardPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -41,15 +41,15 @@ export default function CRMDashboardPage() {
     return (
       <div className="space-y-8">
         <header className="space-y-2">
-          <h1 className="text-3xl font-semibold text-stone-900">CRM Analytics</h1>
-          <p className="text-stone-600">Client intelligence powered by Square POS data</p>
+          <h1 className="text-3xl font-semibold text-foreground">CRM Analytics</h1>
+          <p className="text-muted-foreground">Client intelligence powered by Square POS data</p>
         </header>
-        <div className="bg-white border border-stone-200 rounded-xl shadow-sm p-12 text-center">
+        <div className="bg-surface border border-border rounded-xl shadow-card p-12 text-center">
           <div className="text-4xl mb-4">📊</div>
-          <h2 className="text-xl font-semibold text-stone-900 mb-2">
+          <h2 className="text-xl font-semibold text-foreground mb-2">
             {!isConnected ? 'Connect Square POS' : 'No customer data yet'}
           </h2>
-          <p className="text-stone-500 mb-6 max-w-md mx-auto">
+          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
             {!isConnected
               ? 'Connect your Square account to automatically sync customer and sales data for CRM analytics.'
               : 'Sync your Square data to start seeing customer analytics. Use the Sync button in Settings > Integrations.'}
@@ -68,8 +68,8 @@ export default function CRMDashboardPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold text-stone-900">CRM Analytics</h1>
-        <p className="text-stone-600">Client intelligence powered by Square POS data</p>
+        <h1 className="text-3xl font-semibold text-foreground">CRM Analytics</h1>
+        <p className="text-muted-foreground">Client intelligence powered by Square POS data</p>
       </header>
 
       {/* High-Level Metrics */}
@@ -84,10 +84,10 @@ export default function CRMDashboardPage() {
       </section>
 
       {/* Customer Groups Table */}
-      <section className="bg-white border border-stone-200 rounded-xl shadow-sm">
-        <div className="p-6 border-b border-stone-100">
-          <h2 className="text-xl font-semibold text-stone-900">Customer Groups</h2>
-          <p className="text-sm text-stone-500 mt-1">Customers synced from Square POS with spend and churn analysis</p>
+      <section className="bg-surface border border-border rounded-xl shadow-card">
+        <div className="p-6 border-b border-border">
+          <h2 className="text-xl font-semibold text-foreground">Customer Groups</h2>
+          <p className="text-sm text-muted-foreground mt-1">Customers synced from Square POS with spend and churn analysis</p>
         </div>
         <div className="p-6">
           <ClientGroups groups={groups as any[]} />
@@ -99,10 +99,10 @@ export default function CRMDashboardPage() {
 
 function Card({ title, value, subtitle }: { title: string; value: string; subtitle: string }) {
   return (
-    <div className="border rounded-xl shadow-sm p-6 bg-gradient-to-br from-amber-50 to-white border-amber-200">
-      <h3 className="text-sm font-medium text-stone-500">{title}</h3>
-      <p className="mt-2 text-2xl font-semibold text-stone-900">{value}</p>
-      <p className="text-xs text-stone-400 mt-1">{subtitle}</p>
+    <div className="border rounded-xl shadow-card p-6 bg-gradient-to-br from-copper/5 to-surface border-copper/20">
+      <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+      <p className="mt-2 text-2xl font-semibold text-foreground">{value}</p>
+      <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
     </div>
   )
 }

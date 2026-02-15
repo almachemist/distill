@@ -190,15 +190,15 @@ function BotanicalSteepingContent() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-beige flex items-center justify-center">
+      <div className="flex items-center justify-center py-16">
         <div className="text-graphite">Loading recipe...</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-beige p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="space-y-6">
+      <div className="max-w-4xl">
         {/* Breadcrumb */}
         <div className="mb-4 flex items-center gap-2 text-sm text-graphite/50">
           <span>Preparation</span>
@@ -387,7 +387,7 @@ function BotanicalSteepingContent() {
 
 export default function BotanicalSteepingPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+    <Suspense fallback={<div className="p-6" />}> 
       <BotanicalSteepingContent />
     </Suspense>
   )

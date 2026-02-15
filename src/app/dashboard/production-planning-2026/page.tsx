@@ -254,18 +254,18 @@ export default function ProductionPlanning2026Page() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+      <div className="flex items-center justify-center py-16">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-900 mx-auto"></div>
-          <p className="mt-4 text-sm text-neutral-500">Loading production plan...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper mx-auto"></div>
+          <p className="mt-4 text-sm text-muted-foreground">Loading production plan...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-[#F4EDE6] py-8">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="space-y-6">
+      <div>
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-[#1A1A1A]">2026 Production Planning</h1>

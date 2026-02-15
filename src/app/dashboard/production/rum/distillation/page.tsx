@@ -185,8 +185,8 @@ function RumDistillationContent() {
   }
 
   return (
-    <div className="min-h-screen bg-beige p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="space-y-6">
+      <div className="space-y-6">
         {/* Breadcrumbs */}
         <div className="text-sm text-graphite/60">
           <span>Production</span>
@@ -751,7 +751,7 @@ function RumDistillationContent() {
 
 export default function RumDistillationPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+    <Suspense fallback={<div className="p-6" />}> 
       <RumDistillationContent />
     </Suspense>
   )

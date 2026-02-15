@@ -88,10 +88,10 @@ function EditProductionContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+      <div className="flex items-center justify-center py-16">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
-          <p className="mt-4 text-neutral-600">Loading batch...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
+          <p className="mt-4 text-muted-foreground">Loading batch...</p>
         </div>
       </div>
     )
@@ -99,13 +99,13 @@ function EditProductionContent() {
 
   if (!batch) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+      <div className="flex items-center justify-center py-16">
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-neutral-900 mb-2">Batch not found</h2>
-          <p className="text-neutral-600 mb-6">The batch you're looking for doesn't exist.</p>
+          <h2 className="text-2xl font-semibold text-foreground mb-2">Batch not found</h2>
+          <p className="text-muted-foreground mb-6">The batch you're looking for doesn't exist.</p>
           <button
             onClick={() => router.push('/dashboard/production/new')}
-            className="px-4 py-2 bg-amber-700 text-white rounded-md hover:bg-amber-800"
+            className="px-4 py-2 bg-copper text-white rounded-lg hover:bg-copper/90 transition-colors"
           >
             Back to Production
           </button>
@@ -115,10 +115,10 @@ function EditProductionContent() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div>
       {/* Header */}
-      <div className="bg-white border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-surface border-b border-border -mx-4 sm:-mx-6 lg:-mx-8 -mt-4 sm:-mt-6 lg:-mt-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="py-6 flex items-center justify-between">
             <div>
               <button
@@ -184,7 +184,7 @@ function EditProductionContent() {
 
 export default function EditProductionPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-neutral-50" />}> 
+    <Suspense fallback={<div className="p-6" />}> 
       <EditProductionContent />
     </Suspense>
   )

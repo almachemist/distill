@@ -224,24 +224,24 @@ export default function EditRumBatchPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <div className="text-stone-600">Loading batch...</div>
+      <div className="flex items-center justify-center py-16">
+        <div className="text-muted-foreground">Loading batch...</div>
       </div>
     )
   }
 
   if (!batch) {
     return (
-      <div className="min-h-screen bg-stone-50 flex items-center justify-center">
-        <div className="text-stone-600">Batch not found</div>
+      <div className="flex items-center justify-center py-16">
+        <div className="text-muted-foreground">Batch not found</div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div>
       {/* Header */}
-      <div className="bg-white border-b border-stone-200 px-6 py-4">
+      <div className="bg-surface border-b border-border px-6 py-4 -mx-4 sm:-mx-6 lg:-mx-8 -mt-4 sm:-mt-6 lg:-mt-8">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold text-stone-900">

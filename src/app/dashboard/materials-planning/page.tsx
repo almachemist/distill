@@ -91,10 +91,10 @@ export default function MaterialsPlanningPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-neutral-50 px-6 py-8">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-3xl font-semibold text-neutral-900">2026 Materials Planning</h1>
-          <p className="text-sm text-neutral-500 mt-1">Loading...</p>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-semibold text-foreground">2026 Materials Planning</h1>
+          <p className="text-sm text-muted-foreground mt-1">Loading...</p>
           <div className="flex items-center justify-center py-12">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-neutral-900"></div>
           </div>
@@ -112,8 +112,8 @@ export default function MaterialsPlanningPage() {
   const totalCurrent = materials.reduce((sum, m) => sum + m.current_stock, 0)
 
   return (
-    <div className="min-h-screen bg-neutral-50 px-6 py-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="space-y-6">
+      <div>
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-neutral-900 tracking-tight">2026 Materials Planning</h1>

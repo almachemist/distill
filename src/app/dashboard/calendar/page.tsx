@@ -241,10 +241,10 @@ export default function CalendarPage() {
       <div key={`prod-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week, 'production')}>
         {/* Week header - minimal */}
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-medium text-stone-500">
+          <div className="text-xs font-medium text-muted-foreground">
             W{week.week_number.toString().padStart(2, '0')}
           </div>
-          <div className="text-xs text-stone-400">
+          <div className="text-xs text-muted-foreground">
             {formatDate(week.week_start)}
           </div>
         </div>
@@ -289,16 +289,16 @@ export default function CalendarPage() {
     return (
       <div key={`bott-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week, 'bottling')}>
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-medium text-stone-500">
+          <div className="text-xs font-medium text-muted-foreground">
             W{week.week_number.toString().padStart(2, '0')}
           </div>
-          <div className="text-xs text-stone-400">
+          <div className="text-xs text-muted-foreground">
             {formatDate(week.week_start)}
           </div>
         </div>
 
-        <div className="border border-stone-300 rounded-lg p-4 h-40 overflow-hidden bg-stone-100/50">
-          <div className="font-medium text-stone-700 text-sm mb-2">
+        <div className="border border-border rounded-lg p-4 h-40 overflow-hidden bg-accent/50">
+          <div className="font-medium text-foreground text-sm mb-2">
             Bottling Week
           </div>
 
@@ -306,7 +306,7 @@ export default function CalendarPage() {
           {week.bottling_tasks && week.bottling_tasks.length > 0 && (
             <div className="space-y-1">
               {week.bottling_tasks.map((task, idx) => (
-                <div key={idx} className="text-xs text-stone-600">
+                <div key={idx} className="text-xs text-muted-foreground">
                   • {task.replace('Bottle ', '')}
                 </div>
               ))}
@@ -315,7 +315,7 @@ export default function CalendarPage() {
 
           {/* Default message if no specific tasks */}
           {(!week.bottling_tasks || week.bottling_tasks.length === 0) && (
-            <div className="text-xs text-stone-500">
+            <div className="text-xs text-muted-foreground">
               Free tanks for next production
             </div>
           )}
@@ -331,10 +331,10 @@ export default function CalendarPage() {
       return (
         <div key={`admin-reserve-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
           <div className="flex items-center justify-between mb-2">
-            <div className="text-xs font-medium text-stone-500">
+            <div className="text-xs font-medium text-muted-foreground">
               W{week.week_number.toString().padStart(2, '0')}
             </div>
-            <div className="text-xs text-stone-400">
+            <div className="text-xs text-muted-foreground">
               {formatDate(week.week_start)}
             </div>
           </div>
@@ -356,19 +356,19 @@ export default function CalendarPage() {
       return (
         <div key={`admin-week1-${week.week_number}`} className="group relative cursor-pointer" onClick={() => handleCardClick(week)}>
           <div className="flex items-center justify-between mb-2">
-            <div className="text-xs font-medium text-stone-500">
+            <div className="text-xs font-medium text-muted-foreground">
               W{week.week_number.toString().padStart(2, '0')}
             </div>
-            <div className="text-xs text-stone-400">
+            <div className="text-xs text-muted-foreground">
               {formatDate(week.week_start)}
             </div>
           </div>
 
-          <div className="border border-stone-300 rounded-lg p-4 h-40 overflow-hidden bg-white">
-            <div className="font-medium text-sm text-stone-700 mb-1">
+          <div className="border border-border rounded-lg p-4 h-40 overflow-hidden bg-white">
+            <div className="font-medium text-sm text-foreground mb-1">
               New Year Reset
             </div>
-            <div className="text-xs text-stone-500">
+            <div className="text-xs text-muted-foreground">
               No distillation
             </div>
           </div>
@@ -380,23 +380,23 @@ export default function CalendarPage() {
     return (
       <div key={`admin-${week.week_number}`} className="group relative opacity-40 hover:opacity-100 transition-opacity cursor-pointer" onClick={() => handleCardClick(week)}>
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-medium text-stone-400">
+          <div className="text-xs font-medium text-muted-foreground">
             W{week.week_number.toString().padStart(2, '0')}
           </div>
         </div>
 
-        <div className="border border-stone-200 rounded-lg p-3 h-40 overflow-hidden bg-stone-50/30">
+        <div className="border border-border rounded-lg p-3 h-40 overflow-hidden bg-background/30">
           {week.bottling && week.bottling_tasks && week.bottling_tasks.length > 0 ? (
             <>
-              <div className="text-xs font-medium text-stone-600 mb-1">
+              <div className="text-xs font-medium text-muted-foreground mb-1">
                 Bottling Week
               </div>
-              <div className="text-xs text-stone-500">
+              <div className="text-xs text-muted-foreground">
                 {week.bottling_tasks.map(task => task.replace('Bottle ', '')).join(', ')}
               </div>
             </>
           ) : (
-            <div className="text-xs text-stone-500">
+            <div className="text-xs text-muted-foreground">
               Non-production
             </div>
           )}
@@ -509,7 +509,7 @@ export default function CalendarPage() {
     return (
       <div key={ev.id} className="group relative cursor-pointer" onClick={() => handleDynamicCardClick(ev)}>
         <div className="flex items-center justify-between mb-2">
-          <div className="text-xs font-medium text-stone-500">W{weekNo.toString().padStart(2, '0')}</div>
+          <div className="text-xs font-medium text-muted-foreground">W{weekNo.toString().padStart(2, '0')}</div>
         </div>
         <div className="border rounded-lg p-4 h-40 overflow-hidden transition-all hover:shadow-md" style={getModeStyle(modeForColor)}>
           <div className="font-semibold text-base mb-1">{ev.productName || (ev.type[0].toUpperCase()+ev.type.slice(1))}</div>
@@ -534,56 +534,56 @@ export default function CalendarPage() {
       {/* Header */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight">2026 Production Calendar</h1>
-        <p className="text-stone-600 mt-1">
+        <p className="text-muted-foreground mt-1">
           Demand-based planning with tank management • Includes December 2025 pre-production
         </p>
       </div>
 
       {/* Summary Cards - Clean and minimal */}
       <div className="grid gap-4 md:grid-cols-4">
-        <Card className="border-stone-200">
+        <Card className="border-border">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-stone-600">Production Weeks</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Production Weeks</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">{productionWeeks.length}</div>
-            <p className="text-xs text-stone-500 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               {Math.round(productionWeeks.length/52*100)}% of year
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-stone-200">
+        <Card className="border-border">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-stone-600">Bottling Weeks</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Bottling Weeks</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-emerald-700">{bottlingWeeks.length}</div>
-            <p className="text-xs text-stone-500 mt-1">
+            <div className="text-3xl font-bold text-success">{bottlingWeeks.length}</div>
+            <p className="text-xs text-muted-foreground mt-1">
               {Math.round(bottlingWeeks.length/52*100)}% of year
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-stone-200">
+        <Card className="border-border">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-stone-600">Total Batches</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Total Batches</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold">19</div>
-            <p className="text-xs text-stone-500 mt-1">
+            <p className="text-xs text-muted-foreground mt-1">
               Across 9 products
             </p>
           </CardContent>
         </Card>
 
-        <Card className="border-stone-200">
+        <Card className="border-border">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm font-medium text-stone-600">Non-Production</CardTitle>
+            <CardTitle className="text-sm font-medium text-muted-foreground">Non-Production</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-stone-400">{adminWeeks.length}</div>
-            <p className="text-xs text-stone-500 mt-1">
+            <div className="text-3xl font-bold text-muted-foreground">{adminWeeks.length}</div>
+            <p className="text-xs text-muted-foreground mt-1">
               {Math.round(adminWeeks.length/52*100)}% of year
             </p>
           </CardContent>
@@ -591,7 +591,7 @@ export default function CalendarPage() {
       </div>
 
       {/* Quarter Navigation */}
-      <div className="flex gap-2 border-b border-stone-200 pb-4">
+      <div className="flex gap-2 border-b border-border pb-4">
         {quarters.map(q => {
           const productionCount = q.weeks.filter(w => w.production_runs.length > 0).length
           const isActive = selectedQuarter === q.q
@@ -602,12 +602,12 @@ export default function CalendarPage() {
               onClick={() => setSelectedQuarter(isActive ? null : q.q)}
               className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                 isActive
-                  ? 'bg-stone-900 text-white'
-                  : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                  ? 'bg-sidebar text-white'
+                  : 'bg-accent text-foreground hover:bg-accent/80'
               }`}
             >
               {q.label}
-              <span className={`ml-2 text-xs ${isActive ? 'text-stone-300' : 'text-stone-500'}`}>
+              <span className={`ml-2 text-xs ${isActive ? 'text-white/60' : 'text-muted-foreground'}`}>
                 {productionCount} batches
               </span>
             </button>
@@ -625,19 +625,19 @@ export default function CalendarPage() {
         // Q3: Minimalist display with potential products
         if (quarter.q === 3) {
           return (
-            <Card key={quarter.q} className="border-stone-200">
+            <Card key={quarter.q} className="border-border">
               <CardHeader>
                 <CardTitle className="text-xl">{quarter.label}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="py-8 text-center">
-                  <div className="text-sm text-stone-600 mb-3">Potential productions (TBD):</div>
-                  <div className="text-base text-stone-800 space-y-1">
+                  <div className="text-sm text-muted-foreground mb-3">Potential productions (TBD):</div>
+                  <div className="text-base text-foreground space-y-1">
                     <div>Australian Cane Spirit</div>
                     <div>Spiced Rum</div>
                     <div>Pineapple Rum</div>
                   </div>
-                  <div className="text-xs text-stone-400 mt-4">
+                  <div className="text-xs text-muted-foreground mt-4">
                     Production schedule to be confirmed based on demand
                   </div>
                 </div>
@@ -649,13 +649,13 @@ export default function CalendarPage() {
         // Q4: Completely empty
         if (quarter.q === 4) {
           return (
-            <Card key={quarter.q} className="border-stone-200 bg-white">
+            <Card key={quarter.q} className="border-border bg-white">
               <CardHeader>
                 <CardTitle className="text-xl">{quarter.label}</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="py-12 text-center">
-                  <div className="text-sm text-stone-400">No production planned</div>
+                  <div className="text-sm text-muted-foreground">No production planned</div>
                 </div>
               </CardContent>
             </Card>
@@ -665,12 +665,12 @@ export default function CalendarPage() {
         // Regular quarters (Dec 2025, Q1, Q2)
         if (productionWeeksInQuarter.length === 0 && bottlingWeeksInQuarter.length === 0) {
           return (
-            <Card key={quarter.q} className="border-stone-200">
+            <Card key={quarter.q} className="border-border">
               <CardHeader>
                 <CardTitle className="text-xl">{quarter.label}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="text-center py-12 text-stone-400">
+                <div className="text-center py-12 text-muted-foreground">
                   <div className="text-sm">No production scheduled</div>
                   <div className="text-xs mt-1">Stock sufficient for this period</div>
                 </div>
@@ -680,11 +680,11 @@ export default function CalendarPage() {
         }
 
         return (
-          <Card key={quarter.q} className="border-stone-200">
+          <Card key={quarter.q} className="border-border">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl">{quarter.label}</CardTitle>
-                <div className="text-sm text-stone-500">
+                <div className="text-sm text-muted-foreground">
                   {productionWeeksInQuarter.length} production weeks
                 </div>
               </div>
@@ -730,15 +730,15 @@ export default function CalendarPage() {
       })}
 
       {/* Footer info */}
-      <div className="text-xs text-stone-500 text-center pb-6 pt-4">
+      <div className="text-xs text-muted-foreground text-center pb-6 pt-4">
         <div className="font-medium mb-1">Planning Methodology</div>
-        <div className="text-stone-400">Demand-based with 2025 sales data + 10% growth</div>
+        <div className="text-muted-foreground">Demand-based with 2025 sales data + 10% growth</div>
       </div>
 
       {/* Add Event (floating) */}
       <button
         onClick={handleOpenCreate}
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-stone-900 text-white text-2xl leading-none flex items-center justify-center shadow-lg hover:bg-stone-800"
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-sidebar text-white text-2xl leading-none flex items-center justify-center shadow-lg hover:bg-sidebar-hover"
         aria-label="Add event"
         title="Add event"
       >

@@ -167,8 +167,8 @@ export default function BatchDetailsPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+      <div className="flex items-center justify-center py-16">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -181,7 +181,7 @@ export default function BatchDetailsPage() {
   const distillationSegments = batch.distillation?.segments ?? []
 
   return (
-    <div className="min-h-screen bg-neutral-50 px-6 sm:px-10 py-8">
+    <div className="space-y-6">
       <header className="mb-8">
         <h1 className="text-3xl font-serif text-amber-900 tracking-tight">Batch Details</h1>
         <p className="text-neutral-600 mt-2">

@@ -234,18 +234,18 @@ export default function ProductionPlanning2026CardsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-beige flex items-center justify-center">
+      <div className="flex items-center justify-center py-16">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper mx-auto"></div>
-          <p className="mt-4 text-sm text-graphite/70">Loading production plan...</p>
+          <p className="mt-4 text-sm text-muted-foreground">Loading production plan...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-beige py-8">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="space-y-6">
+      <div>
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-graphite">2026 Production Planning (Cards View)</h1>

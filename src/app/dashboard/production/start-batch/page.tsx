@@ -252,8 +252,8 @@ function PreparationContent() {
   const selectedRecipe = recipes.find(r => r.id === selectedRecipeId)
 
   return (
-    <div className="min-h-screen bg-beige p-6">
-      <div className="max-w-4xl mx-auto">
+    <div className="space-y-6">
+      <div className="max-w-4xl">
         {/* Breadcrumb */}
         <div className="mb-4 flex items-center gap-2 text-sm text-graphite/50">
           <span className="text-copper font-semibold">Preparation</span>
@@ -666,7 +666,7 @@ function PreparationContent() {
 
 export default function PreparationPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+    <Suspense fallback={<div className="p-6" />}> 
       <PreparationContent />
     </Suspense>
   )

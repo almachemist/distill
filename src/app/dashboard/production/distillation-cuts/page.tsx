@@ -352,8 +352,8 @@ function DistillationCutsContent() {
   }
 
   return (
-    <div className="min-h-screen bg-beige p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="space-y-6">
+      <div>
         {/* Breadcrumb */}
         <div className="mb-4 flex items-center gap-2 text-sm text-graphite/50">
           <span>Preparation</span>
@@ -468,7 +468,7 @@ function DistillationCutsContent() {
 
 export default function DistillationCutsPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-beige p-6" />}> 
+    <Suspense fallback={<div className="p-6" />}> 
       <DistillationCutsContent />
     </Suspense>
   )

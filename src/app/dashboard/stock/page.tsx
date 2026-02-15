@@ -114,82 +114,82 @@ export default function StockPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-beige px-6 py-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-semibold text-graphite tracking-tight">Inventory</h1>
-            <p className="text-sm text-graphite/70 mt-1">Loading inventory data...</p>
-          </div>
-          <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
-          </div>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-semibold text-foreground tracking-tight">Inventory</h1>
+          <p className="text-sm text-muted-foreground mt-1">Loading inventory data...</p>
+        </div>
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-beige px-6 py-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="space-y-6">
+      <div>
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-semibold text-graphite tracking-tight">Inventory</h1>
-          <p className="text-sm text-graphite/70 mt-1">
+        <div>
+          <h1 className="text-3xl font-semibold text-foreground tracking-tight">Inventory</h1>
+          <p className="text-sm text-muted-foreground mt-1">
             Real-time inventory levels and tracking
           </p>
         </div>
 
         {/* Summary Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
-            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Total Items</p>
-            <p className="text-3xl font-semibold text-graphite mt-2">{inventory.length}</p>
-            <p className="text-xs text-graphite/60 mt-1">Unique SKUs</p>
-          </div>
+      </div>
 
-          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
-            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Total Inventory</p>
-            <p className="text-3xl font-semibold text-graphite mt-2">{totalUnits.toLocaleString()}</p>
-            <p className="text-xs text-graphite/60 mt-1">Units in warehouse</p>
-          </div>
-
-          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
-            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Low Inventory</p>
-            <p className="text-3xl font-semibold text-copper mt-2">{lowStockCount}</p>
-            <p className="text-xs text-graphite/60 mt-1">Below 100 units</p>
-          </div>
-
-          <div className="p-5 rounded-xl shadow-soft border border-copper-30 bg-white transition-shadow duration-200">
-            <p className="text-xs text-graphite/70 uppercase tracking-wide font-medium">Out of Inventory</p>
-            <p className="text-3xl font-semibold text-copper mt-2">{criticalStockCount}</p>
-            <p className="text-xs text-graphite/60 mt-1">Items at 0</p>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="p-5 rounded-xl shadow-card border border-border bg-surface transition-shadow duration-200">
+          <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Total Items</p>
+          <p className="text-3xl font-semibold text-foreground mt-2">{inventory.length}</p>
+          <p className="text-xs text-muted-foreground mt-1">Unique SKUs</p>
         </div>
+
+        <div className="p-5 rounded-xl shadow-card border border-border bg-surface transition-shadow duration-200">
+          <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Total Inventory</p>
+          <p className="text-3xl font-semibold text-foreground mt-2">{totalUnits.toLocaleString()}</p>
+          <p className="text-xs text-muted-foreground mt-1">Units in warehouse</p>
+        </div>
+
+        <div className="p-5 rounded-xl shadow-card border border-border bg-surface transition-shadow duration-200">
+          <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Low Inventory</p>
+          <p className="text-3xl font-semibold text-warning mt-2">{lowStockCount}</p>
+          <p className="text-xs text-muted-foreground mt-1">Below 100 units</p>
+        </div>
+
+        <div className="p-5 rounded-xl shadow-card border border-border bg-surface transition-shadow duration-200">
+          <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Out of Inventory</p>
+          <p className="text-3xl font-semibold text-destructive mt-2">{criticalStockCount}</p>
+          <p className="text-xs text-muted-foreground mt-1">Items at 0</p>
+        </div>
+      </div>
 
         {/* Inventory by Category */}
         <Tabs defaultValue="labels" className="w-full">
-          <TabsList className="bg-beige border border-copper-30 p-1 rounded-xl inline-flex gap-1">
+          <TabsList className="bg-background border border-border p-1 rounded-xl inline-flex gap-1">
             <TabsTrigger
               value="labels"
-              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-foreground hover:bg-accent data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Labels
             </TabsTrigger>
             <TabsTrigger
               value="bottles"
-              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-foreground hover:bg-accent data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Bottles
             </TabsTrigger>
             <TabsTrigger
               value="packaging"
-              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-foreground hover:bg-accent data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Packaging
             </TabsTrigger>
             <TabsTrigger
               value="botanicals"
-              className="px-6 py-2 rounded-lg text-graphite hover:bg-copper-5 data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
+              className="px-6 py-2 rounded-lg text-foreground hover:bg-accent data-[state=active]:bg-copper data-[state=active]:text-white transition-all duration-150"
             >
               Botanicals
             </TabsTrigger>
@@ -197,46 +197,46 @@ export default function StockPage() {
 
           {categories.map((category) => (
             <TabsContent key={category.name.toLowerCase()} value={category.name.toLowerCase()} className="mt-6">
-              <div className="bg-white rounded-xl shadow-soft border border-copper-30 overflow-hidden">
+              <div className="bg-surface rounded-xl shadow-card border border-border overflow-hidden">
                 {/* Category Header */}
-                <div className="flex items-center justify-between px-6 py-5 border-b border-copper-30 bg-gradient-to-r from-beige to-white">
-                  <h3 className="text-lg font-semibold text-graphite">{category.name}</h3>
+                <div className="flex items-center justify-between px-6 py-5 border-b border-border bg-gradient-to-r from-accent to-surface">
+                  <h3 className="text-lg font-semibold text-foreground">{category.name}</h3>
                   <div className="flex items-center gap-4">
                     <div className="text-right">
-                      <p className="text-xs text-graphite/70 uppercase tracking-wide">Items</p>
-                      <p className="text-sm font-semibold text-graphite">{category.items.length}</p>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide">Items</p>
+                      <p className="text-sm font-semibold text-foreground">{category.items.length}</p>
                     </div>
-                    <div className="h-8 w-px bg-copper-15"></div>
+                    <div className="h-8 w-px bg-border"></div>
                     <div className="text-right">
-                      <p className="text-xs text-graphite/70 uppercase tracking-wide">Total Units</p>
-                      <p className="text-sm font-semibold text-graphite">{category.items.reduce((sum, item) => sum + item.current_stock, 0).toLocaleString()}</p>
+                      <p className="text-xs text-muted-foreground uppercase tracking-wide">Total Units</p>
+                      <p className="text-sm font-semibold text-foreground">{category.items.reduce((sum, item) => sum + item.current_stock, 0).toLocaleString()}</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Table */}
                 <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-copper-15">
-                    <thead className="bg-beige">
+                  <table className="min-w-full divide-y divide-border">
+                    <thead className="bg-accent">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-graphite uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Product Name
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-semibold text-graphite uppercase tracking-wider">
+                        <th className="px-6 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Category
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-semibold text-graphite uppercase tracking-wider">
+                        <th className="px-6 py-3 text-right text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Inventory Level
                         </th>
-                        <th className="px-6 py-3 text-right text-xs font-semibold text-graphite uppercase tracking-wider">
+                        <th className="px-6 py-3 text-right text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                           Status
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-copper-15 bg-white">
+                    <tbody className="divide-y divide-border bg-surface">
                       {category.items.length === 0 ? (
                         <tr>
-                          <td colSpan={4} className="px-6 py-12 text-center text-sm text-graphite/60">
+                          <td colSpan={4} className="px-6 py-12 text-center text-sm text-muted-foreground">
                             No items in this category
                           </td>
                         </tr>
@@ -246,40 +246,38 @@ export default function StockPage() {
                           .map((item, index) => (
                             <tr
                               key={item.id}
-                              className={`hover:bg-copper-5 transition-colors duration-150 ${
-                                index % 2 === 0 ? 'bg-white' : 'bg-white'
-                              }`}
+                              className="hover:bg-background transition-colors duration-150"
                             >
-                              <td className="px-6 py-4 text-sm text-graphite font-medium">
+                              <td className="px-6 py-4 text-sm text-foreground font-medium">
                                 {item.name}
                               </td>
-                              <td className="px-6 py-4 text-sm text-graphite/70">
-                                <span className="inline-flex px-2 py-1 rounded-md bg-beige text-graphite text-xs font-medium">
+                              <td className="px-6 py-4 text-sm text-muted-foreground">
+                                <span className="inline-flex px-2 py-1 rounded-md bg-accent text-foreground text-xs font-medium">
                                   {item.category}
                                 </span>
                               </td>
-                              <td className="px-6 py-4 text-sm text-right font-semibold text-graphite tabular-nums">
+                              <td className="px-6 py-4 text-sm text-right font-semibold text-foreground tabular-nums">
                                 {item.current_stock.toLocaleString()}
                               </td>
                               <td className="px-6 py-4 text-sm text-right">
                                 {item.current_stock === 0 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-red text-white text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-destructive text-white text-xs font-semibold">
                                     Empty
                                   </span>
                                 ) : item.current_stock < 100 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-red text-white text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-destructive text-white text-xs font-semibold">
                                     Critical
                                   </span>
                                 ) : item.current_stock < 500 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-amber text-onyx text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-warning text-white text-xs font-semibold">
                                     Low
                                   </span>
                                 ) : item.current_stock < 1000 ? (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-10 text-graphite text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper/10 text-foreground text-xs font-semibold">
                                     Adequate
                                   </span>
                                 ) : (
-                                  <span className="inline-flex px-3 py-1 rounded-lg bg-copper-green text-white text-xs font-semibold">
+                                  <span className="inline-flex px-3 py-1 rounded-lg bg-success text-white text-xs font-semibold">
                                     Healthy
                                   </span>
                                 )}
@@ -294,7 +292,6 @@ export default function StockPage() {
             </TabsContent>
           ))}
         </Tabs>
-      </div>
     </div>
   )
 }

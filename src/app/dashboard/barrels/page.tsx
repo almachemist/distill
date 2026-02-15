@@ -195,10 +195,10 @@ function BarrelsContent() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-graphite">Barrel Tracking</h1>
+        <h1 className="text-2xl font-bold text-foreground">Barrel Tracking</h1>
         <Link
           href="/dashboard/barrels/new"
-          className="bg-copper hover:bg-copper/90 text-white px-4 py-2 rounded-md text-sm font-medium"
+          className="bg-copper hover:bg-copper-hover text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
         >
           Add Barrel
         </Link>
@@ -207,45 +207,45 @@ function BarrelsContent() {
       {/* Stats Cards */}
       {stats && (
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-surface overflow-hidden shadow-card rounded-xl border border-border">
             <div className="px-4 py-5 sm:p-6">
-              <dt className="text-sm font-medium text-graphite/60 truncate">
+              <dt className="text-sm font-medium text-muted-foreground truncate">
                 Total Barrels
               </dt>
-              <dd className="mt-1 text-3xl font-semibold text-graphite">
+              <dd className="mt-1 text-3xl font-semibold text-foreground">
                 {stats.totalBarrels}
               </dd>
             </div>
           </div>
           
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-surface overflow-hidden shadow-card rounded-xl border border-border">
             <div className="px-4 py-5 sm:p-6">
-              <dt className="text-sm font-medium text-graphite/60 truncate">
+              <dt className="text-sm font-medium text-muted-foreground truncate">
                 Active Barrels
               </dt>
-              <dd className="mt-1 text-3xl font-semibold text-graphite">
+              <dd className="mt-1 text-3xl font-semibold text-foreground">
                 {stats.activeBarrels}
               </dd>
             </div>
           </div>
           
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-surface overflow-hidden shadow-card rounded-xl border border-border">
             <div className="px-4 py-5 sm:p-6">
-              <dt className="text-sm font-medium text-graphite/60 truncate">
+              <dt className="text-sm font-medium text-muted-foreground truncate">
                 Total Volume (L)
               </dt>
-              <dd className="mt-1 text-3xl font-semibold text-graphite">
+              <dd className="mt-1 text-3xl font-semibold text-foreground">
                 {stats.totalVolume.toFixed(1)}
               </dd>
             </div>
           </div>
           
-          <div className="bg-white overflow-hidden shadow rounded-lg">
+          <div className="bg-surface overflow-hidden shadow-card rounded-xl border border-border">
             <div className="px-4 py-5 sm:p-6">
-              <dt className="text-sm font-medium text-graphite/60 truncate">
+              <dt className="text-sm font-medium text-muted-foreground truncate">
                 Avg Age (days)
               </dt>
-              <dd className="mt-1 text-3xl font-semibold text-graphite">
+              <dd className="mt-1 text-3xl font-semibold text-foreground">
                 {stats.averageAge}
               </dd>
             </div>
@@ -254,23 +254,23 @@ function BarrelsContent() {
       )}
 
       {/* Filter Tabs */}
-      <div className="border-b border-copper-15">
-        <nav className="-mb-px flex space-x-8">
+      <div className="border-b border-border">
+        <nav className="-mb-px flex space-x-8 overflow-x-auto">
           {menuStatuses.map((status) => (
             <button
               key={status}
               onClick={() => setFilter(status)}
               className={`
-                whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm
+                whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors
                 ${filter === status
                   ? 'border-copper text-copper'
-                  : 'border-transparent text-graphite/60 hover:text-graphite hover:border-copper-30'
+                  : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border-strong'
                 }
               `}
             >
               {status === 'all' ? 'All Barrels' : status}
               {stats && (
-                <span className="ml-2 bg-beige text-graphite py-0.5 px-2 rounded-full text-xs">
+                <span className="ml-2 bg-accent text-foreground py-0.5 px-2 rounded-full text-xs">
                   {status === 'all'
                     ? stats.totalBarrels
                     : (stats.byStatus[status as keyof typeof stats.byStatus] || 0)}
@@ -284,16 +284,16 @@ function BarrelsContent() {
       {/* Barrels Cards */}
       <div>
         {isLoading ? (
-          <div className="p-8 text-center text-graphite/60">Loading barrels...</div>
+          <div className="p-8 text-center text-muted-foreground">Loading barrels...</div>
         ) : barrels.length === 0 ? (
-          <div className="p-8 text-center text-graphite/60">
+          <div className="p-8 text-center text-muted-foreground">
             No barrels found.
-            <Link href="/dashboard/barrels/new" className="text-brand hover:text-brand ml-1">
+            <Link href="/dashboard/barrels/new" className="text-copper hover:text-copper-hover ml-1 transition-colors">
               Add your first barrel
             </Link>
           </div>
         ) : (
-          <div className="mx-auto bg-white rounded-2xl shadow-sm border border-stone-200 p-4 sm:p-5">
+          <div className="mx-auto bg-surface rounded-2xl shadow-card border border-border p-4 sm:p-5">
             <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-10">
               {barrels
                 .slice()
@@ -334,7 +334,7 @@ function BarrelsContent() {
 
 export default function BarrelsPage() {
   return (
-    <Suspense fallback={<div className="p-8 text-center text-graphite/60">Loading barrels...</div>}>
+    <Suspense fallback={<div className="p-8 text-center text-muted-foreground">Loading barrels...</div>}>
       <BarrelsContent />
     </Suspense>
   )

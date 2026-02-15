@@ -19,7 +19,7 @@ export default function SalesAnalyticsPage() {
   if (connLoading || dataLoading) {
     return (
       <div className="flex items-center justify-center min-h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -28,15 +28,15 @@ export default function SalesAnalyticsPage() {
     return (
       <div className="space-y-8">
         <header className="space-y-2">
-          <h1 className="text-3xl font-semibold text-gray-900">Sales Analytics</h1>
-          <p className="text-gray-600">Sales intelligence powered by Square POS data</p>
+          <h1 className="text-3xl font-semibold text-foreground">Sales Analytics</h1>
+          <p className="text-muted-foreground">Sales intelligence powered by Square POS data</p>
         </header>
-        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-12 text-center">
+        <div className="bg-surface border border-border rounded-xl shadow-card p-12 text-center">
           <div className="text-4xl mb-4">📈</div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
+          <h2 className="text-xl font-semibold text-foreground mb-2">
             {!connection ? 'Connect Square POS' : 'No sales data yet'}
           </h2>
-          <p className="text-gray-500 mb-6 max-w-md mx-auto">
+          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
             {!connection
               ? 'Connect your Square account to see real-time sales analytics.'
               : 'Sync your Square data to start seeing sales analytics. Use the Sync button in Settings > Integrations.'}
@@ -60,8 +60,8 @@ export default function SalesAnalyticsPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-semibold text-gray-900">Sales Analytics 2025</h1>
-        <p className="text-gray-600">
+        <h1 className="text-3xl font-semibold text-foreground">Sales Analytics 2025</h1>
+        <p className="text-muted-foreground">
           Complete sales analysis from {new Date(summary.dateRange.start).toLocaleDateString('en-AU')} to{' '}
           {new Date(summary.dateRange.end).toLocaleDateString('en-AU')} (with December projection)
         </p>
@@ -100,16 +100,16 @@ export default function SalesAnalyticsPage() {
       </section>
 
       {/* Monthly Performance */}
-      <section className="bg-white border border-gray-200 rounded-xl shadow-sm">
-        <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-gray-900">Monthly Performance</h2>
-          <p className="text-sm text-gray-500 mt-1">
+      <section className="bg-surface border border-border rounded-xl shadow-card">
+        <div className="p-6 border-b border-border">
+          <h2 className="text-xl font-semibold text-foreground">Monthly Performance</h2>
+          <p className="text-sm text-muted-foreground mt-1">
             Month-by-month sales (December = projection based on October)
           </p>
         </div>
         <div className="p-6 overflow-x-auto">
           <table className="min-w-full text-sm">
-            <thead className="text-left text-gray-500">
+            <thead className="text-left text-muted-foreground">
               <tr>
                 <th className="pb-3">Month</th>
                 <th className="pb-3 text-right">Net Sales</th>
@@ -119,16 +119,16 @@ export default function SalesAnalyticsPage() {
                 <th className="pb-3">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-border">
               {byMonth.map(month => (
-                <tr key={month.month} className={month.isProjected ? 'bg-amber-50' : 'hover:bg-gray-50'}>
-                  <td className="py-3 font-medium text-gray-900">{month.monthName}</td>
-                  <td className="py-3 text-right text-gray-700">
+                <tr key={month.month} className={month.isProjected ? 'bg-warning/5' : 'hover:bg-background'}>
+                  <td className="py-3 font-medium text-foreground">{month.monthName}</td>
+                  <td className="py-3 text-right text-foreground">
                     {currencyFormatter.format(month.totalNetSales)}
                   </td>
-                  <td className="py-3 text-right text-gray-700">{numberFormatter.format(month.totalUnits)}</td>
-                  <td className="py-3 text-right text-gray-700">{numberFormatter.format(month.salesCount)}</td>
-                  <td className="py-3 text-right text-gray-700">
+                  <td className="py-3 text-right text-foreground">{numberFormatter.format(month.totalUnits)}</td>
+                  <td className="py-3 text-right text-foreground">{numberFormatter.format(month.salesCount)}</td>
+                  <td className="py-3 text-right text-foreground">
                     {currencyFormatter.format(month.avgTicket)}
                   </td>
                   <td className="py-3">
@@ -156,14 +156,14 @@ export default function SalesAnalyticsPage() {
       {/* Top Products and Channels */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         {/* Top Products */}
-        <section className="bg-white border border-gray-200 rounded-xl shadow-sm">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900">Top 10 Products</h2>
-            <p className="text-sm text-gray-500 mt-1">By net sales</p>
+        <section className="bg-surface border border-border rounded-xl shadow-card">
+          <div className="p-6 border-b border-border">
+            <h2 className="text-xl font-semibold text-foreground">Top 10 Products</h2>
+            <p className="text-sm text-muted-foreground mt-1">By net sales</p>
           </div>
           <div className="p-6 overflow-x-auto">
             <table className="min-w-full text-sm">
-              <thead className="text-left text-gray-500">
+              <thead className="text-left text-muted-foreground">
                 <tr>
                   <th className="pb-3">#</th>
                   <th className="pb-3">Product</th>
@@ -172,18 +172,18 @@ export default function SalesAnalyticsPage() {
                   <th className="pb-3 text-right">Avg Price</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-border">
                 {topProducts.map((product, index) => (
-                  <tr key={product.item} className="hover:bg-gray-50">
-                    <td className="py-3 text-gray-500">{index + 1}</td>
-                    <td className="py-3 font-medium text-gray-900">{product.item}</td>
-                    <td className="py-3 text-right text-gray-700">
+                  <tr key={product.item} className="hover:bg-background">
+                    <td className="py-3 text-muted-foreground">{index + 1}</td>
+                    <td className="py-3 font-medium text-foreground">{product.item}</td>
+                    <td className="py-3 text-right text-foreground">
                       {currencyFormatter.format(product.totalNetSales)}
                     </td>
-                    <td className="py-3 text-right text-gray-700">
+                    <td className="py-3 text-right text-foreground">
                       {numberFormatter.format(product.totalUnits)}
                     </td>
-                    <td className="py-3 text-right text-gray-700">
+                    <td className="py-3 text-right text-foreground">
                       {currencyFormatter.format(product.avgPrice)}
                     </td>
                   </tr>
@@ -194,14 +194,14 @@ export default function SalesAnalyticsPage() {
         </section>
 
         {/* Channels */}
-        <section className="bg-white border border-gray-200 rounded-xl shadow-sm">
-          <div className="p-6 border-b border-gray-100">
-            <h2 className="text-xl font-semibold text-gray-900">Sales Channels</h2>
-            <p className="text-sm text-gray-500 mt-1">Performance by channel</p>
+        <section className="bg-surface border border-border rounded-xl shadow-card">
+          <div className="p-6 border-b border-border">
+            <h2 className="text-xl font-semibold text-foreground">Sales Channels</h2>
+            <p className="text-sm text-muted-foreground mt-1">Performance by channel</p>
           </div>
           <div className="p-6 overflow-x-auto">
             <table className="min-w-full text-sm">
-              <thead className="text-left text-gray-500">
+              <thead className="text-left text-muted-foreground">
                 <tr>
                   <th className="pb-3">Channel</th>
                   <th className="pb-3 text-right">Net Sales</th>
@@ -209,17 +209,17 @@ export default function SalesAnalyticsPage() {
                   <th className="pb-3 text-right">Transactions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-border">
                 {byChannel.map(channel => (
-                  <tr key={channel.channel} className="hover:bg-gray-50">
-                    <td className="py-3 font-medium text-gray-900">{channel.channel}</td>
-                    <td className="py-3 text-right text-gray-700">
+                  <tr key={channel.channel} className="hover:bg-background">
+                    <td className="py-3 font-medium text-foreground">{channel.channel}</td>
+                    <td className="py-3 text-right text-foreground">
                       {currencyFormatter.format(channel.totalNetSales)}
                     </td>
-                    <td className="py-3 text-right text-gray-700">
+                    <td className="py-3 text-right text-foreground">
                       {numberFormatter.format(channel.totalUnits)}
                     </td>
-                    <td className="py-3 text-right text-gray-700">
+                    <td className="py-3 text-right text-foreground">
                       {numberFormatter.format(channel.salesCount)}
                     </td>
                   </tr>
@@ -231,14 +231,14 @@ export default function SalesAnalyticsPage() {
       </div>
 
       {/* Top Customers */}
-      <section className="bg-white border border-gray-200 rounded-xl shadow-sm">
-        <div className="p-6 border-b border-gray-100">
-          <h2 className="text-xl font-semibold text-gray-900">Top 10 Customers</h2>
-          <p className="text-sm text-gray-500 mt-1">By net sales</p>
+      <section className="bg-surface border border-border rounded-xl shadow-card">
+        <div className="p-6 border-b border-border">
+          <h2 className="text-xl font-semibold text-foreground">Top 10 Customers</h2>
+          <p className="text-sm text-muted-foreground mt-1">By net sales</p>
         </div>
         <div className="p-6 overflow-x-auto">
           <table className="min-w-full text-sm">
-            <thead className="text-left text-gray-500">
+            <thead className="text-left text-muted-foreground">
               <tr>
                 <th className="pb-3">#</th>
                 <th className="pb-3">Customer</th>
@@ -248,21 +248,21 @@ export default function SalesAnalyticsPage() {
                 <th className="pb-3 text-right">Avg Ticket</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-border">
               {topCustomers.map((customer, index) => (
-                <tr key={customer.customerId} className="hover:bg-gray-50">
-                  <td className="py-3 text-gray-500">{index + 1}</td>
-                  <td className="py-3 font-medium text-gray-900">{customer.customerName || 'N/A'}</td>
-                  <td className="py-3 text-right text-gray-700">
+                <tr key={customer.customerId} className="hover:bg-background">
+                  <td className="py-3 text-muted-foreground">{index + 1}</td>
+                  <td className="py-3 font-medium text-foreground">{customer.customerName || 'N/A'}</td>
+                  <td className="py-3 text-right text-foreground">
                     {currencyFormatter.format(customer.totalNetSales)}
                   </td>
-                  <td className="py-3 text-right text-gray-700">
+                  <td className="py-3 text-right text-foreground">
                     {numberFormatter.format(customer.totalUnits)}
                   </td>
-                  <td className="py-3 text-right text-gray-700">
+                  <td className="py-3 text-right text-foreground">
                     {numberFormatter.format(customer.purchaseCount)}
                   </td>
-                  <td className="py-3 text-right text-gray-700">
+                  <td className="py-3 text-right text-foreground">
                     {currencyFormatter.format(customer.avgTicket)}
                   </td>
                 </tr>
@@ -285,13 +285,13 @@ interface SummaryCardProps {
 function SummaryCard({ title, value, subtitle, highlight }: SummaryCardProps) {
   return (
     <div
-      className={`border rounded-xl shadow-sm p-6 ${
-        highlight ? 'bg-gradient-to-br from-amber-50 to-white border-amber-200' : 'bg-white border-gray-200'
+      className={`border rounded-xl shadow-card p-6 ${
+        highlight ? 'bg-gradient-to-br from-copper/5 to-surface border-copper/20' : 'bg-surface border-border'
       }`}
     >
-      <h3 className="text-sm font-medium text-gray-500">{title}</h3>
-      <p className={`mt-2 text-2xl font-semibold ${highlight ? 'text-amber-900' : 'text-gray-900'}`}>{value}</p>
-      <p className="text-xs text-gray-400 mt-1">{subtitle}</p>
+      <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+      <p className={`mt-2 text-2xl font-semibold ${highlight ? 'text-copper' : 'text-foreground'}`}>{value}</p>
+      <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
     </div>
   )
 }

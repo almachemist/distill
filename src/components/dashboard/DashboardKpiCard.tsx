@@ -10,10 +10,10 @@ interface DashboardKpiCardProps {
 }
 
 export function DashboardKpiCard({ title, value, subtitle, accent = 'gray', delta }: DashboardKpiCardProps) {
-  const accentColor = accent === 'copper' ? 'border-copper' : 'border-border'
+  const accentBorder = accent === 'copper' ? 'border-l-copper' : ''
 
   return (
-    <div className={`bg-surface rounded-xl shadow-card border border-border border-t-2 ${accentColor} p-6 hover:shadow-elevated transition-shadow`}>
+    <div className={`bg-surface rounded-xl shadow-card border border-border ${accent === 'copper' ? 'border-l-2 ' + accentBorder : ''} p-6 hover:shadow-elevated transition-shadow`}>
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{title}</p>
         <p className="text-3xl font-bold text-foreground">{value}</p>

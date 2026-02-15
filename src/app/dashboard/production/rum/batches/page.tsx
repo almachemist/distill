@@ -14,16 +14,16 @@ export default function RumBatchesPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A65E2E]"></div>
+      <div className="flex items-center justify-center py-16">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-red-600">Failed to load rum batches: {(error as Error).message}</p>
+      <div className="flex items-center justify-center py-16">
+        <p className="text-destructive">Failed to load rum batches: {(error as Error).message}</p>
       </div>
     )
   }
@@ -55,8 +55,8 @@ export default function RumBatchesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-beige p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
+    <div className="space-y-6">
+      <div className="space-y-6">
         {/* Header */}
         <div className="bg-white rounded-xl border border-copper-15 p-6 shadow-sm">
           <h1 className="text-3xl font-bold text-graphite mb-2">Rum Production Batches</h1>

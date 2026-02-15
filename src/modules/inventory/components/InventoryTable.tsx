@@ -62,7 +62,7 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
     
     if (isOut) {
       return (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-red text-white">
+        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-destructive text-white">
           ⚠️ OUT
         </span>
       )
@@ -70,14 +70,14 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
     
     if (isLow) {
       return (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-amber text-onyx">
+        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-warning text-white">
           ⚠️ LOW
         </span>
       )
     }
     
     return (
-      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-green text-white">
+      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-success text-white">
         ✓ OK
       </span>
     )
@@ -112,15 +112,15 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
   }
 
   return (
-    <div className="bg-white shadow-sm rounded-lg">
-      <div className="px-6 py-4 border-b border-copper-30">
+    <div className="bg-surface shadow-card rounded-xl border border-border">
+      <div className="px-6 py-4 border-b border-border">
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-medium text-graphite">{getCategoryTitle()}</h3>
+          <h3 className="text-lg font-medium text-foreground">{getCategoryTitle()}</h3>
           <div className="flex items-center space-x-4">
             <select
               value={filterType}
               onChange={(e) => setFilterType(e.target.value)}
-              className="px-3 py-1 border border-copper-30 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-brand"
+              className="px-3 py-1 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ring"
             >
               <option value="all">All Types</option>
               {getTypeOptions().map(type => (
@@ -129,7 +129,7 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
                 </option>
               ))}
             </select>
-            <span className="text-sm text-graphite/70">
+            <span className="text-sm text-muted-foreground">
               {filteredItems.length} items
             </span>
           </div>
@@ -137,11 +137,11 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-copper-15">
-          <thead className="bg-beige">
+        <table className="min-w-full divide-y divide-border">
+          <thead className="bg-accent">
             <tr>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider cursor-pointer hover:bg-copper-10"
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider cursor-pointer hover:bg-background"
                 onClick={() => handleSort('name')}
               >
                 <div className="flex items-center">
@@ -154,7 +154,7 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
                 </div>
               </th>
               <th 
-                className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider cursor-pointer hover:bg-copper-10"
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider cursor-pointer hover:bg-background"
                 onClick={() => handleSort('quantity')}
               >
                 <div className="flex items-center">
@@ -166,37 +166,37 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
                   )}
                 </div>
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Unit
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Minimum
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-graphite uppercase tracking-wider">
+              <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-copper-15">
+          <tbody className="bg-surface divide-y divide-border">
             {filteredItems.map((item) => (
               <tr 
                 key={item.id} 
-                className="hover:bg-copper-5 cursor-pointer"
+                className="hover:bg-background cursor-pointer"
                 onClick={() => onItemClick(item)}
               >
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-graphite">{item.name}</div>
-                  <div className="text-sm text-graphite/70">{getTypeLabel(item.type)}</div>
+                  <div className="text-sm font-medium text-foreground">{item.name}</div>
+                  <div className="text-sm text-muted-foreground">{getTypeLabel(item.type)}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-semibold text-graphite">
+                  <div className="text-sm font-semibold text-foreground">
                     {item.quantity.toLocaleString()}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/70">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                   {item.unit}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/70">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground">
                   {item.minThreshold.toLocaleString()}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -209,7 +209,7 @@ export function InventoryTable({ items, category, onItemClick }: InventoryTableP
       </div>
 
       {filteredItems.length === 0 && (
-        <div className="text-center py-8 text-graphite/60">
+        <div className="text-center py-8 text-muted-foreground">
           <p>No items found in this category</p>
         </div>
       )}

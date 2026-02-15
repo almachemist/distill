@@ -10,51 +10,49 @@ export default function ProductionPage() {
   const [activeTab, setActiveTab] = useState<Tab>('production')
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="bg-white border-b border-neutral-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-6">
-            <h1 className="text-2xl font-semibold text-neutral-900">Production</h1>
-            <p className="mt-1 text-sm text-neutral-600">
-              Manage production batches and view historical data
-            </p>
-          </div>
+      <div>
+        <h1 className="text-2xl font-semibold text-foreground">Production</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Manage production batches and view historical data
+        </p>
+      </div>
 
-          {/* Tabs */}
-          <div className="flex space-x-8 border-b border-neutral-200">
-            <button
-              onClick={() => setActiveTab('production')}
-              className={`
-                pb-4 px-1 border-b-2 font-medium text-sm transition-colors
-                ${
-                  activeTab === 'production'
-                    ? 'border-amber-600 text-amber-700'
-                    : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                }
-              `}
-            >
-              Production
-            </button>
-            <button
-              onClick={() => setActiveTab('batches')}
-              className={`
-                pb-4 px-1 border-b-2 font-medium text-sm transition-colors
-                ${
-                  activeTab === 'batches'
-                    ? 'border-amber-600 text-amber-700'
-                    : 'border-transparent text-neutral-500 hover:text-neutral-700 hover:border-neutral-300'
-                }
-              `}
-            >
-              Batches
-            </button>
-          </div>
-        </div>
+      {/* Tabs */}
+      <div className="border-b border-border">
+        <nav className="-mb-px flex space-x-8">
+          <button
+            onClick={() => setActiveTab('production')}
+            className={`
+              whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition-colors
+              ${
+                activeTab === 'production'
+                  ? 'border-copper text-copper'
+                  : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border-strong'
+              }
+            `}
+          >
+            Production
+          </button>
+          <button
+            onClick={() => setActiveTab('batches')}
+            className={`
+              whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition-colors
+              ${
+                activeTab === 'batches'
+                  ? 'border-copper text-copper'
+                  : 'border-transparent text-muted-foreground hover:text-foreground hover:border-border-strong'
+              }
+            `}
+          >
+            Batches
+          </button>
+        </nav>
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div>
         {activeTab === 'production' && <ProductionTab />}
         {activeTab === 'batches' && <BatchesTab />}
       </div>

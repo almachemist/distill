@@ -38,8 +38,8 @@ export default function DebugStoragePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
-      <div className="max-w-7xl mx-auto">
+    <div className="space-y-6">
+      <div>
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">LocalStorage Debug</h1>

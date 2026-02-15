@@ -396,8 +396,8 @@ function NewBottlingRunContent() {
   // Render
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#A65E2E]"></div>
+      <div className="flex items-center justify-center py-16">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -405,9 +405,9 @@ function NewBottlingRunContent() {
   // Empty state
   if (allBatches.length === 0) {
     return (
-      <div className="min-h-screen bg-[#F5F5F5]">
-        <div className="bg-white border-b border-[#E5E5E5] px-6 py-4">
-          <div className="max-w-7xl mx-auto">
+      <div>
+        <div className="bg-surface border-b border-border px-6 py-4 -mx-4 sm:-mx-6 lg:-mx-8 -mt-4 sm:-mt-6 lg:-mt-8">
+          <div>
             <h1 className="text-2xl font-bold text-[#000000]">New Bottling Run</h1>
           </div>
         </div>
@@ -438,10 +438,10 @@ function NewBottlingRunContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
+    <div>
       {/* Header */}
-      <div className="bg-white border-b border-[#E5E5E5] px-6 py-4">
-        <div className="max-w-7xl mx-auto">
+      <div className="bg-surface border-b border-border px-6 py-4 -mx-4 sm:-mx-6 lg:-mx-8 -mt-4 sm:-mt-6 lg:-mt-8">
+        <div>
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-[#000000]">New Bottling Run</h1>
@@ -995,7 +995,7 @@ function NewBottlingRunContent() {
 
 export default function NewBottlingRunPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#F5F5F5]" />}> 
+    <Suspense fallback={<div className="p-6" />}> 
       <NewBottlingRunContent />
     </Suspense>
   )

@@ -11,10 +11,10 @@ export default function ProductionRedirect() {
   }, [router])
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+    <div className="flex items-center justify-center min-h-64">
       <div className="text-center">
-        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
-        <p className="mt-4 text-neutral-600">Redirecting to production...</p>
+        <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
+        <p className="mt-4 text-muted-foreground">Redirecting to production...</p>
       </div>
     </div>
   )
