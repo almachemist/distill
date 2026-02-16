@@ -168,12 +168,12 @@ export default function ProductDetailPage() {
           <h1 className="text-2xl font-bold text-gray-900">{productInfo.label}</h1>
           <p className="text-gray-600 mt-1">{productInfo.type.toUpperCase()}</p>
         </div>
-        <Link href="/dashboard/products" className="text-blue-600 hover:text-blue-700 text-sm font-medium">Voltar</Link>
+        <Link href="/dashboard/products" className="text-blue-600 hover:text-blue-700 text-sm font-medium">Back</Link>
       </div>
 
       {loading && (
         <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <p className="text-gray-600">Carregando…</p>
+          <p className="text-gray-600">Loading…</p>
         </div>
       )}
 
@@ -236,7 +236,7 @@ export default function ProductDetailPage() {
                 ))}
                 {productGinRuns.length + productRumRuns.length === 0 && (
                   <div className="rounded-md border border-gray-200 p-6">
-                    <p className="text-gray-600 text-sm">Nenhum batch encontrado para este produto.</p>
+                    <p className="text-gray-600 text-sm">No batches found for this product.</p>
                   </div>
                 )}
               </div>
@@ -252,13 +252,13 @@ export default function ProductDetailPage() {
                       <span className="text-xs text-gray-600">{formatDate(r.created_at)}</span>
                     </div>
                     <div className="mt-2 text-sm text-gray-700">
-                      <p>Modo: {(r.mode || '').toUpperCase()}</p>
+                      <p>Mode: {(r.mode || '').toUpperCase()}</p>
                     </div>
                   </div>
                 ))}
                 {productBottling.length === 0 && (
                   <div className="rounded-md border border-gray-200 p-6">
-                    <p className="text-gray-600 text-sm">Nenhum bottling registrado para este produto.</p>
+                    <p className="text-gray-600 text-sm">No bottling runs recorded for this product.</p>
                   </div>
                 )}
               </div>
@@ -267,25 +267,25 @@ export default function ProductDetailPage() {
 
           <div className="space-y-6">
             <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h2 className="text-lg font-semibold text-gray-900">Anotações</h2>
+              <h2 className="text-lg font-semibold text-gray-900">Notes</h2>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 className="mt-3 w-full h-40 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                placeholder="Registre observações deste produto…"
+                placeholder="Record notes about this product…"
               />
               <div className="mt-3 flex gap-3">
                 <button
                   onClick={saveNotes}
                   className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
                 >
-                  Salvar
+                  Save
                 </button>
                 <Link
                   href="/dashboard/production/bottling/new"
                   className="px-4 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 text-sm font-medium"
                 >
-                  Iniciar Bottling
+                  Start Bottling
                 </Link>
               </div>
             </div>

@@ -150,14 +150,14 @@ export default function ProductsHubPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Products</h1>
-          <p className="text-muted-foreground mt-1">Batch reports, bottling runs, and notes by product</p>
+          <h1 className="text-2xl font-bold text-graphite">Products</h1>
+          <p className="text-graphite/70 mt-1">Batch reports, bottling runs and notes by product</p>
         </div>
       </div>
 
       {loading && (
-        <div className="rounded-lg border border-border bg-surface p-6">
-          <p className="text-muted-foreground">Loading…</p>
+        <div className="rounded-lg border border-gray-200 bg-white p-6">
+          <p className="text-gray-600">Loading…</p>
         </div>
       )}
 
@@ -168,36 +168,36 @@ export default function ProductsHubPage() {
             const slug = slugify(p.value)
             const skus = skuByProduct[p.value] || []
             return (
-              <div key={p.value} className="bg-surface rounded-xl shadow-card border border-border p-6">
+              <div key={p.value} className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground">{p.label}</h3>
-                    <p className="text-muted-foreground text-sm">{p.type.toUpperCase()}</p>
+                    <h3 className="text-lg font-semibold text-graphite">{p.label}</h3>
+                    <p className="text-graphite/70 text-sm">{p.type.toUpperCase()}</p>
                     {skus.length > 0 && (
                       <div className="mt-2 space-y-1">
                         {skus.slice(0, 3).map((s) => (
-                          <p key={`${s.sku}-${s.variation}`} className="text-xs text-muted-foreground">
+                          <p key={`${s.sku}-${s.variation}`} className="text-xs text-graphite/70">
                             {s.variation ? `${s.variation}: ` : ''}<span className="font-mono">{s.sku}</span>
                           </p>
                         ))}
                         {skus.length > 3 && (
-                          <p className="text-xs text-muted-foreground/70">+{skus.length - 3} more</p>
+                          <p className="text-xs text-graphite/50">+{skus.length - 3} more</p>
                         )}
                       </div>
                     )}
                   </div>
-                  <Link href={`/dashboard/products/${slug}`} className="text-copper hover:text-copper-hover text-sm font-medium transition-colors">
+                  <Link href={`/dashboard/products/${slug}`} className="text-copper hover:text-copper/80 text-sm font-medium">
                     View
                   </Link>
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="rounded-md border border-border p-4">
-                    <p className="text-xs uppercase tracking-wide text-muted-foreground">Batches</p>
-                    <p className="text-xl font-bold text-foreground">{formatNumber(m.batches)}</p>
+                  <div className="rounded-md border border-copper-15 p-4">
+                    <p className="text-xs uppercase tracking-wide text-graphite/60">Batches</p>
+                    <p className="text-xl font-bold text-graphite">{formatNumber(m.batches)}</p>
                   </div>
-                  <div className="rounded-md border border-border p-4">
-                    <p className="text-xs uppercase tracking-wide text-muted-foreground">Bottling</p>
-                    <p className="text-xl font-bold text-foreground">{formatNumber(m.bottling)}</p>
+                  <div className="rounded-md border border-copper-15 p-4">
+                    <p className="text-xs uppercase tracking-wide text-graphite/60">Bottling</p>
+                    <p className="text-xl font-bold text-graphite">{formatNumber(m.bottling)}</p>
                   </div>
                 </div>
               </div>

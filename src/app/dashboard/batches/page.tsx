@@ -95,17 +95,17 @@ const Sidebar: React.FC<{
   onToggle: () => void
 }> = ({ active, onSelect, isCollapsed, onToggle }) => {
   return (
-    <aside className={`border-r border-border bg-accent transition-all ${isCollapsed ? 'w-12' : 'w-56'}`}>
+    <aside className={`border-r border-stone-200 bg-stone-50 transition-all ${isCollapsed ? 'w-12' : 'w-64'}`}>
       <div className="px-4 py-4">
         <div className="flex items-center justify-between mb-3">
           {!isCollapsed && (
-            <h2 className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+            <h2 className="text-xs font-semibold tracking-wide text-stone-500 uppercase">
               Gin Categories
             </h2>
           )}
           <button
             onClick={onToggle}
-            className="text-muted-foreground hover:text-foreground transition"
+            className="text-stone-400 hover:text-stone-600 transition"
             title={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,8 +125,8 @@ const Sidebar: React.FC<{
                   onClick={() => onSelect(cat.id)}
                   className={`w-full text-left px-3 py-2 rounded-md text-sm transition ${
                     cat.id === active
-                      ? "bg-surface shadow-sm text-foreground font-medium"
-                      : "text-muted-foreground hover:bg-surface hover:text-foreground"
+                      ? "bg-white shadow-sm text-stone-900 font-medium"
+                      : "text-stone-600 hover:bg-white hover:text-stone-900"
                   }`}
                 >
                   {cat.label}
@@ -164,39 +164,39 @@ const RunCard: React.FC<{
   return (
     <button
       onClick={onSelect}
-      className="bg-surface border border-border rounded-xl p-4 flex flex-col gap-3 hover:border-copper transition text-left w-full"
+      className="bg-white border border-stone-200 rounded-xl p-4 flex flex-col gap-3 hover:border-amber-700 transition text-left w-full"
     >
       <div className="flex justify-between items-start">
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-1">
-            <p className="text-xs uppercase tracking-wide text-muted-foreground">
+            <p className="text-xs uppercase tracking-wide text-stone-400">
               {run.recipe || run.display_name || run.sku}
             </p>
             <span className={`text-[0.65rem] px-2 py-0.5 rounded-full border ${statusInfo.color}`}>
               {statusInfo.label}
             </span>
           </div>
-          <h3 className="text-sm font-semibold text-foreground">
+          <h3 className="text-sm font-semibold text-stone-900">
             {run.run_id || run.batch_id}
           </h3>
         </div>
-        <span className="text-xs text-muted-foreground">{formatDate(run.date)}</span>
+        <span className="text-xs text-stone-400">{formatDate(run.date)}</span>
       </div>
       <div>
-        <p className="text-[0.6rem] uppercase tracking-wide text-muted-foreground mb-1">
+        <p className="text-[0.6rem] uppercase tracking-wide text-stone-500 mb-1">
           Hearts (most important)
         </p>
         <div className="flex items-baseline gap-3">
-          <p className="text-3xl font-semibold text-foreground">
+          <p className="text-3xl font-semibold text-stone-900">
             {formatNumber(heartsVolume, 1)}
           </p>
-          <div className="text-xs text-muted-foreground leading-tight">
+          <div className="text-xs text-stone-500 leading-tight">
             <p>{formatNumber(heartsABV, 1)}% ABV</p>
             <p>{formatNumber(heartsLAL, 1)} LAL</p>
           </div>
         </div>
       </div>
-      <div className="flex justify-between items-center text-xs text-muted-foreground">
+      <div className="flex justify-between items-center text-xs text-stone-500">
         <p>Still: {run.still_used || "Carrie"}</p>
         <p>Charge: {formatNumber(chargeVolume, 0)} L @ {formatNumber(chargeABV, 1)}%</p>
       </div>
@@ -277,26 +277,26 @@ export default function BatchesPage() {
   const selectedRun = ginBatches.find((r) => (r.run_id || r.batch_id) === selectedRunId) || null
 
   return (
-    <div className="h-[calc(100vh-4rem)] flex flex-col -m-4 sm:-m-6 lg:-m-8">
+    <div className="h-[calc(100vh-3.5rem)] flex flex-col bg-stone-100 scrollbar-hide">
       {/* Top Navigation Bar */}
-      <div className="bg-surface border-b border-border px-6 py-3 flex items-center justify-between">
+      <div className="bg-white rounded-xl border border-stone-200 mx-2 mt-2 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <h1 className="text-lg font-semibold text-foreground">Production Batches</h1>
+          <h1 className="text-lg font-semibold text-stone-900">Production Batches</h1>
           <div className="flex gap-2">
             <button
-              className="px-4 py-2 bg-copper text-white rounded-lg text-sm font-medium"
+              className="px-4 py-2 bg-amber-700 text-white rounded-md text-sm font-medium"
             >
               Gin / Vodka / Ethanol
             </button>
             <button
               onClick={() => router.push('/dashboard/production/rum')}
-              className="px-4 py-2 bg-surface border border-border text-foreground hover:bg-background rounded-lg text-sm font-medium transition-colors"
+              className="px-4 py-2 bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 rounded-md text-sm font-medium"
             >
               Rum
             </button>
             <button
               onClick={() => router.push('/dashboard/batches/old-roberta')}
-              className="px-4 py-2 bg-surface border border-border text-foreground hover:bg-background rounded-lg text-sm font-medium transition-colors"
+              className="px-4 py-2 bg-white border border-stone-200 text-stone-700 hover:bg-stone-50 rounded-md text-sm font-medium"
             >
               Old Roberta
             </button>
@@ -317,16 +317,16 @@ export default function BatchesPage() {
           }}
         />
       <main className="flex-1 flex">
-        <div className={`border-r border-border p-6 overflow-auto transition-all ${batchListCollapsed ? 'w-12' : 'w-[24rem]'}`}>
+        <div className={`border-r border-stone-200 p-6 overflow-auto transition-all ${batchListCollapsed ? 'w-12' : 'w-[28rem]'}`}>
           <div className="flex items-center justify-between mb-4">
             {!batchListCollapsed && (
-              <h1 className="text-lg font-semibold text-foreground">
+              <h1 className="text-lg font-semibold text-stone-900">
                 Gin Batches
               </h1>
             )}
             <button
               onClick={() => setBatchListCollapsed(!batchListCollapsed)}
-              className="text-muted-foreground hover:text-foreground transition"
+              className="text-stone-400 hover:text-stone-600 transition"
               title={batchListCollapsed ? "Expand batch list" : "Collapse batch list"}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -343,7 +343,7 @@ export default function BatchesPage() {
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value as 'oldest-first' | 'newest-first')}
-                className="w-full text-sm border border-border rounded-lg px-3 py-2 bg-surface text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full text-sm border border-stone-200 rounded-md px-3 py-2 bg-white text-stone-800 focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 <option value="oldest-first">Oldest first (A→Z by date)</option>
                 <option value="newest-first">Newest first (Z→A by date)</option>
@@ -353,16 +353,16 @@ export default function BatchesPage() {
           {!batchListCollapsed && (
             <>
               {loading && (
-                <div className="mb-4 text-sm text-muted-foreground">Loading from Supabase...</div>
+                <div className="mb-4 text-sm text-stone-500">Loading from Supabase...</div>
               )}
               {error && (
-                <div className="mb-4 bg-destructive/5 border border-destructive/20 text-destructive px-3 py-2 rounded-lg text-sm">
+                <div className="mb-4 bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded-lg text-sm">
                   {error}
                 </div>
               )}
               <div className="grid gap-4">
                 {filteredRuns.length === 0 ? (
-                  <p className="text-sm text-muted-foreground">No runs for this category.</p>
+                  <p className="text-sm text-stone-400">No runs for this category.</p>
                 ) : (
                   filteredRuns.map((run) => (
                     <RunCard

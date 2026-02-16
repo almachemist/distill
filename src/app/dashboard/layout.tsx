@@ -131,7 +131,7 @@ function SidebarContent({
                       className={cn(
                         'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                         active
-                          ? 'bg-sidebar-hover text-sidebar-foreground border-l-2 border-copper ml-0.5'
+                          ? 'bg-sidebar-hover text-sidebar-foreground border border-copper/40'
                           : 'text-sidebar-muted hover:bg-sidebar-hover hover:text-sidebar-foreground'
                       )}
                     >
@@ -222,7 +222,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         </header>
 
         {/* Page content */}
-        <main className="p-4 sm:p-6 lg:p-8 max-w-7xl">
+        <main className="p-4 sm:p-6 lg:p-8 w-full max-w-[1600px] mx-auto">
           {children}
         </main>
       </div>
