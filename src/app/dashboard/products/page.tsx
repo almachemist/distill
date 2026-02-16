@@ -150,14 +150,14 @@ export default function ProductsHubPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-graphite">Produtos</h1>
-          <p className="text-graphite/70 mt-1">Relatórios de batches, bottling e anotações por produto</p>
+          <h1 className="text-2xl font-bold text-graphite">Products</h1>
+          <p className="text-graphite/70 mt-1">Batch reports, bottling runs and notes by product</p>
         </div>
       </div>
 
       {loading && (
         <div className="rounded-lg border border-gray-200 bg-white p-6">
-          <p className="text-gray-600">Carregando…</p>
+          <p className="text-gray-600">Loading…</p>
         </div>
       )}
 
@@ -187,7 +187,7 @@ export default function ProductsHubPage() {
                     )}
                   </div>
                   <Link href={`/dashboard/products/${slug}`} className="text-copper hover:text-copper/80 text-sm font-medium">
-                    Abrir
+                    View
                   </Link>
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">

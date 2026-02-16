@@ -232,7 +232,7 @@ export default function InventoryManager() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-graphite">Inventory</h1>
-          <p className="text-graphite/70 text-sm">Baseline de Novembro 2025 + movimentos (sem negativos)</p>
+          <p className="text-graphite/70 text-sm">Track stock levels, movements and suppliers</p>
         </div>
         <div className="flex gap-2">
           <Link href="/dashboard/inventory-planning" className="px-4 py-2 rounded-md border border-copper-30 hover:bg-copper-10">Forecast Needs</Link>

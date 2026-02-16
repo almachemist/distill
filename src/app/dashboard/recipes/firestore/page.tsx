@@ -1,370 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-
-// Simple mock data matching Gabi's structure
-const MOCK_RECIPES = [
-  {
-    id: "rainforest-gin",
-    name: "Rainforest Gin",
-    description: "Australian native botanicals with tropical notes",
-    abv: 42,
-    batchVolume: 100,
-    totalCost: 430.44,
-    ingredients: [
-      { name: "Juniper", quantity: 6360, unit: "g", pricePerKg: 40.273, pricePerBatch: 256.14 },
-      { name: "Coriander", quantity: 1410, unit: "g", pricePerKg: 12.852, pricePerBatch: 18.12 },
-      { name: "Angelica", quantity: 175, unit: "g", pricePerKg: 58.17, pricePerBatch: 10.18 },
-      { name: "Cassia", quantity: 25, unit: "g", pricePerKg: 32.5, pricePerBatch: 0.81 },
-      { name: "Lemon Myrtle", quantity: 141, unit: "g", pricePerKg: 133.76, pricePerBatch: 18.86 },
-      { name: "Lemon Aspen", quantity: 71, unit: "g", pricePerKg: 760, pricePerBatch: 53.96 },
-      { name: "Grapefruit Peel", quantity: 567, unit: "g", pricePerKg: 5.9, pricePerBatch: 14.22 },
-      { name: "Macadamia", quantity: 102, unit: "g", pricePerKg: 41.67, pricePerBatch: 4.25 },
-      { name: "Liquorice", quantity: 51, unit: "g", pricePerKg: 28.08, pricePerBatch: 1.43 },
-      { name: "Cardamon", quantity: 141, unit: "g", pricePerKg: 64.14, pricePerBatch: 9.04 },
-      { name: "Pepperberry", quantity: 102, unit: "g", pricePerKg: 29.75, pricePerBatch: 3.03 },
-      { name: "Vanilla", quantity: 25, unit: "g", pricePerKg: 1500, pricePerBatch: 37.5 },
-      { name: "Mango", quantity: 176, unit: "g", pricePerKg: 2.9, pricePerBatch: 2.9 }
-    ],
-    productionTime: 24,
-    difficulty: 'medium',
-    category: 'contemporary'
-  },
-  {
-    id: "signature-dry-gin",
-    name: "Signature Dry Gin (Traditional)",
-    description: "Classic London Dry style with traditional botanicals",
-    abv: 40,
-    batchVolume: 100,
-    totalCost: 339.76,
-    ingredients: [
-      { name: "Juniper", quantity: 6400, unit: "g", pricePerKg: 40.273, pricePerBatch: 257.75 },
-      { name: "Coriander", quantity: 1800, unit: "g", pricePerKg: 12.852, pricePerBatch: 23.13 },
-      { name: "Angelica", quantity: 180, unit: "g", pricePerKg: 58.17, pricePerBatch: 10.47 },
-      { name: "Orris Root", quantity: 90, unit: "g", pricePerKg: 52.32, pricePerBatch: 4.71 },
-      { name: "Orange Peel", quantity: 560, unit: "g", pricePerKg: 3.99, pricePerBatch: 6.98 },
-      { name: "Lemon Peel", quantity: 560, unit: "g", pricePerKg: 6.99, pricePerBatch: 12.48 },
-      { name: "Macadamia", quantity: 180, unit: "g", pricePerKg: 41.67, pricePerBatch: 7.5 },
-      { name: "Liquorice", quantity: 100, unit: "g", pricePerKg: 28.08, pricePerBatch: 2.81 },
-      { name: "Cardamon", quantity: 180, unit: "g", pricePerKg: 64.14, pricePerBatch: 11.55 },
-      { name: "Lavender", quantity: 40, unit: "g", pricePerKg: 59.5, pricePerBatch: 2.38 }
-    ],
-    productionTime: 18,
-    difficulty: 'easy',
-    category: 'traditional'
-  },
-  {
-    id: "navy-strength-gin",
-    name: "Navy Strength Gin",
-    description: "High-proof traditional gin with Australian finger lime",
-    abv: 58.8,
-    batchVolume: 100,
-    totalCost: 345.41,
-    ingredients: [
-      { name: "Juniper", quantity: 6400, unit: "g", pricePerKg: 40.273, pricePerBatch: 257.73 },
-      { name: "Coriander", quantity: 1800, unit: "g", pricePerKg: 12.852, pricePerBatch: 23.13 },
-      { name: "Angelica", quantity: 180, unit: "g", pricePerKg: 58.17, pricePerBatch: 10.47 },
-      { name: "Orris Root", quantity: 90, unit: "g", pricePerKg: 52.32, pricePerBatch: 4.71 },
-      { name: "Orange Peel", quantity: 380, unit: "g", pricePerKg: 3.99, pricePerBatch: 4.74 },
-      { name: "Lemon Peel", quantity: 380, unit: "g", pricePerKg: 6.99, pricePerBatch: 8.47 },
-      { name: "Finger Lime", quantity: 380, unit: "g", pricePerKg: 30, pricePerBatch: 11.4 },
-      { name: "Macadamia", quantity: 180, unit: "g", pricePerKg: 41.67, pricePerBatch: 7.5 },
-      { name: "Liquorice", quantity: 100, unit: "g", pricePerKg: 28.08, pricePerBatch: 2.81 },
-      { name: "Cardamon", quantity: 180, unit: "g", pricePerKg: 64.14, pricePerBatch: 11.55 },
-      { name: "Chamomile", quantity: 90, unit: "g", pricePerKg: 32.2, pricePerBatch: 2.9 }
-    ],
-    productionTime: 20,
-    difficulty: 'medium',
-    category: 'traditional'
-  },
-  {
-    id: "merchant-made-gin",
-    name: "Merchant Made Gin",
-    description: "Traditional gin with chamomile and citrus notes",
-    abv: 37,
-    batchVolume: 100,
-    totalCost: 312.17,
-    ingredients: [
-      { name: "Juniper", quantity: 6400, unit: "g", pricePerKg: 40.273, pricePerBatch: 257.73 },
-      { name: "Coriander", quantity: 1800, unit: "g", pricePerKg: 12.852, pricePerBatch: 23.13 },
-      { name: "Angelica", quantity: 180, unit: "g", pricePerKg: 58.17, pricePerBatch: 10.47 },
-      { name: "Orris Root", quantity: 50, unit: "g", pricePerKg: 52.32, pricePerBatch: 2.62 },
-      { name: "Orange", quantity: 380, unit: "g", pricePerKg: 3.99, pricePerBatch: 1.52 },
-      { name: "Lemon", quantity: 380, unit: "g", pricePerKg: 6.99, pricePerBatch: 2.66 },
-      { name: "Liquorice", quantity: 100, unit: "g", pricePerKg: 28.08, pricePerBatch: 2.81 },
-      { name: "Cardamon", quantity: 150, unit: "g", pricePerKg: 64.14, pricePerBatch: 9.62 },
-      { name: "Chamomile", quantity: 50, unit: "g", pricePerKg: 32.2, pricePerBatch: 1.61 }
-    ],
-    productionTime: 20,
-    difficulty: 'easy',
-    category: 'traditional'
-  },
-  {
-    id: "dry-season-gin",
-    name: "Dry Season Gin",
-    description: "Asian-inspired gin with fresh market botanicals",
-    abv: 40,
-    batchVolume: 100,
-    totalCost: 424.75, // 251.69 + 8.03 + 9.71 + 5.32 + 150 (fresh market)
-    freshMarketCost: 150,
-    ingredients: [
-      { name: "Juniper", quantity: 6250, unit: "g", pricePerKg: 40.273, pricePerBatch: 251.69 },
-      { name: "Coriander Seed", quantity: 625, unit: "g", pricePerKg: 12.852, pricePerBatch: 8.03 },
-      { name: "Angelica", quantity: 167, unit: "g", pricePerKg: 58.17, pricePerBatch: 9.71 },
-      { name: "Cardamon", quantity: 83, unit: "g", pricePerKg: 64.14, pricePerBatch: 5.32 },
-      { name: "Lemongrass", quantity: 1167, unit: "g" },
-      { name: "Mandarin", quantity: 1667, unit: "g" },
-      { name: "Mandarin Skin", quantity: 1200, unit: "g" },
-      { name: "Turmeric", quantity: 500, unit: "g" },
-      { name: "Rosella Flower", quantity: 1667, unit: "g" },
-      { name: "Holy Basil", quantity: 167, unit: "g" },
-      { name: "Thai Basil", quantity: 1000, unit: "g" },
-      { name: "Kaffir Lime Leaf", quantity: 333, unit: "g" }
-    ],
-    productionTime: 22,
-    difficulty: 'medium',
-    category: 'contemporary'
-  },
-  {
-    id: "wet-season-gin",
-    name: "Wet Season Gin",
-    description: "Tropical gin with Thai and Southeast Asian botanicals",
-    abv: 42,
-    batchVolume: 100,
-    totalCost: 409.44, // 251.69 + 2.36 + 5.39 + 150 (fresh market)
-    freshMarketCost: 150,
-    ingredients: [
-      { name: "Juniper", quantity: 6250, unit: "g", pricePerKg: 40.27, pricePerBatch: 251.69 },
-      { name: "Sawtooth Coriander", quantity: 625, unit: "g" },
-      { name: "Angelica", quantity: 168, unit: "g" },
-      { name: "Holy Basil", quantity: 252, unit: "g" },
-      { name: "Thai Sweet Basil", quantity: 168, unit: "g" },
-      { name: "Kaffir Fruit Rind", quantity: 832, unit: "g" },
-      { name: "Kaffir Leaves", quantity: 500, unit: "g" },
-      { name: "Thai Marigolds", quantity: 332, unit: "g" },
-      { name: "Galangal", quantity: 332, unit: "g" },
-      { name: "Lemongrass", quantity: 252, unit: "g" },
-      { name: "Liquorice Root", quantity: 84, unit: "g", pricePerKg: 28.08, pricePerBatch: 2.36 },
-      { name: "Cardamon", quantity: 84, unit: "g", pricePerKg: 64.14, pricePerBatch: 5.39 },
-      { name: "Pandanus", quantity: 108, unit: "g" }
-    ],
-    productionTime: 24,
-    difficulty: 'medium',
-    category: 'contemporary'
-  }
-]
-
-const MOCK_INVENTORY = [
-  { id: "juniper", name: "Juniper", quantity: 0, unit: "g", pricePerKg: 40.273, minThreshold: 5000 },
-  { id: "coriander", name: "Coriander", quantity: 0, unit: "g", pricePerKg: 12.852, minThreshold: 3000 },
-  { id: "angelica", name: "Angelica", quantity: 0, unit: "g", pricePerKg: 58.17, minThreshold: 1000 },
-  { id: "cassia", name: "Cassia", quantity: 0, unit: "g", pricePerKg: 32.5, minThreshold: 500 },
-  { id: "lemon-myrtle", name: "Lemon Myrtle", quantity: 0, unit: "g", pricePerKg: 133.76, minThreshold: 1000 },
-  { id: "lemon-aspen", name: "Lemon Aspen", quantity: 0, unit: "g", pricePerKg: 760, minThreshold: 500 },
-  { id: "grapefruit-peel", name: "Grapefruit Peel", quantity: 0, unit: "g", pricePerKg: 5.9, minThreshold: 500 },
-  { id: "macadamia", name: "Macadamia", quantity: 0, unit: "g", pricePerKg: 41.67, minThreshold: 500 },
-  { id: "liquorice", name: "Liquorice", quantity: 0, unit: "g", pricePerKg: 28.08, minThreshold: 200 },
-  { id: "cardamon", name: "Cardamon", quantity: 0, unit: "g", pricePerKg: 64.14, minThreshold: 100 },
-  { id: "pepperberry", name: "Pepperberry", quantity: 0, unit: "g", pricePerKg: 29.75, minThreshold: 300 },
-  { id: "vanilla", name: "Vanilla", quantity: 0, unit: "g", pricePerKg: 1500, minThreshold: 100 },
-  { id: "mango", name: "Mango", quantity: 0, unit: "g", pricePerKg: 2.9, minThreshold: 1000 },
-  { id: "orris-root", name: "Orris Root", quantity: 0, unit: "g", pricePerKg: 52.32, minThreshold: 500 },
-  { id: "orange-peel", name: "Orange Peel", quantity: 0, unit: "g", pricePerKg: 3.99, minThreshold: 2000 },
-  { id: "lemon-peel", name: "Lemon Peel", quantity: 0, unit: "g", pricePerKg: 6.99, minThreshold: 1500 },
-  { id: "lavender", name: "Lavender", quantity: 0, unit: "g", pricePerKg: 59.5, minThreshold: 1000 },
-  { id: "orange", name: "Orange", quantity: 0, unit: "g", pricePerKg: 3.99, minThreshold: 1500 },
-  { id: "lemon", name: "Lemon", quantity: 0, unit: "g", pricePerKg: 6.99, minThreshold: 1500 },
-  { id: "chamomile", name: "Chamomile", quantity: 0, unit: "g", pricePerKg: 32.2, minThreshold: 300 },
-  { id: "finger-lime", name: "Finger Lime", quantity: 0, unit: "g", pricePerKg: 30, minThreshold: 500 },
-  
-  // Dry Season Gin botanicals
-  { id: "coriander-seed", name: "Coriander Seed", quantity: 0, unit: "g", pricePerKg: 12.852, minThreshold: 1000 },
-  { id: "lemongrass", name: "Lemongrass", quantity: 0, unit: "g", minThreshold: 2000 },
-  { id: "mandarin", name: "Mandarin", quantity: 0, unit: "g", minThreshold: 3000 },
-  { id: "mandarin-skin", name: "Mandarin Skin", quantity: 0, unit: "g", minThreshold: 2000 },
-  { id: "turmeric", name: "Turmeric", quantity: 0, unit: "g", minThreshold: 1000 },
-  { id: "rosella-flower", name: "Rosella Flower", quantity: 0, unit: "g", minThreshold: 3000 },
-  { id: "holy-basil", name: "Holy Basil", quantity: 0, unit: "g", minThreshold: 500 },
-  { id: "thai-basil", name: "Thai Basil", quantity: 0, unit: "g", minThreshold: 2000 },
-  { id: "kaffir-lime-leaf", name: "Kaffir Lime Leaf", quantity: 0, unit: "g", minThreshold: 1000 },
-  
-  // Wet Season Gin botanicals
-  { id: "sawtooth-coriander", name: "Sawtooth Coriander", quantity: 0, unit: "g", minThreshold: 1000 },
-  { id: "thai-sweet-basil", name: "Thai Sweet Basil", quantity: 0, unit: "g", minThreshold: 500 },
-  { id: "kaffir-fruit-rind", name: "Kaffir Fruit Rind", quantity: 0, unit: "g", minThreshold: 1500 },
-  { id: "kaffir-leaves", name: "Kaffir Leaves", quantity: 0, unit: "g", minThreshold: 1000 },
-  { id: "thai-marigolds", name: "Thai Marigolds", quantity: 0, unit: "g", minThreshold: 500 },
-  { id: "galangal", name: "Galangal", quantity: 0, unit: "g", minThreshold: 500 },
-  { id: "pandanus", name: "Pandanus", quantity: 0, unit: "g", minThreshold: 200 }
-]
+import { useFirestoreRecipes } from './useFirestoreRecipes'
+import type { MockRecipe, MockInventoryItem } from './firestore-data'
 
 export default function FirestoreRecipesPage() {
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [recipes, setRecipes] = useState(MOCK_RECIPES)
-  const [inventory, setInventory] = useState(MOCK_INVENTORY)
-  const [selectedRecipe, setSelectedRecipe] = useState<any>(null)
-  const [activeTab, setActiveTab] = useState<'recipes' | 'inventory' | 'production'>('recipes')
-  const [isSeeding, setIsSeeding] = useState(false)
+  const d = useFirestoreRecipes()
 
-  useEffect(() => {
-    loadData()
-  }, [])
-
-  const loadData = async () => {
-    try {
-      setLoading(true)
-      setError(null)
-      
-      // Simulate loading delay
-      await new Promise(resolve => setTimeout(resolve, 500))
-      
-      setRecipes(MOCK_RECIPES)
-      setInventory(MOCK_INVENTORY)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to load data')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  const handleInitializeSystem = async () => {
-    try {
-      setIsSeeding(true)
-      setError(null)
-      
-      // Simulate Firestore initialization
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      alert('System initialized successfully!\nInventory seeded: true\nRecipes seeded: true')
-      
-      // Reload data
-      await loadData()
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to initialize system')
-    } finally {
-      setIsSeeding(false)
-    }
-  }
-
-  const handleStartProduction = async (recipe: any) => {
-    try {
-      setLoading(true)
-      
-      // Check ingredient availability
-      const missingIngredients = []
-      for (const ingredient of recipe.ingredients) {
-        const inventoryItem = inventory.find(item => 
-          item.name.toLowerCase() === ingredient.name.toLowerCase()
-        )
-        
-        if (!inventoryItem || inventoryItem.quantity < ingredient.quantity) {
-          missingIngredients.push({
-            name: ingredient.name,
-            required: ingredient.quantity,
-            available: inventoryItem?.quantity || 0,
-            unit: ingredient.unit
-          })
-        }
-      }
-      
-      if (missingIngredients.length > 0) {
-        const missingList = missingIngredients.map(ing => 
-          `${ing.name}: Need ${ing.required}${ing.unit}, have ${ing.available}${ing.unit}`
-        ).join('\n')
-        
-        alert(`Cannot start production. Missing ingredients:\n${missingList}`)
-        return
-      }
-      
-      // Simulate production batch creation
-      const batchId = `batch-${Date.now()}`
-      
-      // Simulate inventory deduction
-      const updatedInventory = inventory.map(item => {
-        const ingredient = recipe.ingredients.find((ing: any) => 
-          ing.name.toLowerCase() === item.name.toLowerCase()
-        )
-        
-        if (ingredient) {
-          return {
-            ...item,
-            quantity: Math.max(0, item.quantity - ingredient.quantity)
-          }
-        }
-        
-        return item
-      })
-      
-      setInventory(updatedInventory)
-      
-      alert(`Production batch started successfully!\nBatch ID: ${batchId}\nCost: $${recipe.totalCost.toFixed(2)}\n\nIngredients consumed from inventory.`)
-      
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to start production')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Helper functions for easy production
-  const produceRainforestGin = () => {
-    const recipe = recipes.find(r => r.id === 'rainforest-gin')
-    if (recipe) handleStartProduction(recipe)
-  }
-
-  const produceSignatureDryGin = () => {
-    const recipe = recipes.find(r => r.id === 'signature-dry-gin')
-    if (recipe) handleStartProduction(recipe)
-  }
-
-  const produceNavyStrengthGin = () => {
-    const recipe = recipes.find(r => r.id === 'navy-strength-gin')
-    if (recipe) handleStartProduction(recipe)
-  }
-
-  const produceMerchantMadeGin = () => {
-    const recipe = recipes.find(r => r.id === 'merchant-made-gin')
-    if (recipe) handleStartProduction(recipe)
-  }
-
-  const produceDrySeasonGin = () => {
-    const recipe = recipes.find(r => r.id === 'dry-season-gin')
-    if (recipe) handleStartProduction(recipe)
-  }
-
-  const produceWetSeasonGin = () => {
-    const recipe = recipes.find(r => r.id === 'wet-season-gin')
-    if (recipe) handleStartProduction(recipe)
-  }
-
-  const handleUpdateInventory = async (itemId: string, newQuantity: number) => {
-    try {
-      setInventory(prev => prev.map(item => 
-        item.id === itemId 
-          ? { ...item, quantity: newQuantity }
-          : item
-      ))
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to update inventory')
-    }
-  }
-
-  const getLowStockItems = () => {
-    return inventory.filter(item => item.quantity <= (item.minThreshold || 0))
-  }
-
-  const getStatusBadge = (item: any) => {
-    if (item.quantity === 0) {
-      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-5 text-copper">⚠️ OUT</span>
-    }
-    if (item.quantity <= (item.minThreshold || 0)) {
-      return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-5 text-copper">⚠️ LOW</span>
-    }
-    return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-beige text-graphite">✓ OK</span>
-  }
-
-  if (loading) {
+  if (d.loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
@@ -378,392 +20,282 @@ export default function FirestoreRecipesPage() {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-graphite">Firestore Gin Recipe System</h1>
-          <p className="text-graphite/70 mt-2">Complete Firestore integration with Gabi's exact data structure</p>
+          <p className="text-graphite/70 mt-2">Complete Firestore integration with Gabi&apos;s exact data structure</p>
         </div>
         <div className="flex space-x-3">
-          <button
-            onClick={handleInitializeSystem}
-            disabled={isSeeding}
-            className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium"
-          >
-            {isSeeding ? 'Initializing...' : 'Initialize Firestore System'}
+          <button onClick={d.handleInitializeSystem} disabled={d.isSeeding}
+            className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 disabled:opacity-50 disabled:cursor-not-allowed font-medium">
+            {d.isSeeding ? 'Initializing...' : 'Initialize Firestore System'}
           </button>
-          <button
-            onClick={loadData}
-            className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 font-medium"
-          >
-            Refresh
-          </button>
+          <button onClick={d.loadData} className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 font-medium">Refresh</button>
         </div>
       </div>
 
-      {error && (
+      {d.error && (
         <div className="bg-beige border border-copper-30 rounded-md p-4">
-          <p className="text-copper">{error}</p>
+          <p className="text-copper">{d.error}</p>
         </div>
       )}
 
       {/* Low Stock Banner */}
-      {getLowStockItems().length > 0 && (
-        <div className="bg-copper-5 border-l-4 border-copper p-4 mb-6">
-          <div className="flex">
-            <div className="flex-shrink-0">
-              <span className="text-copper text-xl">⚠️</span>
-            </div>
-            <div className="ml-3 flex-1">
-              <h3 className="text-sm font-medium text-copper">
-                ⚠️ Stock Alert: {getLowStockItems().length} items need attention
-              </h3>
-              <div className="mt-2 text-sm text-graphite/80">
-                <ul className="list-disc list-inside ml-4">
-                  {getLowStockItems().slice(0, 5).map(item => (
-                    <li key={item.id}>
-                      {item.name} ({item.quantity} {item.unit}, min: {item.minThreshold || 0})
-                    </li>
-                  ))}
-                  {getLowStockItems().length > 5 && <li>...and {getLowStockItems().length - 5} more</li>}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <LowStockBanner items={d.getLowStockItems()} />
 
       {/* Tabs */}
       <div className="border-b border-copper-20">
         <nav className="-mb-px flex space-x-8">
-          {[
-            { key: 'recipes', label: 'Gin Recipes', count: recipes.length },
-            { key: 'inventory', label: 'Inventory', count: inventory.length },
-            { key: 'production', label: 'Production', count: 0 }
-          ].map((tab) => (
-            <button
-              key={tab.key}
-              onClick={() => setActiveTab(tab.key as any)}
+          {([
+            { key: 'recipes' as const, label: 'Gin Recipes', count: d.recipes.length },
+            { key: 'inventory' as const, label: 'Inventory', count: d.inventory.length },
+            { key: 'production' as const, label: 'Production', count: 0 }
+          ]).map((tab) => (
+            <button key={tab.key} onClick={() => d.setActiveTab(tab.key)}
               className={`py-2 px-1 border-b-2 font-medium text-sm ${
-                activeTab === tab.key
+                d.activeTab === tab.key
                   ? 'border-copper text-copper'
                   : 'border-transparent text-graphite/60 hover:text-graphite hover:border-copper-20'
-              }`}
-            >
+              }`}>
               {tab.label} ({tab.count})
             </button>
           ))}
         </nav>
       </div>
 
-      {/* Recipes Tab */}
-      {activeTab === 'recipes' && (
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {recipes.map((recipe) => (
-              <div key={recipe.id} className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-graphite">{recipe.name}</h3>
-                    <p className="text-sm text-graphite/70">{recipe.description}</p>
-                  </div>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    recipe.difficulty === 'easy' ? 'bg-copper-green text-onyx' :
-                    recipe.difficulty === 'medium' ? 'bg-copper-amber text-onyx' :
-                    'bg-copper-red text-white'
-                  }`}>
-                    {recipe.difficulty}
-                  </span>
-                </div>
+      {d.activeTab === 'recipes' && (
+        <RecipesGrid recipes={d.recipes} onSelect={d.setSelectedRecipe} onStartProduction={d.handleStartProduction} />
+      )}
 
-                <div className="space-y-2 mb-4">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-graphite/70">ABV:</span>
-                    <span className="font-medium">{recipe.abv}%</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-graphite/70">Batch Volume:</span>
-                    <span className="font-medium">{recipe.batchVolume}L</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-graphite/70">Total Cost:</span>
-                    <span className="font-medium text-copper">${recipe.totalCost.toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-graphite/70">Ingredients:</span>
-                    <span className="font-medium">{recipe.ingredients.length}</span>
-                  </div>
-                </div>
+      {d.activeTab === 'inventory' && (
+        <InventoryTable inventory={d.inventory} onUpdate={d.handleUpdateInventory} />
+      )}
 
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => setSelectedRecipe(recipe)}
-                    className="flex-1 px-3 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                  >
-                    View Details
-                  </button>
-                  <button
-                    onClick={() => handleStartProduction(recipe)}
-                    className="flex-1 px-3 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                  >
-                    Start Production
-                  </button>
-                </div>
+      {d.activeTab === 'production' && (
+        <ProductionTab recipes={d.recipes} onStartProduction={d.handleStartProduction} />
+      )}
+
+      {d.selectedRecipe && (
+        <RecipeDetailModal recipe={d.selectedRecipe} onClose={() => d.setSelectedRecipe(null)} onStartProduction={d.handleStartProduction} />
+      )}
+    </div>
+  )
+}
+
+/* ── Sub-components ──────────────────────────────────────────────── */
+
+function LowStockBanner({ items }: { items: MockInventoryItem[] }) {
+  if (items.length === 0) return null
+  return (
+    <div className="bg-copper-5 border-l-4 border-copper p-4 mb-6">
+      <div className="flex">
+        <div className="flex-shrink-0"><span className="text-copper text-xl">⚠️</span></div>
+        <div className="ml-3 flex-1">
+          <h3 className="text-sm font-medium text-copper">⚠️ Stock Alert: {items.length} items need attention</h3>
+          <div className="mt-2 text-sm text-graphite/80">
+            <ul className="list-disc list-inside ml-4">
+              {items.slice(0, 5).map(item => (
+                <li key={item.id}>{item.name} ({item.quantity} {item.unit}, min: {item.minThreshold || 0})</li>
+              ))}
+              {items.length > 5 && <li>...and {items.length - 5} more</li>}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RecipesGrid({ recipes, onSelect, onStartProduction }: { recipes: MockRecipe[]; onSelect: (r: MockRecipe) => void; onStartProduction: (r: MockRecipe) => void }) {
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        {recipes.map((recipe) => (
+          <div key={recipe.id} className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h3 className="text-lg font-semibold text-graphite">{recipe.name}</h3>
+                <p className="text-sm text-graphite/70">{recipe.description}</p>
               </div>
+              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                recipe.difficulty === 'easy' ? 'bg-copper-green text-onyx' :
+                recipe.difficulty === 'medium' ? 'bg-copper-amber text-onyx' :
+                'bg-copper-red text-white'
+              }`}>{recipe.difficulty}</span>
+            </div>
+            <div className="space-y-2 mb-4">
+              <div className="flex justify-between text-sm"><span className="text-graphite/70">ABV:</span><span className="font-medium">{recipe.abv}%</span></div>
+              <div className="flex justify-between text-sm"><span className="text-graphite/70">Batch Volume:</span><span className="font-medium">{recipe.batchVolume}L</span></div>
+              <div className="flex justify-between text-sm"><span className="text-graphite/70">Total Cost:</span><span className="font-medium text-copper">${recipe.totalCost.toFixed(2)}</span></div>
+              <div className="flex justify-between text-sm"><span className="text-graphite/70">Ingredients:</span><span className="font-medium">{recipe.ingredients.length}</span></div>
+            </div>
+            <div className="flex space-x-2">
+              <button onClick={() => onSelect(recipe)} className="flex-1 px-3 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium">View Details</button>
+              <button onClick={() => onStartProduction(recipe)} className="flex-1 px-3 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium">Start Production</button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function InventoryTable({ inventory, onUpdate }: { inventory: MockInventoryItem[]; onUpdate: (id: string, qty: number) => void }) {
+  const getStatusBadge = (item: MockInventoryItem) => {
+    if (item.quantity === 0) return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-5 text-copper">⚠️ OUT</span>
+    if (item.quantity <= (item.minThreshold || 0)) return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-copper-5 text-copper">⚠️ LOW</span>
+    return <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-beige text-graphite">✓ OK</span>
+  }
+
+  return (
+    <div className="bg-white shadow-sm rounded-lg">
+      <div className="px-6 py-4 border-b border-copper-20">
+        <h3 className="text-lg font-medium text-graphite">Firestore Inventory</h3>
+        <p className="text-sm text-graphite/70">Matches Gabi&apos;s exact data structure with Timestamp fields</p>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-copper-15">
+          <thead className="bg-beige">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Item</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Stock</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Min Threshold</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Price</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Status</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-copper-15">
+            {inventory.map((item) => (
+              <tr key={item.id}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm font-medium text-graphite">{item.name}</div>
+                  <div className="text-sm text-graphite/60">{item.unit}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap"><div className="text-sm font-semibold text-graphite">{item.quantity.toLocaleString()}</div></td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/60">{item.minThreshold || 0}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/60">${item.pricePerKg?.toFixed(2) || '0.00'}/kg</td>
+                <td className="px-6 py-4 whitespace-nowrap">{getStatusBadge(item)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button onClick={() => {
+                    const newQty = prompt(`Enter new quantity for ${item.name}:`, item.quantity.toString())
+                    if (newQty && !isNaN(Number(newQty))) onUpdate(item.id, Number(newQty))
+                  }} className="text-copper hover:text-copper/80 text-sm font-medium">Update</button>
+                </td>
+              </tr>
             ))}
-          </div>
-        </div>
-      )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
 
-      {/* Inventory Tab */}
-      {activeTab === 'inventory' && (
-        <div className="bg-white shadow-sm rounded-lg">
-          <div className="px-6 py-4 border-b border-copper-20">
-            <h3 className="text-lg font-medium text-graphite">Firestore Inventory</h3>
-            <p className="text-sm text-graphite/70">Matches Gabi's exact data structure with Timestamp fields</p>
+function ProductionTab({ recipes, onStartProduction }: { recipes: MockRecipe[]; onStartProduction: (r: MockRecipe) => void }) {
+  const produce = (id: string) => {
+    const r = recipes.find(r => r.id === id)
+    if (r) onStartProduction(r)
+  }
+  const cards: { id: string; name: string; cost: string; note?: string }[] = [
+    { id: 'rainforest-gin', name: 'Rainforest Gin', cost: '$430.44 per batch' },
+    { id: 'signature-dry-gin', name: 'Signature Dry Gin', cost: '$339.76 per batch' },
+    { id: 'navy-strength-gin', name: 'Navy Strength Gin', cost: '$345.41 per batch', note: '58.8% ABV' },
+    { id: 'merchant-made-gin', name: 'Merchant Made Gin', cost: '$312.17 per batch' },
+    { id: 'dry-season-gin', name: 'Dry Season Gin', cost: '$424.75 per batch', note: '(+$150 fresh market)' },
+    { id: 'wet-season-gin', name: 'Wet Season Gin', cost: '$409.44 per batch', note: '(+$150 fresh market)' },
+  ]
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-beige border border-copper-30 rounded-lg p-6">
+        <h3 className="text-lg font-semibold text-graphite mb-2">Firestore Production Management</h3>
+        <p className="text-graphite/70 text-sm mb-4">
+          Production batches are automatically created in Firestore when you start production from a recipe.
+          All ingredient consumption is tracked with Timestamp fields and inventory is updated in real-time.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+          {['Select recipe and check ingredient availability', 'Start production batch with automatic Firestore inventory deduction', 'Track costs and generate compliance reports with Timestamp tracking'].map((text, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">{i + 1}</div>
+              <span className="text-graphite">{text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
+        <h3 className="text-lg font-semibold text-graphite mb-4">Quick Production</h3>
+        <p className="text-graphite/70 text-sm mb-4">One-click production with automatic ingredient checking and inventory deduction</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {cards.map(c => (
+            <div key={c.id} className="bg-beige rounded-lg p-4 border border-copper-30">
+              <h4 className="font-semibold text-graphite mb-2">{c.name}</h4>
+              <p className="text-sm text-copper mb-3">{c.cost}</p>
+              {c.note && <p className="text-xs text-graphite/70 mb-2">{c.note}</p>}
+              <button onClick={() => produce(c.id)} className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium">
+                Produce {c.name}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function RecipeDetailModal({ recipe, onClose, onStartProduction }: { recipe: MockRecipe; onClose: () => void; onStartProduction: (r: MockRecipe) => void }) {
+  return (
+    <div className="fixed inset-0 bg-graphite bg-opacity-50 overflow-y-auto h-full w-full z-50">
+      <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
+        <div className="mt-3">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <h3 className="text-xl font-medium text-graphite">{recipe.name}</h3>
+              <p className="text-sm text-graphite/60">{recipe.description}</p>
+            </div>
+            <button onClick={onClose} className="bg-beige rounded-md p-1.5 text-graphite/60 hover:text-graphite">✕</button>
           </div>
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-copper-15">
-              <thead className="bg-beige">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Item</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Stock</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Min Threshold</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Price</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Status</th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-graphite/60 uppercase tracking-wider">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-copper-15">
-                {inventory.map((item) => (
-                  <tr key={item.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-graphite">{item.name}</div>
-                      <div className="text-sm text-graphite/60">{item.unit}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-semibold text-graphite">
-                        {item.quantity.toLocaleString()}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/60">
-                      {item.minThreshold || 0}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-graphite/60">
-                      ${item.pricePerKg?.toFixed(2) || '0.00'}/kg
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {getStatusBadge(item)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <button
-                        onClick={() => {
-                          const newQty = prompt(`Enter new quantity for ${item.name}:`, item.quantity.toString())
-                          if (newQty && !isNaN(Number(newQty))) {
-                            handleUpdateInventory(item.id, Number(newQty))
-                          }
-                        }}
-                        className="text-copper hover:text-copper/80 text-sm font-medium"
-                      >
-                        Update
-                      </button>
-                    </td>
-                  </tr>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 className="text-sm font-medium text-graphite mb-3">Recipe Details</h4>
+              <div className="space-y-2 text-sm">
+                {[
+                  ['ABV:', `${recipe.abv}%`],
+                  ['Batch Volume:', `${recipe.batchVolume}L`],
+                  ['Production Time:', `${recipe.productionTime}h`],
+                  ['Difficulty:', recipe.difficulty],
+                  ['Total Cost:', `$${recipe.totalCost.toFixed(2)}`],
+                ].map(([label, value]) => (
+                  <div key={label} className="flex justify-between">
+                    <span className="text-graphite/70">{label}</span>
+                    <span className={`font-medium ${label === 'Total Cost:' ? 'text-copper' : ''} capitalize`}>{value}</span>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      )}
-
-      {/* Production Tab */}
-      {activeTab === 'production' && (
-        <div className="space-y-6">
-          <div className="bg-beige border border-copper-30 rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-graphite mb-2">Firestore Production Management</h3>
-            <p className="text-graphite/70 text-sm mb-4">
-              Production batches are automatically created in Firestore when you start production from a recipe.
-              All ingredient consumption is tracked with Timestamp fields and inventory is updated in real-time.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">1</div>
-                <span className="text-graphite">Select recipe and check ingredient availability</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">2</div>
-                <span className="text-graphite">Start production batch with automatic Firestore inventory deduction</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-copper rounded-full flex items-center justify-center text-white text-xs font-bold">3</div>
-                <span className="text-graphite">Track costs and generate compliance reports with Timestamp tracking</span>
               </div>
             </div>
-          </div>
 
-          {/* Quick Production Buttons */}
-          <div className="bg-white rounded-lg shadow-sm border border-copper-15 p-6">
-            <h3 className="text-lg font-semibold text-graphite mb-4">Quick Production</h3>
-            <p className="text-graphite/70 text-sm mb-4">One-click production with automatic ingredient checking and inventory deduction</p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <div className="bg-beige rounded-lg p-4 border border-copper-30">
-                <h4 className="font-semibold text-graphite mb-2">Rainforest Gin</h4>
-                <p className="text-sm text-copper mb-3">$430.44 per batch</p>
-                <button
-                  onClick={produceRainforestGin}
-                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                >
-                  Produce Rainforest Gin
-                </button>
-              </div>
-              
-              <div className="bg-beige rounded-lg p-4 border border-copper-30">
-                <h4 className="font-semibold text-graphite mb-2">Signature Dry Gin</h4>
-                <p className="text-sm text-copper mb-3">$339.76 per batch</p>
-                <button
-                  onClick={produceSignatureDryGin}
-                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                >
-                  Produce Signature Dry Gin
-                </button>
-              </div>
-              
-              <div className="bg-beige rounded-lg p-4 border border-copper-30">
-                <h4 className="font-semibold text-graphite mb-2">Navy Strength Gin</h4>
-                <p className="text-sm text-copper mb-3">$345.41 per batch</p>
-                <p className="text-xs text-graphite/70 mb-2">58.8% ABV</p>
-                <button
-                  onClick={produceNavyStrengthGin}
-                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                >
-                  Produce Navy Strength Gin
-                </button>
-              </div>
-              
-              <div className="bg-beige rounded-lg p-4 border border-copper-30">
-                <h4 className="font-semibold text-graphite mb-2">Merchant Made Gin</h4>
-                <p className="text-sm text-copper mb-3">$312.17 per batch</p>
-                <button
-                  onClick={produceMerchantMadeGin}
-                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                >
-                  Produce MM Gin
-                </button>
-              </div>
-              
-              <div className="bg-beige rounded-lg p-4 border border-copper-30">
-                <h4 className="font-semibold text-graphite mb-2">Dry Season Gin</h4>
-                <p className="text-sm text-copper mb-3">$424.75 per batch</p>
-                <p className="text-xs text-graphite/70 mb-2">(+$150 fresh market)</p>
-                <button
-                  onClick={produceDrySeasonGin}
-                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                >
-                  Produce Dry Season Gin
-                </button>
-              </div>
-              
-              <div className="bg-beige rounded-lg p-4 border border-copper-30">
-                <h4 className="font-semibold text-graphite mb-2">Wet Season Gin</h4>
-                <p className="text-sm text-copper mb-3">$409.44 per batch</p>
-                <p className="text-xs text-graphite/70 mb-2">(+$150 fresh market)</p>
-                <button
-                  onClick={produceWetSeasonGin}
-                  className="w-full px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90 text-sm font-medium"
-                >
-                  Produce Wet Season Gin
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Recipe Detail Modal */}
-      {selectedRecipe && (
-        <div className="fixed inset-0 bg-graphite bg-opacity-50 overflow-y-auto h-full w-full z-50">
-          <div className="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
-            <div className="mt-3">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-xl font-medium text-graphite">{selectedRecipe.name}</h3>
-                  <p className="text-sm text-graphite/60">{selectedRecipe.description}</p>
-                </div>
-                <button
-                  onClick={() => setSelectedRecipe(null)}
-                  className="bg-beige rounded-md p-1.5 text-graphite/60 hover:text-graphite"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="text-sm font-medium text-graphite mb-3">Recipe Details</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-graphite/70">ABV:</span>
-                      <span className="font-medium">{selectedRecipe.abv}%</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-graphite/70">Batch Volume:</span>
-                      <span className="font-medium">{selectedRecipe.batchVolume}L</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-graphite/70">Production Time:</span>
-                      <span className="font-medium">{selectedRecipe.productionTime}h</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-graphite/70">Difficulty:</span>
-                      <span className="font-medium capitalize">{selectedRecipe.difficulty}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-graphite/70">Total Cost:</span>
-                      <span className="font-medium text-copper">${selectedRecipe.totalCost.toFixed(2)}</span>
+            <div>
+              <h4 className="text-sm font-medium text-graphite mb-3">Ingredients ({recipe.ingredients.length})</h4>
+              <div className="space-y-2 max-h-64 overflow-y-auto">
+                {recipe.ingredients.map((ingredient, index) => (
+                  <div key={index} className="flex justify-between items-center p-2 bg-beige rounded">
+                    <div className="text-sm font-medium text-graphite">{ingredient.name}</div>
+                    <div className="text-right">
+                      <div className="text-sm font-medium text-graphite">{ingredient.quantity} {ingredient.unit}</div>
+                      {ingredient.pricePerBatch != null && (
+                        <div className="text-xs text-graphite/60">${ingredient.pricePerBatch.toFixed(2)}</div>
+                      )}
                     </div>
                   </div>
-                </div>
-
-                <div>
-                  <h4 className="text-sm font-medium text-graphite mb-3">Ingredients ({selectedRecipe.ingredients.length})</h4>
-                  <div className="space-y-2 max-h-64 overflow-y-auto">
-                    {selectedRecipe.ingredients.map((ingredient: any, index: number) => (
-                      <div key={index} className="flex justify-between items-center p-2 bg-beige rounded">
-                        <div>
-                          <div className="text-sm font-medium text-graphite">{ingredient.name}</div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-sm font-medium text-graphite">
-                            {ingredient.quantity} {ingredient.unit}
-                          </div>
-                          <div className="text-xs text-graphite/60">
-                            ${ingredient.pricePerBatch.toFixed(2)}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex justify-end space-x-3">
-                <button
-                  onClick={() => setSelectedRecipe(null)}
-                  className="px-4 py-2 bg-beige text-graphite rounded-md hover:bg-copper-20"
-                >
-                  Close
-                </button>
-                <button
-                  onClick={() => {
-                    handleStartProduction(selectedRecipe)
-                    setSelectedRecipe(null)
-                  }}
-                  className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90"
-                >
-                  Start Production
-                </button>
+                ))}
               </div>
             </div>
           </div>
+
+          <div className="mt-6 flex justify-end space-x-3">
+            <button onClick={onClose} className="px-4 py-2 bg-beige text-graphite rounded-md hover:bg-copper-20">Close</button>
+            <button onClick={() => { onStartProduction(recipe); onClose() }} className="px-4 py-2 bg-copper text-white rounded-md hover:bg-copper/90">Start Production</button>
+          </div>
         </div>
-      )}
+      </div>
     </div>
   )
 }

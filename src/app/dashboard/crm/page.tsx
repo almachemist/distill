@@ -10,11 +10,12 @@ const currency = new Intl.NumberFormat('en-AU', { style: 'currency', currency: '
 const number = new Intl.NumberFormat('en-AU')
 
 export default function CRMDashboardPage() {
-  const { data: connection, isLoading: connLoading } = useSquareConnection()
-  const { data: groups = [], isLoading: dataLoading } = useCrmCustomers()
+  const { data: connection, isLoading: connLoading, error: connError } = useSquareConnection()
+  const { data: groups = [], isLoading: dataLoading, error: dataError } = useCrmCustomers()
 
   const isLoading = connLoading || dataLoading
   const isConnected = !!connection
+  const hasError = !!connError || !!dataError
 
   const stats = useMemo(() => {
     const total = groups.length
@@ -33,6 +34,27 @@ export default function CRMDashboardPage() {
     return (
       <div className="flex items-center justify-center min-h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-700"></div>
+      </div>
+    )
+  }
+
+  if (hasError) {
+    return (
+      <div className="space-y-8">
+        <header className="space-y-2">
+          <h1 className="text-3xl font-semibold text-stone-900">CRM Analytics</h1>
+          <p className="text-stone-600">Client intelligence powered by Square POS data</p>
+        </header>
+        <div className="bg-white border border-red-200 rounded-xl shadow-sm p-12 text-center">
+          <div className="text-4xl mb-4">⚠️</div>
+          <h2 className="text-xl font-semibold text-stone-900 mb-2">Failed to load CRM data</h2>
+          <p className="text-stone-500 mb-4 max-w-md mx-auto text-sm">
+            {(connError as Error)?.message || (dataError as Error)?.message || 'An unexpected error occurred.'}
+          </p>
+          <button onClick={() => window.location.reload()} className="px-5 py-2.5 bg-copper hover:bg-copper/90 text-white text-sm font-medium rounded-lg transition-colors">
+            Retry
+          </button>
+        </div>
       </div>
     )
   }
