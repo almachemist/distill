@@ -279,7 +279,7 @@ export default function BatchesPage() {
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col bg-stone-100 scrollbar-hide">
       {/* Top Navigation Bar */}
-      <div className="bg-white rounded-xl border border-stone-200 mx-2 mt-2 px-6 py-3 flex items-center justify-between">
+      <div className="mx-2 mt-2 mb-2 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1 className="text-lg font-semibold text-stone-900">Production Batches</h1>
           <div className="flex gap-2">

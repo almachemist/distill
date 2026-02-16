@@ -99,8 +99,8 @@ export const RumDetailPanel: React.FC<{
 
       {/* Delete Confirmation Modal */}
       {d.showDeleteConfirm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+        <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50" onClick={(e) => { if (e.target === e.currentTarget) d.setShowDeleteConfirm(false) }}>
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full mx-4" onClick={(e) => e.stopPropagation()}>
             <div className="p-6">
               <h2 className="text-xl font-semibold text-stone-900 mb-2">Delete Batch?</h2>
               <p className="text-sm text-stone-600 mb-4">

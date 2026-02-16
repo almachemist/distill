@@ -64,8 +64,8 @@ export default function BatchDetailView({
   const phaseDetails = getPhaseDetails(displaySession, selectedPhase)
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4">
-      <div className="bg-gray-900 text-white w-full max-w-7xl max-h-[95vh] rounded-2xl overflow-hidden flex flex-col shadow-2xl border border-gray-700">
+    <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50 p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="bg-gray-900 text-white w-full max-w-7xl max-h-[95vh] rounded-2xl overflow-hidden flex flex-col shadow-2xl border border-gray-700" onClick={(e) => e.stopPropagation()}>
         <BatchDetailHeader
           displaySession={displaySession}
           batchStatus={batchStatus}

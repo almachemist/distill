@@ -47,7 +47,7 @@ export function GinRecipesBrowser() {
                   onClick={() => setSelectedIndex(index)}
                   className={`flex w-full items-center justify-between px-4 py-3 text-left transition ${
                     isSelected
-                      ? 'bg-blue-600/10 text-blue-700 ring-1 ring-inset ring-blue-500'
+                      ? 'bg-copper/10 text-copper ring-1 ring-inset ring-copper'
                       : 'hover:bg-gray-50'
                   }`}
                 >
@@ -152,7 +152,7 @@ export function GinRecipesBrowser() {
               <button
                 type="button"
                 disabled
-                className="inline-flex items-center gap-2 rounded-lg border border-blue-500 bg-blue-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-lg border border-copper bg-copper px-4 py-2 text-sm font-semibold text-white shadow-sm transition disabled:cursor-not-allowed disabled:opacity-60"
               >
                 ✎ Edit (coming soon)
               </button>

@@ -11,7 +11,7 @@ export function RecipesList() {
   if (data.loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -97,7 +97,7 @@ export function RecipesList() {
               placeholder="Search recipes..."
               value={data.searchTerm}
               onChange={(e) => data.setSearchTerm(e.target.value)}
-              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-copper focus:border-copper"
             />
           </div>
         </div>
@@ -119,21 +119,21 @@ export function RecipesList() {
               type="checkbox"
               checked={data.ginOnly}
               onChange={(e) => data.setGinOnly(e.target.checked)}
-              className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              className="rounded border-gray-300 text-copper focus:ring-copper"
             />
             <span>Show only gin</span>
           </label>
           <button
             type="button"
             onClick={data.openCreateModal}
-            className="rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-500"
+            className="rounded-lg bg-copper px-3 py-2 text-sm font-medium text-white hover:bg-copper/90"
           >
             New recipe card
           </button>
           <button
             type="button"
             onClick={data.toggleDeveloperTools}
-            className="rounded-lg border border-dashed border-blue-400 px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50"
+            className="rounded-lg border border-dashed border-copper/40 px-3 py-2 text-sm font-medium text-copper hover:bg-copper/5"
           >
             {data.showDeveloperTools ? 'Hide developer tools' : 'Show developer tools'}
           </button>
@@ -206,7 +206,7 @@ export function RecipesList() {
                   <li key={recipe.id}>
                     <button
                       onClick={() => data.handleRecipeView(recipe)}
-                      className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 ${data.selectedRecipeId === recipe.id ? 'bg-blue-50' : ''}`}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-gray-50 ${data.selectedRecipeId === recipe.id ? 'bg-copper/10' : ''}`}
                     >
                       <div className="font-medium text-gray-900">{recipe.name}</div>
                     </button>

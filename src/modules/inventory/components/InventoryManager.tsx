@@ -329,8 +329,8 @@ export default function InventoryManager() {
 
       {/* Adjust Stock Modal */}
       {adjusting && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-          <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-4 space-y-3">
+        <div className="fixed inset-0 bg-black/20 flex items-center justify-center p-4 z-50" onClick={(e) => { if (e.target === e.currentTarget) setAdjusting(null) }}>
+          <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-4 space-y-3" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between">
               <h3 className="font-semibold">Adjust Stock: {adjusting.name}</h3>
               <button className="text-graphite/60 hover:text-graphite" onClick={() => setAdjusting(null)}>✕</button>
@@ -371,8 +371,8 @@ export default function InventoryManager() {
 
       {/* Edit Modal */}
       {edit && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-          <div className="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 space-y-3">
+        <div className="fixed inset-0 bg-black/20 flex items-center justify-center p-4 z-50" onClick={(e) => { if (e.target === e.currentTarget) setEdit(null) }}>
+          <div className="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 space-y-3" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between">
               <h3 className="font-semibold">Edit: {edit.name}</h3>
               <button className="text-graphite/60 hover:text-graphite" onClick={() => setEdit(null)}>✕</button>
@@ -400,8 +400,8 @@ export default function InventoryManager() {
 
       {/* Add Supplier Modal */}
       {addingSupplier && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-          <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-4 space-y-3">
+        <div className="fixed inset-0 bg-black/20 flex items-center justify-center p-4 z-50" onClick={(e) => { if (e.target === e.currentTarget) setAddingSupplier(false) }}>
+          <div className="bg-white w-full max-w-md rounded-lg shadow-lg p-4 space-y-3" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between">
               <h3 className="font-semibold">Add Supplier</h3>
               <button className="text-graphite/60 hover:text-graphite" onClick={() => setAddingSupplier(false)}>✕</button>
@@ -423,8 +423,8 @@ export default function InventoryManager() {
 
       {/* Create Modal */}
       {creating && (
-        <div className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-          <div className="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 space-y-3">
+        <div className="fixed inset-0 bg-black/20 flex items-center justify-center p-4 z-50" onClick={(e) => { if (e.target === e.currentTarget) setCreating(false) }}>
+          <div className="bg-white w-full max-w-lg rounded-lg shadow-lg p-4 space-y-3" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between">
               <h3 className="font-semibold">Add Inventory Item</h3>
               <button className="text-graphite/60 hover:text-graphite" onClick={() => setCreating(false)}>✕</button>

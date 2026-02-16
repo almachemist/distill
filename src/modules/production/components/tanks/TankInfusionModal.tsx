@@ -17,8 +17,8 @@ interface TankInfusionModalProps {
 
 export function TankInfusionModal({ tank, infusionType, botanicals, botanicalSearch, infusionItems, onInfusionTypeChange, onBotanicalSearchChange, onInfusionItemsChange, onSubmit, onClose }: TankInfusionModalProps) {
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50 p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
         <div className="bg-copper-amber text-white p-6 rounded-t-xl">
           <h2 className="text-2xl font-bold">Add Ingredients / Infusion</h2>
           <p className="text-sm mt-1">{tank.tank_id} • {tank.tank_name}</p>

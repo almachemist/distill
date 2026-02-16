@@ -52,8 +52,8 @@ export default function QuickEventForm({ onEventCreated }: QuickEventFormProps) 
   }
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md">
+    <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50" onClick={(e) => { if (e.target === e.currentTarget) setIsOpen(false) }}>
+      <div className="bg-white rounded-lg p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
         <h3 className="text-lg font-semibold mb-4">Create Quick Event</h3>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

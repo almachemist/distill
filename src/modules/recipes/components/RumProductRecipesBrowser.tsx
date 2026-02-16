@@ -43,7 +43,7 @@ export function RumProductRecipesBrowser() {
                   onClick={() => setSelectedIndex(index)}
                   className={`flex w-full items-center justify-between px-4 py-3 text-left transition ${
                     isSelected
-                      ? 'bg-amber-600/10 text-amber-700 ring-1 ring-inset ring-amber-500'
+                      ? 'bg-copper/10 text-copper ring-1 ring-inset ring-copper'
                       : 'hover:bg-gray-50'
                   }`}
                 >
@@ -139,9 +139,9 @@ export function RumProductRecipesBrowser() {
               </div>
 
               {selectedRecipe.notes && (
-                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                  <h4 className="text-sm font-semibold text-blue-900 mb-1">Notes</h4>
-                  <p className="text-sm text-blue-800">{selectedRecipe.notes}</p>
+                <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <h4 className="text-sm font-semibold text-amber-900 mb-1">Notes</h4>
+                  <p className="text-sm text-amber-800">{selectedRecipe.notes}</p>
                 </div>
               )}
             </div>

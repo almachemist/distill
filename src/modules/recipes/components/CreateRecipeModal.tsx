@@ -38,8 +38,8 @@ export function CreateRecipeModal({
   if (!show) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-xl rounded-xl bg-white shadow-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 p-4" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="w-full max-w-xl rounded-xl bg-white shadow-xl" onClick={(e) => e.stopPropagation()}>
         <div className="border-b border-gray-200 px-5 py-4">
           <div className="flex items-center justify-between gap-3">
             <h3 className="text-lg font-semibold text-gray-900">Create recipe card</h3>

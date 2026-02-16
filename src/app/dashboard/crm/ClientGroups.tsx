@@ -144,7 +144,7 @@ export default function ClientGroups({ groups }: { groups: Group[] }) {
       {/* Slide-over for details */}
       {selected && (
         <div className="fixed inset-0 z-40">
-          <div className="absolute inset-0 bg-black/30" onClick={() => setOpenId(null)} />
+          <div className="absolute inset-0 bg-black/20" onClick={() => setOpenId(null)} />
           <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl border-l border-stone-200 p-6 overflow-y-auto">
             <div className="flex items-start justify-between">
               <div>

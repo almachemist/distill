@@ -47,8 +47,8 @@ export function InventoryItemModal({ item, isOpen, onClose, onUpdateStock }: Inv
   }
 
   return (
-    <div className="fixed inset-0 bg-black/40 overflow-y-auto h-full w-full z-50">
-      <div className="relative top-20 mx-auto p-5 border border-copper-30 w-11/12 max-w-2xl shadow-lg rounded-lg bg-white">
+    <div className="fixed inset-0 bg-black/20 overflow-y-auto h-full w-full z-50" onClick={(e) => { if (e.target === e.currentTarget) onClose() }}>
+      <div className="relative top-20 mx-auto p-5 border border-copper-30 w-11/12 max-w-2xl shadow-lg rounded-lg bg-white" onClick={(e) => e.stopPropagation()}>
         <div className="mt-3">
           <div className="flex justify-between items-start mb-4">
             <div>

@@ -139,8 +139,8 @@ export default function BatchOverviewPage() {
           }} />
       )}
       {d.showLiveTracker && d.selectedSession && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-black/20 flex items-center justify-center z-50 p-4" onClick={(e) => { if (e.target === e.currentTarget) d.setShowLiveTracker(false) }}>
+          <div className="bg-white rounded-2xl p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-2xl font-bold text-gray-900">Real-Time Tracking - {d.selectedSession.sku}</h3>
               <button onClick={() => d.setShowLiveTracker(false)} className="text-gray-400 hover:text-gray-600 text-2xl">×</button>

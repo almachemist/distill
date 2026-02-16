@@ -48,8 +48,8 @@ export function RumRecipeCalculator() {
     <div className="space-y-6">
       {/* Header */}
       <div className="rounded-xl border border-neutral-200 bg-white p-6">
-        <h2 className="text-2xl font-bold text-graphite">Rum Recipe Calculator</h2>
-        <p className="text-graphite/60 mt-1">Calculate water dilution and ingredient scaling</p>
+        <h2 className="text-2xl font-bold text-gray-900">Rum Recipe Calculator</h2>
+        <p className="text-gray-500 mt-1">Calculate water dilution and ingredient scaling</p>
       </div>
 
       {/* Input Form */}
@@ -67,7 +67,7 @@ export function RumRecipeCalculator() {
               id="rum_volume"
               value={inputVolume}
               onChange={(e) => setInputVolume(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
               placeholder="96"
               step="0.1"
             />
@@ -83,7 +83,7 @@ export function RumRecipeCalculator() {
               id="current_abv"
               value={inputABV}
               onChange={(e) => setInputABV(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
               placeholder="60"
               step="0.1"
             />
@@ -98,7 +98,7 @@ export function RumRecipeCalculator() {
               id="recipe_select"
               value={selectedRecipe}
               onChange={(e) => setSelectedRecipe(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-copper focus:border-copper"
             >
               {recipes.map(recipe => (
                 <option key={recipe.id} value={recipe.id}>
@@ -112,7 +112,7 @@ export function RumRecipeCalculator() {
         {/* Calculate Button */}
         <button
           onClick={handleCalculate}
-          className="mt-6 w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg transition"
+          className="mt-6 w-full bg-copper hover:bg-copper/90 text-white font-semibold py-3 px-6 rounded-lg transition"
         >
           Calculate
         </button>
@@ -132,17 +132,17 @@ export function RumRecipeCalculator() {
           <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Dilution Calculation</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-blue-50 p-4 rounded-lg">
-                <div className="text-sm font-medium text-blue-700">Water to Add</div>
-                <div className="text-2xl font-bold text-blue-900">{result.water_to_add_l.toFixed(2)} L</div>
+              <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                <div className="text-sm font-medium text-stone-600">Water to Add</div>
+                <div className="text-2xl font-bold text-stone-900">{result.water_to_add_l.toFixed(2)} L</div>
               </div>
-              <div className="bg-green-50 p-4 rounded-lg">
-                <div className="text-sm font-medium text-green-700">Final Volume</div>
-                <div className="text-2xl font-bold text-green-900">{result.total_volume_l.toFixed(2)} L</div>
+              <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                <div className="text-sm font-medium text-stone-600">Final Volume</div>
+                <div className="text-2xl font-bold text-stone-900">{result.total_volume_l.toFixed(2)} L</div>
               </div>
-              <div className="bg-purple-50 p-4 rounded-lg">
-                <div className="text-sm font-medium text-purple-700">Target ABV</div>
-                <div className="text-2xl font-bold text-purple-900">{result.target_abv.toFixed(1)}%</div>
+              <div className="bg-stone-50 p-4 rounded-lg border border-stone-200">
+                <div className="text-sm font-medium text-stone-600">Target ABV</div>
+                <div className="text-2xl font-bold text-stone-900">{result.target_abv.toFixed(1)}%</div>
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ export function RumRecipeCalculator() {
                       <td className="px-4 py-3 text-right text-gray-600">
                         {ing.original_amount.toFixed(2)} {ing.original_unit}
                       </td>
-                      <td className="px-4 py-3 text-right font-semibold text-amber-600">
+                      <td className="px-4 py-3 text-right font-semibold text-copper">
                         {ing.scaled_amount.toFixed(2)} {ing.scaled_unit}
                       </td>
                       <td className="px-4 py-3 text-gray-600 text-sm">{ing.note || '—'}</td>

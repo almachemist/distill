@@ -86,6 +86,12 @@ function SidebarContent({
 
   const isActive = (href: string) => {
     if (href === '/dashboard') return pathname === '/dashboard'
+    // Exact match first
+    if (pathname === href) return true
+    // For /dashboard/production, only match direct children—not /dashboard/production/tanks
+    if (href === '/dashboard/production') {
+      return pathname.startsWith(href) && !pathname.startsWith('/dashboard/production/tanks')
+    }
     return pathname.startsWith(href)
   }
 
@@ -187,7 +193,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       {/* Mobile sidebar overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="fixed inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
+          <div className="fixed inset-0 bg-black/20" onClick={() => setMobileOpen(false)} />
           <aside className="fixed inset-y-0 left-0 w-60 bg-sidebar z-50">
             <SidebarContent pathname={pathname} onNavigate={() => setMobileOpen(false)} />
           </aside>

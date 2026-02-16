@@ -27,7 +27,7 @@ function Dialog({ open, onOpenChange, children }: DialogProps) {
   return (
     <div className="fixed inset-0 z-50">
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-[2px] transition-opacity"
+        className="fixed inset-0 bg-black/20 transition-opacity"
         onClick={() => onOpenChange(false)}
       />
       <div className="fixed inset-0 overflow-y-auto">

@@ -109,7 +109,7 @@ export function NewProductionModal({
       <div className="flex min-h-screen items-center justify-center p-4">
         {/* Backdrop */}
         <div
-          className="fixed inset-0 bg-black bg-opacity-25 transition-opacity"
+          className="fixed inset-0 bg-black/20 transition-opacity"
           onClick={onClose}
         />
 
