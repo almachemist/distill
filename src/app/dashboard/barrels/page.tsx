@@ -294,7 +294,7 @@ function BarrelsContent() {
           </div>
         ) : (
           <div className="mx-auto bg-white rounded-2xl shadow-sm border border-stone-200 p-4 sm:p-5">
-            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-10">
+            <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
               {barrels
                 .slice()
                 .sort((a, b) => String(a.barrelNumber || '').localeCompare(String(b.barrelNumber || '')))
@@ -302,25 +302,42 @@ function BarrelsContent() {
                   const code = String(barrel.barrelNumber || '').toUpperCase()
                   const uiStatus = toUiStatus(barrel)
                   const bg = tileClasses(uiStatus)
-                  const label = `Barrel ${code}, status ${uiStatus}`
+                  const age = toAgeLabel(barrel.fillDate)
+                  const vol = safeNumber(barrel.currentVolume)
+                  const spirit = safeLabel(barrel.spiritType)
+                  const progress = agingProgress(barrel.fillDate, barrel.dateMature)
+                  const fillStr = formatDate(barrel.fillDate)
+                  const tooltipText = `${spirit ? spirit + ' · ' : ''}${vol > 0 ? vol.toFixed(1) + ' L' : ''}${age !== '—' ? ' · Age: ' + age : ''}${fillStr !== '—' ? '\nFilled: ' + fillStr : ''}${barrel.batch ? '\nBatch: ' + barrel.batch : ''}`
 
                   return (
                     <Link
                       key={barrel.id}
                       href={`/dashboard/barrels/${barrel.id}`}
-                      aria-label={label}
+                      title={tooltipText}
                       className={
-                        `${bg} rounded-lg aspect-square flex items-center justify-center text-white border-2 border-white ` +
-                        'transition-all duration-150 ease-out hover:brightness-[1.04] active:brightness-[0.98] active:scale-[0.99] cursor-pointer ' +
-                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-graphite/20 focus-visible:ring-offset-2 focus-visible:ring-offset-white'
+                        `${bg} group relative rounded-xl p-3 flex flex-col items-center justify-center text-white min-h-[7rem] ` +
+                        'transition-all duration-150 ease-out hover:scale-[1.03] hover:shadow-lg active:scale-[0.98] cursor-pointer ' +
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-copper/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white'
                       }
                     >
-                      <div className="flex flex-col items-center justify-center text-center select-none">
-                        <div className="flex items-center justify-center gap-2">
-                          <span className="text-white">{dropletSvg}</span>
-                          <span className="text-white text-sm font-semibold tracking-wide">{code}</span>
-                        </div>
+                      <div className="flex flex-col items-center justify-center text-center select-none gap-1">
+                        <span className="text-white/70">{dropletSvg}</span>
+                        <span className="text-white text-sm font-bold tracking-wide">{code}</span>
+                        {age !== '—' && (
+                          <span className="text-[0.6rem] font-medium text-white/80 tracking-wide">{age}</span>
+                        )}
+                        {vol > 0 && (
+                          <span className="text-[0.55rem] text-white/60">{vol.toFixed(1)} L</span>
+                        )}
                       </div>
+                      {progress !== null && (
+                        <div className="absolute bottom-1.5 left-2 right-2 h-1 bg-white/20 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-white/60 rounded-full transition-all"
+                            style={{ width: `${Math.round(progress * 100)}%` }}
+                          />
+                        </div>
+                      )}
                     </Link>
                   )
                 })}

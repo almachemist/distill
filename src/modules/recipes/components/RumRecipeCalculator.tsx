@@ -47,9 +47,9 @@ export function RumRecipeCalculator() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl p-6 text-white">
-        <h2 className="text-2xl font-bold">Rum Recipe Calculator</h2>
-        <p className="text-amber-100 mt-1">Calculate water dilution and ingredient scaling</p>
+      <div className="rounded-xl border border-neutral-200 bg-white p-6">
+        <h2 className="text-2xl font-bold text-graphite">Rum Recipe Calculator</h2>
+        <p className="text-graphite/60 mt-1">Calculate water dilution and ingredient scaling</p>
       </div>
 
       {/* Input Form */}

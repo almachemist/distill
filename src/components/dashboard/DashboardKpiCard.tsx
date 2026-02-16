@@ -13,7 +13,7 @@ export function DashboardKpiCard({ title, value, subtitle, accent = 'gray', delt
   const accentColor = accent === 'copper' ? 'border-copper' : 'border-border'
 
   return (
-    <div className={`bg-surface rounded-xl shadow-card border border-border border-t-2 ${accentColor} p-6 hover:shadow-elevated transition-shadow`}>
+    <div className={`bg-surface rounded-xl shadow-card border ${accent === 'copper' ? 'border-copper/40' : 'border-border'} p-6 hover:shadow-elevated transition-shadow`}>
       <div className="space-y-2">
         <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{title}</p>
         <p className="text-3xl font-bold text-foreground">{value}</p>

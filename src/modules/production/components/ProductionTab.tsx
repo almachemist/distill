@@ -10,16 +10,24 @@ export function ProductionTab() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [drafts, setDrafts] = useState<ProductionBatch[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     loadDrafts()
   }, [])
 
   async function loadDrafts() {
-    setIsLoading(true)
-    const data = await getDraftBatches()
-    setDrafts(data)
-    setIsLoading(false)
+    try {
+      setIsLoading(true)
+      setError(null)
+      const data = await getDraftBatches()
+      setDrafts(data)
+    } catch (err) {
+      console.error('Error loading drafts:', err)
+      setError(err instanceof Error ? err.message : 'Failed to load drafts')
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   function handleDraftCreated() {
@@ -66,6 +74,11 @@ export function ProductionTab() {
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-amber-700"></div>
             <p className="mt-2 text-sm text-neutral-600">Loading drafts...</p>
+          </div>
+        ) : error ? (
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+            <p className="text-red-700 text-sm mb-3">{error}</p>
+            <button onClick={loadDrafts} className="px-4 py-2 bg-amber-700 text-white text-sm rounded-md hover:bg-amber-800">Retry</button>
           </div>
         ) : drafts.length === 0 ? (
           <div className="bg-white rounded-lg border border-neutral-200 p-12 text-center">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useAuth } from '@/modules/auth/hooks/useAuth'
+import { useOrganization } from '@/modules/settings/hooks/useOrganization'
 import { createClient } from '@/lib/supabase/client'
 
 /**
@@ -11,6 +12,7 @@ import { createClient } from '@/lib/supabase/client'
  */
 export default function ProfileTab() {
   const { user } = useAuth()
+  const { data: org } = useOrganization()
   const [displayName, setDisplayName] = useState('')
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
@@ -117,11 +119,19 @@ export default function ProfileTab() {
             <p className="text-xs text-neutral-400 mt-1">Email cannot be changed here.</p>
           </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-neutral-600 mb-1">Role</label>
-          <span className="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 text-sm rounded-full capitalize">
-            {user?.role || 'viewer'}
-          </span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-neutral-600 mb-1">Role</label>
+            <span className="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 text-sm rounded-full capitalize">
+              {user?.role || 'viewer'}
+            </span>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-neutral-600 mb-1">Organization</label>
+            <span className="inline-block px-3 py-1 bg-neutral-100 text-neutral-700 text-sm rounded-full">
+              {org?.name || '—'}
+            </span>
+          </div>
         </div>
         <div className="flex justify-end">
           <button

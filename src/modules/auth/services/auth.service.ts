@@ -137,26 +137,52 @@ export class AuthService {
     const [profileResult, authResult] = await Promise.all([
       this.supabase
         .from('profiles')
-        .select('*, organizations(name)')
+        .select('id, display_name, role, organization_id')
         .eq('id', userId)
         .single(),
       this.supabase.auth.getUser(),
     ])
 
     if (profileResult.error) {
-      // Silently handle profile errors
+      console.warn('Profile query failed:', profileResult.error.message)
+      // Fallback: return minimal user from auth data
+      const authUser = authResult.data?.user
+      if (authUser) {
+        return {
+          id: authUser.id,
+          email: authUser.email ?? '',
+          displayName: authUser.user_metadata?.display_name || authUser.email || '',
+          role: 'viewer',
+          organizationId: '',
+        }
+      }
       return null
     }
 
     const data = profileResult.data
     const email = authResult.data?.user?.email ?? ''
 
+    // Get org role from user_organizations (more accurate than profiles.role)
+    let orgRole = data.role
+    if (data.organization_id) {
+      const { data: membership } = await this.supabase
+        .from('user_organizations')
+        .select('role')
+        .eq('user_id', userId)
+        .eq('organization_id', data.organization_id)
+        .eq('is_active', true)
+        .single()
+      if (membership?.role) {
+        orgRole = membership.role
+      }
+    }
+
     return {
       id: data.id,
       email,
       name: data.display_name,
       displayName: data.display_name,
-      role: data.role,
+      role: orgRole as User['role'],
       organizationId: data.organization_id,
     }
   }

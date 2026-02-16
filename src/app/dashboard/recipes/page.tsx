@@ -43,7 +43,7 @@ export default function RecipesPage() {
             onClick={() => setActiveTab('cards')}
             className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition ${
               activeTab === 'cards'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-copper text-copper'
                 : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             }`}
           >
@@ -53,7 +53,7 @@ export default function RecipesPage() {
             onClick={() => setActiveTab('gin')}
             className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition ${
               activeTab === 'gin'
-                ? 'border-blue-500 text-blue-600'
+                ? 'border-copper text-copper'
                 : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             }`}
           >
@@ -63,7 +63,7 @@ export default function RecipesPage() {
             onClick={() => setActiveTab('rum')}
             className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition ${
               activeTab === 'rum'
-                ? 'border-amber-500 text-amber-600'
+                ? 'border-copper text-copper'
                 : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             }`}
           >
@@ -73,7 +73,7 @@ export default function RecipesPage() {
             onClick={() => setActiveTab('calculator')}
             className={`whitespace-nowrap border-b-2 py-4 px-1 text-sm font-medium transition ${
               activeTab === 'calculator'
-                ? 'border-orange-500 text-orange-600'
+                ? 'border-copper text-copper'
                 : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
             }`}
           >

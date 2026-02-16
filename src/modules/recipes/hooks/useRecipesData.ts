@@ -89,16 +89,17 @@ export function useRecipesData() {
       setError(null)
       const data = await recipeRepo.fetchRecipes()
       setRecipes(data)
-      if (!selectedRecipeId && data && data.length > 0) {
-        setSelectedRecipeId(data[0].id)
-      }
+      setSelectedRecipeId((prev) => {
+        if (!prev && data && data.length > 0) return data[0].id
+        return prev
+      })
     } catch (err) {
       console.error('Error loading recipes:', err)
       setError(err instanceof Error ? err.message : 'Failed to load recipes')
     } finally {
       setLoading(false)
     }
-  }, [recipeRepo, selectedRecipeId])
+  }, [recipeRepo])
 
   const handleImportProvidedJson = useCallback(async () => {
     try {

@@ -79,3 +79,7 @@ body {
 /* These will be removed as pages migrate to Tailwind token classes */
 .border-copper-15 { border-color: var(--color-copper-15); }
 .border-copper-30 { border-color: var(--color-copper-30); }
+
+/* Hide scrollbars globally where requested */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
