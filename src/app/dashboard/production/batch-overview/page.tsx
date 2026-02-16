@@ -22,7 +22,7 @@ export default function BatchOverviewPage() {
   if (d.loading) {
     return (
       <div className="flex justify-center items-center min-h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-copper"></div>
       </div>
     )
   }
@@ -55,11 +55,11 @@ export default function BatchOverviewPage() {
   return (
     <div>
       {/* Hero Header */}
-      <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 text-white py-12">
+      <div className="bg-stone-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">Distillation Batch Overview</h1>
-            <p className="text-xl text-blue-100 mb-8">Track, analyze, and manage your distillation runs with real-time insights</p>
+            <p className="text-xl text-stone-300 mb-8">Track, analyze, and manage your distillation runs with real-time insights</p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <StatCard value={d.filteredSessions.length} label="Total Batches" />
               <StatCard value={`${d.filteredSessions.reduce((sum, s) => sum + (s.lalOut || 0), 0).toFixed(1)}L`} label="LAL Produced" />
@@ -77,24 +77,24 @@ export default function BatchOverviewPage() {
             <div className="flex-1 max-w-md">
               <div className="relative">
                 <input type="text" placeholder="Search batches, stills, or SKUs..." value={d.searchTerm} onChange={(e) => d.setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-copper focus:border-copper" />
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><span className="text-gray-400">🔍</span></div>
               </div>
             </div>
             <div className="flex gap-4">
               <select value={d.selectedYear} onChange={(e) => d.setSelectedYear(parseInt(e.target.value))}
-                className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-copper focus:border-copper">
                 {[2024, 2025, 2026].map(year => <option key={year} value={year}>{year}</option>)}
               </select>
               <select value={d.selectedMonth} onChange={(e) => d.setSelectedMonth(e.target.value)}
-                className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                className="px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-copper focus:border-copper">
                 {MONTHS.map(m => <option key={m.value} value={m.value}>{m.label}</option>)}
               </select>
             </div>
             <div className="flex bg-gray-100 rounded-xl p-1">
               {(['calendar', 'grid', 'list'] as const).map(mode => (
                 <button key={mode} onClick={() => d.setViewMode(mode)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${d.viewMode === mode ? 'bg-white text-blue-600 shadow-sm' : 'text-gray-600'}`}>
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors capitalize ${d.viewMode === mode ? 'bg-white text-copper shadow-sm' : 'text-gray-600'}`}>
                   {mode}
                 </button>
               ))}
@@ -184,7 +184,7 @@ function StatCard({ value, label }: { value: string | number; label: string }) {
   return (
     <div className="bg-white/20 backdrop-blur-sm rounded-xl p-6">
       <div className="text-3xl font-bold">{value}</div>
-      <div className="text-blue-100">{label}</div>
+      <div className="text-stone-400">{label}</div>
     </div>
   )
 }

@@ -240,14 +240,7 @@ function RumPageContent() {
         }
 
         const payload: { gin: any[]; rum: RumBatchRecord[] } = await response.json()
-        let batches = payload.rum ?? []
-        if ((batches?.length ?? 0) === 0) {
-          const fbRes = await fetch("/api/fallback/rum-batches", { signal: controller.signal })
-          if (fbRes.ok) {
-            const fb = await fbRes.json()
-            batches = Array.isArray(fb) ? fb : []
-          }
-        }
+        const batches = payload.rum ?? []
         setRumBatches(batches)
 
         // If no requested batch was provided, auto-select first
@@ -309,14 +302,7 @@ function RumPageContent() {
       const response = await fetch("/api/production/batches")
       if (response.ok) {
         const payload: { gin: any[]; rum: RumBatchRecord[] } = await response.json()
-        let batches = payload.rum ?? []
-        if ((batches?.length ?? 0) === 0) {
-          const fbRes = await fetch("/api/fallback/rum-batches")
-          if (fbRes.ok) {
-            const fb = await fbRes.json()
-            batches = Array.isArray(fb) ? fb : []
-          }
-        }
+        const batches = payload.rum ?? []
         setRumBatches(batches)
         setSelectedRunId(null)
       }

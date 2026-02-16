@@ -142,12 +142,18 @@ export function useDashboardStats() {
             return db - da
           })
           .slice(0, 7)
-          .map((b: any) => ({
-            id: b.batch_id || b.run_id || b.id,
-            name: b.display_name || b.sku || b.recipe || b.product_name || 'Unknown',
-            date: b.date || b.distillation_date || '',
-            href: '/dashboard/production/batch-overview'
-          }))
+          .map((b: any) => {
+            const batchId = b.batch_id || b.run_id || b.id
+            const isRum = rumBatches.some((r: any) => (r.batch_id || r.id) === batchId)
+            return {
+              id: batchId,
+              name: b.display_name || b.sku || b.recipe || b.product_name || 'Unknown',
+              date: b.date || b.distillation_date || '',
+              href: isRum
+                ? `/dashboard/production/rum?batch=${encodeURIComponent(batchId)}`
+                : `/dashboard/batches?batch=${encodeURIComponent(batchId)}`
+            }
+          })
 
         setStats({
           batchesThisYear,

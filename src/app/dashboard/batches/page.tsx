@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { useEffect, useState, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { DetailPanel } from "./DetailPanel"
 
 export const dynamic = 'force-dynamic'
@@ -204,13 +204,15 @@ const RunCard: React.FC<{
   )
 }
 
-export default function BatchesPage() {
+function BatchesPageInner() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const requestedBatchId = searchParams?.get('batch') ?? null
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [ginBatches, setGinBatches] = useState<GinBatchRecord[]>([])
   const [activeCategory, setActiveCategory] = useState<string>("rainforest")
-  const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
+  const [selectedRunId, setSelectedRunId] = useState<string | null>(requestedBatchId)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [batchListCollapsed, setBatchListCollapsed] = useState(false)
   const [sortOrder, setSortOrder] = useState<'oldest-first' | 'newest-first'>('oldest-first')
@@ -230,14 +232,7 @@ export default function BatchesPage() {
         }
 
         const payload: { gin: GinBatchRecord[]; rum: any[] } = await response.json()
-        let batches = payload.gin ?? []
-        if ((batches?.length ?? 0) === 0) {
-          const fbRes = await fetch("/api/fallback/gin-batches", { signal: controller.signal })
-          if (fbRes.ok) {
-            const fb = await fbRes.json()
-            batches = Array.isArray(fb) ? fb : []
-          }
-        }
+        const batches = payload.gin ?? []
         setGinBatches(batches)
         
         // Auto-select first batch if none selected
@@ -382,5 +377,13 @@ export default function BatchesPage() {
       </main>
       </div>
     </div>
+  )
+}
+
+export default function BatchesPage() {
+  return (
+    <Suspense fallback={<div className="flex justify-center items-center min-h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-copper" /></div>}>
+      <BatchesPageInner />
+    </Suspense>
   )
 }
